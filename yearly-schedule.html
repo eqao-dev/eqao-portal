@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>年間スケジュール - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* カレンダーセクション */
+    .calendar-section {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .calendar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .calendar-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .calendar-nav-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: #f0f0f0;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .calendar-nav-btn:hover {
+      background: #e0e0e0;
+    }
+
+    .calendar-nav-btn .material-icons {
+      font-size: 20px;
+      color: #333;
+    }
+
+    .calendar-month-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a237e;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      background: #e0e0e0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .calendar-weekday {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #666;
+      padding: 10px 0;
+      background: #f5f5f5;
+    }
+
+    .calendar-weekday.sun {
+      color: #e53935;
+    }
+
+    .calendar-weekday.sat {
+      color: #1e88e5;
+    }
+
+    .calendar-day {
+      height: 80px;
+      background: white;
+      padding: 4px;
+      display: flex;
+      flex-direction: column;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .calendar-day.other-month {
+      background: #fafafa;
+    }
+
+    .calendar-day.other-month .day-number {
+      color: #ccc;
+    }
+
+    .day-number {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+      text-align: right;
+      padding-right: 2px;
+      flex-shrink: 0;
+    }
+
+    .calendar-day.sun .day-number {
+      color: #e53935;
+    }
+
+    .calendar-day.sat .day-number {
+      color: #1e88e5;
+    }
+
+    .calendar-day.today {
+      background: #e8eaf6;
+    }
+
+    .calendar-day.today .day-number {
+      background: #1a237e;
+      color: white !important;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      padding: 0;
+    }
+
+    .day-events {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .day-event {
+      font-size: 9px;
+      padding: 2px 4px;
+      background: #ff5722;
+      color: white;
+      border-radius: 3px;
+      line-height: 1.3;
+      word-break: break-all;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .day-event-more {
+      font-size: 9px;
+      color: #666;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    /* イベントポップアップ */
+    .event-popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s;
+    }
+
+    .event-popup-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .event-popup {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 300px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      transform: scale(0.9);
+      transition: transform 0.2s;
+    }
+
+    .event-popup-overlay.active .event-popup {
+      transform: scale(1);
+    }
+
+    .event-popup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .event-popup-date {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a237e;
+    }
+
+    .event-popup-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: #666;
+    }
+
+    .event-popup-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .event-popup-detail {
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* 月別スケジュールセクション */
+    .schedule-section {
+      margin-bottom: 24px;
+    }
+
+    .month-card {
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
+    }
+
+    .month-header {
+      background: #e8eaf6;
+      color: #1a237e;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 2px solid #1a237e;
+    }
+
+    .month-header .material-icons {
+      font-size: 22px;
+      color: #1a237e;
+    }
+
+    .month-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .month-events {
+      padding: 8px 0;
+    }
+
+    .event-item {
+      padding: 14px 20px;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      gap: 12px;
+    }
+
+    .event-item:last-child {
+      border-bottom: none;
+    }
+
+    .event-date {
+      flex-shrink: 0;
+      min-width: 60px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a237e;
+    }
+
+    .event-date.no-date {
+      color: #bbb;
+      font-weight: 400;
+      font-size: 13px;
+    }
+
+    .event-content {
+      flex: 1;
+    }
+
+    .event-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .event-detail {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .no-events {
+      padding: 20px;
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+    }
+
+    /* ローディング */
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #e0e0e0;
+      border-top-color: #1a237e;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* 今日へ戻るボタン */
+    .today-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      background: #1a237e;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .today-btn:hover {
+      background: #283593;
+    }
+
+    .today-btn .material-icons {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="index.html?t=<?= new Date().getTime() ?>" class="back-btn">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <h1 class="header-title">年間スケジュール</h1>
+  </header>
+
+  <div class="container">
+    <div id="loadingArea" class="loading">
+      <div class="loading-spinner"></div>
+      <p>読み込み中...</p>
+    </div>
+
+    <div id="contentArea" style="display: none;">
+      <!-- カレンダー -->
+      <div class="calendar-section">
+        <div class="calendar-header">
+          <div class="calendar-nav">
+            <button class="calendar-nav-btn" onclick="prevMonth()">
+              <span class="material-icons">chevron_left</span>
+            </button>
+            <span id="calendarTitle" class="calendar-month-title"></span>
+            <button class="calendar-nav-btn" onclick="nextMonth()">
+              <span class="material-icons">chevron_right</span>
+            </button>
+          </div>
+          <button class="today-btn" onclick="goToToday()">
+            <span class="material-icons">today</span>
+            今日
+          </button>
+        </div>
+        <div id="calendarGrid" class="calendar-grid"></div>
+      </div>
+
+      <!-- 月別スケジュール -->
+      <div id="scheduleList" class="schedule-section"></div>
+    </div>
+
+    <!-- イベントポップアップ -->
+    <div id="eventPopup" class="event-popup-overlay" onclick="closePopup(event)">
+      <div class="event-popup" onclick="event.stopPropagation()">
+        <div class="event-popup-header">
+          <span id="popupDate" class="event-popup-date"></span>
+          <button class="event-popup-close" onclick="closePopup()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <div id="popupTitle" class="event-popup-title"></div>
+        <div id="popupDetail" class="event-popup-detail"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ============================================
+    // API設定
+    // ============================================
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzCFkkw6h6o0iFwObPILE-VCYfjRP1ikmMWOl6DgqIaqIRi657vQIKkjSKuRVTaWJzG/exec';
+
+    async function apiGet(action, params = {}) {
+      const url = new URL(API_URL);
+      url.searchParams.set('action', action);
+      for (const [key, value] of Object.entries(params)) {
+        if (value !== undefined && value !== null) {
+          url.searchParams.set(key, value);
+        }
+      }
+      
+      const response = await fetch(url.toString());
+      if (!response.ok) {
+        throw new Error('API Error: ' + response.status);
+      }
+      return await response.json();
+    }
+
+    let allScheduleData = [];
+    let currentYear = new Date().getFullYear();
+    let currentMonth = new Date().getMonth(); // 0-11
+    const today = new Date();
+
+    // ページ読み込み時
+    document.addEventListener('DOMContentLoaded', function() {
+      loadScheduleData();
+    });
+
+    // データ読み込み
+    async function loadScheduleData() {
+      try {
+        const data = await apiGet('getYearlySchedule');
+        onDataLoaded(data);
+      } catch (error) {
+        onError(error);
+      }
+    }
+
+    function onDataLoaded(data) {
+      allScheduleData = data || [];
+      document.getElementById('loadingArea').style.display = 'none';
+      document.getElementById('contentArea').style.display = 'block';
+      renderCalendar();
+      renderScheduleList();
+    }
+
+    function onError(error) {
+      console.error(error);
+      document.getElementById('loadingArea').innerHTML = 
+        '<p style="color: #e53935;">データの読み込みに失敗しました</p>';
+    }
+
+    // カレンダー描画
+    function renderCalendar() {
+      const title = document.getElementById('calendarTitle');
+      title.textContent = currentYear + '年' + (currentMonth + 1) + '月';
+
+      const grid = document.getElementById('calendarGrid');
+      grid.innerHTML = '';
+
+      // 曜日ヘッダー
+      const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+      weekdays.forEach((day, index) => {
+        const el = document.createElement('div');
+        el.className = 'calendar-weekday';
+        if (index === 0) el.classList.add('sun');
+        if (index === 6) el.classList.add('sat');
+        el.textContent = day;
+        grid.appendChild(el);
+      });
+
+      // 月の最初の日と最後の日
+      const firstDay = new Date(currentYear, currentMonth, 1);
+      const lastDay = new Date(currentYear, currentMonth + 1, 0);
+      const startDayOfWeek = firstDay.getDay();
+      const daysInMonth = lastDay.getDate();
+
+      // その月のイベントを取得（年も考慮）
+      const eventsForMonth = getEventsForMonth(currentYear, currentMonth + 1);
+
+      // 前月の日
+      const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
+      for (let i = startDayOfWeek - 1; i >= 0; i--) {
+        const el = createDayCell(prevMonthLastDay - i, true, -1, []);
+        grid.appendChild(el);
+      }
+
+      // 当月の日
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayOfWeek = new Date(currentYear, currentMonth, day).getDay();
+        const isToday = currentYear === today.getFullYear() && 
+                        currentMonth === today.getMonth() && 
+                        day === today.getDate();
+        const dayEvents = eventsForMonth[day] || [];
+        const el = createDayCell(day, false, dayOfWeek, dayEvents, isToday);
+        grid.appendChild(el);
+      }
+
+      // 次月の日（6行になるように）
+      const totalCells = startDayOfWeek + daysInMonth;
+      const remainingCells = (7 - (totalCells % 7)) % 7;
+      for (let i = 1; i <= remainingCells; i++) {
+        const el = createDayCell(i, true, -1, []);
+        grid.appendChild(el);
+      }
+    }
+
+    // 日付セルを作成
+    function createDayCell(day, isOtherMonth, dayOfWeek, events, isToday) {
+      const el = document.createElement('div');
+      el.className = 'calendar-day';
+      
+      if (isOtherMonth) {
+        el.classList.add('other-month');
+      } else {
+        if (dayOfWeek === 0) el.classList.add('sun');
+        if (dayOfWeek === 6) el.classList.add('sat');
+        if (isToday) el.classList.add('today');
+      }
+
+      // 日付
+      const numberEl = document.createElement('div');
+      numberEl.className = 'day-number';
+      numberEl.textContent = day;
+      el.appendChild(numberEl);
+
+      // イベント
+      if (!isOtherMonth && events.length > 0) {
+        const eventsEl = document.createElement('div');
+        eventsEl.className = 'day-events';
+        
+        // 最大2件表示
+        const maxShow = 2;
+        events.slice(0, maxShow).forEach(event => {
+          const eventEl = document.createElement('div');
+          eventEl.className = 'day-event';
+          eventEl.textContent = event.title;
+          eventEl.onclick = function(e) {
+            e.stopPropagation();
+            showPopup(day, event);
+          };
+          eventsEl.appendChild(eventEl);
+        });
+
+        // 3件以上ある場合
+        if (events.length > maxShow) {
+          const moreEl = document.createElement('div');
+          moreEl.className = 'day-event-more';
+          moreEl.textContent = '+' + (events.length - maxShow) + '件';
+          eventsEl.appendChild(moreEl);
+        }
+
+        el.appendChild(eventsEl);
+      }
+
+      return el;
+    }
+
+    // その月のイベントを日付ごとに取得（年も考慮）
+    function getEventsForMonth(year, month) {
+      const eventsByDay = {};
+      allScheduleData.forEach(item => {
+        if (item.year === year && item.month === month && item.day) {
+          if (!eventsByDay[item.day]) {
+            eventsByDay[item.day] = [];
+          }
+          eventsByDay[item.day].push(item);
+        }
+      });
+      return eventsByDay;
+    }
+
+    // ポップアップ表示
+    function showPopup(day, event) {
+      document.getElementById('popupDate').textContent = (currentMonth + 1) + '月' + day + '日';
+      document.getElementById('popupTitle').textContent = event.title;
+      document.getElementById('popupDetail').textContent = event.detail || '';
+      document.getElementById('eventPopup').classList.add('active');
+    }
+
+    // ポップアップを閉じる
+    function closePopup(e) {
+      if (!e || e.target.id === 'eventPopup') {
+        document.getElementById('eventPopup').classList.remove('active');
+      }
+    }
+
+    // 月別スケジュール一覧描画
+    function renderScheduleList() {
+      const container = document.getElementById('scheduleList');
+      container.innerHTML = '';
+
+      // 現在表示中の年月から12ヶ月分を表示
+      for (let i = 0; i < 12; i++) {
+        let displayMonth = currentMonth + i;
+        let displayYear = currentYear;
+        
+        if (displayMonth > 11) {
+          displayMonth -= 12;
+          displayYear += 1;
+        }
+        
+        const monthNum = displayMonth + 1; // 1-12
+
+        // その月のイベントを取得（年は関係なく、月だけで判定）
+        const events = allScheduleData.filter(item => item.month === monthNum);
+
+        // 同じタイトルをまとめる
+        const groupedEvents = {};
+        events.forEach(event => {
+          const key = event.title;
+          if (!groupedEvents[key]) {
+            groupedEvents[key] = {
+              title: event.title,
+              detail: event.detail,
+              days: []
+            };
+          }
+          if (event.day) {
+            groupedEvents[key].days.push(event.day);
+          }
+        });
+
+        // 配列に変換してソート
+        const mergedEvents = Object.values(groupedEvents);
+        mergedEvents.forEach(e => {
+          e.days = [...new Set(e.days)].sort((a, b) => a - b); // 重複除去＆ソート
+        });
+        // 最初の日付でソート（日付なしは最後）
+        mergedEvents.sort((a, b) => {
+          if (a.days.length === 0 && b.days.length === 0) return 0;
+          if (a.days.length === 0) return 1;
+          if (b.days.length === 0) return -1;
+          return a.days[0] - b.days[0];
+        });
+
+        const card = document.createElement('div');
+        card.className = 'month-card';
+
+        // 月ヘッダー
+        const header = document.createElement('div');
+        header.className = 'month-header';
+        header.innerHTML = '<span class="material-icons">event</span><span class="month-title">' + monthNum + '月</span>';
+        card.appendChild(header);
+
+        // イベント一覧
+        const eventsContainer = document.createElement('div');
+        eventsContainer.className = 'month-events';
+
+        if (mergedEvents.length === 0) {
+          // 予定がない場合
+          const noEvents = document.createElement('div');
+          noEvents.className = 'no-events';
+          noEvents.textContent = '予定はありません';
+          eventsContainer.appendChild(noEvents);
+        } else {
+          mergedEvents.forEach(event => {
+            const item = document.createElement('div');
+            item.className = 'event-item';
+
+            const dateEl = document.createElement('div');
+            dateEl.className = 'event-date';
+            if (event.days.length > 0) {
+              dateEl.textContent = event.days.join(',') + '日';
+            } else {
+              dateEl.textContent = 'ー';
+              dateEl.classList.add('no-date');
+            }
+
+            const contentEl = document.createElement('div');
+            contentEl.className = 'event-content';
+
+            const titleEl = document.createElement('div');
+            titleEl.className = 'event-title';
+            titleEl.textContent = event.title;
+            contentEl.appendChild(titleEl);
+
+            if (event.detail) {
+              const detailEl = document.createElement('div');
+              detailEl.className = 'event-detail';
+              detailEl.textContent = event.detail;
+              contentEl.appendChild(detailEl);
+            }
+
+            item.appendChild(dateEl);
+            item.appendChild(contentEl);
+            eventsContainer.appendChild(item);
+          });
+        }
+
+        card.appendChild(eventsContainer);
+        container.appendChild(card);
+      }
+    }
+
+    // 前月
+    function prevMonth() {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      renderCalendar();
+    }
+
+    // 次月
+    function nextMonth() {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar();
+    }
+
+    // 今日へ戻る
+    function goToToday() {
+      currentYear = today.getFullYear();
+      currentMonth = today.getMonth();
+      renderCalendar();
+    }
+  </script>
+</body>
+</html>
