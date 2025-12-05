@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header .logo {
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      background: white;
+      border-radius: 50%;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .header .title-area h1 {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: 6px;
+    }
+
+    .header .title-area .subtitle {
+      font-size: 11px;
+      opacity: 0.8;
+      margin-top: 4px;
+      letter-spacing: 2px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    .line-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .line-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 14px 8px;
+      background: linear-gradient(135deg, #06c755 0%, #00b341 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 500;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(6, 199, 85, 0.3);
+      transition: all 0.3s ease;
+      line-height: 1.3;
+    }
+
+    .line-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(6, 199, 85, 0.4);
+    }
+
+    .line-btn .material-icons {
+      font-size: 22px;
+    }
+
+    .section {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 14px;
+      padding-left: 4px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 5px;
+      height: 22px;
+      background: linear-gradient(180deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 3px;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .menu-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 20px 8px;
+      background: white;
+      border: none;
+      border-radius: 16px;
+      text-decoration: none;
+      color: #333;
+      font-size: 11px;
+      font-weight: 500;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      min-height: 100px;
+    }
+
+    .menu-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(26, 35, 126, 0.15);
+    }
+
+    .menu-btn .icon-wrapper {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-btn .material-icons {
+      font-size: 24px;
+      color: white;
+    }
+
+    .menu-btn span {
+      line-height: 1.4;
+    }
+
+    .icon-blue { background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); }
+    .icon-indigo { background: linear-gradient(135deg, #283593 0%, #5c6bc0 100%); }
+    .icon-purple { background: linear-gradient(135deg, #4527a0 0%, #7e57c2 100%); }
+    .icon-teal { background: linear-gradient(135deg, #00695c 0%, #26a69a 100%); }
+    .icon-orange { background: linear-gradient(135deg, #e65100 0%, #ff9800 100%); }
+    .icon-pink { background: linear-gradient(135deg, #ad1457 0%, #ec407a 100%); }
+    .icon-green { background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%); }
+    .icon-red { background: linear-gradient(135deg, #c62828 0%, #ef5350 100%); }
+    .icon-cyan { background: linear-gradient(135deg, #00838f 0%, #4dd0e1 100%); }
+    .icon-amber { background: linear-gradient(135deg, #ff8f00 0%, #ffc107 100%); }
+    .icon-brown { background: linear-gradient(135deg, #4e342e 0%, #8d6e63 100%); }
+
+    /* お知らせセクション */
+    .news-section {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .news-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e8ecf4;
+    }
+
+    .news-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .news-icon .material-icons {
+      font-size: 20px;
+      color: white;
+    }
+
+    .news-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 280px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .news-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .news-list::-webkit-scrollbar-track {
+      background: #f0f0f0;
+      border-radius: 3px;
+    }
+
+    .news-list::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 3px;
+    }
+
+    .news-list::-webkit-scrollbar-thumb:hover {
+      background: #aaa;
+    }
+
+    .news-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      background: linear-gradient(135deg, #fff9f0 0%, #fff5f5 100%);
+      border-radius: 12px;
+      border-left: 4px solid #ff6b6b;
+    }
+
+    .news-date {
+      flex-shrink: 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: #ff6b6b;
+      min-width: 45px;
+    }
+
+    .news-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .news-item-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .news-new-badge {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .news-item-text {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .news-empty {
+      text-align: center;
+      padding: 20px;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .news-loading {
+      text-align: center;
+      padding: 20px;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .personal-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #ff5722;
+      color: white;
+      font-size: 8px;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .menu-btn.has-badge {
+      position: relative;
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 14px 16px;
+        gap: 14px;
+      }
+
+      .header .logo {
+      border-radius: 50%;
+        width: 50px;
+        height: 50px;
+      }
+
+      .header .title-area h1 {
+        font-size: 24px;
+        letter-spacing: 3px;
+      }
+
+      .header .title-area .subtitle {
+        font-size: 10px;
+      }
+
+      .line-btn {
+        font-size: 12px;
+        padding: 14px 8px;
+      }
+
+      .menu-btn {
+        padding: 16px 6px;
+        min-height: 90px;
+      }
+
+      .menu-btn .icon-wrapper {
+        width: 40px;
+        height: 40px;
+      }
+
+      .menu-btn .material-icons {
+        font-size: 22px;
+      }
+
+      .menu-btn span {
+        font-size: 10px;
+      }
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      font-size: 11px;
+    }
+
+    /* ハンバーガーメニュー */
+    .menu-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-left: auto;
+    }
+
+    .menu-toggle:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .menu-toggle .material-icons {
+      font-size: 26px;
+    }
+
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .nav-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100%;
+      background: white;
+      z-index: 201;
+      transition: right 0.3s ease;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+      overflow-y: auto;
+    }
+
+    .nav-menu.open {
+      right: 0;
+    }
+
+    .nav-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 20px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-header-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .nav-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+    }
+
+    .nav-section {
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #999;
+      padding: 8px 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      color: #333;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-item:hover {
+      background: #f5f5f5;
+    }
+
+    .nav-item .material-icons {
+      font-size: 22px;
+      color: #1a237e;
+    }
+
+    .nav-item span {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-badge {
+      background: #ff5722;
+      color: white;
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: auto;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .nav-badge-wip {
+      background: #9e9e9e;
+      color: white;
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: auto;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .nav-category {
+      padding: 10px 20px 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #1a237e;
+      background: #f5f5f5;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .nav-category:first-child {
+      border-top: none;
+    }
+
+    .nav-divider {
+      height: 1px;
+      background: #e0e0e0;
+      margin: 8px 0;
+    }
+
+    .hamburger-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    .hamburger-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .hamburger-btn .material-icons {
+      font-size: 28px;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="data:image/webp;base64,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" alt="EQAO Logo">
+    </div>
+    <div class="title-area">
+      <h1>EQAO PORTAL</h1>
+      <p class="subtitle">塾生専用ページ</p>
+    </div>
+    <button class="hamburger-btn" onclick="openNav()">
+      <span class="material-icons">menu</span>
+    </button>
+  </header>
+
+  <!-- ナビゲーションオーバーレイ -->
+  <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
+
+  <!-- ナビゲーションメニュー -->
+  <div id="navMenu" class="nav-menu">
+    <div class="nav-header">
+      <span class="nav-header-title">メニュー</span>
+      <button class="nav-close" onclick="closeNav()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <a href="index.html" class="nav-item">
+        <span class="material-icons">home</span>
+        <span>ホーム</span>
+      </a>
+    </div>
+
+    <div class="nav-category">スケジュール</div>
+    <div class="nav-section">
+      <a href="yearly-schedule.html" class="nav-item">
+        <span class="material-icons">calendar_month</span>
+        <span>年間スケジュール</span>
+      </a>
+      <a href="exam-schedule.html" class="nav-item">
+        <span class="material-icons">school</span>
+        <span>受験スケジュール</span>
+        <span class="nav-badge">個別</span>
+      </a>
+      <a href="schedule.html" class="nav-item">
+        <span class="material-icons">event_note</span>
+        <span>授業スケジュール</span>
+        <span class="nav-badge">個別</span>
+      </a>
+    </div>
+
+    <div class="nav-category">チェックリスト一覧</div>
+    <div class="nav-section">
+      <a href="checklist.html" class="nav-item">
+        <span class="material-icons">checklist</span>
+        <span>チェックリスト教材</span>
+        <span class="nav-badge">個別</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="material-icons">trending_up</span>
+        <span>自己/進捗管理シート</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="material-icons">location_city</span>
+        <span>志望校/併願校管理シート</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+    </div>
+
+    <div class="nav-category">教材</div>
+    <div class="nav-section">
+      <a href="#" class="nav-item">
+        <span class="material-icons">play_circle</span>
+        <span>動画教材一覧</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="material-icons">folder_shared</span>
+        <span>生徒共通教材一覧</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="material-icons">description</span>
+        <span>授業書類一覧</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+    </div>
+
+    <div class="nav-category">コンテンツ</div>
+    <div class="nav-section">
+      <a href="videos.html" class="nav-item">
+        <span class="material-icons">video_library</span>
+        <span>過去の集団授業動画</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="material-icons">dashboard</span>
+        <span>生徒プラットフォーム</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+      <a href="column.html" class="nav-item">
+        <span class="material-icons">article</span>
+        <span>コラム一覧</span>
+      </a>
+    </div>
+
+    <div class="nav-category">イベント申し込み</div>
+    <div class="nav-section">
+      <a href="https://forms.gle/1ihZxscRHMVmypFq9" target="_blank" class="nav-item">
+        <span class="material-icons">quiz</span>
+        <span>EQAO模試申し込み</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="material-icons">groups</span>
+        <span>MCFF申し込み</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+      <a href="https://forms.gle/HnXY4omVvs2haCKM6" target="_blank" class="nav-item">
+        <span class="material-icons">celebration</span>
+        <span>EQAO PARTY FOR NEXT STAGE</span>
+      </a>
+    </div>
+
+    <div class="nav-category">各種申し込み</div>
+    <div class="nav-section">
+      <a href="forms.html" class="nav-item">
+        <span class="material-icons">list_alt</span>
+        <span>各種申し込みフォーム一覧</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="material-icons">edit_calendar</span>
+        <span>スケジュールフォーム</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+      <a href="https://forms.gle/89pDvpSBRXiNnpPG9" target="_blank" class="nav-item">
+        <span class="material-icons">swap_horiz</span>
+        <span>授業振替フォーム</span>
+      </a>
+    </div>
+
+    <div class="nav-category">追加対策申し込み</div>
+    <div class="nav-section">
+      <a href="https://forms.gle/aCu1VwgJjLhAQtDQ7" target="_blank" class="nav-item">
+        <span class="material-icons">add_box</span>
+        <span>授業コマ追加フォーム</span>
+      </a>
+      <a href="https://forms.gle/jYZz42KbFSMmJCMi6" target="_blank" class="nav-item">
+        <span class="material-icons">library_add</span>
+        <span>コース追加フォーム</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="material-icons">menu_book</span>
+        <span>課題図書対策追加フォーム</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+    </div>
+
+    <div class="nav-category">プログラム申し込み</div>
+    <div class="nav-section">
+      <a href="#" class="nav-item">
+        <span class="material-icons">holiday_village</span>
+        <span>EQAO CAMP</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="material-icons">flight</span>
+        <span>EQAO STUDY TOUR</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="material-icons">volunteer_activism</span>
+        <span>EQAO VOLUNTEER</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+    </div>
+
+    <div class="nav-category">面談申し込み</div>
+    <div class="nav-section">
+      <a href="meeting-principal.html" class="nav-item">
+        <span class="material-icons">person</span>
+        <span>塾長面談</span>
+      </a>
+      <a href="meeting-sansya.html" class="nav-item">
+        <span class="material-icons">group</span>
+        <span>三者面談</span>
+      </a>
+      <a href="meeting-tantou.html" class="nav-item">
+        <span class="material-icons">support_agent</span>
+        <span>担任面談</span>
+      </a>
+    </div>
+
+    <div class="nav-category">カリキュラム</div>
+    <div class="nav-section">
+      <a href="zoom-links.html" class="nav-item">
+        <span class="material-icons">videocam</span>
+        <span>Zoomリンク一覧</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="material-icons">route</span>
+        <span>授業の流れ</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="material-icons">account_tree</span>
+        <span>カリキュラムの流れ</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+    </div>
+
+    <div class="nav-category">ルール関連</div>
+    <div class="nav-section">
+      <a href="rules.html" class="nav-item">
+        <span class="material-icons">gavel</span>
+        <span>生徒/保護者ルール一覧</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="material-icons">auto_stories</span>
+        <span>パンフレット</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="material-icons">policy</span>
+        <span>基本事項規定書</span>
+        <span class="nav-badge-wip">未完成</span>
+      </a>
+    </div>
+
+    <div class="nav-divider"></div>
+
+    <div class="nav-section">
+      <a href="https://lin.ee/nM1pgho" target="_blank" class="nav-item">
+        <span class="material-icons">chat</span>
+        <span>塾生専用公式LINE</span>
+      </a>
+      <a href="https://lin.ee/qbBTdgx" target="_blank" class="nav-item">
+        <span class="material-icons">family_restroom</span>
+        <span>保護者専用公式LINE[配信用]</span>
+      </a>
+      <a href="https://lin.ee/x3WPAvR" target="_blank" class="nav-item">
+        <span class="material-icons">mail</span>
+        <span>保護者専用公式LINE[連絡用]</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- お知らせセクション -->
+    <div class="news-section">
+      <div class="news-header">
+        <div class="news-icon">
+          <span class="material-icons">campaign</span>
+        </div>
+        <span class="news-title">お知らせ</span>
+      </div>
+      <div id="newsList" class="news-list">
+        <div class="news-loading">読み込み中...</div>
+      </div>
+    </div>
+
+    <div class="line-section">
+      <a href="https://lin.ee/nM1pgho" target="_blank" class="line-btn">
+        <span class="material-icons">chat</span>
+        塾生専用<br>公式LINE
+      </a>
+      <a href="https://lin.ee/qbBTdgx" target="_blank" class="line-btn">
+        <span class="material-icons">family_restroom</span>
+        保護者専用<br>公式LINE<br>[配信用]
+      </a>
+      <a href="https://lin.ee/x3WPAvR" target="_blank" class="line-btn">
+        <span class="material-icons">mail</span>
+        保護者専用<br>公式LINE<br>[連絡用]
+      </a>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">スケジュール</h2>
+      <div class="button-grid">
+        <a href="yearly-schedule.html" class="menu-btn">
+          <div class="icon-wrapper icon-blue">
+            <span class="material-icons">calendar_month</span>
+          </div>
+          <span>年間<br>スケジュール</span>
+        </a>
+        <a href="exam-schedule.html" class="menu-btn has-badge">
+          <span class="personal-badge">個別</span>
+          <div class="icon-wrapper icon-indigo">
+            <span class="material-icons">school</span>
+          </div>
+          <span>受験<br>スケジュール</span>
+        </a>
+        <a href="schedule.html" class="menu-btn has-badge">
+          <span class="personal-badge">個別</span>
+          <div class="icon-wrapper icon-purple">
+            <span class="material-icons">event_note</span>
+          </div>
+          <span>授業<br>スケジュール</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">チェックリスト一覧</h2>
+      <div class="button-grid">
+        <a href="checklist.html" class="menu-btn has-badge">
+          <span class="personal-badge">個別</span>
+          <div class="icon-wrapper icon-teal">
+            <span class="material-icons">checklist</span>
+          </div>
+          <span>チェックリスト<br>教材</span>
+        </a>
+        <a href="#" class="menu-btn has-badge">
+          <span class="personal-badge">個別</span>
+          <div class="icon-wrapper icon-teal">
+            <span class="material-icons">trending_up</span>
+          </div>
+          <span>自己/進捗<br>管理シート</span>
+        </a>
+        <a href="#" class="menu-btn has-badge">
+          <span class="personal-badge">個別</span>
+          <div class="icon-wrapper icon-teal">
+            <span class="material-icons">location_city</span>
+          </div>
+          <span>志望校/併願校<br>管理シート</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">教材</h2>
+      <div class="button-grid">
+        <a href="#" class="menu-btn">
+          <div class="icon-wrapper icon-orange">
+            <span class="material-icons">play_circle</span>
+          </div>
+          <span>動画教材<br>一覧</span>
+        </a>
+        <a href="#" class="menu-btn">
+          <div class="icon-wrapper icon-orange">
+            <span class="material-icons">folder_shared</span>
+          </div>
+          <span>生徒共通<br>教材一覧</span>
+        </a>
+        <a href="#" class="menu-btn has-badge">
+          <span class="personal-badge">個別</span>
+          <div class="icon-wrapper icon-orange">
+            <span class="material-icons">description</span>
+          </div>
+          <span>授業書類<br>一覧</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">コンテンツ</h2>
+      <div class="button-grid">
+        <a href="videos.html" class="menu-btn">
+          <div class="icon-wrapper icon-pink">
+            <span class="material-icons">video_library</span>
+          </div>
+          <span>過去の集団<br>授業動画</span>
+        </a>
+        <a href="#" class="menu-btn">
+          <div class="icon-wrapper icon-pink">
+            <span class="material-icons">dashboard</span>
+          </div>
+          <span>生徒<br>プラットフォーム</span>
+        </a>
+        <a href="column.html" class="menu-btn">
+          <div class="icon-wrapper icon-pink">
+            <span class="material-icons">article</span>
+          </div>
+          <span>コラム<br>一覧</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">イベント申し込み</h2>
+      <div class="button-grid">
+        <a href="https://forms.gle/1ihZxscRHMVmypFq9" target="_blank" class="menu-btn">
+          <div class="icon-wrapper icon-green">
+            <span class="material-icons">quiz</span>
+          </div>
+          <span>EQAO模試<br>申し込み</span>
+        </a>
+        <a href="#" class="menu-btn">
+          <div class="icon-wrapper icon-green">
+            <span class="material-icons">groups</span>
+          </div>
+          <span>MCFF<br>申し込み</span>
+        </a>
+        <a href="https://forms.gle/HnXY4omVvs2haCKM6" target="_blank" class="menu-btn">
+          <div class="icon-wrapper icon-green">
+            <span class="material-icons">celebration</span>
+          </div>
+          <span>EQAO PARTY<br>FOR NEXT STAGE</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">各種申し込み</h2>
+      <div class="button-grid">
+        <a href="forms.html" class="menu-btn">
+          <div class="icon-wrapper icon-cyan">
+            <span class="material-icons">list_alt</span>
+          </div>
+          <span>各種申し込み<br>フォーム一覧</span>
+        </a>
+        <a href="#" class="menu-btn">
+          <div class="icon-wrapper icon-cyan">
+            <span class="material-icons">edit_calendar</span>
+          </div>
+          <span>スケジュール<br>フォーム</span>
+        </a>
+        <a href="https://forms.gle/89pDvpSBRXiNnpPG9" target="_blank" class="menu-btn">
+          <div class="icon-wrapper icon-cyan">
+            <span class="material-icons">swap_horiz</span>
+          </div>
+          <span>授業振替<br>フォーム</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">追加対策申し込み</h2>
+      <div class="button-grid">
+        <a href="https://forms.gle/aCu1VwgJjLhAQtDQ7" target="_blank" class="menu-btn">
+          <div class="icon-wrapper icon-amber">
+            <span class="material-icons">add_box</span>
+          </div>
+          <span>授業コマ<br>追加フォーム</span>
+        </a>
+        <a href="https://forms.gle/jYZz42KbFSMmJCMi6" target="_blank" class="menu-btn">
+          <div class="icon-wrapper icon-amber">
+            <span class="material-icons">library_add</span>
+          </div>
+          <span>コース<br>追加フォーム</span>
+        </a>
+        <a href="#" class="menu-btn">
+          <div class="icon-wrapper icon-amber">
+            <span class="material-icons">menu_book</span>
+          </div>
+          <span>課題図書対策<br>追加フォーム</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">プログラム申し込み</h2>
+      <div class="button-grid">
+        <a href="#" class="menu-btn">
+          <div class="icon-wrapper icon-red">
+            <span class="material-icons">camping</span>
+          </div>
+          <span>EQAO<br>CAMP</span>
+        </a>
+        <a href="#" class="menu-btn">
+          <div class="icon-wrapper icon-red">
+            <span class="material-icons">flight</span>
+          </div>
+          <span>EQAO<br>STUDY TOUR</span>
+        </a>
+        <a href="#" class="menu-btn">
+          <div class="icon-wrapper icon-red">
+            <span class="material-icons">volunteer_activism</span>
+          </div>
+          <span>EQAO<br>VOLUNTEER</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">面談申し込み</h2>
+      <div class="button-grid">
+        <a href="meeting-principal.html" class="menu-btn">
+          <div class="icon-wrapper icon-indigo">
+            <span class="material-icons">person</span>
+          </div>
+          <span>塾長面談</span>
+        </a>
+        <a href="meeting-sansya.html" class="menu-btn">
+          <div class="icon-wrapper icon-indigo">
+            <span class="material-icons">group</span>
+          </div>
+          <span>三者面談</span>
+        </a>
+        <a href="meeting-tantou.html" class="menu-btn">
+          <div class="icon-wrapper icon-indigo">
+            <span class="material-icons">support_agent</span>
+          </div>
+          <span>担任面談</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">カリキュラム</h2>
+      <div class="button-grid">
+        <a href="zoom-links.html" class="menu-btn">
+          <div class="icon-wrapper icon-purple">
+            <span class="material-icons">videocam</span>
+          </div>
+          <span>Zoomリンク<br>一覧</span>
+        </a>
+        <a href="#" class="menu-btn">
+          <div class="icon-wrapper icon-purple">
+            <span class="material-icons">route</span>
+          </div>
+          <span>授業の<br>流れ</span>
+        </a>
+        <a href="#" class="menu-btn">
+          <div class="icon-wrapper icon-purple">
+            <span class="material-icons">account_tree</span>
+          </div>
+          <span>カリキュラム<br>の流れ</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">ルール関連</h2>
+      <div class="button-grid">
+        <a href="rules.html" class="menu-btn">
+          <div class="icon-wrapper icon-brown">
+            <span class="material-icons">gavel</span>
+          </div>
+          <span>生徒/保護者<br>ルール一覧</span>
+        </a>
+        <a href="#" class="menu-btn">
+          <div class="icon-wrapper icon-brown">
+            <span class="material-icons">auto_stories</span>
+          </div>
+          <span>パンフレット</span>
+        </a>
+        <a href="#" class="menu-btn">
+          <div class="icon-wrapper icon-brown">
+            <span class="material-icons">policy</span>
+          </div>
+          <span>基本事項<br>規定書</span>
+        </a>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>© 2025 EQAO Education Group</p>
+    </footer>
+  </div>
+
+  <script>
+    // ============================================
+    // API設定（デプロイ後に実際のURLに変更）
+    // ============================================
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzCFkkw6h6o0iFwObPILE-VCYfjRP1ikmMWOl6DgqIaqIRi657vQIKkjSKuRVTaWJzG/exec';
+
+    // ============================================
+    // API通信関数
+    // ============================================
+    async function apiGet(action, params = {}) {
+      const url = new URL(API_URL);
+      url.searchParams.set('action', action);
+      for (const [key, value] of Object.entries(params)) {
+        if (value !== undefined && value !== null) {
+          url.searchParams.set(key, value);
+        }
+      }
+      
+      const response = await fetch(url.toString());
+      if (!response.ok) {
+        throw new Error('API Error: ' + response.status);
+      }
+      return await response.json();
+    }
+
+    // ページ読み込み時にお知らせを取得
+    document.addEventListener('DOMContentLoaded', function() {
+      loadNews();
+    });
+
+    async function loadNews() {
+      try {
+        const data = await apiGet('getNews');
+        displayNews(data);
+      } catch (error) {
+        handleNewsError(error);
+      }
+    }
+
+    function displayNews(data) {
+      const newsList = document.getElementById('newsList');
+      
+      if (!data || data.length === 0) {
+        newsList.innerHTML = '<div class="news-empty">現在お知らせはありません</div>';
+        return;
+      }
+
+      newsList.innerHTML = '';
+      
+      data.forEach(function(item) {
+        const newsItem = document.createElement('div');
+        newsItem.className = 'news-item';
+        
+        newsItem.innerHTML = 
+          '<div class="news-date">' + escapeHtml(item.date) + '</div>' +
+          '<div class="news-content">' +
+            '<div class="news-item-title">' +
+              escapeHtml(item.title) +
+              (item.isNew ? '<span class="news-new-badge">NEW</span>' : '') +
+            '</div>' +
+            (item.content ? '<div class="news-item-text">' + escapeHtml(item.content) + '</div>' : '') +
+          '</div>';
+        
+        newsList.appendChild(newsItem);
+      });
+    }
+
+    function handleNewsError(error) {
+      const newsList = document.getElementById('newsList');
+      newsList.innerHTML = '<div class="news-empty">お知らせを読み込めませんでした</div>';
+      console.error(error);
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // ナビゲーションメニュー
+    function openNav() {
+      document.getElementById('navOverlay').classList.add('open');
+      document.getElementById('navMenu').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav() {
+      document.getElementById('navOverlay').classList.remove('open');
+      document.getElementById('navMenu').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  </script>
+</body>
+</html>
