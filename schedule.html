@@ -797,24 +797,6 @@
         console.error(error);
       }
     }
-                loadSchedule(result.studentId);
-              }
-            }
-          } else {
-            errorMessage.textContent = '生徒番号またはパスワードが正しくありません';
-            errorMessage.style.display = 'block';
-            loginBtn.disabled = false;
-            loginBtn.textContent = 'ログイン';
-          }
-        })
-        .withFailureHandler(function(error) {
-          errorMessage.textContent = 'エラーが発生しました。もう一度お試しください。';
-          errorMessage.style.display = 'block';
-          loginBtn.disabled = false;
-          loginBtn.textContent = 'ログイン';
-        })
-        .authenticateUser(studentId, password);
-    }
 
     // パスワード変更処理
     async function changePassword() {
