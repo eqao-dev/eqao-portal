@@ -966,6 +966,54 @@
     let currentCategory = null;
     let currentView = 'progress';  // 'progress' or 'detail'
 
+    // ============================================
+    // キャッシュ管理
+    // ============================================
+    const CACHE_KEY_PREFIX = 'eqao_checklist_';
+    const CACHE_EXPIRY = 5 * 60 * 1000; // 5分
+
+    function getCacheKey(type, id = '') {
+      const studentId = localStorage.getItem('eqao_studentId');
+      return `${CACHE_KEY_PREFIX}${studentId}_${type}${id ? '_' + id : ''}`;
+    }
+
+    function setCache(type, data, id = '') {
+      try {
+        const cacheData = {
+          data: data,
+          timestamp: Date.now()
+        };
+        localStorage.setItem(getCacheKey(type, id), JSON.stringify(cacheData));
+      } catch (e) {
+        console.warn('キャッシュ保存エラー:', e);
+      }
+    }
+
+    function getCache(type, id = '') {
+      try {
+        const cached = localStorage.getItem(getCacheKey(type, id));
+        if (!cached) return null;
+        
+        const cacheData = JSON.parse(cached);
+        const age = Date.now() - cacheData.timestamp;
+        
+        // キャッシュが有効期限内なら返す（ただし古いデータとしてマーク）
+        return {
+          data: cacheData.data,
+          isStale: age > CACHE_EXPIRY,
+          age: age
+        };
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function clearCategoryCache(categoryName) {
+      try {
+        localStorage.removeItem(getCacheKey('category', categoryName));
+      } catch (e) {}
+    }
+
     // 戻るボタン
     function goBack() {
       if (currentView === 'detail') {
@@ -1002,22 +1050,67 @@
       loadProgress();
     }
 
-    // 進捗一覧を読み込み
+    // 進捗一覧を読み込み（キャッシュ対応）
     async function loadProgress() {
-      document.getElementById('loading').style.display = 'block';
       document.getElementById('progressView').style.display = 'none';
       document.getElementById('detailView').style.display = 'none';
 
-      try {
-        const data = await apiGet('getChecklistProgress', { studentId: currentUser.studentId });
-        displayProgress(data);
-      } catch (error) {
-        handleError(error);
+      // キャッシュをチェック
+      const cached = getCache('progress');
+      
+      if (cached && cached.data) {
+        // キャッシュがあれば即座に表示
+        console.log('キャッシュから表示 (経過: ' + Math.round(cached.age / 1000) + '秒)');
+        displayProgress(cached.data, true);
+        
+        // バックグラウンドで最新データを取得（古い場合のみ）
+        if (cached.isStale) {
+          fetchAndUpdateProgress();
+        }
+      } else {
+        // キャッシュがなければローディング表示してから取得
+        document.getElementById('loading').style.display = 'block';
+        updateLoadingMessage('データを読み込み中...');
+        
+        try {
+          const data = await apiGet('getChecklistProgress', { studentId: currentUser.studentId });
+          setCache('progress', data);
+          displayProgress(data, false);
+        } catch (error) {
+          handleError(error);
+        }
       }
     }
 
+    // バックグラウンドで進捗を更新
+    async function fetchAndUpdateProgress() {
+      try {
+        const data = await apiGet('getChecklistProgress', { studentId: currentUser.studentId });
+        setCache('progress', data);
+        
+        // 進捗画面が表示中なら更新
+        if (currentView === 'progress') {
+          displayProgress(data, true);
+        }
+      } catch (error) {
+        console.warn('バックグラウンド更新エラー:', error);
+      }
+    }
+
+    // ローディングメッセージを更新
+    function updateLoadingMessage(message) {
+      const loadingEl = document.getElementById('loading');
+      let msgEl = loadingEl.querySelector('.loading-message');
+      if (!msgEl) {
+        msgEl = document.createElement('p');
+        msgEl.className = 'loading-message';
+        loadingEl.appendChild(msgEl);
+      }
+      msgEl.textContent = message;
+    }
+
     // 進捗を表示
-    function displayProgress(data) {
+    function displayProgress(data, fromCache = false) {
       document.getElementById('loading').style.display = 'none';
 
       if (!data.success) {
@@ -1065,24 +1158,57 @@
       currentView = 'progress';
     }
 
-    // カテゴリ詳細を表示
+    // カテゴリ詳細を表示（キャッシュ対応）
     async function showCategoryDetail(categoryName) {
       currentCategory = categoryName;
       document.getElementById('headerTitle').textContent = categoryName;
       document.getElementById('progressView').style.display = 'none';
-      document.getElementById('loading').style.display = 'block';
       currentView = 'detail';
 
+      // キャッシュをチェック
+      const cached = getCache('category', categoryName);
+      
+      if (cached && cached.data) {
+        // キャッシュがあれば即座に表示
+        console.log('カテゴリキャッシュから表示: ' + categoryName);
+        displayCategoryDetail(cached.data, true);
+        
+        // バックグラウンドで最新データを取得（古い場合のみ）
+        if (cached.isStale) {
+          fetchAndUpdateCategory(categoryName);
+        }
+      } else {
+        // キャッシュがなければローディング表示してから取得
+        document.getElementById('loading').style.display = 'block';
+        updateLoadingMessage(categoryName + ' を読み込み中...');
+        
+        try {
+          const data = await apiGet('getChecklistCategory', { checklistId, categoryName });
+          setCache('category', data, categoryName);
+          displayCategoryDetail(data, false);
+        } catch (error) {
+          handleError(error);
+        }
+      }
+    }
+
+    // バックグラウンドでカテゴリ詳細を更新
+    async function fetchAndUpdateCategory(categoryName) {
       try {
         const data = await apiGet('getChecklistCategory', { checklistId, categoryName });
-        displayCategoryDetail(data);
+        setCache('category', data, categoryName);
+        
+        // 同じカテゴリを表示中なら更新
+        if (currentView === 'detail' && currentCategory === categoryName) {
+          displayCategoryDetail(data, true);
+        }
       } catch (error) {
-        handleError(error);
+        console.warn('カテゴリ更新エラー:', error);
       }
     }
 
     // カテゴリ詳細を表示
-    function displayCategoryDetail(data) {
+    function displayCategoryDetail(data, fromCache = false) {
       document.getElementById('loading').style.display = 'none';
 
       if (!data.success) {
@@ -1135,6 +1261,8 @@
       document.getElementById('headerTitle').textContent = 'チェックリスト';
       currentView = 'progress';
       setNavUserName();
+      
+      // キャッシュがクリアされていたら再読み込み
       loadProgress();
     }
 
@@ -1150,6 +1278,13 @@
       } else {
         card.classList.remove('checked');
       }
+
+      // 進捗カウントを更新（楽観的更新）
+      updateDetailProgress(newState ? 1 : -1);
+
+      // キャッシュをクリア（次回は最新データを取得）
+      clearCategoryCache(currentCategory);
+      localStorage.removeItem(getCacheKey('progress'));
 
       // サーバーに保存
       try {
@@ -1169,9 +1304,7 @@
           } else {
             card.classList.add('checked');
           }
-        } else {
-          // 進捗カウントを更新
-          updateDetailProgress(newState ? 1 : -1);
+          updateDetailProgress(newState ? -1 : 1);
         }
       } catch (error) {
         // 失敗したら元に戻す
@@ -1180,6 +1313,7 @@
         } else {
           card.classList.add('checked');
         }
+        updateDetailProgress(newState ? -1 : 1);
         console.error(error);
       }
     }
