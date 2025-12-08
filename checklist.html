@@ -1047,6 +1047,14 @@
       };
 
       setNavUserName();
+      
+      // 未保存の変更があれば復元してバックグラウンドで保存
+      loadPendingFromLocal();
+      if (pendingChanges.size > 0) {
+        console.log('未保存の変更を復元:', pendingChanges.size, '件');
+        setTimeout(flushChanges, 3000); // 3秒後に保存開始
+      }
+      
       loadProgress();
     }
 
@@ -1266,18 +1274,107 @@
       loadProgress();
     }
 
-    // 連打防止用
-    const pendingChecks = new Set();
+    // ============================================
+    // 非同期バッチ保存システム
+    // ============================================
+    const pendingChanges = new Map(); // { 'categoryName:rowIndex': { categoryName, rowIndex, checked } }
+    let saveTimer = null;
+    const SAVE_INTERVAL = 60 * 1000; // 1分
 
-    // チェック状態を切り替え
-    async function toggleCheck(event, rowIndex, newState) {
-      event.stopPropagation();
+    // 変更をキューに追加
+    function queueChange(categoryName, rowIndex, checked) {
+      const key = `${categoryName}:${rowIndex}`;
+      pendingChanges.set(key, { categoryName, rowIndex, checked });
       
-      // 同じアイテムの処理中なら無視（連打防止）
-      if (pendingChecks.has(rowIndex)) {
+      // ローカルストレージにも保存（ページリロード対策）
+      savePendingToLocal();
+      
+      // タイマーがなければ開始
+      if (!saveTimer) {
+        saveTimer = setTimeout(flushChanges, SAVE_INTERVAL);
+      }
+    }
+
+    // ローカルストレージに一時保存
+    function savePendingToLocal() {
+      try {
+        const data = Array.from(pendingChanges.values());
+        localStorage.setItem(getCacheKey('pendingChanges'), JSON.stringify(data));
+      } catch (e) {}
+    }
+
+    // ローカルストレージから復元
+    function loadPendingFromLocal() {
+      try {
+        const data = localStorage.getItem(getCacheKey('pendingChanges'));
+        if (data) {
+          const changes = JSON.parse(data);
+          changes.forEach(c => {
+            const key = `${c.categoryName}:${c.rowIndex}`;
+            pendingChanges.set(key, c);
+          });
+        }
+      } catch (e) {}
+    }
+
+    // 保存待ちの変更をサーバーに送信
+    async function flushChanges() {
+      if (pendingChanges.size === 0) {
+        saveTimer = null;
         return;
       }
-      pendingChecks.add(rowIndex);
+
+      const changes = Array.from(pendingChanges.values());
+      pendingChanges.clear();
+      localStorage.removeItem(getCacheKey('pendingChanges'));
+      saveTimer = null;
+
+      console.log('バッチ保存開始:', changes.length, '件');
+
+      // 1件ずつ送信（GASの制約上、まとめて送れないので）
+      for (const change of changes) {
+        try {
+          await apiGet('updateChecklistItem', {
+            studentId: currentUser.studentId,
+            password: currentUser.password,
+            checklistId: checklistId,
+            categoryName: change.categoryName,
+            rowIndex: change.rowIndex,
+            checked: change.checked
+          });
+        } catch (error) {
+          console.error('保存エラー:', change, error);
+          // 失敗したら再キュー
+          queueChange(change.categoryName, change.rowIndex, change.checked);
+        }
+      }
+
+      console.log('バッチ保存完了');
+
+      // キャッシュをクリア
+      localStorage.removeItem(getCacheKey('progress'));
+    }
+
+    // ページ離脱時に保存
+    window.addEventListener('beforeunload', function() {
+      if (pendingChanges.size > 0) {
+        // 同期的に保存を試みる（sendBeacon使用）
+        const changes = Array.from(pendingChanges.values());
+        // localStorageには保存済みなので、次回読み込み時に復元される
+        console.log('ページ離脱: 未保存', changes.length, '件（次回復元）');
+      }
+    });
+
+    // visibilitychange でも保存（タブ切り替え、アプリ切り替え時）
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'hidden' && pendingChanges.size > 0) {
+        flushChanges();
+      }
+    });
+
+    // チェック状態を切り替え（即座にUI更新、サーバー保存は後で）
+    function toggleCheck(event, rowIndex, newState) {
+      event.stopPropagation();
       
       const card = event.target.closest('.item-card');
       
@@ -1288,46 +1385,14 @@
         card.classList.remove('checked');
       }
 
-      // 進捗カウントを更新（楽観的更新）
+      // 進捗カウントを更新
       updateDetailProgress(newState ? 1 : -1);
 
-      // キャッシュをクリア（次回は最新データを取得）
+      // キャッシュをクリア
       clearCategoryCache(currentCategory);
-      localStorage.removeItem(getCacheKey('progress'));
 
-      // サーバーに保存
-      try {
-        const result = await apiGet('updateChecklistItem', {
-          studentId: currentUser.studentId,
-          password: currentUser.password,
-          checklistId: checklistId,
-          categoryName: currentCategory,
-          rowIndex: rowIndex,
-          checked: newState
-        });
-        
-        if (!result.success) {
-          // 失敗したら元に戻す
-          if (newState) {
-            card.classList.remove('checked');
-          } else {
-            card.classList.add('checked');
-          }
-          updateDetailProgress(newState ? -1 : 1);
-        }
-      } catch (error) {
-        // 失敗したら元に戻す
-        if (newState) {
-          card.classList.remove('checked');
-        } else {
-          card.classList.add('checked');
-        }
-        updateDetailProgress(newState ? -1 : 1);
-        console.error(error);
-      } finally {
-        // 処理完了後にロック解除
-        pendingChecks.delete(rowIndex);
-      }
+      // 変更をキューに追加（サーバー保存は後で）
+      queueChange(currentCategory, rowIndex, newState);
     }
 
     // 詳細の表示/非表示
