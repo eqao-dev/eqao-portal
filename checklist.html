@@ -611,7 +611,7 @@
       errorMessage.style.display = 'none';
 
       try {
-        const result = await apiPost('authenticate', { studentId, password });
+        const result = await apiGet('authenticate', { studentId, password });
         
         if (result.success) {
           localStorage.setItem('eqao_studentId', result.studentId);
@@ -793,7 +793,7 @@
 
       // サーバーに保存
       try {
-        const result = await apiPost('updateChecklistItem', {
+        const result = await apiGet('updateChecklistItem', {
           studentId: currentUser.studentId,
           password: currentUser.password,
           checklistId: checklistId,
