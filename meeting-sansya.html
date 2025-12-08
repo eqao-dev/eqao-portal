@@ -227,7 +227,7 @@
       if (!studentId || !password) { errorMessage.textContent = '生徒番号とパスワードを入力してください'; errorMessage.style.display = 'block'; return; }
       errorMessage.style.display = 'none';
       try {
-        const result = await apiPost('authenticate', { studentId, password });
+        const result = await apiGet('authenticate', { studentId, password });
         if (result.success) {
           localStorage.setItem('eqao_studentId', result.studentId);
           localStorage.setItem('eqao_studentName', result.studentName);
