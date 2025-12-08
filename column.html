@@ -68,38 +68,90 @@
 
     /* フィルターエリア */
     .filter-area {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
       margin-bottom: 20px;
     }
 
-    .filter-group {
+    /* カテゴリセグメント */
+    .category-tabs {
       display: flex;
-      flex-direction: column;
-      gap: 6px;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
     }
 
-    .filter-label {
-      font-size: 12px;
-      font-weight: 600;
+    .category-tab {
+      padding: 10px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      background: white;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .category-tab:hover {
+      border-color: #1a237e;
       color: #1a237e;
     }
 
-    .filter-select {
-      padding: 12px 16px;
+    .category-tab.active {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      border-color: #1a237e;
+      color: white;
+    }
+
+    /* 検索ボックス */
+    .search-box {
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 16px 14px 48px;
       border: 2px solid #e0e0e0;
       border-radius: 12px;
       font-size: 14px;
       font-family: inherit;
       background: white;
-      cursor: pointer;
       transition: border-color 0.3s;
     }
 
-    .filter-select:focus {
+    .search-input:focus {
       outline: none;
       border-color: #1a237e;
+    }
+
+    .search-input::placeholder {
+      color: #999;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      pointer-events: none;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #999;
+      cursor: pointer;
+      padding: 4px;
+      display: none;
+    }
+
+    .search-clear.show {
+      display: block;
     }
 
     /* ローディング */
@@ -568,17 +620,18 @@
 
   <div class="container">
     <div class="filter-area">
-      <div class="filter-group">
-        <label class="filter-label">投稿月</label>
-        <select id="monthFilter" class="filter-select" onchange="filterData()">
-          <option value="すべて">すべて</option>
-        </select>
+      <!-- カテゴリセグメント -->
+      <div id="categoryTabs" class="category-tabs">
+        <button class="category-tab active" data-category="すべて" onclick="selectCategory(this)">すべて</button>
       </div>
-      <div class="filter-group">
-        <label class="filter-label">カテゴリ</label>
-        <select id="categoryFilter" class="filter-select" onchange="filterData()">
-          <option value="すべて">すべて</option>
-        </select>
+
+      <!-- キーワード検索 -->
+      <div class="search-box">
+        <span class="material-icons search-icon">search</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="キーワードで検索..." oninput="onSearchInput()">
+        <button id="searchClear" class="search-clear" onclick="clearSearch()">
+          <span class="material-icons">close</span>
+        </button>
       </div>
     </div>
 
@@ -625,54 +678,106 @@
     // ページ読み込み時
     document.addEventListener('DOMContentLoaded', function() {
       setNavUserName();
-      loadCategoryOptions();
-      filterData();
+      loadCategoryTabs();
+      loadAllData();
     });
 
-    // カテゴリの選択肢を読み込み
-    async function loadCategoryOptions() {
+    let allData = [];
+    let currentCategory = 'すべて';
+    let searchKeyword = '';
+
+    // カテゴリタブを読み込み
+    async function loadCategoryTabs() {
       try {
         const categories = await apiGet('getColumnCategories');
-        const select = document.getElementById('categoryFilter');
+        const tabsContainer = document.getElementById('categoryTabs');
+        
         categories.forEach(function(cat) {
-          const option = document.createElement('option');
-          option.value = cat;
-          option.textContent = cat;
-          select.appendChild(option);
+          const tab = document.createElement('button');
+          tab.className = 'category-tab';
+          tab.setAttribute('data-category', cat);
+          tab.textContent = cat;
+          tab.onclick = function() { selectCategory(this); };
+          tabsContainer.appendChild(tab);
         });
       } catch (e) {
         console.error('カテゴリ取得エラー:', e);
       }
     }
 
-    // データをフィルタして表示
-    async function filterData() {
-      const month = document.getElementById('monthFilter').value;
-      const category = document.getElementById('categoryFilter').value;
-
+    // 全データを読み込み
+    async function loadAllData() {
       document.getElementById('loading').style.display = 'block';
       document.getElementById('cardList').style.display = 'none';
       document.getElementById('noResults').style.display = 'none';
 
       try {
-        const data = await apiGet('getColumn', { month, category });
-        displayData(data);
-        
-        // 月の選択肢を更新（初回のみ）
-        if (document.getElementById('monthFilter').options.length <= 1) {
-          const months = [...new Set(data.map(item => item.month).filter(m => m))];
-          months.sort((a, b) => parseInt(b) - parseInt(a));
-          const select = document.getElementById('monthFilter');
-          months.forEach(function(m) {
-            const option = document.createElement('option');
-            option.value = m;
-            option.textContent = m;
-            select.appendChild(option);
-          });
-        }
+        allData = await apiGet('getColumn', { month: 'すべて', category: 'すべて' });
+        filterAndDisplay();
       } catch (error) {
         handleError(error);
       }
+    }
+
+    // カテゴリ選択
+    function selectCategory(tab) {
+      // 全タブからactiveを削除
+      document.querySelectorAll('.category-tab').forEach(function(t) {
+        t.classList.remove('active');
+      });
+      // 選択したタブにactiveを追加
+      tab.classList.add('active');
+      currentCategory = tab.getAttribute('data-category');
+      filterAndDisplay();
+    }
+
+    // 検索入力
+    function onSearchInput() {
+      const input = document.getElementById('searchInput');
+      searchKeyword = input.value.trim();
+      
+      // クリアボタンの表示切り替え
+      const clearBtn = document.getElementById('searchClear');
+      if (searchKeyword) {
+        clearBtn.classList.add('show');
+      } else {
+        clearBtn.classList.remove('show');
+      }
+      
+      filterAndDisplay();
+    }
+
+    // 検索クリア
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      searchKeyword = '';
+      document.getElementById('searchClear').classList.remove('show');
+      filterAndDisplay();
+    }
+
+    // フィルタして表示
+    function filterAndDisplay() {
+      let filtered = allData;
+
+      // カテゴリフィルタ
+      if (currentCategory !== 'すべて') {
+        filtered = filtered.filter(function(item) {
+          return item.category === currentCategory;
+        });
+      }
+
+      // キーワード検索
+      if (searchKeyword) {
+        const keyword = searchKeyword.toLowerCase();
+        filtered = filtered.filter(function(item) {
+          const title = (item.title || '').toLowerCase();
+          const content = (item.content || '').toLowerCase();
+          const category = (item.category || '').toLowerCase();
+          return title.includes(keyword) || content.includes(keyword) || category.includes(keyword);
+        });
+      }
+
+      displayData(filtered);
     }
 
     // データを表示
