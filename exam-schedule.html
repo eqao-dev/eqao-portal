@@ -969,7 +969,7 @@
         renderProgress();
         // サーバーに保存
         try {
-          await apiPost('updatePersonalSchedule', {
+          await apiGet('updatePersonalSchedule', {
             studentId: studentId,
             password: studentPassword,
             month: selectedMonth,
