@@ -656,38 +656,6 @@
         handleError(error);
       }
     }
-            };
-            
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('loading').style.display = 'block';
-            loadProgress();
-          } else {
-            errorMessage.textContent = '生徒番号またはパスワードが正しくありません';
-            errorMessage.style.display = 'block';
-            loginBtn.disabled = false;
-            loginBtn.textContent = 'ログイン';
-          }
-        })
-        .withFailureHandler(function(error) {
-          errorMessage.textContent = 'エラーが発生しました';
-          errorMessage.style.display = 'block';
-          loginBtn.disabled = false;
-          loginBtn.textContent = 'ログイン';
-        })
-        .authenticateUser(studentId, password);
-    }
-
-    // 進捗一覧を読み込み
-    function loadProgress() {
-      document.getElementById('loading').style.display = 'block';
-      document.getElementById('progressView').style.display = 'none';
-      document.getElementById('detailView').style.display = 'none';
-
-      google.script.run
-        .withSuccessHandler(displayProgress)
-        .withFailureHandler(handleError)
-        .getChecklistProgress(currentUser.studentId);
-    }
 
     // 進捗を表示
     function displayProgress(data) {
