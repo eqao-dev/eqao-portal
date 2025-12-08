@@ -69,38 +69,42 @@
     /* フィルターエリア */
     .filter-area {
       margin-bottom: 20px;
-    }
-
-    /* カテゴリセグメント */
-    .category-tabs {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    .category-tab {
-      padding: 10px 16px;
+    /* カテゴリセレクト */
+    .category-select-wrapper {
+      position: relative;
+    }
+
+    .category-select {
+      width: 100%;
+      padding: 14px 48px 14px 16px;
       border: 2px solid #e0e0e0;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 500;
+      border-radius: 12px;
+      font-size: 14px;
       font-family: inherit;
       background: white;
-      color: #666;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: border-color 0.3s;
+      appearance: none;
+      -webkit-appearance: none;
     }
 
-    .category-tab:hover {
+    .category-select:focus {
+      outline: none;
       border-color: #1a237e;
-      color: #1a237e;
     }
 
-    .category-tab.active {
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-      border-color: #1a237e;
-      color: white;
+    .category-select-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      pointer-events: none;
     }
 
     /* 検索ボックス */
@@ -620,9 +624,12 @@
 
   <div class="container">
     <div class="filter-area">
-      <!-- カテゴリセグメント -->
-      <div id="categoryTabs" class="category-tabs">
-        <button class="category-tab active" data-category="すべて" onclick="selectCategory(this)">すべて</button>
+      <!-- カテゴリプルダウン -->
+      <div class="category-select-wrapper">
+        <select id="categorySelect" class="category-select" onchange="onCategoryChange()">
+          <option value="すべて">すべてのカテゴリ</option>
+        </select>
+        <span class="material-icons category-select-icon">expand_more</span>
       </div>
 
       <!-- キーワード検索 -->
@@ -678,7 +685,7 @@
     // ページ読み込み時
     document.addEventListener('DOMContentLoaded', function() {
       setNavUserName();
-      loadCategoryTabs();
+      loadCategoryOptions();
       loadAllData();
     });
 
@@ -686,19 +693,17 @@
     let currentCategory = 'すべて';
     let searchKeyword = '';
 
-    // カテゴリタブを読み込み
-    async function loadCategoryTabs() {
+    // カテゴリの選択肢を読み込み
+    async function loadCategoryOptions() {
       try {
         const categories = await apiGet('getColumnCategories');
-        const tabsContainer = document.getElementById('categoryTabs');
+        const select = document.getElementById('categorySelect');
         
         categories.forEach(function(cat) {
-          const tab = document.createElement('button');
-          tab.className = 'category-tab';
-          tab.setAttribute('data-category', cat);
-          tab.textContent = cat;
-          tab.onclick = function() { selectCategory(this); };
-          tabsContainer.appendChild(tab);
+          const option = document.createElement('option');
+          option.value = cat;
+          option.textContent = cat;
+          select.appendChild(option);
         });
       } catch (e) {
         console.error('カテゴリ取得エラー:', e);
@@ -719,15 +724,9 @@
       }
     }
 
-    // カテゴリ選択
-    function selectCategory(tab) {
-      // 全タブからactiveを削除
-      document.querySelectorAll('.category-tab').forEach(function(t) {
-        t.classList.remove('active');
-      });
-      // 選択したタブにactiveを追加
-      tab.classList.add('active');
-      currentCategory = tab.getAttribute('data-category');
+    // カテゴリ変更
+    function onCategoryChange() {
+      currentCategory = document.getElementById('categorySelect').value;
       filterAndDisplay();
     }
 
@@ -785,13 +784,17 @@
       document.getElementById('loading').style.display = 'none';
       
       const cardList = document.getElementById('cardList');
+      const noResults = document.getElementById('noResults');
       cardList.innerHTML = '';
 
       if (!data || data.length === 0) {
-        document.getElementById('noResults').style.display = 'block';
+        cardList.style.display = 'none';
+        noResults.style.display = 'block';
         return;
       }
 
+      // データがある場合はnoResultsを非表示
+      noResults.style.display = 'none';
       cardList.style.display = 'flex';
 
       data.forEach(function(item) {
