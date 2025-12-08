@@ -693,6 +693,16 @@
       white-space: nowrap;
       flex-shrink: 0;
     }
+    .nav-item.disabled {
+      color: #bbb;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .nav-item.disabled .material-icons {
+      color: #ccc;
+    }
+
   </style>
 </head>
 <body>
@@ -747,22 +757,43 @@
       <a href="exam-schedule.html" class="nav-item">
         <span class="material-icons">school</span>
         <span>受験スケジュール</span>
-        <span class="nav-badge">個別</span>
       </a>
       <a href="schedule.html" class="nav-item">
         <span class="material-icons">event_note</span>
         <span>授業スケジュール</span>
-        <span class="nav-badge">個別</span>
       </a>
     </div>
 
-    <div class="nav-category">学習管理</div>
+    <div class="nav-category">チェックリスト一覧</div>
     <div class="nav-section">
       <a href="checklist.html" class="nav-item">
         <span class="material-icons">checklist</span>
         <span>チェックリスト教材</span>
-        <span class="nav-badge">個別</span>
       </a>
+      <span class="nav-item disabled">
+        <span class="material-icons">trending_up</span>
+        <span>自己/進捗管理シート</span>
+      </span>
+      <span class="nav-item disabled">
+        <span class="material-icons">location_city</span>
+        <span>志望校/併願校管理シート</span>
+      </span>
+    </div>
+
+    <div class="nav-category">教材</div>
+    <div class="nav-section">
+      <span class="nav-item disabled">
+        <span class="material-icons">play_circle</span>
+        <span>動画教材一覧</span>
+      </span>
+      <span class="nav-item disabled">
+        <span class="material-icons">folder_shared</span>
+        <span>生徒共通教材一覧</span>
+      </span>
+      <span class="nav-item disabled">
+        <span class="material-icons">description</span>
+        <span>授業書類一覧</span>
+      </span>
     </div>
 
     <div class="nav-category">コンテンツ</div>
@@ -771,25 +802,29 @@
         <span class="material-icons">video_library</span>
         <span>過去の集団授業動画</span>
       </a>
+      <span class="nav-item disabled">
+        <span class="material-icons">dashboard</span>
+        <span>生徒プラットフォーム</span>
+      </span>
       <a href="column.html" class="nav-item">
         <span class="material-icons">article</span>
         <span>コラム一覧</span>
       </a>
     </div>
 
-    <div class="nav-category">面談申し込み</div>
+    <div class="nav-category">イベント申し込み</div>
     <div class="nav-section">
-      <a href="meeting-principal.html" class="nav-item">
-        <span class="material-icons">person</span>
-        <span>塾長面談</span>
+      <a href="https://forms.gle/1ihZxscRHMVmypFq9" target="_blank" class="nav-item">
+        <span class="material-icons">quiz</span>
+        <span>EQAO模試申し込み</span>
       </a>
-      <a href="meeting-sansya.html" class="nav-item">
-        <span class="material-icons">groups</span>
-        <span>三者面談</span>
+      <a href="mcff.html" class="nav-item">
+        <span class="material-icons">mic</span>
+        <span>MCFF申し込み</span>
       </a>
-      <a href="meeting-tantou.html" class="nav-item">
-        <span class="material-icons">support_agent</span>
-        <span>担任面談</span>
+      <a href="https://forms.gle/HnXY4omVvs2haCKM6" target="_blank" class="nav-item">
+        <span class="material-icons">celebration</span>
+        <span>EQAO PARTY</span>
       </a>
     </div>
 
@@ -799,6 +834,62 @@
         <span class="material-icons">list_alt</span>
         <span>各種申し込みフォーム一覧</span>
       </a>
+      <span class="nav-item disabled">
+        <span class="material-icons">edit_calendar</span>
+        <span>スケジュールフォーム</span>
+      </span>
+      <a href="https://forms.gle/89pDvpSBRXiNnpPG9" target="_blank" class="nav-item">
+        <span class="material-icons">swap_horiz</span>
+        <span>授業振替フォーム</span>
+      </a>
+    </div>
+
+    <div class="nav-category">追加対策申し込み</div>
+    <div class="nav-section">
+      <a href="https://forms.gle/aCu1VwgJjLhAQtDQ7" target="_blank" class="nav-item">
+        <span class="material-icons">add_box</span>
+        <span>授業コマ追加フォーム</span>
+      </a>
+      <a href="https://forms.gle/jYZz42KbFSMmJCMi6" target="_blank" class="nav-item">
+        <span class="material-icons">library_add</span>
+        <span>コース追加フォーム</span>
+      </a>
+      <span class="nav-item disabled">
+        <span class="material-icons">menu_book</span>
+        <span>課題図書対策追加フォーム</span>
+      </span>
+    </div>
+
+    <div class="nav-category">プログラム申し込み</div>
+    <div class="nav-section">
+      <span class="nav-item disabled">
+        <span class="material-icons">camping</span>
+        <span>EQAO CAMP</span>
+      </span>
+      <span class="nav-item disabled">
+        <span class="material-icons">flight</span>
+        <span>EQAO STUDY TOUR</span>
+      </span>
+      <span class="nav-item disabled">
+        <span class="material-icons">volunteer_activism</span>
+        <span>EQAO VOLUNTEER</span>
+      </span>
+    </div>
+
+    <div class="nav-category">面談申し込み</div>
+    <div class="nav-section">
+      <a href="meeting-principal.html" class="nav-item">
+        <span class="material-icons">person</span>
+        <span>塾長面談</span>
+      </a>
+      <a href="meeting-sansya.html" class="nav-item">
+        <span class="material-icons">group</span>
+        <span>三者面談</span>
+      </a>
+      <a href="meeting-tantou.html" class="nav-item">
+        <span class="material-icons">support_agent</span>
+        <span>担任面談</span>
+      </a>
     </div>
 
     <div class="nav-category">カリキュラム</div>
@@ -807,6 +898,14 @@
         <span class="material-icons">videocam</span>
         <span>Zoomリンク一覧</span>
       </a>
+      <span class="nav-item disabled">
+        <span class="material-icons">route</span>
+        <span>授業の流れ</span>
+      </span>
+      <span class="nav-item disabled">
+        <span class="material-icons">account_tree</span>
+        <span>カリキュラムの流れ</span>
+      </span>
     </div>
 
     <div class="nav-category">ルール関連</div>
@@ -815,14 +914,14 @@
         <span class="material-icons">gavel</span>
         <span>生徒/保護者ルール一覧</span>
       </a>
-    </div>
-
-    <div class="nav-category">イベント</div>
-    <div class="nav-section">
-      <a href="mcff.html" class="nav-item">
-        <span class="material-icons">mic</span>
-        <span>MCFF プレゼン大会</span>
-      </a>
+      <span class="nav-item disabled">
+        <span class="material-icons">auto_stories</span>
+        <span>パンフレット</span>
+      </span>
+      <span class="nav-item disabled">
+        <span class="material-icons">policy</span>
+        <span>基本事項規定書</span>
+      </span>
     </div>
   </div>
 
