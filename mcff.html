@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>MCFF 全国高校生プレゼンテーションコンテスト | EQAO PORTAL</title>
+  
+  <!-- OGP -->
+  <meta property="og:title" content="MCFF 全国高校生プレゼンテーションコンテスト">
+  <meta property="og:description" content="夢を、語れ！高校生のためのプレゼン大会">
+  <meta property="og:type" content="website">
+  
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(180deg, #422006 0%, #1c1917 100%);
+      min-height: 100vh;
+      color: #374151;
+    }
+    
+    /* ヘッダー */
+    .header {
+      background: rgba(66, 32, 6, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 12px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .back-button {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    
+    .back-button:hover {
+      background: rgba(255,255,255,0.25);
+    }
+    
+    .logo {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #facc15, #eab308);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #422006;
+      font-size: 11px;
+      box-shadow: 0 2px 8px rgba(250, 204, 21, 0.4);
+      flex-shrink: 0;
+    }
+    
+    .header-title {
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+    
+    /* メインコンテンツ */
+    .main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+    
+    /* ヒーロー */
+    .hero {
+      background: linear-gradient(135deg, #fde047 0%, #facc15 50%, #eab308 100%);
+      border-radius: 20px;
+      padding: 32px 24px;
+      margin-bottom: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(250, 204, 21, 0.4);
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 50%);
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,0,0,0.15);
+      color: #422006;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero-title-sub {
+      color: #422006;
+      font-size: 14px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero-title {
+      color: #422006;
+      font-size: 26px;
+      font-weight: bold;
+      text-shadow: 0 2px 8px rgba(255,255,255,0.3);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+      line-height: 1.3;
+    }
+    
+    .hero-theme {
+      background: #422006;
+      color: #fde047;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 20px;
+      font-weight: bold;
+      display: inline-block;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    
+    /* 準備中カード */
+    .coming-soon-card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+      border: 2px dashed rgba(253, 224, 71, 0.3);
+    }
+    
+    .coming-soon-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(253, 224, 71, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      color: #fde047;
+    }
+    
+    .coming-soon-text {
+      color: #fde047;
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    
+    .coming-soon-sub {
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+    }
+    
+    /* セクション */
+    .section {
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+    
+    .section-header {
+      background: linear-gradient(135deg, #422006 0%, #78350f 100%);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fde047;
+    }
+    
+    .section-title {
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    
+    .section-content {
+      padding: 20px;
+    }
+    
+    /* 理念 */
+    .philosophy {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+    
+    .philosophy-text {
+      font-size: 14px;
+      color: #92400e;
+      line-height: 2;
+    }
+    
+    /* 表彰準備中 */
+    .prize-coming {
+      background: linear-gradient(135deg, #fef9c3 0%, #fde68a 100%);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    
+    .prize-coming-icon {
+      width: 56px;
+      height: 56px;
+      background: #422006;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      color: #fde047;
+    }
+    
+    .prize-coming-text {
+      font-size: 16px;
+      font-weight: bold;
+      color: #422006;
+      margin-bottom: 4px;
+    }
+    
+    .prize-coming-sub {
+      font-size: 13px;
+      color: #92400e;
+    }
+    
+    /* CTAセクション */
+    .cta-section {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+    
+    .cta-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #422006;
+      margin-bottom: 8px;
+    }
+    
+    .cta-desc {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 20px;
+    }
+    
+    .cta-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, opacity 0.2s;
+      font-family: inherit;
+    }
+    
+    .cta-button.active {
+      background: linear-gradient(135deg, #fde047 0%, #eab308 100%);
+      color: #422006;
+      box-shadow: 0 4px 12px rgba(234, 179, 8, 0.4);
+    }
+    
+    .cta-button.active:hover {
+      transform: translateY(-2px);
+    }
+    
+    .cta-button.disabled {
+      background: #e5e7eb;
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+    
+    .cta-notice {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 12px;
+      background: #fef3c7;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #92400e;
+    }
+    
+    /* 戻るリンク */
+    .back-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      text-decoration: none;
+      padding: 16px;
+      transition: color 0.2s;
+    }
+    
+    .back-link:hover {
+      color: white;
+    }
+    
+    /* レスポンシブ対応 */
+    @media (min-width: 600px) {
+      .header {
+        padding: 16px 24px;
+      }
+      
+      .header-title {
+        font-size: 18px;
+      }
+      
+      .main {
+        padding: 24px 24px 48px;
+      }
+      
+      .hero {
+        padding: 40px 32px;
+        border-radius: 24px;
+      }
+      
+      .hero-title {
+        font-size: 32px;
+      }
+      
+      .hero-theme {
+        font-size: 24px;
+        padding: 14px 32px;
+      }
+      
+      .section {
+        border-radius: 20px;
+      }
+      
+      .section-content {
+        padding: 24px;
+      }
+      
+      .philosophy {
+        padding: 32px 24px;
+      }
+      
+      .philosophy-text {
+        font-size: 15px;
+      }
+      
+      .cta-section {
+        padding: 32px;
+        border-radius: 20px;
+      }
+      
+      .cta-title {
+        font-size: 20px;
+      }
+      
+      .cta-button {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      
+      .cta-notice {
+        max-width: 400px;
+        margin: 16px auto 0;
+      }
+    }
+    
+    @media (min-width: 800px) {
+      .hero {
+        padding: 48px 40px;
+      }
+      
+      .hero-title {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="back-button">
+        <span class="material-icons">arrow_back</span>
+      </a>
+      <div class="logo">MCFF</div>
+      <h1 class="header-title">全国高校生プレゼン大会</h1>
+    </div>
+  </header>
+  
+  <!-- メインコンテンツ -->
+  <main class="main">
+    <!-- ヒーロー -->
+    <div class="hero">
+      <div class="hero-badge">
+        <span class="material-icons" style="font-size: 14px;">mic</span>
+        次回開催準備中
+      </div>
+      <p class="hero-title-sub">MCFF 全国高校生</p>
+      <h1 class="hero-title">プレゼンテーション<br>コンテスト</h1>
+      <div class="hero-theme">「夢を、語れ！」</div>
+    </div>
+    
+    <!-- 準備中メッセージ -->
+    <div class="coming-soon-card">
+      <div class="coming-soon-icon">
+        <span class="material-icons" style="font-size: 28px;">settings</span>
+      </div>
+      <p class="coming-soon-text">次回開催に向けて詳細を準備中です</p>
+      <p class="coming-soon-sub">決まり次第、こちらでお知らせします</p>
+    </div>
+    
+    <!-- 理念 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">
+          <span class="material-icons" style="font-size: 20px;">auto_awesome</span>
+        </div>
+        <h2 class="section-title">大会理念</h2>
+      </div>
+      <div class="section-content">
+        <div class="philosophy">
+          <p class="philosophy-text">
+            胸の奥底に潜む小さな夢を語ることで、<br>
+            夢が周囲を巻き込み、<br>
+            社会に変革をもたらす力となる。<br><br>
+            未来を創る若者の可能性を信じ、<br>
+            その夢を存分に語る場を提供する。
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 表彰 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">
+          <span class="material-icons" style="font-size: 20px;">emoji_events</span>
+        </div>
+        <h2 class="section-title">表彰</h2>
+      </div>
+      <div class="section-content">
+        <div class="prize-coming">
+          <div class="prize-coming-icon">
+            <span class="material-icons" style="font-size: 28px;">redeem</span>
+          </div>
+          <p class="prize-coming-text">豪華特典を用意予定！</p>
+          <p class="prize-coming-sub">詳細は決まり次第お知らせします</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- CTA -->
+    <div class="cta-section">
+      <h3 class="cta-title">あなたの夢を、語ろう</h3>
+      <p class="cta-desc">全国の高校生が挑戦できるプレゼンコンテスト</p>
+      <button class="cta-button disabled" disabled>
+        <span class="material-icons" style="font-size: 20px;">edit</span>
+        エントリーフォームへ
+      </button>
+      <div class="cta-notice">
+        <span class="material-icons" style="font-size: 16px;">schedule</span>
+        <span>次回開催の詳細が決まり次第、エントリー受付を開始します。</span>
+      </div>
+    </div>
+    
+    <!-- 戻るリンク -->
+    <a href="index.html" class="back-link">
+      <span class="material-icons" style="font-size: 18px;">arrow_back</span>
+      ポータルトップに戻る
+    </a>
+  </main>
+  
+  <script>
+    // フォームURL（準備中のため未使用）
+    const ENTRY_FORM_URL = 'https://forms.gle/dWJ7GBVPBz6XQ8A57';
+    
+    // エントリー受付開始後に有効化する場合
+    function enableEntryButton() {
+      const button = document.querySelector('.cta-button');
+      button.classList.remove('disabled');
+      button.classList.add('active');
+      button.disabled = false;
+      button.onclick = function() {
+        window.open(ENTRY_FORM_URL, '_blank');
+      };
+      document.querySelector('.cta-notice').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
