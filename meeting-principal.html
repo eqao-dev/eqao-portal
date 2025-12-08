@@ -215,30 +215,9 @@
         currentStudentId = studentId;
         loadMeetingHistory();
       } else {
-        document.getElementById('loadingArea').style.display = 'none';
-        document.getElementById('loginArea').style.display = 'block';
+        // 未ログインならindex.htmlへリダイレクト
+        window.location.href = 'index.html';
       }
-    }
-
-    async function login() {
-      const studentId = document.getElementById('studentIdInput').value.trim();
-      const password = document.getElementById('passwordInput').value;
-      const errorMessage = document.getElementById('loginError');
-      if (!studentId || !password) { errorMessage.textContent = '生徒番号とパスワードを入力してください'; errorMessage.style.display = 'block'; return; }
-      errorMessage.style.display = 'none';
-      try {
-        const result = await apiGet('authenticate', { studentId, password });
-        if (result.success) {
-          localStorage.setItem('eqao_studentId', result.studentId);
-          localStorage.setItem('eqao_studentName', result.studentName);
-          localStorage.setItem('eqao_password', password);
-          localStorage.setItem('eqao_loggedIn', 'true');
-          currentStudentId = result.studentId;
-          document.getElementById('loginArea').style.display = 'none';
-          document.getElementById('loadingArea').style.display = 'block';
-          loadMeetingHistory();
-        } else { errorMessage.textContent = '生徒番号またはパスワードが正しくありません'; errorMessage.style.display = 'block'; }
-      } catch (error) { errorMessage.textContent = 'エラーが発生しました'; errorMessage.style.display = 'block'; }
     }
 
     async function loadMeetingHistory() {

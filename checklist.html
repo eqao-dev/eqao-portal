@@ -574,7 +574,8 @@
       const studentName = localStorage.getItem('eqao_studentName');
 
       if (!loggedIn || !studentId) {
-        showLoginForm();
+        // 未ログインならindex.htmlへリダイレクト
+        window.location.href = 'index.html';
         return;
       }
 
@@ -585,62 +586,6 @@
       };
 
       loadProgress();
-    }
-
-    // ログインフォーム表示
-    function showLoginForm() {
-      document.getElementById('loading').style.display = 'none';
-      document.getElementById('loginForm').style.display = 'block';
-    }
-
-    // ログイン処理
-    async function login() {
-      const studentId = document.getElementById('studentIdInput').value.trim();
-      const password = document.getElementById('passwordInput').value;
-      const errorMessage = document.getElementById('loginError');
-      const loginBtn = document.getElementById('loginBtn');
-
-      if (!studentId || !password) {
-        errorMessage.textContent = '生徒番号とパスワードを入力してください';
-        errorMessage.style.display = 'block';
-        return;
-      }
-
-      loginBtn.disabled = true;
-      loginBtn.textContent = 'ログイン中...';
-      errorMessage.style.display = 'none';
-
-      try {
-        const result = await apiGet('authenticate', { studentId, password });
-        
-        if (result.success) {
-          localStorage.setItem('eqao_studentId', result.studentId);
-          localStorage.setItem('eqao_studentName', result.studentName);
-          localStorage.setItem('eqao_password', password);
-          localStorage.setItem('eqao_loggedIn', 'true');
-          
-          currentUser = {
-            studentId: result.studentId,
-            studentName: result.studentName,
-            password: password
-          };
-          
-          document.getElementById('loginForm').style.display = 'none';
-          document.getElementById('loading').style.display = 'block';
-          loadProgress();
-        } else {
-          errorMessage.textContent = '生徒番号またはパスワードが正しくありません';
-          errorMessage.style.display = 'block';
-          loginBtn.disabled = false;
-          loginBtn.textContent = 'ログイン';
-        }
-      } catch (error) {
-        errorMessage.textContent = 'エラーが発生しました';
-        errorMessage.style.display = 'block';
-        loginBtn.disabled = false;
-        loginBtn.textContent = 'ログイン';
-        console.error(error);
-      }
     }
 
     // 進捗一覧を読み込み

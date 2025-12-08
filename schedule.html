@@ -702,7 +702,8 @@
       const isAdmin = localStorage.getItem('eqao_isAdmin') === 'true';
 
       if (!loggedIn || !studentId) {
-        showLoginForm();
+        // 未ログインならindex.htmlへリダイレクト
+        window.location.href = 'index.html';
         return;
       }
 
@@ -721,12 +722,6 @@
       }
     }
 
-    // ログインフォームを表示
-    function showLoginForm() {
-      document.getElementById('loading').style.display = 'none';
-      document.getElementById('loginForm').style.display = 'block';
-    }
-
     // ユーザー情報を表示
     function showUserInfo() {
       document.getElementById('userName').textContent = currentUser.studentName || '生徒';
@@ -736,9 +731,10 @@
         document.getElementById('userAvatar').innerHTML = '<span class="material-icons">admin_panel_settings</span>';
       }
       document.getElementById('userInfo').style.display = 'flex';
+      document.getElementById('loading').style.display = 'block';
     }
 
-    // ログイン処理
+    // ログイン処理（パスワード変更時のみ使用）
     async function login() {
       const studentId = document.getElementById('studentIdInput').value.trim();
       const password = document.getElementById('passwordInput').value;
@@ -775,7 +771,6 @@
             
             document.getElementById('loginForm').style.display = 'none';
             showUserInfo();
-            document.getElementById('loading').style.display = 'block';
             
             if (result.isAdmin) {
               loadStudentList();
