@@ -572,7 +572,6 @@
       border-radius: 50%;
       color: white;
       cursor: pointer;
-      margin-left: auto;
     }
 
     .hamburger-btn:hover {
@@ -704,8 +703,13 @@
       display: flex;
       align-items: center;
       gap: 8px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       margin-left: auto;
-      margin-right: 12px;
     }
 
     .user-name {
@@ -770,15 +774,17 @@
       <h1>EQAO PORTAL</h1>
       <p class="subtitle">塾生専用ページ</p>
     </div>
-    <div class="user-info">
-      <span id="headerUserName" class="user-name"></span>
-      <button class="logout-btn" onclick="doLogout()" title="ログアウト">
-        <span class="material-icons">logout</span>
+    <div class="header-right">
+      <div class="user-info">
+        <span id="headerUserName" class="user-name"></span>
+        <button class="logout-btn" onclick="doLogout()" title="ログアウト">
+          <span class="material-icons">logout</span>
+        </button>
+      </div>
+      <button class="hamburger-btn" onclick="openNav()">
+        <span class="material-icons">menu</span>
       </button>
     </div>
-    <button class="hamburger-btn" onclick="openNav()">
-      <span class="material-icons">menu</span>
-    </button>
   </header>
 
   <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
