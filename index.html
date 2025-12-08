@@ -162,6 +162,17 @@
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(26, 35, 126, 0.15);
     }
+    .menu-btn.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    .menu-btn.disabled:hover {
+      transform: none;
+      box-shadow: 0 4px 15px rgba(26, 35, 126, 0.1);
+    }
+
 
     .menu-btn .icon-wrapper {
       width: 44px;
@@ -1058,16 +1069,12 @@
           </div>
           <span>年間<br>スケジュール</span>
         </a>
-        <a href="exam-schedule.html" class="menu-btn has-badge">
-          <span class="personal-badge">個別</span>
-          <div class="icon-wrapper icon-indigo">
+        <a href="exam-schedule.html" class="menu-btn">          <div class="icon-wrapper icon-indigo">
             <span class="material-icons">school</span>
           </div>
           <span>受験<br>スケジュール</span>
         </a>
-        <a href="schedule.html" class="menu-btn has-badge">
-          <span class="personal-badge">個別</span>
-          <div class="icon-wrapper icon-purple">
+        <a href="schedule.html" class="menu-btn">          <div class="icon-wrapper icon-purple">
             <span class="material-icons">event_note</span>
           </div>
           <span>授業<br>スケジュール</span>
@@ -1078,52 +1085,44 @@
     <div class="section">
       <h2 class="section-title">チェックリスト一覧</h2>
       <div class="button-grid">
-        <a href="checklist.html" class="menu-btn has-badge">
-          <span class="personal-badge">個別</span>
-          <div class="icon-wrapper icon-teal">
+        <a href="checklist.html" class="menu-btn">          <div class="icon-wrapper icon-teal">
             <span class="material-icons">checklist</span>
           </div>
           <span>チェックリスト<br>教材</span>
         </a>
-        <a href="#" class="menu-btn has-badge">
-          <span class="personal-badge">個別</span>
-          <div class="icon-wrapper icon-teal">
+        <span class="menu-btn disabled">          <div class="icon-wrapper icon-teal">
             <span class="material-icons">trending_up</span>
           </div>
           <span>自己/進捗<br>管理シート</span>
-        </a>
-        <a href="#" class="menu-btn has-badge">
-          <span class="personal-badge">個別</span>
-          <div class="icon-wrapper icon-teal">
+        </span>
+        <span class="menu-btn disabled">          <div class="icon-wrapper icon-teal">
             <span class="material-icons">location_city</span>
           </div>
           <span>志望校/併願校<br>管理シート</span>
-        </a>
+        </span>
       </div>
     </div>
 
     <div class="section">
       <h2 class="section-title">教材</h2>
       <div class="button-grid">
-        <a href="mcff.html" class="menu-btn">
+        <span class="menu-btn disabled">
           <div class="icon-wrapper icon-orange">
             <span class="material-icons">play_circle</span>
           </div>
           <span>動画教材<br>一覧</span>
-        </a>
-        <a href="mcff.html" class="menu-btn">
+        </span>
+        <span class="menu-btn disabled">
           <div class="icon-wrapper icon-orange">
             <span class="material-icons">folder_shared</span>
           </div>
           <span>生徒共通<br>教材一覧</span>
-        </a>
-        <a href="#" class="menu-btn has-badge">
-          <span class="personal-badge">個別</span>
-          <div class="icon-wrapper icon-orange">
+        </span>
+        <span class="menu-btn disabled">          <div class="icon-wrapper icon-orange">
             <span class="material-icons">description</span>
           </div>
           <span>授業書類<br>一覧</span>
-        </a>
+        </span>
       </div>
     </div>
 
@@ -1136,12 +1135,12 @@
           </div>
           <span>過去の集団<br>授業動画</span>
         </a>
-        <a href="mcff.html" class="menu-btn">
+        <span class="menu-btn disabled">
           <div class="icon-wrapper icon-pink">
             <span class="material-icons">dashboard</span>
           </div>
           <span>生徒<br>プラットフォーム</span>
-        </a>
+        </span>
         <a href="column.html" class="menu-btn">
           <div class="icon-wrapper icon-pink">
             <span class="material-icons">article</span>
@@ -1162,7 +1161,7 @@
         </a>
         <a href="mcff.html" class="menu-btn">
           <div class="icon-wrapper icon-green">
-            <span class="material-icons">groups</span>
+            <span class="material-icons">mic</span>
           </div>
           <span>MCFF<br>申し込み</span>
         </a>
@@ -1184,12 +1183,12 @@
           </div>
           <span>各種申し込み<br>フォーム一覧</span>
         </a>
-        <a href="mcff.html" class="menu-btn">
+        <span class="menu-btn disabled">
           <div class="icon-wrapper icon-cyan">
             <span class="material-icons">edit_calendar</span>
           </div>
           <span>スケジュール<br>フォーム</span>
-        </a>
+        </span>
         <a href="https://forms.gle/89pDvpSBRXiNnpPG9" target="_blank" class="menu-btn">
           <div class="icon-wrapper icon-cyan">
             <span class="material-icons">swap_horiz</span>
@@ -1214,36 +1213,36 @@
           </div>
           <span>コース<br>追加フォーム</span>
         </a>
-        <a href="mcff.html" class="menu-btn">
+        <span class="menu-btn disabled">
           <div class="icon-wrapper icon-amber">
             <span class="material-icons">menu_book</span>
           </div>
           <span>課題図書対策<br>追加フォーム</span>
-        </a>
+        </span>
       </div>
     </div>
 
     <div class="section">
       <h2 class="section-title">プログラム申し込み</h2>
       <div class="button-grid">
-        <a href="mcff.html" class="menu-btn">
+        <span class="menu-btn disabled">
           <div class="icon-wrapper icon-red">
             <span class="material-icons">camping</span>
           </div>
           <span>EQAO<br>CAMP</span>
-        </a>
-        <a href="mcff.html" class="menu-btn">
+        </span>
+        <span class="menu-btn disabled">
           <div class="icon-wrapper icon-red">
             <span class="material-icons">flight</span>
           </div>
           <span>EQAO<br>STUDY TOUR</span>
-        </a>
-        <a href="mcff.html" class="menu-btn">
+        </span>
+        <span class="menu-btn disabled">
           <div class="icon-wrapper icon-red">
             <span class="material-icons">volunteer_activism</span>
           </div>
           <span>EQAO<br>VOLUNTEER</span>
-        </a>
+        </span>
       </div>
     </div>
 
@@ -1280,18 +1279,18 @@
           </div>
           <span>Zoomリンク<br>一覧</span>
         </a>
-        <a href="mcff.html" class="menu-btn">
+        <span class="menu-btn disabled">
           <div class="icon-wrapper icon-purple">
             <span class="material-icons">route</span>
           </div>
           <span>授業の<br>流れ</span>
-        </a>
-        <a href="mcff.html" class="menu-btn">
+        </span>
+        <span class="menu-btn disabled">
           <div class="icon-wrapper icon-purple">
             <span class="material-icons">account_tree</span>
           </div>
           <span>カリキュラム<br>の流れ</span>
-        </a>
+        </span>
       </div>
     </div>
 
@@ -1304,18 +1303,18 @@
           </div>
           <span>生徒/保護者<br>ルール一覧</span>
         </a>
-        <a href="mcff.html" class="menu-btn">
+        <span class="menu-btn disabled">
           <div class="icon-wrapper icon-brown">
             <span class="material-icons">auto_stories</span>
           </div>
           <span>パンフレット</span>
-        </a>
-        <a href="mcff.html" class="menu-btn">
+        </span>
+        <span class="menu-btn disabled">
           <div class="icon-wrapper icon-brown">
             <span class="material-icons">policy</span>
           </div>
           <span>基本事項<br>規定書</span>
-        </a>
+        </span>
       </div>
     </div>
 
