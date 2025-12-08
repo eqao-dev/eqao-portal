@@ -756,7 +756,7 @@
       errorMessage.style.display = 'none';
 
       try {
-        const result = await apiPost('authenticate', { studentId, password });
+        const result = await apiGet('authenticate', { studentId, password });
         
         if (result.success) {
           if (result.needsPasswordChange) {
@@ -831,7 +831,7 @@
       changeBtn.textContent = '変更中...';
 
       try {
-        const result = await apiPost('changePassword', {
+        const result = await apiGet('changePassword', {
           studentId: currentUser.studentId,
           currentPassword: '0000',
           newPassword: newPassword
