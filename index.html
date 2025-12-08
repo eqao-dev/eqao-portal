@@ -1366,7 +1366,7 @@
         const result = await apiGet('authenticate', { studentId, password });
         
         if (result.success) {
-          if (result.needsPasswordChange) {
+          if (false && result.needsPasswordChange) {
             alert('初回ログインのためパスワードを変更してください。');
             localStorage.setItem('eqao_studentId', result.studentId);
             localStorage.setItem('eqao_studentName', result.studentName);
