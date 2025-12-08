@@ -758,10 +758,10 @@
     function filterAndDisplay() {
       let filtered = allData;
 
-      // カテゴリフィルタ
+      // カテゴリフィルタ（部分一致：カンマ区切りの複数カテゴリに対応）
       if (currentCategory !== 'すべて') {
         filtered = filtered.filter(function(item) {
-          return item.category === currentCategory;
+          return item.category && item.category.indexOf(currentCategory) !== -1;
         });
       }
 
