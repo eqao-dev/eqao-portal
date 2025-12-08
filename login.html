@@ -220,7 +220,7 @@
       errorMessage.classList.remove('show');
 
       try {
-        const result = await apiPost('authenticate', { studentId, password });
+        const result = await apiGet('authenticate', { studentId, password });
         
         if (result.success) {
           // ログイン情報を保存
