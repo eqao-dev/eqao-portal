@@ -1266,9 +1266,18 @@
       loadProgress();
     }
 
+    // 連打防止用
+    const pendingChecks = new Set();
+
     // チェック状態を切り替え
     async function toggleCheck(event, rowIndex, newState) {
       event.stopPropagation();
+      
+      // 同じアイテムの処理中なら無視（連打防止）
+      if (pendingChecks.has(rowIndex)) {
+        return;
+      }
+      pendingChecks.add(rowIndex);
       
       const card = event.target.closest('.item-card');
       
@@ -1315,6 +1324,9 @@
         }
         updateDetailProgress(newState ? -1 : 1);
         console.error(error);
+      } finally {
+        // 処理完了後にロック解除
+        pendingChecks.delete(rowIndex);
       }
     }
 
