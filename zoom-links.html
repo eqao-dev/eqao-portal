@@ -406,7 +406,7 @@
       errorMessage.style.display = 'none';
 
       try {
-        const result = await apiPost('authenticate', { studentId, password });
+        const result = await apiGet('authenticate', { studentId, password });
         
         if (result.success) {
           localStorage.setItem('eqao_studentId', result.studentId);
