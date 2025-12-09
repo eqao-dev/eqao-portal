@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>EQAO PARTY for Next Stage - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      flex: 1;
+    }
+
+    .header-user {
+      font-size: 12px;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .header-user .material-icons {
+      font-size: 16px;
+    }
+
+    .menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .menu-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .nav-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      max-width: 85%;
+      height: 100%;
+      background: white;
+      z-index: 201;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+    }
+
+    .nav-menu.active {
+      right: 0;
+    }
+
+    .nav-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 24px 20px;
+    }
+
+    .nav-header-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .nav-header-subtitle {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .nav-section {
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav-section-title {
+      font-size: 11px;
+      color: #888;
+      padding: 8px 20px;
+      font-weight: 500;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      color: #333;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-item:hover {
+      background: #f5f5f5;
+    }
+
+    .nav-item .material-icons {
+      font-size: 22px;
+      color: #1a237e;
+    }
+
+    .nav-item-text {
+      font-size: 14px;
+    }
+
+    .nav-item.disabled {
+      color: #bbb;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .nav-item.disabled .material-icons {
+      color: #ccc;
+    }
+
+    .nav-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* ヒーローセクション - クリスマス風 */
+    .hero-section {
+      background: linear-gradient(135deg, #c62828 0%, #b71c1c 50%, #1a237e 100%);
+      border-radius: 20px;
+      padding: 32px 24px;
+      margin-bottom: 24px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(198, 40, 40, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '🎄';
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-size: 30px;
+      opacity: 0.8;
+    }
+
+    .hero-section::after {
+      content: '🎅';
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      opacity: 0.8;
+    }
+
+    .hero-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .hero-icon .material-icons {
+      font-size: 40px;
+    }
+
+    .hero-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      opacity: 0.95;
+    }
+
+    .hero-desc {
+      font-size: 13px;
+      opacity: 0.9;
+      line-height: 1.7;
+    }
+
+    /* ステータスバナー */
+    .status-banner {
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-banner.accepting {
+      background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+    }
+
+    .status-banner.closed {
+      background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+    }
+
+    .status-banner .material-icons {
+      font-size: 28px;
+    }
+
+    .status-banner-text {
+      flex: 1;
+    }
+
+    .status-banner-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .status-banner-detail {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    /* セクションカード */
+    .section-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section-icon .material-icons {
+      font-size: 24px;
+      color: white;
+    }
+
+    .section-icon.red {
+      background: linear-gradient(135deg, #c62828 0%, #e53935 100%);
+    }
+
+    .section-icon.green {
+      background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+    }
+
+    .section-icon.amber {
+      background: linear-gradient(135deg, #ff8f00 0%, #ffc107 100%);
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .section-content {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    /* イベント情報 */
+    .event-info {
+      display: grid;
+      gap: 12px;
+    }
+
+    .event-info-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #f8f9fc 0%, #eef1f8 100%);
+      border-radius: 12px;
+    }
+
+    .event-info-item .material-icons {
+      font-size: 24px;
+      color: #1a237e;
+    }
+
+    .event-info-label {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 2px;
+    }
+
+    .event-info-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* 目的リスト */
+    .purpose-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .purpose-item {
+      display: flex;
+      gap: 12px;
+      padding: 16px;
+      background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+      border-radius: 12px;
+      border-left: 4px solid #2e7d32;
+    }
+
+    .purpose-item .material-icons {
+      font-size: 24px;
+      color: #2e7d32;
+      flex-shrink: 0;
+    }
+
+    .purpose-text {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* プログラム内容 */
+    .program-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .program-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px;
+      background: #f8f9fc;
+      border-radius: 12px;
+    }
+
+    .program-number {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .program-content {
+      flex: 1;
+    }
+
+    .program-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .program-desc {
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* 重要メッセージ */
+    .important-box {
+      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      border: 2px solid #ff9800;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .important-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .important-header .material-icons {
+      font-size: 28px;
+      color: #e65100;
+    }
+
+    .important-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #e65100;
+    }
+
+    .important-content {
+      font-size: 14px;
+      color: #5d4037;
+      line-height: 1.8;
+    }
+
+    .important-highlight {
+      background: #fff;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-top: 12px;
+      font-weight: 500;
+      color: #c62828;
+      text-align: center;
+    }
+
+    /* 注意リスト */
+    .warning-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .warning-tag {
+      background: #ffebee;
+      color: #c62828;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* メッセージボックス */
+    .message-box {
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .message-quote {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 12px;
+    }
+
+    .message-text {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    /* 申し込みセクション */
+    .apply-section {
+      text-align: center;
+      padding: 24px 0;
+    }
+
+    .apply-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 400px;
+      padding: 18px 32px;
+      background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
+      color: white;
+      border: none;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(198, 40, 40, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .apply-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(198, 40, 40, 0.5);
+    }
+
+    .apply-btn:disabled {
+      background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .apply-btn .material-icons {
+      font-size: 22px;
+    }
+
+    .apply-note {
+      font-size: 13px;
+      color: #666;
+      margin-top: 12px;
+    }
+
+    .apply-period {
+      font-size: 14px;
+      color: #1a237e;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 480px) {
+      .header-title {
+        font-size: 15px;
+      }
+      
+      .hero-title {
+        font-size: 20px;
+      }
+      
+      .hero-section::before,
+      .hero-section::after {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <button class="back-btn" onclick="goBack()">
+      <span class="material-icons">arrow_back</span>
+    </button>
+    <h1 class="header-title">EQAO PARTY</h1>
+    <span id="navUserName" class="header-user">
+      <span class="material-icons">person</span>
+      <span id="navHeaderUser"></span>
+    </span>
+    <button class="menu-btn" onclick="toggleMenu()">
+      <span class="material-icons">menu</span>
+    </button>
+  </header>
+
+  <div id="navOverlay" class="nav-overlay" onclick="toggleMenu()"></div>
+
+  <nav id="navMenu" class="nav-menu">
+    <div class="nav-header">
+      <div class="nav-header-title" id="navHeaderUserMenu">メニュー</div>
+      <div class="nav-header-subtitle">EQAO PORTAL</div>
+      <button class="nav-close" onclick="toggleMenu()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <a href="index.html" class="nav-item">
+        <span class="material-icons">home</span>
+        <span class="nav-item-text">ホーム</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">スケジュール</div>
+      <a href="yearly-schedule.html" class="nav-item">
+        <span class="material-icons">calendar_month</span>
+        <span class="nav-item-text">年間スケジュール</span>
+      </a>
+      <a href="schedule.html" class="nav-item">
+        <span class="material-icons">event_note</span>
+        <span class="nav-item-text">授業スケジュール</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">イベント</div>
+      <a href="moshi.html" class="nav-item">
+        <span class="material-icons">quiz</span>
+        <span class="nav-item-text">EQAO模試</span>
+      </a>
+      <a href="party.html" class="nav-item">
+        <span class="material-icons">celebration</span>
+        <span class="nav-item-text">EQAO PARTY</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">各種申し込み</div>
+      <a href="forms.html" class="nav-item">
+        <span class="material-icons">add_circle</span>
+        <span class="nav-item-text">授業追加フォーム</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">面談</div>
+      <a href="zoom-links.html" class="nav-item">
+        <span class="material-icons">videocam</span>
+        <span class="nav-item-text">Zoomリンク一覧</span>
+      </a>
+      <a href="meeting-tantou.html" class="nav-item">
+        <span class="material-icons">support_agent</span>
+        <span class="nav-item-text">担当講師面談予約</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">ルール関連</div>
+      <a href="rules.html" class="nav-item">
+        <span class="material-icons">gavel</span>
+        <span class="nav-item-text">ルール一覧</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- ヒーローセクション -->
+    <div class="hero-section">
+      <div class="hero-icon">
+        <span class="material-icons">celebration</span>
+      </div>
+      <h1 class="hero-title">EQAO PARTY for Next Stage</h1>
+      <p class="hero-subtitle">🎄 クリスマス会を兼ねた卒塾プログラム 🎄</p>
+      <p class="hero-desc">
+        合格者同士の交流を深め、大学入学までの<br>
+        過ごし方や心構えを整える特別イベント
+      </p>
+    </div>
+
+    <!-- ステータスバナー -->
+    <div id="statusBanner" class="status-banner closed">
+      <span class="material-icons">info</span>
+      <div class="status-banner-text">
+        <div id="statusTitle" class="status-banner-title">申し込み受付中！</div>
+        <div id="statusDetail" class="status-banner-detail">12月1日〜12月20日まで</div>
+      </div>
+    </div>
+
+    <!-- イベント情報 -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">
+          <span class="material-icons">event</span>
+        </div>
+        <h2 class="section-title">イベント情報</h2>
+      </div>
+      <div class="event-info">
+        <div class="event-info-item">
+          <span class="material-icons">calendar_today</span>
+          <div>
+            <div class="event-info-label">開催日</div>
+            <div class="event-info-value">2025年12月21日（日）</div>
+          </div>
+        </div>
+        <div class="event-info-item">
+          <span class="material-icons">location_on</span>
+          <div>
+            <div class="event-info-label">会場</div>
+            <div class="event-info-value">後日ご案内いたします</div>
+          </div>
+        </div>
+        <div class="event-info-item">
+          <span class="material-icons">payments</span>
+          <div>
+            <div class="event-info-label">参加費</div>
+            <div class="event-info-value" style="color: #2e7d32;">無料</div>
+          </div>
+        </div>
+        <div class="event-info-item">
+          <span class="material-icons">group</span>
+          <div>
+            <div class="event-info-label">対象</div>
+            <div class="event-info-value">合格が決まったEQAO生</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- メッセージボックス -->
+    <div class="message-box">
+      <div class="message-quote">「合格の、その先へ。」</div>
+      <div class="message-text">
+        大学入学はゴールではなく、未来への大きなスタートです。<br>
+        努力を支えてくださったご家族への感謝を形にし、<br>
+        EQAOで共に頑張ってきた仲間と次のステージに進む準備を整えましょう。
+      </div>
+    </div>
+
+    <!-- 開催目的 -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon green">
+          <span class="material-icons">flag</span>
+        </div>
+        <h2 class="section-title">開催目的</h2>
+      </div>
+      <div class="purpose-list">
+        <div class="purpose-item">
+          <span class="material-icons">check_circle</span>
+          <span class="purpose-text">合格後の過ごし方を正しく整えるための最終プログラム</span>
+        </div>
+        <div class="purpose-item">
+          <span class="material-icons">check_circle</span>
+          <span class="purpose-text">大学入学後に意識すべき姿勢・習慣を知る場</span>
+        </div>
+        <div class="purpose-item">
+          <span class="material-icons">check_circle</span>
+          <span class="purpose-text">EQAO卒塾生同士の横のつながりを作る場</span>
+        </div>
+        <div class="purpose-item">
+          <span class="material-icons">check_circle</span>
+          <span class="purpose-text">保護者へ感謝を伝える機会を設ける場</span>
+        </div>
+        <div class="purpose-item">
+          <span class="material-icons">check_circle</span>
+          <span class="purpose-text">「合格＝終わり」ではなく「合格＝次のスタート」であることを再確認</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- プログラム内容 -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">
+          <span class="material-icons">list_alt</span>
+        </div>
+        <h2 class="section-title">プログラム内容</h2>
+      </div>
+      <div class="program-list">
+        <div class="program-item">
+          <div class="program-number">1</div>
+          <div class="program-content">
+            <div class="program-title">代表からの特別レクチャー</div>
+            <div class="program-desc">「大学入学までに絶対に気をつけてほしいこと」</div>
+          </div>
+        </div>
+        <div class="program-item">
+          <div class="program-number">2</div>
+          <div class="program-content">
+            <div class="program-title">大学生活で意識すべきポイント</div>
+            <div class="program-desc">目標設定のレクチャー</div>
+          </div>
+        </div>
+        <div class="program-item">
+          <div class="program-number">3</div>
+          <div class="program-content">
+            <div class="program-title">卒塾生同士の交流会</div>
+            <div class="program-desc">クリスマス会を兼ねて実施 🎄</div>
+          </div>
+        </div>
+        <div class="program-item">
+          <div class="program-number">4</div>
+          <div class="program-content">
+            <div class="program-title">保護者様への感謝の手紙作成</div>
+            <div class="program-desc">これまでの感謝を形にする時間</div>
+          </div>
+        </div>
+        <div class="program-item">
+          <div class="program-number">5</div>
+          <div class="program-content">
+            <div class="program-title">合格者インタビュー</div>
+            <div class="program-desc">塾内広報として使用（指定校推薦合格者）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 重要な注意事項 -->
+    <div class="important-box">
+      <div class="important-header">
+        <span class="material-icons">warning</span>
+        <h2 class="important-title">なぜ参加が重要なのか</h2>
+      </div>
+      <div class="important-content">
+        <p>合格後の油断により、以下のような理由で<strong>進学が取り消されてしまう事例</strong>が全国で多発しています。</p>
+        <div class="warning-list">
+          <span class="warning-tag">深夜の外出</span>
+          <span class="warning-tag">飲酒</span>
+          <span class="warning-tag">暴力</span>
+          <span class="warning-tag">在校日数不足</span>
+          <span class="warning-tag">学校トラブル</span>
+        </div>
+        <p style="margin-top: 16px;">皆様が努力してつかんだ合格を確実に大学入学につなぐためにも、ぜひ本イベントをご活用ください。</p>
+        <div class="important-highlight">
+          ⚠️ 本イベントは EQAO卒塾プロセスの最終項目 です<br>
+          原則として必ずご参加ください
+        </div>
+      </div>
+    </div>
+
+    <!-- 申し込みセクション -->
+    <div class="apply-section">
+      <a id="applyBtn" href="https://forms.gle/HnXY4omVvs2haCKM6" target="_blank" class="apply-btn">
+        <span class="material-icons">edit</span>
+        <span>参加申し込みはこちら</span>
+      </a>
+      <p class="apply-period">申し込み期間：12月1日〜12月20日</p>
+      <p class="apply-note">※合格が決まった方は、ぜひお早めにお申し込みください</p>
+    </div>
+  </div>
+
+  <script>
+    // ログイン確認
+    document.addEventListener('DOMContentLoaded', function() {
+      const loggedIn = localStorage.getItem('eqao_loggedIn');
+      const studentId = localStorage.getItem('eqao_studentId');
+
+      if (!loggedIn || !studentId) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      setNavUserName();
+      checkApplicationPeriod();
+    });
+
+    function checkApplicationPeriod() {
+      const now = new Date();
+      const year = now.getFullYear();
+      
+      // 申し込み期間: 12月1日 00:00 〜 12月20日 23:59
+      const startDate = new Date(year, 11, 1, 0, 0, 0); // 12月1日
+      const endDate = new Date(year, 11, 20, 23, 59, 59); // 12月20日
+      
+      const statusBanner = document.getElementById('statusBanner');
+      const statusTitle = document.getElementById('statusTitle');
+      const statusDetail = document.getElementById('statusDetail');
+      const applyBtn = document.getElementById('applyBtn');
+      
+      if (now >= startDate && now <= endDate) {
+        // 受付期間内
+        statusBanner.classList.remove('closed');
+        statusBanner.classList.add('accepting');
+        statusTitle.textContent = '🎉 申し込み受付中！';
+        statusDetail.textContent = '12月20日まで受け付けています';
+        
+        applyBtn.style.pointerEvents = 'auto';
+        applyBtn.style.opacity = '1';
+      } else if (now < startDate) {
+        // 受付開始前
+        statusBanner.classList.remove('accepting');
+        statusBanner.classList.add('closed');
+        statusTitle.textContent = '申し込み開始前です';
+        statusDetail.textContent = '12月1日から受付開始します';
+        
+        applyBtn.style.pointerEvents = 'none';
+        applyBtn.style.opacity = '0.5';
+        applyBtn.innerHTML = '<span class="material-icons">schedule</span><span>12月1日から申し込み開始</span>';
+      } else {
+        // 受付終了後
+        statusBanner.classList.remove('accepting');
+        statusBanner.classList.add('closed');
+        statusTitle.textContent = '申し込みは終了しました';
+        statusDetail.textContent = '今年度の受付は終了しています';
+        
+        applyBtn.style.pointerEvents = 'none';
+        applyBtn.style.opacity = '0.5';
+        applyBtn.innerHTML = '<span class="material-icons">lock</span><span>申し込み受付は終了しました</span>';
+      }
+    }
+
+    function goBack() {
+      window.location.href = 'index.html?t=' + new Date().getTime();
+    }
+
+    function toggleMenu() {
+      document.getElementById('navOverlay').classList.toggle('active');
+      document.getElementById('navMenu').classList.toggle('active');
+    }
+
+    function setNavUserName() {
+      const studentName = localStorage.getItem('eqao_studentName') || '';
+      document.getElementById('navUserName').textContent = studentName;
+      document.getElementById('navHeaderUser').textContent = studentName ? studentName + ' さん' : 'メニュー';
+      document.getElementById('navHeaderUserMenu').textContent = studentName ? studentName + ' さん' : 'メニュー';
+    }
+  </script>
+</body>
+</html>
