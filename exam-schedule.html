@@ -161,29 +161,52 @@
       padding: 10px 4px;
       font-size: 12px;
       font-weight: 600;
-      color: #666;
+      color: #1a237e;
+      background: #f5f5f5;
       border-left: 1px solid #e0e0e0;
       cursor: pointer;
       transition: all 0.2s;
+      user-select: none;
     }
 
     .gantt-month:hover {
-      background: #e8eaf6;
+      background: #c5cae9;
+      color: #1a237e;
     }
 
     .gantt-month.selected {
-      background: #1a237e;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
       color: white;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(26, 35, 126, 0.3);
     }
 
     .gantt-month.current {
       background: #fff3e0;
       color: #e65100;
       font-weight: 700;
+      position: relative;
+    }
+
+    .gantt-month.current::after {
+      content: '●';
+      font-size: 6px;
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .gantt-month.current:hover {
+      background: #ffe0b2;
     }
 
     .gantt-month.current.selected {
-      background: #1a237e;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+    }
+
+    .gantt-month.current.selected::after {
       color: white;
     }
 
@@ -232,35 +255,34 @@
       position: absolute;
       height: 20px;
       top: 4px;
-      border-radius: 4px;
-      left: 4px;
-      right: 4px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     }
 
-    /* カテゴリ色 */
-    .color-blue { background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%); }
-    .color-green { background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%); }
-    .color-yellow { background: linear-gradient(135deg, #FFC107 0%, #FFA000 100%); }
-    .color-orange { background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%); }
-    .color-purple { background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%); }
-    .color-cyan { background: linear-gradient(135deg, #00BCD4 0%, #0097A7 100%); }
-    .color-red { background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%); }
-    .color-gray { background: linear-gradient(135deg, #607D8B 0%, #455A64 100%); }
+    /* カテゴリ色 - ネイビーベース配色 */
+    .color-blue { background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); }
+    .color-green { background: linear-gradient(135deg, #00897B 0%, #00695C 100%); }
+    .color-yellow { background: linear-gradient(135deg, #F9A825 0%, #F57F17 100%); }
+    .color-orange { background: linear-gradient(135deg, #EF6C00 0%, #E65100 100%); }
+    .color-purple { background: linear-gradient(135deg, #5E35B1 0%, #4527A0 100%); }
+    .color-cyan { background: linear-gradient(135deg, #0097A7 0%, #00838F 100%); }
+    .color-red { background: linear-gradient(135deg, #C62828 0%, #B71C1C 100%); }
+    .color-gray { background: linear-gradient(135deg, #455A64 0%, #37474F 100%); }
 
-    .bg-blue { background: #2196F3; }
-    .bg-green { background: #4CAF50; }
-    .bg-yellow { background: #FFC107; }
-    .bg-orange { background: #FF9800; }
-    .bg-purple { background: #9C27B0; }
-    .bg-cyan { background: #00BCD4; }
-    .bg-red { background: #f44336; }
-    .bg-gray { background: #607D8B; }
+    .bg-blue { background: #1a237e; }
+    .bg-green { background: #00897B; }
+    .bg-yellow { background: #F9A825; }
+    .bg-orange { background: #EF6C00; }
+    .bg-purple { background: #5E35B1; }
+    .bg-cyan { background: #0097A7; }
+    .bg-red { background: #C62828; }
+    .bg-gray { background: #455A64; }
 
     /* 凡例 */
     .gantt-legend {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 12px 20px;
       margin-top: 16px;
       padding-top: 16px;
       border-top: 1px solid #e0e0e0;
@@ -271,13 +293,33 @@
       align-items: center;
       gap: 6px;
       font-size: 11px;
-      color: #666;
+      color: #555;
     }
 
     .legend-color {
-      width: 16px;
+      width: 20px;
       height: 10px;
-      border-radius: 2px;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    /* 月選択ヒント */
+    .month-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px;
+      background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 12px;
+      color: #1a237e;
+      font-weight: 500;
+    }
+
+    .month-hint .material-icons {
+      font-size: 18px;
     }
 
     /* 月詳細カード */
@@ -792,6 +834,12 @@
           <span>左右にスクロールできます</span>
         </div>
 
+        <!-- 月選択ヒント -->
+        <div class="month-hint">
+          <span class="material-icons">touch_app</span>
+          <span>上の月をタップすると詳細が表示されます</span>
+        </div>
+
         <!-- ガントチャート -->
         <div class="gantt-wrapper">
           <div class="gantt-chart" id="ganttChart"></div>
@@ -1113,25 +1161,19 @@
 
     // 初期化
     document.addEventListener('DOMContentLoaded', function() {
-      console.log('DOMContentLoaded fired');
       try {
         setNavUserName();
-        console.log('selectedGrade:', selectedGrade);
-        console.log('idealScheduleData:', idealScheduleData);
         renderGanttChart();
-        console.log('renderGanttChart completed');
         
         // 現在の月を初期選択
         const now = new Date();
         const currentMonth = String(now.getMonth() + 1);
         const data = idealScheduleData[selectedGrade];
-        console.log('data:', data);
         if (data && data.months && data.months.includes(currentMonth)) {
           selectMonth(currentMonth);
         } else if (data && data.months && data.months.length > 0) {
           selectMonth(data.months[0]);
         }
-        console.log('Initialization complete');
       } catch (e) {
         console.error('Initialization error:', e);
       }
@@ -1159,15 +1201,11 @@
 
     // ガントチャート描画
     function renderGanttChart() {
-      console.log('renderGanttChart called, selectedGrade:', selectedGrade);
       const data = idealScheduleData[selectedGrade];
-      console.log('data for grade:', data);
       const container = document.getElementById('ganttChart');
       const legendContainer = document.getElementById('ganttLegend');
-      console.log('container:', container, 'legendContainer:', legendContainer);
 
       if (!data || !data.months || data.months.length === 0) {
-        console.log('No data or months, showing empty state');
         container.innerHTML = '<div class="todo-empty"><span class="material-icons">construction</span><p>準備中です</p></div>';
         legendContainer.innerHTML = '';
         return;
@@ -1175,7 +1213,6 @@
 
       const months = data.months;
       const categories = data.categories || [];
-      console.log('months:', months, 'categories:', categories);
 
       // 現在の月を取得
       const now = new Date();
@@ -1198,18 +1235,26 @@
 
       // 各カテゴリ行
       categories.forEach(cat => {
+        const startIdx = months.indexOf(cat.start);
+        const endIdx = months.indexOf(cat.end);
+        
+        // バーの位置と幅を計算（パーセント）
+        const barLeft = (startIdx / months.length) * 100;
+        const barWidth = ((endIdx - startIdx + 1) / months.length) * 100;
+        
         html += '<div class="gantt-row">';
         html += `<div class="gantt-category"><div class="category-color bg-${cat.color}"></div>${cat.name}</div>`;
         html += '<div class="gantt-bars">';
         
+        // セル（グリッド線用）
         months.forEach(m => {
-          const isInRange = isMonthInRange(m, cat.start, cat.end, months);
-          html += '<div class="gantt-cell">';
-          if (isInRange) {
-            html += `<div class="gantt-bar color-${cat.color}"></div>`;
-          }
-          html += '</div>';
+          html += '<div class="gantt-cell"></div>';
         });
+        
+        // バー（連続した1本）
+        if (startIdx !== -1 && endIdx !== -1) {
+          html += `<div class="gantt-bar color-${cat.color}" style="left: ${barLeft}%; width: ${barWidth}%;"></div>`;
+        }
         
         html += '</div></div>';
       });
