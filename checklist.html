@@ -770,7 +770,7 @@
     // ============================================
     const JSON_URL = 'checklist_master.json';
     const API_URL = 'https://script.google.com/macros/s/AKfycbzCFkkw6h6o0iFwObPILE-VCYfjRP1ikmMWOl6DgqIaqIRi657vQIKkjSKuRVTaWJzG/exec';
-    const SYNC_INTERVAL = 60 * 1000; // 1分ごとに同期
+    const SYNC_INTERVAL = 15 * 1000; // 15秒ごとに同期
 
     // ============================================
     // 状態管理
@@ -820,35 +820,31 @@
     // スプレッドシートとの同期
     // ============================================
     async function syncToSpreadsheet() {
-      if (!pendingSync || !currentUser) return;
+  if (!pendingSync || !currentUser) return;
 
-      showSyncStatus('同期中...', 'sync');
+  showSyncStatus('同期中...', 'sync');
 
-      try {
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'syncChecklistState',
-            studentId: currentUser.studentId,
-            password: currentUser.password,
-            checkState: checkState
-          })
-        });
+  try {
+    const url = new URL(API_URL);
+    url.searchParams.set('action', 'syncChecklistState');
+    url.searchParams.set('studentId', currentUser.studentId);
+    url.searchParams.set('password', currentUser.password);
+    url.searchParams.set('checkState', JSON.stringify(checkState));
 
-        const result = await response.json();
-        
-        if (result.success) {
-          pendingSync = false;
-          showSyncStatus('同期完了', 'success');
-        } else {
-          showSyncStatus('同期エラー', 'error');
-        }
-      } catch (error) {
-        console.error('同期エラー:', error);
-        showSyncStatus('同期エラー', 'error');
-      }
+    const response = await fetch(url.toString());
+    const result = await response.json();
+    
+    if (result.success) {
+      pendingSync = false;
+      showSyncStatus('同期完了', 'success');
+    } else {
+      showSyncStatus('同期エラー', 'error');
     }
+  } catch (error) {
+    console.error('同期エラー:', error);
+    showSyncStatus('同期エラー', 'error');
+  }
+}
 
     async function loadFromSpreadsheet() {
       if (!currentUser) return;
@@ -1204,17 +1200,18 @@
     });
 
     // ページ離脱時に同期
-    window.addEventListener('beforeunload', function() {
-      if (pendingSync) {
-        // localStorageには保存済みなので、次回復元される
-        navigator.sendBeacon && navigator.sendBeacon(API_URL, JSON.stringify({
-          action: 'syncChecklistState',
-          studentId: currentUser?.studentId,
-          password: currentUser?.password,
-          checkState: checkState
-        }));
-      }
-    });
+window.addEventListener('beforeunload', function() {
+  if (pendingSync && currentUser) {
+    // 同期をトリガー（完了を待たない）
+    const url = new URL(API_URL);
+    url.searchParams.set('action', 'syncChecklistState');
+    url.searchParams.set('studentId', currentUser.studentId);
+    url.searchParams.set('password', currentUser.password);
+    url.searchParams.set('checkState', JSON.stringify(checkState));
+    
+    fetch(url.toString(), { keepalive: true }).catch(() => {});
+  }
+});
 
     // タブ切り替え時に同期
     document.addEventListener('visibilitychange', function() {
