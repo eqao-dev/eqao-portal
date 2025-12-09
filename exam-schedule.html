@@ -156,6 +156,7 @@
       left: 0;
       background: white;
       z-index: 5;
+      box-shadow: 2px 0 4px rgba(0,0,0,0.08);
     }
 
     .gantt-months {
@@ -243,6 +244,7 @@
       left: 0;
       background: white;
       z-index: 5;
+      box-shadow: 2px 0 4px rgba(0,0,0,0.08);
     }
 
     .category-color {
@@ -257,6 +259,7 @@
       flex: 1;
       position: relative;
       height: 18px;
+      overflow: hidden;
     }
 
     .gantt-cell {
@@ -2229,6 +2232,19 @@
       try {
         setNavUserName();
         
+        // localStorageから前回の学年・月を復元
+        const savedGrade = localStorage.getItem('eqao_schedule_grade');
+        const savedMonth = localStorage.getItem('eqao_schedule_month');
+        
+        if (savedGrade && idealScheduleData[savedGrade]) {
+          selectedGrade = savedGrade;
+        }
+        
+        // 上の学年ボタンを更新
+        document.querySelectorAll('.grade-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.grade === selectedGrade);
+        });
+        
         // 下の学年ボタンを初期化
         updateMiniGradeButtons(selectedGrade);
         
@@ -2237,14 +2253,18 @@
         
         renderGanttChart();
         
-        // 現在の月を初期選択
-        const now = new Date();
-        const currentMonth = String(now.getMonth() + 1);
+        // 月を選択（保存された月 or 現在の月 or 最初の月）
         const data = idealScheduleData[selectedGrade];
-        if (data && data.months && data.months.includes(currentMonth)) {
-          selectMonth(currentMonth);
-        } else if (data && data.months && data.months.length > 0) {
-          selectMonth(data.months[0]);
+        if (savedMonth && data && data.months && data.months.includes(savedMonth)) {
+          selectMonth(savedMonth);
+        } else {
+          const now = new Date();
+          const currentMonth = String(now.getMonth() + 1);
+          if (data && data.months && data.months.includes(currentMonth)) {
+            selectMonth(currentMonth);
+          } else if (data && data.months && data.months.length > 0) {
+            selectMonth(data.months[0]);
+          }
         }
       } catch (e) {
         console.error('Initialization error:', e);
@@ -2254,6 +2274,10 @@
     // 学年選択
     function selectGrade(grade) {
       selectedGrade = grade;
+      
+      // localStorageに保存
+      localStorage.setItem('eqao_schedule_grade', grade);
+      
       document.querySelectorAll('.grade-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.grade === grade);
       });
@@ -2350,6 +2374,9 @@
     // 月選択
     function selectMonth(month) {
       selectedMonth = month;
+      
+      // localStorageに保存
+      localStorage.setItem('eqao_schedule_month', month);
       
       // ガントチャートのヘッダー更新
       document.querySelectorAll('.gantt-month').forEach(el => {
