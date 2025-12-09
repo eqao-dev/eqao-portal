@@ -338,11 +338,20 @@
     .month-badge {
       background: linear-gradient(135deg, #E05555 0%, #FF6B6B 100%);
       color: white;
-      padding: 6px 14px;
+      padding: 6px 16px;
       border-radius: 20px;
       font-size: 13px;
       font-weight: 700;
       box-shadow: 0 2px 8px rgba(224, 85, 85, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      white-space: nowrap;
+    }
+
+    .badge-divider {
+      opacity: 0.6;
+      margin: 0 4px;
     }
 
     .month-title {
@@ -2391,7 +2400,7 @@
       }
 
       let html = '<div class="month-detail-header">';
-      html += `<div class="month-badge">${selectedGrade} ${month}月</div>`;
+      html += `<div class="month-badge">${selectedGrade}<span class="badge-divider">｜</span>${month}月</div>`;
       html += `<div class="month-title">${detail.title}</div>`;
       html += '</div>';
 
