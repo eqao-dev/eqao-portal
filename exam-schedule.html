@@ -1113,17 +1113,27 @@
 
     // 初期化
     document.addEventListener('DOMContentLoaded', function() {
-      setNavUserName();
-      renderGanttChart();
-      
-      // 現在の月を初期選択
-      const now = new Date();
-      const currentMonth = String(now.getMonth() + 1);
-      const data = idealScheduleData[selectedGrade];
-      if (data.months.includes(currentMonth)) {
-        selectMonth(currentMonth);
-      } else {
-        selectMonth(data.months[0]);
+      console.log('DOMContentLoaded fired');
+      try {
+        setNavUserName();
+        console.log('selectedGrade:', selectedGrade);
+        console.log('idealScheduleData:', idealScheduleData);
+        renderGanttChart();
+        console.log('renderGanttChart completed');
+        
+        // 現在の月を初期選択
+        const now = new Date();
+        const currentMonth = String(now.getMonth() + 1);
+        const data = idealScheduleData[selectedGrade];
+        console.log('data:', data);
+        if (data && data.months && data.months.includes(currentMonth)) {
+          selectMonth(currentMonth);
+        } else if (data && data.months && data.months.length > 0) {
+          selectMonth(data.months[0]);
+        }
+        console.log('Initialization complete');
+      } catch (e) {
+        console.error('Initialization error:', e);
       }
     });
 
@@ -1149,18 +1159,23 @@
 
     // ガントチャート描画
     function renderGanttChart() {
+      console.log('renderGanttChart called, selectedGrade:', selectedGrade);
       const data = idealScheduleData[selectedGrade];
+      console.log('data for grade:', data);
       const container = document.getElementById('ganttChart');
       const legendContainer = document.getElementById('ganttLegend');
+      console.log('container:', container, 'legendContainer:', legendContainer);
 
-      if (!data || data.months.length === 0) {
+      if (!data || !data.months || data.months.length === 0) {
+        console.log('No data or months, showing empty state');
         container.innerHTML = '<div class="todo-empty"><span class="material-icons">construction</span><p>準備中です</p></div>';
         legendContainer.innerHTML = '';
         return;
       }
 
       const months = data.months;
-      const categories = data.categories;
+      const categories = data.categories || [];
+      console.log('months:', months, 'categories:', categories);
 
       // 現在の月を取得
       const now = new Date();
