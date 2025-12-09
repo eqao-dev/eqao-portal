@@ -14,17 +14,17 @@
       font-family: 'Noto Sans JP', sans-serif;
       background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
       min-height: 100vh;
-      padding-bottom: 40px;
+      padding-bottom: 24px;
     }
 
     .header {
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      background: linear-gradient(135deg, #00897B 0%, #00ACC1 100%);
       color: white;
-      padding: 16px 20px;
+      padding: 12px 16px;
       display: flex;
       align-items: center;
-      gap: 16px;
-      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(0, 137, 123, 0.3);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -34,8 +34,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       background: rgba(255,255,255,0.15);
       border: none;
       border-radius: 50%;
@@ -45,85 +45,90 @@
       transition: background 0.3s;
     }
 
+    .back-btn .material-icons {
+      font-size: 20px;
+    }
+
     .back-btn:hover { background: rgba(255,255,255,0.25); }
 
-    .header-title { font-size: 18px; font-weight: 700; }
+    .header-title { font-size: 16px; font-weight: 700; }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px 16px;
+      padding: 16px 12px;
     }
 
     /* セクション */
     .section {
       background: white;
-      border-radius: 16px;
-      margin-bottom: 20px;
+      border-radius: 12px;
+      margin-bottom: 16px;
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
       overflow: hidden;
     }
 
     .section-header {
-      background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
-      padding: 14px 20px;
+      background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%);
+      padding: 12px 16px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      border-bottom: 2px solid #1a237e;
+      gap: 8px;
+      border-bottom: 2px solid #00897B;
     }
 
     .section-header .material-icons {
-      color: #1a237e;
-      font-size: 22px;
+      color: #00897B;
+      font-size: 20px;
     }
 
     .section-title {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
-      color: #1a237e;
+      color: #00695C;
     }
 
     .section-content {
-      padding: 20px;
+      padding: 16px;
     }
 
     /* 学年選択ボタン */
     .grade-selector {
       display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 8px;
+      margin-bottom: 12px;
     }
 
     .grade-btn {
       flex: 1;
-      max-width: 120px;
-      padding: 12px 16px;
-      border: 2px solid #1a237e;
+      max-width: 100px;
+      padding: 8px 12px;
+      border: 2px solid #FF6B6B;
       background: white;
-      color: #1a237e;
-      font-size: 14px;
+      color: #FF6B6B;
+      font-size: 13px;
       font-weight: 700;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
       transition: all 0.2s;
     }
 
     .grade-btn.active {
-      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
       color: white;
-      box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
+      border-color: #FF6B6B;
+      box-shadow: 0 3px 10px rgba(255, 107, 107, 0.4);
     }
 
     .grade-btn:hover:not(.active) {
-      background: #e8eaf6;
+      background: #FFF0F0;
     }
 
     /* ガントチャート */
     .gantt-wrapper {
       overflow-x: auto;
-      margin: 0 -20px;
-      padding: 0 20px 16px;
+      margin: 0 -16px;
+      padding: 0 16px 8px;
     }
 
     .gantt-chart {
@@ -133,7 +138,7 @@
     /* ガントヘッダー（月） */
     .gantt-header {
       display: flex;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
       position: sticky;
       top: 0;
       background: white;
@@ -141,10 +146,10 @@
     }
 
     .gantt-label-header {
-      width: 140px;
+      width: 130px;
       flex-shrink: 0;
-      padding: 10px 8px;
-      font-size: 11px;
+      padding: 6px 8px;
+      font-size: 10px;
       font-weight: 700;
       color: #666;
     }
@@ -158,39 +163,42 @@
       flex: 1;
       min-width: 50px;
       text-align: center;
-      padding: 10px 4px;
-      font-size: 12px;
+      padding: 6px 4px;
+      font-size: 11px;
       font-weight: 600;
-      color: #1a237e;
-      background: #f5f5f5;
-      border-left: 1px solid #e0e0e0;
+      color: #00695C;
+      background: #E0F2F1;
+      border-left: 1px solid #B2DFDB;
       cursor: pointer;
       transition: all 0.2s;
       user-select: none;
     }
 
     .gantt-month:hover {
-      background: #c5cae9;
-      color: #1a237e;
+      background: #B2DFDB;
+      color: #00695C;
     }
 
     .gantt-month.selected {
-      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
       color: white;
       font-weight: 700;
-      box-shadow: 0 2px 8px rgba(26, 35, 126, 0.3);
+      box-shadow: 0 2px 6px rgba(255, 107, 107, 0.4);
     }
 
     .gantt-month.current {
-      background: #fff3e0;
-      color: #e65100;
+      background: #FFF3E0;
+      color: #F57C00;
       font-weight: 700;
       position: relative;
     }
 
     .gantt-month.current::after {
-      content: '●';
-      font-size: 6px;
+      content: '';
+      width: 4px;
+      height: 4px;
+      background: #F57C00;
+      border-radius: 50%;
       position: absolute;
       bottom: 2px;
       left: 50%;
@@ -198,41 +206,41 @@
     }
 
     .gantt-month.current:hover {
-      background: #ffe0b2;
+      background: #FFE0B2;
     }
 
     .gantt-month.current.selected {
-      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
       color: white;
     }
 
     .gantt-month.current.selected::after {
-      color: white;
+      background: white;
     }
 
     /* ガント行 */
     .gantt-row {
       display: flex;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       align-items: center;
     }
 
     .gantt-category {
-      width: 140px;
+      width: 130px;
       flex-shrink: 0;
-      padding: 8px;
-      font-size: 12px;
+      padding: 4px 8px;
+      font-size: 11px;
       font-weight: 600;
       color: #333;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .category-color {
-      width: 12px;
-      height: 12px;
-      border-radius: 3px;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
       flex-shrink: 0;
     }
 
@@ -240,7 +248,7 @@
       display: flex;
       flex: 1;
       position: relative;
-      height: 28px;
+      height: 18px;
     }
 
     .gantt-cell {
@@ -253,81 +261,90 @@
 
     .gantt-bar {
       position: absolute;
-      height: 20px;
-      top: 4px;
-      border-radius: 10px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      height: 14px;
+      top: 2px;
+      border-radius: 7px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
     }
 
-    /* カテゴリ色 - ネイビーベース配色 */
-    .color-blue { background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); }
-    .color-green { background: linear-gradient(135deg, #00897B 0%, #00695C 100%); }
-    .color-yellow { background: linear-gradient(135deg, #F9A825 0%, #F57F17 100%); }
-    .color-orange { background: linear-gradient(135deg, #EF6C00 0%, #E65100 100%); }
-    .color-purple { background: linear-gradient(135deg, #5E35B1 0%, #4527A0 100%); }
-    .color-cyan { background: linear-gradient(135deg, #0097A7 0%, #00838F 100%); }
-    .color-red { background: linear-gradient(135deg, #C62828 0%, #B71C1C 100%); }
-    .color-gray { background: linear-gradient(135deg, #455A64 0%, #37474F 100%); }
+    /* カテゴリ色 - ポップ配色 */
+    .color-blue { background: linear-gradient(135deg, #5C6BC0 0%, #7986CB 100%); }
+    .color-green { background: linear-gradient(135deg, #26A69A 0%, #4DB6AC 100%); }
+    .color-yellow { background: linear-gradient(135deg, #FFCA28 0%, #FFD54F 100%); }
+    .color-orange { background: linear-gradient(135deg, #FF7043 0%, #FF8A65 100%); }
+    .color-purple { background: linear-gradient(135deg, #AB47BC 0%, #CE93D8 100%); }
+    .color-cyan { background: linear-gradient(135deg, #26C6DA 0%, #4DD0E1 100%); }
+    .color-red { background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%); }
+    .color-gray { background: linear-gradient(135deg, #78909C 0%, #90A4AE 100%); }
 
-    .bg-blue { background: #1a237e; }
-    .bg-green { background: #00897B; }
-    .bg-yellow { background: #F9A825; }
-    .bg-orange { background: #EF6C00; }
-    .bg-purple { background: #5E35B1; }
-    .bg-cyan { background: #0097A7; }
-    .bg-red { background: #C62828; }
-    .bg-gray { background: #455A64; }
+    .bg-blue { background: #5C6BC0; }
+    .bg-green { background: #26A69A; }
+    .bg-yellow { background: #FFCA28; }
+    .bg-orange { background: #FF7043; }
+    .bg-purple { background: #AB47BC; }
+    .bg-cyan { background: #26C6DA; }
+    .bg-red { background: #FF6B6B; }
+    .bg-gray { background: #78909C; }
+
+    /* 凡例とヒントの行 */
+    .legend-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #e0e0e0;
+      flex-wrap: wrap;
+    }
 
     /* 凡例 */
     .gantt-legend {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px 20px;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid #e0e0e0;
+      gap: 8px 16px;
+      flex: 1;
     }
 
     .legend-item {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 11px;
+      gap: 5px;
+      font-size: 10px;
       color: #555;
     }
 
     .legend-color {
-      width: 20px;
-      height: 10px;
-      border-radius: 5px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      width: 16px;
+      height: 8px;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
     }
 
     /* 月選択ヒント */
     .month-hint {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 10px;
-      background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
-      border-radius: 8px;
-      margin-bottom: 16px;
-      font-size: 12px;
-      color: #1a237e;
+      gap: 4px;
+      padding: 4px 10px;
+      background: #FFF0F0;
+      border: 1px solid #FFCDD2;
+      border-radius: 20px;
+      font-size: 10px;
+      color: #FF6B6B;
       font-weight: 500;
     }
 
     .month-hint .material-icons {
-      font-size: 18px;
+      font-size: 14px;
     }
 
     /* 月詳細カード */
     .month-detail {
-      background: linear-gradient(135deg, #f8f9fc 0%, #e8eaf6 100%);
+      background: linear-gradient(135deg, #E8F5F3 0%, #E0F2F1 100%);
       border-radius: 12px;
-      padding: 20px;
-      margin-top: 20px;
+      padding: 16px;
+      margin-top: 16px;
       display: none;
     }
 
@@ -345,39 +362,40 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .month-badge {
-      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
       color: white;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 14px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
       font-weight: 700;
+      box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
     }
 
     .month-title {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       color: #333;
     }
 
     .month-description {
       font-size: 13px;
-      color: #666;
+      color: #555;
       line-height: 1.7;
-      margin-bottom: 16px;
-      padding: 12px 16px;
+      margin-bottom: 14px;
+      padding: 12px 14px;
       background: white;
       border-radius: 8px;
-      border-left: 4px solid #1a237e;
+      border-left: 4px solid #26A69A;
     }
 
     .month-tasks-title {
       font-size: 13px;
       font-weight: 700;
-      color: #1a237e;
+      color: #00897B;
       margin-bottom: 10px;
       display: flex;
       align-items: center;
@@ -403,7 +421,7 @@
     }
 
     .month-task-item .material-icons {
-      color: #4CAF50;
+      color: #26A69A;
       font-size: 18px;
       flex-shrink: 0;
       margin-top: 1px;
@@ -419,7 +437,7 @@
 
     .selected-month-label {
       font-size: 14px;
-      color: #1a237e;
+      color: #00897B;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -437,20 +455,20 @@
       align-items: center;
       gap: 12px;
       padding: 14px 16px;
-      background: #f8f9fc;
+      background: #E8F5F3;
       border-radius: 10px;
       transition: background 0.2s;
     }
 
     .todo-item:hover {
-      background: #e8eaf6;
+      background: #B2DFDB;
     }
 
     .todo-checkbox {
       width: 22px;
       height: 22px;
       cursor: pointer;
-      accent-color: #1a237e;
+      accent-color: #FF6B6B;
     }
 
     .todo-text {
@@ -467,19 +485,19 @@
     .todo-empty {
       text-align: center;
       padding: 30px 20px;
-      color: #999;
+      color: #80CBC4;
       font-size: 14px;
     }
 
     .todo-empty .material-icons {
       font-size: 40px;
       margin-bottom: 10px;
-      opacity: 0.5;
+      opacity: 0.7;
     }
 
     /* 進捗バー */
     .progress-section {
-      background: #f8f9fc;
+      background: #E0F2F1;
       border-radius: 12px;
       padding: 16px;
       margin-top: 16px;
@@ -490,19 +508,19 @@
       justify-content: space-between;
       margin-bottom: 8px;
       font-size: 13px;
-      color: #666;
+      color: #555;
     }
 
     .progress-bar-bg {
       height: 12px;
-      background: #e0e0e0;
+      background: #B2DFDB;
       border-radius: 6px;
       overflow: hidden;
     }
 
     .progress-bar {
       height: 100%;
-      background: linear-gradient(90deg, #1a237e, #3949ab);
+      background: linear-gradient(90deg, #FF6B6B, #FF8E8E);
       border-radius: 6px;
       transition: width 0.5s ease;
     }
@@ -512,13 +530,17 @@
       display: none;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      padding: 8px;
-      background: #fff3e0;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      font-size: 12px;
-      color: #e65100;
+      gap: 4px;
+      padding: 6px;
+      background: #E0F2F1;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      font-size: 11px;
+      color: #00897B;
+    }
+
+    .scroll-hint .material-icons {
+      font-size: 16px;
     }
 
     @media (max-width: 768px) {
@@ -530,20 +552,24 @@
     /* ハンバーガーメニュー */
     .hamburger-btn {
       position: fixed;
-      top: 16px;
-      right: 16px;
+      top: 10px;
+      right: 12px;
       z-index: 100;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #00897B 0%, #00ACC1 100%);
       border: none;
       border-radius: 50%;
       color: white;
       cursor: pointer;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .hamburger-btn .material-icons {
+      font-size: 22px;
     }
 
     .nav-overlay {
@@ -580,7 +606,7 @@
     .nav-menu.open { right: 0; }
 
     .nav-header {
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      background: linear-gradient(135deg, #00897B 0%, #00ACC1 100%);
       color: white;
       padding: 20px 16px;
       display: flex;
@@ -611,7 +637,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: linear-gradient(135deg, #283593 0%, #3949ab 100%);
+      background: linear-gradient(135deg, #00897B 0%, #26A69A 100%);
     }
 
     .nav-user-info {
@@ -671,7 +697,7 @@
 
     .nav-item .material-icons {
       font-size: 22px;
-      color: #1a237e;
+      color: #00897B;
     }
 
     .nav-item span {
@@ -698,8 +724,8 @@
     .loading-spinner {
       width: 40px;
       height: 40px;
-      border: 3px solid #e0e0e0;
-      border-top-color: #1a237e;
+      border: 3px solid #B2DFDB;
+      border-top-color: #00897B;
       border-radius: 50%;
       animation: spin 1s linear infinite;
       margin: 0 auto 16px;
@@ -834,19 +860,19 @@
           <span>左右にスクロールできます</span>
         </div>
 
-        <!-- 月選択ヒント -->
-        <div class="month-hint">
-          <span class="material-icons">touch_app</span>
-          <span>上の月をタップすると詳細が表示されます</span>
-        </div>
-
         <!-- ガントチャート -->
         <div class="gantt-wrapper">
           <div class="gantt-chart" id="ganttChart"></div>
         </div>
 
-        <!-- 凡例 -->
-        <div class="gantt-legend" id="ganttLegend"></div>
+        <!-- 凡例とヒント -->
+        <div class="legend-row">
+          <div class="gantt-legend" id="ganttLegend"></div>
+          <div class="month-hint">
+            <span class="material-icons">touch_app</span>
+            <span>月をタップで詳細表示</span>
+          </div>
+        </div>
 
         <!-- 月詳細カード -->
         <div class="month-detail" id="monthDetail"></div>
