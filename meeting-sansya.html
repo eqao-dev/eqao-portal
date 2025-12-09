@@ -25,17 +25,58 @@
     .notice-text { font-size: 13px; color: #1565c0; line-height: 1.5; }
     .notice-text strong { font-weight: 700; }
 
-    /* 合格率注意書き */
-    .success-box { background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 12px; }
-    .success-box .material-icons { color: #2e7d32; font-size: 22px; flex-shrink: 0; margin-top: 2px; }
-    .success-text { font-size: 13px; color: #1b5e20; line-height: 1.6; }
-    .success-text strong { font-weight: 700; }
-
-    /* 保護者申込注意書き */
-    .parent-box { background: #f3e5f5; border: 1px solid #ce93d8; border-radius: 12px; padding: 14px 16px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
-    .parent-box .material-icons { color: #7b1fa2; font-size: 22px; flex-shrink: 0; margin-top: 2px; }
-    .parent-text { font-size: 13px; color: #6a1b9a; line-height: 1.5; }
-    .parent-text strong { font-weight: 700; }
+    /* 注意書きセクション */
+    .tips-section {
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+    .tips-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+      border-bottom: 1px solid #ffe082;
+      font-size: 14px;
+      font-weight: 600;
+      color: #f57c00;
+    }
+    .tips-header .material-icons {
+      font-size: 20px;
+    }
+    .tips-content {
+      padding: 16px 20px;
+    }
+    .tips-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .tips-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .tips-item:first-child {
+      padding-top: 0;
+    }
+    .tips-item .material-icons {
+      font-size: 20px;
+      color: #1a237e;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .tips-item strong {
+      color: #1a237e;
+      font-weight: 600;
+    }
 
     .apply-section { background: white; border-radius: 16px; padding: 24px 20px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); text-align: center; }
     .apply-icon { width: 64px; height: 64px; background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
@@ -422,30 +463,6 @@
     </div>
 
     <div id="contentArea" style="display: none;">
-      <!-- 月1回制限の注意書き -->
-      <div class="notice-box">
-        <span class="material-icons">info</span>
-        <div class="notice-text">三者面談のお申し込みは<strong>月に1回まで</strong>となっております。</div>
-      </div>
-
-      <!-- 合格率の注意書き -->
-      <div class="success-box">
-        <span class="material-icons">trending_up</span>
-        <div class="success-text">
-          <strong>面談を活用する生徒ほど合格率が高い傾向があります。</strong>
-          定期的に面談を受けることで、課題の早期発見・軌道修正ができ、合格に近づきます。ぜひ積極的にご活用ください。
-        </div>
-      </div>
-
-      <!-- 保護者申込の注意書き -->
-      <div class="parent-box">
-        <span class="material-icons">family_restroom</span>
-        <div class="parent-text">
-          <strong>保護者の方からもお申し込みいただけます。</strong>
-          生徒本人だけでなく、保護者の方からの面談申し込みも受け付けております。お子様の学習状況についてご相談されたい場合など、お気軽にお申し込みください。
-        </div>
-      </div>
-
       <div class="meeting-content-section" id="meetingContentSection">
         <div class="meeting-content-header" onclick="toggleMeetingContent()">
           <span class="material-icons">assignment</span>
@@ -488,6 +505,28 @@
           <span class="material-icons">edit_calendar</span>
           申し込みフォームへ
         </a>
+      </div>
+
+      <!-- 注意書き（まとめて1ブロック） -->
+      <div class="tips-section">
+        <div class="tips-header">
+          <span class="material-icons">lightbulb</span>
+          <span>面談について</span>
+        </div>
+        <div class="tips-content">
+          <div class="tips-item">
+            <span class="material-icons">event_repeat</span>
+            <span>お申し込みは<strong>月に1回まで</strong>となっております。</span>
+          </div>
+          <div class="tips-item">
+            <span class="material-icons">trending_up</span>
+            <span>面談を活用する生徒ほど<strong>合格率が高い傾向</strong>があります。定期的な面談で課題の早期発見・軌道修正ができます。</span>
+          </div>
+          <div class="tips-item">
+            <span class="material-icons">family_restroom</span>
+            <span><strong>保護者の方からもお申し込み可能</strong>です。お子様の学習状況についてご相談されたい場合など、お気軽にどうぞ。</span>
+          </div>
+        </div>
       </div>
 
       <div class="history-section">
