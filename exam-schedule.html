@@ -4,17 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <title>受験スケジュール - EQAO PORTAL</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Noto Sans JP', sans-serif;
@@ -51,14 +45,9 @@
       transition: background 0.3s;
     }
 
-    .back-btn:hover {
-      background: rgba(255,255,255,0.25);
-    }
+    .back-btn:hover { background: rgba(255,255,255,0.25); }
 
-    .header-title {
-      font-size: 18px;
-      font-weight: 700;
-    }
+    .header-title { font-size: 18px; font-weight: 700; }
 
     .container {
       max-width: 1200px;
@@ -66,103 +55,7 @@
       padding: 20px 16px;
     }
 
-    /* PC用2カラムレイアウト */
-    @media (min-width: 768px) {
-      .container {
-        padding: 24px 32px;
-      }
-
-      .section-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-      }
-
-      .section-full {
-        grid-column: 1 / -1;
-      }
-
-      .section {
-        margin-bottom: 0;
-      }
-
-      .header {
-        padding: 20px 32px;
-      }
-
-      .header-title {
-        font-size: 22px;
-      }
-
-      .grade-selector {
-        max-width: 400px;
-      }
-
-      .school-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 12px;
-      }
-
-      .meeting-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 12px;
-      }
-
-      .modal {
-        max-width: 700px;
-      }
-
-      .modal-body {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-      }
-
-      .modal-section {
-        margin-bottom: 0;
-      }
-
-      .modal-section:first-child,
-      .modal-section:nth-child(2) {
-        grid-column: 1 / -1;
-      }
-    }
-
-    /* 大画面用 */
-    @media (min-width: 1024px) {
-      .section-grid {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
-
-      .section-wide {
-        grid-column: span 2;
-      }
-    }
-
-    /* ローディング */
-    .loading {
-      text-align: center;
-      padding: 60px 20px;
-      color: #666;
-    }
-
-    .loading-spinner {
-      width: 40px;
-      height: 40px;
-      border: 3px solid #e0e0e0;
-      border-top-color: #1a237e;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 16px;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* セクション共通 */
+    /* セクション */
     .section {
       background: white;
       border-radius: 16px;
@@ -171,18 +64,8 @@
       overflow: hidden;
     }
 
-    .section-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .section-grid .section {
-      margin-bottom: 0;
-    }
-
     .section-header {
-      background: #e8eaf6;
+      background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
       padding: 14px 20px;
       display: flex;
       align-items: center;
@@ -202,54 +85,65 @@
     }
 
     .section-content {
-      padding: 16px 20px;
+      padding: 20px;
     }
 
     /* 学年選択ボタン */
     .grade-selector {
       display: flex;
       gap: 10px;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     .grade-btn {
       flex: 1;
-      padding: 12px;
+      max-width: 120px;
+      padding: 12px 16px;
       border: 2px solid #1a237e;
       background: white;
       color: #1a237e;
       font-size: 14px;
       font-weight: 700;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
       transition: all 0.2s;
     }
 
     .grade-btn.active {
-      background: #1a237e;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
       color: white;
+      box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
+    }
+
+    .grade-btn:hover:not(.active) {
+      background: #e8eaf6;
     }
 
     /* ガントチャート */
-    .gantt-container {
+    .gantt-wrapper {
       overflow-x: auto;
-      padding-bottom: 10px;
+      margin: 0 -20px;
+      padding: 0 20px 16px;
     }
 
     .gantt-chart {
-      min-width: 600px;
+      min-width: 700px;
     }
 
+    /* ガントヘッダー（月） */
     .gantt-header {
       display: flex;
-      border-bottom: 1px solid #e0e0e0;
       margin-bottom: 8px;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 10;
     }
 
-    .gantt-label-col {
-      width: 120px;
+    .gantt-label-header {
+      width: 140px;
       flex-shrink: 0;
-      padding: 8px;
+      padding: 10px 8px;
       font-size: 11px;
       font-weight: 700;
       color: #666;
@@ -262,86 +156,234 @@
 
     .gantt-month {
       flex: 1;
+      min-width: 50px;
       text-align: center;
-      padding: 8px 4px;
-      font-size: 11px;
+      padding: 10px 4px;
+      font-size: 12px;
       font-weight: 600;
       color: #666;
-      border-left: 1px solid #f0f0f0;
+      border-left: 1px solid #e0e0e0;
+      cursor: pointer;
+      transition: all 0.2s;
     }
 
+    .gantt-month:hover {
+      background: #e8eaf6;
+    }
+
+    .gantt-month.selected {
+      background: #1a237e;
+      color: white;
+    }
+
+    .gantt-month.current {
+      background: #fff3e0;
+      color: #e65100;
+      font-weight: 700;
+    }
+
+    .gantt-month.current.selected {
+      background: #1a237e;
+      color: white;
+    }
+
+    /* ガント行 */
     .gantt-row {
       display: flex;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       align-items: center;
     }
 
-    .gantt-task-label {
-      width: 120px;
+    .gantt-category {
+      width: 140px;
       flex-shrink: 0;
       padding: 8px;
-      font-size: 11px;
+      font-size: 12px;
+      font-weight: 600;
       color: #333;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .gantt-bar-container {
+    .category-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .gantt-bars {
       display: flex;
       flex: 1;
       position: relative;
-      height: 24px;
+      height: 28px;
+    }
+
+    .gantt-cell {
+      flex: 1;
+      min-width: 50px;
+      height: 100%;
+      border-left: 1px solid #f0f0f0;
+      position: relative;
     }
 
     .gantt-bar {
       position: absolute;
       height: 20px;
+      top: 4px;
       border-radius: 4px;
-      top: 2px;
-      font-size: 9px;
-      color: white;
+      left: 4px;
+      right: 4px;
+    }
+
+    /* カテゴリ色 */
+    .color-blue { background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%); }
+    .color-green { background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%); }
+    .color-yellow { background: linear-gradient(135deg, #FFC107 0%, #FFA000 100%); }
+    .color-orange { background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%); }
+    .color-purple { background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%); }
+    .color-cyan { background: linear-gradient(135deg, #00BCD4 0%, #0097A7 100%); }
+    .color-red { background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%); }
+    .color-gray { background: linear-gradient(135deg, #607D8B 0%, #455A64 100%); }
+
+    .bg-blue { background: #2196F3; }
+    .bg-green { background: #4CAF50; }
+    .bg-yellow { background: #FFC107; }
+    .bg-orange { background: #FF9800; }
+    .bg-purple { background: #9C27B0; }
+    .bg-cyan { background: #00BCD4; }
+    .bg-red { background: #f44336; }
+    .bg-gray { background: #607D8B; }
+
+    /* 凡例 */
+    .gantt-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .legend-item {
       display: flex;
       align-items: center;
-      padding: 0 6px;
-      white-space: nowrap;
-      overflow: hidden;
+      gap: 6px;
+      font-size: 11px;
+      color: #666;
     }
 
-    .gantt-cell {
-      flex: 1;
-      border-left: 1px solid #f5f5f5;
+    .legend-color {
+      width: 16px;
+      height: 10px;
+      border-radius: 2px;
     }
 
-    /* 月選択 */
-    .month-selector {
+    /* 月詳細カード */
+    .month-detail {
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8eaf6 100%);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .month-detail.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .month-detail-header {
       display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 12px;
+      align-items: center;
+      gap: 12px;
       margin-bottom: 16px;
     }
 
-    .month-btn {
-      flex-shrink: 0;
-      padding: 8px 16px;
-      border: 1px solid #ddd;
-      background: white;
-      color: #666;
-      font-size: 13px;
-      font-weight: 500;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .month-btn.active {
-      background: #1a237e;
+    .month-badge {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
       color: white;
-      border-color: #1a237e;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
     }
 
-    /* Todoリスト */
+    .month-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .month-description {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: white;
+      border-radius: 8px;
+      border-left: 4px solid #1a237e;
+    }
+
+    .month-tasks-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .month-tasks {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .month-task-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 14px;
+      background: white;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .month-task-item .material-icons {
+      color: #4CAF50;
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* 私のスケジュール */
+    .my-schedule-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .selected-month-label {
+      font-size: 14px;
+      color: #1a237e;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     .todo-list {
       display: flex;
       flex-direction: column;
@@ -352,9 +394,14 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px;
+      padding: 14px 16px;
       background: #f8f9fc;
-      border-radius: 8px;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+
+    .todo-item:hover {
+      background: #e8eaf6;
     }
 
     .todo-checkbox {
@@ -377,14 +424,23 @@
 
     .todo-empty {
       text-align: center;
-      padding: 20px;
+      padding: 30px 20px;
       color: #999;
       font-size: 14px;
     }
 
+    .todo-empty .material-icons {
+      font-size: 40px;
+      margin-bottom: 10px;
+      opacity: 0.5;
+    }
+
     /* 進捗バー */
-    .progress-container {
-      margin-top: 8px;
+    .progress-section {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
     }
 
     .progress-label {
@@ -396,259 +452,37 @@
     }
 
     .progress-bar-bg {
-      height: 20px;
+      height: 12px;
       background: #e0e0e0;
-      border-radius: 10px;
+      border-radius: 6px;
       overflow: hidden;
     }
 
     .progress-bar {
       height: 100%;
       background: linear-gradient(90deg, #1a237e, #3949ab);
-      border-radius: 10px;
+      border-radius: 6px;
       transition: width 0.5s ease;
     }
 
-    /* 併願校リスト */
-    .school-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .school-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-      background: #f8f9fc;
-      border-radius: 10px;
-      text-decoration: none;
-      color: inherit;
-      transition: background 0.2s;
-    }
-
-    .school-card:hover {
-      background: #e8eaf6;
-    }
-
-    .school-info {
-      flex: 1;
-    }
-
-    .school-rank {
-      font-size: 11px;
-      color: #1a237e;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .school-name {
-      font-size: 15px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 2px;
-    }
-
-    .school-detail {
-      font-size: 12px;
-      color: #666;
-    }
-
-    .school-deadline {
-      text-align: right;
-    }
-
-    .school-deadline-label {
-      font-size: 10px;
-      color: #999;
-    }
-
-    .school-deadline-date {
-      font-size: 13px;
-      font-weight: 600;
-      color: #e53935;
-    }
-
-    .school-card .material-icons {
-      color: #999;
-      margin-left: 8px;
-    }
-
-    .add-school-btn {
-      display: flex;
+    /* スクロールヒント */
+    .scroll-hint {
+      display: none;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 14px;
-      background: white;
-      border: 2px dashed #ccc;
-      border-radius: 10px;
-      color: #666;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .add-school-btn:hover {
-      border-color: #1a237e;
-      color: #1a237e;
-    }
-
-    /* 面談履歴 */
-    .meeting-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .meeting-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-      background: #f8f9fc;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .meeting-card:hover {
-      background: #e8eaf6;
-    }
-
-    .meeting-info {
-      flex: 1;
-    }
-
-    .meeting-date {
-      font-size: 14px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 2px;
-    }
-
-    .meeting-teacher {
+      gap: 6px;
+      padding: 8px;
+      background: #fff3e0;
+      border-radius: 8px;
+      margin-bottom: 12px;
       font-size: 12px;
-      color: #666;
+      color: #e65100;
     }
 
-    .meeting-card .material-icons {
-      color: #999;
-    }
-
-    .meeting-empty {
-      text-align: center;
-      padding: 20px;
-      color: #999;
-      font-size: 14px;
-    }
-
-    /* モーダル */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.2s;
-      padding: 20px;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .modal {
-      background: white;
-      border-radius: 16px;
-      width: 100%;
-      max-width: 500px;
-      max-height: 80vh;
-      overflow-y: auto;
-      transform: scale(0.9);
-      transition: transform 0.2s;
-    }
-
-    .modal-overlay.active .modal {
-      transform: scale(1);
-    }
-
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 20px;
-      border-bottom: 1px solid #e0e0e0;
-      position: sticky;
-      top: 0;
-      background: white;
-    }
-
-    .modal-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #333;
-    }
-
-    .modal-close {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #666;
-      padding: 4px;
-    }
-
-    .modal-body {
-      padding: 20px;
-    }
-
-    .modal-section {
-      margin-bottom: 20px;
-    }
-
-    .modal-section:last-child {
-      margin-bottom: 0;
-    }
-
-    .modal-section-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: #1a237e;
-      margin-bottom: 10px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid #e8eaf6;
-    }
-
-    .modal-item {
-      display: flex;
-      padding: 8px 0;
-      border-bottom: 1px solid #f5f5f5;
-    }
-
-    .modal-item:last-child {
-      border-bottom: none;
-    }
-
-    .modal-item-label {
-      width: 120px;
-      flex-shrink: 0;
-      font-size: 12px;
-      color: #666;
-    }
-
-    .modal-item-value {
-      flex: 1;
-      font-size: 13px;
-      color: #333;
+    @media (max-width: 768px) {
+      .scroll-hint {
+        display: flex;
+      }
     }
 
     /* ハンバーガーメニュー */
@@ -701,9 +535,7 @@
       overflow-y: auto;
     }
 
-    .nav-menu.open {
-      right: 0;
-    }
+    .nav-menu.open { right: 0; }
 
     .nav-header {
       background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
@@ -717,12 +549,23 @@
     .nav-header-title {
       font-size: 16px;
       font-weight: 700;
-      letter-spacing: 1px;
+    }
+
+    .nav-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
     }
 
     .nav-user-section {
       padding: 16px 20px;
-      border-bottom: 1px solid #eee;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -741,10 +584,7 @@
       color: rgba(255,255,255,0.7);
     }
 
-    .nav-user-name {
-      font-size: 14px;
-      font-weight: 500;
-    }
+    .nav-user-name { font-size: 14px; font-weight: 500; }
 
     .nav-logout-btn {
       display: flex;
@@ -757,37 +597,16 @@
       color: rgba(255,255,255,0.9);
       font-size: 12px;
       cursor: pointer;
-      transition: background 0.2s;
       font-family: inherit;
     }
 
-    .nav-logout-btn:hover {
-      background: rgba(255,255,255,0.25);
-    }
-
-    .nav-logout-btn .material-icons {
-      font-size: 16px;
-    }
-
-    .nav-close {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      background: rgba(255,255,255,0.15);
-      border: none;
-      border-radius: 50%;
-      color: white;
-      cursor: pointer;
-    }
+    .nav-logout-btn .material-icons { font-size: 16px; }
 
     .nav-category {
       font-size: 11px;
       font-weight: 700;
       color: #999;
       padding: 16px 16px 8px;
-      text-transform: uppercase;
       letter-spacing: 1px;
     }
 
@@ -806,9 +625,7 @@
       transition: background 0.2s;
     }
 
-    .nav-item:hover {
-      background: #f5f5f5;
-    }
+    .nav-item:hover { background: #f5f5f5; }
 
     .nav-item .material-icons {
       font-size: 22px;
@@ -827,38 +644,43 @@
       padding: 2px 6px;
       border-radius: 4px;
       margin-left: auto;
-      white-space: nowrap;
-      flex-shrink: 0;
     }
 
-    .nav-badge-wip {
-      background: #9e9e9e;
-      color: white;
-      font-size: 9px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-left: auto;
-      white-space: nowrap;
-      flex-shrink: 0;
+    /* ローディング */
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #e0e0e0;
+      border-top-color: #1a237e;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
   <header class="header">
-    <a href="index.html?t=<?= new Date().getTime() ?>" class="back-btn">
+    <a href="index.html" class="back-btn">
       <span class="material-icons">arrow_back</span>
     </a>
     <h1 class="header-title">受験スケジュール</h1>
   </header>
-  <!-- ハンバーガーボタン -->
+
   <button class="hamburger-btn" onclick="openNav()">
     <span class="material-icons">menu</span>
   </button>
 
-  <!-- ナビゲーションオーバーレイ -->
   <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
-
-  <!-- ナビゲーションメニュー -->
   <div id="navMenu" class="nav-menu">
     <div class="nav-header">
       <span class="nav-header-title">メニュー</span>
@@ -866,7 +688,6 @@
         <span class="material-icons">close</span>
       </button>
     </div>
-
     <div class="nav-user-section">
       <div class="nav-user-info">
         <span class="material-icons">person</span>
@@ -877,14 +698,12 @@
         <span>ログアウト</span>
       </button>
     </div>
-
     <div class="nav-section">
       <a href="index.html" class="nav-item">
         <span class="material-icons">home</span>
         <span>ホーム</span>
       </a>
     </div>
-
     <div class="nav-category">スケジュール</div>
     <div class="nav-section">
       <a href="yearly-schedule.html" class="nav-item">
@@ -902,7 +721,6 @@
         <span class="nav-badge">個別</span>
       </a>
     </div>
-
     <div class="nav-category">学習管理</div>
     <div class="nav-section">
       <a href="checklist.html" class="nav-item">
@@ -911,7 +729,6 @@
         <span class="nav-badge">個別</span>
       </a>
     </div>
-
     <div class="nav-category">コンテンツ</div>
     <div class="nav-section">
       <a href="videos.html" class="nav-item">
@@ -923,7 +740,6 @@
         <span>コラム一覧</span>
       </a>
     </div>
-
     <div class="nav-category">面談申し込み</div>
     <div class="nav-section">
       <a href="meeting-principal.html" class="nav-item">
@@ -939,7 +755,6 @@
         <span>担任面談</span>
       </a>
     </div>
-
     <div class="nav-category">各種申し込み</div>
     <div class="nav-section">
       <a href="forms.html" class="nav-item">
@@ -947,7 +762,6 @@
         <span>各種申し込みフォーム一覧</span>
       </a>
     </div>
-
     <div class="nav-category">カリキュラム</div>
     <div class="nav-section">
       <a href="zoom-links.html" class="nav-item">
@@ -955,225 +769,363 @@
         <span>Zoomリンク一覧</span>
       </a>
     </div>
-
-    <div class="nav-category">ルール関連</div>
-    <div class="nav-section">
-      <a href="rules.html" class="nav-item">
-        <span class="material-icons">gavel</span>
-        <span>生徒/保護者ルール一覧</span>
-      </a>
-    </div>
-
-    <div class="nav-category">イベント</div>
-    <div class="nav-section">
-      <a href="mcff.html" class="nav-item">
-        <span class="material-icons">mic</span>
-        <span>MCFF プレゼン大会</span>
-      </a>
-    </div>
   </div>
-
 
   <div class="container">
-    <div id="loadingArea" class="loading">
-      <div class="loading-spinner"></div>
-      <p>読み込み中...</p>
+    <!-- 理想スケジュール -->
+    <div class="section">
+      <div class="section-header">
+        <span class="material-icons">timeline</span>
+        <span class="section-title">理想スケジュール</span>
+      </div>
+      <div class="section-content">
+        <!-- 学年選択 -->
+        <div class="grade-selector">
+          <button class="grade-btn" data-grade="高1" onclick="selectGrade('高1')">高1</button>
+          <button class="grade-btn active" data-grade="高2" onclick="selectGrade('高2')">高2</button>
+          <button class="grade-btn" data-grade="高3" onclick="selectGrade('高3')">高3</button>
+        </div>
+
+        <!-- スクロールヒント -->
+        <div class="scroll-hint">
+          <span class="material-icons">swipe</span>
+          <span>左右にスクロールできます</span>
+        </div>
+
+        <!-- ガントチャート -->
+        <div class="gantt-wrapper">
+          <div class="gantt-chart" id="ganttChart"></div>
+        </div>
+
+        <!-- 凡例 -->
+        <div class="gantt-legend" id="ganttLegend"></div>
+
+        <!-- 月詳細カード -->
+        <div class="month-detail" id="monthDetail"></div>
+      </div>
     </div>
 
-    <div id="contentArea" style="display: none;">
-
-      <!-- グリッドコンテナ -->
-      <div class="section-grid">
-
-      <!-- 学年選択 & 理想スケジュール -->
-      <div class="section section-full">
-        <div class="section-header">
-          <span class="material-icons">timeline</span>
-          <span class="section-title">理想スケジュール</span>
-        </div>
-        <div class="section-content">
-          <div class="grade-selector">
-            <button class="grade-btn" data-grade="高1" onclick="selectGrade('高1')">高1</button>
-            <button class="grade-btn active" data-grade="高2" onclick="selectGrade('高2')">高2</button>
-            <button class="grade-btn" data-grade="高3" onclick="selectGrade('高3')">高3</button>
-          </div>
-          <div class="gantt-container">
-            <div id="ganttChart" class="gantt-chart"></div>
+    <!-- 私のスケジュール -->
+    <div class="section">
+      <div class="section-header">
+        <span class="material-icons">checklist</span>
+        <span class="section-title">私のスケジュール</span>
+      </div>
+      <div class="section-content">
+        <div class="my-schedule-header">
+          <div class="selected-month-label">
+            <span class="material-icons">event</span>
+            <span id="selectedMonthLabel">12月</span>
           </div>
         </div>
-      </div>
-
-      <!-- 私のスケジュール -->
-      <div class="section section-wide">
-        <div class="section-header">
-          <span class="material-icons">checklist</span>
-          <span class="section-title">私のスケジュール</span>
+        <div class="todo-list" id="todoList">
+          <div class="todo-empty">
+            <span class="material-icons">event_available</span>
+            <p>上のガントチャートから月を選択してください</p>
+          </div>
         </div>
-        <div class="section-content">
-          <div class="month-selector" id="monthSelector"></div>
-          <div class="todo-list" id="todoList"></div>
-        </div>
-      </div>
-
-      <!-- 進捗状況 -->
-      <div class="section">
-        <div class="section-header">
-          <span class="material-icons">trending_up</span>
-          <span class="section-title">進捗状況</span>
-        </div>
-        <div class="section-content">
-          <div class="progress-container">
-            <div class="progress-label">
-              <span>全体の進捗</span>
-              <span id="progressPercent">0%</span>
-            </div>
-            <div class="progress-bar-bg">
-              <div class="progress-bar" id="progressBar" style="width: 0%"></div>
-            </div>
+        <div class="progress-section">
+          <div class="progress-label">
+            <span>全体の進捗</span>
+            <span id="progressPercent">0%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
           </div>
         </div>
       </div>
-
-      <!-- 併願校 -->
-      <div class="section section-full">
-        <div class="section-header">
-          <span class="material-icons">school</span>
-          <span class="section-title">併願校</span>
-        </div>
-        <div class="section-content">
-          <div class="school-list" id="schoolList"></div>
-        </div>
-      </div>
-
-      <!-- 担任面談履歴 -->
-      <div class="section section-wide">
-        <div class="section-header">
-          <span class="material-icons">forum</span>
-          <span class="section-title">担任面談履歴</span>
-        </div>
-        <div class="section-content">
-          <div class="meeting-list" id="meetingList"></div>
-        </div>
-      </div>
-
-      <!-- 宿題・授業内容（準備中） -->
-      <div class="section">
-        <div class="section-header">
-          <span class="material-icons">menu_book</span>
-          <span class="section-title">宿題・授業内容</span>
-        </div>
-        <div class="section-content">
-          <div class="todo-empty">準備中です</div>
-        </div>
-      </div>
-
-      </div><!-- section-grid end -->
-
-    </div>
-  </div>
-
-  <!-- 面談詳細モーダル -->
-  <div id="meetingModal" class="modal-overlay" onclick="closeMeetingModal(event)">
-    <div class="modal" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <span class="modal-title">面談記録</span>
-        <button class="modal-close" onclick="closeMeetingModal()">
-          <span class="material-icons">close</span>
-        </button>
-      </div>
-      <div class="modal-body" id="meetingModalBody"></div>
     </div>
   </div>
 
   <script>
     // ============================================
-    // API設定
+    // 理想スケジュールデータ
     // ============================================
-    const API_URL = 'https://script.google.com/macros/s/AKfycbzCFkkw6h6o0iFwObPILE-VCYfjRP1ikmMWOl6DgqIaqIRi657vQIKkjSKuRVTaWJzG/exec';
-
-    async function apiGet(action, params = {}) {
-      const url = new URL(API_URL);
-      url.searchParams.set('action', action);
-      for (const [key, value] of Object.entries(params)) {
-        if (value !== undefined && value !== null) {
-          url.searchParams.set(key, value);
+    const idealScheduleData = {
+      "高1": {
+        months: ["4", "5", "6", "7", "8", "9", "10", "11", "12", "1", "2", "3"],
+        categories: [],
+        monthDetails: {}
+      },
+      "高2": {
+        months: ["12", "1", "2", "3"],
+        categories: [
+          { id: "self", name: "自己分析・自己理解", color: "blue", start: "12", end: "3" },
+          { id: "research", name: "志望校リサーチ", color: "green", start: "12", end: "3" },
+          { id: "grade", name: "評定・英語資格", color: "yellow", start: "12", end: "3" },
+          { id: "docs", name: "書類準備", color: "orange", start: "2", end: "3" },
+          { id: "essay", name: "小論文対策", color: "purple", start: "2", end: "3" },
+          { id: "activity", name: "課外活動・ボランティア", color: "cyan", start: "12", end: "3" }
+        ],
+        monthDetails: {
+          "12": {
+            title: "インプットと自己分析の開始",
+            subtitle: "出願条件の理解と達成準備",
+            description: "この段階では、受験というより"自分を知る・制度を知る"ことが中心。まだ焦る必要はなく、総合型選抜・推薦入試がどんな試験かを正しく理解し、長期的に準備を進める土台を作る時期。",
+            tasks: [
+              "総合型選抜・学校推薦型選抜の制度や流れを学ぶ（基礎理解）",
+              "各大学・学部の選抜方式や違いを調べる",
+              "志望校や併願校の候補を複数挙げておく",
+              "「やるべきこと」「やらないべきこと」を整理し、優先順位を決める",
+              "総合型選抜全体のスケジュールを年間で把握",
+              "自己分析を開始（価値観・性格・経験・将来像の言語化）",
+              "評定平均を上げる努力（4.0以上が目標）",
+              "英語資格取得（英検2級レベル）に向けた学習",
+              "ボランティア・地域貢献・文化活動などの参加を開始（継続的に）"
+            ]
+          },
+          "1": {
+            title: "自己分析の深化と方向性の形成",
+            subtitle: "",
+            description: "12月に始めた自己分析をより深め、自分の軸や価値観を明確にする時期。同時に、出願条件（評定・資格）を確実に満たす努力を続ける。",
+            tasks: [
+              "総合型選抜・推薦入試の学習継続（出願条件の確認）",
+              "志望校候補を広く調べ、併願可能な大学を比較検討",
+              "自己分析を文章化し、自分史・ビジョン・強みを整理",
+              "出願書類の書き方や種類を知る（志望理由書・活動報告書など）",
+              "評定平均を上げる（主要科目の提出点を意識）",
+              "英検・TOEFL・IELTSなど資格試験に向けて対策開始",
+              "体験的活動を増やす（ボランティア・講演参加・地域活動など）",
+              "長期的に続けられる社会活動・プロジェクトを決めておく"
+            ]
+          },
+          "2": {
+            title: "志望方向の具体化と書類準備の開始",
+            subtitle: "",
+            description: "大学や学部をある程度絞り、出願書類の下書きを開始。ここで「書く・調べる・比べる」を並行しながら、土台を固める。",
+            tasks: [
+              "志望校・併願校を仮決定（学部・学科レベルまで考える）",
+              "自己分析をもとに初期の志望理由文を作成",
+              "小論文の基礎問題を学び始める",
+              "提出書類（自己PR・活動報告など）の作成を開始",
+              "評定・資格の基準値を確実に満たす",
+              "過去問請求・出願条件の問い合わせ（大学HP・資料請求）",
+              "継続的な社会活動を維持し、体験を記録（報告書に活かす）"
+            ]
+          },
+          "3": {
+            title: "志望校仮決定と学習習慣の確立",
+            subtitle: "",
+            description: "春休みを活かして、学びと行動の両方をバランスよく整える。海外プログラムや新しい経験を積む良いタイミング。",
+            tasks: [
+              "志望校・学部・学科の仮決定（複数案を用意）",
+              "英検などの資格試験を受験し、出願基準を満たす",
+              "小論文の基礎問題を継続演習",
+              "第一志望の提出書類の下書き完成",
+              "短期留学・プログラム・ボランティアへの参加",
+              "書類で使える活動実績や体験を蓄積"
+            ]
+          }
+        }
+      },
+      "高3": {
+        months: ["4", "5", "6", "7", "8", "9", "10", "11", "12", "1", "2"],
+        categories: [
+          { id: "research", name: "志望校リサーチ", color: "green", start: "4", end: "7" },
+          { id: "grade", name: "評定・英語資格", color: "yellow", start: "4", end: "8" },
+          { id: "docs", name: "書類準備", color: "orange", start: "4", end: "9" },
+          { id: "essay", name: "小論文対策", color: "purple", start: "4", end: "11" },
+          { id: "study", name: "研究活動", color: "cyan", start: "4", end: "9" },
+          { id: "interview", name: "面接対策", color: "red", start: "9", end: "11" },
+          { id: "apply", name: "出願作業", color: "gray", start: "8", end: "12" }
+        ],
+        monthDetails: {
+          "4": {
+            title: "受験スケジュールの確立と研究テーマ決定",
+            subtitle: "",
+            description: "ここから本格的に受験モードへ。研究テーマを決め、学びを学術的に深化させる。進捗管理を始め、全体を見える化する。",
+            tasks: [
+              "EQAO進捗管理シートで年間スケジュールを立案",
+              "集団授業・交流会・保護者会に参加し意識を高める",
+              "志望校・学部・学科を正式決定",
+              "オープンキャンパスの予約・参加準備",
+              "評定平均・英語資格を再確認（不足があれば補強）",
+              "小論文の基礎演習継続",
+              "志望理由書の初稿作成開始",
+              "研究テーマを決定（興味分野×社会課題×学問領域）",
+              "文献・論文・データ分析など調査を開始",
+              "ボランティア・地域活動を継続",
+              "専願・併願条件の確認・交渉（高校・大学に確認）"
+            ]
+          },
+          "5": {
+            title: "研究・書類作成の本格化",
+            subtitle: "",
+            description: "研究・分析・文献読解など、"自分の研究テーマ"を深める月。出願書類と研究テーマの整合性を取っていく。",
+            tasks: [
+              "文献・書籍・学術データを用いたリサーチ開始",
+              "研究ノート・読書記録をまとめる",
+              "小論文の演習を継続（要約・意見・構成練習）",
+              "志望理由書を第2稿に更新（根拠を補強）",
+              "活動報告書・自己PR文の精度を上げる",
+              "評定平均・英語資格の追い込み（最終測定へ）",
+              "研究やボランティア活動を習慣化"
+            ]
+          },
+          "6": {
+            title: "研究深化と推薦状準備の開始",
+            subtitle: "",
+            description: "推薦状の依頼を正式に始めるタイミング。研究活動・課外活動・小論文の応用力を強化。",
+            tasks: [
+              "研究テーマに基づくフィールドワーク・アンケート等を実施",
+              "調査報告書・仮レポートを作成",
+              "小論文の応用問題演習に移行",
+              "出願書類（第一志望）の内容を精査・加筆修正",
+              "高校教員に推薦状作成依頼を正式に申し出る",
+              "研究成果をまとめ、面接・書類両方で活かせる形に整える"
+            ]
+          },
+          "7": {
+            title: "学校連携・書類整理の最終段階",
+            subtitle: "",
+            description: "いよいよ校内手続きが動き出す。調査書・推薦状・証明書など、出願に必要な全書類を整える重要な月。",
+            tasks: [
+              "部活動引退・受験専念",
+              "志望校・併願校リストを学校に正式提示",
+              "調査書記載内容を相談・確認",
+              "新年度の大学募集要項を最新版に更新",
+              "小論文の応用演習を継続（記述＋口頭説明）",
+              "推薦状依頼を完了・内容確認",
+              "各種賞状・検定証・活動証明書を整理・コピー",
+              "調査書発行願いを提出（大学ごとに申請）",
+              "出願日程と学校行事を照合し、重複を回避"
+            ]
+          },
+          "8": {
+            title: "夏休み：活動・資格・書類の総仕上げ",
+            subtitle: "",
+            description: "最も重要な集中特訓期間。EQAOイベントや模試・合宿を活用し、実践力を磨く。",
+            tasks: [
+              "部活動完全引退・受験一本化",
+              "志望理由書以外の書類（活動報告書・課題レポート等）を仕上げる",
+              "調査書・証明書の発行・照合作業を完了",
+              "英語資格原本照合（高校・大学両方で確認）",
+              "指定校推薦の出願判断を確定",
+              "研究活動・ボランティア・プログラム参加を集中実施",
+              "EQAO CAMP／STUDY TOURなど合宿・研修参加",
+              "小論文の過去問演習を開始",
+              "提出書類（第一志望）を完成・最終確認",
+              "Web出願登録開始（不備チェック）"
+            ]
+          },
+          "9": {
+            title: "出願本番と一次審査突破期",
+            subtitle: "",
+            description: "ついに出願開始。書類提出・一次審査・模試・面接対策が同時進行。焦らず確実に、期限管理が命。",
+            tasks: [
+              "出願Web登録・郵送作業を本格化",
+              "指定校推薦結果発表（一次審査）",
+              "小論文の過去問演習を本格化",
+              "面接対策を開始（書類からの想定質問100問）",
+              "レポート課題 着手開始",
+              "課外活動・ボランティアの最終整理",
+              "大学から受験番号発行",
+              "EQAO出願サポートを受ける",
+              "EQAO模試を受験（本番シミュレーション）"
+            ]
+          },
+          "10": {
+            title: "総合型選抜ピーク期／二次試験対策本格化",
+            subtitle: "",
+            description: "最も緊張感の高い月。面接・小論文の最終仕上げ。EQAO模試と面接練習を最大限活用する。",
+            tasks: [
+              "出願継続（残り大学対応）",
+              "EQAO模試本格化／結果分析フィードバック",
+              "小論文過去問・応用問題演習",
+              "二次試験（面接・小論文）本格練習",
+              "EQAO出願サポート・書類最終添削",
+              "一次審査結果の確認と再出願準備",
+              "面接100問＋書類質問100問の想定練習",
+              "大学から受験番号通知"
+            ]
+          },
+          "11": {
+            title: "学校推薦型選抜出願・結果ラッシュ期",
+            subtitle: "",
+            description: "公募推薦と総合型選抜の結果・試験が重なる時期。「合格確定者」と「最終試験者」に分かれ動く。",
+            tasks: [
+              "公募推薦の出願開始（高校との調整）",
+              "二次試験（小論文・面接）本格化",
+              "総合型選抜の結果発表開始（順次）",
+              "入学手続き関連（合格者向け）を進行",
+              "EQAO模試最終実施／最終対策",
+              "出願サポート継続（最後の大学まで）",
+              "面接練習継続／自己表現力の最終確認",
+              "卒塾手続き開始（合格者より順次）"
+            ]
+          },
+          "12": {
+            title: "結果発表・卒塾・次のステージへ",
+            subtitle: "",
+            description: "結果が出揃い始める。受験の総仕上げと次への準備を同時に行う。「合格＝ゴール」ではなく「スタート」として捉える。",
+            tasks: [
+              "総合型・公募推薦の最終結果発表",
+              "第二期募集・追加出願対応者の書類準備",
+              "入学手続き・入学金納入・必要書類提出",
+              "EQAO PARTY FOR NEXT STAGE（卒塾式）開催",
+              "後輩向けメッセージ・インタビュー協力"
+            ]
+          },
+          "1": {
+            title: "次への選択と切り替え",
+            subtitle: "",
+            description: "合格者は入学準備、不合格者は一般・海外・再挑戦を決定する。精神面・方向性を整える重要な時期。",
+            tasks: [
+              "一般入試への切り替え・対策開始",
+              "併願校の入試対策実施",
+              "海外大学進学の検討",
+              "浪人・再挑戦の判断",
+              "大学側から課される入学前課題の対応",
+              "各種手続き・書類最終確認"
+            ]
+          },
+          "2": {
+            title: "共通テスト利用・後期募集対応",
+            subtitle: "",
+            description: "最終追い込み。国公立や私立の後期型、共通テスト利用型の対策。最後まで学び続ける姿勢を保つ。",
+            tasks: [
+              "共通テスト利用の国公立型選抜対策",
+              "総合型選抜の2期・3期募集出願",
+              "一般入試・後期入試の準備",
+              "EQAO講師・メンターとの面談で進路確定"
+            ]
+          }
         }
       }
-      const response = await fetch(url.toString());
-      if (!response.ok) throw new Error('API Error: ' + response.status);
-      return await response.json();
-    }
+    };
 
-    async function apiPost(action, data = {}) {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action, ...data })
-      });
-      if (!response.ok) throw new Error('API Error: ' + response.status);
-      return await response.json();
-    }
+    // カテゴリの色と名前のマッピング
+    const categoryInfo = {
+      self: { name: "自己分析・自己理解", color: "blue" },
+      research: { name: "志望校リサーチ", color: "green" },
+      grade: { name: "評定・英語資格", color: "yellow" },
+      docs: { name: "書類準備", color: "orange" },
+      essay: { name: "小論文対策", color: "purple" },
+      activity: { name: "課外活動・ボランティア", color: "cyan" },
+      study: { name: "研究活動", color: "cyan" },
+      interview: { name: "面接対策", color: "red" },
+      apply: { name: "出願作業", color: "gray" }
+    };
 
-    // データ
-    let studentId = '';
-    let studentPassword = '';
-    let idealScheduleData = [];
-    let personalScheduleData = [];
-    let schoolData = [];
-    let meetingData = [];
-
-    let selectedGrade = '高2';
-    let selectedMonth = new Date().getMonth() + 1;
-
-    const monthNames = ['4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月', '1月', '2月', '3月'];
+    // 状態
+    let selectedGrade = "高2";
+    let selectedMonth = null;
 
     // 初期化
     document.addEventListener('DOMContentLoaded', function() {
-      studentId = localStorage.getItem('eqao_studentId') || '';
-      studentPassword = localStorage.getItem('eqao_password') || '';
       setNavUserName();
-      loadAllData();
-    });
-
-    // 全データ読み込み
-    async function loadAllData() {
-      try {
-        // 各APIを並列で呼び出し
-        const [idealData, personalData, schoolsData, meetingsData] = await Promise.all([
-          apiGet('getIdealSchedule'),
-          apiGet('getPersonalSchedule', { studentId }),
-          apiGet('getSchoolData', { studentId }),
-          apiGet('getMeetingData', { studentId })
-        ]);
-        
-        idealScheduleData = idealData || [];
-        personalScheduleData = personalData || [];
-        schoolData = schoolsData || [];
-        meetingData = meetingsData || [];
-
-        document.getElementById('loadingArea').style.display = 'none';
-        document.getElementById('contentArea').style.display = 'block';
-
-        renderAll();
-      } catch (error) {
-        onError(error);
-      }
-    }
-
-    function onError(error) {
-      console.error(error);
-      document.getElementById('loadingArea').innerHTML = 
-        '<p style="color: #e53935;">データの読み込みに失敗しました</p>';
-    }
-
-    function renderAll() {
       renderGanttChart();
-      renderMonthSelector();
-      renderTodoList();
-      renderProgress();
-      renderSchoolList();
-      renderMeetingList();
-    }
+      
+      // 現在の月を初期選択
+      const now = new Date();
+      const currentMonth = String(now.getMonth() + 1);
+      const data = idealScheduleData[selectedGrade];
+      if (data.months.includes(currentMonth)) {
+        selectMonth(currentMonth);
+      } else {
+        selectMonth(data.months[0]);
+      }
+    });
 
     // 学年選択
     function selectGrade(grade) {
@@ -1181,258 +1133,160 @@
       document.querySelectorAll('.grade-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.grade === grade);
       });
+      
+      // ガントチャート再描画
       renderGanttChart();
+      
+      // 最初の月を選択
+      const data = idealScheduleData[grade];
+      if (data.months.length > 0) {
+        selectMonth(data.months[0]);
+      } else {
+        document.getElementById('monthDetail').classList.remove('show');
+        document.getElementById('selectedMonthLabel').textContent = '-';
+      }
     }
 
     // ガントチャート描画
     function renderGanttChart() {
+      const data = idealScheduleData[selectedGrade];
       const container = document.getElementById('ganttChart');
-      const tasks = idealScheduleData.filter(t => t.grade === selectedGrade);
+      const legendContainer = document.getElementById('ganttLegend');
 
-      if (tasks.length === 0) {
-        container.innerHTML = '<div class="todo-empty">データがありません</div>';
+      if (!data || data.months.length === 0) {
+        container.innerHTML = '<div class="todo-empty"><span class="material-icons">construction</span><p>準備中です</p></div>';
+        legendContainer.innerHTML = '';
         return;
       }
 
+      const months = data.months;
+      const categories = data.categories;
+
+      // 現在の月を取得
+      const now = new Date();
+      const currentMonth = String(now.getMonth() + 1);
+
+      // ヘッダー（月）
       let html = '<div class="gantt-header">';
-      html += '<div class="gantt-label-col">タスク</div>';
+      html += '<div class="gantt-label-header">カテゴリ</div>';
       html += '<div class="gantt-months">';
-      monthNames.forEach(m => {
-        html += '<div class="gantt-month">' + m + '</div>';
+      months.forEach(m => {
+        const monthLabel = m + '月';
+        const isCurrent = m === currentMonth;
+        const isSelected = m === selectedMonth;
+        let classes = 'gantt-month';
+        if (isCurrent) classes += ' current';
+        if (isSelected) classes += ' selected';
+        html += `<div class="${classes}" onclick="selectMonth('${m}')">${monthLabel}</div>`;
       });
       html += '</div></div>';
 
-      const colors = ['#4CAF50', '#2196F3', '#FF9800', '#E91E63', '#9C27B0', '#00BCD4', '#795548'];
-
-      tasks.forEach((task, index) => {
-        const startIdx = monthToIndex(task.startMonth);
-        const endIdx = monthToIndex(task.endMonth);
-        const width = ((endIdx - startIdx + 1) / 12) * 100;
-        const left = (startIdx / 12) * 100;
-        const color = task.color || colors[index % colors.length];
-
+      // 各カテゴリ行
+      categories.forEach(cat => {
         html += '<div class="gantt-row">';
-        html += '<div class="gantt-task-label" title="' + task.title + '">' + task.title + '</div>';
-        html += '<div class="gantt-bar-container">';
-        monthNames.forEach(() => {
-          html += '<div class="gantt-cell"></div>';
+        html += `<div class="gantt-category"><div class="category-color bg-${cat.color}"></div>${cat.name}</div>`;
+        html += '<div class="gantt-bars">';
+        
+        months.forEach(m => {
+          const isInRange = isMonthInRange(m, cat.start, cat.end, months);
+          html += '<div class="gantt-cell">';
+          if (isInRange) {
+            html += `<div class="gantt-bar color-${cat.color}"></div>`;
+          }
+          html += '</div>';
         });
-        html += '<div class="gantt-bar" style="left: ' + left + '%; width: ' + width + '%; background: ' + color + ';">' + task.title + '</div>';
+        
         html += '</div></div>';
       });
 
       container.innerHTML = html;
+
+      // 凡例
+      let legendHtml = '';
+      categories.forEach(cat => {
+        legendHtml += `<div class="legend-item"><div class="legend-color bg-${cat.color}"></div>${cat.name}</div>`;
+      });
+      legendContainer.innerHTML = legendHtml;
     }
 
-    function monthToIndex(month) {
-      // 4月=0, 5月=1, ... 3月=11
-      if (month >= 4) return month - 4;
-      return month + 8;
+    // 月が範囲内かチェック
+    function isMonthInRange(month, start, end, monthOrder) {
+      const monthIdx = monthOrder.indexOf(month);
+      const startIdx = monthOrder.indexOf(start);
+      const endIdx = monthOrder.indexOf(end);
+      
+      if (monthIdx === -1 || startIdx === -1 || endIdx === -1) return false;
+      return monthIdx >= startIdx && monthIdx <= endIdx;
     }
 
     // 月選択
-    function renderMonthSelector() {
-      const container = document.getElementById('monthSelector');
-      let html = '';
-
-      monthNames.forEach((name, index) => {
-        const monthNum = index < 9 ? index + 4 : index - 8;
-        const isActive = monthNum === selectedMonth;
-        html += '<button class="month-btn' + (isActive ? ' active' : '') + '" onclick="selectMonth(' + monthNum + ')">' + name + '</button>';
-      });
-
-      container.innerHTML = html;
-    }
-
     function selectMonth(month) {
       selectedMonth = month;
-      document.querySelectorAll('.month-btn').forEach((btn, index) => {
-        const monthNum = index < 9 ? index + 4 : index - 8;
-        btn.classList.toggle('active', monthNum === month);
+      
+      // ガントチャートのヘッダー更新
+      document.querySelectorAll('.gantt-month').forEach(el => {
+        const m = el.textContent.replace('月', '');
+        el.classList.toggle('selected', m === month);
       });
-      renderTodoList();
+
+      // 詳細カード表示
+      renderMonthDetail(month);
+      
+      // 私のスケジュールのラベル更新
+      document.getElementById('selectedMonthLabel').textContent = month + '月';
+      
+      // Todoリスト更新（今後API連携）
+      renderTodoList(month);
     }
 
-    // Todoリスト描画
-    function renderTodoList() {
+    // 月詳細カード描画
+    function renderMonthDetail(month) {
+      const data = idealScheduleData[selectedGrade];
+      const detail = data.monthDetails[month];
+      const container = document.getElementById('monthDetail');
+
+      if (!detail) {
+        container.classList.remove('show');
+        return;
+      }
+
+      let html = '<div class="month-detail-header">';
+      html += `<div class="month-badge">${month}月</div>`;
+      html += `<div class="month-title">${detail.title}</div>`;
+      html += '</div>';
+
+      if (detail.description) {
+        html += `<div class="month-description">${detail.description}</div>`;
+      }
+
+      if (detail.tasks && detail.tasks.length > 0) {
+        html += '<div class="month-tasks-title"><span class="material-icons">check_circle</span>具体的な行動</div>';
+        html += '<div class="month-tasks">';
+        detail.tasks.forEach(task => {
+          html += `<div class="month-task-item"><span class="material-icons">check</span><span>${task}</span></div>`;
+        });
+        html += '</div>';
+      }
+
+      container.innerHTML = html;
+      container.classList.add('show');
+    }
+
+    // Todoリスト描画（仮実装）
+    function renderTodoList(month) {
       const container = document.getElementById('todoList');
-      const tasks = personalScheduleData.filter(t => t.month === selectedMonth);
-
-      if (tasks.length === 0) {
-        container.innerHTML = '<div class="todo-empty">この月のタスクはありません</div>';
-        return;
-      }
-
-      let html = '';
-      tasks.forEach((task, index) => {
-        const checked = task.completed ? 'checked' : '';
-        const textClass = task.completed ? 'todo-text completed' : 'todo-text';
-        html += '<div class="todo-item">';
-        html += '<input type="checkbox" class="todo-checkbox" ' + checked + ' onchange="toggleTodo(' + index + ', this.checked)">';
-        html += '<span class="' + textClass + '">' + task.taskName + '</span>';
-        html += '</div>';
-      });
-
-      container.innerHTML = html;
+      
+      // TODO: API連携で個人のタスクを取得
+      // 今は仮データ
+      container.innerHTML = `
+        <div class="todo-empty">
+          <span class="material-icons">assignment</span>
+          <p>${month}月のタスクはまだ登録されていません</p>
+        </div>
+      `;
     }
 
-    async function toggleTodo(index, completed) {
-      const tasks = personalScheduleData.filter(t => t.month === selectedMonth);
-      if (tasks[index]) {
-        tasks[index].completed = completed;
-        renderTodoList();
-        renderProgress();
-        // サーバーに保存
-        try {
-          await apiGet('updatePersonalSchedule', {
-            studentId: studentId,
-            password: studentPassword,
-            month: selectedMonth,
-            taskName: tasks[index].taskName,
-            completed: completed
-          });
-        } catch (error) {
-          console.error('保存エラー:', error);
-        }
-      }
-    }
-
-    // 進捗バー描画
-    function renderProgress() {
-      const total = personalScheduleData.length;
-      const completed = personalScheduleData.filter(t => t.completed).length;
-      const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
-
-      document.getElementById('progressPercent').textContent = percent + '%';
-      document.getElementById('progressBar').style.width = percent + '%';
-    }
-
-    // 併願校リスト描画
-    function renderSchoolList() {
-      const container = document.getElementById('schoolList');
-
-      if (schoolData.length === 0) {
-        container.innerHTML = '<div class="todo-empty">併願校が登録されていません</div>';
-        container.innerHTML += '<button class="add-school-btn" onclick="addSchool()"><span class="material-icons">add</span>併願校を追加</button>';
-        return;
-      }
-
-      let html = '';
-      schoolData.sort((a, b) => a.rank - b.rank);
-
-      schoolData.forEach(school => {
-        const rankLabel = school.rank === 1 ? '第1志望' : '第' + school.rank + '志望';
-        const deadline = school.deadline || '未設定';
-
-        html += '<a href="index.html?page=school-detail&rank=' + school.rank + '" class="school-card">';
-        html += '<div class="school-info">';
-        html += '<div class="school-rank">' + rankLabel + '</div>';
-        html += '<div class="school-name">' + school.universityName + '</div>';
-        html += '<div class="school-detail">' + school.faculty + ' ' + school.department + '</div>';
-        html += '</div>';
-        html += '<div class="school-deadline">';
-        html += '<div class="school-deadline-label">出願締切</div>';
-        html += '<div class="school-deadline-date">' + deadline + '</div>';
-        html += '</div>';
-        html += '<span class="material-icons">chevron_right</span>';
-        html += '</a>';
-      });
-
-      html += '<button class="add-school-btn" onclick="addSchool()"><span class="material-icons">add</span>併願校を追加</button>';
-      container.innerHTML = html;
-    }
-
-    function addSchool() {
-      window.location.href = 'index.html?page=school-detail&rank=new';
-    }
-
-    // 面談履歴描画
-    function renderMeetingList() {
-      const container = document.getElementById('meetingList');
-
-      if (meetingData.length === 0) {
-        container.innerHTML = '<div class="meeting-empty">面談記録がありません</div>';
-        return;
-      }
-
-      let html = '';
-      meetingData.forEach((meeting, index) => {
-        html += '<div class="meeting-card" onclick="showMeetingDetail(' + index + ')">';
-        html += '<div class="meeting-info">';
-        html += '<div class="meeting-date">' + meeting.submitMonth + ' 面談記録</div>';
-        html += '<div class="meeting-teacher">担任: ' + meeting.teacherName + '</div>';
-        html += '</div>';
-        html += '<span class="material-icons">chevron_right</span>';
-        html += '</div>';
-      });
-
-      container.innerHTML = html;
-    }
-
-    // 面談詳細モーダル
-    function showMeetingDetail(index) {
-      const meeting = meetingData[index];
-      const body = document.getElementById('meetingModalBody');
-
-      let html = '';
-
-      // 基本情報
-      html += '<div class="modal-section">';
-      html += '<div class="modal-section-title">基本情報</div>';
-      html += '<div class="modal-item"><div class="modal-item-label">提出月</div><div class="modal-item-value">' + (meeting.submitMonth || '-') + '</div></div>';
-      html += '<div class="modal-item"><div class="modal-item-label">担任</div><div class="modal-item-value">' + (meeting.teacherName || '-') + '</div></div>';
-      html += '<div class="modal-item"><div class="modal-item-label">学年</div><div class="modal-item-value">' + (meeting.grade || '-') + '</div></div>';
-      html += '<div class="modal-item"><div class="modal-item-label">評定平均</div><div class="modal-item-value">' + (meeting.gpa || '-') + '</div></div>';
-      html += '<div class="modal-item"><div class="modal-item-label">英語資格</div><div class="modal-item-value">' + (meeting.englishCert || '-') + '</div></div>';
-      html += '<div class="modal-item"><div class="modal-item-label">小論文</div><div class="modal-item-value">' + (meeting.essay || '-') + '</div></div>';
-      html += '<div class="modal-item"><div class="modal-item-label">志望校決定</div><div class="modal-item-value">' + (meeting.schoolDecided || '-') + '</div></div>';
-      html += '</div>';
-
-      // 志望校情報
-      for (let i = 1; i <= 4; i++) {
-        const school = meeting['school' + i];
-        if (school && school.name) {
-          html += '<div class="modal-section">';
-          html += '<div class="modal-section-title">第' + i + '志望</div>';
-          html += '<div class="modal-item"><div class="modal-item-label">大学名</div><div class="modal-item-value">' + (school.name || '-') + '</div></div>';
-          html += '<div class="modal-item"><div class="modal-item-label">学部学科</div><div class="modal-item-value">' + (school.faculty || '-') + '</div></div>';
-          html += '<div class="modal-item"><div class="modal-item-label">受験資格</div><div class="modal-item-value">' + (school.requirement || '-') + '</div></div>';
-          html += '<div class="modal-item"><div class="modal-item-label">必要書類</div><div class="modal-item-value">' + (school.documents || '-') + '</div></div>';
-          html += '<div class="modal-item"><div class="modal-item-label">書類進捗</div><div class="modal-item-value">' + (school.progress || '-') + '</div></div>';
-          html += '</div>';
-        }
-      }
-
-      // アドバイス
-      html += '<div class="modal-section">';
-      html += '<div class="modal-section-title">アドバイス</div>';
-      html += '<div class="modal-item"><div class="modal-item-label">進捗アドバイス</div><div class="modal-item-value">' + (meeting.advice || '-') + '</div></div>';
-      html += '<div class="modal-item"><div class="modal-item-label">授業内 重点</div><div class="modal-item-value">' + (meeting.classroomFocus || '-') + '</div></div>';
-      html += '</div>';
-
-      // 授業外
-      html += '<div class="modal-section">';
-      html += '<div class="modal-section-title">授業外での取り組み</div>';
-      html += '<div class="modal-item"><div class="modal-item-label">基礎編</div><div class="modal-item-value">' + (meeting.outsideBasic || '-') + '</div></div>';
-      html += '<div class="modal-item"><div class="modal-item-label">書類作成編</div><div class="modal-item-value">' + (meeting.outsideDocuments || '-') + '</div></div>';
-      html += '<div class="modal-item"><div class="modal-item-label">小論文編</div><div class="modal-item-value">' + (meeting.outsideEssay || '-') + '</div></div>';
-      html += '<div class="modal-item"><div class="modal-item-label">面接編</div><div class="modal-item-value">' + (meeting.outsideInterview || '-') + '</div></div>';
-      html += '<div class="modal-item"><div class="modal-item-label">プレゼン編</div><div class="modal-item-value">' + (meeting.outsidePresentation || '-') + '</div></div>';
-      html += '<div class="modal-item"><div class="modal-item-label">出願資格編</div><div class="modal-item-value">' + (meeting.outsideQualification || '-') + '</div></div>';
-      html += '<div class="modal-item"><div class="modal-item-label">提出書類編</div><div class="modal-item-value">' + (meeting.outsideSubmission || '-') + '</div></div>';
-      html += '</div>';
-
-      body.innerHTML = html;
-      document.getElementById('meetingModal').classList.add('active');
-    }
-
-    function closeMeetingModal(event) {
-      if (!event || event.target.id === 'meetingModal') {
-        document.getElementById('meetingModal').classList.remove('active');
-      }
-    }
-  
-    // ハンバーガーメニュー
+    // ナビゲーション
     function openNav() {
       document.getElementById('navMenu').classList.add('open');
       document.getElementById('navOverlay').classList.add('open');
@@ -1450,8 +1304,6 @@
       localStorage.removeItem('eqao_studentId');
       localStorage.removeItem('eqao_studentName');
       localStorage.removeItem('eqao_password');
-      localStorage.removeItem('eqao_rowIndex');
-      localStorage.removeItem('eqao_isAdmin');
       window.location.href = 'index.html';
     }
 
@@ -1462,7 +1314,6 @@
         navUserName.textContent = studentName || '';
       }
     }
-
   </script>
 </body>
 </html>
