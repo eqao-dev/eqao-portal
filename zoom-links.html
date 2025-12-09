@@ -18,19 +18,20 @@
 
     body {
       font-family: 'Noto Sans JP', sans-serif;
-      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       min-height: 100vh;
       padding-bottom: 40px;
     }
 
     .header {
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
       color: white;
       padding: 16px 20px;
       display: flex;
       align-items: center;
       gap: 16px;
-      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -42,7 +43,7 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.2);
       border: none;
       border-radius: 50%;
       color: white;
@@ -51,12 +52,19 @@
     }
 
     .back-btn:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.3);
     }
 
     .header-title {
       font-size: 18px;
       font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-title .material-icons {
+      font-size: 24px;
     }
 
     .container {
@@ -69,14 +77,14 @@
     .loading {
       text-align: center;
       padding: 60px 20px;
-      color: #666;
+      color: rgba(255,255,255,0.9);
     }
 
     .loading-spinner {
       width: 40px;
       height: 40px;
-      border: 3px solid #e0e0e0;
-      border-top-color: #1a237e;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top-color: white;
       border-radius: 50%;
       animation: spin 1s linear infinite;
       margin: 0 auto 16px;
@@ -86,82 +94,252 @@
       to { transform: rotate(360deg); }
     }
 
+    /* 検索ボックス */
+    .search-section {
+      margin-bottom: 16px;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 16px 14px 48px;
+      border: none;
+      border-radius: 16px;
+      font-size: 15px;
+      font-family: inherit;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      transition: all 0.3s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+      transform: translateY(-1px);
+    }
+
+    .search-input::placeholder {
+      color: #999;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #667eea;
+      pointer-events: none;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #999;
+      cursor: pointer;
+      padding: 4px;
+      display: none;
+    }
+
+    .search-clear.show {
+      display: block;
+    }
+
     /* 説明文 */
     .page-desc {
-      background: #e3f2fd;
-      border-radius: 12px;
-      padding: 14px 16px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .page-desc .material-icons {
-      color: #1976d2;
-      font-size: 24px;
-      flex-shrink: 0;
-    }
-
-    .page-desc-text {
-      font-size: 13px;
-      color: #1565c0;
-      line-height: 1.5;
-    }
-
-    /* スタッフリスト */
-    .staff-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .staff-card {
-      background: white;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
       border-radius: 16px;
       padding: 16px 20px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    }
-
-    .staff-header {
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
+      gap: 14px;
+      border: 1px solid rgba(255,255,255,0.2);
     }
 
-    .staff-avatar {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
-      border-radius: 50%;
+    .page-desc-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
 
-    .staff-avatar .material-icons {
+    .page-desc-icon .material-icons {
       color: white;
       font-size: 24px;
     }
 
-    .staff-name {
-      font-size: 16px;
-      font-weight: 700;
-      color: #333;
+    .page-desc-text {
+      font-size: 13px;
+      color: rgba(255,255,255,0.95);
+      line-height: 1.5;
     }
 
-    .zoom-info {
-      background: #f5f5f5;
-      border-radius: 10px;
-      padding: 12px 14px;
-      margin-bottom: 12px;
+    /* 注意書きセクション */
+    .tips-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .tips-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      font-size: 14px;
+      font-weight: 600;
+      color: #c2185b;
+      cursor: pointer;
+    }
+
+    .tips-header .material-icons {
+      font-size: 20px;
+    }
+
+    .tips-toggle {
+      margin-left: auto;
+      transition: transform 0.3s;
+    }
+
+    .tips-section.expanded .tips-toggle {
+      transform: rotate(180deg);
+    }
+
+    .tips-content {
+      display: none;
+      padding: 16px 20px;
+    }
+
+    .tips-section.expanded .tips-content {
+      display: block;
+    }
+
+    .tips-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
       font-size: 13px;
       color: #555;
       line-height: 1.6;
+    }
+
+    .tips-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .tips-item:first-child {
+      padding-top: 0;
+    }
+
+    .tips-item .material-icons {
+      font-size: 20px;
+      color: #c2185b;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .tips-item strong {
+      color: #c2185b;
+      font-weight: 600;
+    }
+
+    .tips-item code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #d32f2f;
+    }
+
+    /* 検索結果カウント */
+    .result-count {
+      color: rgba(255,255,255,0.8);
+      font-size: 13px;
+      margin-bottom: 12px;
+      padding-left: 4px;
+    }
+
+    /* スタッフリスト */
+    .staff-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .staff-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      transition: all 0.3s;
+    }
+
+    .staff-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .staff-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .staff-avatar {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .staff-avatar .material-icons {
+      color: white;
+      font-size: 26px;
+    }
+
+    .staff-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      letter-spacing: 0.5px;
+    }
+
+    .zoom-info {
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.7;
       white-space: pre-wrap;
       word-break: break-all;
+      border-left: 4px solid #667eea;
     }
 
     .zoom-btn {
@@ -170,119 +348,41 @@
       justify-content: center;
       gap: 8px;
       width: 100%;
-      padding: 12px;
-      background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
       text-decoration: none;
-      border-radius: 10px;
-      font-size: 14px;
+      border-radius: 12px;
+      font-size: 15px;
       font-weight: 600;
       transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
 
     .zoom-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+      box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+    }
+
+    .zoom-btn .material-icons {
+      font-size: 22px;
     }
 
     /* 結果なし */
     .no-results {
       text-align: center;
       padding: 60px 20px;
-      color: #888;
+      color: rgba(255,255,255,0.8);
     }
 
     .no-results .material-icons {
-      font-size: 48px;
+      font-size: 56px;
       margin-bottom: 16px;
-      opacity: 0.5;
+      opacity: 0.6;
     }
 
-    /* ログインフォーム */
-    .login-box {
-      background: white;
-      border-radius: 20px;
-      padding: 32px 24px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .login-icon {
-      width: 64px;
-      height: 64px;
-      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 16px;
-    }
-
-    .login-icon .material-icons {
-      font-size: 32px;
-      color: white;
-    }
-
-    .login-title {
-      font-size: 20px;
-      color: #1a237e;
-      margin-bottom: 8px;
-    }
-
-    .login-subtitle {
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 24px;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-      text-align: left;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 6px;
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 12px 14px;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
+    .no-results p {
       font-size: 15px;
-      font-family: inherit;
-      transition: border-color 0.3s;
-    }
-
-    .form-input:focus {
-      outline: none;
-      border-color: #1a237e;
-    }
-
-    .login-btn {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 8px;
-    }
-
-    .error-message {
-      background: #ffebee;
-      color: #c62828;
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 16px;
-      font-size: 13px;
     }
 
     /* ハンバーガーメニュー */
@@ -296,12 +396,13 @@
       justify-content: center;
       width: 44px;
       height: 44px;
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.3);
       border-radius: 50%;
       color: white;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
     }
 
     .nav-overlay {
@@ -340,7 +441,7 @@
     }
 
     .nav-header {
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
       padding: 20px 16px;
       display: flex;
@@ -360,7 +461,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: linear-gradient(135deg, #283593 0%, #3949ab 100%);
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
     }
 
     .nav-user-info {
@@ -446,7 +547,7 @@
 
     .nav-item .material-icons {
       font-size: 22px;
-      color: #1a237e;
+      color: #667eea;
     }
 
     .nav-item span {
@@ -465,15 +566,11 @@
       flex-shrink: 0;
     }
 
-    .nav-badge-wip {
-      background: #9e9e9e;
-      color: white;
-      font-size: 9px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-left: auto;
-      white-space: nowrap;
-      flex-shrink: 0;
+    /* ハイライト */
+    .highlight {
+      background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+      padding: 1px 4px;
+      border-radius: 3px;
     }
   </style>
 </head>
@@ -482,8 +579,12 @@
     <button class="back-btn" onclick="goBack()">
       <span class="material-icons">arrow_back</span>
     </button>
-    <h1 class="header-title">Zoomリンク一覧</h1>
+    <h1 class="header-title">
+      <span class="material-icons">videocam</span>
+      Zoomリンク一覧
+    </h1>
   </header>
+
   <!-- ハンバーガーボタン -->
   <button class="hamburger-btn" onclick="openNav()">
     <span class="material-icons">menu</span>
@@ -607,7 +708,6 @@
     </div>
   </div>
 
-
   <div class="container">
     <!-- ローディング -->
     <div id="loadingArea" class="loading">
@@ -617,37 +717,57 @@
 
     <!-- メインコンテンツ -->
     <div id="contentArea" style="display: none;">
+      <!-- 検索ボックス -->
+      <div class="search-section">
+        <div class="search-box">
+          <span class="material-icons search-icon">search</span>
+          <input type="text" id="searchInput" class="search-input" placeholder="講師名で検索（カタカナ）...">
+          <button id="searchClear" class="search-clear" onclick="clearSearch()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 説明文 -->
       <div class="page-desc">
-        <span class="material-icons">videocam</span>
+        <div class="page-desc-icon">
+          <span class="material-icons">videocam</span>
+        </div>
         <div class="page-desc-text">授業の際は、担当講師のZoomリンクからご参加ください。</div>
       </div>
 
-      <div id="staffList" class="staff-list"></div>
-    </div>
-
-    <!-- ログインフォーム -->
-    <div id="loginArea" style="display: none;">
-      <div class="login-box">
-        <div class="login-icon">
-          <span class="material-icons">lock</span>
+      <!-- 注意書き（折りたたみ） -->
+      <div class="tips-section" id="tipsSection">
+        <div class="tips-header" onclick="toggleTips()">
+          <span class="material-icons">help_outline</span>
+          <span>Zoomに入れない場合は？</span>
+          <span class="material-icons tips-toggle">expand_more</span>
         </div>
-        <h2 class="login-title">ログイン</h2>
-        <p class="login-subtitle">生徒番号とパスワードを入力してください</p>
-        
-        <div id="loginError" class="error-message" style="display: none;"></div>
-        
-        <div class="form-group">
-          <label class="form-label">生徒番号</label>
-          <input type="text" id="studentIdInput" class="form-input" placeholder="例：0001">
+        <div class="tips-content">
+          <div class="tips-item">
+            <span class="material-icons">content_paste</span>
+            <span>パスワードをコピペする際、<strong>全角文字</strong>や<strong>余分なスペース</strong>が入っていませんか？半角英数字のみで入力してください。</span>
+          </div>
+          <div class="tips-item">
+            <span class="material-icons">space_bar</span>
+            <span>コピー時に<strong>前後にスペース</strong>が含まれることがあります。ペースト後、不要なスペースを削除してください。</span>
+          </div>
+          <div class="tips-item">
+            <span class="material-icons">keyboard</span>
+            <span>うまくいかない場合は、<strong>手入力</strong>でパスワードを打ち込んでみてください。</span>
+          </div>
+          <div class="tips-item">
+            <span class="material-icons">refresh</span>
+            <span>それでも入れない場合は、Zoomアプリを<strong>最新版にアップデート</strong>してから再度お試しください。</span>
+          </div>
         </div>
-        
-        <div class="form-group">
-          <label class="form-label">パスワード</label>
-          <input type="password" id="passwordInput" class="form-input" placeholder="パスワード" onkeypress="if(event.key==='Enter')login()">
-        </div>
-        
-        <button class="login-btn" onclick="login()">ログイン</button>
       </div>
+
+      <!-- 検索結果カウント -->
+      <div id="resultCount" class="result-count"></div>
+
+      <!-- スタッフリスト -->
+      <div id="staffList" class="staff-list"></div>
     </div>
   </div>
 
@@ -656,6 +776,8 @@
     // API設定
     // ============================================
     const API_URL = 'https://script.google.com/macros/s/AKfycbzCFkkw6h6o0iFwObPILE-VCYfjRP1ikmMWOl6DgqIaqIRi657vQIKkjSKuRVTaWJzG/exec';
+
+    let allStaffData = [];
 
     async function apiGet(action, params = {}) {
       const url = new URL(API_URL);
@@ -673,18 +795,6 @@
       return await response.json();
     }
 
-    async function apiPost(action, data = {}) {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action, ...data })
-      });
-      if (!response.ok) {
-        throw new Error('API Error: ' + response.status);
-      }
-      return await response.json();
-    }
-
     // 戻るボタン
     function goBack() {
       window.location.href = 'index.html?t=' + new Date().getTime();
@@ -692,6 +802,25 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       checkLoginStatus();
+
+      // 検索イベント
+      const searchInput = document.getElementById('searchInput');
+      let searchTimeout;
+      searchInput.addEventListener('input', function(e) {
+        clearTimeout(searchTimeout);
+        
+        // クリアボタンの表示
+        const clearBtn = document.getElementById('searchClear');
+        if (e.target.value.trim()) {
+          clearBtn.classList.add('show');
+        } else {
+          clearBtn.classList.remove('show');
+        }
+        
+        searchTimeout = setTimeout(function() {
+          filterStaff(e.target.value);
+        }, 200);
+      });
     });
 
     function checkLoginStatus() {
@@ -702,7 +831,6 @@
         setNavUserName();
         loadZoomLinks();
       } else {
-        // 未ログインならindex.htmlへリダイレクト
         window.location.href = 'index.html';
       }
     }
@@ -710,33 +838,75 @@
     async function loadZoomLinks() {
       try {
         const data = await apiGet('getZoomLinks');
-        displayZoomLinks(data);
+        allStaffData = data || [];
+        displayZoomLinks(allStaffData, '');
       } catch (error) {
         handleError(error);
       }
     }
 
-    function displayZoomLinks(data) {
+    function filterStaff(query) {
+      const trimmedQuery = query.trim();
+      
+      if (!trimmedQuery) {
+        displayZoomLinks(allStaffData, '');
+        return;
+      }
+
+      // カタカナ・ひらがな両対応（カタカナに変換して検索）
+      const normalizedQuery = toKatakana(trimmedQuery);
+      
+      const filtered = allStaffData.filter(function(staff) {
+        const normalizedName = toKatakana(staff.name);
+        return normalizedName.includes(normalizedQuery);
+      });
+      
+      displayZoomLinks(filtered, trimmedQuery);
+    }
+
+    // ひらがな→カタカナ変換
+    function toKatakana(str) {
+      return str.replace(/[\u3041-\u3096]/g, function(match) {
+        return String.fromCharCode(match.charCodeAt(0) + 0x60);
+      });
+    }
+
+    function displayZoomLinks(data, searchQuery) {
       document.getElementById('loadingArea').style.display = 'none';
       document.getElementById('contentArea').style.display = 'block';
 
       const staffList = document.getElementById('staffList');
+      const resultCount = document.getElementById('resultCount');
+
+      // 検索結果カウント表示
+      if (searchQuery) {
+        resultCount.textContent = '「' + searchQuery + '」の検索結果: ' + data.length + '件';
+      } else {
+        resultCount.textContent = '全' + allStaffData.length + '名の講師';
+      }
 
       if (!data || data.length === 0) {
         staffList.innerHTML = `
           <div class="no-results">
-            <span class="material-icons">videocam_off</span>
-            <p>Zoomリンクが登録されていません</p>
+            <span class="material-icons">search_off</span>
+            <p>該当する講師が見つかりませんでした</p>
           </div>
         `;
         return;
       }
 
       let html = '';
-      data.forEach(staff => {
+      data.forEach(function(staff) {
         // zoomリンクをB列から抽出（最初のURLを取得）
         const urlMatch = staff.info.match(/(https?:\/\/[^\s]+)/);
         const zoomUrl = urlMatch ? urlMatch[1] : '#';
+
+        // 検索キーワードをハイライト
+        let displayName = escapeHtml(staff.name);
+        if (searchQuery) {
+          const regex = new RegExp('(' + escapeRegex(searchQuery) + ')', 'gi');
+          displayName = displayName.replace(regex, '<span class="highlight">$1</span>');
+        }
 
         html += `
           <div class="staff-card">
@@ -744,7 +914,7 @@
               <div class="staff-avatar">
                 <span class="material-icons">person</span>
               </div>
-              <div class="staff-name">${escapeHtml(staff.name)}</div>
+              <div class="staff-name">${displayName}</div>
             </div>
             <div class="zoom-info">${escapeHtml(staff.info)}</div>
             <a href="${escapeHtml(zoomUrl)}" target="_blank" class="zoom-btn">
@@ -758,10 +928,21 @@
       staffList.innerHTML = html;
     }
 
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('searchClear').classList.remove('show');
+      displayZoomLinks(allStaffData, '');
+    }
+
+    // 注意書き折りたたみ
+    function toggleTips() {
+      document.getElementById('tipsSection').classList.toggle('expanded');
+    }
+
     function handleError(error) {
       console.error(error);
       document.getElementById('loadingArea').innerHTML = 
-        '<p style="color: #e53935;">データの読み込みに失敗しました</p>';
+        '<p style="color: rgba(255,255,255,0.9);">データの読み込みに失敗しました</p>';
     }
 
     function escapeHtml(text) {
@@ -769,6 +950,10 @@
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
+    }
+
+    function escapeRegex(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
   
     // ハンバーガーメニュー
@@ -801,7 +986,6 @@
         navUserName.textContent = studentName || '';
       }
     }
-
   </script>
 </body>
 </html>
