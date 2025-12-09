@@ -1414,19 +1414,25 @@
       font-size: 16px;
     }
 
-    .school-action-btn.order-btn {
-      background: #E0E0E0;
-      color: #666;
-      padding: 6px 8px;
+    .school-rank-select {
+      padding: 8px 12px;
+      border: 2px solid #00897B;
+      border-radius: 8px;
+      background: white;
+      color: #00897B;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
     }
 
-    .school-action-btn.order-btn:hover {
-      background: #BDBDBD;
+    .school-rank-select:hover {
+      background: #E0F2F1;
     }
 
-    .school-action-btn.order-btn:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
+    .school-rank-select:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0,137,123,0.2);
     }
 
     .school-action-btn.edit-btn {
@@ -3144,8 +3150,12 @@
         return;
       }
       
-      const isFirst = selectedSchoolIndex === 0;
-      const isLast = selectedSchoolIndex === schools.length - 1;
+      // 順位ドロップダウンのオプションを生成
+      let rankOptions = '';
+      for (let i = 0; i < schools.length; i++) {
+        const selected = i === selectedSchoolIndex ? 'selected' : '';
+        rankOptions += `<option value="${i}" ${selected}>第${i + 1}志望</option>`;
+      }
       
       let html = `
         <div class="school-detail-header">
@@ -3159,12 +3169,9 @@
             </div>
           </div>
           <div class="school-detail-actions">
-            <button class="school-action-btn order-btn" onclick="moveSchool(-1)" ${isFirst ? 'disabled' : ''}>
-              <span class="material-icons">arrow_upward</span>
-            </button>
-            <button class="school-action-btn order-btn" onclick="moveSchool(1)" ${isLast ? 'disabled' : ''}>
-              <span class="material-icons">arrow_downward</span>
-            </button>
+            <select class="school-rank-select" onchange="changeSchoolRank(${selectedSchoolIndex}, this.value)">
+              ${rankOptions}
+            </select>
             <button class="school-action-btn edit-btn" onclick="editSchool(${selectedSchoolIndex})">
               <span class="material-icons">edit</span>
               編集
@@ -3280,16 +3287,16 @@
     }
 
     // 志望校を上下に移動
-    async function moveSchool(direction) {
-      const newIndex = selectedSchoolIndex + direction;
-      if (newIndex < 0 || newIndex >= schools.length) return;
+    // 志望順位を変更
+    async function changeSchoolRank(fromIndex, toIndex) {
+      toIndex = parseInt(toIndex);
+      if (fromIndex === toIndex) return;
       
-      // 配列内で入れ替え
-      const temp = schools[selectedSchoolIndex];
-      schools[selectedSchoolIndex] = schools[newIndex];
-      schools[newIndex] = temp;
+      // 配列から要素を取り出して新しい位置に挿入
+      const school = schools.splice(fromIndex, 1)[0];
+      schools.splice(toIndex, 0, school);
       
-      selectedSchoolIndex = newIndex;
+      selectedSchoolIndex = toIndex;
       renderSchoolTabs();
       
       // APIに保存
