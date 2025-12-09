@@ -18,13 +18,13 @@
     }
 
     .header {
-      background: linear-gradient(135deg, #00897B 0%, #00ACC1 100%);
+      background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
       color: white;
       padding: 12px 16px;
       display: flex;
       align-items: center;
       gap: 12px;
-      box-shadow: 0 4px 20px rgba(0, 137, 123, 0.3);
+      box-shadow: 0 4px 20px rgba(0, 105, 92, 0.4);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -69,23 +69,23 @@
     }
 
     .section-header {
-      background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%);
+      background: linear-gradient(135deg, #B2DFDB 0%, #80CBC4 100%);
       padding: 12px 16px;
       display: flex;
       align-items: center;
       gap: 8px;
-      border-bottom: 2px solid #00897B;
+      border-bottom: 2px solid #00695C;
     }
 
     .section-header .material-icons {
-      color: #00897B;
+      color: #00695C;
       font-size: 20px;
     }
 
     .section-title {
       font-size: 15px;
       font-weight: 700;
-      color: #00695C;
+      color: #004D40;
     }
 
     .section-content {
@@ -103,9 +103,9 @@
       flex: 1;
       max-width: 100px;
       padding: 8px 12px;
-      border: 2px solid #FF6B6B;
+      border: 2px solid #E05555;
       background: white;
-      color: #FF6B6B;
+      color: #E05555;
       font-size: 13px;
       font-weight: 700;
       border-radius: 8px;
@@ -114,14 +114,14 @@
     }
 
     .grade-btn.active {
-      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+      background: linear-gradient(135deg, #E05555 0%, #FF6B6B 100%);
       color: white;
-      border-color: #FF6B6B;
-      box-shadow: 0 3px 10px rgba(255, 107, 107, 0.4);
+      border-color: #E05555;
+      box-shadow: 0 3px 10px rgba(224, 85, 85, 0.4);
     }
 
     .grade-btn:hover:not(.active) {
-      background: #FFF0F0;
+      background: #FFEBEE;
     }
 
     /* ガントチャート */
@@ -151,7 +151,7 @@
       padding: 6px 8px;
       font-size: 10px;
       font-weight: 700;
-      color: #666;
+      color: #004D40;
     }
 
     .gantt-months {
@@ -166,29 +166,29 @@
       padding: 6px 4px;
       font-size: 11px;
       font-weight: 600;
-      color: #00695C;
-      background: #E0F2F1;
-      border-left: 1px solid #B2DFDB;
+      color: #004D40;
+      background: #B2DFDB;
+      border-left: 1px solid #80CBC4;
       cursor: pointer;
       transition: all 0.2s;
       user-select: none;
     }
 
     .gantt-month:hover {
-      background: #B2DFDB;
-      color: #00695C;
+      background: #80CBC4;
+      color: #004D40;
     }
 
     .gantt-month.selected {
-      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+      background: linear-gradient(135deg, #E05555 0%, #FF6B6B 100%);
       color: white;
       font-weight: 700;
-      box-shadow: 0 2px 6px rgba(255, 107, 107, 0.4);
+      box-shadow: 0 2px 6px rgba(224, 85, 85, 0.4);
     }
 
     .gantt-month.current {
-      background: #FFF3E0;
-      color: #F57C00;
+      background: #FFE0B2;
+      color: #E65100;
       font-weight: 700;
       position: relative;
     }
@@ -197,7 +197,7 @@
       content: '';
       width: 4px;
       height: 4px;
-      background: #F57C00;
+      background: #E65100;
       border-radius: 50%;
       position: absolute;
       bottom: 2px;
@@ -206,11 +206,11 @@
     }
 
     .gantt-month.current:hover {
-      background: #FFE0B2;
+      background: #FFCC80;
     }
 
     .gantt-month.current.selected {
-      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+      background: linear-gradient(135deg, #E05555 0%, #FF6B6B 100%);
       color: white;
     }
 
@@ -231,7 +231,7 @@
       padding: 4px 8px;
       font-size: 11px;
       font-weight: 600;
-      color: #333;
+      color: #004D40;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -255,7 +255,7 @@
       flex: 1;
       min-width: 50px;
       height: 100%;
-      border-left: 1px solid #f0f0f0;
+      border-left: 1px solid #B2DFDB;
       position: relative;
     }
 
@@ -267,24 +267,24 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.15);
     }
 
-    /* カテゴリ色 - ポップ配色 */
-    .color-blue { background: linear-gradient(135deg, #5C6BC0 0%, #7986CB 100%); }
-    .color-green { background: linear-gradient(135deg, #26A69A 0%, #4DB6AC 100%); }
-    .color-yellow { background: linear-gradient(135deg, #FFCA28 0%, #FFD54F 100%); }
-    .color-orange { background: linear-gradient(135deg, #FF7043 0%, #FF8A65 100%); }
-    .color-purple { background: linear-gradient(135deg, #AB47BC 0%, #CE93D8 100%); }
-    .color-cyan { background: linear-gradient(135deg, #26C6DA 0%, #4DD0E1 100%); }
-    .color-red { background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%); }
-    .color-gray { background: linear-gradient(135deg, #78909C 0%, #90A4AE 100%); }
+    /* カテゴリ色 - ポップ配色（濃いめ） */
+    .color-blue { background: linear-gradient(135deg, #3F51B5 0%, #5C6BC0 100%); }
+    .color-green { background: linear-gradient(135deg, #00897B 0%, #26A69A 100%); }
+    .color-yellow { background: linear-gradient(135deg, #FFA000 0%, #FFB300 100%); }
+    .color-orange { background: linear-gradient(135deg, #F4511E 0%, #FF7043 100%); }
+    .color-purple { background: linear-gradient(135deg, #8E24AA 0%, #AB47BC 100%); }
+    .color-cyan { background: linear-gradient(135deg, #00ACC1 0%, #26C6DA 100%); }
+    .color-red { background: linear-gradient(135deg, #E05555 0%, #FF6B6B 100%); }
+    .color-gray { background: linear-gradient(135deg, #546E7A 0%, #78909C 100%); }
 
-    .bg-blue { background: #5C6BC0; }
-    .bg-green { background: #26A69A; }
-    .bg-yellow { background: #FFCA28; }
-    .bg-orange { background: #FF7043; }
-    .bg-purple { background: #AB47BC; }
-    .bg-cyan { background: #26C6DA; }
-    .bg-red { background: #FF6B6B; }
-    .bg-gray { background: #78909C; }
+    .bg-blue { background: #3F51B5; }
+    .bg-green { background: #00897B; }
+    .bg-yellow { background: #FFA000; }
+    .bg-orange { background: #F4511E; }
+    .bg-purple { background: #8E24AA; }
+    .bg-cyan { background: #00ACC1; }
+    .bg-red { background: #E05555; }
+    .bg-gray { background: #546E7A; }
 
     /* 凡例とヒントの行 */
     .legend-row {
@@ -294,7 +294,7 @@
       gap: 12px;
       margin-top: 12px;
       padding-top: 12px;
-      border-top: 1px solid #e0e0e0;
+      border-top: 1px solid #80CBC4;
       flex-wrap: wrap;
     }
 
@@ -311,7 +311,7 @@
       align-items: center;
       gap: 5px;
       font-size: 10px;
-      color: #555;
+      color: #333;
     }
 
     .legend-color {
@@ -327,11 +327,11 @@
       align-items: center;
       gap: 4px;
       padding: 4px 10px;
-      background: #FFF0F0;
-      border: 1px solid #FFCDD2;
+      background: #FFEBEE;
+      border: 1px solid #E05555;
       border-radius: 20px;
       font-size: 10px;
-      color: #FF6B6B;
+      color: #C62828;
       font-weight: 500;
     }
 
@@ -341,7 +341,7 @@
 
     /* 月詳細カード */
     .month-detail {
-      background: linear-gradient(135deg, #E8F5F3 0%, #E0F2F1 100%);
+      background: linear-gradient(135deg, #B2DFDB 0%, #80CBC4 100%);
       border-radius: 12px;
       padding: 16px;
       margin-top: 16px;
@@ -366,36 +366,36 @@
     }
 
     .month-badge {
-      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+      background: linear-gradient(135deg, #E05555 0%, #FF6B6B 100%);
       color: white;
       padding: 6px 14px;
       border-radius: 20px;
       font-size: 13px;
       font-weight: 700;
-      box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+      box-shadow: 0 2px 8px rgba(224, 85, 85, 0.4);
     }
 
     .month-title {
       font-size: 15px;
       font-weight: 700;
-      color: #333;
+      color: #004D40;
     }
 
     .month-description {
       font-size: 13px;
-      color: #555;
+      color: #333;
       line-height: 1.7;
       margin-bottom: 14px;
       padding: 12px 14px;
       background: white;
       border-radius: 8px;
-      border-left: 4px solid #26A69A;
+      border-left: 4px solid #00695C;
     }
 
     .month-tasks-title {
       font-size: 13px;
       font-weight: 700;
-      color: #00897B;
+      color: #00695C;
       margin-bottom: 10px;
       display: flex;
       align-items: center;
@@ -421,7 +421,7 @@
     }
 
     .month-task-item .material-icons {
-      color: #26A69A;
+      color: #00897B;
       font-size: 18px;
       flex-shrink: 0;
       margin-top: 1px;
@@ -437,7 +437,7 @@
 
     .selected-month-label {
       font-size: 14px;
-      color: #00897B;
+      color: #00695C;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -455,20 +455,20 @@
       align-items: center;
       gap: 12px;
       padding: 14px 16px;
-      background: #E8F5F3;
+      background: #B2DFDB;
       border-radius: 10px;
       transition: background 0.2s;
     }
 
     .todo-item:hover {
-      background: #B2DFDB;
+      background: #80CBC4;
     }
 
     .todo-checkbox {
       width: 22px;
       height: 22px;
       cursor: pointer;
-      accent-color: #FF6B6B;
+      accent-color: #E05555;
     }
 
     .todo-text {
@@ -479,13 +479,13 @@
 
     .todo-text.completed {
       text-decoration: line-through;
-      color: #999;
+      color: #666;
     }
 
     .todo-empty {
       text-align: center;
       padding: 30px 20px;
-      color: #80CBC4;
+      color: #00897B;
       font-size: 14px;
     }
 
@@ -497,7 +497,7 @@
 
     /* 進捗バー */
     .progress-section {
-      background: #E0F2F1;
+      background: #B2DFDB;
       border-radius: 12px;
       padding: 16px;
       margin-top: 16px;
@@ -508,19 +508,19 @@
       justify-content: space-between;
       margin-bottom: 8px;
       font-size: 13px;
-      color: #555;
+      color: #004D40;
     }
 
     .progress-bar-bg {
       height: 12px;
-      background: #B2DFDB;
+      background: #80CBC4;
       border-radius: 6px;
       overflow: hidden;
     }
 
     .progress-bar {
       height: 100%;
-      background: linear-gradient(90deg, #FF6B6B, #FF8E8E);
+      background: linear-gradient(90deg, #E05555, #FF6B6B);
       border-radius: 6px;
       transition: width 0.5s ease;
     }
@@ -532,11 +532,11 @@
       justify-content: center;
       gap: 4px;
       padding: 6px;
-      background: #E0F2F1;
+      background: #B2DFDB;
       border-radius: 6px;
       margin-bottom: 8px;
       font-size: 11px;
-      color: #00897B;
+      color: #004D40;
     }
 
     .scroll-hint .material-icons {
@@ -560,12 +560,12 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: linear-gradient(135deg, #00897B 0%, #00ACC1 100%);
+      background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
       border: none;
       border-radius: 50%;
       color: white;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
 
     .hamburger-btn .material-icons {
@@ -606,7 +606,7 @@
     .nav-menu.open { right: 0; }
 
     .nav-header {
-      background: linear-gradient(135deg, #00897B 0%, #00ACC1 100%);
+      background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
       color: white;
       padding: 20px 16px;
       display: flex;
@@ -637,7 +637,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: linear-gradient(135deg, #00897B 0%, #26A69A 100%);
+      background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
     }
 
     .nav-user-info {
@@ -697,7 +697,7 @@
 
     .nav-item .material-icons {
       font-size: 22px;
-      color: #00897B;
+      color: #00695C;
     }
 
     .nav-item span {
@@ -724,8 +724,8 @@
     .loading-spinner {
       width: 40px;
       height: 40px;
-      border: 3px solid #B2DFDB;
-      border-top-color: #00897B;
+      border: 3px solid #80CBC4;
+      border-top-color: #00695C;
       border-radius: 50%;
       animation: spin 1s linear infinite;
       margin: 0 auto 16px;
