@@ -61,6 +61,151 @@
       flex: 1;
     }
 
+    .header-user {
+      font-size: 12px;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .header-user .material-icons {
+      font-size: 16px;
+    }
+
+    /* ハンバーガーメニュー */
+    .menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .menu-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .nav-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      max-width: 85%;
+      height: 100%;
+      background: white;
+      z-index: 201;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+    }
+
+    .nav-menu.active {
+      right: 0;
+    }
+
+    .nav-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 24px 20px;
+    }
+
+    .nav-header-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .nav-header-subtitle {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .nav-section {
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav-section-title {
+      font-size: 11px;
+      color: #888;
+      padding: 8px 20px;
+      font-weight: 500;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      color: #333;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-item:hover {
+      background: #f5f5f5;
+    }
+
+    .nav-item .material-icons {
+      font-size: 22px;
+      color: #1a237e;
+    }
+
+    .nav-item-text {
+      font-size: 14px;
+    }
+
+    .nav-item.disabled {
+      color: #bbb;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .nav-item.disabled .material-icons {
+      color: #ccc;
+    }
+
+    .nav-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .container {
       max-width: 800px;
       margin: 0 auto;
@@ -86,6 +231,47 @@
 
     @keyframes spin {
       to { transform: rotate(360deg); }
+    }
+
+    .loading-message {
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    /* 同期ステータス */
+    .sync-status {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #333;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .sync-status.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .sync-status.success {
+      background: #4caf50;
+    }
+
+    .sync-status.error {
+      background: #f44336;
+    }
+
+    .sync-status .material-icons {
+      font-size: 18px;
     }
 
     /* 全体進捗 */
@@ -340,310 +526,6 @@
       color: #ccc;
       flex-shrink: 0;
     }
-
-    /* ログインフォーム */
-    .form-box {
-      background: white;
-      border-radius: 20px;
-      padding: 32px 24px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .form-icon {
-      width: 64px;
-      height: 64px;
-      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 16px;
-    }
-
-    .form-icon .material-icons {
-      font-size: 32px;
-      color: white;
-    }
-
-    .form-title {
-      font-size: 20px;
-      color: #1a237e;
-      margin-bottom: 8px;
-    }
-
-    .form-subtitle {
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 24px;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-      text-align: left;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 6px;
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 12px 14px;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
-      font-size: 15px;
-      font-family: inherit;
-      transition: border-color 0.3s;
-    }
-
-    .form-input:focus {
-      outline: none;
-      border-color: #1a237e;
-    }
-
-    .form-btn {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 8px;
-    }
-
-    .form-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .error-message {
-      background: #ffebee;
-      color: #c62828;
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      margin-bottom: 16px;
-      text-align: left;
-    }
-
-    /* レスポンシブ */
-    @media (max-width: 480px) {
-      .header-title {
-        font-size: 16px;
-      }
-      .total-progress-percent {
-        font-size: 28px;
-      }
-    }
-
-    /* ハンバーガーメニュー */
-    .hamburger-btn {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-      border: none;
-      border-radius: 50%;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-
-    .nav-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 200;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .nav-overlay.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .nav-menu {
-      position: fixed;
-      top: 0;
-      right: -300px;
-      width: 280px;
-      height: 100%;
-      background: white;
-      z-index: 201;
-      transition: right 0.3s ease;
-      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
-      overflow-y: auto;
-    }
-
-    .nav-menu.open {
-      right: 0;
-    }
-
-    .nav-header {
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-      color: white;
-      padding: 20px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-header-title {
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .nav-user-section {
-      padding: 16px 20px;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: linear-gradient(135deg, #283593 0%, #3949ab 100%);
-    }
-
-    .nav-user-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: white;
-    }
-
-    .nav-user-info .material-icons {
-      font-size: 24px;
-      color: rgba(255,255,255,0.7);
-    }
-
-    .nav-user-name {
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .nav-logout-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 12px;
-      background: rgba(255,255,255,0.15);
-      border: none;
-      border-radius: 8px;
-      color: rgba(255,255,255,0.9);
-      font-size: 12px;
-      cursor: pointer;
-      transition: background 0.2s;
-      font-family: inherit;
-    }
-
-    .nav-logout-btn:hover {
-      background: rgba(255,255,255,0.25);
-    }
-
-    .nav-logout-btn .material-icons {
-      font-size: 16px;
-    }
-
-    .nav-close {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      background: rgba(255,255,255,0.15);
-      border: none;
-      border-radius: 50%;
-      color: white;
-      cursor: pointer;
-    }
-
-    .nav-category {
-      font-size: 11px;
-      font-weight: 700;
-      color: #999;
-      padding: 16px 16px 8px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .nav-section {
-      padding: 4px 0;
-      border-bottom: 1px solid #eee;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      color: #333;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-
-    .nav-item:hover {
-      background: #f5f5f5;
-    }
-
-    .nav-item .material-icons {
-      font-size: 22px;
-      color: #1a237e;
-    }
-
-    .nav-item span {
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .nav-badge {
-      background: #ff5722;
-      color: white;
-      font-size: 9px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-left: auto;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .nav-badge-wip {
-      background: #9e9e9e;
-      color: white;
-      font-size: 9px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-left: auto;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .nav-item.disabled {
-      color: #bbb;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
-    .nav-item.disabled .material-icons {
-      color: #ccc;
-    }
-
   </style>
 </head>
 <body>
@@ -651,251 +533,197 @@
     <button class="back-btn" onclick="goBack()">
       <span class="material-icons">arrow_back</span>
     </button>
-    <h1 id="headerTitle" class="header-title">チェックリスト</h1>
+    <div class="header-title" id="headerTitle">チェックリスト</div>
+    <div class="header-user" id="headerUser">
+      <span class="material-icons">person</span>
+      <span id="navUserName"></span>
+    </div>
+    <button class="menu-btn" onclick="toggleMenu()">
+      <span class="material-icons">menu</span>
+    </button>
   </header>
-  <!-- ハンバーガーボタン -->
-  <button class="hamburger-btn" onclick="openNav()">
-    <span class="material-icons">menu</span>
-  </button>
-
-  <!-- ナビゲーションオーバーレイ -->
-  <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
 
   <!-- ナビゲーションメニュー -->
-  <div id="navMenu" class="nav-menu">
+  <div class="nav-overlay" id="navOverlay" onclick="toggleMenu()"></div>
+  <nav class="nav-menu" id="navMenu">
+    <button class="nav-close" onclick="toggleMenu()">
+      <span class="material-icons">close</span>
+    </button>
     <div class="nav-header">
-      <span class="nav-header-title">メニュー</span>
-      <button class="nav-close" onclick="closeNav()">
-        <span class="material-icons">close</span>
-      </button>
+      <div class="nav-header-title">EQAO PORTAL</div>
+      <div class="nav-header-subtitle" id="navHeaderUser">メニュー</div>
     </div>
-
-    <div class="nav-user-section">
-      <div class="nav-user-info">
-        <span class="material-icons">person</span>
-        <span id="navUserName" class="nav-user-name"></span>
-      </div>
-      <button class="nav-logout-btn" onclick="doLogout()">
-        <span class="material-icons">logout</span>
-        <span>ログアウト</span>
-      </button>
-    </div>
-
+    
     <div class="nav-section">
       <a href="index.html" class="nav-item">
         <span class="material-icons">home</span>
-        <span>ホーム</span>
+        <span class="nav-item-text">ホーム</span>
       </a>
     </div>
 
-    <div class="nav-category">スケジュール</div>
     <div class="nav-section">
-      <a href="yearly-schedule.html" class="nav-item">
-        <span class="material-icons">calendar_month</span>
-        <span>年間スケジュール</span>
+      <div class="nav-section-title">スケジュール</div>
+      <a href="schedule.html" class="nav-item">
+        <span class="material-icons">event</span>
+        <span class="nav-item-text">授業スケジュール</span>
       </a>
       <a href="exam-schedule.html" class="nav-item">
         <span class="material-icons">school</span>
-        <span>受験スケジュール</span>
+        <span class="nav-item-text">受験スケジュール</span>
       </a>
-      <a href="schedule.html" class="nav-item">
-        <span class="material-icons">event_note</span>
-        <span>授業スケジュール</span>
+      <a href="yearly-schedule.html" class="nav-item">
+        <span class="material-icons">calendar_month</span>
+        <span class="nav-item-text">年間スケジュール</span>
       </a>
     </div>
 
-    <div class="nav-category">チェックリスト一覧</div>
     <div class="nav-section">
+      <div class="nav-section-title">チェックリスト</div>
       <a href="checklist.html" class="nav-item">
         <span class="material-icons">checklist</span>
-        <span>チェックリスト教材</span>
+        <span class="nav-item-text">チェックリスト</span>
       </a>
-      <span class="nav-item disabled">
-        <span class="material-icons">trending_up</span>
-        <span>自己/進捗管理シート</span>
-      </span>
-      <span class="nav-item disabled">
-        <span class="material-icons">location_city</span>
-        <span>志望校/併願校管理シート</span>
-      </span>
+      <a href="#" class="nav-item disabled">
+        <span class="material-icons">assessment</span>
+        <span class="nav-item-text">自己/進捗管理シート</span>
+      </a>
+      <a href="#" class="nav-item disabled">
+        <span class="material-icons">format_list_bulleted</span>
+        <span class="nav-item-text">志望校/併願校管理シート</span>
+      </a>
     </div>
 
-    <div class="nav-category">教材</div>
     <div class="nav-section">
-      <span class="nav-item disabled">
+      <div class="nav-section-title">教材</div>
+      <a href="#" class="nav-item disabled">
         <span class="material-icons">play_circle</span>
-        <span>動画教材一覧</span>
-      </span>
-      <span class="nav-item disabled">
+        <span class="nav-item-text">動画教材一覧</span>
+      </a>
+      <a href="#" class="nav-item disabled">
         <span class="material-icons">folder_shared</span>
-        <span>生徒共通教材一覧</span>
-      </span>
-      <span class="nav-item disabled">
+        <span class="nav-item-text">生徒共通教材一覧</span>
+      </a>
+      <a href="#" class="nav-item disabled">
         <span class="material-icons">description</span>
-        <span>授業書類一覧</span>
-      </span>
+        <span class="nav-item-text">授業書類一覧</span>
+      </a>
     </div>
 
-    <div class="nav-category">コンテンツ</div>
     <div class="nav-section">
+      <div class="nav-section-title">コンテンツ</div>
+      <a href="column.html" class="nav-item">
+        <span class="material-icons">auto_stories</span>
+        <span class="nav-item-text">コラム一覧</span>
+      </a>
+      <a href="#" class="nav-item disabled">
+        <span class="material-icons">hub</span>
+        <span class="nav-item-text">生徒プラットフォーム</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">イベント申し込み</div>
+      <a href="mcff.html" class="nav-item">
+        <span class="material-icons">campaign</span>
+        <span class="nav-item-text">MCFF</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">各種申し込み</div>
+      <a href="#" class="nav-item disabled">
+        <span class="material-icons">edit_calendar</span>
+        <span class="nav-item-text">スケジュールフォーム</span>
+      </a>
+      <a href="forms.html" class="nav-item">
+        <span class="material-icons">add_circle</span>
+        <span class="nav-item-text">授業追加フォーム</span>
+      </a>
       <a href="videos.html" class="nav-item">
         <span class="material-icons">video_library</span>
-        <span>過去の集団授業動画</span>
-      </a>
-      <span class="nav-item disabled">
-        <span class="material-icons">dashboard</span>
-        <span>生徒プラットフォーム</span>
-      </span>
-      <a href="column.html" class="nav-item">
-        <span class="material-icons">article</span>
-        <span>コラム一覧</span>
+        <span class="nav-item-text">動画視聴報告フォーム</span>
       </a>
     </div>
 
-    <div class="nav-category">イベント申し込み</div>
     <div class="nav-section">
-      <a href="https://forms.gle/1ihZxscRHMVmypFq9" target="_blank" class="nav-item">
-        <span class="material-icons">quiz</span>
-        <span>EQAO模試申し込み</span>
-      </a>
-      <a href="mcff.html" class="nav-item">
-        <span class="material-icons">mic</span>
-        <span>MCFF申し込み</span>
-      </a>
-      <a href="https://forms.gle/HnXY4omVvs2haCKM6" target="_blank" class="nav-item">
-        <span class="material-icons">celebration</span>
-        <span>EQAO PARTY</span>
-      </a>
-    </div>
-
-    <div class="nav-category">各種申し込み</div>
-    <div class="nav-section">
-      <a href="forms.html" class="nav-item">
-        <span class="material-icons">list_alt</span>
-        <span>各種申し込みフォーム一覧</span>
-      </a>
-      <span class="nav-item disabled">
-        <span class="material-icons">edit_calendar</span>
-        <span>スケジュールフォーム</span>
-      </span>
-      <a href="https://forms.gle/89pDvpSBRXiNnpPG9" target="_blank" class="nav-item">
-        <span class="material-icons">swap_horiz</span>
-        <span>授業振替フォーム</span>
-      </a>
-    </div>
-
-    <div class="nav-category">追加対策申し込み</div>
-    <div class="nav-section">
-      <a href="https://forms.gle/aCu1VwgJjLhAQtDQ7" target="_blank" class="nav-item">
-        <span class="material-icons">add_box</span>
-        <span>授業コマ追加フォーム</span>
-      </a>
-      <a href="https://forms.gle/jYZz42KbFSMmJCMi6" target="_blank" class="nav-item">
-        <span class="material-icons">library_add</span>
-        <span>コース追加フォーム</span>
-      </a>
-      <span class="nav-item disabled">
+      <div class="nav-section-title">追加対策</div>
+      <a href="#" class="nav-item disabled">
         <span class="material-icons">menu_book</span>
-        <span>課題図書対策追加フォーム</span>
-      </span>
-    </div>
-
-    <div class="nav-category">プログラム申し込み</div>
-    <div class="nav-section">
-      <span class="nav-item disabled">
-        <span class="material-icons">camping</span>
-        <span>EQAO CAMP</span>
-      </span>
-      <span class="nav-item disabled">
-        <span class="material-icons">flight</span>
-        <span>EQAO STUDY TOUR</span>
-      </span>
-      <span class="nav-item disabled">
-        <span class="material-icons">volunteer_activism</span>
-        <span>EQAO VOLUNTEER</span>
-      </span>
-    </div>
-
-    <div class="nav-category">面談申し込み</div>
-    <div class="nav-section">
-      <a href="meeting-principal.html" class="nav-item">
-        <span class="material-icons">person</span>
-        <span>塾長面談</span>
+        <span class="nav-item-text">課題図書対策追加フォーム</span>
       </a>
-      <a href="meeting-sansya.html" class="nav-item">
-        <span class="material-icons">group</span>
-        <span>三者面談</span>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">プログラム</div>
+      <a href="#" class="nav-item disabled">
+        <span class="material-icons">cottage</span>
+        <span class="nav-item-text">EQAO CAMP</span>
+      </a>
+      <a href="#" class="nav-item disabled">
+        <span class="material-icons">flight</span>
+        <span class="nav-item-text">EQAO STUDY TOUR</span>
+      </a>
+      <a href="#" class="nav-item disabled">
+        <span class="material-icons">volunteer_activism</span>
+        <span class="nav-item-text">EQAO VOLUNTEER</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">面談</div>
+      <a href="zoom-links.html" class="nav-item">
+        <span class="material-icons">videocam</span>
+        <span class="nav-item-text">Zoomリンク一覧</span>
       </a>
       <a href="meeting-tantou.html" class="nav-item">
         <span class="material-icons">support_agent</span>
-        <span>担任面談</span>
+        <span class="nav-item-text">担当講師面談予約</span>
+      </a>
+      <a href="meeting-sansya.html" class="nav-item">
+        <span class="material-icons">groups</span>
+        <span class="nav-item-text">三者面談予約</span>
+      </a>
+      <a href="meeting-principal.html" class="nav-item">
+        <span class="material-icons">person</span>
+        <span class="nav-item-text">代表面談予約</span>
       </a>
     </div>
 
-    <div class="nav-category">カリキュラム</div>
     <div class="nav-section">
-      <a href="zoom-links.html" class="nav-item">
-        <span class="material-icons">videocam</span>
-        <span>Zoomリンク一覧</span>
-      </a>
-      <span class="nav-item disabled">
+      <div class="nav-section-title">カリキュラム</div>
+      <a href="#" class="nav-item disabled">
         <span class="material-icons">route</span>
-        <span>授業の流れ</span>
-      </span>
-      <span class="nav-item disabled">
-        <span class="material-icons">account_tree</span>
-        <span>カリキュラムの流れ</span>
-      </span>
+        <span class="nav-item-text">授業の流れ</span>
+      </a>
+      <a href="#" class="nav-item disabled">
+        <span class="material-icons">timeline</span>
+        <span class="nav-item-text">カリキュラムの流れ</span>
+      </a>
     </div>
 
-    <div class="nav-category">ルール関連</div>
     <div class="nav-section">
+      <div class="nav-section-title">ルール関連</div>
       <a href="rules.html" class="nav-item">
         <span class="material-icons">gavel</span>
-        <span>生徒/保護者ルール一覧</span>
+        <span class="nav-item-text">ルール一覧</span>
       </a>
-      <span class="nav-item disabled">
-        <span class="material-icons">auto_stories</span>
-        <span>パンフレット</span>
-      </span>
-      <span class="nav-item disabled">
-        <span class="material-icons">policy</span>
-        <span>基本事項規定書</span>
-      </span>
+      <a href="#" class="nav-item disabled">
+        <span class="material-icons">menu_book</span>
+        <span class="nav-item-text">パンフレット</span>
+      </a>
+      <a href="#" class="nav-item disabled">
+        <span class="material-icons">article</span>
+        <span class="nav-item-text">基本事項規定書</span>
+      </a>
     </div>
-  </div>
-
+  </nav>
 
   <div class="container">
     <!-- ローディング -->
     <div id="loading" class="loading">
       <div class="loading-spinner"></div>
       <p>読み込み中...</p>
-    </div>
-
-    <!-- ログインフォーム -->
-    <div id="loginForm" style="display: none;">
-      <div class="form-box">
-        <div class="form-icon">
-          <span class="material-icons">lock</span>
-        </div>
-        <h2 class="form-title">ログイン</h2>
-        <p class="form-subtitle">生徒番号とパスワードを入力してください</p>
-        
-        <div id="loginError" class="error-message" style="display: none;"></div>
-        
-        <div class="form-group">
-          <label class="form-label">生徒番号</label>
-          <input type="text" id="studentIdInput" class="form-input" placeholder="例：0001">
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">パスワード</label>
-          <input type="password" id="passwordInput" class="form-input" placeholder="パスワード" onkeypress="if(event.key==='Enter')login()">
-        </div>
-        
-        <button id="loginBtn" class="form-btn" onclick="login()">ログイン</button>
-      </div>
+      <p class="loading-message" id="loadingMessage"></p>
     </div>
 
     <!-- 進捗一覧画面 -->
@@ -930,217 +758,232 @@
     </div>
   </div>
 
+  <!-- 同期ステータス -->
+  <div id="syncStatus" class="sync-status">
+    <span class="material-icons">sync</span>
+    <span id="syncMessage">同期中...</span>
+  </div>
+
   <script>
     // ============================================
-    // API設定
+    // 設定
     // ============================================
+    const JSON_URL = 'checklist_master.json';
     const API_URL = 'https://script.google.com/macros/s/AKfycbzCFkkw6h6o0iFwObPILE-VCYfjRP1ikmMWOl6DgqIaqIRi657vQIKkjSKuRVTaWJzG/exec';
+    const SYNC_INTERVAL = 60 * 1000; // 1分ごとに同期
 
-    async function apiGet(action, params = {}) {
-      const url = new URL(API_URL);
-      url.searchParams.set('action', action);
-      for (const [key, value] of Object.entries(params)) {
-        if (value !== undefined && value !== null) {
-          url.searchParams.set(key, value);
-        }
-      }
-      const response = await fetch(url.toString());
-      if (!response.ok) throw new Error('API Error: ' + response.status);
-      return await response.json();
-    }
-
-    async function apiPost(action, data = {}) {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action, ...data })
-      });
-      if (!response.ok) throw new Error('API Error: ' + response.status);
-      return await response.json();
-    }
-
-    const BASE_URL = 'index.html';
-    
+    // ============================================
+    // 状態管理
+    // ============================================
+    let masterData = null;  // JSONから読み込んだマスタデータ
+    let checkState = {};    // チェック状態 { "カテゴリ名": { "項目No": true/false } }
     let currentUser = null;
-    let checklistId = null;
     let currentCategory = null;
-    let currentView = 'progress';  // 'progress' or 'detail'
+    let currentView = 'progress';
+    let pendingSync = false;
+    let syncTimer = null;
 
     // ============================================
-    // キャッシュ管理
+    // localStorage キー
     // ============================================
-    const CACHE_KEY_PREFIX = 'eqao_checklist_';
-    const CACHE_EXPIRY = 5 * 60 * 1000; // 5分
-
-    function getCacheKey(type, id = '') {
-      const studentId = localStorage.getItem('eqao_studentId');
-      return `${CACHE_KEY_PREFIX}${studentId}_${type}${id ? '_' + id : ''}`;
+    function getStorageKey(type) {
+      const studentId = localStorage.getItem('eqao_studentId') || 'guest';
+      return `eqao_checklist_${studentId}_${type}`;
     }
 
-    function setCache(type, data, id = '') {
+    // ============================================
+    // チェック状態の保存・読み込み（localStorage）
+    // ============================================
+    function saveCheckState() {
       try {
-        const cacheData = {
-          data: data,
-          timestamp: Date.now()
-        };
-        localStorage.setItem(getCacheKey(type, id), JSON.stringify(cacheData));
+        localStorage.setItem(getStorageKey('state'), JSON.stringify(checkState));
+        localStorage.setItem(getStorageKey('lastModified'), Date.now().toString());
+        pendingSync = true;
       } catch (e) {
-        console.warn('キャッシュ保存エラー:', e);
+        console.error('チェック状態の保存エラー:', e);
       }
     }
 
-    function getCache(type, id = '') {
+    function loadCheckState() {
       try {
-        const cached = localStorage.getItem(getCacheKey(type, id));
-        if (!cached) return null;
-        
-        const cacheData = JSON.parse(cached);
-        const age = Date.now() - cacheData.timestamp;
-        
-        // キャッシュが有効期限内なら返す（ただし古いデータとしてマーク）
-        return {
-          data: cacheData.data,
-          isStale: age > CACHE_EXPIRY,
-          age: age
-        };
+        const saved = localStorage.getItem(getStorageKey('state'));
+        if (saved) {
+          checkState = JSON.parse(saved);
+        }
       } catch (e) {
-        return null;
+        console.error('チェック状態の読み込みエラー:', e);
+        checkState = {};
       }
     }
 
-    function clearCategoryCache(categoryName) {
+    // ============================================
+    // スプレッドシートとの同期
+    // ============================================
+    async function syncToSpreadsheet() {
+      if (!pendingSync || !currentUser) return;
+
+      showSyncStatus('同期中...', 'sync');
+
       try {
-        localStorage.removeItem(getCacheKey('category', categoryName));
-      } catch (e) {}
-    }
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'syncChecklistState',
+            studentId: currentUser.studentId,
+            password: currentUser.password,
+            checkState: checkState
+          })
+        });
 
-    // 戻るボタン
-    function goBack() {
-      if (currentView === 'detail') {
-        showProgressView();
-      } else {
-        window.location.href = 'index.html?t=' + new Date().getTime();
-      }
-    }
-
-    // ページ読み込み時
-    document.addEventListener('DOMContentLoaded', function() {
-      checkLoginAndLoad();
-    });
-
-    // ログイン確認
-    function checkLoginAndLoad() {
-      const loggedIn = localStorage.getItem('eqao_loggedIn');
-      const studentId = localStorage.getItem('eqao_studentId');
-      const studentName = localStorage.getItem('eqao_studentName');
-
-      if (!loggedIn || !studentId) {
-        // 未ログインならindex.htmlへリダイレクト
-        window.location.href = 'index.html';
-        return;
-      }
-
-      currentUser = {
-        studentId: studentId,
-        studentName: studentName,
-        password: localStorage.getItem('eqao_password')
-      };
-
-      setNavUserName();
-      
-      // 未保存の変更があれば復元してバックグラウンドで保存
-      loadPendingFromLocal();
-      if (pendingChanges.size > 0) {
-        console.log('未保存の変更を復元:', pendingChanges.size, '件');
-        setTimeout(flushChanges, 3000); // 3秒後に保存開始
-      }
-      
-      loadProgress();
-    }
-
-    // 進捗一覧を読み込み（キャッシュ対応）
-    async function loadProgress() {
-      document.getElementById('progressView').style.display = 'none';
-      document.getElementById('detailView').style.display = 'none';
-
-      // キャッシュをチェック
-      const cached = getCache('progress');
-      
-      if (cached && cached.data) {
-        // キャッシュがあれば即座に表示
-        console.log('キャッシュから表示 (経過: ' + Math.round(cached.age / 1000) + '秒)');
-        displayProgress(cached.data, true);
+        const result = await response.json();
         
-        // バックグラウンドで最新データを取得（古い場合のみ）
-        if (cached.isStale) {
-          fetchAndUpdateProgress();
-        }
-      } else {
-        // キャッシュがなければローディング表示してから取得
-        document.getElementById('loading').style.display = 'block';
-        updateLoadingMessage('データを読み込み中...');
-        
-        try {
-          const data = await apiGet('getChecklistProgress', { studentId: currentUser.studentId });
-          setCache('progress', data);
-          displayProgress(data, false);
-        } catch (error) {
-          handleError(error);
-        }
-      }
-    }
-
-    // バックグラウンドで進捗を更新
-    async function fetchAndUpdateProgress() {
-      try {
-        const data = await apiGet('getChecklistProgress', { studentId: currentUser.studentId });
-        setCache('progress', data);
-        
-        // 進捗画面が表示中なら更新
-        if (currentView === 'progress') {
-          displayProgress(data, true);
+        if (result.success) {
+          pendingSync = false;
+          showSyncStatus('同期完了', 'success');
+        } else {
+          showSyncStatus('同期エラー', 'error');
         }
       } catch (error) {
-        console.warn('バックグラウンド更新エラー:', error);
+        console.error('同期エラー:', error);
+        showSyncStatus('同期エラー', 'error');
       }
     }
 
-    // ローディングメッセージを更新
+    async function loadFromSpreadsheet() {
+      if (!currentUser) return;
+
+      try {
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'getChecklistState');
+        url.searchParams.set('studentId', currentUser.studentId);
+
+        const response = await fetch(url.toString());
+        const result = await response.json();
+
+        if (result.success && result.checkState) {
+          // サーバーのデータとローカルをマージ（ローカル優先）
+          const serverState = result.checkState;
+          for (const category in serverState) {
+            if (!checkState[category]) {
+              checkState[category] = serverState[category];
+            }
+          }
+          saveCheckState();
+        }
+      } catch (error) {
+        console.error('サーバーからの読み込みエラー:', error);
+      }
+    }
+
+    function showSyncStatus(message, type) {
+      const statusEl = document.getElementById('syncStatus');
+      const messageEl = document.getElementById('syncMessage');
+      const iconEl = statusEl.querySelector('.material-icons');
+
+      messageEl.textContent = message;
+      statusEl.className = 'sync-status show';
+
+      if (type === 'success') {
+        statusEl.classList.add('success');
+        iconEl.textContent = 'check_circle';
+      } else if (type === 'error') {
+        statusEl.classList.add('error');
+        iconEl.textContent = 'error';
+      } else {
+        iconEl.textContent = 'sync';
+      }
+
+      setTimeout(() => {
+        statusEl.classList.remove('show');
+      }, 2000);
+    }
+
+    // ============================================
+    // マスタデータの読み込み（JSONファイル）
+    // ============================================
+    async function loadMasterData() {
+      updateLoadingMessage('項目データを読み込み中...');
+
+      try {
+        const response = await fetch(JSON_URL + '?t=' + Date.now());
+        if (!response.ok) throw new Error('JSONファイルの読み込みに失敗');
+        masterData = await response.json();
+        return true;
+      } catch (error) {
+        console.error('マスタデータ読み込みエラー:', error);
+        alert('チェックリストデータの読み込みに失敗しました。');
+        return false;
+      }
+    }
+
     function updateLoadingMessage(message) {
-      const loadingEl = document.getElementById('loading');
-      let msgEl = loadingEl.querySelector('.loading-message');
-      if (!msgEl) {
-        msgEl = document.createElement('p');
-        msgEl.className = 'loading-message';
-        loadingEl.appendChild(msgEl);
-      }
-      msgEl.textContent = message;
+      document.getElementById('loadingMessage').textContent = message;
     }
 
-    // 進捗を表示
-    function displayProgress(data, fromCache = false) {
+    // ============================================
+    // 進捗計算
+    // ============================================
+    function calculateProgress() {
+      let totalItems = 0;
+      let totalChecked = 0;
+      const categories = [];
+
+      for (const categoryName in masterData) {
+        const items = masterData[categoryName];
+        const categoryState = checkState[categoryName] || {};
+        
+        let checked = 0;
+        for (const item of items) {
+          if (categoryState[item.no]) {
+            checked++;
+          }
+        }
+
+        totalItems += items.length;
+        totalChecked += checked;
+
+        const percent = items.length > 0 ? Math.round((checked / items.length) * 100) : 0;
+
+        categories.push({
+          name: categoryName,
+          total: items.length,
+          checked: checked,
+          percent: percent
+        });
+      }
+
+      const totalPercent = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
+
+      return {
+        totalItems,
+        totalChecked,
+        totalPercent,
+        categories
+      };
+    }
+
+    // ============================================
+    // 進捗画面の表示
+    // ============================================
+    function displayProgress() {
       document.getElementById('loading').style.display = 'none';
 
-      if (!data.success) {
-        alert('エラー: ' + data.error);
-        return;
-      }
-
-      checklistId = data.checklistId;
+      const progress = calculateProgress();
 
       // 全体進捗
-      document.getElementById('totalPercent').textContent = data.totalPercent + '%';
-      document.getElementById('totalProgressFill').style.width = data.totalPercent + '%';
-      document.getElementById('totalDetail').textContent = data.totalChecked + ' / ' + data.totalItems + ' 完了';
+      document.getElementById('totalPercent').textContent = progress.totalPercent + '%';
+      document.getElementById('totalProgressFill').style.width = progress.totalPercent + '%';
+      document.getElementById('totalDetail').textContent = progress.totalChecked + ' / ' + progress.totalItems + ' 完了';
 
       // カテゴリ一覧
       const categoryList = document.getElementById('categoryList');
       categoryList.innerHTML = '';
 
-      data.categories.forEach(function(cat) {
+      progress.categories.forEach(cat => {
         const card = document.createElement('div');
         card.className = 'category-card';
-        card.onclick = function() { showCategoryDetail(cat.name); };
+        card.onclick = () => showCategoryDetail(cat.name);
 
         let fillClass = 'low';
         if (cat.percent >= 100) fillClass = 'complete';
@@ -1163,95 +1006,56 @@
 
       document.getElementById('headerTitle').textContent = 'チェックリスト';
       document.getElementById('progressView').style.display = 'block';
+      document.getElementById('detailView').style.display = 'none';
       currentView = 'progress';
     }
 
-    // カテゴリ詳細を表示（キャッシュ対応）
-    async function showCategoryDetail(categoryName) {
+    // ============================================
+    // カテゴリ詳細の表示
+    // ============================================
+    function showCategoryDetail(categoryName) {
       currentCategory = categoryName;
       document.getElementById('headerTitle').textContent = categoryName;
-      document.getElementById('progressView').style.display = 'none';
-      currentView = 'detail';
 
-      // キャッシュをチェック
-      const cached = getCache('category', categoryName);
-      
-      if (cached && cached.data) {
-        // キャッシュがあれば即座に表示
-        console.log('カテゴリキャッシュから表示: ' + categoryName);
-        displayCategoryDetail(cached.data, true);
-        
-        // バックグラウンドで最新データを取得（古い場合のみ）
-        if (cached.isStale) {
-          fetchAndUpdateCategory(categoryName);
-        }
-      } else {
-        // キャッシュがなければローディング表示してから取得
-        document.getElementById('loading').style.display = 'block';
-        updateLoadingMessage(categoryName + ' を読み込み中...');
-        
-        try {
-          const data = await apiGet('getChecklistCategory', { checklistId, categoryName });
-          setCache('category', data, categoryName);
-          displayCategoryDetail(data, false);
-        } catch (error) {
-          handleError(error);
-        }
-      }
-    }
+      const items = masterData[categoryName] || [];
+      const categoryState = checkState[categoryName] || {};
 
-    // バックグラウンドでカテゴリ詳細を更新
-    async function fetchAndUpdateCategory(categoryName) {
-      try {
-        const data = await apiGet('getChecklistCategory', { checklistId, categoryName });
-        setCache('category', data, categoryName);
-        
-        // 同じカテゴリを表示中なら更新
-        if (currentView === 'detail' && currentCategory === categoryName) {
-          displayCategoryDetail(data, true);
-        }
-      } catch (error) {
-        console.warn('カテゴリ更新エラー:', error);
-      }
-    }
-
-    // カテゴリ詳細を表示
-    function displayCategoryDetail(data, fromCache = false) {
-      document.getElementById('loading').style.display = 'none';
-
-      if (!data.success) {
-        alert('エラー: ' + data.error);
-        showProgressView();
-        return;
+      // 進捗計算
+      let checked = 0;
+      for (const item of items) {
+        if (categoryState[item.no]) checked++;
       }
 
-      const percent = data.total > 0 ? Math.round((data.checked / data.total) * 100) : 0;
-      document.getElementById('detailCount').textContent = data.checked + ' / ' + data.total;
+      const percent = items.length > 0 ? Math.round((checked / items.length) * 100) : 0;
+
+      document.getElementById('detailCount').textContent = checked + ' / ' + items.length;
       document.getElementById('detailProgressFill').style.width = percent + '%';
 
+      // 項目一覧
       const itemList = document.getElementById('itemList');
       itemList.innerHTML = '';
 
-      data.items.forEach(function(item) {
-        const card = document.createElement('div');
-        card.className = 'item-card' + (item.checked ? ' checked' : '');
-        card.dataset.rowIndex = item.rowIndex;
+      items.forEach(item => {
+        const isChecked = categoryState[item.no] === true;
 
-        // 詳細のHTMLを作成（リンクをクリック可能に）
+        const card = document.createElement('div');
+        card.className = 'item-card' + (isChecked ? ' checked' : '');
+        card.dataset.no = item.no;
+
         let detailHtml = '';
         if (item.detail) {
           detailHtml = escapeHtml(item.detail).replace(
-            /(https?:\/\/[^\s]+)/g, 
+            /(https?:\/\/[^\s]+)/g,
             '<a href="$1" target="_blank" onclick="event.stopPropagation();">$1</a>'
           );
         }
 
         card.innerHTML = `
-          <div class="item-checkbox" onclick="toggleCheck(event, ${item.rowIndex}, ${!item.checked})">
+          <div class="item-checkbox" onclick="toggleCheck(event, '${escapeHtml(categoryName)}', ${item.no})">
             <span class="material-icons">check</span>
           </div>
           <div class="item-content" onclick="toggleDetail(this)">
-            <div class="item-name">${escapeHtml(item.name)}</div>
+            <div class="item-name">${escapeHtml(item.item)}</div>
             ${item.detail ? '<div class="item-detail">' + detailHtml + '</div>' : ''}
           </div>
           ${item.detail ? '<span class="material-icons item-toggle" onclick="toggleDetail(this.previousElementSibling)">expand_more</span>' : ''}
@@ -1260,125 +1064,27 @@
         itemList.appendChild(card);
       });
 
+      document.getElementById('progressView').style.display = 'none';
       document.getElementById('detailView').style.display = 'block';
-    }
-
-    // 進捗画面に戻る
-    function showProgressView() {
-      document.getElementById('detailView').style.display = 'none';
-      document.getElementById('headerTitle').textContent = 'チェックリスト';
-      currentView = 'progress';
-      setNavUserName();
-      
-      // キャッシュがクリアされていたら再読み込み
-      loadProgress();
+      currentView = 'detail';
     }
 
     // ============================================
-    // 非同期バッチ保存システム
+    // チェック状態の切り替え（即座に反映）
     // ============================================
-    const pendingChanges = new Map(); // { 'categoryName:rowIndex': { categoryName, rowIndex, checked } }
-    let saveTimer = null;
-    const SAVE_INTERVAL = 60 * 1000; // 1分
-
-    // 変更をキューに追加
-    function queueChange(categoryName, rowIndex, checked) {
-      const key = `${categoryName}:${rowIndex}`;
-      pendingChanges.set(key, { categoryName, rowIndex, checked });
-      
-      // ローカルストレージにも保存（ページリロード対策）
-      savePendingToLocal();
-      
-      // タイマーがなければ開始
-      if (!saveTimer) {
-        saveTimer = setTimeout(flushChanges, SAVE_INTERVAL);
-      }
-    }
-
-    // ローカルストレージに一時保存
-    function savePendingToLocal() {
-      try {
-        const data = Array.from(pendingChanges.values());
-        localStorage.setItem(getCacheKey('pendingChanges'), JSON.stringify(data));
-      } catch (e) {}
-    }
-
-    // ローカルストレージから復元
-    function loadPendingFromLocal() {
-      try {
-        const data = localStorage.getItem(getCacheKey('pendingChanges'));
-        if (data) {
-          const changes = JSON.parse(data);
-          changes.forEach(c => {
-            const key = `${c.categoryName}:${c.rowIndex}`;
-            pendingChanges.set(key, c);
-          });
-        }
-      } catch (e) {}
-    }
-
-    // 保存待ちの変更をサーバーに送信
-    async function flushChanges() {
-      if (pendingChanges.size === 0) {
-        saveTimer = null;
-        return;
-      }
-
-      const changes = Array.from(pendingChanges.values());
-      pendingChanges.clear();
-      localStorage.removeItem(getCacheKey('pendingChanges'));
-      saveTimer = null;
-
-      console.log('バッチ保存開始:', changes.length, '件');
-
-      // 1件ずつ送信（GASの制約上、まとめて送れないので）
-      for (const change of changes) {
-        try {
-          await apiGet('updateChecklistItem', {
-            studentId: currentUser.studentId,
-            password: currentUser.password,
-            checklistId: checklistId,
-            categoryName: change.categoryName,
-            rowIndex: change.rowIndex,
-            checked: change.checked
-          });
-        } catch (error) {
-          console.error('保存エラー:', change, error);
-          // 失敗したら再キュー
-          queueChange(change.categoryName, change.rowIndex, change.checked);
-        }
-      }
-
-      console.log('バッチ保存完了');
-
-      // キャッシュをクリア
-      localStorage.removeItem(getCacheKey('progress'));
-    }
-
-    // ページ離脱時に保存
-    window.addEventListener('beforeunload', function() {
-      if (pendingChanges.size > 0) {
-        // 同期的に保存を試みる（sendBeacon使用）
-        const changes = Array.from(pendingChanges.values());
-        // localStorageには保存済みなので、次回読み込み時に復元される
-        console.log('ページ離脱: 未保存', changes.length, '件（次回復元）');
-      }
-    });
-
-    // visibilitychange でも保存（タブ切り替え、アプリ切り替え時）
-    document.addEventListener('visibilitychange', function() {
-      if (document.visibilityState === 'hidden' && pendingChanges.size > 0) {
-        flushChanges();
-      }
-    });
-
-    // チェック状態を切り替え（即座にUI更新、サーバー保存は後で）
-    function toggleCheck(event, rowIndex, newState) {
+    function toggleCheck(event, categoryName, itemNo) {
       event.stopPropagation();
-      
+
+      // チェック状態を切り替え
+      if (!checkState[categoryName]) {
+        checkState[categoryName] = {};
+      }
+
+      const newState = !checkState[categoryName][itemNo];
+      checkState[categoryName][itemNo] = newState;
+
+      // UIを即座に更新
       const card = event.target.closest('.item-card');
-      
-      // 即座にUIを更新
       if (newState) {
         card.classList.add('checked');
       } else {
@@ -1386,85 +1092,136 @@
       }
 
       // 進捗カウントを更新
-      updateDetailProgress(newState ? 1 : -1);
+      updateDetailProgress();
 
-      // キャッシュをクリア
-      clearCategoryCache(currentCategory);
-
-      // 変更をキューに追加（サーバー保存は後で）
-      queueChange(currentCategory, rowIndex, newState);
+      // localStorageに保存
+      saveCheckState();
     }
 
+    function updateDetailProgress() {
+      if (!currentCategory) return;
+
+      const items = masterData[currentCategory] || [];
+      const categoryState = checkState[currentCategory] || {};
+
+      let checked = 0;
+      for (const item of items) {
+        if (categoryState[item.no]) checked++;
+      }
+
+      const percent = items.length > 0 ? Math.round((checked / items.length) * 100) : 0;
+
+      document.getElementById('detailCount').textContent = checked + ' / ' + items.length;
+      document.getElementById('detailProgressFill').style.width = percent + '%';
+    }
+
+    // ============================================
     // 詳細の表示/非表示
+    // ============================================
     function toggleDetail(contentEl) {
       const detailEl = contentEl.querySelector('.item-detail');
       if (detailEl) {
         detailEl.classList.toggle('show');
         const toggleIcon = contentEl.nextElementSibling;
-        if (toggleIcon) {
+        if (toggleIcon && toggleIcon.classList.contains('item-toggle')) {
           toggleIcon.textContent = detailEl.classList.contains('show') ? 'expand_less' : 'expand_more';
         }
       }
     }
 
-    // 詳細画面の進捗を更新
-    function updateDetailProgress(delta) {
-      const countEl = document.getElementById('detailCount');
-      const parts = countEl.textContent.split(' / ');
-      const checked = parseInt(parts[0]) + delta;
-      const total = parseInt(parts[1]);
-      countEl.textContent = checked + ' / ' + total;
-      
-      const percent = total > 0 ? Math.round((checked / total) * 100) : 0;
-      document.getElementById('detailProgressFill').style.width = percent + '%';
-    }
-
-    // エラーハンドリング
-    function handleError(error) {
-      document.getElementById('loading').style.display = 'none';
-      console.error(error);
-      alert('データの読み込みに失敗しました');
-    }
-
-    // HTMLエスケープ
-    function escapeHtml(text) {
-      if (!text) return '';
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-  
-    // ハンバーガーメニュー
-    function openNav() {
-      document.getElementById('navMenu').classList.add('open');
-      document.getElementById('navOverlay').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeNav() {
-      document.getElementById('navMenu').classList.remove('open');
-      document.getElementById('navOverlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function doLogout() {
-      localStorage.removeItem('eqao_loggedIn');
-      localStorage.removeItem('eqao_studentId');
-      localStorage.removeItem('eqao_studentName');
-      localStorage.removeItem('eqao_password');
-      localStorage.removeItem('eqao_rowIndex');
-      localStorage.removeItem('eqao_isAdmin');
-      window.location.href = 'index.html';
-    }
-
-    function setNavUserName() {
-      const studentName = localStorage.getItem('eqao_studentName');
-      const navUserName = document.getElementById('navUserName');
-      if (navUserName) {
-        navUserName.textContent = studentName || '';
+    // ============================================
+    // ナビゲーション
+    // ============================================
+    function goBack() {
+      if (currentView === 'detail') {
+        displayProgress();
+      } else {
+        window.location.href = 'index.html?t=' + new Date().getTime();
       }
     }
 
+    function toggleMenu() {
+      document.getElementById('navOverlay').classList.toggle('active');
+      document.getElementById('navMenu').classList.toggle('active');
+    }
+
+    function setNavUserName() {
+      const studentName = localStorage.getItem('eqao_studentName') || '';
+      document.getElementById('navUserName').textContent = studentName;
+      document.getElementById('navHeaderUser').textContent = studentName ? studentName + ' さん' : 'メニュー';
+    }
+
+    // ============================================
+    // ユーティリティ
+    // ============================================
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // ============================================
+    // 初期化
+    // ============================================
+    document.addEventListener('DOMContentLoaded', async function() {
+      // ログイン確認
+      const loggedIn = localStorage.getItem('eqao_loggedIn');
+      const studentId = localStorage.getItem('eqao_studentId');
+      const studentName = localStorage.getItem('eqao_studentName');
+
+      if (!loggedIn || !studentId) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      currentUser = {
+        studentId: studentId,
+        studentName: studentName,
+        password: localStorage.getItem('eqao_password')
+      };
+
+      setNavUserName();
+
+      // ローカルのチェック状態を読み込み
+      loadCheckState();
+
+      // マスタデータを読み込み
+      const loaded = await loadMasterData();
+      if (!loaded) return;
+
+      // 画面表示
+      displayProgress();
+
+      // バックグラウンドでサーバーから同期
+      loadFromSpreadsheet();
+
+      // 定期的にサーバーに同期
+      syncTimer = setInterval(syncToSpreadsheet, SYNC_INTERVAL);
+    });
+
+    // ページ離脱時に同期
+    window.addEventListener('beforeunload', function() {
+      if (pendingSync) {
+        // localStorageには保存済みなので、次回復元される
+        navigator.sendBeacon && navigator.sendBeacon(API_URL, JSON.stringify({
+          action: 'syncChecklistState',
+          studentId: currentUser?.studentId,
+          password: currentUser?.password,
+          checkState: checkState
+        }));
+      }
+    });
+
+    // タブ切り替え時に同期
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'hidden' && pendingSync) {
+        syncToSpreadsheet();
+      }
+    });
   </script>
 </body>
 </html>
