@@ -427,7 +427,75 @@
       margin-top: 1px;
     }
 
-    /* 私のスケジュール */
+    /* 私のスケジュール - 2カラムレイアウト */
+    .my-schedule-selector {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .mini-grade-selector {
+      display: flex;
+      gap: 6px;
+    }
+
+    .mini-grade-btn {
+      padding: 6px 14px;
+      border: 2px solid #E05555;
+      background: white;
+      color: #E05555;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mini-grade-btn.active {
+      background: linear-gradient(135deg, #E05555 0%, #FF6B6B 100%);
+      color: white;
+      box-shadow: 0 2px 8px rgba(224, 85, 85, 0.3);
+    }
+
+    .mini-grade-btn:hover:not(.active) {
+      background: #FFEBEE;
+    }
+
+    .month-selector {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #00695C;
+    }
+
+    .month-selector .material-icons {
+      font-size: 20px;
+    }
+
+    .month-select {
+      padding: 8px 32px 8px 12px;
+      border: 2px solid #00897B;
+      border-radius: 8px;
+      background: white;
+      color: #00695C;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300695C' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+
+    .month-select:focus {
+      outline: none;
+      border-color: #004D40;
+      box-shadow: 0 0 0 3px rgba(0, 137, 123, 0.2);
+    }
+
     .my-schedule-header {
       display: flex;
       align-items: center;
@@ -436,14 +504,165 @@
     }
 
     .selected-month-label {
-      font-size: 14px;
+      font-size: 16px;
       color: #00695C;
-      font-weight: 600;
+      font-weight: 700;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
+    .my-schedule-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .my-schedule-split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .my-schedule-panel {
+      background: #E0F2F1;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      background: linear-gradient(135deg, #00897B 0%, #26A69A 100%);
+      color: white;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .panel-title .material-icons {
+      font-size: 20px;
+    }
+
+    .panel-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .panel-btn {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.2s;
+    }
+
+    .panel-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .panel-btn .material-icons {
+      font-size: 16px;
+    }
+
+    .panel-content {
+      padding: 16px;
+      min-height: 200px;
+    }
+
+    /* 左側: 今月やること */
+    .monthly-goals {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    .monthly-goals-empty {
+      color: #80CBC4;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .monthly-goals-empty .material-icons {
+      font-size: 36px;
+      margin-bottom: 8px;
+      opacity: 0.7;
+    }
+
+    .goals-textarea {
+      width: 100%;
+      min-height: 180px;
+      padding: 12px;
+      border: 2px solid #80CBC4;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      line-height: 1.8;
+      resize: vertical;
+      background: white;
+    }
+
+    .goals-textarea:focus {
+      outline: none;
+      border-color: #00897B;
+    }
+
+    .edit-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      justify-content: flex-end;
+    }
+
+    .btn-save {
+      background: linear-gradient(135deg, #E05555 0%, #FF6B6B 100%);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-save:hover {
+      box-shadow: 0 2px 8px rgba(224, 85, 85, 0.4);
+    }
+
+    .btn-cancel {
+      background: #B2DFDB;
+      color: #00695C;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-cancel:hover {
+      background: #80CBC4;
+    }
+
+    /* 右側: ToDo */
     .todo-list {
       display: flex;
       flex-direction: column;
@@ -452,47 +671,154 @@
 
     .todo-item {
       display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 16px;
-      background: #B2DFDB;
-      border-radius: 10px;
-      transition: background 0.2s;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px;
+      background: white;
+      border-radius: 8px;
+      transition: all 0.2s;
     }
 
     .todo-item:hover {
-      background: #80CBC4;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .todo-item.completed {
+      opacity: 0.6;
     }
 
     .todo-checkbox {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       cursor: pointer;
       accent-color: #E05555;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .todo-content {
+      flex: 1;
+      min-width: 0;
     }
 
     .todo-text {
-      flex: 1;
-      font-size: 14px;
+      font-size: 13px;
       color: #333;
+      line-height: 1.4;
     }
 
-    .todo-text.completed {
+    .todo-text.done {
       text-decoration: line-through;
-      color: #666;
+      color: #888;
+    }
+
+    .todo-deadline {
+      font-size: 11px;
+      color: #E05555;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .todo-deadline .material-icons {
+      font-size: 14px;
+    }
+
+    .todo-deadline.overdue {
+      color: #C62828;
+      font-weight: 600;
+    }
+
+    .todo-deadline.soon {
+      color: #F57C00;
+    }
+
+    .todo-actions {
+      display: flex;
+      gap: 4px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .todo-item:hover .todo-actions {
+      opacity: 1;
+    }
+
+    .todo-action-btn {
+      background: none;
+      border: none;
+      color: #80CBC4;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+    }
+
+    .todo-action-btn:hover {
+      background: #E0F2F1;
+      color: #00695C;
+    }
+
+    .todo-action-btn .material-icons {
+      font-size: 18px;
     }
 
     .todo-empty {
       text-align: center;
-      padding: 30px 20px;
-      color: #00897B;
-      font-size: 14px;
+      padding: 40px 20px;
+      color: #80CBC4;
+      font-size: 13px;
     }
 
     .todo-empty .material-icons {
-      font-size: 40px;
-      margin-bottom: 10px;
+      font-size: 36px;
+      margin-bottom: 8px;
       opacity: 0.7;
+    }
+
+    /* ToDo追加フォーム */
+    .todo-add-form {
+      background: white;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 12px;
+      border: 2px dashed #80CBC4;
+    }
+
+    .todo-add-form.hidden {
+      display: none;
+    }
+
+    .todo-input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .todo-input {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid #B2DFDB;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    .todo-input:focus {
+      outline: none;
+      border-color: #00897B;
+    }
+
+    .todo-date-input {
+      width: 140px;
+      padding: 8px 12px;
+      border: 1px solid #B2DFDB;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    .todo-date-input:focus {
+      outline: none;
+      border-color: #00897B;
     }
 
     /* 進捗バー */
@@ -886,25 +1212,153 @@
         <span class="section-title">私のスケジュール</span>
       </div>
       <div class="section-content">
-        <div class="my-schedule-header">
-          <div class="selected-month-label">
+        <!-- 学年・月セレクター -->
+        <div class="my-schedule-selector">
+          <div class="mini-grade-selector">
+            <button class="mini-grade-btn active" data-grade="高1" onclick="selectGradeFromMySchedule('高1')">高1</button>
+            <button class="mini-grade-btn" data-grade="高2" onclick="selectGradeFromMySchedule('高2')">高2</button>
+            <button class="mini-grade-btn" data-grade="高3" onclick="selectGradeFromMySchedule('高3')">高3</button>
+          </div>
+          <div class="month-selector">
             <span class="material-icons">event</span>
-            <span id="selectedMonthLabel">12月</span>
+            <select id="monthSelect" class="month-select" onchange="selectMonthFromMySchedule(this.value)">
+              <!-- JSで動的に生成 -->
+            </select>
           </div>
         </div>
-        <div class="todo-list" id="todoList">
-          <div class="todo-empty">
-            <span class="material-icons">event_available</span>
-            <p>上のガントチャートから月を選択してください</p>
+
+        <!-- 2カラムレイアウト -->
+        <div class="my-schedule-split">
+          <!-- 左側: 今月やること -->
+          <div class="my-schedule-panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span class="material-icons">edit_note</span>
+                今月やること
+              </div>
+              <div class="panel-actions">
+                <button class="panel-btn" onclick="toggleGoalsEdit()" id="goalsEditBtn">
+                  <span class="material-icons">edit</span>
+                  編集
+                </button>
+              </div>
+            </div>
+            <div class="panel-content">
+              <!-- 表示モード -->
+              <div id="goalsDisplay">
+                <div class="monthly-goals" id="monthlyGoalsText">
+                  <!-- サンプルデータ -->
+                  ・英検準1級の過去問を週2回解く
+・志望理由書の初稿を書き始める
+・オープンキャンパスの日程を調べる
+・ボランティア活動に月2回参加
+                </div>
+              </div>
+              <!-- 編集モード -->
+              <div id="goalsEdit" style="display: none;">
+                <textarea class="goals-textarea" id="goalsTextarea" placeholder="今月やることを入力...&#10;&#10;例:&#10;・英検の勉強を毎日30分&#10;・志望理由書の下書き&#10;・ボランティア活動"></textarea>
+                <div class="edit-actions">
+                  <button class="btn-cancel" onclick="cancelGoalsEdit()">キャンセル</button>
+                  <button class="btn-save" onclick="saveGoals()">
+                    <span class="material-icons">save</span>
+                    保存
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="progress-section">
-          <div class="progress-label">
-            <span>全体の進捗</span>
-            <span id="progressPercent">0%</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+
+          <!-- 右側: ToDo -->
+          <div class="my-schedule-panel">
+            <div class="panel-header" style="background: linear-gradient(135deg, #E05555 0%, #FF6B6B 100%);">
+              <div class="panel-title">
+                <span class="material-icons">task_alt</span>
+                ToDo（期限付き）
+              </div>
+              <div class="panel-actions">
+                <button class="panel-btn" onclick="toggleTodoForm()" id="todoAddBtn">
+                  <span class="material-icons">add</span>
+                  追加
+                </button>
+              </div>
+            </div>
+            <div class="panel-content">
+              <!-- ToDo追加フォーム -->
+              <div class="todo-add-form hidden" id="todoAddForm">
+                <div class="todo-input-row">
+                  <input type="text" class="todo-input" id="todoInput" placeholder="やること...">
+                  <input type="date" class="todo-date-input" id="todoDateInput">
+                </div>
+                <div class="edit-actions">
+                  <button class="btn-cancel" onclick="cancelTodoAdd()">キャンセル</button>
+                  <button class="btn-save" onclick="addTodo()">
+                    <span class="material-icons">add</span>
+                    追加
+                  </button>
+                </div>
+              </div>
+
+              <!-- ToDoリスト -->
+              <div class="todo-list" id="todoList">
+                <!-- サンプルデータ -->
+                <div class="todo-item" data-id="1">
+                  <input type="checkbox" class="todo-checkbox" onchange="toggleTodo(1)">
+                  <div class="todo-content">
+                    <div class="todo-text">志望理由書の初稿を提出</div>
+                    <div class="todo-deadline">
+                      <span class="material-icons">schedule</span>
+                      12/15まで
+                    </div>
+                  </div>
+                  <div class="todo-actions">
+                    <button class="todo-action-btn" onclick="editTodo(1)">
+                      <span class="material-icons">edit</span>
+                    </button>
+                    <button class="todo-action-btn" onclick="deleteTodo(1)">
+                      <span class="material-icons">delete</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="todo-item completed" data-id="2">
+                  <input type="checkbox" class="todo-checkbox" checked onchange="toggleTodo(2)">
+                  <div class="todo-content">
+                    <div class="todo-text done">英検の過去問3年分を解く</div>
+                    <div class="todo-deadline">
+                      <span class="material-icons">schedule</span>
+                      12/10まで
+                    </div>
+                  </div>
+                  <div class="todo-actions">
+                    <button class="todo-action-btn" onclick="editTodo(2)">
+                      <span class="material-icons">edit</span>
+                    </button>
+                    <button class="todo-action-btn" onclick="deleteTodo(2)">
+                      <span class="material-icons">delete</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="todo-item" data-id="3">
+                  <input type="checkbox" class="todo-checkbox" onchange="toggleTodo(3)">
+                  <div class="todo-content">
+                    <div class="todo-text">面談前に自己分析シートを記入</div>
+                    <div class="todo-deadline soon">
+                      <span class="material-icons">schedule</span>
+                      12/20まで
+                    </div>
+                  </div>
+                  <div class="todo-actions">
+                    <button class="todo-action-btn" onclick="editTodo(3)">
+                      <span class="material-icons">edit</span>
+                    </button>
+                    <button class="todo-action-btn" onclick="deleteTodo(3)">
+                      <span class="material-icons">delete</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1414,10 +1868,358 @@
     let selectedGrade = "高2";
     let selectedMonth = null;
 
+    // ============================================
+    // 私のスケジュール関連
+    // ============================================
+    
+    // サンプルデータ（後でAPIから取得する想定）
+    let monthlyGoals = {
+      "12": "・英検準1級の過去問を週2回解く\n・志望理由書の初稿を書き始める\n・オープンキャンパスの日程を調べる\n・ボランティア活動に月2回参加"
+    };
+
+    let todos = [
+      { id: 1, text: "志望理由書の初稿を提出", deadline: "2025-12-15", completed: false, month: "12" },
+      { id: 2, text: "英検の過去問3年分を解く", deadline: "2025-12-10", completed: true, month: "12" },
+      { id: 3, text: "面談前に自己分析シートを記入", deadline: "2025-12-20", completed: false, month: "12" }
+    ];
+
+    let nextTodoId = 4;
+
+    // 今月やること: 編集モード切り替え
+    function toggleGoalsEdit() {
+      const display = document.getElementById('goalsDisplay');
+      const edit = document.getElementById('goalsEdit');
+      const btn = document.getElementById('goalsEditBtn');
+      const textarea = document.getElementById('goalsTextarea');
+      const goalsText = document.getElementById('monthlyGoalsText');
+
+      if (display.style.display !== 'none') {
+        // 編集モードに切り替え
+        textarea.value = goalsText.textContent.trim();
+        display.style.display = 'none';
+        edit.style.display = 'block';
+        btn.innerHTML = '<span class="material-icons">close</span>閉じる';
+        textarea.focus();
+      } else {
+        // 表示モードに戻す
+        display.style.display = 'block';
+        edit.style.display = 'none';
+        btn.innerHTML = '<span class="material-icons">edit</span>編集';
+      }
+    }
+
+    // 今月やること: 保存
+    function saveGoals() {
+      const textarea = document.getElementById('goalsTextarea');
+      const goalsText = document.getElementById('monthlyGoalsText');
+      const month = selectedMonth || '12';
+
+      const newGoals = textarea.value.trim();
+      monthlyGoals[month] = newGoals;
+      
+      if (newGoals) {
+        goalsText.textContent = newGoals;
+      } else {
+        goalsText.innerHTML = '<div class="monthly-goals-empty"><span class="material-icons">edit_note</span><p>まだ入力されていません</p></div>';
+      }
+
+      // 編集モードを閉じる
+      toggleGoalsEdit();
+
+      // TODO: ここでAPIに保存する
+      console.log('Saved goals for month', month, ':', newGoals);
+    }
+
+    // 今月やること: キャンセル
+    function cancelGoalsEdit() {
+      toggleGoalsEdit();
+    }
+
+    // ToDo: 追加フォーム表示切り替え
+    function toggleTodoForm() {
+      const form = document.getElementById('todoAddForm');
+      const btn = document.getElementById('todoAddBtn');
+
+      if (form.classList.contains('hidden')) {
+        form.classList.remove('hidden');
+        btn.innerHTML = '<span class="material-icons">close</span>閉じる';
+        document.getElementById('todoInput').focus();
+        // 日付のデフォルト値を設定（今月末）
+        const now = new Date();
+        const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+        document.getElementById('todoDateInput').value = lastDay.toISOString().split('T')[0];
+      } else {
+        form.classList.add('hidden');
+        btn.innerHTML = '<span class="material-icons">add</span>追加';
+        document.getElementById('todoInput').value = '';
+      }
+    }
+
+    // ToDo: 追加
+    function addTodo() {
+      const input = document.getElementById('todoInput');
+      const dateInput = document.getElementById('todoDateInput');
+      const month = selectedMonth || '12';
+
+      const text = input.value.trim();
+      const deadline = dateInput.value;
+
+      if (!text) {
+        alert('やることを入力してください');
+        input.focus();
+        return;
+      }
+
+      if (!deadline) {
+        alert('期限を設定してください');
+        dateInput.focus();
+        return;
+      }
+
+      const newTodo = {
+        id: nextTodoId++,
+        text: text,
+        deadline: deadline,
+        completed: false,
+        month: month
+      };
+
+      todos.push(newTodo);
+      renderTodos();
+      toggleTodoForm();
+
+      // TODO: ここでAPIに保存する
+      console.log('Added todo:', newTodo);
+    }
+
+    // ToDo: 追加キャンセル
+    function cancelTodoAdd() {
+      toggleTodoForm();
+    }
+
+    // ToDo: 完了状態切り替え
+    function toggleTodo(id) {
+      const todo = todos.find(t => t.id === id);
+      if (todo) {
+        todo.completed = !todo.completed;
+        renderTodos();
+        updateProgress();
+
+        // TODO: ここでAPIに保存する
+        console.log('Toggled todo:', id, 'completed:', todo.completed);
+      }
+    }
+
+    // ToDo: 編集
+    function editTodo(id) {
+      const todo = todos.find(t => t.id === id);
+      if (!todo) return;
+
+      const newText = prompt('やることを編集:', todo.text);
+      if (newText !== null && newText.trim()) {
+        todo.text = newText.trim();
+
+        const newDeadline = prompt('期限を編集 (YYYY-MM-DD):', todo.deadline);
+        if (newDeadline !== null && newDeadline.match(/^\d{4}-\d{2}-\d{2}$/)) {
+          todo.deadline = newDeadline;
+        }
+
+        renderTodos();
+
+        // TODO: ここでAPIに保存する
+        console.log('Edited todo:', todo);
+      }
+    }
+
+    // ToDo: 削除
+    function deleteTodo(id) {
+      if (confirm('このToDoを削除しますか？')) {
+        todos = todos.filter(t => t.id !== id);
+        renderTodos();
+        updateProgress();
+
+        // TODO: ここでAPIに削除リクエストする
+        console.log('Deleted todo:', id);
+      }
+    }
+
+    // ToDo: 描画
+    function renderTodos() {
+      const container = document.getElementById('todoList');
+      const month = selectedMonth || '12';
+      const monthTodos = todos.filter(t => t.month === month);
+
+      if (monthTodos.length === 0) {
+        container.innerHTML = `
+          <div class="todo-empty">
+            <span class="material-icons">task_alt</span>
+            <p>この月のToDoはありません</p>
+          </div>
+        `;
+        return;
+      }
+
+      // 期限順にソート（未完了を先に）
+      monthTodos.sort((a, b) => {
+        if (a.completed !== b.completed) return a.completed ? 1 : -1;
+        return new Date(a.deadline) - new Date(b.deadline);
+      });
+
+      let html = '';
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      monthTodos.forEach(todo => {
+        const deadlineDate = new Date(todo.deadline);
+        const diffDays = Math.ceil((deadlineDate - today) / (1000 * 60 * 60 * 24));
+        
+        let deadlineClass = '';
+        if (diffDays < 0 && !todo.completed) {
+          deadlineClass = 'overdue';
+        } else if (diffDays <= 3 && !todo.completed) {
+          deadlineClass = 'soon';
+        }
+
+        const deadlineText = formatDeadline(todo.deadline);
+
+        html += `
+          <div class="todo-item ${todo.completed ? 'completed' : ''}" data-id="${todo.id}">
+            <input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${todo.id})">
+            <div class="todo-content">
+              <div class="todo-text ${todo.completed ? 'done' : ''}">${escapeHtml(todo.text)}</div>
+              <div class="todo-deadline ${deadlineClass}">
+                <span class="material-icons">schedule</span>
+                ${deadlineText}
+              </div>
+            </div>
+            <div class="todo-actions">
+              <button class="todo-action-btn" onclick="editTodo(${todo.id})">
+                <span class="material-icons">edit</span>
+              </button>
+              <button class="todo-action-btn" onclick="deleteTodo(${todo.id})">
+                <span class="material-icons">delete</span>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // 期限フォーマット
+    function formatDeadline(dateStr) {
+      const date = new Date(dateStr);
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      return `${month}/${day}まで`;
+    }
+
+    // HTMLエスケープ
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, function(match) {
+        const escape = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        };
+        return escape[match];
+      });
+    }
+
+    // 進捗更新
+    function updateProgress() {
+      const month = selectedMonth || '12';
+      const monthTodos = todos.filter(t => t.month === month);
+      
+      if (monthTodos.length === 0) {
+        document.getElementById('progressPercent').textContent = '0%';
+        document.getElementById('progressBar').style.width = '0%';
+        return;
+      }
+
+      const completed = monthTodos.filter(t => t.completed).length;
+      const percent = Math.round((completed / monthTodos.length) * 100);
+      
+      document.getElementById('progressPercent').textContent = `${percent}%`;
+      document.getElementById('progressBar').style.width = `${percent}%`;
+    }
+
+    // 月の目標を読み込み
+    function loadMonthlyGoals(month) {
+      const goalsText = document.getElementById('monthlyGoalsText');
+      const goals = monthlyGoals[month];
+
+      if (goals) {
+        goalsText.textContent = goals;
+      } else {
+        goalsText.innerHTML = '<div class="monthly-goals-empty"><span class="material-icons">edit_note</span><p>まだ入力されていません<br>「編集」ボタンから入力できます</p></div>';
+      }
+    }
+
+    // 私のスケジュールから学年選択
+    function selectGradeFromMySchedule(grade) {
+      // 上の学年ボタンも更新
+      selectGrade(grade);
+      
+      // 下の学年ボタンも更新
+      updateMiniGradeButtons(grade);
+      
+      // 月のドロップダウンを更新
+      updateMonthSelect(grade);
+    }
+
+    // 私のスケジュールから月選択
+    function selectMonthFromMySchedule(month) {
+      selectMonth(month);
+    }
+
+    // 下の学年ボタンを更新
+    function updateMiniGradeButtons(grade) {
+      document.querySelectorAll('.mini-grade-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.grade === grade);
+      });
+    }
+
+    // 月のドロップダウンを更新
+    function updateMonthSelect(grade) {
+      const select = document.getElementById('monthSelect');
+      const data = idealScheduleData[grade];
+      
+      if (!data || !data.months) {
+        select.innerHTML = '<option value="">-</option>';
+        return;
+      }
+
+      let html = '';
+      data.months.forEach(m => {
+        const selected = m === selectedMonth ? 'selected' : '';
+        html += `<option value="${m}" ${selected}>${m}月</option>`;
+      });
+      select.innerHTML = html;
+    }
+
+    // 月選択ドロップダウンの値を更新（上から選択された時用）
+    function updateMonthSelectValue(month) {
+      const select = document.getElementById('monthSelect');
+      if (select) {
+        select.value = month;
+      }
+    }
+
     // 初期化
     document.addEventListener('DOMContentLoaded', function() {
       try {
         setNavUserName();
+        
+        // 下の学年ボタンを初期化
+        updateMiniGradeButtons(selectedGrade);
+        
+        // 月のドロップダウンを初期化
+        updateMonthSelect(selectedGrade);
+        
         renderGanttChart();
         
         // 現在の月を初期選択
@@ -1441,6 +2243,12 @@
         btn.classList.toggle('active', btn.dataset.grade === grade);
       });
       
+      // 下の学年ボタンも更新
+      updateMiniGradeButtons(grade);
+      
+      // 月のドロップダウンを更新
+      updateMonthSelect(grade);
+      
       // ガントチャート再描画
       renderGanttChart();
       
@@ -1450,7 +2258,6 @@
         selectMonth(data.months[0]);
       } else {
         document.getElementById('monthDetail').classList.remove('show');
-        document.getElementById('selectedMonthLabel').textContent = '-';
       }
     }
 
@@ -1547,11 +2354,32 @@
       // 詳細カード表示
       renderMonthDetail(month);
       
-      // 私のスケジュールのラベル更新
-      document.getElementById('selectedMonthLabel').textContent = month + '月';
+      // 私のスケジュール: 月ドロップダウン更新
+      updateMonthSelectValue(month);
       
-      // Todoリスト更新（今後API連携）
-      renderTodoList(month);
+      // 私のスケジュール: 目標を読み込み
+      loadMonthlyGoals(month);
+      
+      // 私のスケジュール: ToDoリスト更新
+      renderTodos();
+
+      // 編集モードを閉じる
+      const display = document.getElementById('goalsDisplay');
+      const edit = document.getElementById('goalsEdit');
+      const btn = document.getElementById('goalsEditBtn');
+      if (edit && edit.style.display !== 'none') {
+        display.style.display = 'block';
+        edit.style.display = 'none';
+        btn.innerHTML = '<span class="material-icons">edit</span>編集';
+      }
+      
+      // ToDo追加フォームを閉じる
+      const form = document.getElementById('todoAddForm');
+      const addBtn = document.getElementById('todoAddBtn');
+      if (form && !form.classList.contains('hidden')) {
+        form.classList.add('hidden');
+        addBtn.innerHTML = '<span class="material-icons">add</span>追加';
+      }
     }
 
     // 月詳細カード描画
@@ -1588,19 +2416,6 @@
     }
 
     // Todoリスト描画（仮実装）
-    function renderTodoList(month) {
-      const container = document.getElementById('todoList');
-      
-      // TODO: API連携で個人のタスクを取得
-      // 今は仮データ
-      container.innerHTML = `
-        <div class="todo-empty">
-          <span class="material-icons">assignment</span>
-          <p>${month}月のタスクはまだ登録されていません</p>
-        </div>
-      `;
-    }
-
     // ナビゲーション
     function openNav() {
       document.getElementById('navMenu').classList.add('open');
