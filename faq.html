@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>よくある質問 - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      flex: 1;
+    }
+
+    .menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .menu-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+    
+    /* 検索・フィルターエリア */
+    .filter-area {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* 検索ボックス */
+    .search-box {
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 16px 14px 48px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      background: white;
+      transition: border-color 0.3s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    .search-input::placeholder {
+      color: #999;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      pointer-events: none;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #999;
+      cursor: pointer;
+      padding: 4px;
+      display: none;
+    }
+
+    .search-clear.show {
+      display: block;
+    }
+    
+    /* カテゴリセレクト */
+    .category-select-wrapper {
+      position: relative;
+    }
+
+    .category-select {
+      width: 100%;
+      padding: 14px 48px 14px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      background: white;
+      cursor: pointer;
+      transition: border-color 0.3s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .category-select:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    .category-select-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      pointer-events: none;
+    }
+    
+    /* FAQコンテナ */
+    .faq-container {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    .faq-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .faq-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+    }
+
+    .faq-header-left .material-icons {
+      font-size: 22px;
+    }
+
+    .faq-header-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    
+    .faq-count {
+      background: rgba(255,255,255,0.2);
+      color: #ffffff;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+    
+    /* 全展開/全閉ボタン */
+    .expand-controls {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px;
+      background: #f8f9fc;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .expand-btn {
+      padding: 8px 14px;
+      font-size: 12px;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+    
+    .expand-btn:hover {
+      background: #f1f5f9;
+      border-color: #1a237e;
+      color: #1a237e;
+    }
+
+    .expand-btn .material-icons {
+      font-size: 16px;
+    }
+    
+    /* FAQ項目 */
+    .faq-list {
+      padding: 0;
+    }
+    
+    .faq-item {
+      border-bottom: 1px solid #f1f5f9;
+    }
+    
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    
+    .faq-question {
+      width: 100%;
+      padding: 16px 20px;
+      background: #ffffff;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: background 0.2s;
+      font-family: inherit;
+    }
+    
+    .faq-question:hover {
+      background: #f8f9fc;
+    }
+    
+    .faq-question-number {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+    
+    .faq-question-text {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .faq-toggle {
+      color: #999;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    
+    .faq-item.open .faq-toggle {
+      transform: rotate(180deg);
+      color: #1a237e;
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    
+    .faq-item.open .faq-answer {
+      max-height: 3000px;
+    }
+    
+    .faq-answer-content {
+      padding: 0 20px 20px 20px;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.8;
+      background: #f8f9fc;
+      margin: 0 16px 16px;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    
+    .faq-answer-content p {
+      margin-bottom: 12px;
+    }
+    
+    .faq-answer-content p:last-child {
+      margin-bottom: 0;
+    }
+    
+    /* 動画リンク */
+    .video-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 10px 16px;
+      background: linear-gradient(135deg, #c62828 0%, #e53935 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    
+    .video-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(198, 40, 40, 0.3);
+    }
+
+    .video-link .material-icons {
+      font-size: 18px;
+    }
+    
+    /* ローディング */
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #e0e0e0;
+      border-top-color: #1a237e;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* エラー・検索結果なし */
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: #888;
+    }
+
+    .no-results .material-icons {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+    
+    /* 検索モード表示 */
+    .search-mode-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff3e0;
+      color: #e65100;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 500;
+      margin-left: 8px;
+    }
+    
+    .clear-search-btn {
+      background: none;
+      border: none;
+      color: #e65100;
+      cursor: pointer;
+      padding: 2px;
+      display: flex;
+      align-items: center;
+    }
+
+    .clear-search-btn .material-icons {
+      font-size: 14px;
+    }
+    
+    /* セグメント区切りヘッダー */
+    .segment-divider {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-left: 5px solid #ffc107;
+    }
+    
+    .segment-divider-icon {
+      width: 36px;
+      height: 36px;
+      background: #ffc107;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .segment-divider-icon span {
+      color: #1a237e;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    
+    .segment-divider-content {
+      flex: 1;
+    }
+    
+    .segment-divider-title {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    
+    .segment-divider-count {
+      color: rgba(255,255,255,0.7);
+      font-size: 11px;
+    }
+
+    /* ナビゲーション */
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .nav-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100%;
+      background: white;
+      z-index: 201;
+      transition: right 0.3s ease;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+      overflow-y: auto;
+    }
+
+    .nav-menu.open {
+      right: 0;
+    }
+
+    .nav-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 20px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-header-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .nav-user-section {
+      padding: 16px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #283593 0%, #3949ab 100%);
+    }
+
+    .nav-user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+    }
+
+    .nav-user-info .material-icons {
+      font-size: 24px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .nav-user-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 8px;
+      color: rgba(255,255,255,0.9);
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: inherit;
+    }
+
+    .nav-logout-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .nav-logout-btn .material-icons {
+      font-size: 16px;
+    }
+
+    .nav-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+    }
+
+    .nav-category {
+      font-size: 11px;
+      font-weight: 700;
+      color: #999;
+      padding: 16px 16px 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-section {
+      padding: 4px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      color: #333;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-item:hover {
+      background: #f5f5f5;
+    }
+
+    .nav-item .material-icons {
+      font-size: 22px;
+      color: #1a237e;
+    }
+
+    .nav-item span {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    /* レスポンシブ */
+    @media (max-width: 480px) {
+      .header-title {
+        font-size: 16px;
+      }
+
+      .faq-question {
+        padding: 14px 16px;
+      }
+
+      .faq-question-text {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <button class="back-btn" onclick="goBack()">
+      <span class="material-icons">arrow_back</span>
+    </button>
+    <h1 class="header-title">よくある質問</h1>
+    <button class="menu-btn" onclick="openNav()">
+      <span class="material-icons">menu</span>
+    </button>
+  </header>
+
+  <!-- ナビゲーションオーバーレイ -->
+  <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
+
+  <!-- ナビゲーションメニュー -->
+  <div id="navMenu" class="nav-menu">
+    <div class="nav-header">
+      <span class="nav-header-title">メニュー</span>
+      <button class="nav-close" onclick="closeNav()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+
+    <div class="nav-user-section">
+      <div class="nav-user-info">
+        <span class="material-icons">person</span>
+        <span id="navUserName" class="nav-user-name"></span>
+      </div>
+      <button class="nav-logout-btn" onclick="doLogout()">
+        <span class="material-icons">logout</span>
+        <span>ログアウト</span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <a href="index.html" class="nav-item">
+        <span class="material-icons">home</span>
+        <span>ホーム</span>
+      </a>
+    </div>
+
+    <div class="nav-category">サポート</div>
+    <div class="nav-section">
+      <a href="faq.html" class="nav-item">
+        <span class="material-icons">help</span>
+        <span>よくある質問</span>
+      </a>
+    </div>
+
+    <div class="nav-category">スケジュール</div>
+    <div class="nav-section">
+      <a href="yearly-schedule.html" class="nav-item">
+        <span class="material-icons">calendar_month</span>
+        <span>年間スケジュール</span>
+      </a>
+      <a href="schedule.html" class="nav-item">
+        <span class="material-icons">event_note</span>
+        <span>授業スケジュール</span>
+      </a>
+    </div>
+
+    <div class="nav-category">学習管理</div>
+    <div class="nav-section">
+      <a href="checklist.html" class="nav-item">
+        <span class="material-icons">checklist</span>
+        <span>チェックリスト教材</span>
+      </a>
+    </div>
+
+    <div class="nav-category">コンテンツ</div>
+    <div class="nav-section">
+      <a href="videos.html" class="nav-item">
+        <span class="material-icons">video_library</span>
+        <span>過去の集団授業動画</span>
+      </a>
+      <a href="column.html" class="nav-item">
+        <span class="material-icons">article</span>
+        <span>コラム一覧</span>
+      </a>
+    </div>
+
+    <div class="nav-category">ルール関連</div>
+    <div class="nav-section">
+      <a href="rules.html" class="nav-item">
+        <span class="material-icons">gavel</span>
+        <span>生徒/保護者ルール一覧</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="filter-area">
+      <!-- 検索ボックス -->
+      <div class="search-box">
+        <span class="material-icons search-icon">search</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="キーワードで検索...">
+        <button id="searchClear" class="search-clear" onclick="clearSearch()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+
+      <!-- カテゴリプルダウン -->
+      <div class="category-select-wrapper">
+        <select id="segmentSelect" class="category-select">
+          <option value="">読み込み中...</option>
+        </select>
+        <span class="material-icons category-select-icon">expand_more</span>
+      </div>
+    </div>
+    
+    <!-- FAQコンテナ -->
+    <div id="faqContent">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <p>読み込み中...</p>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // スプレッドシートID
+    const SPREADSHEET_ID = '1igi3X2-u5_SXkS8KoTj3QEfxgdXMNnUO6fNovDuUdGo';
+    const SHEET_NAME = 'シート1';
+    
+    // グローバル変数
+    let allFaqData = [];
+    let segments = [];
+    let currentSegmentId = null;
+    let isSearchMode = false;
+    
+    // ページ読み込み時
+    document.addEventListener('DOMContentLoaded', function() {
+      setNavUserName();
+      fetchFaqData();
+      
+      // プルダウン変更イベント
+      document.getElementById('segmentSelect').addEventListener('change', function(e) {
+        selectSegment(e.target.value);
+      });
+      
+      // 検索イベント
+      const searchInput = document.getElementById('searchInput');
+      let searchTimeout;
+      searchInput.addEventListener('input', function(e) {
+        clearTimeout(searchTimeout);
+        
+        // クリアボタンの表示
+        const clearBtn = document.getElementById('searchClear');
+        if (e.target.value.trim()) {
+          clearBtn.classList.add('show');
+        } else {
+          clearBtn.classList.remove('show');
+        }
+        
+        searchTimeout = setTimeout(function() {
+          searchFaq(e.target.value);
+        }, 300);
+      });
+    });
+
+    // スプレッドシートからデータを取得
+    async function fetchFaqData() {
+      try {
+        const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+        const response = await fetch(url);
+        const text = await response.text();
+        
+        // JSONを抽出
+        const jsonString = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*?)\);/);
+        if (!jsonString) {
+          throw new Error('データの形式が不正です');
+        }
+        
+        const data = JSON.parse(jsonString[1]);
+        const rows = data.table.rows;
+        
+        // データを整形
+        allFaqData = rows
+          .map(function(row) {
+            return {
+              segmentId: String(row.c[0]?.v || ''),
+              segmentName: row.c[1]?.v || '',
+              questionNumber: String(row.c[2]?.v || ''),
+              question: row.c[3]?.v || '',
+              answer: row.c[4]?.v || '',
+              videoUrl: row.c[5]?.v || ''
+            };
+          })
+          .filter(function(item) {
+            return item.question && !isNaN(Number(item.segmentId));
+          });
+        
+        // セグメント一覧を抽出
+        const segmentMap = new Map();
+        allFaqData.forEach(function(item) {
+          if (!segmentMap.has(item.segmentId)) {
+            segmentMap.set(item.segmentId, item.segmentName);
+          }
+        });
+        
+        segments = Array.from(segmentMap, function(entry) {
+          return { id: entry[0], name: entry[1] };
+        });
+        
+        // プルダウンを描画
+        renderSegmentSelect();
+        
+        // 初期表示（全件表示）
+        selectSegment('all');
+        
+      } catch (error) {
+        console.error('データ取得エラー:', error);
+        showError();
+      }
+    }
+    
+    // セグメントプルダウンを描画
+    function renderSegmentSelect() {
+      const select = document.getElementById('segmentSelect');
+      const allCount = allFaqData.length;
+      
+      let optionsHtml = '<option value="all">すべて表示（' + allCount + '件）</option>';
+      segments.forEach(function(seg) {
+        const count = allFaqData.filter(function(f) { return f.segmentId === seg.id; }).length;
+        optionsHtml += '<option value="' + seg.id + '">' + seg.name + '（' + count + '件）</option>';
+      });
+      
+      select.innerHTML = optionsHtml;
+    }
+    
+    // セグメント選択
+    function selectSegment(segmentId) {
+      currentSegmentId = String(segmentId);
+      isSearchMode = false;
+      
+      // プルダウンの値を更新
+      document.getElementById('segmentSelect').value = currentSegmentId;
+      
+      // 検索をクリア
+      document.getElementById('searchInput').value = '';
+      document.getElementById('searchClear').classList.remove('show');
+      
+      // FAQを描画
+      const filtered = currentSegmentId === 'all' 
+        ? allFaqData 
+        : allFaqData.filter(function(item) { return item.segmentId === currentSegmentId; });
+      renderFaqList(filtered);
+    }
+    
+    // FAQ一覧を描画
+    function renderFaqList(faqItems) {
+      const container = document.getElementById('faqContent');
+      
+      if (faqItems.length === 0) {
+        container.innerHTML = `
+          <div class="faq-container">
+            <div class="no-results">
+              <span class="material-icons">search_off</span>
+              <p>該当する質問が見つかりませんでした</p>
+            </div>
+          </div>
+        `;
+        return;
+      }
+      
+      const currentSegment = segments.find(function(s) { return s.id === currentSegmentId; });
+      const headerTitle = isSearchMode 
+        ? '検索結果' 
+        : (currentSegmentId === 'all' ? 'すべての質問' : (currentSegment ? currentSegment.name : ''));
+      
+      const searchBadge = isSearchMode ? `
+        <span class="search-mode-badge">
+          検索中
+          <button class="clear-search-btn" onclick="clearSearch()">
+            <span class="material-icons">close</span>
+          </button>
+        </span>
+      ` : '';
+      
+      // 「すべて表示」の場合はセグメントごとにグループ化
+      let faqListHtml = '';
+      if (currentSegmentId === 'all' && !isSearchMode) {
+        faqListHtml = renderFaqListGrouped(faqItems);
+      } else {
+        faqListHtml = faqItems.map(function(item) { return renderFaqItem(item); }).join('');
+      }
+      
+      container.innerHTML = `
+        <div class="faq-container">
+          <div class="faq-header">
+            <div class="faq-header-left">
+              <span class="material-icons">help</span>
+              <span class="faq-header-title">${headerTitle}</span>
+              ${searchBadge}
+            </div>
+            <span class="faq-count">${faqItems.length}件</span>
+          </div>
+          <div class="expand-controls">
+            <button class="expand-btn" onclick="expandAll()">
+              <span class="material-icons">unfold_more</span>
+              すべて開く
+            </button>
+            <button class="expand-btn" onclick="collapseAll()">
+              <span class="material-icons">unfold_less</span>
+              すべて閉じる
+            </button>
+          </div>
+          <div class="faq-list">
+            ${faqListHtml}
+          </div>
+        </div>
+      `;
+    }
+    
+    // セグメントごとにグループ化して描画
+    function renderFaqListGrouped(faqItems) {
+      let html = '';
+      let currentSegId = null;
+      let segmentIndex = 0;
+      
+      faqItems.forEach(function(item) {
+        if (item.segmentId !== currentSegId) {
+          currentSegId = item.segmentId;
+          segmentIndex++;
+          const segmentCount = faqItems.filter(function(f) { return f.segmentId === currentSegId; }).length;
+          html += `
+            <div class="segment-divider">
+              <div class="segment-divider-icon">
+                <span>${segmentIndex}</span>
+              </div>
+              <div class="segment-divider-content">
+                <div class="segment-divider-title">${escapeHtml(item.segmentName)}</div>
+                <div class="segment-divider-count">${segmentCount}件の質問</div>
+              </div>
+            </div>
+          `;
+        }
+        html += renderFaqItem(item);
+      });
+      
+      return html;
+    }
+    
+    // FAQ項目を描画
+    function renderFaqItem(item) {
+      const videoLink = item.videoUrl ? `
+        <a href="${escapeHtml(item.videoUrl)}" target="_blank" rel="noopener" class="video-link">
+          <span class="material-icons">play_circle</span>
+          解説動画を見る
+        </a>
+      ` : '';
+      
+      const answerHtml = '<p>' + escapeHtml(item.answer).replace(/\n/g, '<br>') + '</p>';
+      
+      return `
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-number">Q${escapeHtml(item.questionNumber)}</span>
+            <span class="faq-question-text">${escapeHtml(item.question)}</span>
+            <span class="material-icons faq-toggle">expand_more</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              ${answerHtml}
+              ${videoLink}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    
+    // FAQ開閉
+    function toggleFaq(button) {
+      const item = button.closest('.faq-item');
+      item.classList.toggle('open');
+    }
+    
+    // すべて開く
+    function expandAll() {
+      document.querySelectorAll('.faq-item').forEach(function(item) {
+        item.classList.add('open');
+      });
+    }
+    
+    // すべて閉じる
+    function collapseAll() {
+      document.querySelectorAll('.faq-item').forEach(function(item) {
+        item.classList.remove('open');
+      });
+    }
+    
+    // 検索
+    function searchFaq(query) {
+      if (!query.trim()) {
+        isSearchMode = false;
+        if (currentSegmentId) {
+          const filtered = currentSegmentId === 'all' 
+            ? allFaqData 
+            : allFaqData.filter(function(item) { return item.segmentId === currentSegmentId; });
+          renderFaqList(filtered);
+        }
+        return;
+      }
+      
+      isSearchMode = true;
+      const keywords = query.toLowerCase().split(/\s+/);
+      const results = allFaqData.filter(function(item) {
+        const searchText = (item.question + ' ' + item.answer).toLowerCase();
+        return keywords.every(function(kw) { return searchText.includes(kw); });
+      });
+      
+      renderFaqList(results);
+    }
+    
+    // 検索クリア
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('searchClear').classList.remove('show');
+      isSearchMode = false;
+      if (currentSegmentId) {
+        const filtered = currentSegmentId === 'all' 
+          ? allFaqData 
+          : allFaqData.filter(function(item) { return item.segmentId === currentSegmentId; });
+        renderFaqList(filtered);
+      }
+    }
+    
+    // エラー表示
+    function showError() {
+      const container = document.getElementById('faqContent');
+      container.innerHTML = `
+        <div class="faq-container">
+          <div class="no-results">
+            <span class="material-icons">error</span>
+            <p>データの読み込みに失敗しました</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // HTMLエスケープ
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // 戻るボタン
+    function goBack() {
+      window.location.href = 'index.html?t=' + new Date().getTime();
+    }
+
+    // ナビゲーション
+    function openNav() {
+      document.getElementById('navMenu').classList.add('open');
+      document.getElementById('navOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav() {
+      document.getElementById('navMenu').classList.remove('open');
+      document.getElementById('navOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function doLogout() {
+      localStorage.removeItem('eqao_loggedIn');
+      localStorage.removeItem('eqao_studentId');
+      localStorage.removeItem('eqao_studentName');
+      localStorage.removeItem('eqao_password');
+      localStorage.removeItem('eqao_rowIndex');
+      localStorage.removeItem('eqao_isAdmin');
+      window.location.href = 'index.html';
+    }
+
+    function setNavUserName() {
+      const studentName = localStorage.getItem('eqao_studentName');
+      const navUserName = document.getElementById('navUserName');
+      if (navUserName) {
+        navUserName.textContent = studentName || '';
+      }
+    }
+  </script>
+</body>
+</html>

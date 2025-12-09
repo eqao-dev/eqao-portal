@@ -108,6 +108,65 @@
       font-size: 22px;
     }
 
+    /* FAQバナー */
+    .faq-banner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
+      border: 2px solid #e8ecf4;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+    }
+
+    .faq-banner:hover {
+      border-color: #1a237e;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .faq-banner-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .faq-banner-icon .material-icons {
+      color: white;
+      font-size: 26px;
+    }
+
+    .faq-banner-content {
+      flex: 1;
+    }
+
+    .faq-banner-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 2px;
+    }
+
+    .faq-banner-desc {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .faq-banner-arrow {
+      color: #999;
+      font-size: 24px;
+    }
+
     .section {
       margin-bottom: 24px;
     }
@@ -837,6 +896,10 @@
         <span class="material-icons">home</span>
         <span>ホーム</span>
       </a>
+      <a href="faq.html" class="nav-item">
+        <span class="material-icons">help</span>
+        <span>よくある質問</span>
+      </a>
     </div>
 
     <div class="nav-category">スケジュール</div>
@@ -1059,6 +1122,18 @@
         保護者専用<br>公式LINE<br>[連絡用]
       </a>
     </div>
+
+    <!-- よくある質問バナー -->
+    <a href="faq.html" class="faq-banner">
+      <div class="faq-banner-icon">
+        <span class="material-icons">help</span>
+      </div>
+      <div class="faq-banner-content">
+        <div class="faq-banner-title">よくある質問</div>
+        <div class="faq-banner-desc">総合型選抜・EQAOについてのQ&A</div>
+      </div>
+      <span class="material-icons faq-banner-arrow">chevron_right</span>
+    </a>
 
     <div class="section">
       <h2 class="section-title">スケジュール</h2>
