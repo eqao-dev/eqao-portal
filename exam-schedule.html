@@ -152,6 +152,10 @@
       font-size: 10px;
       font-weight: 700;
       color: #004D40;
+      position: sticky;
+      left: 0;
+      background: white;
+      z-index: 5;
     }
 
     .gantt-months {
@@ -235,6 +239,10 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      position: sticky;
+      left: 0;
+      background: white;
+      z-index: 5;
     }
 
     .category-color {
@@ -286,57 +294,19 @@
     .bg-red { background: #E05555; }
     .bg-gray { background: #546E7A; }
 
-    /* 凡例とヒントの行 */
-    .legend-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid #80CBC4;
-      flex-wrap: wrap;
-    }
-
-    /* 凡例 */
-    .gantt-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 16px;
-      flex: 1;
-    }
-
-    .legend-item {
+    /* ヒント */
+    .chart-hint {
       display: flex;
       align-items: center;
-      gap: 5px;
-      font-size: 10px;
-      color: #333;
-    }
-
-    .legend-color {
-      width: 16px;
-      height: 8px;
-      border-radius: 4px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    }
-
-    /* 月選択ヒント */
-    .month-hint {
-      display: inline-flex;
-      align-items: center;
+      justify-content: center;
       gap: 4px;
-      padding: 4px 10px;
-      background: #FFEBEE;
-      border: 1px solid #E05555;
-      border-radius: 20px;
-      font-size: 10px;
-      color: #C62828;
-      font-weight: 500;
+      font-size: 11px;
+      color: #00897B;
+      margin-top: 8px;
     }
 
-    .month-hint .material-icons {
-      font-size: 14px;
+    .chart-hint .material-icons {
+      font-size: 16px;
     }
 
     /* 月詳細カード */
@@ -392,20 +362,59 @@
       border-left: 4px solid #00695C;
     }
 
-    .month-tasks-title {
+    /* タスクトグル */
+    .tasks-toggle {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .tasks-toggle-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .tasks-toggle-header:hover {
+      background: #E0F2F1;
+    }
+
+    .tasks-toggle-title {
       font-size: 13px;
       font-weight: 700;
       color: #00695C;
-      margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
+    .tasks-toggle-icon {
+      color: #00897B;
+      transition: transform 0.3s;
+    }
+
+    .tasks-toggle.open .tasks-toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .tasks-toggle-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .tasks-toggle.open .tasks-toggle-content {
+      max-height: 1000px;
+    }
+
     .month-tasks {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
+      padding: 0 14px 14px;
     }
 
     .month-task-item {
@@ -413,7 +422,7 @@
       align-items: flex-start;
       gap: 10px;
       padding: 10px 14px;
-      background: white;
+      background: #E0F2F1;
       border-radius: 8px;
       font-size: 13px;
       color: #333;
@@ -1191,13 +1200,10 @@
           <div class="gantt-chart" id="ganttChart"></div>
         </div>
 
-        <!-- 凡例とヒント -->
-        <div class="legend-row">
-          <div class="gantt-legend" id="ganttLegend"></div>
-          <div class="month-hint">
-            <span class="material-icons">touch_app</span>
-            <span>月をタップで詳細表示</span>
-          </div>
+        <!-- ヒント -->
+        <div class="chart-hint">
+          <span class="material-icons">touch_app</span>
+          <span>月をタップで詳細表示</span>
         </div>
 
         <!-- 月詳細カード -->
@@ -2265,11 +2271,9 @@
     function renderGanttChart() {
       const data = idealScheduleData[selectedGrade];
       const container = document.getElementById('ganttChart');
-      const legendContainer = document.getElementById('ganttLegend');
 
       if (!data || !data.months || data.months.length === 0) {
         container.innerHTML = '<div class="todo-empty"><span class="material-icons">construction</span><p>準備中です</p></div>';
-        legendContainer.innerHTML = '';
         return;
       }
 
@@ -2322,13 +2326,6 @@
       });
 
       container.innerHTML = html;
-
-      // 凡例
-      let legendHtml = '';
-      categories.forEach(cat => {
-        legendHtml += `<div class="legend-item"><div class="legend-color bg-${cat.color}"></div>${cat.name}</div>`;
-      });
-      legendContainer.innerHTML = legendHtml;
     }
 
     // 月が範囲内かチェック
@@ -2394,7 +2391,7 @@
       }
 
       let html = '<div class="month-detail-header">';
-      html += `<div class="month-badge">${month}月</div>`;
+      html += `<div class="month-badge">${selectedGrade} ${month}月</div>`;
       html += `<div class="month-title">${detail.title}</div>`;
       html += '</div>';
 
@@ -2403,16 +2400,31 @@
       }
 
       if (detail.tasks && detail.tasks.length > 0) {
-        html += '<div class="month-tasks-title"><span class="material-icons">check_circle</span>具体的な行動</div>';
+        html += '<div class="tasks-toggle" id="tasksToggle">';
+        html += '<div class="tasks-toggle-header" onclick="toggleTasks()">';
+        html += '<div class="tasks-toggle-title"><span class="material-icons">check_circle</span>具体的な行動（' + detail.tasks.length + '件）</div>';
+        html += '<span class="material-icons tasks-toggle-icon">expand_more</span>';
+        html += '</div>';
+        html += '<div class="tasks-toggle-content">';
         html += '<div class="month-tasks">';
         detail.tasks.forEach(task => {
           html += `<div class="month-task-item"><span class="material-icons">check</span><span>${task}</span></div>`;
         });
         html += '</div>';
+        html += '</div>';
+        html += '</div>';
       }
 
       container.innerHTML = html;
       container.classList.add('show');
+    }
+
+    // タスクトグル
+    function toggleTasks() {
+      const toggle = document.getElementById('tasksToggle');
+      if (toggle) {
+        toggle.classList.toggle('open');
+      }
     }
 
     // Todoリスト描画（仮実装）
