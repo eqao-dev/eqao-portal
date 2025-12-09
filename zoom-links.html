@@ -151,39 +151,11 @@
       display: block;
     }
 
-    /* 説明文 */
-    .page-desc {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 16px 20px;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .page-desc-icon {
-      width: 44px;
-      height: 44px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .page-desc-icon .material-icons {
-      color: white;
-      font-size: 24px;
-    }
-
-    .page-desc-text {
-      font-size: 13px;
-      color: rgba(255,255,255,0.95);
-      line-height: 1.5;
+    .search-hint {
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+      margin-top: 8px;
+      padding-left: 4px;
     }
 
     /* 注意書きセクション */
@@ -727,14 +699,7 @@
             <span class="material-icons">close</span>
           </button>
         </div>
-      </div>
-
-      <!-- 説明文 -->
-      <div class="page-desc">
-        <div class="page-desc-icon">
-          <span class="material-icons">videocam</span>
-        </div>
-        <div class="page-desc-text">授業の際は、担当講師のZoomリンクからご参加ください。</div>
+        <p class="search-hint">担当講師のZoomリンクからご参加ください</p>
       </div>
 
       <!-- 注意書き（折りたたみ） -->
