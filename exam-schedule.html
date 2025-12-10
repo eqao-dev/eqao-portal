@@ -3312,7 +3312,7 @@
     // ============================================
     
     let schools = [];
-    let selectedSchoolIndex = 0;
+    let selectedSchoolIndex = -1;
     let editingSchoolId = null;
 
     // 志望校タブ描画
@@ -3358,7 +3358,12 @@
 
     // 志望校選択
     function selectSchool(index) {
-      selectedSchoolIndex = index;
+      // 同じものをクリックしたら閉じる（トグル）
+      if (selectedSchoolIndex === index) {
+        selectedSchoolIndex = -1;
+      } else {
+        selectedSchoolIndex = index;
+      }
       renderSchoolTabs();
     }
 
