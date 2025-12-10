@@ -155,7 +155,7 @@
       position: sticky;
       left: 0;
       background: white;
-      z-index: 5;
+      z-index: 15;
       box-shadow: 2px 0 4px rgba(0,0,0,0.08);
     }
 
@@ -228,6 +228,7 @@
       display: flex;
       margin-bottom: 2px;
       align-items: center;
+      position: relative;
     }
 
     .gantt-category {
@@ -243,7 +244,7 @@
       position: sticky;
       left: 0;
       background: white;
-      z-index: 5;
+      z-index: 10;
       box-shadow: 2px 0 4px rgba(0,0,0,0.08);
     }
 
@@ -426,7 +427,7 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
-      padding: 0 14px 14px;
+      padding: 12px 14px 14px;
     }
 
     .month-task-item {
@@ -3928,7 +3929,7 @@
       if (newGoals) {
         goalsText.textContent = newGoals;
       } else {
-        goalsText.innerHTML = '<div class="monthly-goals-empty"><span class="material-icons">edit_note</span><p>まだ入力されていません</p></div>';
+        goalsText.textContent = '';
       }
 
       // 編集モードを閉じる
@@ -4256,11 +4257,11 @@
           monthlyGoals[key] = data.content;
           goalsText.textContent = data.content;
         } else {
-          goalsText.innerHTML = '<div class="monthly-goals-empty"><span class="material-icons">edit_note</span><p>まだ入力されていません<br>「編集」ボタンから入力できます</p></div>';
+          goalsText.textContent = '';
         }
       } catch (error) {
         console.error('API error:', error);
-        goalsText.innerHTML = '<div class="monthly-goals-empty"><span class="material-icons">edit_note</span><p>まだ入力されていません<br>「編集」ボタンから入力できます</p></div>';
+        goalsText.textContent = '';
       }
     }
 
