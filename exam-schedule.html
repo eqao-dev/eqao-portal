@@ -1748,129 +1748,176 @@
     /* ============================================
        宿題・授業履歴セクション
        ============================================ */
-    .homework-list {
+    .lesson-list-wrapper {
+      margin-bottom: 16px;
+    }
+
+    .lesson-list {
       display: flex;
-      flex-direction: column;
       gap: 8px;
-      max-height: 400px;
-      overflow-y: auto;
-      padding-right: 4px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      -webkit-overflow-scrolling: touch;
     }
 
-    .homework-list::-webkit-scrollbar {
-      width: 6px;
+    .lesson-list::-webkit-scrollbar {
+      height: 6px;
     }
 
-    .homework-list::-webkit-scrollbar-track {
+    .lesson-list::-webkit-scrollbar-track {
       background: #F0F0F0;
       border-radius: 3px;
     }
 
-    .homework-list::-webkit-scrollbar-thumb {
+    .lesson-list::-webkit-scrollbar-thumb {
       background: #BDBDBD;
       border-radius: 3px;
     }
 
-    .homework-list::-webkit-scrollbar-thumb:hover {
-      background: #9E9E9E;
+    .lesson-item {
+      flex-shrink: 0;
+      min-width: 100px;
+      padding: 12px 14px;
+      background: white;
+      border: 2px solid #E0E0E0;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
     }
 
-    .homework-item {
+    .lesson-item:hover {
+      border-color: #00897B;
+      background: #E0F2F1;
+    }
+
+    .lesson-item.active {
+      border-color: #00897B;
+      background: linear-gradient(135deg, #00897B 0%, #26A69A 100%);
+      color: white;
+    }
+
+    .lesson-item-date {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .lesson-item-type {
+      font-size: 11px;
+      font-weight: 600;
+      margin-top: 4px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    .lesson-item:not(.active) .lesson-item-type.type-english {
+      background: rgba(136, 14, 79, 0.15);
+      color: #880e4f;
+    }
+
+    .lesson-item:not(.active) .lesson-item-type.type-essay {
+      background: rgba(230, 81, 0, 0.15);
+      color: #e65100;
+    }
+
+    .lesson-item:not(.active) .lesson-item-type.type-interview {
+      background: rgba(27, 94, 32, 0.15);
+      color: #1b5e20;
+    }
+
+    .lesson-item:not(.active) .lesson-item-type.type-normal {
+      background: rgba(26, 35, 126, 0.15);
+      color: #1a237e;
+    }
+
+    .lesson-item.active .lesson-item-type {
+      background: rgba(255, 255, 255, 0.25);
+      color: white;
+    }
+
+    .lesson-item-teacher {
+      font-size: 11px;
+      margin-top: 4px;
+      opacity: 0.8;
+    }
+
+    .lesson-detail-card {
       background: #FAFAFA;
       border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #E0E0E0;
+      padding: 20px;
+      display: none;
     }
 
-    .homework-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 16px;
-      cursor: pointer;
-      transition: background 0.2s;
+    .lesson-detail-card.show {
+      display: block;
     }
 
-    .homework-header:hover {
-      background: #F0F0F0;
-    }
-
-    .homework-item.open .homework-header {
-      background: #E0F2F1;
-      border-bottom: 1px solid #B2DFDB;
-    }
-
-    .homework-summary {
+    .lesson-detail-header {
       display: flex;
       align-items: center;
       gap: 12px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
     }
 
-    .homework-date {
-      font-size: 14px;
+    .lesson-detail-date {
+      font-size: 18px;
       font-weight: 700;
       color: #333;
     }
 
-    .homework-type {
+    .lesson-detail-badge {
       font-size: 12px;
       font-weight: 600;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 12px;
-      background: #E3F2FD;
-      color: #1565C0;
+      color: white;
     }
 
-    .homework-teacher {
-      font-size: 13px;
+    .lesson-detail-badge.type-english {
+      background: linear-gradient(135deg, #880e4f 0%, #ad1457 100%);
+    }
+
+    .lesson-detail-badge.type-essay {
+      background: linear-gradient(135deg, #e65100 0%, #f57c00 100%);
+    }
+
+    .lesson-detail-badge.type-interview {
+      background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+    }
+
+    .lesson-detail-badge.type-normal {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+    }
+
+    .lesson-detail-teacher {
+      font-size: 14px;
       color: #666;
     }
 
-    .homework-arrow {
-      color: #999;
-      transition: transform 0.3s;
+    .lesson-detail-section {
+      background: white;
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 12px;
     }
 
-    .homework-item.open .homework-arrow {
-      transform: rotate(180deg);
-      color: #00897B;
-    }
-
-    .homework-detail {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-
-    .homework-item.open .homework-detail {
-      max-height: 500px;
-    }
-
-    .homework-section {
-      padding: 14px 16px;
-      border-top: 1px solid #E8E8E8;
-    }
-
-    .homework-section:first-child {
-      border-top: none;
-    }
-
-    .homework-section-title {
+    .lesson-detail-section-title {
       font-size: 12px;
       font-weight: 700;
       color: #00897B;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .homework-section-title .material-icons {
+    .lesson-detail-section-title .material-icons {
       font-size: 16px;
     }
 
-    .homework-section-content {
+    .lesson-detail-section-content {
       font-size: 14px;
       color: #444;
       line-height: 1.7;
@@ -2224,273 +2271,16 @@
         <span class="section-title">宿題・授業履歴</span>
       </div>
       <div class="section-content">
-        <div class="homework-list" id="homeworkList">
-          <!-- サンプルデータ（将来的にAPIから取得） -->
-          <div class="homework-item">
-            <div class="homework-header" onclick="toggleHomework(this)">
-              <div class="homework-summary">
-                <span class="homework-date">12/10（火）</span>
-                <span class="homework-type">英語</span>
-                <span class="homework-teacher">山田先生</span>
-              </div>
-              <span class="material-icons homework-arrow">expand_more</span>
-            </div>
-            <div class="homework-detail">
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">menu_book</span>
-                  授業内容
-                </div>
-                <div class="homework-section-content">
-                  ・IELTS Reading対策<br>
-                  ・時間配分の練習<br>
-                  ・長文読解のコツ
-                </div>
-              </div>
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">edit_note</span>
-                  宿題／課題
-                </div>
-                <div class="homework-section-content">
-                  ・Reading過去問 Test3 を解く<br>
-                  ・単語帳 Unit5 を暗記
-                </div>
-              </div>
-            </div>
+        <!-- 授業リスト（横スクロール） -->
+        <div class="lesson-list-wrapper">
+          <div class="lesson-list" id="lessonList">
+            <!-- JSで描画 -->
           </div>
+        </div>
 
-          <div class="homework-item">
-            <div class="homework-header" onclick="toggleHomework(this)">
-              <div class="homework-summary">
-                <span class="homework-date">12/8（日）</span>
-                <span class="homework-type">小論文</span>
-                <span class="homework-teacher">佐藤先生</span>
-              </div>
-              <span class="material-icons homework-arrow">expand_more</span>
-            </div>
-            <div class="homework-detail">
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">menu_book</span>
-                  授業内容
-                </div>
-                <div class="homework-section-content">
-                  ・志望理由書の添削<br>
-                  ・論理構成の見直し
-                </div>
-              </div>
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">edit_note</span>
-                  宿題／課題
-                </div>
-                <div class="homework-section-content">
-                  ・志望理由書の修正版を提出<br>
-                  ・活動報告書の下書きを作成
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="homework-item">
-            <div class="homework-header" onclick="toggleHomework(this)">
-              <div class="homework-summary">
-                <span class="homework-date">12/5（木）</span>
-                <span class="homework-type">面接対策</span>
-                <span class="homework-teacher">鈴木先生</span>
-              </div>
-              <span class="material-icons homework-arrow">expand_more</span>
-            </div>
-            <div class="homework-detail">
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">menu_book</span>
-                  授業内容
-                </div>
-                <div class="homework-section-content">
-                  ・模擬面接の実施<br>
-                  ・志望動機の深掘り練習
-                </div>
-              </div>
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">edit_note</span>
-                  宿題／課題
-                </div>
-                <div class="homework-section-content">
-                  ・想定質問50問への回答を用意<br>
-                  ・自己PRの1分バージョンを暗記
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="homework-item">
-            <div class="homework-header" onclick="toggleHomework(this)">
-              <div class="homework-summary">
-                <span class="homework-date">12/3（火）</span>
-                <span class="homework-type">英語</span>
-                <span class="homework-teacher">山田先生</span>
-              </div>
-              <span class="material-icons homework-arrow">expand_more</span>
-            </div>
-            <div class="homework-detail">
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">menu_book</span>
-                  授業内容
-                </div>
-                <div class="homework-section-content">
-                  ・IELTS Writing Task2 対策<br>
-                  ・エッセイ構成の基本<br>
-                  ・意見文の書き方
-                </div>
-              </div>
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">edit_note</span>
-                  宿題／課題
-                </div>
-                <div class="homework-section-content">
-                  ・Writing過去問 1題を書く<br>
-                  ・模範解答を読んで分析
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="homework-item">
-            <div class="homework-header" onclick="toggleHomework(this)">
-              <div class="homework-summary">
-                <span class="homework-date">12/1（日）</span>
-                <span class="homework-type">小論文</span>
-                <span class="homework-teacher">佐藤先生</span>
-              </div>
-              <span class="material-icons homework-arrow">expand_more</span>
-            </div>
-            <div class="homework-detail">
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">menu_book</span>
-                  授業内容
-                </div>
-                <div class="homework-section-content">
-                  ・過去問演習（2023年度）<br>
-                  ・時事問題の知識整理
-                </div>
-              </div>
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">edit_note</span>
-                  宿題／課題
-                </div>
-                <div class="homework-section-content">
-                  ・時事ニュース5本を要約<br>
-                  ・過去問をもう1年分解く
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="homework-item">
-            <div class="homework-header" onclick="toggleHomework(this)">
-              <div class="homework-summary">
-                <span class="homework-date">11/28（木）</span>
-                <span class="homework-type">面接対策</span>
-                <span class="homework-teacher">鈴木先生</span>
-              </div>
-              <span class="material-icons homework-arrow">expand_more</span>
-            </div>
-            <div class="homework-detail">
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">menu_book</span>
-                  授業内容
-                </div>
-                <div class="homework-section-content">
-                  ・グループディスカッション練習<br>
-                  ・他者の意見への対応方法
-                </div>
-              </div>
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">edit_note</span>
-                  宿題／課題
-                </div>
-                <div class="homework-section-content">
-                  ・ニュースを3本読み意見をまとめる<br>
-                  ・GDテーマ例を5つ考える
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="homework-item">
-            <div class="homework-header" onclick="toggleHomework(this)">
-              <div class="homework-summary">
-                <span class="homework-date">11/26（火）</span>
-                <span class="homework-type">英語</span>
-                <span class="homework-teacher">山田先生</span>
-              </div>
-              <span class="material-icons homework-arrow">expand_more</span>
-            </div>
-            <div class="homework-detail">
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">menu_book</span>
-                  授業内容
-                </div>
-                <div class="homework-section-content">
-                  ・IELTS Listening対策<br>
-                  ・セクション別攻略法
-                </div>
-              </div>
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">edit_note</span>
-                  宿題／課題
-                </div>
-                <div class="homework-section-content">
-                  ・Listening過去問 Test2 を解く<br>
-                  ・シャドーイング15分×3日
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="homework-item">
-            <div class="homework-header" onclick="toggleHomework(this)">
-              <div class="homework-summary">
-                <span class="homework-date">11/24（日）</span>
-                <span class="homework-type">小論文</span>
-                <span class="homework-teacher">佐藤先生</span>
-              </div>
-              <span class="material-icons homework-arrow">expand_more</span>
-            </div>
-            <div class="homework-detail">
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">menu_book</span>
-                  授業内容
-                </div>
-                <div class="homework-section-content">
-                  ・要約問題の解き方<br>
-                  ・キーワード抽出の練習
-                </div>
-              </div>
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">edit_note</span>
-                  宿題／課題
-                </div>
-                <div class="homework-section-content">
-                  ・新聞社説を3本要約（各200字）<br>
-                  ・要約チェックリストを確認
-                </div>
-              </div>
-            </div>
-          </div>
+        <!-- 詳細表示エリア -->
+        <div class="lesson-detail-card" id="lessonDetail">
+          <!-- JSで描画 -->
         </div>
 
         <!-- 空状態（データがない場合） -->
@@ -3924,59 +3714,164 @@
     // ============================================
 
     // アコーディオントグル
-    function toggleHomework(header) {
-      const item = header.closest('.homework-item');
-      item.classList.toggle('open');
+    // ============================================
+    // 宿題・授業履歴関連
+    // ============================================
+
+    // サンプルデータ（将来的にAPIから取得）
+    const lessonData = [
+      {
+        date: '12/10（火）',
+        type: '英語',
+        teacher: '山田先生',
+        content: '・IELTS Reading対策<br>・時間配分の練習<br>・長文読解のコツ',
+        homework: '・Reading過去問 Test3 を解く<br>・単語帳 Unit5 を暗記'
+      },
+      {
+        date: '12/8（日）',
+        type: '小論文',
+        teacher: '佐藤先生',
+        content: '・志望理由書の添削<br>・論理構成の見直し',
+        homework: '・志望理由書の修正版を提出<br>・活動報告書の下書きを作成'
+      },
+      {
+        date: '12/5（木）',
+        type: '面接対策',
+        teacher: '鈴木先生',
+        content: '・模擬面接の実施<br>・志望動機の深掘り練習',
+        homework: '・想定質問50問への回答を用意<br>・自己PRの1分バージョンを暗記'
+      },
+      {
+        date: '12/3（火）',
+        type: '英語',
+        teacher: '山田先生',
+        content: '・IELTS Writing Task2 対策<br>・エッセイ構成の基本<br>・意見文の書き方',
+        homework: '・Writing過去問 1題を書く<br>・模範解答を読んで分析'
+      },
+      {
+        date: '12/1（日）',
+        type: '小論文',
+        teacher: '佐藤先生',
+        content: '・過去問演習（2023年度）<br>・時事問題の知識整理',
+        homework: '・時事ニュース5本を要約<br>・過去問をもう1年分解く'
+      },
+      {
+        date: '11/28（木）',
+        type: '面接対策',
+        teacher: '鈴木先生',
+        content: '・グループディスカッション練習<br>・他者の意見への対応方法',
+        homework: '・ニュースを3本読み意見をまとめる<br>・GDテーマ例を5つ考える'
+      },
+      {
+        date: '11/26（火）',
+        type: '英語',
+        teacher: '山田先生',
+        content: '・IELTS Listening対策<br>・セクション別攻略法',
+        homework: '・Listening過去問 Test2 を解く<br>・シャドーイング15分×3日'
+      },
+      {
+        date: '11/24（日）',
+        type: '小論文',
+        teacher: '佐藤先生',
+        content: '・要約問題の解き方<br>・キーワード抽出の練習',
+        homework: '・新聞社説を3本要約（各200字）<br>・要約チェックリストを確認'
+      }
+    ];
+
+    let selectedLessonIndex = 0;
+
+    // 授業種類に応じたCSSクラスを取得
+    function getLessonTypeClass(type) {
+      if (!type) return 'type-normal';
+      if (type.includes('英語')) return 'type-english';
+      if (type.includes('小論文')) return 'type-essay';
+      if (type.includes('面接')) return 'type-interview';
+      return 'type-normal';
     }
 
-    // 宿題データ（将来的にAPIから取得）
-    let homeworkData = [];
-
-    // 宿題リスト描画（将来的にAPIと連携）
-    function renderHomeworkList() {
-      const container = document.getElementById('homeworkList');
+    // 授業リストを描画
+    function renderLessonList() {
+      const container = document.getElementById('lessonList');
       const emptyState = document.getElementById('homeworkEmpty');
       
-      if (homeworkData.length === 0) {
-        // サンプルデータがあるので今は何もしない
-        // 将来的にはここでAPIからデータを取得して描画
+      if (lessonData.length === 0) {
+        container.innerHTML = '';
+        emptyState.style.display = 'block';
         return;
       }
       
+      emptyState.style.display = 'none';
+      
       let html = '';
-      homeworkData.forEach((item, index) => {
+      lessonData.forEach((lesson, index) => {
+        const typeClass = getLessonTypeClass(lesson.type);
+        const activeClass = index === selectedLessonIndex ? 'active' : '';
         html += `
-          <div class="homework-item">
-            <div class="homework-header" onclick="toggleHomework(this)">
-              <div class="homework-summary">
-                <span class="homework-date">${escapeHtml(item.date)}</span>
-                <span class="homework-type">${escapeHtml(item.type)}</span>
-                <span class="homework-teacher">${escapeHtml(item.teacher)}</span>
-              </div>
-              <span class="material-icons homework-arrow">expand_more</span>
-            </div>
-            <div class="homework-detail">
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">menu_book</span>
-                  授業内容
-                </div>
-                <div class="homework-section-content">${item.content}</div>
-              </div>
-              <div class="homework-section">
-                <div class="homework-section-title">
-                  <span class="material-icons">edit_note</span>
-                  宿題／課題
-                </div>
-                <div class="homework-section-content">${item.homework}</div>
-              </div>
-            </div>
+          <div class="lesson-item ${activeClass}" onclick="selectLesson(${index})">
+            <div class="lesson-item-date">${escapeHtml(lesson.date)}</div>
+            <div class="lesson-item-type ${typeClass}">${escapeHtml(lesson.type)}</div>
+            <div class="lesson-item-teacher">${escapeHtml(lesson.teacher)}</div>
           </div>
         `;
       });
       
       container.innerHTML = html;
-      emptyState.style.display = 'none';
+      renderLessonDetail();
+    }
+
+    // 授業を選択
+    function selectLesson(index) {
+      selectedLessonIndex = index;
+      
+      // アクティブ状態を更新
+      document.querySelectorAll('.lesson-item').forEach((item, i) => {
+        if (i === index) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+      
+      renderLessonDetail();
+    }
+
+    // 授業詳細を描画
+    function renderLessonDetail() {
+      const container = document.getElementById('lessonDetail');
+      const lesson = lessonData[selectedLessonIndex];
+      
+      if (!lesson) {
+        container.classList.remove('show');
+        return;
+      }
+      
+      const typeClass = getLessonTypeClass(lesson.type);
+      
+      container.innerHTML = `
+        <div class="lesson-detail-header">
+          <div class="lesson-detail-date">${escapeHtml(lesson.date)}</div>
+          <div class="lesson-detail-badge ${typeClass}">${escapeHtml(lesson.type)}</div>
+          <div class="lesson-detail-teacher">${escapeHtml(lesson.teacher)}</div>
+        </div>
+        
+        <div class="lesson-detail-section">
+          <div class="lesson-detail-section-title">
+            <span class="material-icons">menu_book</span>
+            授業内容
+          </div>
+          <div class="lesson-detail-section-content">${lesson.content}</div>
+        </div>
+        
+        <div class="lesson-detail-section">
+          <div class="lesson-detail-section-title">
+            <span class="material-icons">edit_note</span>
+            宿題／課題
+          </div>
+          <div class="lesson-detail-section-content">${lesson.homework}</div>
+        </div>
+      `;
+      
+      container.classList.add('show');
     }
 
     // ============================================
@@ -4482,6 +4377,9 @@
         
         // 志望校を読み込み
         loadSchools();
+        
+        // 授業履歴を描画
+        renderLessonList();
         
       } catch (e) {
         console.error('Initialization error:', e);
