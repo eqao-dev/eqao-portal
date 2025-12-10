@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>志望校／併願校管理シート - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      min-height: 100vh;
+      padding-bottom: 24px;
+    }
+
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover { background: rgba(255,255,255,0.25); }
+
+    .header-title { font-size: 16px; font-weight: 700; }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-name {
+      font-size: 13px;
+      font-weight: 500;
+      display: none;
+    }
+
+    @media (min-width: 480px) {
+      .user-name { display: block; }
+    }
+
+    .menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .menu-btn:hover { background: rgba(255,255,255,0.25); }
+
+    /* コンテナ */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 12px;
+    }
+
+    /* ローディング */
+    .loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+
+    .loading .material-icons {
+      font-size: 48px;
+      color: #1a237e;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading p {
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    /* 空状態 */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+
+    .empty-state .material-icons {
+      font-size: 64px;
+      color: #ccc;
+      margin-bottom: 16px;
+    }
+
+    .empty-state h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+      color: #888;
+      text-align: center;
+    }
+
+    .empty-state a {
+      margin-top: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .empty-state a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
+    }
+
+    /* サマリーカード */
+    .summary-card {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      color: white;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+    }
+
+    .summary-title {
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0.9;
+      margin-bottom: 8px;
+    }
+
+    .summary-count {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .summary-subtitle {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .summary-stats {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .summary-stat {
+      flex: 1;
+      text-align: center;
+    }
+
+    .summary-stat-value {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .summary-stat-label {
+      font-size: 11px;
+      opacity: 0.8;
+      margin-top: 2px;
+    }
+
+    /* 志望校カード */
+    .school-card {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .school-card-header {
+      background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+      padding: 16px;
+      border-bottom: 3px solid #3949ab;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .school-rank {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .school-rank.first {
+      background: linear-gradient(135deg, #F9A825 0%, #FBC02D 100%);
+    }
+
+    .school-rank.second {
+      background: linear-gradient(135deg, #78909C 0%, #90A4AE 100%);
+    }
+
+    .school-rank.third {
+      background: linear-gradient(135deg, #8D6E63 0%, #A1887F 100%);
+    }
+
+    .school-main-info {
+      flex: 1;
+    }
+
+    .school-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 4px;
+    }
+
+    .school-faculty {
+      font-size: 14px;
+      color: #3949ab;
+      font-weight: 600;
+    }
+
+    .school-department {
+      font-size: 13px;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    .school-badges {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .school-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .badge-sengan {
+      background: #FFEBEE;
+      color: #C62828;
+    }
+
+    .badge-heigan {
+      background: #E3F2FD;
+      color: #1565C0;
+    }
+
+    .badge-region {
+      background: #E8F5E9;
+      color: #2E7D32;
+    }
+
+    /* 詳細セクション */
+    .school-sections {
+      padding: 16px;
+    }
+
+    .school-section {
+      margin-bottom: 20px;
+    }
+
+    .school-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .school-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #E8EAF6;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .school-section-title .material-icons {
+      font-size: 18px;
+    }
+
+    .school-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .school-info-item {
+      background: #F5F5F5;
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+
+    .school-info-label {
+      font-size: 10px;
+      color: #888;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .school-info-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .school-info-value.yes {
+      color: #2E7D32;
+    }
+
+    .school-info-value.no {
+      color: #9E9E9E;
+    }
+
+    .school-info-value.empty {
+      color: #BDBDBD;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    /* 試験内容マトリクス */
+    .exam-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 8px;
+    }
+
+    .exam-item {
+      background: #F5F5F5;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .exam-item.active {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+    }
+
+    .exam-item.inactive {
+      background: #FAFAFA;
+      opacity: 0.6;
+    }
+
+    .exam-item-icon {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .exam-item.active .exam-item-icon {
+      color: #2E7D32;
+    }
+
+    .exam-item.inactive .exam-item-icon {
+      color: #BDBDBD;
+    }
+
+    .exam-item-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .exam-item.inactive .exam-item-label {
+      color: #999;
+    }
+
+    /* 日程セクション */
+    .schedule-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .schedule-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: #F5F5F5;
+      border-radius: 8px;
+    }
+
+    .schedule-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .schedule-icon .material-icons {
+      font-size: 20px;
+    }
+
+    .schedule-content {
+      flex: 1;
+    }
+
+    .schedule-label {
+      font-size: 11px;
+      color: #888;
+      font-weight: 600;
+    }
+
+    .schedule-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+      margin-top: 2px;
+    }
+
+    /* 備考 */
+    .notes-box {
+      background: #FFF8E1;
+      border-left: 4px solid #FFA000;
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .notes-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #E65100;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .notes-text {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    /* データ数値 */
+    .data-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .data-item {
+      flex: 1;
+      min-width: 80px;
+      background: #F5F5F5;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .data-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1a237e;
+    }
+
+    .data-label {
+      font-size: 11px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    /* 比較テーブル */
+    .compare-section {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .compare-header {
+      background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+      padding: 14px 16px;
+      border-bottom: 3px solid #3949ab;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .compare-header .material-icons {
+      color: #1a237e;
+    }
+
+    .compare-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a237e;
+    }
+
+    .compare-table-wrapper {
+      overflow-x: auto;
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    .compare-table th,
+    .compare-table td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #E8EAF6;
+      font-size: 13px;
+    }
+
+    .compare-table th {
+      background: #FAFAFA;
+      font-weight: 700;
+      color: #1a237e;
+      position: sticky;
+      top: 0;
+    }
+
+    .compare-table th:first-child,
+    .compare-table td:first-child {
+      text-align: left;
+      position: sticky;
+      left: 0;
+      background: white;
+      z-index: 1;
+      min-width: 120px;
+    }
+
+    .compare-table th:first-child {
+      background: #FAFAFA;
+      z-index: 2;
+    }
+
+    .compare-table td:first-child {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .compare-table tbody tr:hover {
+      background: #F5F5F5;
+    }
+
+    .compare-table tbody tr:hover td:first-child {
+      background: #F5F5F5;
+    }
+
+    .compare-yes {
+      color: #2E7D32;
+      font-weight: 600;
+    }
+
+    .compare-no {
+      color: #BDBDBD;
+    }
+
+    /* 表示切り替えボタン */
+    .view-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .view-btn {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid #1a237e;
+      background: white;
+      color: #1a237e;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .view-btn.active {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      border-color: #1a237e;
+    }
+
+    .view-btn:hover:not(.active) {
+      background: #E8EAF6;
+    }
+
+    /* ナビゲーションメニュー */
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    .nav-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      height: 100%;
+      background: white;
+      z-index: 201;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .nav-menu.open {
+      right: 0;
+    }
+
+    .nav-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 20px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-user {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-close {
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      color: #333;
+      text-decoration: none;
+      border-bottom: 1px solid #eee;
+      transition: background 0.2s;
+    }
+
+    .nav-item:hover {
+      background: #f5f5f5;
+    }
+
+    .nav-item .material-icons {
+      color: #1a237e;
+      font-size: 22px;
+    }
+
+    .nav-item-text {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-item.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .nav-logout {
+      color: #c62828;
+    }
+
+    .nav-logout .material-icons {
+      color: #c62828;
+    }
+
+    /* 受験スケジュールへのリンク */
+    .link-to-edit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+      background: white;
+      border: 2px dashed #1a237e;
+      border-radius: 12px;
+      color: #1a237e;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      transition: all 0.2s;
+    }
+
+    .link-to-edit:hover {
+      background: #E8EAF6;
+      border-style: solid;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 600px) {
+      .school-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .exam-matrix {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .data-row {
+        flex-wrap: wrap;
+      }
+      
+      .data-item {
+        min-width: calc(50% - 6px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="header-left">
+      <a href="index.html?t=<?php echo time(); ?>" class="back-btn">
+        <span class="material-icons">arrow_back</span>
+      </a>
+      <h1 class="header-title">志望校／併願校管理シート</h1>
+    </div>
+    <div class="header-right">
+      <span class="user-name" id="headerUserName"></span>
+      <button class="menu-btn" onclick="openNav()">
+        <span class="material-icons">menu</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ナビゲーションオーバーレイ -->
+  <div class="nav-overlay" id="navOverlay" onclick="closeNav()"></div>
+  
+  <!-- ナビゲーションメニュー -->
+  <nav class="nav-menu" id="navMenu">
+    <div class="nav-header">
+      <span class="nav-user" id="navUserName">ゲスト</span>
+      <button class="nav-close" onclick="closeNav()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    <a href="index.html" class="nav-item">
+      <span class="material-icons">home</span>
+      <span class="nav-item-text">ホーム</span>
+    </a>
+    <a href="schedule.html" class="nav-item">
+      <span class="material-icons">calendar_today</span>
+      <span class="nav-item-text">授業スケジュール</span>
+    </a>
+    <a href="exam-schedule.html" class="nav-item">
+      <span class="material-icons">school</span>
+      <span class="nav-item-text">受験スケジュール</span>
+    </a>
+    <a href="school-list.html" class="nav-item">
+      <span class="material-icons">format_list_numbered</span>
+      <span class="nav-item-text">志望校／併願校管理シート</span>
+    </a>
+    <a href="checklist.html" class="nav-item">
+      <span class="material-icons">checklist</span>
+      <span class="nav-item-text">チェックリスト</span>
+    </a>
+    <a href="column.html" class="nav-item">
+      <span class="material-icons">article</span>
+      <span class="nav-item-text">コラム一覧</span>
+    </a>
+    <a href="rules.html" class="nav-item">
+      <span class="material-icons">gavel</span>
+      <span class="nav-item-text">ルール一覧</span>
+    </a>
+    <a href="#" class="nav-item nav-logout" onclick="doLogout(); return false;">
+      <span class="material-icons">logout</span>
+      <span class="nav-item-text">ログアウト</span>
+    </a>
+  </nav>
+
+  <!-- メインコンテンツ -->
+  <div class="container">
+    <!-- ローディング -->
+    <div id="loadingState" class="loading">
+      <span class="material-icons">sync</span>
+      <p>読み込み中...</p>
+    </div>
+
+    <!-- 空状態 -->
+    <div id="emptyState" class="empty-state" style="display: none;">
+      <span class="material-icons">school</span>
+      <h3>志望校が登録されていません</h3>
+      <p>受験スケジュールページから<br>志望校を登録してください</p>
+      <a href="exam-schedule.html">
+        <span class="material-icons">add</span>
+        志望校を登録する
+      </a>
+    </div>
+
+    <!-- コンテンツ -->
+    <div id="mainContent" style="display: none;">
+      <!-- 受験スケジュールへのリンク -->
+      <a href="exam-schedule.html" class="link-to-edit">
+        <span class="material-icons">edit</span>
+        志望校を編集する場合は受験スケジュールページへ
+      </a>
+
+      <!-- サマリー -->
+      <div class="summary-card">
+        <div class="summary-title">登録済み志望校</div>
+        <div class="summary-count"><span id="totalCount">0</span>校</div>
+        <div class="summary-subtitle">あなたの受験戦略</div>
+        <div class="summary-stats">
+          <div class="summary-stat">
+            <div class="summary-stat-value" id="senganCount">0</div>
+            <div class="summary-stat-label">専願</div>
+          </div>
+          <div class="summary-stat">
+            <div class="summary-stat-value" id="heiganCount">0</div>
+            <div class="summary-stat-label">併願</div>
+          </div>
+          <div class="summary-stat">
+            <div class="summary-stat-value" id="examCount">0</div>
+            <div class="summary-stat-label">試験日設定済</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 表示切り替え -->
+      <div class="view-toggle">
+        <button class="view-btn active" id="viewCards" onclick="setView('cards')">
+          <span class="material-icons">view_agenda</span>
+          カード表示
+        </button>
+        <button class="view-btn" id="viewCompare" onclick="setView('compare')">
+          <span class="material-icons">table_chart</span>
+          比較表示
+        </button>
+      </div>
+
+      <!-- カード表示 -->
+      <div id="cardsView"></div>
+
+      <!-- 比較表示 -->
+      <div id="compareView" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script>
+    // ============================================
+    // API設定
+    // ============================================
+    const API_URL = 'https://script.google.com/macros/s/AKfycbyEZYtWGd0JzLGrw2sysVktA88fk-ohHOnkAPS-8K8ezmCnRyNxMiuE2O4AsMfMqcE/exec';
+    
+    // 状態
+    let schools = [];
+    let currentView = 'cards';
+
+    // 生徒IDを取得
+    function getStudentId() {
+      return localStorage.getItem('eqao_studentId') || 'GUEST';
+    }
+
+    // エスケープ
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // 日付フォーマット
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return dateStr;
+      return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
+    }
+
+    // ============================================
+    // データ読み込み
+    // ============================================
+    async function loadSchools() {
+      const studentId = getStudentId();
+      try {
+        const url = `${API_URL}?action=getSchools&studentId=${studentId}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data && Array.isArray(data)) {
+          schools = data;
+        }
+        
+        renderContent();
+      } catch (error) {
+        console.error('API error:', error);
+        renderContent();
+      }
+    }
+
+    // ============================================
+    // 描画
+    // ============================================
+    function renderContent() {
+      document.getElementById('loadingState').style.display = 'none';
+      
+      if (schools.length === 0) {
+        document.getElementById('emptyState').style.display = 'flex';
+        document.getElementById('mainContent').style.display = 'none';
+        return;
+      }
+      
+      document.getElementById('emptyState').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+      
+      // サマリー更新
+      updateSummary();
+      
+      // ビュー描画
+      renderCardsView();
+      renderCompareView();
+    }
+
+    // サマリー更新
+    function updateSummary() {
+      const total = schools.length;
+      const sengan = schools.filter(s => s.applicationType === '専願').length;
+      const heigan = schools.filter(s => s.applicationType === '併願').length;
+      const withExam = schools.filter(s => s.examDate).length;
+      
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('senganCount').textContent = sengan;
+      document.getElementById('heiganCount').textContent = heigan;
+      document.getElementById('examCount').textContent = withExam;
+    }
+
+    // 表示切り替え
+    function setView(view) {
+      currentView = view;
+      
+      document.getElementById('viewCards').classList.toggle('active', view === 'cards');
+      document.getElementById('viewCompare').classList.toggle('active', view === 'compare');
+      
+      document.getElementById('cardsView').style.display = view === 'cards' ? 'block' : 'none';
+      document.getElementById('compareView').style.display = view === 'compare' ? 'block' : 'none';
+    }
+
+    // カード表示
+    function renderCardsView() {
+      const container = document.getElementById('cardsView');
+      let html = '';
+      
+      schools.forEach((school, index) => {
+        const rank = index + 1;
+        let rankClass = '';
+        if (rank === 1) rankClass = 'first';
+        else if (rank === 2) rankClass = 'second';
+        else if (rank === 3) rankClass = 'third';
+        
+        html += `
+          <div class="school-card">
+            <div class="school-card-header">
+              <div class="school-rank ${rankClass}">${rank}</div>
+              <div class="school-main-info">
+                <div class="school-name">${escapeHtml(school.universityName)}</div>
+                <div class="school-faculty">${escapeHtml(school.faculty)}</div>
+                ${school.department ? `<div class="school-department">${escapeHtml(school.department)}</div>` : ''}
+                <div class="school-badges">
+                  ${school.applicationType ? `<span class="school-badge ${school.applicationType === '専願' ? 'badge-sengan' : 'badge-heigan'}">${escapeHtml(school.applicationType)}</span>` : ''}
+                  ${school.region ? `<span class="school-badge badge-region">${escapeHtml(school.region)}</span>` : ''}
+                </div>
+              </div>
+            </div>
+            
+            <div class="school-sections">
+              ${renderBasicInfo(school)}
+              ${renderExamContent(school)}
+              ${renderSchedule(school)}
+              ${renderDataSection(school)}
+              ${school.notes ? renderNotes(school.notes) : ''}
+            </div>
+          </div>
+        `;
+      });
+      
+      container.innerHTML = html;
+    }
+
+    // 基本情報セクション
+    function renderBasicInfo(school) {
+      const items = [
+        { label: '試験方式', value: school.examType },
+        { label: '英語資格', value: school.englishReq },
+        { label: '評定条件', value: school.gpaReq },
+        { label: '出願書類', value: school.documents },
+        { label: '推薦状', value: school.recommendation },
+        { label: '英語証明形式', value: school.englishCert },
+        { label: '賞状提出', value: school.awards },
+        { label: '締切扱い', value: school.deadlineType }
+      ].filter(item => item.value);
+      
+      if (items.length === 0) return '';
+      
+      let html = `
+        <div class="school-section">
+          <div class="school-section-title">
+            <span class="material-icons">description</span>
+            出願要件
+          </div>
+          <div class="school-info-grid">
+      `;
+      
+      items.forEach(item => {
+        html += `
+          <div class="school-info-item">
+            <div class="school-info-label">${item.label}</div>
+            <div class="school-info-value">${escapeHtml(item.value)}</div>
+          </div>
+        `;
+      });
+      
+      html += '</div></div>';
+      return html;
+    }
+
+    // 試験内容セクション
+    function renderExamContent(school) {
+      const examItems = [
+        { key: 'essay', label: '小論文', icon: 'edit_note' },
+        { key: 'interview', label: '面接', icon: 'record_voice_over' },
+        { key: 'oral', label: '口頭試問', icon: 'question_answer' },
+        { key: 'groupDiscussion', label: 'GD', icon: 'groups' },
+        { key: 'englishInterview', label: '英語面接', icon: 'translate' },
+        { key: 'englishPresent', label: '英語プレゼン', icon: 'present_to_all' },
+        { key: 'present', label: 'プレゼン', icon: 'slideshow' },
+        { key: 'secondExam', label: '二次科目試験', icon: 'quiz' },
+        { key: 'material', label: '資料作成', icon: 'folder' },
+        { key: 'video', label: '動画資料', icon: 'videocam' }
+      ];
+      
+      const hasAnyExam = examItems.some(item => school[item.key] === '有');
+      if (!hasAnyExam && !school.format && !school.hasSecond) return '';
+      
+      let html = `
+        <div class="school-section">
+          <div class="school-section-title">
+            <span class="material-icons">assignment</span>
+            試験内容
+          </div>
+      `;
+      
+      // 実施形式・二次有無
+      if (school.format || school.hasSecond) {
+        html += '<div class="school-info-grid" style="margin-bottom: 12px;">';
+        if (school.format) {
+          html += `
+            <div class="school-info-item">
+              <div class="school-info-label">実施形式</div>
+              <div class="school-info-value">${escapeHtml(school.format)}</div>
+            </div>
+          `;
+        }
+        if (school.hasSecond) {
+          html += `
+            <div class="school-info-item">
+              <div class="school-info-label">二次試験</div>
+              <div class="school-info-value">${escapeHtml(school.hasSecond)}</div>
+            </div>
+          `;
+        }
+        html += '</div>';
+      }
+      
+      // 試験内容マトリクス
+      html += '<div class="exam-matrix">';
+      examItems.forEach(item => {
+        const isActive = school[item.key] === '有';
+        html += `
+          <div class="exam-item ${isActive ? 'active' : 'inactive'}">
+            <div class="exam-item-icon">
+              <span class="material-icons">${isActive ? 'check_circle' : 'remove_circle_outline'}</span>
+            </div>
+            <div class="exam-item-label">${item.label}</div>
+          </div>
+        `;
+      });
+      html += '</div></div>';
+      
+      return html;
+    }
+
+    // 日程セクション
+    function renderSchedule(school) {
+      const hasSchedule = school.examDate || school.firstResultDate || school.secondApplicationPeriod;
+      if (!hasSchedule) return '';
+      
+      let html = `
+        <div class="school-section">
+          <div class="school-section-title">
+            <span class="material-icons">event</span>
+            日程
+          </div>
+          <div class="schedule-timeline">
+      `;
+      
+      if (school.examDate) {
+        html += `
+          <div class="schedule-item">
+            <div class="schedule-icon">
+              <span class="material-icons">event</span>
+            </div>
+            <div class="schedule-content">
+              <div class="schedule-label">入試日程</div>
+              <div class="schedule-value">${formatDate(school.examDate)}</div>
+            </div>
+          </div>
+        `;
+      }
+      
+      if (school.firstResultDate) {
+        html += `
+          <div class="schedule-item">
+            <div class="schedule-icon">
+              <span class="material-icons">fact_check</span>
+            </div>
+            <div class="schedule-content">
+              <div class="schedule-label">一次合格発表</div>
+              <div class="schedule-value">${formatDate(school.firstResultDate)}</div>
+            </div>
+          </div>
+        `;
+      }
+      
+      if (school.secondApplicationPeriod) {
+        html += `
+          <div class="schedule-item">
+            <div class="schedule-icon">
+              <span class="material-icons">date_range</span>
+            </div>
+            <div class="schedule-content">
+              <div class="schedule-label">二次出願期間</div>
+              <div class="schedule-value">${escapeHtml(school.secondApplicationPeriod)}</div>
+            </div>
+          </div>
+        `;
+      }
+      
+      html += '</div></div>';
+      return html;
+    }
+
+    // データセクション
+    function renderDataSection(school) {
+      const hasData = school.deviation || school.ratio || school.applicants;
+      if (!hasData) return '';
+      
+      let html = `
+        <div class="school-section">
+          <div class="school-section-title">
+            <span class="material-icons">analytics</span>
+            データ
+          </div>
+          <div class="data-row">
+      `;
+      
+      if (school.deviation) {
+        html += `
+          <div class="data-item">
+            <div class="data-value">${escapeHtml(school.deviation)}</div>
+            <div class="data-label">偏差値</div>
+          </div>
+        `;
+      }
+      
+      if (school.ratio) {
+        html += `
+          <div class="data-item">
+            <div class="data-value">${escapeHtml(school.ratio)}</div>
+            <div class="data-label">倍率</div>
+          </div>
+        `;
+      }
+      
+      if (school.applicants) {
+        html += `
+          <div class="data-item">
+            <div class="data-value">${escapeHtml(school.applicants)}</div>
+            <div class="data-label">志願者数</div>
+          </div>
+        `;
+      }
+      
+      html += '</div></div>';
+      return html;
+    }
+
+    // 備考
+    function renderNotes(notes) {
+      return `
+        <div class="school-section">
+          <div class="notes-box">
+            <div class="notes-label">
+              <span class="material-icons" style="font-size: 16px;">sticky_note_2</span>
+              備考
+            </div>
+            <div class="notes-text">${escapeHtml(notes)}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // 比較表示
+    function renderCompareView() {
+      const container = document.getElementById('compareView');
+      
+      if (schools.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+      
+      // 基本情報比較
+      let html = `
+        <div class="compare-section">
+          <div class="compare-header">
+            <span class="material-icons">compare</span>
+            <span class="compare-title">基本情報比較</span>
+          </div>
+          <div class="compare-table-wrapper">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th>項目</th>
+                  ${schools.map((s, i) => `<th>${i + 1}. ${escapeHtml(s.universityName)}</th>`).join('')}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>学部</td>
+                  ${schools.map(s => `<td>${escapeHtml(s.faculty || '-')}</td>`).join('')}
+                </tr>
+                <tr>
+                  <td>学科</td>
+                  ${schools.map(s => `<td>${escapeHtml(s.department || '-')}</td>`).join('')}
+                </tr>
+                <tr>
+                  <td>専願/併願</td>
+                  ${schools.map(s => `<td>${escapeHtml(s.applicationType || '-')}</td>`).join('')}
+                </tr>
+                <tr>
+                  <td>地域</td>
+                  ${schools.map(s => `<td>${escapeHtml(s.region || '-')}</td>`).join('')}
+                </tr>
+                <tr>
+                  <td>試験方式</td>
+                  ${schools.map(s => `<td>${escapeHtml(s.examType || '-')}</td>`).join('')}
+                </tr>
+                <tr>
+                  <td>英語資格</td>
+                  ${schools.map(s => `<td>${escapeHtml(s.englishReq || '-')}</td>`).join('')}
+                </tr>
+                <tr>
+                  <td>評定条件</td>
+                  ${schools.map(s => `<td>${escapeHtml(s.gpaReq || '-')}</td>`).join('')}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+      
+      // 試験内容比較
+      html += `
+        <div class="compare-section">
+          <div class="compare-header">
+            <span class="material-icons">assignment</span>
+            <span class="compare-title">試験内容比較</span>
+          </div>
+          <div class="compare-table-wrapper">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th>項目</th>
+                  ${schools.map((s, i) => `<th>${i + 1}. ${escapeHtml(s.universityName)}</th>`).join('')}
+                </tr>
+              </thead>
+              <tbody>
+                ${renderCompareRow('小論文', schools, 'essay')}
+                ${renderCompareRow('面接', schools, 'interview')}
+                ${renderCompareRow('口頭試問', schools, 'oral')}
+                ${renderCompareRow('GD', schools, 'groupDiscussion')}
+                ${renderCompareRow('英語面接', schools, 'englishInterview')}
+                ${renderCompareRow('英語プレゼン', schools, 'englishPresent')}
+                ${renderCompareRow('プレゼン', schools, 'present')}
+                ${renderCompareRow('二次科目試験', schools, 'secondExam')}
+                ${renderCompareRow('資料作成', schools, 'material')}
+                ${renderCompareRow('動画資料', schools, 'video')}
+                ${renderCompareRow('二次有無', schools, 'hasSecond')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+      
+      // 日程・データ比較
+      html += `
+        <div class="compare-section">
+          <div class="compare-header">
+            <span class="material-icons">event</span>
+            <span class="compare-title">日程・データ比較</span>
+          </div>
+          <div class="compare-table-wrapper">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th>項目</th>
+                  ${schools.map((s, i) => `<th>${i + 1}. ${escapeHtml(s.universityName)}</th>`).join('')}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>入試日程</td>
+                  ${schools.map(s => `<td>${formatDate(s.examDate) || '-'}</td>`).join('')}
+                </tr>
+                <tr>
+                  <td>一次合格発表</td>
+                  ${schools.map(s => `<td>${formatDate(s.firstResultDate) || '-'}</td>`).join('')}
+                </tr>
+                <tr>
+                  <td>偏差値</td>
+                  ${schools.map(s => `<td>${escapeHtml(s.deviation || '-')}</td>`).join('')}
+                </tr>
+                <tr>
+                  <td>倍率</td>
+                  ${schools.map(s => `<td>${escapeHtml(s.ratio || '-')}</td>`).join('')}
+                </tr>
+                <tr>
+                  <td>志願者数</td>
+                  ${schools.map(s => `<td>${escapeHtml(s.applicants || '-')}</td>`).join('')}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+      
+      container.innerHTML = html;
+    }
+
+    // 比較表の行を生成（有/無の項目用）
+    function renderCompareRow(label, schools, key) {
+      return `
+        <tr>
+          <td>${label}</td>
+          ${schools.map(s => {
+            const val = s[key];
+            if (val === '有') return '<td class="compare-yes">✓ 有</td>';
+            if (val === '無') return '<td class="compare-no">− 無</td>';
+            return `<td>${escapeHtml(val || '-')}</td>`;
+          }).join('')}
+        </tr>
+      `;
+    }
+
+    // ============================================
+    // ナビゲーション
+    // ============================================
+    function openNav() {
+      document.getElementById('navMenu').classList.add('open');
+      document.getElementById('navOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav() {
+      document.getElementById('navMenu').classList.remove('open');
+      document.getElementById('navOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function doLogout() {
+      localStorage.removeItem('eqao_loggedIn');
+      localStorage.removeItem('eqao_studentId');
+      localStorage.removeItem('eqao_studentName');
+      localStorage.removeItem('eqao_password');
+      window.location.href = 'index.html';
+    }
+
+    // ============================================
+    // 初期化
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+      // ログインチェック
+      const isLoggedIn = localStorage.getItem('eqao_loggedIn');
+      if (!isLoggedIn) {
+        window.location.href = 'index.html?t=' + new Date().getTime();
+        return;
+      }
+      
+      // ユーザー名表示
+      const studentName = localStorage.getItem('eqao_studentName');
+      document.getElementById('headerUserName').textContent = studentName || '';
+      document.getElementById('navUserName').textContent = studentName || 'ゲスト';
+      
+      // 戻るボタンのリンク修正
+      document.querySelector('.back-btn').href = 'index.html?t=' + new Date().getTime();
+      
+      // データ読み込み
+      loadSchools();
+    });
+  </script>
+</body>
+</html>
