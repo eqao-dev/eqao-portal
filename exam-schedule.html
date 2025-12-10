@@ -1942,6 +1942,103 @@
     .homework-empty p {
       font-size: 14px;
     }
+
+    /* ==============================
+       大科目・小科目の表示スタイル（追加）
+       ============================== */
+    
+    /* 大科目バッジ */
+    .major-subject-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .major-subject-number {
+      background: rgba(255,255,255,0.25);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* 小科目チップ */
+    .minor-subjects-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .minor-subject-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #E0F2F1;
+      color: #00695C;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid #B2DFDB;
+    }
+
+    .minor-subject-chip .material-icons {
+      font-size: 16px;
+      color: #00897B;
+    }
+
+    /* カリキュラムセクション */
+    .curriculum-section {
+      background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 12px;
+      border: 1px solid #A5D6A7;
+    }
+
+    .curriculum-section-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #2E7D32;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .curriculum-section-title .material-icons {
+      font-size: 18px;
+    }
+
+    @media (max-width: 600px) {
+      .major-subject-badge {
+        font-size: 13px;
+        padding: 8px 14px;
+      }
+
+      .major-subject-number {
+        width: 22px;
+        height: 22px;
+        font-size: 11px;
+      }
+
+      .minor-subject-chip {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2544,6 +2641,22 @@
   </div>
 
   <script>
+    // ============================================
+    // 大科目データ（追加）
+    // ============================================
+    const majorSubjects = {
+      1: "全体像理解・進路理解",
+      2: "自己分析・現状把握・原材料抽出",
+      3: "研究テーマ・志望校マッチング",
+      4: "研究実践",
+      5: "小論文準備",
+      6: "書類作成（志望理由書と自己推薦書）",
+      7: "課題レポート",
+      8: "プレゼン",
+      9: "面接",
+      10: "最終確認・調整"
+    };
+
     // ============================================
     // 理想スケジュールデータ
     // ============================================
@@ -3730,59 +3843,75 @@
     const lessonData = [
       {
         date: '12/10（火）',
-        type: '英語',
+        type: '通常授業',
         teacher: '山田先生',
-        content: '・IELTS Reading対策<br>・時間配分の練習<br>・長文読解のコツ',
-        homework: '・Reading過去問 Test3 を解く<br>・単語帳 Unit5 を暗記'
+        majorSubjectId: 6,
+        minorSubjects: ['志望理由書テクニック（構成・段落）', '志望理由書実践と修正'],
+        content: '・志望理由書の黄金構成を解説<br>・きっかけ→課題意識→試行錯誤→学びの必要性→マッチング→学習計画<br>・第1段落を添削',
+        homework: '・志望理由書の第2〜3段落を書いてくる<br>・教授の研究テーマを3つ調べてメモする'
       },
       {
         date: '12/8（日）',
         type: '小論文',
         teacher: '佐藤先生',
-        content: '・志望理由書の添削<br>・論理構成の見直し',
-        homework: '・志望理由書の修正版を提出<br>・活動報告書の下書きを作成'
+        majorSubjectId: 5,
+        minorSubjects: ['小論文過去問演習'],
+        content: '・志望校の過去問演習（2023年度）<br>・論理構成の見直し',
+        homework: '・過去問をもう1年分解く<br>・時事ニュース5本を要約'
       },
       {
         date: '12/5（木）',
         type: '面接対策',
         teacher: '鈴木先生',
-        content: '・模擬面接の実施<br>・志望動機の深掘り練習',
-        homework: '・想定質問50問への回答を用意<br>・自己PRの1分バージョンを暗記'
+        majorSubjectId: 9,
+        minorSubjects: ['面接基礎100問の言語化', '発声・表情・視線のコントロール'],
+        content: '・模擬面接の実施<br>・志望動機の深掘り練習<br>・非言語コミュニケーションの確認',
+        homework: '・想定質問50問への回答を用意<br>・自己PRの1分バージョンを暗記<br>・鏡の前で練習'
       },
       {
         date: '12/3（火）',
-        type: '英語',
+        type: '通常授業',
         teacher: '山田先生',
-        content: '・IELTS Writing Task2 対策<br>・エッセイ構成の基本<br>・意見文の書き方',
-        homework: '・Writing過去問 1題を書く<br>・模範解答を読んで分析'
+        majorSubjectId: 3,
+        minorSubjects: ['仮説検証とテーマ深掘り', '研究ツールの使い方（論文検索・ResearchMap等）'],
+        content: '・CiNiiとGoogle Scholarを使った論文検索の実践<br>・先行研究を3本読み、リサーチクエスチョンを再設定',
+        homework: '・見つけた論文を1本読んで要約（300字）<br>・自分の研究テーマとの関連性をメモ'
       },
       {
         date: '12/1（日）',
-        type: '小論文',
+        type: '通常授業',
         teacher: '佐藤先生',
-        content: '・過去問演習（2023年度）<br>・時事問題の知識整理',
-        homework: '・時事ニュース5本を要約<br>・過去問をもう1年分解く'
+        majorSubjectId: 2,
+        minorSubjects: ['過去の振り返り（ライフライン分析）', '現在の自己理解と価値観整理', '研究テーマに繋がる素材抽出'],
+        content: '・ライフラインチャートを作成<br>・感情の山谷を整理<br>・高校2年の文化祭実行委員の経験から「リーダーシップ」と「地域貢献」を抽出',
+        homework: '・3案の研究テーマについて「なぜ興味があるか」を200字で書く<br>・関連しそうな大学・学部を3つずつリストアップ'
       },
       {
         date: '11/28（木）',
         type: '面接対策',
         teacher: '鈴木先生',
-        content: '・グループディスカッション練習<br>・他者の意見への対応方法',
-        homework: '・ニュースを3本読み意見をまとめる<br>・GDテーマ例を5つ考える'
+        majorSubjectId: 9,
+        minorSubjects: ['圧迫面接・深掘り/口頭試問対策'],
+        content: '・圧迫質問への対応練習<br>・矛盾を指摘された時の切り返し方<br>・「研究テーマに戻る」技術の習得',
+        homework: '・想定される反論を10個書き出す<br>・それぞれへの回答を用意'
       },
       {
         date: '11/26（火）',
-        type: '英語',
+        type: '通常授業',
         teacher: '山田先生',
-        content: '・IELTS Listening対策<br>・セクション別攻略法',
-        homework: '・Listening過去問 Test2 を解く<br>・シャドーイング15分×3日'
+        majorSubjectId: 4,
+        minorSubjects: ['研究テーマの実践', '先行研究・論文・書籍の読み込み'],
+        content: '・フィールドワークの計画立案<br>・アンケート設計の基礎<br>・先行研究のまとめ方',
+        homework: '・アンケート質問項目を10問作成<br>・関連書籍を1冊読み始める'
       },
       {
         date: '11/24（日）',
         type: '小論文',
         teacher: '佐藤先生',
-        content: '・要約問題の解き方<br>・キーワード抽出の練習',
-        homework: '・新聞社説を3本要約（各200字）<br>・要約チェックリストを確認'
+        majorSubjectId: 5,
+        minorSubjects: ['小論文テクニック（段落構成・型理解）', '小論文基礎演習'],
+        content: '・結論→理由→具体例→反論→結論の構成練習<br>・要約問題の解き方',
+        homework: '・新聞社説を3本要約（各200字）<br>・小論文基礎問題を2問解く'
       }
     ];
 
@@ -3855,11 +3984,43 @@
       
       const typeClass = getLessonTypeClass(lesson.type);
       
+      // 大科目の情報
+      const majorSubjectId = lesson.majorSubjectId;
+      const majorSubjectName = majorSubjects[majorSubjectId] || '未設定';
+      
+      // 小科目のチップを生成
+      let minorSubjectsHtml = '';
+      if (lesson.minorSubjects && lesson.minorSubjects.length > 0) {
+        minorSubjectsHtml = '<div class="minor-subjects-list">';
+        lesson.minorSubjects.forEach(subject => {
+          minorSubjectsHtml += `
+            <span class="minor-subject-chip">
+              <span class="material-icons">check_circle</span>
+              ${escapeHtml(subject)}
+            </span>
+          `;
+        });
+        minorSubjectsHtml += '</div>';
+      }
+      
       container.innerHTML = `
         <div class="lesson-detail-header">
           <div class="lesson-detail-date">${escapeHtml(lesson.date)}</div>
           <div class="lesson-detail-badge ${typeClass}">${escapeHtml(lesson.type)}</div>
           <div class="lesson-detail-teacher">${escapeHtml(lesson.teacher)}</div>
+        </div>
+        
+        <!-- カリキュラムセクション（大科目・小科目） -->
+        <div class="curriculum-section">
+          <div class="curriculum-section-title">
+            <span class="material-icons">school</span>
+            カリキュラム
+          </div>
+          <div class="major-subject-badge">
+            <span class="major-subject-number">${majorSubjectId}</span>
+            ${escapeHtml(majorSubjectName)}
+          </div>
+          ${minorSubjectsHtml}
         </div>
         
         <div class="lesson-detail-section">
