@@ -216,6 +216,11 @@
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+      cursor: pointer;
+    }
+
+    .day-event:hover {
+      opacity: 0.9;
     }
 
     .day-event-more {
@@ -240,6 +245,7 @@
       opacity: 0;
       visibility: hidden;
       transition: all 0.2s;
+      padding: 20px;
     }
 
     .event-popup-overlay.active {
@@ -252,7 +258,7 @@
       border-radius: 12px;
       padding: 20px;
       max-width: 300px;
-      width: 90%;
+      width: 100%;
       max-height: 80vh;
       overflow-y: auto;
       transform: scale(0.9);
@@ -294,6 +300,7 @@
     .event-popup-detail {
       font-size: 14px;
       color: #666;
+      line-height: 1.6;
     }
 
     /* 月別スケジュールセクション */
@@ -373,6 +380,7 @@
     .event-detail {
       font-size: 12px;
       color: #666;
+      line-height: 1.5;
     }
 
     .no-events {
@@ -617,15 +625,224 @@
       white-space: nowrap;
       flex-shrink: 0;
     }
+
+    /* ============================================ */
+    /* レスポンシブ対応 */
+    /* ============================================ */
+    @media (max-width: 480px) {
+      .header {
+        padding: 12px 16px;
+      }
+
+      .header-title {
+        font-size: 16px;
+      }
+
+      .back-btn {
+        width: 36px;
+        height: 36px;
+      }
+
+      .container {
+        padding: 12px 8px;
+      }
+
+      .calendar-section {
+        padding: 12px;
+        border-radius: 12px;
+      }
+
+      .calendar-header {
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .calendar-nav {
+        gap: 8px;
+      }
+
+      .calendar-month-title {
+        font-size: 16px;
+      }
+
+      .calendar-nav-btn {
+        width: 32px;
+        height: 32px;
+      }
+
+      .calendar-nav-btn .material-icons {
+        font-size: 18px;
+      }
+
+      .today-btn {
+        padding: 5px 10px;
+        font-size: 11px;
+      }
+
+      .today-btn .material-icons {
+        font-size: 14px;
+      }
+
+      .calendar-weekday {
+        font-size: 10px;
+        padding: 6px 0;
+      }
+
+      .calendar-day {
+        height: 60px;
+        padding: 2px;
+      }
+
+      .day-number {
+        font-size: 11px;
+        margin-bottom: 1px;
+      }
+
+      .calendar-day.today .day-number {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+      }
+
+      .day-event {
+        font-size: 8px;
+        padding: 1px 2px;
+        border-radius: 2px;
+        -webkit-line-clamp: 1;
+      }
+
+      .day-event-more {
+        font-size: 8px;
+      }
+
+      .month-card {
+        border-radius: 12px;
+        margin-bottom: 12px;
+      }
+
+      .month-header {
+        padding: 12px 16px;
+      }
+
+      .month-header .material-icons {
+        font-size: 20px;
+      }
+
+      .month-title {
+        font-size: 14px;
+      }
+
+      .event-item {
+        padding: 12px 16px;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .event-date {
+        font-size: 12px;
+        min-width: auto;
+      }
+
+      .event-title {
+        font-size: 13px;
+      }
+
+      .event-detail {
+        font-size: 11px;
+      }
+
+      .hamburger-btn {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+      }
+
+      .hamburger-btn .material-icons {
+        font-size: 22px;
+      }
+
+      .event-popup {
+        padding: 16px;
+        margin: 16px;
+      }
+
+      .event-popup-date {
+        font-size: 13px;
+      }
+
+      .event-popup-title {
+        font-size: 15px;
+      }
+
+      .event-popup-detail {
+        font-size: 13px;
+      }
+    }
+
+    /* さらに小さい画面（iPhone SE等） */
+    @media (max-width: 360px) {
+      .calendar-day {
+        height: 50px;
+      }
+
+      .day-number {
+        font-size: 10px;
+      }
+
+      .calendar-day.today .day-number {
+        width: 18px;
+        height: 18px;
+        font-size: 9px;
+      }
+
+      .day-event {
+        font-size: 7px;
+        padding: 1px;
+      }
+
+      .calendar-weekday {
+        font-size: 9px;
+        padding: 5px 0;
+      }
+
+      .calendar-month-title {
+        font-size: 14px;
+      }
+
+      .calendar-nav-btn {
+        width: 28px;
+        height: 28px;
+      }
+
+      .today-btn {
+        padding: 4px 8px;
+        font-size: 10px;
+      }
+    }
+
+    /* タブレット */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .container {
+        max-width: 100%;
+        padding: 16px 12px;
+      }
+
+      .calendar-day {
+        height: 70px;
+      }
+    }
   </style>
 </head>
 <body>
   <header class="header">
-    <a href="index.html?t=<?= new Date().getTime() ?>" class="back-btn">
+    <a href="index.html" class="back-btn" id="backBtn">
       <span class="material-icons">arrow_back</span>
     </a>
     <h1 class="header-title">年間スケジュール</h1>
   </header>
+  
   <!-- ハンバーガーボタン -->
   <button class="hamburger-btn" onclick="openNav()">
     <span class="material-icons">menu</span>
@@ -826,6 +1043,10 @@
     // ページ読み込み時
     document.addEventListener('DOMContentLoaded', function() {
       setNavUserName();
+      
+      // 戻るボタンのリンク修正
+      document.getElementById('backBtn').href = 'index.html?t=' + new Date().getTime();
+      
       loadScheduleData();
     });
 
@@ -932,8 +1153,8 @@
         const eventsEl = document.createElement('div');
         eventsEl.className = 'day-events';
         
-        // 最大2件表示
-        const maxShow = 2;
+        // 最大2件表示（モバイルでは1件）
+        const maxShow = window.innerWidth <= 480 ? 1 : 2;
         events.slice(0, maxShow).forEach(event => {
           const eventEl = document.createElement('div');
           eventEl.className = 'day-event';
@@ -945,7 +1166,7 @@
           eventsEl.appendChild(eventEl);
         });
 
-        // 3件以上ある場合
+        // 残りがある場合
         if (events.length > maxShow) {
           const moreEl = document.createElement('div');
           moreEl.className = 'day-event-more';
@@ -1154,6 +1375,14 @@
       }
     }
 
+    // ウィンドウリサイズ時にカレンダーを再描画
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        renderCalendar();
+      }, 250);
+    });
   </script>
 </body>
 </html>
