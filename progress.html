@@ -16,7 +16,6 @@
       font-family: 'Noto Sans JP', sans-serif;
       background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
       min-height: 100vh;
-      padding-bottom: 24px;
     }
 
     /* ヘッダー */
@@ -92,7 +91,7 @@
 
     /* コンテナ */
     .container {
-      max-width: 800px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 16px 12px;
     }
@@ -123,493 +122,169 @@
       font-size: 14px;
     }
 
-    /* ==============================
-       セクション共通
-       ============================== */
-    .section {
-      background: white;
-      border-radius: 12px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-      overflow: hidden;
-    }
-
-    .section-header {
-      background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%);
-      padding: 14px 16px;
-      border-bottom: 2px solid #00897B;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-header .material-icons {
-      color: #00695C;
-      font-size: 22px;
-    }
-
-    .section-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #00695C;
-    }
-
-    .section-content {
-      padding: 16px;
-    }
-
-    /* ==============================
-       全体進捗サマリー
-       ============================== */
-    .summary-card {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .summary-circle {
-      position: relative;
-      width: 100px;
-      height: 100px;
-      flex-shrink: 0;
-    }
-
-    .summary-circle svg {
-      transform: rotate(-90deg);
-    }
-
-    .summary-circle-bg {
-      fill: none;
-      stroke: #E0E0E0;
-      stroke-width: 8;
-    }
-
-    .summary-circle-progress {
-      fill: none;
-      stroke: #00897B;
-      stroke-width: 8;
-      stroke-linecap: round;
-      transition: stroke-dashoffset 0.5s ease;
-    }
-
-    .summary-circle-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
-
-    .summary-percent {
-      font-size: 24px;
-      font-weight: 700;
-      color: #00695C;
-      line-height: 1;
-    }
-
-    .summary-percent-label {
-      font-size: 10px;
-      color: #666;
-    }
-
-    .summary-details {
-      flex: 1;
-    }
-
-    .summary-main-text {
-      font-size: 14px;
-      color: #333;
-      margin-bottom: 8px;
-    }
-
-    .summary-main-text strong {
-      font-size: 20px;
-      color: #00695C;
-    }
-
-    .summary-sub-text {
-      font-size: 12px;
-      color: #888;
-    }
-
-    /* ==============================
-       学年別チェックリスト進捗
-       ============================== */
-    .grade-progress-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    /* 全体進捗サマリー */
+    .total-summary {
+      background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
+      border-radius: 16px;
+      padding: 20px 24px;
       margin-bottom: 20px;
+      color: white;
+      box-shadow: 0 4px 20px rgba(0, 105, 92, 0.3);
     }
 
-    .grade-progress-item {
+    .total-header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      margin-bottom: 12px;
     }
 
-    .grade-progress-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: #333;
-      min-width: 32px;
+    .total-title {
+      font-size: 14px;
+      opacity: 0.9;
     }
 
-    .grade-progress-bar-wrapper {
-      flex: 1;
+    .total-percent {
+      font-size: 36px;
+      font-weight: 700;
+    }
+
+    .total-bar {
       height: 12px;
-      background: #E0E0E0;
+      background: rgba(255,255,255,0.2);
       border-radius: 6px;
       overflow: hidden;
     }
 
-    .grade-progress-bar {
+    .total-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, #00897B 0%, #4DB6AC 100%);
+      background: linear-gradient(90deg, #4DB6AC 0%, #80CBC4 100%);
       border-radius: 6px;
       transition: width 0.5s ease;
     }
 
-    .grade-progress-stats {
-      font-size: 12px;
-      color: #666;
-      min-width: 90px;
+    .total-detail {
+      margin-top: 10px;
+      font-size: 13px;
+      opacity: 0.9;
       text-align: right;
     }
 
-    .grade-progress-percent {
+    /* カテゴリグリッド */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .category-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* カテゴリカード */
+    .category-card {
+      background: white;
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-left: 4px solid #E0E0E0;
+    }
+
+    .category-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 105, 92, 0.15);
+    }
+
+    .category-card.low { border-left-color: #EF5350; }
+    .category-card.mid { border-left-color: #FFA726; }
+    .category-card.high { border-left-color: #66BB6A; }
+    .category-card.complete { border-left-color: #00695C; }
+
+    .category-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .category-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 8px;
+    }
+
+    .category-percent {
+      font-size: 15px;
       font-weight: 700;
       color: #00695C;
-    }
-
-    /* 学年タブ */
-    .grade-tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-      border-bottom: 2px solid #E0E0E0;
-      padding-bottom: 12px;
-    }
-
-    .grade-tab {
-      padding: 8px 20px;
-      border: 2px solid #00897B;
-      background: white;
-      color: #00695C;
-      font-size: 13px;
-      font-weight: 600;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .grade-tab.active {
-      background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
-      color: white;
-      border-color: #00695C;
-    }
-
-    .grade-tab:hover:not(.active) {
-      background: #E0F2F1;
-    }
-
-    /* チェックリスト一覧 */
-    .checklist-view {
-      max-height: 400px;
-      overflow-y: auto;
-    }
-
-    .checklist-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 8px;
-      margin-bottom: 6px;
-      background: #FAFAFA;
-      transition: background 0.2s;
-    }
-
-    .checklist-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .checklist-item.checked {
-      background: #E8F5E9;
-    }
-
-    .checklist-icon {
-      font-size: 20px;
       flex-shrink: 0;
-      margin-top: 1px;
     }
 
-    .checklist-icon.checked {
-      color: #2E7D32;
-    }
-
-    .checklist-icon.unchecked {
-      color: #BDBDBD;
-    }
-
-    .checklist-text {
-      font-size: 13px;
-      color: #333;
-      line-height: 1.5;
-    }
-
-    .checklist-item.checked .checklist-text {
-      color: #2E7D32;
-    }
-
-    /* ==============================
-       月別やること
-       ============================== */
-    .goals-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .goals-item {
-      border: 1px solid #E0E0E0;
-      border-radius: 10px;
+    .category-bar {
+      height: 6px;
+      background: #E8E8E8;
+      border-radius: 3px;
       overflow: hidden;
     }
 
-    .goals-item-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      background: #FAFAFA;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .goals-item-header:hover {
-      background: #F0F0F0;
-    }
-
-    .goals-item-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .goals-month-badge {
-      background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
-      color: white;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .goals-item-arrow {
-      color: #999;
-      transition: transform 0.3s;
-    }
-
-    .goals-item.open .goals-item-arrow {
-      transform: rotate(180deg);
-    }
-
-    .goals-item-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-
-    .goals-item.open .goals-item-content {
-      max-height: 500px;
-    }
-
-    .goals-text {
-      padding: 16px;
-      font-size: 13px;
-      color: #333;
-      line-height: 1.8;
-      white-space: pre-wrap;
-      background: white;
-      border-top: 1px solid #E0E0E0;
-    }
-
-    .goals-empty {
-      padding: 16px;
-      text-align: center;
-      color: #999;
-      font-size: 13px;
-      background: white;
-      border-top: 1px solid #E0E0E0;
-    }
-
-    .no-goals-message {
-      text-align: center;
-      padding: 40px 20px;
-      color: #999;
-    }
-
-    .no-goals-message .material-icons {
-      font-size: 48px;
-      color: #E0E0E0;
-      margin-bottom: 12px;
-    }
-
-    /* ==============================
-       ToDo達成状況
-       ============================== */
-    .todo-summary {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 16px;
-      padding: 12px 16px;
-      background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%);
-      border-radius: 10px;
-    }
-
-    .todo-summary-text {
-      font-size: 14px;
-      color: #00695C;
-      font-weight: 600;
-    }
-
-    .todo-summary-text strong {
-      font-size: 20px;
-    }
-
-    .todo-summary-bar {
-      flex: 1;
-      height: 10px;
-      background: rgba(255,255,255,0.5);
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    .todo-summary-bar-fill {
+    .category-bar-fill {
       height: 100%;
-      background: #00695C;
-      border-radius: 5px;
+      border-radius: 3px;
       transition: width 0.5s ease;
     }
 
-    .todo-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+    .category-bar-fill.low { background: linear-gradient(90deg, #EF5350 0%, #E57373 100%); }
+    .category-bar-fill.mid { background: linear-gradient(90deg, #FFA726 0%, #FFB74D 100%); }
+    .category-bar-fill.high { background: linear-gradient(90deg, #66BB6A 0%, #81C784 100%); }
+    .category-bar-fill.complete { background: linear-gradient(90deg, #00695C 0%, #00897B 100%); }
 
-    .todo-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
-      background: #FAFAFA;
-      border-radius: 10px;
-      transition: background 0.2s;
-    }
-
-    .todo-item.completed {
-      background: #E8F5E9;
-    }
-
-    .todo-icon {
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-
-    .todo-icon.completed {
-      color: #2E7D32;
-    }
-
-    .todo-icon.pending {
-      color: #BDBDBD;
-    }
-
-    .todo-content {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .todo-text {
-      font-size: 13px;
-      color: #333;
-    }
-
-    .todo-item.completed .todo-text {
-      color: #2E7D32;
-    }
-
-    .todo-deadline {
+    .category-count {
+      margin-top: 6px;
       font-size: 11px;
       color: #888;
-      margin-top: 2px;
+      text-align: right;
+    }
+
+    /* チェックリストへのリンク */
+    .checklist-link {
       display: flex;
       align-items: center;
-      gap: 4px;
-    }
-
-    .todo-deadline .material-icons {
-      font-size: 14px;
-    }
-
-    .todo-deadline.overdue {
-      color: #C62828;
-    }
-
-    .todo-deadline.soon {
-      color: #E65100;
-    }
-
-    .todo-month-section {
-      margin-top: 16px;
-    }
-
-    .todo-month-header {
-      display: flex;
-      align-items: center;
+      justify-content: center;
       gap: 8px;
-      padding: 10px 0;
-      cursor: pointer;
-      border-top: 1px solid #E0E0E0;
-    }
-
-    .todo-month-header .material-icons {
+      margin-top: 20px;
+      padding: 14px 20px;
+      background: white;
+      border: 2px solid #00897B;
+      border-radius: 12px;
       color: #00695C;
-      transition: transform 0.3s;
-    }
-
-    .todo-month-header.open .material-icons {
-      transform: rotate(180deg);
-    }
-
-    .todo-month-title {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
-      color: #00695C;
+      text-decoration: none;
+      transition: all 0.2s;
     }
 
-    .todo-month-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
+    .checklist-link:hover {
+      background: #00897B;
+      color: white;
     }
 
-    .todo-month-header.open + .todo-month-content {
-      max-height: 1000px;
-    }
-
-    .no-todo-message {
-      text-align: center;
-      padding: 40px 20px;
-      color: #999;
-    }
-
-    .no-todo-message .material-icons {
-      font-size: 48px;
-      color: #E0E0E0;
-      margin-bottom: 12px;
+    .checklist-link .material-icons {
+      font-size: 20px;
     }
 
     /* ナビゲーションメニュー */
@@ -707,31 +382,36 @@
       color: #c62828;
     }
 
-    /* レスポンシブ */
-    @media (max-width: 600px) {
-      .summary-card {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .summary-details {
-        text-align: center;
-      }
-
-      .grade-tabs {
-        justify-content: center;
-      }
-
-      .grade-tab {
-        padding: 8px 14px;
-        font-size: 12px;
-      }
-
-      .grade-progress-stats {
-        min-width: 70px;
-        font-size: 11px;
-      }
+    /* 凡例 */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #666;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    .legend-color.low { background: #EF5350; }
+    .legend-color.mid { background: #FFA726; }
+    .legend-color.high { background: #66BB6A; }
+    .legend-color.complete { background: #00695C; }
   </style>
 </head>
 <body>
@@ -812,598 +492,197 @@
     <div id="mainContent" style="display: none;">
       
       <!-- 全体進捗サマリー -->
-      <div class="section">
-        <div class="section-header">
-          <span class="material-icons">pie_chart</span>
-          <span class="section-title">全体進捗サマリー</span>
+      <div class="total-summary">
+        <div class="total-header">
+          <span class="total-title">チェックリスト全体の進捗</span>
+          <span id="totalPercent" class="total-percent">0%</span>
         </div>
-        <div class="section-content">
-          <div class="summary-card">
-            <div class="summary-circle">
-              <svg width="100" height="100" viewBox="0 0 100 100">
-                <circle class="summary-circle-bg" cx="50" cy="50" r="42"></circle>
-                <circle class="summary-circle-progress" id="progressCircle" cx="50" cy="50" r="42" 
-                  stroke-dasharray="264" stroke-dashoffset="264"></circle>
-              </svg>
-              <div class="summary-circle-text">
-                <div class="summary-percent" id="totalPercent">0%</div>
-                <div class="summary-percent-label">完了</div>
-              </div>
-            </div>
-            <div class="summary-details">
-              <div class="summary-main-text">
-                チェックリスト <strong id="totalChecked">0</strong> / <span id="totalItems">0</span> 項目完了
-              </div>
-              <div class="summary-sub-text" id="summarySubText">
-                高1: 0/30 ｜ 高2: 0/29 ｜ 高3: 0/50
-              </div>
-            </div>
-          </div>
+        <div class="total-bar">
+          <div id="totalBarFill" class="total-bar-fill" style="width: 0%;"></div>
+        </div>
+        <div id="totalDetail" class="total-detail">0 / 0 完了</div>
+      </div>
+
+      <!-- 凡例 -->
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-color low"></div>
+          <span>0〜29%</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color mid"></div>
+          <span>30〜69%</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color high"></div>
+          <span>70〜99%</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color complete"></div>
+          <span>100%</span>
         </div>
       </div>
 
-      <!-- 学年別チェックリスト進捗 -->
-      <div class="section">
-        <div class="section-header">
-          <span class="material-icons">checklist</span>
-          <span class="section-title">学年別チェックリスト進捗</span>
-        </div>
-        <div class="section-content">
-          <!-- 進捗バー -->
-          <div class="grade-progress-list" id="gradeProgressList">
-            <!-- JSで生成 -->
-          </div>
-
-          <!-- 学年タブ -->
-          <div class="grade-tabs">
-            <button class="grade-tab active" data-grade="高1" onclick="selectChecklistGrade('高1')">高1</button>
-            <button class="grade-tab" data-grade="高2" onclick="selectChecklistGrade('高2')">高2</button>
-            <button class="grade-tab" data-grade="高3" onclick="selectChecklistGrade('高3')">高3</button>
-          </div>
-
-          <!-- チェックリスト一覧 -->
-          <div class="checklist-view" id="checklistView">
-            <!-- JSで生成 -->
-          </div>
-        </div>
+      <!-- カテゴリグリッド -->
+      <div id="categoryGrid" class="category-grid">
+        <!-- JSで生成 -->
       </div>
 
-      <!-- 月別やること -->
-      <div class="section">
-        <div class="section-header">
-          <span class="material-icons">event_note</span>
-          <span class="section-title">月別やること一覧</span>
-        </div>
-        <div class="section-content">
-          <div class="goals-list" id="goalsList">
-            <!-- JSで生成 -->
-          </div>
-        </div>
-      </div>
-
-      <!-- ToDo達成状況 -->
-      <div class="section">
-        <div class="section-header">
-          <span class="material-icons">task_alt</span>
-          <span class="section-title">ToDo達成状況</span>
-        </div>
-        <div class="section-content">
-          <div id="todoSection">
-            <!-- JSで生成 -->
-          </div>
-        </div>
-      </div>
+      <!-- チェックリストへのリンク -->
+      <a href="checklist.html" class="checklist-link">
+        <span class="material-icons">checklist</span>
+        チェックリスト教材を開く
+      </a>
 
     </div>
   </div>
 
   <script>
     // ============================================
-    // API設定
+    // 設定
     // ============================================
-    const API_URL = 'https://script.google.com/macros/s/AKfycbyEZYtWGd0JzLGrw2sysVktA88fk-ohHOnkAPS-8K8ezmCnRyNxMiuE2O4AsMfMqcE/exec';
-
-    // ============================================
-    // チェックリストデータ（exam-schedule.htmlと同じ）
-    // ============================================
-    const checklistData = {
-      "高1": [
-        "評定平均に力を入れ、4.0を目指す",
-        "部活動に力を入れ、継続力や忍耐力をつける",
-        "欠席や遅刻をしないよう心がけ、内申点を高得点に保つ",
-        "多様なプログラムに積極的に参加し、視野を広げ、コミュニケーション能力を鍛える",
-        "なぜ？を意識しながら行動し、思考力を鍛え研究テーマとなるきっかけを探る",
-        "本や映画を積極的に視聴し視野を広げる",
-        "基礎学力をおろそかにせず、特に英語、国語、数学、歴史には注力する",
-        "英語資格（英検とIELTS）に力を入れて、２級獲得を目指す",
-        "総合型選抜とは何かを理解する",
-        "総合型選抜でやるべきことやスケジュールを理解する",
-        "過去の人生を振り返り自分だからこその魅力や人間性、強み、経歴を客観視し、自分の武器を理解する",
-        "現時点で将来つきたい職業、やりたいこと、目標を言語化する",
-        "保護者や友人、メンターとディスカッションを重ね、自分の性格を知る",
-        "チェックリストから志望理由書の基礎をインプットする",
-        "チェックリストから自己推薦書の基礎をインプットする",
-        "チェックリストから提出書類の基礎をインプットする",
-        "チェックリストから出願資格の基礎をインプットする",
-        "チェックリストから志望校/併願校決めの基礎をインプットする",
-        "チェックリストから小論文の基礎をインプットする",
-        "チェックリストからレポートの基礎をインプットする",
-        "チェックリストから面接の基礎をインプットする",
-        "チェックリストからプレゼンテーションの基礎をインプットする",
-        "集団授業に全て参加し、過去の授業も視聴する",
-        "チェックリストから考え方の基礎をインプットする",
-        "EQAO生が読むべき本を購入し朗読を開始する",
-        "すき見つけるテクニックをインプットする",
-        "すきを伸ばすためのテクニックをインプットする",
-        "EQAOのステップアップ動画教材を20%は視聴完了させる",
-        "EQAO配信のコラムとYouTube動画を視聴して基礎を固める",
-        "高校2年からの計画表、スケジュールを作成する"
-      ],
-      "高2": [
-        "第一志望校を確定させる",
-        "評定平均と英語資格など全ての条件を満たした時の併願校一覧を決める",
-        "評定平均のみ満たした場合の併願校一覧を決める",
-        "英語資格のみ満たした場合の併願校一覧を決める",
-        "何も満たせなかった場合の併願校一覧を決める",
-        "志望校や併願校を調べ、比較し、それぞれの特徴や特色、違いを踏まえる",
-        "研究テーマをさらに深掘り、本質的かつ発展的なテーマにする",
-        "志望校、併願校の教授の素性や経歴、専門分野などを指定ツールを使用して把握する",
-        "土台となる第一志望校の志望理由書や自己推薦書を量を気にすることなく具体的に書き始める",
-        "志望校の最も気になる教授の書籍や論文を読み始める",
-        "評定平均と英語資格を継続的に取り組む",
-        "志望校/併願校の過去問を請求する",
-        "継続的に研究テーマに関連する支援活動を行う",
-        "多様なプログラムや大会に参加し視野を広げ、経験を積む",
-        "継続してEQAOのステップアップ動画教材を視聴して60%は視聴完了させる",
-        "継続してEQAOのコラムとYouTube配信に目を通す",
-        "志望校の志望理由書以外の書類にも着手する",
-        "研究テーマの仮説検証行動に着手する",
-        "時事問題をキャッチアップし始める",
-        "関連するテーマの書籍や教授の書籍を視聴する",
-        "志望する学部の関連テーマの小論文に着手する",
-        "志望校の過去問に一度触れて小論文の癖や特徴を理解する",
-        "志望校/併願校の過去問回収を行う",
-        "オープンキャンパスや模擬講義に参加する",
-        "留学や短期留学、スタディーツアーに参加する",
-        "一般入試にも備えて基礎学力も上げておく",
-        "英検準一級/IELTS5.5を狙う（EQAOではIELTSを推奨）",
-        "継続して集団授業を受講する/過去の配信も全て閲覧する",
-        "高校3年からの計画表、スケジュールを作成する"
-      ],
-      "高3": [
-        "志望校／併願校ともに確定させる",
-        "各志望校に向けた書類の転用と調整を行う",
-        "新しく発行された募集要項を確認する",
-        "最新版の過去問請求を行う",
-        "評定平均／英語資格の基準を満たす",
-        "英検準一級／IELTS5.5／評定平均4.0獲得",
-        "課題レポート（書類）に着手する",
-        "小論文の専門分野の演習を継続する",
-        "過去問分析と過去問演習を行う",
-        "時事問題のキャッチアップを継続する",
-        "倍率の分析を行う",
-        "出願サポートを受ける",
-        "面接100問基礎は徹底する",
-        "書類からの質問を100問想定する",
-        "大学や社会・時事問題に関して50問を想定する",
-        "研究テーマに関する仮説検証行動を行う",
-        "研究テーマに関連する研究発表・プレゼン大会・課題解決系イベントに参加する",
-        "要約問題のチェックリストを埋める",
-        "出願2ヶ月前には推薦状を高校に依頼する",
-        "調査書に書いてもらいたい内容・提出書類を担任の先生に共有し、リンクをおすすめる",
-        "担任の先生とのコミュニケーションを増やす",
-        "指定校推薦を出してもよいが妥協はしない",
-        "英語資格の原本照合用コピーを複数作成しておく",
-        "英語資格を複数回受験し、異なる種類も取得しておく",
-        "賞状などはクリアファイルで徹底管理し、提出しやすくする",
-        "オープンキャンパスに行く",
-        "研究テーマ以外の本を一冊読む",
-        "研究テーマ以外の映画を見る",
-        "漢字の基礎を徹底する",
-        "志望理由書を複数パターン作成し、最適なものを選んで提出する",
-        "志願票のためのプロフィールを整理しておく",
-        "活動報告書のためのプロフィールを整理しておく（学校内外問わず）",
-        "研究テーマ以外の活動にも積極的に参加する",
-        "スタディツアーに参加する",
-        "専願か併願かを確認する",
-        "Web出願・登録の有無を確認する",
-        "併願スケジュールを学校に提出し、調査書発行願いを早めに出す",
-        "分からないことがあれば大学に直接確認する",
-        "集団授業に参加する",
-        "小論文の練習のために口頭試問にも触れる",
-        "小論文ネタ・事例ノートを作成する",
-        "グラフ問題が出題される場合の対策を行う",
-        "関連する他大学の同分野過去問にも触れる",
-        "「しないことリスト」を作成する",
-        "自分の弱点・癖・懸念を認知し、段階的に払拭していく",
-        "保護者への伝達を怠らない",
-        "進捗管理・スケジュール管理を徹底する",
-        "三者面談・塾長面談を受けて方向性を確認する",
-        "EQAO模試を受験する",
-        "授業外学習を徹底すること"
-      ]
-    };
+    const JSON_URL = 'checklist_master.json';
 
     // ============================================
     // 状態管理
     // ============================================
-    let checkedItems = { "高1": [], "高2": [], "高3": [] };
-    let monthlyGoals = {};
-    let todos = [];
-    let selectedChecklistGrade = "高1";
+    let masterData = null;
+    let checkState = {};
 
-    // 生徒IDを取得
-    function getStudentId() {
-      return localStorage.getItem('eqao_studentId') || 'GUEST';
-    }
-
-    // エスケープ
-    function escapeHtml(str) {
-      if (!str) return '';
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+    // ============================================
+    // localStorage キー
+    // ============================================
+    function getStorageKey(type) {
+      const studentId = localStorage.getItem('eqao_studentId') || 'guest';
+      return `eqao_checklist_${studentId}_${type}`;
     }
 
     // ============================================
-    // データ読み込み
+    // チェック状態の読み込み
     // ============================================
-    async function loadAllData() {
-      const studentId = getStudentId();
-      
-      // チェックリストを読み込み
-      await loadChecklist(studentId);
-      
-      // 月別やることを読み込み
-      await loadAllGoals(studentId);
-      
-      // ToDoを読み込み
-      await loadAllTodos(studentId);
-      
-      // 表示
-      renderAll();
-    }
-
-    async function loadChecklist(studentId) {
-      const grades = ["高1", "高2", "高3"];
-      for (const grade of grades) {
-        try {
-          const url = `${API_URL}?action=getChecklist&studentId=${studentId}&grade=${grade}`;
-          const response = await fetch(url);
-          const data = await response.json();
-          if (data && Array.isArray(data)) {
-            checkedItems[grade] = data;
-          }
-        } catch (error) {
-          console.error('Checklist load error:', error);
+    function loadCheckState() {
+      try {
+        const saved = localStorage.getItem(getStorageKey('state'));
+        if (saved) {
+          checkState = JSON.parse(saved);
         }
-      }
-    }
-
-    async function loadAllGoals(studentId) {
-      const grades = ["高1", "高2", "高3"];
-      const months = ["1","2","3","4","5","6","7","8","9","10","11","12"];
-      
-      for (const grade of grades) {
-        for (const month of months) {
-          try {
-            const url = `${API_URL}?action=getGoals&studentId=${studentId}&grade=${grade}&month=${month}`;
-            const response = await fetch(url);
-            const data = await response.json();
-            if (data && data.content) {
-              const key = `${grade}_${month}`;
-              monthlyGoals[key] = data.content;
-            }
-          } catch (error) {
-            // エラーは無視
-          }
-        }
-      }
-    }
-
-    async function loadAllTodos(studentId) {
-      const grades = ["高1", "高2", "高3"];
-      const months = ["1","2","3","4","5","6","7","8","9","10","11","12"];
-      
-      for (const grade of grades) {
-        for (const month of months) {
-          try {
-            const url = `${API_URL}?action=getTodos&studentId=${studentId}&grade=${grade}&month=${month}`;
-            const response = await fetch(url);
-            const data = await response.json();
-            if (data && Array.isArray(data)) {
-              data.forEach(todo => {
-                todo.grade = grade;
-                todo.month = month;
-                const exists = todos.find(t => t.id === todo.id);
-                if (!exists) {
-                  todos.push(todo);
-                }
-              });
-            }
-          } catch (error) {
-            // エラーは無視
-          }
-        }
+      } catch (e) {
+        console.error('チェック状態の読み込みエラー:', e);
+        checkState = {};
       }
     }
 
     // ============================================
-    // 描画
+    // マスタデータの読み込み
     // ============================================
-    function renderAll() {
+    async function loadMasterData() {
+      try {
+        const response = await fetch(JSON_URL + '?t=' + Date.now());
+        if (!response.ok) throw new Error('JSONファイルの読み込みに失敗');
+        masterData = await response.json();
+        return true;
+      } catch (error) {
+        console.error('マスタデータ読み込みエラー:', error);
+        return false;
+      }
+    }
+
+    // ============================================
+    // 進捗計算
+    // ============================================
+    function calculateProgress() {
+      let totalItems = 0;
+      let totalChecked = 0;
+      const categories = [];
+
+      for (const categoryName in masterData) {
+        const items = masterData[categoryName];
+        const categoryState = checkState[categoryName] || {};
+        
+        let checked = 0;
+        for (const item of items) {
+          if (categoryState[item.no]) {
+            checked++;
+          }
+        }
+
+        totalItems += items.length;
+        totalChecked += checked;
+
+        const percent = items.length > 0 ? Math.round((checked / items.length) * 100) : 0;
+
+        categories.push({
+          name: categoryName,
+          total: items.length,
+          checked: checked,
+          percent: percent
+        });
+      }
+
+      const totalPercent = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
+
+      return {
+        totalItems,
+        totalChecked,
+        totalPercent,
+        categories
+      };
+    }
+
+    // ============================================
+    // 表示
+    // ============================================
+    function render() {
       document.getElementById('loadingState').style.display = 'none';
       document.getElementById('mainContent').style.display = 'block';
-      
-      renderSummary();
-      renderGradeProgress();
-      renderChecklistView();
-      renderGoalsList();
-      renderTodoSection();
-    }
 
-    // 全体サマリー
-    function renderSummary() {
-      const grades = ["高1", "高2", "高3"];
-      let totalChecked = 0;
-      let totalItems = 0;
-      const gradeStats = [];
+      const progress = calculateProgress();
 
-      grades.forEach(grade => {
-        const items = checklistData[grade] || [];
-        const checked = checkedItems[grade] || [];
-        totalItems += items.length;
-        totalChecked += checked.length;
-        gradeStats.push({ grade, checked: checked.length, total: items.length });
-      });
+      // 全体進捗
+      document.getElementById('totalPercent').textContent = progress.totalPercent + '%';
+      document.getElementById('totalBarFill').style.width = progress.totalPercent + '%';
+      document.getElementById('totalDetail').textContent = progress.totalChecked + ' / ' + progress.totalItems + ' 完了';
 
-      const percent = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
+      // カテゴリグリッド
+      const grid = document.getElementById('categoryGrid');
+      grid.innerHTML = '';
 
-      // 円グラフ
-      const circle = document.getElementById('progressCircle');
-      const circumference = 2 * Math.PI * 42; // r=42
-      const offset = circumference - (percent / 100) * circumference;
-      circle.style.strokeDashoffset = offset;
+      // 進捗が低い順にソート
+      progress.categories.sort((a, b) => a.percent - b.percent);
 
-      document.getElementById('totalPercent').textContent = percent + '%';
-      document.getElementById('totalChecked').textContent = totalChecked;
-      document.getElementById('totalItems').textContent = totalItems;
-
-      const subText = gradeStats.map(s => `${s.grade}: ${s.checked}/${s.total}`).join(' ｜ ');
-      document.getElementById('summarySubText').textContent = subText;
-    }
-
-    // 学年別進捗バー
-    function renderGradeProgress() {
-      const container = document.getElementById('gradeProgressList');
-      const grades = ["高1", "高2", "高3"];
-      let html = '';
-
-      grades.forEach(grade => {
-        const items = checklistData[grade] || [];
-        const checked = checkedItems[grade] || [];
-        const percent = items.length > 0 ? Math.round((checked.length / items.length) * 100) : 0;
-
-        html += `
-          <div class="grade-progress-item">
-            <span class="grade-progress-label">${grade}</span>
-            <div class="grade-progress-bar-wrapper">
-              <div class="grade-progress-bar" style="width: ${percent}%"></div>
-            </div>
-            <span class="grade-progress-stats">
-              <span class="grade-progress-percent">${percent}%</span> (${checked.length}/${items.length})
-            </span>
-          </div>
-        `;
-      });
-
-      container.innerHTML = html;
-    }
-
-    // 学年タブ選択
-    function selectChecklistGrade(grade) {
-      selectedChecklistGrade = grade;
-      document.querySelectorAll('.grade-tab').forEach(tab => {
-        tab.classList.toggle('active', tab.dataset.grade === grade);
-      });
-      renderChecklistView();
-    }
-
-    // チェックリスト一覧
-    function renderChecklistView() {
-      const container = document.getElementById('checklistView');
-      const items = checklistData[selectedChecklistGrade] || [];
-      const checked = checkedItems[selectedChecklistGrade] || [];
-
-      let html = '';
-      items.forEach((item, index) => {
-        const isChecked = checked.includes(index);
-        html += `
-          <div class="checklist-item ${isChecked ? 'checked' : ''}">
-            <span class="material-icons checklist-icon ${isChecked ? 'checked' : 'unchecked'}">
-              ${isChecked ? 'check_circle' : 'radio_button_unchecked'}
-            </span>
-            <span class="checklist-text">${escapeHtml(item)}</span>
-          </div>
-        `;
-      });
-
-      container.innerHTML = html;
-    }
-
-    // 月別やること
-    function renderGoalsList() {
-      const container = document.getElementById('goalsList');
-      const grades = ["高3", "高2", "高1"];
-      const months = ["12","11","10","9","8","7","6","5","4","3","2","1"];
-      
-      let html = '';
-      let hasAny = false;
-
-      grades.forEach(grade => {
-        months.forEach(month => {
-          const key = `${grade}_${month}`;
-          const content = monthlyGoals[key];
-          if (content) {
-            hasAny = true;
-            html += `
-              <div class="goals-item" data-key="${key}">
-                <div class="goals-item-header" onclick="toggleGoalsItem('${key}')">
-                  <div class="goals-item-title">
-                    <span class="goals-month-badge">${grade}｜${month}月</span>
-                  </div>
-                  <span class="material-icons goals-item-arrow">expand_more</span>
-                </div>
-                <div class="goals-item-content">
-                  <div class="goals-text">${escapeHtml(content)}</div>
-                </div>
-              </div>
-            `;
-          }
-        });
-      });
-
-      if (!hasAny) {
-        html = `
-          <div class="no-goals-message">
-            <span class="material-icons">event_note</span>
-            <p>登録された「やること」はありません</p>
-          </div>
-        `;
-      }
-
-      container.innerHTML = html;
-    }
-
-    function toggleGoalsItem(key) {
-      const item = document.querySelector(`.goals-item[data-key="${key}"]`);
-      if (item) {
-        item.classList.toggle('open');
-      }
-    }
-
-    // ToDo達成状況
-    function renderTodoSection() {
-      const container = document.getElementById('todoSection');
-      
-      if (todos.length === 0) {
-        container.innerHTML = `
-          <div class="no-todo-message">
-            <span class="material-icons">task_alt</span>
-            <p>登録されたToDoはありません</p>
-          </div>
-        `;
-        return;
-      }
-
-      // 今月のToDo
-      const now = new Date();
-      const currentMonth = String(now.getMonth() + 1);
-      const currentMonthTodos = todos.filter(t => t.month === currentMonth);
-      const completedCount = currentMonthTodos.filter(t => t.completed).length;
-      const totalCount = currentMonthTodos.length;
-      const percent = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
-
-      let html = '';
-
-      // サマリー
-      html += `
-        <div class="todo-summary">
-          <div class="todo-summary-text">今月: <strong>${completedCount}</strong> / ${totalCount} 完了</div>
-          <div class="todo-summary-bar">
-            <div class="todo-summary-bar-fill" style="width: ${percent}%"></div>
-          </div>
-        </div>
-      `;
-
-      // 今月のToDoリスト
-      if (currentMonthTodos.length > 0) {
-        html += '<div class="todo-list">';
-        currentMonthTodos.sort((a, b) => {
-          if (a.completed !== b.completed) return a.completed ? 1 : -1;
-          return new Date(a.deadline) - new Date(b.deadline);
-        });
-        currentMonthTodos.forEach(todo => {
-          html += renderTodoItem(todo);
-        });
-        html += '</div>';
-      }
-
-      // 過去のToDo
-      const pastTodos = todos.filter(t => t.month !== currentMonth);
-      if (pastTodos.length > 0) {
-        html += `
-          <div class="todo-month-section">
-            <div class="todo-month-header" onclick="togglePastTodos(this)">
-              <span class="material-icons">expand_more</span>
-              <span class="todo-month-title">過去の月のToDoを見る（${pastTodos.length}件）</span>
-            </div>
-            <div class="todo-month-content">
-              <div class="todo-list" style="margin-top: 12px;">
-        `;
+      progress.categories.forEach(cat => {
+        const card = document.createElement('div');
         
-        // グループ化
-        const grouped = {};
-        pastTodos.forEach(todo => {
-          const key = `${todo.grade}_${todo.month}`;
-          if (!grouped[key]) grouped[key] = [];
-          grouped[key].push(todo);
-        });
+        let level = 'low';
+        if (cat.percent >= 100) level = 'complete';
+        else if (cat.percent >= 70) level = 'high';
+        else if (cat.percent >= 30) level = 'mid';
 
-        Object.keys(grouped).sort().reverse().forEach(key => {
-          const [grade, month] = key.split('_');
-          html += `<div style="font-size: 12px; font-weight: 600; color: #00695C; margin: 12px 0 8px; padding-left: 4px;">${grade}｜${month}月</div>`;
-          grouped[key].forEach(todo => {
-            html += renderTodoItem(todo);
-          });
-        });
+        card.className = `category-card ${level}`;
+        card.onclick = () => goToChecklist(cat.name);
 
-        html += '</div></div></div>';
-      }
-
-      container.innerHTML = html;
-    }
-
-    function renderTodoItem(todo) {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const deadlineDate = new Date(todo.deadline);
-      const diffDays = Math.ceil((deadlineDate - today) / (1000 * 60 * 60 * 24));
-      
-      let deadlineClass = '';
-      if (diffDays < 0 && !todo.completed) deadlineClass = 'overdue';
-      else if (diffDays <= 3 && !todo.completed) deadlineClass = 'soon';
-
-      const deadlineText = formatDeadline(todo.deadline);
-
-      return `
-        <div class="todo-item ${todo.completed ? 'completed' : ''}">
-          <span class="material-icons todo-icon ${todo.completed ? 'completed' : 'pending'}">
-            ${todo.completed ? 'check_circle' : 'radio_button_unchecked'}
-          </span>
-          <div class="todo-content">
-            <div class="todo-text">${escapeHtml(todo.text)}</div>
-            <div class="todo-deadline ${deadlineClass}">
-              <span class="material-icons">schedule</span>
-              ${deadlineText}
-            </div>
+        card.innerHTML = `
+          <div class="category-header">
+            <span class="category-name">${escapeHtml(cat.name)}</span>
+            <span class="category-percent">${cat.percent}%</span>
           </div>
-        </div>
-      `;
+          <div class="category-bar">
+            <div class="category-bar-fill ${level}" style="width: ${cat.percent}%;"></div>
+          </div>
+          <div class="category-count">${cat.checked} / ${cat.total}</div>
+        `;
+
+        grid.appendChild(card);
+      });
     }
 
-    function formatDeadline(dateStr) {
-      const date = new Date(dateStr);
-      const month = date.getMonth() + 1;
-      const day = date.getDate();
-      return `${month}/${day}まで`;
-    }
-
-    function togglePastTodos(header) {
-      header.classList.toggle('open');
+    // ============================================
+    // チェックリストページへ遷移
+    // ============================================
+    function goToChecklist(categoryName) {
+      // カテゴリ名をlocalStorageに保存して遷移
+      localStorage.setItem('eqao_checklist_openCategory', categoryName);
+      window.location.href = 'checklist.html?t=' + Date.now();
     }
 
     // ============================================
@@ -1430,9 +709,22 @@
     }
 
     // ============================================
+    // ユーティリティ
+    // ============================================
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // ============================================
     // 初期化
     // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', async function() {
       const isLoggedIn = localStorage.getItem('eqao_loggedIn');
       if (!isLoggedIn) {
         window.location.href = 'index.html?t=' + new Date().getTime();
@@ -1444,7 +736,21 @@
       document.getElementById('navUserName').textContent = studentName || 'ゲスト';
       document.getElementById('backBtn').href = 'index.html?t=' + new Date().getTime();
 
-      loadAllData();
+      // チェック状態を読み込み
+      loadCheckState();
+
+      // マスタデータを読み込み
+      const loaded = await loadMasterData();
+      if (!loaded) {
+        document.getElementById('loadingState').innerHTML = `
+          <span class="material-icons" style="animation: none; color: #c62828;">error</span>
+          <p>データの読み込みに失敗しました</p>
+        `;
+        return;
+      }
+
+      // 表示
+      render();
     });
   </script>
 </body>
