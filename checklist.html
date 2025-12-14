@@ -322,6 +322,111 @@
       text-align: right;
     }
 
+    /* 検索・フィルター・ソート */
+    .filter-section {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f5f5f5;
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+    }
+
+    .search-box .material-icons {
+      color: #888;
+      font-size: 20px;
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .search-box input::placeholder {
+      color: #aaa;
+    }
+
+    .search-clear {
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      border-radius: 50%;
+    }
+
+    .search-clear:hover {
+      background: #e0e0e0;
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .filter-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .filter-group label {
+      font-size: 11px;
+      color: #888;
+      font-weight: 500;
+    }
+
+    .filter-group select {
+      padding: 8px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 13px;
+      background: white;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .filter-group select:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    .filter-result {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+      display: none;
+    }
+
+    .filter-result.show {
+      display: block;
+    }
+
+    /* 検索ハイライト */
+    .highlight {
+      background: #fff59d;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+
     /* カテゴリ一覧 */
     .category-list {
       display: flex;
@@ -347,7 +452,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 4px;
     }
 
     .category-name {
@@ -362,6 +467,25 @@
       font-weight: 700;
       color: #1a237e;
       margin-left: 12px;
+    }
+
+    .category-parent-label {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .category-parent-label::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #1a237e;
+      border-radius: 2px;
+      opacity: 0.5;
     }
 
     .category-progress-bar {
@@ -526,117 +650,6 @@
       color: #ccc;
       flex-shrink: 0;
     }
-
-    /* 検索・フィルター・ソート */
-.filter-section {
-  background: white;
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-}
-
-.search-box {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #f5f5f5;
-  border-radius: 12px;
-  padding: 10px 14px;
-  margin-bottom: 12px;
-}
-
-.search-box .material-icons {
-  color: #888;
-  font-size: 20px;
-}
-
-.search-box input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  font-size: 14px;
-  outline: none;
-  font-family: inherit;
-}
-
-.search-box input::placeholder {
-  color: #aaa;
-}
-
-.search-clear {
-  background: none;
-  border: none;
-  padding: 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #888;
-  border-radius: 50%;
-}
-
-.search-clear:hover {
-  background: #e0e0e0;
-}
-
-.filter-row {
-  display: flex;
-  gap: 12px;
-}
-
-.filter-group {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.filter-group label {
-  font-size: 11px;
-  color: #888;
-  font-weight: 500;
-}
-
-.filter-group select {
-  padding: 8px 12px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 13px;
-  background: white;
-  cursor: pointer;
-  font-family: inherit;
-}
-
-.filter-group select:focus {
-  outline: none;
-  border-color: #1a237e;
-}
-
-.filter-result {
-  margin-top: 12px;
-  font-size: 12px;
-  color: #888;
-  text-align: center;
-  display: none;
-}
-
-.filter-result.show {
-  display: block;
-}
-
-.category-card.hidden {
-  display: none;
-}
-
-/* 検索ハイライト */
-.highlight {
-  background: #fff59d;
-  padding: 0 2px;
-  border-radius: 2px;
-}
-
-    
   </style>
 </head>
 <body>
@@ -837,53 +850,60 @@
       <p class="loading-message" id="loadingMessage"></p>
     </div>
 
-   <!-- 進捗一覧画面 -->
-<div id="progressView" style="display: none;">
-  <div class="total-progress">
-    <div class="total-progress-header">
-      <span class="total-progress-title">全体の進捗</span>
-      <span id="totalPercent" class="total-progress-percent">0%</span>
-    </div>
-    <div class="total-progress-bar">
-      <div id="totalProgressFill" class="total-progress-fill" style="width: 0%;"></div>
-    </div>
-    <div id="totalDetail" class="total-progress-detail">0 / 0 完了</div>
-  </div>
-
-  <!-- 検索・フィルター・ソート -->
-  <div class="filter-section">
-    <div class="search-box">
-      <span class="material-icons">search</span>
-      <input type="text" id="searchInput" placeholder="カテゴリを検索..." oninput="applyFilters()">
-      <button class="search-clear" id="searchClear" onclick="clearSearch()" style="display:none;">
-        <span class="material-icons">close</span>
-      </button>
-    </div>
-    <div class="filter-row">
-      <div class="filter-group">
-        <label>表示</label>
-        <select id="filterStatus" onchange="applyFilters()">
-          <option value="all">すべて</option>
-          <option value="incomplete">未完了あり</option>
-          <option value="complete">完了のみ</option>
-        </select>
+    <!-- 進捗一覧画面 -->
+    <div id="progressView" style="display: none;">
+      <div class="total-progress">
+        <div class="total-progress-header">
+          <span class="total-progress-title">全体の進捗</span>
+          <span id="totalPercent" class="total-progress-percent">0%</span>
+        </div>
+        <div class="total-progress-bar">
+          <div id="totalProgressFill" class="total-progress-fill" style="width: 0%;"></div>
+        </div>
+        <div id="totalDetail" class="total-progress-detail">0 / 0 完了</div>
       </div>
-      <div class="filter-group">
-        <label>並び順</label>
-        <select id="sortOrder" onchange="applyFilters()">
-          <option value="default">デフォルト</option>
-          <option value="progress-asc">進捗率（低→高）</option>
-          <option value="progress-desc">進捗率（高→低）</option>
-          <option value="name-asc">名前（あ→ん）</option>
-          <option value="count-desc">項目数（多→少）</option>
-        </select>
-      </div>
-    </div>
-    <div class="filter-result" id="filterResult"></div>
-  </div>
 
-  <div id="categoryList" class="category-list"></div>
-</div>
+      <!-- 検索・フィルター・ソート -->
+      <div class="filter-section">
+        <div class="search-box">
+          <span class="material-icons">search</span>
+          <input type="text" id="searchInput" placeholder="カテゴリを検索..." oninput="applyFilters()">
+          <button class="search-clear" id="searchClear" onclick="clearSearch()" style="display:none;">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <div class="filter-row">
+          <div class="filter-group">
+            <label>大カテゴリ</label>
+            <select id="filterParent" onchange="applyFilters()">
+              <option value="all">すべて</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>表示</label>
+            <select id="filterStatus" onchange="applyFilters()">
+              <option value="all">すべて</option>
+              <option value="incomplete">未完了あり</option>
+              <option value="complete">完了のみ</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-row" style="margin-top: 8px;">
+          <div class="filter-group">
+            <label>並び順</label>
+            <select id="sortOrder" onchange="applyFilters()">
+              <option value="default">デフォルト</option>
+              <option value="progress-asc">進捗率（低→高）</option>
+              <option value="progress-desc">進捗率（高→低）</option>
+              <option value="count-desc">項目数（多→少）</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-result" id="filterResult"></div>
+      </div>
+
+      <div id="categoryList" class="category-list"></div>
+    </div>
 
     <!-- カテゴリ詳細画面 -->
     <div id="detailView" class="detail-view">
@@ -913,18 +933,20 @@
     // ============================================
     const JSON_URL = 'checklist_master.json';
     const API_URL = 'https://script.google.com/macros/s/AKfycbzCFkkw6h6o0iFwObPILE-VCYfjRP1ikmMWOl6DgqIaqIRi657vQIKkjSKuRVTaWJzG/exec';
-    const SYNC_INTERVAL = 15 * 1000; // 15秒ごとに同期
+    const SYNC_INTERVAL = 15 * 1000;
 
     // ============================================
     // 状態管理
     // ============================================
-    let masterData = null;  // JSONから読み込んだマスタデータ
-    let checkState = {};    // チェック状態 { "カテゴリ名": { "項目No": true/false } }
+    let masterData = null;
+    let checkState = {};
     let currentUser = null;
     let currentCategory = null;
     let currentView = 'progress';
     let pendingSync = false;
     let syncTimer = null;
+    let allCategoryData = [];
+    let parentCategories = [];
 
     // ============================================
     // localStorage キー
@@ -963,31 +985,31 @@
     // スプレッドシートとの同期
     // ============================================
     async function syncToSpreadsheet() {
-  if (!pendingSync || !currentUser) return;
+      if (!pendingSync || !currentUser) return;
 
-  showSyncStatus('同期中...', 'sync');
+      showSyncStatus('同期中...', 'sync');
 
-  try {
-    const url = new URL(API_URL);
-    url.searchParams.set('action', 'syncChecklistState');
-    url.searchParams.set('studentId', currentUser.studentId);
-    url.searchParams.set('password', currentUser.password);
-    url.searchParams.set('checkState', JSON.stringify(checkState));
+      try {
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'syncChecklistState');
+        url.searchParams.set('studentId', currentUser.studentId);
+        url.searchParams.set('password', currentUser.password);
+        url.searchParams.set('checkState', JSON.stringify(checkState));
 
-    const response = await fetch(url.toString());
-    const result = await response.json();
-    
-    if (result.success) {
-      pendingSync = false;
-      showSyncStatus('同期完了', 'success');
-    } else {
-      showSyncStatus('同期エラー', 'error');
+        const response = await fetch(url.toString());
+        const result = await response.json();
+        
+        if (result.success) {
+          pendingSync = false;
+          showSyncStatus('同期完了', 'success');
+        } else {
+          showSyncStatus('同期エラー', 'error');
+        }
+      } catch (error) {
+        console.error('同期エラー:', error);
+        showSyncStatus('同期エラー', 'error');
+      }
     }
-  } catch (error) {
-    console.error('同期エラー:', error);
-    showSyncStatus('同期エラー', 'error');
-  }
-}
 
     async function loadFromSpreadsheet() {
       if (!currentUser) return;
@@ -1001,7 +1023,6 @@
         const result = await response.json();
 
         if (result.success && result.checkState) {
-          // サーバーのデータとローカルをマージ（ローカル優先）
           const serverState = result.checkState;
           for (const category in serverState) {
             if (!checkState[category]) {
@@ -1067,10 +1088,15 @@
       let totalItems = 0;
       let totalChecked = 0;
       const categories = [];
+      const parentSet = new Set();
 
       for (const categoryName in masterData) {
-        const items = masterData[categoryName];
+        const categoryData = masterData[categoryName];
+        const items = categoryData.items || [];
+        const parent = categoryData.parent || '未分類';
         const categoryState = checkState[categoryName] || {};
+        
+        parentSet.add(parent);
         
         let checked = 0;
         for (const item of items) {
@@ -1086,11 +1112,14 @@
 
         categories.push({
           name: categoryName,
+          parent: parent,
           total: items.length,
           checked: checked,
           percent: percent
         });
       }
+
+      parentCategories = [...parentSet].sort((a, b) => a.localeCompare(b, 'ja'));
 
       const totalPercent = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
 
@@ -1103,34 +1132,161 @@
     }
 
     // ============================================
+    // 大カテゴリフィルターの更新
+    // ============================================
+    function updateParentFilter() {
+      const select = document.getElementById('filterParent');
+      select.innerHTML = '<option value="all">すべて</option>';
+      
+      parentCategories.forEach(parent => {
+        const option = document.createElement('option');
+        option.value = parent;
+        option.textContent = parent;
+        select.appendChild(option);
+      });
+    }
+
+    // ============================================
     // 進捗画面の表示
     // ============================================
     function displayProgress() {
-  document.getElementById('loading').style.display = 'none';
+      document.getElementById('loading').style.display = 'none';
 
-  const progress = calculateProgress();
+      const progress = calculateProgress();
 
-  // 全体進捗
-  document.getElementById('totalPercent').textContent = progress.totalPercent + '%';
-  document.getElementById('totalProgressFill').style.width = progress.totalPercent + '%';
-  document.getElementById('totalDetail').textContent = progress.totalChecked + ' / ' + progress.totalItems + ' 完了';
+      document.getElementById('totalPercent').textContent = progress.totalPercent + '%';
+      document.getElementById('totalProgressFill').style.width = progress.totalPercent + '%';
+      document.getElementById('totalDetail').textContent = progress.totalChecked + ' / ' + progress.totalItems + ' 完了';
 
-  // カテゴリデータを保存
-  allCategoryData = progress.categories;
-  
-  // フィルターをリセットして表示
-  document.getElementById('searchInput').value = '';
-  document.getElementById('filterStatus').value = 'all';
-  document.getElementById('sortOrder').value = 'default';
-  
-  // カテゴリカードを描画
-  renderCategoryCards(allCategoryData);
+      allCategoryData = progress.categories;
+      
+      updateParentFilter();
+      
+      document.getElementById('searchInput').value = '';
+      document.getElementById('filterParent').value = 'all';
+      document.getElementById('filterStatus').value = 'all';
+      document.getElementById('sortOrder').value = 'default';
+      
+      renderCategoryCards(allCategoryData);
 
-  document.getElementById('headerTitle').textContent = 'チェックリスト';
-  document.getElementById('progressView').style.display = 'block';
-  document.getElementById('detailView').style.display = 'none';
-  currentView = 'progress';
-}
+      document.getElementById('headerTitle').textContent = 'チェックリスト';
+      document.getElementById('progressView').style.display = 'block';
+      document.getElementById('detailView').style.display = 'none';
+      currentView = 'progress';
+    }
+
+    // ============================================
+    // フィルター適用
+    // ============================================
+    function applyFilters() {
+      const searchText = document.getElementById('searchInput').value.toLowerCase().trim();
+      const filterParent = document.getElementById('filterParent').value;
+      const filterStatus = document.getElementById('filterStatus').value;
+      const sortOrder = document.getElementById('sortOrder').value;
+      
+      document.getElementById('searchClear').style.display = searchText ? 'flex' : 'none';
+      
+      let filtered = allCategoryData.filter(cat => {
+        if (filterParent !== 'all' && cat.parent !== filterParent) {
+          return false;
+        }
+        
+        if (searchText && !cat.name.toLowerCase().includes(searchText)) {
+          return false;
+        }
+        
+        if (filterStatus === 'complete' && cat.percent < 100) {
+          return false;
+        }
+        if (filterStatus === 'incomplete' && cat.percent >= 100) {
+          return false;
+        }
+        
+        return true;
+      });
+      
+      switch (sortOrder) {
+        case 'progress-asc':
+          filtered.sort((a, b) => a.percent - b.percent);
+          break;
+        case 'progress-desc':
+          filtered.sort((a, b) => b.percent - a.percent);
+          break;
+        case 'count-desc':
+          filtered.sort((a, b) => b.total - a.total);
+          break;
+        default:
+          break;
+      }
+      
+      const resultEl = document.getElementById('filterResult');
+      if (searchText || filterParent !== 'all' || filterStatus !== 'all' || sortOrder !== 'default') {
+        resultEl.textContent = `${filtered.length} / ${allCategoryData.length} カテゴリ表示中`;
+        resultEl.classList.add('show');
+      } else {
+        resultEl.classList.remove('show');
+      }
+      
+      renderCategoryCards(filtered, searchText);
+    }
+
+    // ============================================
+    // カテゴリカード描画
+    // ============================================
+    function renderCategoryCards(categories, searchText = '') {
+      const categoryList = document.getElementById('categoryList');
+      categoryList.innerHTML = '';
+      
+      if (categories.length === 0) {
+        categoryList.innerHTML = `
+          <div style="text-align: center; padding: 40px 20px; color: #888;">
+            <span class="material-icons" style="font-size: 48px; opacity: 0.5;">search_off</span>
+            <p style="margin-top: 12px;">該当するカテゴリがありません</p>
+          </div>
+        `;
+        return;
+      }
+      
+      categories.forEach(cat => {
+        const card = document.createElement('div');
+        card.className = 'category-card';
+        card.onclick = () => showCategoryDetail(cat.name);
+
+        let fillClass = 'low';
+        if (cat.percent >= 100) fillClass = 'complete';
+        else if (cat.percent >= 70) fillClass = 'high';
+        else if (cat.percent >= 30) fillClass = 'mid';
+
+        let displayName = escapeHtml(cat.name);
+        if (searchText) {
+          const regex = new RegExp(`(${escapeRegex(searchText)})`, 'gi');
+          displayName = displayName.replace(regex, '<span class="highlight">$1</span>');
+        }
+
+        card.innerHTML = `
+          <div class="category-header">
+            <span class="category-name">${displayName}</span>
+            <span class="category-percent">${cat.percent}%</span>
+          </div>
+          <div class="category-parent-label">${escapeHtml(cat.parent)}</div>
+          <div class="category-progress-bar">
+            <div class="category-progress-fill ${fillClass}" style="width: ${cat.percent}%;"></div>
+          </div>
+          <div class="category-detail">${cat.checked} / ${cat.total} 完了</div>
+        `;
+
+        categoryList.appendChild(card);
+      });
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      applyFilters();
+    }
+
+    function escapeRegex(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
 
     // ============================================
     // カテゴリ詳細の表示
@@ -1139,10 +1295,10 @@
       currentCategory = categoryName;
       document.getElementById('headerTitle').textContent = categoryName;
 
-      const items = masterData[categoryName] || [];
+      const categoryData = masterData[categoryName] || {};
+      const items = categoryData.items || [];
       const categoryState = checkState[categoryName] || {};
 
-      // 進捗計算
       let checked = 0;
       for (const item of items) {
         if (categoryState[item.no]) checked++;
@@ -1153,7 +1309,6 @@
       document.getElementById('detailCount').textContent = checked + ' / ' + items.length;
       document.getElementById('detailProgressFill').style.width = percent + '%';
 
-      // 項目一覧
       const itemList = document.getElementById('itemList');
       itemList.innerHTML = '';
 
@@ -1192,12 +1347,11 @@
     }
 
     // ============================================
-    // チェック状態の切り替え（即座に反映）
+    // チェック状態の切り替え
     // ============================================
     function toggleCheck(event, categoryName, itemNo) {
       event.stopPropagation();
 
-      // チェック状態を切り替え
       if (!checkState[categoryName]) {
         checkState[categoryName] = {};
       }
@@ -1205,7 +1359,6 @@
       const newState = !checkState[categoryName][itemNo];
       checkState[categoryName][itemNo] = newState;
 
-      // UIを即座に更新
       const card = event.target.closest('.item-card');
       if (newState) {
         card.classList.add('checked');
@@ -1213,17 +1366,15 @@
         card.classList.remove('checked');
       }
 
-      // 進捗カウントを更新
       updateDetailProgress();
-
-      // localStorageに保存
       saveCheckState();
     }
 
     function updateDetailProgress() {
       if (!currentCategory) return;
 
-      const items = masterData[currentCategory] || [];
+      const categoryData = masterData[currentCategory] || {};
+      const items = categoryData.items || [];
       const categoryState = checkState[currentCategory] || {};
 
       let checked = 0;
@@ -1290,7 +1441,6 @@
     // 初期化
     // ============================================
     document.addEventListener('DOMContentLoaded', async function() {
-      // ログイン確認
       const loggedIn = localStorage.getItem('eqao_loggedIn');
       const studentId = localStorage.getItem('eqao_studentId');
       const studentName = localStorage.getItem('eqao_studentName');
@@ -1307,164 +1457,34 @@
       };
 
       setNavUserName();
-
-      // ローカルのチェック状態を読み込み
       loadCheckState();
 
-      // マスタデータを読み込み
       const loaded = await loadMasterData();
       if (!loaded) return;
 
-      // 画面表示
       displayProgress();
-
-      // バックグラウンドでサーバーから同期
       loadFromSpreadsheet();
 
-      // 定期的にサーバーに同期
       syncTimer = setInterval(syncToSpreadsheet, SYNC_INTERVAL);
     });
 
-    // ページ離脱時に同期
-window.addEventListener('beforeunload', function() {
-  if (pendingSync && currentUser) {
-    // 同期をトリガー（完了を待たない）
-    const url = new URL(API_URL);
-    url.searchParams.set('action', 'syncChecklistState');
-    url.searchParams.set('studentId', currentUser.studentId);
-    url.searchParams.set('password', currentUser.password);
-    url.searchParams.set('checkState', JSON.stringify(checkState));
-    
-    fetch(url.toString(), { keepalive: true }).catch(() => {});
-  }
-});
+    window.addEventListener('beforeunload', function() {
+      if (pendingSync && currentUser) {
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'syncChecklistState');
+        url.searchParams.set('studentId', currentUser.studentId);
+        url.searchParams.set('password', currentUser.password);
+        url.searchParams.set('checkState', JSON.stringify(checkState));
+        
+        fetch(url.toString(), { keepalive: true }).catch(() => {});
+      }
+    });
 
-    // タブ切り替え時に同期
     document.addEventListener('visibilitychange', function() {
       if (document.visibilityState === 'hidden' && pendingSync) {
         syncToSpreadsheet();
       }
     });
-
-// ============================================
-// 検索・フィルター・ソート
-// ============================================
-let allCategoryData = []; // 全カテゴリデータを保持
-
-function applyFilters() {
-  const searchText = document.getElementById('searchInput').value.toLowerCase().trim();
-  const filterStatus = document.getElementById('filterStatus').value;
-  const sortOrder = document.getElementById('sortOrder').value;
-  
-  // 検索クリアボタンの表示制御
-  document.getElementById('searchClear').style.display = searchText ? 'flex' : 'none';
-  
-  // フィルタリング
-  let filtered = allCategoryData.filter(cat => {
-    // 検索フィルター
-    if (searchText && !cat.name.toLowerCase().includes(searchText)) {
-      return false;
-    }
-    
-    // ステータスフィルター
-    if (filterStatus === 'complete' && cat.percent < 100) {
-      return false;
-    }
-    if (filterStatus === 'incomplete' && cat.percent >= 100) {
-      return false;
-    }
-    
-    return true;
-  });
-  
-  // ソート
-  switch (sortOrder) {
-    case 'progress-asc':
-      filtered.sort((a, b) => a.percent - b.percent);
-      break;
-    case 'progress-desc':
-      filtered.sort((a, b) => b.percent - a.percent);
-      break;
-    case 'name-asc':
-      filtered.sort((a, b) => a.name.localeCompare(b.name, 'ja'));
-      break;
-    case 'count-desc':
-      filtered.sort((a, b) => b.total - a.total);
-      break;
-    default:
-      // デフォルト順（元の順序を維持）
-      break;
-  }
-  
-  // 結果表示
-  const resultEl = document.getElementById('filterResult');
-  if (searchText || filterStatus !== 'all' || sortOrder !== 'default') {
-    resultEl.textContent = `${filtered.length} / ${allCategoryData.length} カテゴリ表示中`;
-    resultEl.classList.add('show');
-  } else {
-    resultEl.classList.remove('show');
-  }
-  
-  // カテゴリカードを再描画
-  renderCategoryCards(filtered, searchText);
-}
-
-function renderCategoryCards(categories, searchText = '') {
-  const categoryList = document.getElementById('categoryList');
-  categoryList.innerHTML = '';
-  
-  if (categories.length === 0) {
-    categoryList.innerHTML = `
-      <div style="text-align: center; padding: 40px 20px; color: #888;">
-        <span class="material-icons" style="font-size: 48px; opacity: 0.5;">search_off</span>
-        <p style="margin-top: 12px;">該当するカテゴリがありません</p>
-      </div>
-    `;
-    return;
-  }
-  
-  categories.forEach(cat => {
-    const card = document.createElement('div');
-    card.className = 'category-card';
-    card.onclick = () => showCategoryDetail(cat.name);
-
-    let fillClass = 'low';
-    if (cat.percent >= 100) fillClass = 'complete';
-    else if (cat.percent >= 70) fillClass = 'high';
-    else if (cat.percent >= 30) fillClass = 'mid';
-
-    // 検索テキストをハイライト
-    let displayName = escapeHtml(cat.name);
-    if (searchText) {
-      const regex = new RegExp(`(${escapeRegex(searchText)})`, 'gi');
-      displayName = displayName.replace(regex, '<span class="highlight">$1</span>');
-    }
-
-    card.innerHTML = `
-      <div class="category-header">
-        <span class="category-name">${displayName}</span>
-        <span class="category-percent">${cat.percent}%</span>
-      </div>
-      <div class="category-progress-bar">
-        <div class="category-progress-fill ${fillClass}" style="width: ${cat.percent}%;"></div>
-      </div>
-      <div class="category-detail">${cat.checked} / ${cat.total} 完了</div>
-    `;
-
-    categoryList.appendChild(card);
-  });
-}
-
-function clearSearch() {
-  document.getElementById('searchInput').value = '';
-  applyFilters();
-}
-
-function escapeRegex(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-    
-    
   </script>
 </body>
 </html>
