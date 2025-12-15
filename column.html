@@ -158,6 +158,122 @@
       display: block;
     }
 
+    /* 件数サマリー */
+    .count-summary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: white;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #666;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .count-summary .material-icons {
+      font-size: 18px;
+      color: #1a237e;
+    }
+
+    .count-number {
+      font-weight: 700;
+      color: #1a237e;
+    }
+
+    /* 表示件数セレクト */
+    .per-page-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .per-page-label {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .per-page-select {
+      padding: 6px 28px 6px 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: inherit;
+      background: #f9f9f9;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+    }
+
+    .per-page-select:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    /* ページネーション */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .pagination-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      height: 40px;
+      padding: 0 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      background: white;
+      color: #333;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .pagination-btn:hover:not(:disabled):not(.active) {
+      border-color: #1a237e;
+      background: #f5f5ff;
+    }
+
+    .pagination-btn.active {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      border-color: #1a237e;
+      color: white;
+    }
+
+    .pagination-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .pagination-btn .material-icons {
+      font-size: 20px;
+    }
+
+    .pagination-info {
+      font-size: 13px;
+      color: #888;
+      margin: 0 8px;
+    }
+
+    .pagination-ellipsis {
+      color: #999;
+      font-size: 14px;
+      padding: 0 4px;
+    }
+
     /* ローディング */
     .loading {
       text-align: center;
@@ -709,6 +825,22 @@
           <span class="material-icons">close</span>
         </button>
       </div>
+
+      <!-- 件数サマリー -->
+      <div class="count-summary" id="countSummary">
+        <span class="material-icons">article</span>
+        <span>表示中: <span class="count-number" id="displayCount">0</span> 件</span>
+        <div class="per-page-wrapper">
+          <span class="per-page-label">表示件数:</span>
+          <select id="perPageSelect" class="per-page-select" onchange="onPerPageChange()">
+            <option value="10">10件</option>
+            <option value="20" selected>20件</option>
+            <option value="50">50件</option>
+            <option value="100">100件</option>
+            <option value="all">すべて</option>
+          </select>
+        </div>
+      </div>
     </div>
 
     <div id="loading" class="loading">
@@ -717,6 +849,9 @@
     </div>
 
     <div id="cardList" class="card-list" style="display: none;"></div>
+
+    <!-- ページネーション -->
+    <div id="pagination" class="pagination" style="display: none;"></div>
     
     <div id="noResults" class="no-results" style="display: none;">
       <span class="material-icons">search_off</span>
@@ -839,29 +974,91 @@
     // ページ読み込み時
     document.addEventListener('DOMContentLoaded', function() {
       setNavUserName();
+      
+      // 保存された表示件数を復元
+      const savedPerPage = localStorage.getItem('eqao_column_perPage');
+      if (savedPerPage) {
+        if (savedPerPage === 'all') {
+          perPage = Infinity;
+        } else {
+          perPage = parseInt(savedPerPage);
+        }
+        document.getElementById('perPageSelect').value = savedPerPage;
+      }
+      
       loadCategoryOptions();
       loadAllData();
     });
 
     let allData = [];
+    let filteredData = [];
     let currentCategory = 'すべて';
     let searchKeyword = '';
+    let currentPage = 1;
+    let perPage = 20;
 
     // カテゴリの選択肢を読み込み
     async function loadCategoryOptions() {
       try {
         const categories = await apiGet('getColumnCategories');
-        const select = document.getElementById('categorySelect');
-        
-        categories.forEach(function(cat) {
-          const option = document.createElement('option');
-          option.value = cat;
-          option.textContent = cat;
-          select.appendChild(option);
-        });
+        // カテゴリリストを保存（件数更新用）
+        window.categoryList = categories;
       } catch (e) {
         console.error('カテゴリ取得エラー:', e);
       }
+    }
+
+    // カテゴリ件数をカウントしてセレクトボックスを更新
+    function updateCategoryCountsInSelect() {
+      if (!window.categoryList || !allData) return;
+      
+      const counts = {};
+      
+      // 各コラムのカテゴリをカウント（複数カテゴリは両方にカウント）
+      allData.forEach(function(item) {
+        const categories = splitCategories(item.category);
+        categories.forEach(function(cat) {
+          // セレクトボックスの各カテゴリに対して、このコラムが該当するかチェック
+          window.categoryList.forEach(function(listCat) {
+            // 部分一致（「面接対策」なら「面接」にも「対策」にもマッチ）
+            if (cat.includes(listCat) || listCat.includes(cat) || cat === listCat) {
+              if (!counts[listCat]) {
+                counts[listCat] = 0;
+              }
+            }
+          });
+        });
+      });
+      
+      // 実際のフィルタ結果でカウントし直す
+      window.categoryList.forEach(function(listCat) {
+        const filtered = allData.filter(function(item) {
+          return item.category && item.category.indexOf(listCat) !== -1;
+        });
+        counts[listCat] = filtered.length;
+      });
+      
+      // セレクトボックスを更新
+      const select = document.getElementById('categorySelect');
+      select.innerHTML = '';
+      
+      // 「すべて」オプション
+      const allOption = document.createElement('option');
+      allOption.value = 'すべて';
+      allOption.textContent = 'すべてのカテゴリ (' + allData.length + ')';
+      select.appendChild(allOption);
+      
+      // 各カテゴリオプション（件数付き）
+      window.categoryList.forEach(function(cat) {
+        const option = document.createElement('option');
+        option.value = cat;
+        const count = counts[cat] || 0;
+        option.textContent = cat + ' (' + count + ')';
+        select.appendChild(option);
+      });
+      
+      // 現在の選択を維持
+      select.value = currentCategory;
     }
 
     // 全データを読み込み
@@ -872,6 +1069,8 @@
 
       try {
         allData = await apiGet('getColumn', { month: 'すべて', category: 'すべて' });
+        // カテゴリ件数を更新
+        updateCategoryCountsInSelect();
         filterAndDisplay();
       } catch (error) {
         handleError(error);
@@ -908,6 +1107,29 @@
       filterAndDisplay();
     }
 
+    // 表示件数変更
+    function onPerPageChange() {
+      const select = document.getElementById('perPageSelect');
+      const value = select.value;
+      if (value === 'all') {
+        perPage = Infinity;
+      } else {
+        perPage = parseInt(value);
+      }
+      // localStorageに保存
+      localStorage.setItem('eqao_column_perPage', value);
+      currentPage = 1; // ページをリセット
+      displayCurrentPage();
+    }
+
+    // ページ変更
+    function goToPage(page) {
+      currentPage = page;
+      displayCurrentPage();
+      // ページトップにスクロール
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     // フィルタして表示
     function filterAndDisplay() {
       let filtered = allData;
@@ -930,20 +1152,102 @@
         });
       }
 
-      displayData(filtered);
+      filteredData = filtered;
+      currentPage = 1; // フィルター変更時はページをリセット
+      displayCurrentPage();
+    }
+
+    // 現在のページを表示
+    function displayCurrentPage() {
+      const totalItems = filteredData.length;
+      const totalPages = perPage === Infinity ? 1 : Math.ceil(totalItems / perPage);
+      
+      // ページ範囲のデータを取得
+      let pageData;
+      if (perPage === Infinity) {
+        pageData = filteredData;
+      } else {
+        const start = (currentPage - 1) * perPage;
+        const end = start + perPage;
+        pageData = filteredData.slice(start, end);
+      }
+
+      displayData(pageData, totalItems);
+      renderPagination(totalPages, totalItems);
+    }
+
+    // ページネーションを描画
+    function renderPagination(totalPages, totalItems) {
+      const container = document.getElementById('pagination');
+      
+      if (totalPages <= 1 || perPage === Infinity) {
+        container.style.display = 'none';
+        return;
+      }
+
+      container.style.display = 'flex';
+      let html = '';
+
+      // 前へボタン
+      html += `<button class="pagination-btn" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+        <span class="material-icons">chevron_left</span>
+      </button>`;
+
+      // ページ番号
+      const maxVisible = 5;
+      let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+      let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+      
+      if (endPage - startPage < maxVisible - 1) {
+        startPage = Math.max(1, endPage - maxVisible + 1);
+      }
+
+      if (startPage > 1) {
+        html += `<button class="pagination-btn" onclick="goToPage(1)">1</button>`;
+        if (startPage > 2) {
+          html += `<span class="pagination-ellipsis">...</span>`;
+        }
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        html += `<button class="pagination-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+      }
+
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+          html += `<span class="pagination-ellipsis">...</span>`;
+        }
+        html += `<button class="pagination-btn" onclick="goToPage(${totalPages})">${totalPages}</button>`;
+      }
+
+      // 次へボタン
+      html += `<button class="pagination-btn" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+        <span class="material-icons">chevron_right</span>
+      </button>`;
+
+      // ページ情報
+      const start = (currentPage - 1) * perPage + 1;
+      const end = Math.min(currentPage * perPage, totalItems);
+      html += `<span class="pagination-info">${start}-${end} / ${totalItems}件</span>`;
+
+      container.innerHTML = html;
     }
 
     // データを表示
-    function displayData(data) {
+    function displayData(data, totalItems) {
       document.getElementById('loading').style.display = 'none';
       
       const cardList = document.getElementById('cardList');
       const noResults = document.getElementById('noResults');
       cardList.innerHTML = '';
 
+      // 件数を更新（総件数を表示）
+      document.getElementById('displayCount').textContent = totalItems !== undefined ? totalItems : (data ? data.length : 0);
+
       if (!data || data.length === 0) {
         cardList.style.display = 'none';
         noResults.style.display = 'block';
+        document.getElementById('pagination').style.display = 'none';
         return;
       }
 
