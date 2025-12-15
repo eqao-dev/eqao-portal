@@ -96,6 +96,7 @@
     .section-icon.schedule { background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); }
     .section-icon.contract { background: linear-gradient(135deg, #ff8f00 0%, #ffc107 100%); }
     .section-icon.meeting { background: linear-gradient(135deg, #00695c 0%, #26a69a 100%); }
+    .section-icon.exam { background: linear-gradient(135deg, #4527a0 0%, #7e57c2 100%); }
     .section-icon.other { background: linear-gradient(135deg, #00838f 0%, #4dd0e1 100%); }
 
     .section-title {
@@ -566,125 +567,50 @@
 
   <div class="container">
     <!-- スケジュール・授業関連 -->
-    <div class="section">
+    <div class="section" id="scheduleSection" style="display: none;">
       <div class="section-header">
         <div class="section-icon schedule">
           <span class="material-icons">event_note</span>
         </div>
         <h2 class="section-title">スケジュール・授業関連</h2>
       </div>
-      <div class="card-list">
-        <a href="https://forms.gle/89pDvpSBRXiNnpPG9" target="_blank" class="card">
-          <div class="card-icon blue">
-            <span class="material-icons">swap_horiz</span>
-          </div>
-          <div class="card-content">
-            <div class="card-title">授業振替フォーム</div>
-            <div class="card-subtitle">授業の振替申請</div>
-          </div>
-          <span class="card-badge external">外部フォーム</span>
-          <span class="material-icons card-arrow">chevron_right</span>
-        </a>
-        <div class="card disabled">
-          <div class="card-icon blue">
-            <span class="material-icons">edit_calendar</span>
-          </div>
-          <div class="card-content">
-            <div class="card-title">スケジュールフォーム</div>
-            <div class="card-subtitle">スケジュールの調整申請</div>
-          </div>
-          <span class="card-badge wip">準備中</span>
-        </div>
-      </div>
+      <div class="card-list" id="scheduleCardList"></div>
     </div>
 
     <!-- 追加対策・契約関連 -->
-    <div class="section">
+    <div class="section" id="contractSection" style="display: none;">
       <div class="section-header">
         <div class="section-icon contract">
           <span class="material-icons">add_shopping_cart</span>
         </div>
         <h2 class="section-title">追加対策・契約関連</h2>
       </div>
-      <div class="card-list">
-        <a href="https://forms.gle/aCu1VwgJjLhAQtDQ7" target="_blank" class="card">
-          <div class="card-icon amber">
-            <span class="material-icons">add_box</span>
-          </div>
-          <div class="card-content">
-            <div class="card-title">授業コマ追加フォーム</div>
-            <div class="card-subtitle">授業コマ数の追加申請</div>
-          </div>
-          <span class="card-badge external">外部フォーム</span>
-          <span class="material-icons card-arrow">chevron_right</span>
-        </a>
-        <a href="https://forms.gle/jYZz42KbFSMmJCMi6" target="_blank" class="card">
-          <div class="card-icon amber">
-            <span class="material-icons">library_add</span>
-          </div>
-          <div class="card-content">
-            <div class="card-title">コース追加フォーム</div>
-            <div class="card-subtitle">受講コースの追加申請</div>
-          </div>
-          <span class="card-badge external">外部フォーム</span>
-          <span class="material-icons card-arrow">chevron_right</span>
-        </a>
-        <div class="card disabled">
-          <div class="card-icon amber">
-            <span class="material-icons">menu_book</span>
-          </div>
-          <div class="card-content">
-            <div class="card-title">課題図書対策追加フォーム</div>
-            <div class="card-subtitle">課題図書対策の追加申請</div>
-          </div>
-          <span class="card-badge wip">準備中</span>
-        </div>
-      </div>
+      <div class="card-list" id="contractCardList"></div>
     </div>
 
     <!-- 面談関連 -->
-    <div class="section">
+    <div class="section" id="meetingSection" style="display: none;">
       <div class="section-header">
         <div class="section-icon meeting">
           <span class="material-icons">groups</span>
         </div>
         <h2 class="section-title">面談関連</h2>
       </div>
-      <div class="card-list">
-        <a href="meeting-principal.html" class="card">
-          <div class="card-icon teal">
-            <span class="material-icons">person</span>
-          </div>
-          <div class="card-content">
-            <div class="card-title">塾長面談</div>
-            <div class="card-subtitle">塾長との面談予約</div>
-          </div>
-          <span class="material-icons card-arrow">chevron_right</span>
-        </a>
-        <a href="meeting-sansya.html" class="card">
-          <div class="card-icon teal">
-            <span class="material-icons">family_restroom</span>
-          </div>
-          <div class="card-content">
-            <div class="card-title">三者面談</div>
-            <div class="card-subtitle">保護者・生徒・講師の三者面談予約</div>
-          </div>
-          <span class="material-icons card-arrow">chevron_right</span>
-        </a>
-        <a href="meeting-tantou.html" class="card">
-          <div class="card-icon teal">
-            <span class="material-icons">support_agent</span>
-          </div>
-          <div class="card-content">
-            <div class="card-title">担任面談</div>
-            <div class="card-subtitle">担任講師との面談予約</div>
-          </div>
-          <span class="material-icons card-arrow">chevron_right</span>
-        </a>
-      </div>
+      <div class="card-list" id="meetingCardList"></div>
     </div>
 
-    <!-- その他フォーム（APIから取得） -->
+    <!-- 入試関連 -->
+    <div class="section" id="examSection" style="display: none;">
+      <div class="section-header">
+        <div class="section-icon exam">
+          <span class="material-icons">school</span>
+        </div>
+        <h2 class="section-title">入試関連</h2>
+      </div>
+      <div class="card-list" id="examCardList"></div>
+    </div>
+
+    <!-- その他フォーム -->
     <div class="section" id="otherSection" style="display: none;">
       <div class="section-header">
         <div class="section-icon other">
@@ -695,14 +621,77 @@
       <div class="card-list" id="otherCardList"></div>
     </div>
 
-    <div id="loading" class="loading" style="display: none;">
+    <div id="loading" class="loading">
       <div class="loading-spinner"></div>
-      <p>その他のフォームを読み込み中...</p>
+      <p>読み込み中...</p>
     </div>
   </div>
 
   <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbzCFkkw6h6o0iFwObPILE-VCYfjRP1ikmMWOl6DgqIaqIRi657vQIKkjSKuRVTaWJzG/exec';
+
+    // 除外するフォーム（別ページがあるため）
+    const excludeKeywords = ['eqao模試', '模試', 'eqaoparty', 'party', 'study tour', 'studytour', 'eqaocamp', 'camp'];
+
+    // 除外判定
+    function shouldExclude(title) {
+      const t = title.toLowerCase().replace(/\s+/g, '');
+      return excludeKeywords.some(keyword => t.includes(keyword.replace(/\s+/g, '')));
+    }
+
+    // キーワードでカテゴリを判定
+    function categorizeByTitle(title) {
+      const t = title.toLowerCase();
+      
+      // 入試関連（合格発表、面接項目、書類回収など）
+      if (t.includes('合格') || t.includes('面接項目') || t.includes('回収') || t.includes('提出書類')) {
+        return 'exam';
+      }
+      // スケジュール・授業関連
+      if (t.includes('振替') || t.includes('スケジュール') || t.includes('授業') || t.includes('欠席')) {
+        return 'schedule';
+      }
+      // 追加対策・契約関連
+      if (t.includes('追加') || t.includes('コース') || t.includes('コマ') || t.includes('契約') || t.includes('課題図書') || t.includes('退塾') || t.includes('任意サポート')) {
+        return 'contract';
+      }
+      // 面談関連
+      if (t.includes('面談') || t.includes('相談')) {
+        return 'meeting';
+      }
+      // その他
+      return 'other';
+    }
+
+    // 入試関連の並び順（この順番で表示）
+    const examOrder = ['志望校提出書類', '一次合格発表', '面接項目', '二次合格発表'];
+
+    // 入試関連フォームをソート
+    function sortExamForms(items) {
+      return items.sort((a, b) => {
+        const aIndex = examOrder.findIndex(keyword => a.title.includes(keyword));
+        const bIndex = examOrder.findIndex(keyword => b.title.includes(keyword));
+        
+        // 両方見つかった場合は順番通り
+        if (aIndex !== -1 && bIndex !== -1) {
+          return aIndex - bIndex;
+        }
+        // 片方だけ見つかった場合は見つかった方を前に
+        if (aIndex !== -1) return -1;
+        if (bIndex !== -1) return 1;
+        // どちらも見つからない場合は元の順番
+        return 0;
+      });
+    }
+
+    // カテゴリごとのアイコン設定
+    const categoryConfig = {
+      schedule: { icon: 'swap_horiz', color: 'blue' },
+      contract: { icon: 'add_box', color: 'amber' },
+      meeting: { icon: 'groups', color: 'teal' },
+      exam: { icon: 'school', color: 'purple' },
+      other: { icon: 'assignment', color: 'cyan' }
+    };
 
     async function apiGet(action, params = {}) {
       const url = new URL(API_URL);
@@ -726,11 +715,11 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       setNavUserName();
-      loadOtherForms();
+      loadAndCategorizeforms();
     });
 
-    // APIからその他のフォームを読み込み
-    async function loadOtherForms() {
+    // APIからフォームを読み込んで振り分け
+    async function loadAndCategorizeforms() {
       const loadingEl = document.getElementById('loading');
       loadingEl.style.display = 'block';
 
@@ -738,31 +727,67 @@
         const data = await apiGet('getForms');
         
         if (data && data.length > 0) {
-          displayOtherForms(data);
+          distributeFormsByCategory(data);
         }
       } catch (error) {
-        console.error('その他フォームの読み込みエラー:', error);
+        console.error('フォームの読み込みエラー:', error);
       } finally {
         loadingEl.style.display = 'none';
       }
     }
 
-    function displayOtherForms(data) {
-      const section = document.getElementById('otherSection');
-      const cardList = document.getElementById('otherCardList');
-      
-      section.style.display = 'block';
-      cardList.innerHTML = '';
+    function distributeFormsByCategory(data) {
+      // カテゴリごとに振り分け
+      const categorized = {
+        schedule: [],
+        contract: [],
+        meeting: [],
+        exam: [],
+        other: []
+      };
 
       data.forEach(function(item) {
+        // 除外対象はスキップ
+        if (shouldExclude(item.title)) {
+          return;
+        }
+        const category = categorizeByTitle(item.title);
+        categorized[category].push(item);
+      });
+
+      // 入試関連は並び順をソート
+      categorized.exam = sortExamForms(categorized.exam);
+
+      // 各セクションに追加（項目がある場合のみ表示）
+      toggleAndAppendSection('scheduleSection', 'scheduleCardList', categorized.schedule, 'schedule');
+      toggleAndAppendSection('contractSection', 'contractCardList', categorized.contract, 'contract');
+      toggleAndAppendSection('meetingSection', 'meetingCardList', categorized.meeting, 'meeting');
+      toggleAndAppendSection('examSection', 'examCardList', categorized.exam, 'exam');
+      toggleAndAppendSection('otherSection', 'otherCardList', categorized.other, 'other');
+    }
+
+    function toggleAndAppendSection(sectionId, listId, items, category) {
+      const section = document.getElementById(sectionId);
+      const cardList = document.getElementById(listId);
+      if (!section || !cardList) return;
+
+      if (items.length === 0) {
+        section.style.display = 'none';
+        return;
+      }
+
+      section.style.display = 'block';
+      const config = categoryConfig[category];
+
+      items.forEach(function(item) {
         const card = document.createElement('a');
         card.className = 'card';
         card.href = item.url || item.link;
         card.target = '_blank';
 
         card.innerHTML = `
-          <div class="card-icon cyan">
-            <span class="material-icons">assignment</span>
+          <div class="card-icon ${config.color}">
+            <span class="material-icons">${config.icon}</span>
           </div>
           <div class="card-content">
             <div class="card-title">${escapeHtml(item.title)}</div>
