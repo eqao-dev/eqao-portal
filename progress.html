@@ -16,17 +16,18 @@
       font-family: 'Noto Sans JP', sans-serif;
       background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
       min-height: 100vh;
+      padding-bottom: 40px;
     }
 
     /* ヘッダー */
     .header {
-      background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
       color: white;
-      padding: 12px 16px;
+      padding: 14px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 4px 20px rgba(0, 105, 92, 0.3);
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -91,7 +92,7 @@
 
     /* コンテナ */
     .container {
-      max-width: 1200px;
+      max-width: 800px;
       margin: 0 auto;
       padding: 16px 12px;
     }
@@ -109,7 +110,7 @@
 
     .loading .material-icons {
       font-size: 48px;
-      color: #00897B;
+      color: #1a237e;
       animation: spin 1s linear infinite;
     }
 
@@ -124,12 +125,12 @@
 
     /* 全体進捗サマリー */
     .total-summary {
-      background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
       border-radius: 16px;
       padding: 20px 24px;
       margin-bottom: 20px;
       color: white;
-      box-shadow: 0 4px 20px rgba(0, 105, 92, 0.3);
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
     }
 
     .total-header {
@@ -158,7 +159,7 @@
 
     .total-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, #4DB6AC 0%, #80CBC4 100%);
+      background: linear-gradient(90deg, #4fc3f7 0%, #00e676 100%);
       border-radius: 6px;
       transition: width 0.5s ease;
     }
@@ -170,94 +171,215 @@
       text-align: right;
     }
 
-    /* カテゴリグリッド */
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 12px;
+    /* 大カテゴリセクション */
+    .parent-section {
+      margin-bottom: 20px;
     }
 
-    @media (min-width: 768px) {
-      .category-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .category-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    /* カテゴリカード */
-    .category-card {
-      background: white;
-      border-radius: 12px;
-      padding: 14px 16px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border-left: 4px solid #E0E0E0;
-    }
-
-    .category-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0, 105, 92, 0.15);
-    }
-
-    .category-card.low { border-left-color: #EF5350; }
-    .category-card.mid { border-left-color: #FFA726; }
-    .category-card.high { border-left-color: #66BB6A; }
-    .category-card.complete { border-left-color: #00695C; }
-
-    .category-header {
+    .parent-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      gap: 12px;
+      padding: 14px 16px;
+      background: white;
+      border-radius: 12px 12px 0 0;
+      border-bottom: 2px solid #e8ecf4;
+    }
+
+    .parent-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .parent-icon .material-icons {
+      font-size: 22px;
+      color: white;
+    }
+
+    /* 大カテゴリごとの色 */
+    .parent-icon.color-blue { background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%); }
+    .parent-icon.color-cyan { background: linear-gradient(135deg, #00838f 0%, #4dd0e1 100%); }
+    .parent-icon.color-purple { background: linear-gradient(135deg, #6a1b9a 0%, #ab47bc 100%); }
+    .parent-icon.color-amber { background: linear-gradient(135deg, #ff8f00 0%, #ffc107 100%); }
+    .parent-icon.color-orange { background: linear-gradient(135deg, #e65100 0%, #ff9800 100%); }
+    .parent-icon.color-green { background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%); }
+    .parent-icon.color-pink { background: linear-gradient(135deg, #c2185b 0%, #f06292 100%); }
+    .parent-icon.color-red { background: linear-gradient(135deg, #c62828 0%, #ef5350 100%); }
+    .parent-icon.color-indigo { background: linear-gradient(135deg, #283593 0%, #5c6bc0 100%); }
+    .parent-icon.color-brown { background: linear-gradient(135deg, #4e342e 0%, #8d6e63 100%); }
+    .parent-icon.color-gray { background: linear-gradient(135deg, #616161 0%, #9e9e9e 100%); }
+
+    .parent-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .parent-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 2px;
+    }
+
+    .parent-meta {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .parent-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .parent-progress-bar {
+      width: 60px;
+      height: 8px;
+      background: #e8ecf4;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .parent-progress-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .parent-progress-fill.low { background: linear-gradient(90deg, #ef5350 0%, #e57373 100%); }
+    .parent-progress-fill.mid { background: linear-gradient(90deg, #ffa726 0%, #ffb74d 100%); }
+    .parent-progress-fill.high { background: linear-gradient(90deg, #66bb6a 0%, #81c784 100%); }
+    .parent-progress-fill.complete { background: linear-gradient(90deg, #1a237e 0%, #3949ab 100%); }
+
+    .parent-percent {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a237e;
+      min-width: 45px;
+      text-align: right;
+    }
+
+    /* カテゴリリスト */
+    .category-list {
+      background: white;
+      border-radius: 0 0 12px 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .category-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .category-item:last-child {
+      border-bottom: none;
+    }
+
+    .category-item:hover {
+      background: #f8f9fc;
+    }
+
+    .category-item.completed {
+      background: #f1f8e9;
+    }
+
+    .category-check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: #e8ecf4;
+    }
+
+    .category-item.completed .category-check {
+      background: #4caf50;
+    }
+
+    .category-check .material-icons {
+      font-size: 16px;
+      color: #bbb;
+    }
+
+    .category-item.completed .category-check .material-icons {
+      color: white;
+    }
+
+    .category-info {
+      flex: 1;
+      min-width: 0;
     }
 
     .category-name {
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 500;
       color: #333;
-      flex: 1;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      padding-right: 8px;
     }
 
-    .category-percent {
-      font-size: 15px;
-      font-weight: 700;
-      color: #00695C;
+    .category-item.completed .category-name {
+      color: #2e7d32;
+    }
+
+    .category-count {
+      font-size: 11px;
+      color: #999;
+      margin-top: 2px;
+    }
+
+    .category-progress {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       flex-shrink: 0;
     }
 
-    .category-bar {
+    .category-progress-bar {
+      width: 50px;
       height: 6px;
-      background: #E8E8E8;
+      background: #e8ecf4;
       border-radius: 3px;
       overflow: hidden;
     }
 
-    .category-bar-fill {
+    .category-progress-fill {
       height: 100%;
       border-radius: 3px;
-      transition: width 0.5s ease;
+      transition: width 0.3s ease;
     }
 
-    .category-bar-fill.low { background: linear-gradient(90deg, #EF5350 0%, #E57373 100%); }
-    .category-bar-fill.mid { background: linear-gradient(90deg, #FFA726 0%, #FFB74D 100%); }
-    .category-bar-fill.high { background: linear-gradient(90deg, #66BB6A 0%, #81C784 100%); }
-    .category-bar-fill.complete { background: linear-gradient(90deg, #00695C 0%, #00897B 100%); }
+    .category-progress-fill.low { background: #ef5350; }
+    .category-progress-fill.mid { background: #ffa726; }
+    .category-progress-fill.high { background: #66bb6a; }
+    .category-progress-fill.complete { background: #1a237e; }
 
-    .category-count {
-      margin-top: 6px;
-      font-size: 11px;
-      color: #888;
+    .category-percent {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1a237e;
+      min-width: 35px;
       text-align: right;
+    }
+
+    .category-arrow {
+      color: #ccc;
+      font-size: 20px;
     }
 
     /* チェックリストへのリンク */
@@ -269,9 +391,9 @@
       margin-top: 20px;
       padding: 14px 20px;
       background: white;
-      border: 2px solid #00897B;
+      border: 2px solid #1a237e;
       border-radius: 12px;
-      color: #00695C;
+      color: #1a237e;
       font-size: 14px;
       font-weight: 600;
       text-decoration: none;
@@ -279,7 +401,7 @@
     }
 
     .checklist-link:hover {
-      background: #00897B;
+      background: #1a237e;
       color: white;
     }
 
@@ -323,7 +445,7 @@
     }
 
     .nav-header {
-      background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
       color: white;
       padding: 20px 16px;
       display: flex;
@@ -365,7 +487,7 @@
     }
 
     .nav-item .material-icons {
-      color: #00695C;
+      color: #1a237e;
       font-size: 22px;
     }
 
@@ -381,37 +503,6 @@
     .nav-logout .material-icons {
       color: #c62828;
     }
-
-    /* 凡例 */
-    .legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 16px;
-      padding: 12px 16px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: #666;
-    }
-
-    .legend-color {
-      width: 12px;
-      height: 12px;
-      border-radius: 3px;
-    }
-
-    .legend-color.low { background: #EF5350; }
-    .legend-color.mid { background: #FFA726; }
-    .legend-color.high { background: #66BB6A; }
-    .legend-color.complete { background: #00695C; }
   </style>
 </head>
 <body>
@@ -503,30 +594,8 @@
         <div id="totalDetail" class="total-detail">0 / 0 完了</div>
       </div>
 
-      <!-- 凡例 -->
-      <div class="legend">
-        <div class="legend-item">
-          <div class="legend-color low"></div>
-          <span>0〜29%</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-color mid"></div>
-          <span>30〜69%</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-color high"></div>
-          <span>70〜99%</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-color complete"></div>
-          <span>100%</span>
-        </div>
-      </div>
-
-      <!-- カテゴリグリッド -->
-      <div id="categoryGrid" class="category-grid">
-        <!-- JSで生成 -->
-      </div>
+      <!-- 大カテゴリセクション -->
+      <div id="parentSections"></div>
 
       <!-- チェックリストへのリンク -->
       <a href="checklist.html" class="checklist-link">
@@ -542,6 +611,35 @@
     // 設定
     // ============================================
     const JSON_URL = 'checklist_master.json';
+
+    // 大カテゴリのアイコン設定（checklist_v2と同じ）
+    const PARENT_ICONS = {
+      '基礎理解・マインドセット': { icon: 'lightbulb', color: 'blue' },
+      '自己分析・研究テーマ': { icon: 'psychology', color: 'cyan' },
+      '書類作成': { icon: 'edit_note', color: 'purple' },
+      '出願・試験当日': { icon: 'send', color: 'amber' },
+      '小論文対策': { icon: 'description', color: 'orange' },
+      '面接対策': { icon: 'mic', color: 'green' },
+      'レポート作成': { icon: 'article', color: 'pink' },
+      'プレゼンテーション・GD対策': { icon: 'co_present', color: 'red' },
+      '志望校・併願校戦略': { icon: 'school', color: 'indigo' },
+      '日常学習・保護者向け': { icon: 'family_restroom', color: 'brown' },
+      default: { icon: 'checklist', color: 'gray' }
+    };
+
+    // 大カテゴリの表示順序
+    const PARENT_ORDER = [
+      '基礎理解・マインドセット',
+      '自己分析・研究テーマ',
+      '書類作成',
+      '出願・試験当日',
+      '小論文対策',
+      '面接対策',
+      'レポート作成',
+      'プレゼンテーション・GD対策',
+      '志望校・併願校戦略',
+      '日常学習・保護者向け'
+    ];
 
     // ============================================
     // 状態管理
@@ -593,12 +691,23 @@
     function calculateProgress() {
       let totalItems = 0;
       let totalChecked = 0;
-      const categories = [];
+      const parentMap = {};
 
       for (const categoryName in masterData) {
-        const items = masterData[categoryName];
+        const categoryData = masterData[categoryName];
+        const items = categoryData.items || [];
+        const parent = categoryData.parent || '未分類';
         const categoryState = checkState[categoryName] || {};
-        
+
+        if (!parentMap[parent]) {
+          parentMap[parent] = {
+            name: parent,
+            categories: [],
+            totalItems: 0,
+            checkedItems: 0
+          };
+        }
+
         let checked = 0;
         for (const item of items) {
           if (categoryState[item.no]) {
@@ -608,25 +717,43 @@
 
         totalItems += items.length;
         totalChecked += checked;
+        parentMap[parent].totalItems += items.length;
+        parentMap[parent].checkedItems += checked;
 
         const percent = items.length > 0 ? Math.round((checked / items.length) * 100) : 0;
 
-        categories.push({
+        parentMap[parent].categories.push({
           name: categoryName,
+          parent: parent,
           total: items.length,
           checked: checked,
           percent: percent
         });
       }
 
+      // 大カテゴリの進捗率を計算
+      for (const parent in parentMap) {
+        const p = parentMap[parent];
+        p.percent = p.totalItems > 0 ? Math.round((p.checkedItems / p.totalItems) * 100) : 0;
+      }
+
+      // 定義順でソート
+      const sortedParents = [];
+      for (const parentName of PARENT_ORDER) {
+        if (parentMap[parentName]) {
+          sortedParents.push(parentMap[parentName]);
+        }
+      }
+      // 定義されていない大カテゴリは末尾に追加
+      for (const parentName in parentMap) {
+        if (!PARENT_ORDER.includes(parentName)) {
+          sortedParents.push(parentMap[parentName]);
+        }
+      }
+
       const totalPercent = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
 
-      return {
-        totalItems,
-        totalChecked,
-        totalPercent,
-        categories
-      };
+      return { totalItems, totalChecked, totalPercent, parents: sortedParents };
     }
 
     // ============================================
@@ -643,45 +770,81 @@
       document.getElementById('totalBarFill').style.width = progress.totalPercent + '%';
       document.getElementById('totalDetail').textContent = progress.totalChecked + ' / ' + progress.totalItems + ' 完了';
 
-      // カテゴリグリッド
-      const grid = document.getElementById('categoryGrid');
-      grid.innerHTML = '';
+      // 大カテゴリセクション
+      const container = document.getElementById('parentSections');
+      container.innerHTML = '';
 
-      // 進捗が低い順にソート
-      progress.categories.sort((a, b) => a.percent - b.percent);
-
-      progress.categories.forEach(cat => {
-        const card = document.createElement('div');
+      progress.parents.forEach(parent => {
+        const iconConfig = PARENT_ICONS[parent.name] || PARENT_ICONS.default;
         
-        let level = 'low';
-        if (cat.percent >= 100) level = 'complete';
-        else if (cat.percent >= 70) level = 'high';
-        else if (cat.percent >= 30) level = 'mid';
+        let fillClass = 'low';
+        if (parent.percent >= 100) fillClass = 'complete';
+        else if (parent.percent >= 70) fillClass = 'high';
+        else if (parent.percent >= 30) fillClass = 'mid';
 
-        card.className = `category-card ${level}`;
-        card.onclick = () => goToChecklist(cat.name);
+        const completedCategories = parent.categories.filter(c => c.percent >= 100).length;
 
-        card.innerHTML = `
-          <div class="category-header">
-            <span class="category-name">${escapeHtml(cat.name)}</span>
-            <span class="category-percent">${cat.percent}%</span>
+        const section = document.createElement('div');
+        section.className = 'parent-section';
+        section.innerHTML = `
+          <div class="parent-header">
+            <div class="parent-icon color-${iconConfig.color}">
+              <span class="material-icons">${iconConfig.icon}</span>
+            </div>
+            <div class="parent-info">
+              <div class="parent-name">${escapeHtml(parent.name)}</div>
+              <div class="parent-meta">${completedCategories}/${parent.categories.length} カテゴリ完了</div>
+            </div>
+            <div class="parent-progress">
+              <div class="parent-progress-bar">
+                <div class="parent-progress-fill ${fillClass}" style="width: ${parent.percent}%;"></div>
+              </div>
+              <span class="parent-percent">${parent.percent}%</span>
+            </div>
           </div>
-          <div class="category-bar">
-            <div class="category-bar-fill ${level}" style="width: ${cat.percent}%;"></div>
+          <div class="category-list">
+            ${parent.categories.map(cat => renderCategoryItem(cat)).join('')}
           </div>
-          <div class="category-count">${cat.checked} / ${cat.total}</div>
         `;
 
-        grid.appendChild(card);
+        container.appendChild(section);
       });
+    }
+
+    function renderCategoryItem(cat) {
+      const isCompleted = cat.percent >= 100;
+      let fillClass = 'low';
+      if (cat.percent >= 100) fillClass = 'complete';
+      else if (cat.percent >= 70) fillClass = 'high';
+      else if (cat.percent >= 30) fillClass = 'mid';
+
+      return `
+        <div class="category-item ${isCompleted ? 'completed' : ''}" onclick="goToChecklist('${escapeHtml(cat.name)}', '${escapeHtml(cat.parent)}')">
+          <div class="category-check">
+            <span class="material-icons">${isCompleted ? 'check' : 'radio_button_unchecked'}</span>
+          </div>
+          <div class="category-info">
+            <div class="category-name">${escapeHtml(cat.name)}</div>
+            <div class="category-count">${cat.checked}/${cat.total} 項目</div>
+          </div>
+          <div class="category-progress">
+            <div class="category-progress-bar">
+              <div class="category-progress-fill ${fillClass}" style="width: ${cat.percent}%;"></div>
+            </div>
+            <span class="category-percent">${cat.percent}%</span>
+          </div>
+          <span class="material-icons category-arrow">chevron_right</span>
+        </div>
+      `;
     }
 
     // ============================================
     // チェックリストページへ遷移
     // ============================================
-    function goToChecklist(categoryName) {
-      // カテゴリ名をlocalStorageに保存して遷移
+    function goToChecklist(categoryName, parentName) {
+      // カテゴリ名と大カテゴリ名をlocalStorageに保存して遷移
       localStorage.setItem('eqao_checklist_openCategory', categoryName);
+      localStorage.setItem('eqao_checklist_openParent', parentName);
       window.location.href = 'checklist.html?t=' + Date.now();
     }
 
