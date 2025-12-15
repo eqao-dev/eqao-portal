@@ -588,15 +588,46 @@
       <div class="card-list" id="contractCardList"></div>
     </div>
 
-    <!-- 面談関連 -->
-    <div class="section" id="meetingSection" style="display: none;">
+    <!-- 面談関連（固定表示） -->
+    <div class="section" id="meetingSection">
       <div class="section-header">
         <div class="section-icon meeting">
           <span class="material-icons">groups</span>
         </div>
         <h2 class="section-title">面談関連</h2>
       </div>
-      <div class="card-list" id="meetingCardList"></div>
+      <div class="card-list" id="meetingCardList">
+        <a href="meeting-principal.html" class="card">
+          <div class="card-icon teal">
+            <span class="material-icons">person</span>
+          </div>
+          <div class="card-content">
+            <div class="card-title">塾長面談</div>
+            <div class="card-subtitle">塾長との面談予約</div>
+          </div>
+          <span class="material-icons card-arrow">chevron_right</span>
+        </a>
+        <a href="meeting-sansya.html" class="card">
+          <div class="card-icon teal">
+            <span class="material-icons">family_restroom</span>
+          </div>
+          <div class="card-content">
+            <div class="card-title">三者面談</div>
+            <div class="card-subtitle">保護者・生徒・講師の三者面談予約</div>
+          </div>
+          <span class="material-icons card-arrow">chevron_right</span>
+        </a>
+        <a href="meeting-tantou.html" class="card">
+          <div class="card-icon teal">
+            <span class="material-icons">support_agent</span>
+          </div>
+          <div class="card-content">
+            <div class="card-title">担任面談</div>
+            <div class="card-subtitle">担任講師との面談予約</div>
+          </div>
+          <span class="material-icons card-arrow">chevron_right</span>
+        </a>
+      </div>
     </div>
 
     <!-- 入試関連 -->
@@ -631,7 +662,7 @@
     const API_URL = 'https://script.google.com/macros/s/AKfycbzCFkkw6h6o0iFwObPILE-VCYfjRP1ikmMWOl6DgqIaqIRi657vQIKkjSKuRVTaWJzG/exec';
 
     // 除外するフォーム（別ページがあるため）
-    const excludeKeywords = ['eqao模試', '模試', 'eqaoparty', 'party', 'study tour', 'studytour', 'eqaocamp', 'camp'];
+    const excludeKeywords = ['eqao模試', '模試', 'eqaoparty', 'party', 'study tour', 'studytour', 'eqaocamp', 'camp', '塾長面談', '三者面談', '担任面談'];
 
     // 除外判定
     function shouldExclude(title) {
@@ -761,7 +792,10 @@
       // 各セクションに追加（項目がある場合のみ表示）
       toggleAndAppendSection('scheduleSection', 'scheduleCardList', categorized.schedule, 'schedule');
       toggleAndAppendSection('contractSection', 'contractCardList', categorized.contract, 'contract');
-      toggleAndAppendSection('meetingSection', 'meetingCardList', categorized.meeting, 'meeting');
+      // 面談セクションは固定表示のため、追加の面談フォームがあれば追記のみ
+      if (categorized.meeting.length > 0) {
+        appendToSection('meetingCardList', categorized.meeting, 'meeting');
+      }
       toggleAndAppendSection('examSection', 'examCardList', categorized.exam, 'exam');
       toggleAndAppendSection('otherSection', 'otherCardList', categorized.other, 'other');
     }
@@ -777,6 +811,13 @@
       }
 
       section.style.display = 'block';
+      appendToSection(listId, items, category);
+    }
+
+    function appendToSection(listId, items, category) {
+      const cardList = document.getElementById(listId);
+      if (!cardList) return;
+
       const config = categoryConfig[category];
 
       items.forEach(function(item) {
