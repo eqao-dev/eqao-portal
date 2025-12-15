@@ -14,20 +14,20 @@
 
     body {
       font-family: 'Noto Sans JP', sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+      background: #f5f5f5;
       min-height: 100vh;
       padding-bottom: 40px;
     }
 
     /* ヘッダー */
     .header {
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
       color: white;
       padding: 14px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      box-shadow: 0 4px 20px rgba(46, 125, 50, 0.3);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -92,7 +92,7 @@
 
     /* コンテナ */
     .container {
-      max-width: 800px;
+      max-width: 700px;
       margin: 0 auto;
       padding: 16px 12px;
     }
@@ -110,7 +110,7 @@
 
     .loading .material-icons {
       font-size: 48px;
-      color: #1a237e;
+      color: #43a047;
       animation: spin 1s linear infinite;
     }
 
@@ -123,264 +123,261 @@
       font-size: 14px;
     }
 
-    /* 全体進捗サマリー */
-    .total-summary {
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    /* 全体進捗 */
+    .total-section {
+      background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
       border-radius: 16px;
-      padding: 20px 24px;
-      margin-bottom: 20px;
+      padding: 24px;
+      margin-bottom: 24px;
       color: white;
-      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      box-shadow: 0 4px 20px rgba(46, 125, 50, 0.3);
     }
 
-    .total-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .total-title {
-      font-size: 14px;
+    .total-label {
+      font-size: 13px;
       opacity: 0.9;
+      margin-bottom: 8px;
     }
 
-    .total-percent {
-      font-size: 36px;
-      font-weight: 700;
+    .total-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
-    .total-bar {
-      height: 12px;
+    .total-bar-wrapper {
+      flex: 1;
+      height: 24px;
       background: rgba(255,255,255,0.2);
-      border-radius: 6px;
+      border-radius: 12px;
       overflow: hidden;
     }
 
     .total-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, #4fc3f7 0%, #00e676 100%);
-      border-radius: 6px;
-      transition: width 0.5s ease;
+      background: linear-gradient(90deg, #81c784 0%, #c8e6c9 100%);
+      border-radius: 12px;
+      transition: width 0.6s ease;
+    }
+
+    .total-percent {
+      font-size: 32px;
+      font-weight: 700;
+      min-width: 80px;
+      text-align: right;
     }
 
     .total-detail {
-      margin-top: 10px;
+      margin-top: 12px;
       font-size: 13px;
-      opacity: 0.9;
+      opacity: 0.85;
       text-align: right;
     }
 
-    /* 大カテゴリセクション */
-    .parent-section {
-      margin-bottom: 20px;
-    }
-
-    .parent-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 16px;
-      background: white;
-      border-radius: 12px 12px 0 0;
-      border-bottom: 2px solid #e8ecf4;
-    }
-
-    .parent-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .parent-icon .material-icons {
-      font-size: 22px;
-      color: white;
-    }
-
-    /* 大カテゴリごとの色 */
-    .parent-icon.color-blue { background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%); }
-    .parent-icon.color-cyan { background: linear-gradient(135deg, #00838f 0%, #4dd0e1 100%); }
-    .parent-icon.color-purple { background: linear-gradient(135deg, #6a1b9a 0%, #ab47bc 100%); }
-    .parent-icon.color-amber { background: linear-gradient(135deg, #ff8f00 0%, #ffc107 100%); }
-    .parent-icon.color-orange { background: linear-gradient(135deg, #e65100 0%, #ff9800 100%); }
-    .parent-icon.color-green { background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%); }
-    .parent-icon.color-pink { background: linear-gradient(135deg, #c2185b 0%, #f06292 100%); }
-    .parent-icon.color-red { background: linear-gradient(135deg, #c62828 0%, #ef5350 100%); }
-    .parent-icon.color-indigo { background: linear-gradient(135deg, #283593 0%, #5c6bc0 100%); }
-    .parent-icon.color-brown { background: linear-gradient(135deg, #4e342e 0%, #8d6e63 100%); }
-    .parent-icon.color-gray { background: linear-gradient(135deg, #616161 0%, #9e9e9e 100%); }
-
-    .parent-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .parent-name {
-      font-size: 15px;
+    /* セクションタイトル */
+    .section-title {
+      font-size: 14px;
       font-weight: 700;
-      color: #333;
-      margin-bottom: 2px;
-    }
-
-    .parent-meta {
-      font-size: 12px;
-      color: #888;
-    }
-
-    .parent-progress {
+      color: #2e7d32;
+      margin-bottom: 12px;
+      padding-left: 4px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
+      gap: 8px;
     }
 
-    .parent-progress-bar {
-      width: 60px;
-      height: 8px;
-      background: #e8ecf4;
-      border-radius: 4px;
-      overflow: hidden;
+    .section-title .material-icons {
+      font-size: 18px;
     }
 
-    .parent-progress-fill {
-      height: 100%;
-      border-radius: 4px;
-      transition: width 0.5s ease;
-    }
-
-    .parent-progress-fill.low { background: linear-gradient(90deg, #ef5350 0%, #e57373 100%); }
-    .parent-progress-fill.mid { background: linear-gradient(90deg, #ffa726 0%, #ffb74d 100%); }
-    .parent-progress-fill.high { background: linear-gradient(90deg, #66bb6a 0%, #81c784 100%); }
-    .parent-progress-fill.complete { background: linear-gradient(90deg, #1a237e 0%, #3949ab 100%); }
-
-    .parent-percent {
-      font-size: 16px;
-      font-weight: 700;
-      color: #1a237e;
-      min-width: 45px;
-      text-align: right;
-    }
-
-    /* カテゴリリスト */
-    .category-list {
+    /* 大カテゴリ棒グラフ一覧 */
+    .bar-list {
       background: white;
-      border-radius: 0 0 12px 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      margin-bottom: 16px;
     }
 
-    .category-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
+    .bar-item {
+      padding: 12px 0;
       border-bottom: 1px solid #f0f0f0;
       cursor: pointer;
       transition: background 0.2s;
     }
 
-    .category-item:last-child {
+    .bar-item:last-child {
       border-bottom: none;
     }
 
-    .category-item:hover {
-      background: #f8f9fc;
+    .bar-item:hover {
+      background: #fafafa;
+      margin: 0 -16px;
+      padding: 12px 16px;
     }
 
-    .category-item.completed {
-      background: #f1f8e9;
+    .bar-item.open {
+      background: #f5f5f5;
+      margin: 0 -16px;
+      padding: 12px 16px;
     }
 
-    .category-check {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
+    .bar-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .bar-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      background: #e8ecf4;
     }
 
-    .category-item.completed .category-check {
-      background: #4caf50;
-    }
-
-    .category-check .material-icons {
+    .bar-icon .material-icons {
       font-size: 16px;
-      color: #bbb;
-    }
-
-    .category-item.completed .category-check .material-icons {
       color: white;
     }
 
-    .category-info {
-      flex: 1;
-      min-width: 0;
-    }
+    /* 大カテゴリごとの色 */
+    .bar-icon.color-blue { background: #1565c0; }
+    .bar-icon.color-cyan { background: #00838f; }
+    .bar-icon.color-purple { background: #6a1b9a; }
+    .bar-icon.color-amber { background: #ff8f00; }
+    .bar-icon.color-orange { background: #e65100; }
+    .bar-icon.color-green { background: #2e7d32; }
+    .bar-icon.color-pink { background: #c2185b; }
+    .bar-icon.color-red { background: #c62828; }
+    .bar-icon.color-indigo { background: #283593; }
+    .bar-icon.color-brown { background: #4e342e; }
+    .bar-icon.color-gray { background: #616161; }
 
-    .category-name {
+    .bar-name {
+      flex: 1;
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
       color: #333;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .category-item.completed .category-name {
+    .bar-percent {
+      font-size: 14px;
+      font-weight: 700;
       color: #2e7d32;
-    }
-
-    .category-count {
-      font-size: 11px;
-      color: #999;
-      margin-top: 2px;
-    }
-
-    .category-progress {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-
-    .category-progress-bar {
-      width: 50px;
-      height: 6px;
-      background: #e8ecf4;
-      border-radius: 3px;
-      overflow: hidden;
-    }
-
-    .category-progress-fill {
-      height: 100%;
-      border-radius: 3px;
-      transition: width 0.3s ease;
-    }
-
-    .category-progress-fill.low { background: #ef5350; }
-    .category-progress-fill.mid { background: #ffa726; }
-    .category-progress-fill.high { background: #66bb6a; }
-    .category-progress-fill.complete { background: #1a237e; }
-
-    .category-percent {
-      font-size: 13px;
-      font-weight: 600;
-      color: #1a237e;
-      min-width: 35px;
+      min-width: 45px;
       text-align: right;
     }
 
-    .category-arrow {
-      color: #ccc;
+    .bar-arrow {
+      color: #bbb;
       font-size: 20px;
+      transition: transform 0.2s;
     }
+
+    .bar-item.open .bar-arrow {
+      transform: rotate(180deg);
+    }
+
+    .bar-track {
+      height: 16px;
+      background: #e8e8e8;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 8px;
+      transition: width 0.5s ease;
+    }
+
+    .bar-fill.low { background: linear-gradient(90deg, #ef5350 0%, #e57373 100%); }
+    .bar-fill.mid { background: linear-gradient(90deg, #ffa726 0%, #ffcc80 100%); }
+    .bar-fill.high { background: linear-gradient(90deg, #66bb6a 0%, #a5d6a7 100%); }
+    .bar-fill.complete { background: linear-gradient(90deg, #2e7d32 0%, #43a047 100%); }
+
+    /* 内訳（子カテゴリ） */
+    .sub-list {
+      display: none;
+      margin-top: 12px;
+      padding: 12px;
+      background: white;
+      border-radius: 10px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .bar-item.open .sub-list {
+      display: block;
+    }
+
+    .sub-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #f5f5f5;
+      cursor: pointer;
+    }
+
+    .sub-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .sub-item:first-child {
+      padding-top: 0;
+    }
+
+    .sub-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .sub-name {
+      flex: 1;
+      font-size: 12px;
+      color: #555;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sub-count {
+      font-size: 11px;
+      color: #999;
+    }
+
+    .sub-percent {
+      font-size: 13px;
+      font-weight: 600;
+      color: #2e7d32;
+      min-width: 40px;
+      text-align: right;
+    }
+
+    .sub-track {
+      height: 10px;
+      background: #eee;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .sub-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.4s ease;
+    }
+
+    .sub-fill.low { background: #ef5350; }
+    .sub-fill.mid { background: #ffa726; }
+    .sub-fill.high { background: #66bb6a; }
+    .sub-fill.complete { background: #2e7d32; }
 
     /* チェックリストへのリンク */
     .checklist-link {
@@ -391,9 +388,9 @@
       margin-top: 20px;
       padding: 14px 20px;
       background: white;
-      border: 2px solid #1a237e;
+      border: 2px solid #2e7d32;
       border-radius: 12px;
-      color: #1a237e;
+      color: #2e7d32;
       font-size: 14px;
       font-weight: 600;
       text-decoration: none;
@@ -401,7 +398,7 @@
     }
 
     .checklist-link:hover {
-      background: #1a237e;
+      background: #2e7d32;
       color: white;
     }
 
@@ -445,7 +442,7 @@
     }
 
     .nav-header {
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
       color: white;
       padding: 20px 16px;
       display: flex;
@@ -487,7 +484,7 @@
     }
 
     .nav-item .material-icons {
-      color: #1a237e;
+      color: #2e7d32;
       font-size: 22px;
     }
 
@@ -541,29 +538,13 @@
       <span class="material-icons">calendar_today</span>
       <span class="nav-item-text">授業スケジュール</span>
     </a>
-    <a href="exam-schedule.html" class="nav-item">
-      <span class="material-icons">school</span>
-      <span class="nav-item-text">受験スケジュール</span>
-    </a>
-    <a href="school-list.html" class="nav-item">
-      <span class="material-icons">format_list_numbered</span>
-      <span class="nav-item-text">志望校／併願校管理シート</span>
-    </a>
-    <a href="progress.html" class="nav-item">
-      <span class="material-icons">trending_up</span>
-      <span class="nav-item-text">自己／進捗管理シート</span>
-    </a>
     <a href="checklist.html" class="nav-item">
       <span class="material-icons">checklist</span>
       <span class="nav-item-text">チェックリスト</span>
     </a>
-    <a href="column.html" class="nav-item">
-      <span class="material-icons">article</span>
-      <span class="nav-item-text">コラム一覧</span>
-    </a>
-    <a href="rules.html" class="nav-item">
-      <span class="material-icons">gavel</span>
-      <span class="nav-item-text">ルール一覧</span>
+    <a href="progress.html" class="nav-item">
+      <span class="material-icons">trending_up</span>
+      <span class="nav-item-text">自己／進捗管理シート</span>
     </a>
     <a href="#" class="nav-item nav-logout" onclick="doLogout(); return false;">
       <span class="material-icons">logout</span>
@@ -582,20 +563,27 @@
     <!-- コンテンツ -->
     <div id="mainContent" style="display: none;">
       
-      <!-- 全体進捗サマリー -->
-      <div class="total-summary">
-        <div class="total-header">
-          <span class="total-title">チェックリスト全体の進捗</span>
+      <!-- 全体進捗 -->
+      <div class="total-section">
+        <div class="total-label">全体の進捗</div>
+        <div class="total-row">
+          <div class="total-bar-wrapper">
+            <div id="totalBarFill" class="total-bar-fill" style="width: 0%;"></div>
+          </div>
           <span id="totalPercent" class="total-percent">0%</span>
         </div>
-        <div class="total-bar">
-          <div id="totalBarFill" class="total-bar-fill" style="width: 0%;"></div>
-        </div>
-        <div id="totalDetail" class="total-detail">0 / 0 完了</div>
+        <div id="totalDetail" class="total-detail">0 / 0 項目完了</div>
       </div>
 
-      <!-- 大カテゴリセクション -->
-      <div id="parentSections"></div>
+      <!-- 大カテゴリ別進捗 -->
+      <div class="section-title">
+        <span class="material-icons">bar_chart</span>
+        大カテゴリ別の進捗
+      </div>
+
+      <div id="barList" class="bar-list">
+        <!-- JSで生成 -->
+      </div>
 
       <!-- チェックリストへのリンク -->
       <a href="checklist.html" class="checklist-link">
@@ -612,7 +600,7 @@
     // ============================================
     const JSON_URL = 'checklist_master.json';
 
-    // 大カテゴリのアイコン設定（checklist_v2と同じ）
+    // 大カテゴリのアイコン設定
     const PARENT_ICONS = {
       '基礎理解・マインドセット': { icon: 'lightbulb', color: 'blue' },
       '自己分析・研究テーマ': { icon: 'psychology', color: 'cyan' },
@@ -757,6 +745,16 @@
     }
 
     // ============================================
+    // レベルクラス取得
+    // ============================================
+    function getLevelClass(percent) {
+      if (percent >= 100) return 'complete';
+      if (percent >= 70) return 'high';
+      if (percent >= 30) return 'mid';
+      return 'low';
+    }
+
+    // ============================================
     // 表示
     // ============================================
     function render() {
@@ -768,81 +766,72 @@
       // 全体進捗
       document.getElementById('totalPercent').textContent = progress.totalPercent + '%';
       document.getElementById('totalBarFill').style.width = progress.totalPercent + '%';
-      document.getElementById('totalDetail').textContent = progress.totalChecked + ' / ' + progress.totalItems + ' 完了';
+      document.getElementById('totalDetail').textContent = progress.totalChecked + ' / ' + progress.totalItems + ' 項目完了';
 
-      // 大カテゴリセクション
-      const container = document.getElementById('parentSections');
+      // 大カテゴリ棒グラフ一覧
+      const container = document.getElementById('barList');
       container.innerHTML = '';
 
-      progress.parents.forEach(parent => {
+      progress.parents.forEach((parent, index) => {
         const iconConfig = PARENT_ICONS[parent.name] || PARENT_ICONS.default;
-        
-        let fillClass = 'low';
-        if (parent.percent >= 100) fillClass = 'complete';
-        else if (parent.percent >= 70) fillClass = 'high';
-        else if (parent.percent >= 30) fillClass = 'mid';
+        const levelClass = getLevelClass(parent.percent);
 
-        const completedCategories = parent.categories.filter(c => c.percent >= 100).length;
+        const item = document.createElement('div');
+        item.className = 'bar-item';
+        item.dataset.index = index;
 
-        const section = document.createElement('div');
-        section.className = 'parent-section';
-        section.innerHTML = `
-          <div class="parent-header">
-            <div class="parent-icon color-${iconConfig.color}">
+        item.innerHTML = `
+          <div class="bar-header" onclick="toggleParent(${index})">
+            <div class="bar-icon color-${iconConfig.color}">
               <span class="material-icons">${iconConfig.icon}</span>
             </div>
-            <div class="parent-info">
-              <div class="parent-name">${escapeHtml(parent.name)}</div>
-              <div class="parent-meta">${completedCategories}/${parent.categories.length} カテゴリ完了</div>
-            </div>
-            <div class="parent-progress">
-              <div class="parent-progress-bar">
-                <div class="parent-progress-fill ${fillClass}" style="width: ${parent.percent}%;"></div>
-              </div>
-              <span class="parent-percent">${parent.percent}%</span>
-            </div>
+            <span class="bar-name">${escapeHtml(parent.name)}</span>
+            <span class="bar-percent">${parent.percent}%</span>
+            <span class="material-icons bar-arrow">expand_more</span>
           </div>
-          <div class="category-list">
-            ${parent.categories.map(cat => renderCategoryItem(cat)).join('')}
+          <div class="bar-track">
+            <div class="bar-fill ${levelClass}" style="width: ${parent.percent}%;"></div>
+          </div>
+          <div class="sub-list">
+            ${parent.categories.map(cat => renderSubItem(cat)).join('')}
           </div>
         `;
 
-        container.appendChild(section);
+        container.appendChild(item);
       });
     }
 
-    function renderCategoryItem(cat) {
-      const isCompleted = cat.percent >= 100;
-      let fillClass = 'low';
-      if (cat.percent >= 100) fillClass = 'complete';
-      else if (cat.percent >= 70) fillClass = 'high';
-      else if (cat.percent >= 30) fillClass = 'mid';
+    function renderSubItem(cat) {
+      const levelClass = getLevelClass(cat.percent);
 
       return `
-        <div class="category-item ${isCompleted ? 'completed' : ''}" onclick="goToChecklist('${escapeHtml(cat.name)}', '${escapeHtml(cat.parent)}')">
-          <div class="category-check">
-            <span class="material-icons">${isCompleted ? 'check' : 'radio_button_unchecked'}</span>
+        <div class="sub-item" onclick="goToChecklist('${escapeHtml(cat.name)}', '${escapeHtml(cat.parent)}'); event.stopPropagation();">
+          <div class="sub-header">
+            <span class="sub-name">${escapeHtml(cat.name)}</span>
+            <span class="sub-count">${cat.checked}/${cat.total}</span>
+            <span class="sub-percent">${cat.percent}%</span>
           </div>
-          <div class="category-info">
-            <div class="category-name">${escapeHtml(cat.name)}</div>
-            <div class="category-count">${cat.checked}/${cat.total} 項目</div>
+          <div class="sub-track">
+            <div class="sub-fill ${levelClass}" style="width: ${cat.percent}%;"></div>
           </div>
-          <div class="category-progress">
-            <div class="category-progress-bar">
-              <div class="category-progress-fill ${fillClass}" style="width: ${cat.percent}%;"></div>
-            </div>
-            <span class="category-percent">${cat.percent}%</span>
-          </div>
-          <span class="material-icons category-arrow">chevron_right</span>
         </div>
       `;
+    }
+
+    // ============================================
+    // 大カテゴリの開閉
+    // ============================================
+    function toggleParent(index) {
+      const item = document.querySelector(`.bar-item[data-index="${index}"]`);
+      if (item) {
+        item.classList.toggle('open');
+      }
     }
 
     // ============================================
     // チェックリストページへ遷移
     // ============================================
     function goToChecklist(categoryName, parentName) {
-      // カテゴリ名と大カテゴリ名をlocalStorageに保存して遷移
       localStorage.setItem('eqao_checklist_openCategory', categoryName);
       localStorage.setItem('eqao_checklist_openParent', parentName);
       window.location.href = 'checklist.html?t=' + Date.now();
@@ -899,10 +888,8 @@
       document.getElementById('navUserName').textContent = studentName || 'ゲスト';
       document.getElementById('backBtn').href = 'index.html?t=' + new Date().getTime();
 
-      // チェック状態を読み込み
       loadCheckState();
 
-      // マスタデータを読み込み
       const loaded = await loadMasterData();
       if (!loaded) {
         document.getElementById('loadingState').innerHTML = `
@@ -912,7 +899,6 @@
         return;
       }
 
-      // 表示
       render();
     });
   </script>
