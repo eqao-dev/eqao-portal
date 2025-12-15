@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>生徒共通教材一覧 - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      min-height: 100vh;
+      padding-bottom: 100px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .header-title {
+      flex: 1;
+    }
+
+    .header-title h1 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .header-title .subtitle {
+      font-size: 11px;
+      opacity: 0.8;
+      margin-top: 2px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* 進捗サマリー */
+    .progress-summary {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .progress-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .progress-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a237e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .progress-title .material-icons {
+      font-size: 20px;
+    }
+
+    .progress-count {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1a237e;
+    }
+
+    .progress-count span {
+      font-size: 14px;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .progress-bar-container {
+      background: #e8ecf4;
+      border-radius: 10px;
+      height: 12px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+
+    .progress-percent {
+      text-align: right;
+      font-size: 13px;
+      color: #666;
+      margin-top: 6px;
+    }
+
+    /* フィルター・検索 */
+    .filter-section {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f5f7fa;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+    }
+
+    .search-box .material-icons {
+      color: #666;
+      font-size: 22px;
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .search-box input::placeholder {
+      color: #999;
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filter-select {
+      flex: 1;
+      min-width: 150px;
+      padding: 10px 14px;
+      border: 2px solid #e8ecf4;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      background: white;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filter-btn-reset {
+      background: #f5f7fa;
+      color: #666;
+    }
+
+    .filter-btn-reset:hover {
+      background: #e8ecf4;
+    }
+
+    /* カテゴリセクション */
+    .category-section {
+      margin-bottom: 24px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      border-radius: 12px 12px 0 0;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .category-header:hover {
+      filter: brightness(1.1);
+    }
+
+    .category-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .category-icon .material-icons {
+      font-size: 20px;
+    }
+
+    .category-info {
+      flex: 1;
+    }
+
+    .category-name {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .category-count {
+      font-size: 12px;
+      opacity: 0.9;
+      margin-top: 2px;
+    }
+
+    .category-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+
+    .category-toggle.collapsed {
+      transform: rotate(-90deg);
+    }
+
+    .category-items {
+      background: white;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .category-items.collapsed {
+      display: none;
+    }
+
+    /* 教材アイテム */
+    .material-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background 0.2s;
+    }
+
+    .material-item:last-child {
+      border-bottom: none;
+    }
+
+    .material-item:hover {
+      background: #f8f9fc;
+    }
+
+    .material-item.checked {
+      background: #f0f4ff;
+    }
+
+    .material-checkbox {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      margin-top: 2px;
+    }
+
+    .material-checkbox:hover {
+      border-color: #1a237e;
+    }
+
+    .material-checkbox.checked {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-color: #1a237e;
+    }
+
+    .material-checkbox .material-icons {
+      font-size: 18px;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .material-checkbox.checked .material-icons {
+      opacity: 1;
+    }
+
+    .material-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .material-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .material-item.checked .material-name {
+      color: #666;
+    }
+
+    .material-detail {
+      font-size: 12px;
+      color: #666;
+      margin-top: 6px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .material-detail a {
+      color: #1a237e;
+      text-decoration: none;
+    }
+
+    .material-detail a:hover {
+      text-decoration: underline;
+    }
+
+    /* ローディング */
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #e8ecf4;
+      border-top-color: #1a237e;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* エラー */
+    .error-message {
+      text-align: center;
+      padding: 40px 20px;
+      background: #fff5f5;
+      border-radius: 12px;
+      color: #c62828;
+    }
+
+    .error-message .material-icons {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    /* 検索結果なし */
+    .no-results {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+    }
+
+    .no-results .material-icons {
+      font-size: 48px;
+      color: #ccc;
+      margin-bottom: 12px;
+    }
+
+    /* 保存中インジケーター */
+    .save-indicator {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a237e;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 14px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+
+    .save-indicator.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .save-indicator .material-icons {
+      font-size: 20px;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 480px) {
+      .header {
+        padding: 14px 16px;
+      }
+
+      .header-title h1 {
+        font-size: 16px;
+      }
+
+      .progress-summary {
+        padding: 16px;
+      }
+
+      .progress-count {
+        font-size: 20px;
+      }
+
+      .filter-row {
+        flex-direction: column;
+      }
+
+      .filter-select {
+        width: 100%;
+      }
+
+      .category-header {
+        padding: 12px 14px;
+      }
+
+      .category-name {
+        font-size: 14px;
+      }
+
+      .material-item {
+        padding: 14px;
+      }
+
+      .material-name {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="index.html" class="back-btn">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <div class="header-title">
+      <h1>生徒共通教材一覧</h1>
+      <p class="subtitle">チェックして学習進捗を管理</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- 進捗サマリー -->
+    <div class="progress-summary">
+      <div class="progress-header">
+        <div class="progress-title">
+          <span class="material-icons">trending_up</span>
+          学習進捗
+        </div>
+        <div class="progress-count">
+          <span id="checkedCount">0</span> / <span id="totalCount">0</span>
+        </div>
+      </div>
+      <div class="progress-bar-container">
+        <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+      </div>
+      <div id="progressPercent" class="progress-percent">0%</div>
+    </div>
+
+    <!-- フィルター・検索 -->
+    <div class="filter-section">
+      <div class="search-box">
+        <span class="material-icons">search</span>
+        <input type="text" id="searchInput" placeholder="教材名・詳細で検索...">
+      </div>
+      <div class="filter-row">
+        <select id="categoryFilter" class="filter-select">
+          <option value="">すべてのカテゴリ</option>
+        </select>
+        <select id="statusFilter" class="filter-select">
+          <option value="">すべて</option>
+          <option value="unchecked">未完了のみ</option>
+          <option value="checked">完了のみ</option>
+        </select>
+        <button class="filter-btn filter-btn-reset" onclick="resetFilters()">
+          <span class="material-icons">refresh</span>
+          リセット
+        </button>
+      </div>
+    </div>
+
+    <!-- 教材リスト -->
+    <div id="materialsContainer">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <p>教材データを読み込み中...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 保存インジケーター -->
+  <div id="saveIndicator" class="save-indicator">
+    <span class="material-icons">check_circle</span>
+    <span>保存しました</span>
+  </div>
+
+  <script>
+    // ============================================
+    // 設定
+    // ============================================
+    const JSON_URL = 'YOUR_GITHUB_RAW_URL_HERE'; // ← GitHubのraw URLに置き換え
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzCFkkw6h6o0iFwObPILE-VCYfjRP1ikmMWOl6DgqIaqIRi657vQIKkjSKuRVTaWJzG/exec';
+
+    // ============================================
+    // グローバル変数
+    // ============================================
+    let materialsData = [];
+    let checkedItems = {};
+    let categories = [];
+    let collapsedCategories = {};
+    let saveTimeout = null;
+
+    // ============================================
+    // 初期化
+    // ============================================
+    document.addEventListener('DOMContentLoaded', async () => {
+      // ログインチェック
+      if (localStorage.getItem('eqao_loggedIn') !== 'true') {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      await loadMaterials();
+      setupEventListeners();
+    });
+
+    // ============================================
+    // データ読み込み
+    // ============================================
+    async function loadMaterials() {
+      try {
+        // JSONデータ取得
+        const response = await fetch(JSON_URL);
+        if (!response.ok) throw new Error('JSON取得エラー');
+        materialsData = await response.json();
+
+        // カテゴリ抽出
+        categories = [...new Set(materialsData.map(item => item.category))];
+        populateCategoryFilter();
+
+        // チェック状態取得
+        await loadCheckedState();
+
+        // 表示
+        renderMaterials();
+        updateProgress();
+      } catch (error) {
+        console.error('読み込みエラー:', error);
+        document.getElementById('materialsContainer').innerHTML = `
+          <div class="error-message">
+            <span class="material-icons">error_outline</span>
+            <p>データの読み込みに失敗しました</p>
+            <p style="font-size:12px; margin-top:8px;">ページを再読み込みしてください</p>
+          </div>
+        `;
+      }
+    }
+
+    async function loadCheckedState() {
+      try {
+        const studentId = localStorage.getItem('eqao_studentId');
+        if (!studentId) return;
+
+        const url = `${API_URL}?action=getMaterialsState&studentId=${encodeURIComponent(studentId)}`;
+        const response = await fetch(url);
+        const result = await response.json();
+        
+        if (result.success && result.checkedItems) {
+          checkedItems = result.checkedItems;
+        }
+      } catch (error) {
+        console.error('チェック状態取得エラー:', error);
+      }
+    }
+
+    // ============================================
+    // フィルター
+    // ============================================
+    function populateCategoryFilter() {
+      const select = document.getElementById('categoryFilter');
+      categories.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat;
+        option.textContent = cat;
+        select.appendChild(option);
+      });
+    }
+
+    function setupEventListeners() {
+      document.getElementById('searchInput').addEventListener('input', debounce(renderMaterials, 300));
+      document.getElementById('categoryFilter').addEventListener('change', renderMaterials);
+      document.getElementById('statusFilter').addEventListener('change', renderMaterials);
+    }
+
+    function resetFilters() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('categoryFilter').value = '';
+      document.getElementById('statusFilter').value = '';
+      renderMaterials();
+    }
+
+    // ============================================
+    // 表示
+    // ============================================
+    function renderMaterials() {
+      const container = document.getElementById('materialsContainer');
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+      const categoryFilter = document.getElementById('categoryFilter').value;
+      const statusFilter = document.getElementById('statusFilter').value;
+
+      // フィルタリング
+      let filtered = materialsData.filter(item => {
+        // カテゴリフィルター
+        if (categoryFilter && item.category !== categoryFilter) return false;
+
+        // ステータスフィルター
+        const itemKey = generateItemKey(item);
+        const isChecked = checkedItems[itemKey] === true;
+        if (statusFilter === 'checked' && !isChecked) return false;
+        if (statusFilter === 'unchecked' && isChecked) return false;
+
+        // 検索
+        if (searchQuery) {
+          const nameMatch = item.name.toLowerCase().includes(searchQuery);
+          const detailMatch = (item.detail || '').toLowerCase().includes(searchQuery);
+          if (!nameMatch && !detailMatch) return false;
+        }
+
+        return true;
+      });
+
+      // 結果なし
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="no-results">
+            <span class="material-icons">search_off</span>
+            <p>該当する教材が見つかりません</p>
+          </div>
+        `;
+        return;
+      }
+
+      // カテゴリごとにグループ化
+      const grouped = {};
+      filtered.forEach(item => {
+        if (!grouped[item.category]) {
+          grouped[item.category] = [];
+        }
+        grouped[item.category].push(item);
+      });
+
+      // HTML生成
+      let html = '';
+      for (const category of categories) {
+        if (!grouped[category]) continue;
+        
+        const items = grouped[category];
+        const checkedCount = items.filter(item => checkedItems[generateItemKey(item)] === true).length;
+        const isCollapsed = collapsedCategories[category] === true;
+
+        html += `
+          <div class="category-section">
+            <div class="category-header" onclick="toggleCategory('${escapeHtml(category)}')">
+              <div class="category-icon">
+                <span class="material-icons">${getCategoryIcon(category)}</span>
+              </div>
+              <div class="category-info">
+                <div class="category-name">${escapeHtml(category)}</div>
+                <div class="category-count">${checkedCount} / ${items.length} 完了</div>
+              </div>
+              <div class="category-toggle ${isCollapsed ? 'collapsed' : ''}">
+                <span class="material-icons">expand_more</span>
+              </div>
+            </div>
+            <div class="category-items ${isCollapsed ? 'collapsed' : ''}">
+              ${items.map(item => renderItem(item)).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function renderItem(item) {
+      const itemKey = generateItemKey(item);
+      const isChecked = checkedItems[itemKey] === true;
+      
+      // 詳細のリンク処理
+      let detailHtml = '';
+      if (item.detail) {
+        detailHtml = escapeHtml(item.detail).replace(
+          /(https?:\/\/[^\s]+)/g,
+          '<a href="$1" target="_blank" rel="noopener">$1</a>'
+        );
+      }
+
+      return `
+        <div class="material-item ${isChecked ? 'checked' : ''}" data-key="${escapeHtml(itemKey)}">
+          <div class="material-checkbox ${isChecked ? 'checked' : ''}" onclick="toggleItem('${escapeHtml(itemKey)}')">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="material-content">
+            <div class="material-name">${escapeHtml(item.name)}</div>
+            ${detailHtml ? `<div class="material-detail">${detailHtml}</div>` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    function generateItemKey(item) {
+      // カテゴリ + 名前でユニークキー生成
+      return `${item.category}::${item.name}`;
+    }
+
+    function getCategoryIcon(category) {
+      if (category.includes('漢字')) return 'translate';
+      if (category.includes('書籍') || category.includes('参考書')) return 'menu_book';
+      if (category.includes('小論文')) return 'edit_note';
+      if (category.includes('面接')) return 'record_voice_over';
+      if (category.includes('口頭試問')) return 'quiz';
+      return 'folder';
+    }
+
+    // ============================================
+    // インタラクション
+    // ============================================
+    function toggleCategory(category) {
+      collapsedCategories[category] = !collapsedCategories[category];
+      renderMaterials();
+    }
+
+    function toggleItem(itemKey) {
+      checkedItems[itemKey] = !checkedItems[itemKey];
+      
+      // UI即時更新
+      const itemEl = document.querySelector(`[data-key="${itemKey}"]`);
+      if (itemEl) {
+        const checkbox = itemEl.querySelector('.material-checkbox');
+        if (checkedItems[itemKey]) {
+          itemEl.classList.add('checked');
+          checkbox.classList.add('checked');
+        } else {
+          itemEl.classList.remove('checked');
+          checkbox.classList.remove('checked');
+        }
+      }
+
+      updateProgress();
+      scheduleSync();
+    }
+
+    // ============================================
+    // 進捗更新
+    // ============================================
+    function updateProgress() {
+      const total = materialsData.length;
+      const checked = Object.values(checkedItems).filter(v => v === true).length;
+      const percent = total > 0 ? Math.round((checked / total) * 100) : 0;
+
+      document.getElementById('checkedCount').textContent = checked;
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('progressBar').style.width = percent + '%';
+      document.getElementById('progressPercent').textContent = percent + '%';
+
+      // カテゴリカウント更新
+      renderMaterials();
+    }
+
+    // ============================================
+    // 同期
+    // ============================================
+    function scheduleSync() {
+      if (saveTimeout) clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(syncToServer, 1000);
+    }
+
+    async function syncToServer() {
+      try {
+        const studentId = localStorage.getItem('eqao_studentId');
+        if (!studentId) return;
+
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `action=syncMaterialsState&studentId=${encodeURIComponent(studentId)}&checkedItems=${encodeURIComponent(JSON.stringify(checkedItems))}`
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          showSaveIndicator();
+        }
+      } catch (error) {
+        console.error('同期エラー:', error);
+      }
+    }
+
+    function showSaveIndicator() {
+      const indicator = document.getElementById('saveIndicator');
+      indicator.classList.add('show');
+      setTimeout(() => indicator.classList.remove('show'), 2000);
+    }
+
+    // ============================================
+    // ユーティリティ
+    // ============================================
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function debounce(func, wait) {
+      let timeout;
+      return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+      };
+    }
+  </script>
+</body>
+</html>
