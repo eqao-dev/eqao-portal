@@ -108,6 +108,18 @@
       font-size: 22px;
     }
 
+    /* 2列バナー */
+    .banner-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .banner-row .faq-banner {
+      margin-bottom: 0;
+    }
+
     /* FAQバナー */
     .faq-banner {
       display: flex;
@@ -148,6 +160,7 @@
 
     .faq-banner-content {
       flex: 1;
+      min-width: 0;
     }
 
     .faq-banner-title {
@@ -165,6 +178,7 @@
     .faq-banner-arrow {
       color: #999;
       font-size: 24px;
+      flex-shrink: 0;
     }
 
     .section {
@@ -456,6 +470,36 @@
 
       .menu-btn span {
         font-size: 10px;
+      }
+
+      .banner-row {
+        gap: 10px;
+      }
+
+      .faq-banner {
+        padding: 14px 12px;
+        gap: 10px;
+      }
+
+      .faq-banner-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .faq-banner-icon .material-icons {
+        font-size: 22px;
+      }
+
+      .faq-banner-title {
+        font-size: 13px;
+      }
+
+      .faq-banner-desc {
+        font-size: 11px;
+      }
+
+      .faq-banner-arrow {
+        font-size: 20px;
       }
     }
 
@@ -900,6 +944,10 @@
         <span class="material-icons">help</span>
         <span>よくある質問</span>
       </a>
+      <a href="forms.html" class="nav-item">
+        <span class="material-icons">list_alt</span>
+        <span>各種申し込みフォーム一覧</span>
+      </a>
     </div>
 
     <div class="nav-category">スケジュール</div>
@@ -925,13 +973,13 @@
         <span>チェックリスト教材</span>
       </a>
       <a href="progress.html" class="nav-item">
-  <span class="material-icons">trending_up</span>
-  <span>自己/進捗管理シート</span>
-</a>
+        <span class="material-icons">trending_up</span>
+        <span>自己/進捗管理シート</span>
+      </a>
       <a href="school-list.html" class="nav-item">
-  <span class="material-icons">location_city</span>
-  <span>志望校/併願校管理シート</span>
-</a>
+        <span class="material-icons">location_city</span>
+        <span>志望校/併願校管理シート</span>
+      </a>
     </div>
 
     <div class="nav-category">教材</div>
@@ -982,44 +1030,12 @@
       </a>
     </div>
 
-    <div class="nav-category">各種申し込み</div>
-    <div class="nav-section">
-      <a href="forms.html" class="nav-item">
-        <span class="material-icons">list_alt</span>
-        <span>各種申し込みフォーム一覧</span>
-      </a>
-      <span class="nav-item disabled">
-        <span class="material-icons">edit_calendar</span>
-        <span>スケジュールフォーム</span>
-      </span>
-      <a href="https://forms.gle/89pDvpSBRXiNnpPG9" target="_blank" class="nav-item">
-        <span class="material-icons">swap_horiz</span>
-        <span>授業振替フォーム</span>
-      </a>
-    </div>
-
-    <div class="nav-category">追加対策申し込み</div>
-    <div class="nav-section">
-      <a href="https://forms.gle/aCu1VwgJjLhAQtDQ7" target="_blank" class="nav-item">
-        <span class="material-icons">add_box</span>
-        <span>授業コマ追加フォーム</span>
-      </a>
-      <a href="https://forms.gle/jYZz42KbFSMmJCMi6" target="_blank" class="nav-item">
-        <span class="material-icons">library_add</span>
-        <span>コース追加フォーム</span>
-      </a>
-      <span class="nav-item disabled">
-        <span class="material-icons">menu_book</span>
-        <span>課題図書対策追加フォーム</span>
-      </span>
-    </div>
-
     <div class="nav-category">プログラム申し込み</div>
     <div class="nav-section">
-     <a href="camp.html" class="nav-item">
-  <span class="material-icons">camping</span>
-  <span>EQAO CAMP</span>
-</a>
+      <a href="camp.html" class="nav-item">
+        <span class="material-icons">camping</span>
+        <span>EQAO CAMP</span>
+      </a>
       <span class="nav-item disabled">
         <span class="material-icons">flight</span>
         <span>EQAO STUDY TOUR</span>
@@ -1030,22 +1046,6 @@
       </span>
     </div>
 
-    <div class="nav-category">面談申し込み</div>
-    <div class="nav-section">
-      <a href="meeting-principal.html" class="nav-item">
-        <span class="material-icons">person</span>
-        <span>塾長面談</span>
-      </a>
-      <a href="meeting-sansya.html" class="nav-item">
-        <span class="material-icons">group</span>
-        <span>三者面談</span>
-      </a>
-      <a href="meeting-tantou.html" class="nav-item">
-        <span class="material-icons">support_agent</span>
-        <span>担任面談</span>
-      </a>
-    </div>
-
     <div class="nav-category">カリキュラム</div>
     <div class="nav-section">
       <a href="zoom-links.html" class="nav-item">
@@ -1053,13 +1053,13 @@
         <span>Zoomリンク一覧</span>
       </a>
       <a href="curriculum.html" class="nav-item">
-  <span class="material-icons">route</span>
-  <span>授業の流れ</span>
-</a>
+        <span class="material-icons">route</span>
+        <span>授業の流れ</span>
+      </a>
       <a href="curriculum-support.html" class="nav-item">
-  <span class="material-icons">account_tree</span>
-  <span>カリキュラムとサポート体制</span>
-</a>
+        <span class="material-icons">account_tree</span>
+        <span>カリキュラムとサポート体制</span>
+      </a>
     </div>
 
     <div class="nav-category">ルール関連</div>
@@ -1123,17 +1123,29 @@
       </a>
     </div>
 
-    <!-- よくある質問バナー -->
-    <a href="faq.html" class="faq-banner">
-      <div class="faq-banner-icon">
-        <span class="material-icons">help</span>
-      </div>
-      <div class="faq-banner-content">
-        <div class="faq-banner-title">よくある質問</div>
-        <div class="faq-banner-desc">総合型選抜・EQAOについてのQ&A</div>
-      </div>
-      <span class="material-icons faq-banner-arrow">chevron_right</span>
-    </a>
+    <!-- 2列バナー -->
+    <div class="banner-row">
+      <a href="forms.html" class="faq-banner">
+        <div class="faq-banner-icon">
+          <span class="material-icons">list_alt</span>
+        </div>
+        <div class="faq-banner-content">
+          <div class="faq-banner-title">各種申し込み</div>
+          <div class="faq-banner-desc">フォーム一覧</div>
+        </div>
+        <span class="material-icons faq-banner-arrow">chevron_right</span>
+      </a>
+      <a href="faq.html" class="faq-banner">
+        <div class="faq-banner-icon">
+          <span class="material-icons">help</span>
+        </div>
+        <div class="faq-banner-content">
+          <div class="faq-banner-title">よくある質問</div>
+          <div class="faq-banner-desc">Q&A</div>
+        </div>
+        <span class="material-icons faq-banner-arrow">chevron_right</span>
+      </a>
+    </div>
 
     <div class="section">
       <h2 class="section-title">スケジュール</h2>
@@ -1144,12 +1156,14 @@
           </div>
           <span>年間<br>スケジュール</span>
         </a>
-        <a href="exam-schedule.html" class="menu-btn">          <div class="icon-wrapper icon-indigo">
+        <a href="exam-schedule.html" class="menu-btn">
+          <div class="icon-wrapper icon-indigo">
             <span class="material-icons">school</span>
           </div>
           <span>受験<br>スケジュール</span>
         </a>
-        <a href="schedule.html" class="menu-btn">          <div class="icon-wrapper icon-purple">
+        <a href="schedule.html" class="menu-btn">
+          <div class="icon-wrapper icon-purple">
             <span class="material-icons">event_note</span>
           </div>
           <span>授業<br>スケジュール</span>
@@ -1160,23 +1174,24 @@
     <div class="section">
       <h2 class="section-title">チェックリスト一覧</h2>
       <div class="button-grid">
-        <a href="checklist.html" class="menu-btn">          <div class="icon-wrapper icon-teal">
+        <a href="checklist.html" class="menu-btn">
+          <div class="icon-wrapper icon-teal">
             <span class="material-icons">checklist</span>
           </div>
           <span>チェックリスト<br>教材</span>
         </a>
-       <a href="progress.html" class="menu-btn">
-  <div class="icon-wrapper icon-teal">
-    <span class="material-icons">trending_up</span>
-  </div>
-  <span>自己/進捗<br>管理シート</span>
-</a>
+        <a href="progress.html" class="menu-btn">
+          <div class="icon-wrapper icon-teal">
+            <span class="material-icons">trending_up</span>
+          </div>
+          <span>自己/進捗<br>管理シート</span>
+        </a>
         <a href="school-list.html" class="menu-btn">
-  <div class="icon-wrapper icon-teal">
-    <span class="material-icons">location_city</span>
-  </div>
-  <span>志望校/併願校<br>管理シート</span>
-</a>
+          <div class="icon-wrapper icon-teal">
+            <span class="material-icons">location_city</span>
+          </div>
+          <span>志望校/併願校<br>管理シート</span>
+        </a>
       </div>
     </div>
 
@@ -1195,7 +1210,8 @@
           </div>
           <span>生徒共通<br>教材一覧</span>
         </span>
-        <span class="menu-btn disabled">          <div class="icon-wrapper icon-orange">
+        <span class="menu-btn disabled">
+          <div class="icon-wrapper icon-orange">
             <span class="material-icons">description</span>
           </div>
           <span>授業書類<br>一覧</span>
@@ -1252,62 +1268,14 @@
     </div>
 
     <div class="section">
-      <h2 class="section-title">各種申し込み</h2>
-      <div class="button-grid">
-        <a href="forms.html" class="menu-btn">
-          <div class="icon-wrapper icon-cyan">
-            <span class="material-icons">list_alt</span>
-          </div>
-          <span>各種申し込み<br>フォーム一覧</span>
-        </a>
-        <span class="menu-btn disabled">
-          <div class="icon-wrapper icon-cyan">
-            <span class="material-icons">edit_calendar</span>
-          </div>
-          <span>スケジュール<br>フォーム</span>
-        </span>
-        <a href="https://forms.gle/89pDvpSBRXiNnpPG9" target="_blank" class="menu-btn">
-          <div class="icon-wrapper icon-cyan">
-            <span class="material-icons">swap_horiz</span>
-          </div>
-          <span>授業振替<br>フォーム</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2 class="section-title">追加対策申し込み</h2>
-      <div class="button-grid">
-        <a href="https://forms.gle/aCu1VwgJjLhAQtDQ7" target="_blank" class="menu-btn">
-          <div class="icon-wrapper icon-amber">
-            <span class="material-icons">add_box</span>
-          </div>
-          <span>授業コマ<br>追加フォーム</span>
-        </a>
-        <a href="https://forms.gle/jYZz42KbFSMmJCMi6" target="_blank" class="menu-btn">
-          <div class="icon-wrapper icon-amber">
-            <span class="material-icons">library_add</span>
-          </div>
-          <span>コース<br>追加フォーム</span>
-        </a>
-        <span class="menu-btn disabled">
-          <div class="icon-wrapper icon-amber">
-            <span class="material-icons">menu_book</span>
-          </div>
-          <span>課題図書対策<br>追加フォーム</span>
-        </span>
-      </div>
-    </div>
-
-    <div class="section">
       <h2 class="section-title">プログラム申し込み</h2>
       <div class="button-grid">
-       <a href="camp.html" class="menu-btn">
-  <div class="icon-wrapper icon-red">
-    <span class="material-icons">camping</span>
-  </div>
-  <span>EQAO<br>CAMP</span>
-</a>
+        <a href="camp.html" class="menu-btn">
+          <div class="icon-wrapper icon-red">
+            <span class="material-icons">camping</span>
+          </div>
+          <span>EQAO<br>CAMP</span>
+        </a>
         <span class="menu-btn disabled">
           <div class="icon-wrapper icon-red">
             <span class="material-icons">flight</span>
@@ -1324,30 +1292,6 @@
     </div>
 
     <div class="section">
-      <h2 class="section-title">面談申し込み</h2>
-      <div class="button-grid">
-        <a href="meeting-principal.html" class="menu-btn">
-          <div class="icon-wrapper icon-indigo">
-            <span class="material-icons">person</span>
-          </div>
-          <span>塾長面談</span>
-        </a>
-        <a href="meeting-sansya.html" class="menu-btn">
-          <div class="icon-wrapper icon-indigo">
-            <span class="material-icons">group</span>
-          </div>
-          <span>三者面談</span>
-        </a>
-        <a href="meeting-tantou.html" class="menu-btn">
-          <div class="icon-wrapper icon-indigo">
-            <span class="material-icons">support_agent</span>
-          </div>
-          <span>担任面談</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="section">
       <h2 class="section-title">カリキュラム</h2>
       <div class="button-grid">
         <a href="zoom-links.html" class="menu-btn">
@@ -1356,18 +1300,18 @@
           </div>
           <span>Zoomリンク<br>一覧</span>
         </a>
-       <a href="curriculum.html" class="menu-btn">
-  <div class="icon-wrapper icon-purple">
-    <span class="material-icons">route</span>
-  </div>
-  <span>授業の<br>流れ</span>
-</a>
+        <a href="curriculum.html" class="menu-btn">
+          <div class="icon-wrapper icon-purple">
+            <span class="material-icons">route</span>
+          </div>
+          <span>授業の<br>流れ</span>
+        </a>
         <a href="curriculum-support.html" class="menu-btn">
-  <div class="icon-wrapper icon-purple">
-    <span class="material-icons">account_tree</span>
-  </div>
-  <span>カリキュラムと<br>サポート体制</span>
-</a>
+          <div class="icon-wrapper icon-purple">
+            <span class="material-icons">account_tree</span>
+          </div>
+          <span>カリキュラムと<br>サポート体制</span>
+        </a>
       </div>
     </div>
 
