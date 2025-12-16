@@ -769,6 +769,91 @@
       color: #558b2f;
       margin-top: 2px;
     }
+
+    /* 確認テストバナー */
+    .quiz-banner {
+      background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 4px 16px rgba(0, 137, 123, 0.3);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .quiz-banner:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 137, 123, 0.4);
+    }
+
+    .quiz-banner-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .quiz-banner-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quiz-banner-icon .material-icons {
+      font-size: 24px;
+      color: white;
+    }
+
+    .quiz-banner-text {
+      color: white;
+    }
+
+    .quiz-banner-title {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .quiz-banner-subtitle {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .quiz-banner-arrow {
+      color: white;
+      opacity: 0.8;
+    }
+
+    /* 完了メッセージのテストボタン */
+    .completion-quiz-btn {
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .completion-quiz-btn:hover {
+      background: #1b5e20;
+    }
+
+    .completion-quiz-btn .material-icons {
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
@@ -801,6 +886,10 @@
         <span class="material-icons">home</span>
         <span class="nav-item-text">ホーム</span>
       </a>
+      <a href="quiz.html" class="nav-item">
+        <span class="material-icons">quiz</span>
+        <span class="nav-item-text">確認テスト</span>
+      </a>
     </div>
   </nav>
 
@@ -813,6 +902,20 @@
 
     <!-- 進捗一覧画面 -->
     <div id="progressView" style="display: none;">
+      <!-- 確認テストバナー -->
+      <div class="quiz-banner" onclick="window.location.href='quiz.html'">
+        <div class="quiz-banner-content">
+          <div class="quiz-banner-icon">
+            <span class="material-icons">quiz</span>
+          </div>
+          <div class="quiz-banner-text">
+            <div class="quiz-banner-title">確認テスト</div>
+            <div class="quiz-banner-subtitle">学習の理解度をチェック</div>
+          </div>
+        </div>
+        <span class="material-icons quiz-banner-arrow">arrow_forward</span>
+      </div>
+
       <div class="total-progress">
         <div class="total-progress-header">
           <span class="total-progress-title">全体の進捗</span>
@@ -851,8 +954,12 @@
         </div>
         <div class="completion-text">
           <div class="completion-title">このカテゴリ完了！</div>
-          <div class="completion-subtitle">素晴らしい！次のカテゴリに進みましょう</div>
+          <div class="completion-subtitle">素晴らしい！確認テストを受けてみましょう</div>
         </div>
+        <button class="completion-quiz-btn" onclick="window.location.href='quiz.html'">
+          <span class="material-icons">quiz</span>
+          テストへ
+        </button>
       </div>
 
       <div id="itemList" class="item-list"></div>
