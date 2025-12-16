@@ -434,7 +434,9 @@
         <div class="search-row">
           <div class="search-group">
             <label class="search-label">大学名</label>
-            <input type="text" id="searchUniversity" class="search-input" placeholder="例: 早稲田">
+            <select id="searchUniversity" class="search-select">
+              <option value="">すべての大学</option>
+            </select>
           </div>
           <div class="search-group">
             <label class="search-label">学部</label>
@@ -511,23 +513,38 @@
         const response = await fetch(`${API_URL}?action=getPastExamFilters`);
         const filters = await response.json();
 
+        // 大学名
+        const uniSelect = document.getElementById('searchUniversity');
+        if (filters.universities) {
+          filters.universities.forEach(uni => {
+            const option = document.createElement('option');
+            option.value = uni;
+            option.textContent = uni;
+            uniSelect.appendChild(option);
+          });
+        }
+
         // 年度
         const yearSelect = document.getElementById('searchYear');
-        filters.years.forEach(year => {
-          const option = document.createElement('option');
-          option.value = year;
-          option.textContent = year + '年';
-          yearSelect.appendChild(option);
-        });
+        if (filters.years) {
+          filters.years.forEach(year => {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year + '年';
+            yearSelect.appendChild(option);
+          });
+        }
 
         // 試験種別
         const examTypeSelect = document.getElementById('searchExamType');
-        filters.examTypes.forEach(type => {
-          const option = document.createElement('option');
-          option.value = type;
-          option.textContent = type;
-          examTypeSelect.appendChild(option);
-        });
+        if (filters.examTypes) {
+          filters.examTypes.forEach(type => {
+            const option = document.createElement('option');
+            option.value = type;
+            option.textContent = type;
+            examTypeSelect.appendChild(option);
+          });
+        }
       } catch (error) {
         console.error('Error loading filters:', error);
       }

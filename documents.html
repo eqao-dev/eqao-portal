@@ -422,7 +422,9 @@
         <div class="search-row">
           <div class="search-group">
             <label class="search-label">大学名</label>
-            <input type="text" id="searchUniversity" class="search-input" placeholder="例: 早稲田">
+            <select id="searchUniversity" class="search-select">
+              <option value="">すべての大学</option>
+            </select>
           </div>
           <div class="search-group">
             <label class="search-label">学部・学科</label>
@@ -475,34 +477,47 @@
         return;
       }
 
-      // 書類種別を取得
-      loadDocumentTypes();
+      // フィルター選択肢を取得
+      loadFilters();
 
       // Enterキーで検索
-      document.getElementById('searchUniversity').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') searchDocuments();
-      });
       document.getElementById('searchFaculty').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') searchDocuments();
       });
     });
 
-    // 書類種別を読み込み
-    async function loadDocumentTypes() {
+    // フィルター選択肢を読み込み
+    async function loadFilters() {
       try {
-        const response = await fetch(`${API_URL}?action=getDocumentTypes`);
-        const types = await response.json();
-        allDocTypes = types;
+        // 大学一覧を取得
+        const uniResponse = await fetch(`${API_URL}?action=getUniversityList`);
+        const universities = await uniResponse.json();
+        
+        const uniSelect = document.getElementById('searchUniversity');
+        if (Array.isArray(universities)) {
+          universities.forEach(uni => {
+            const option = document.createElement('option');
+            option.value = uni;
+            option.textContent = uni;
+            uniSelect.appendChild(option);
+          });
+        }
 
-        const select = document.getElementById('searchDocType');
-        types.forEach(type => {
-          const option = document.createElement('option');
-          option.value = type;
-          option.textContent = type;
-          select.appendChild(option);
-        });
+        // 書類種別を取得
+        const typeResponse = await fetch(`${API_URL}?action=getDocumentTypes`);
+        const types = await typeResponse.json();
+        
+        const typeSelect = document.getElementById('searchDocType');
+        if (Array.isArray(types)) {
+          types.forEach(type => {
+            const option = document.createElement('option');
+            option.value = type;
+            option.textContent = type;
+            typeSelect.appendChild(option);
+          });
+        }
       } catch (error) {
-        console.error('Error loading document types:', error);
+        console.error('Error loading filters:', error);
       }
     }
 

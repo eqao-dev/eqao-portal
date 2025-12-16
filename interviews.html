@@ -482,7 +482,9 @@
         <div class="search-row">
           <div class="search-group">
             <label class="search-label">大学名</label>
-            <input type="text" id="searchUniversity" class="search-input" placeholder="例: 早稲田">
+            <select id="searchUniversity" class="search-select">
+              <option value="">すべての大学</option>
+            </select>
           </div>
           <div class="search-group">
             <label class="search-label">学部・学科</label>
@@ -524,17 +526,38 @@
         return;
       }
 
+      // フィルター選択肢を読み込み
+      loadFilters();
+
       // 初期表示（全件）
       searchInterviews();
 
       // Enterキーで検索
-      document.getElementById('searchUniversity').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') searchInterviews();
-      });
       document.getElementById('searchFaculty').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') searchInterviews();
       });
     });
+
+    // フィルター選択肢を読み込み
+    async function loadFilters() {
+      try {
+        const response = await fetch(`${API_URL}?action=getInterviewFilters`);
+        const filters = await response.json();
+
+        // 大学名
+        const uniSelect = document.getElementById('searchUniversity');
+        if (filters.universities) {
+          filters.universities.forEach(uni => {
+            const option = document.createElement('option');
+            option.value = uni;
+            option.textContent = uni;
+            uniSelect.appendChild(option);
+          });
+        }
+      } catch (error) {
+        console.error('Error loading filters:', error);
+      }
+    }
 
     // 検索実行
     async function searchInterviews() {
