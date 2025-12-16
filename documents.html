@@ -492,11 +492,9 @@
         console.log('Loading filters...');
         
         // 大学一覧を取得
-        const uniResponse = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'getUniversityList' })
-        });
+        const uniUrl = `${API_URL}?action=getUniversityList`;
+        console.log('Fetching universities from:', uniUrl);
+        const uniResponse = await fetch(uniUrl);
         
         console.log('University response status:', uniResponse.status);
         const uniData = await uniResponse.json();
@@ -519,11 +517,9 @@
         }
 
         // 書類種別を取得
-        const typeResponse = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'getDocumentTypes' })
-        });
+        const typeUrl = `${API_URL}?action=getDocumentTypes`;
+        console.log('Fetching document types from:', typeUrl);
+        const typeResponse = await fetch(typeUrl);
         
         console.log('Document types response status:', typeResponse.status);
         const typeData = await typeResponse.json();
@@ -567,18 +563,19 @@
       `;
 
       try {
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'getSubmittedDocuments',
-            university: university,
-            faculty: faculty,
-            docType: docType
-          })
+        const params = new URLSearchParams({
+          action: 'getSubmittedDocuments',
+          university: university,
+          faculty: faculty,
+          docType: docType
         });
         
+        const url = `${API_URL}?${params}`;
+        console.log('Fetching from:', url);
+        
+        const response = await fetch(url);
         console.log('Search response status:', response.status);
+        
         const data = await response.json();
         console.log('Search response data:', data);
         
