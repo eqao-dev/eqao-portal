@@ -1822,11 +1822,7 @@
 }
 
 .study-legend {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 4px;
-  font-size: 9px;
-  margin-bottom: 8px;
+  display: none;
 }
 
 .study-legend-item {
@@ -2184,7 +2180,6 @@
       </div>
     </div>
     <canvas id="studyChart" class="study-chart-canvas" height="100"></canvas>
-    <div class="study-legend" id="studyLegend"></div>
     <div class="study-total" id="studyTotal">今週の合計: 0時間</div>
     <button class="study-add-btn" onclick="openStudyModal()">
       <span class="material-icons">add</span>
@@ -3293,16 +3288,7 @@ async function viewProfileDetails() {
       const titleText = (startDate.getMonth() + 1) + '/' + startDate.getDate() + 
                        ' - ' + (endDate.getMonth() + 1) + '/' + endDate.getDate();
       document.getElementById('studyChartTitle').textContent = titleText;
-      
-      // 凡例を更新
-      let legendHtml = '';
-      categories.forEach(category => {
-        legendHtml += '<div class="study-legend-item">';
-        legendHtml += '<div class="study-legend-color" style="background:' + studyCategories[category].color + '"></div>';
-        legendHtml += '<span>' + category + '</span>';
-        legendHtml += '</div>';
-      });
-      document.getElementById('studyLegend').innerHTML = legendHtml;
+    
       
       // 合計時間を更新
       const weekLabel = currentWeekOffset === 0 ? '今週' : 
