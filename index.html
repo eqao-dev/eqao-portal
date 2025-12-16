@@ -1542,6 +1542,341 @@
   }
 }
 
+/* 授業外学習記録モーダル */
+.study-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 700;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.study-modal-overlay.show {
+  display: flex;
+}
+
+.study-modal {
+  background: white;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalSlideUp 0.3s ease;
+}
+
+.study-modal-header {
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  color: white;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 20px 20px 0 0;
+}
+
+.study-modal-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  flex: 1;
+}
+
+.study-modal-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: background 0.2s;
+}
+
+.study-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.study-modal-body {
+  padding: 24px;
+}
+
+.study-form-group {
+  margin-bottom: 20px;
+}
+
+.study-form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.study-form-input,
+.study-form-select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.study-form-input:focus,
+.study-form-select:focus {
+  outline: none;
+  border-color: #1a237e;
+}
+
+.study-form-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  min-height: 80px;
+  resize: vertical;
+}
+
+.study-form-textarea:focus {
+  outline: none;
+  border-color: #1a237e;
+}
+
+.study-category-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 11px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.study-category-info:hover {
+  color: #1a237e;
+}
+
+.study-category-info .material-icons {
+  font-size: 16px;
+}
+
+.study-modal-footer {
+  padding: 16px 24px;
+  background: #f8f9fc;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  gap: 12px;
+  border-radius: 0 0 20px 20px;
+}
+
+.study-modal-btn {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.study-modal-btn-cancel {
+  background: #e0e0e0;
+  color: #666;
+}
+
+.study-modal-btn-cancel:hover {
+  background: #d0d0d0;
+}
+
+.study-modal-btn-save {
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  color: white;
+}
+
+.study-modal-btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26, 35, 126, 0.3);
+}
+
+/* カテゴリー詳細ポップアップ */
+.category-detail-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  z-index: 800;
+  display: none;
+  max-width: 350px;
+  width: 90%;
+}
+
+.category-detail-popup.show {
+  display: block;
+  animation: modalSlideUp 0.2s ease;
+}
+
+.category-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1a237e;
+}
+
+.category-detail-badge {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.category-detail-content {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.category-detail-content ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.category-detail-content li {
+  margin: 4px 0;
+}
+
+.category-detail-close {
+  width: 100%;
+  padding: 10px;
+  background: #1a237e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* グラフ表示エリア */
+.study-chart-container {
+  padding: 16px;
+}
+
+.study-chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.study-chart-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a237e;
+}
+
+.study-week-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.study-week-btn {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+}
+
+.study-week-btn:hover {
+  background: #e0e0e0;
+}
+
+.study-chart-canvas {
+  margin-bottom: 12px;
+}
+
+.study-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 11px;
+  margin-bottom: 12px;
+}
+
+.study-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.study-legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.study-total {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.study-add-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.study-add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
+}
+
+.study-loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+  font-size: 13px;
+}
+
   </style>
 </head>
 <body>
@@ -1829,19 +2164,29 @@
         </div>
       </div>
 
-      <!-- 授業外学習カード（準備中） -->
-      <div class="study-card">
-        <div class="study-header">
-          <span class="material-icons">trending_up</span>
-          授業外学習
-        </div>
-        <div class="study-body">
-          <div class="study-icon">
-            <span class="material-icons">construction</span>
-          </div>
-          <div class="study-text">準備中</div>
-        </div>
+      <!-- 授業外学習カード -->
+<div class="study-card">
+  <div class="study-header">
+    <span class="material-icons">trending_up</span>
+    授業外学習
+  </div>
+  <div class="study-chart-container">
+    <div class="study-chart-header">
+      <div class="study-chart-title" id="studyChartTitle">今週の学習記録</div>
+      <div class="study-week-nav">
+        <button class="study-week-btn" onclick="changeWeek(-1)">← 前週</button>
+        <button class="study-week-btn" onclick="changeWeek(1)">次週 →</button>
       </div>
+    </div>
+    <canvas id="studyChart" class="study-chart-canvas" height="120"></canvas>
+    <div class="study-legend" id="studyLegend"></div>
+    <div class="study-total" id="studyTotal">今週の合計: 0時間</div>
+    <button class="study-add-btn" onclick="openStudyModal()">
+      <span class="material-icons">add</span>
+      今日の学習を記録
+    </button>
+  </div>
+</div>
     </div>
     <div class="line-section">
       <a href="https://lin.ee/nM1pgho" target="_blank" class="line-btn">
@@ -2646,6 +2991,328 @@ async function viewProfileDetails() {
         loadProfileCard();
       }
     });
+
+    // ========================================
+    // 授業外学習記録機能
+    // ========================================
+
+    let studyChart = null;
+    let currentWeekOffset = 0; // 0=今週, -1=先週, 1=来週
+
+    // カテゴリー定義
+    const studyCategories = {
+      '英語学習': {
+        color: '#1a237e',
+        details: '①英語資格の勉強をする（英検・TOEFL・IELTSなど）'
+      },
+      '時事・ニュース': {
+        color: '#f59e0b',
+        details: '②時事問題をキャッチアップする\n⑳時事YouTubeやメディアを定期視聴\n㉖研究テーマに関するニュースを定期追跡'
+      },
+      '大学・研究調査': {
+        color: '#9c27b0',
+        details: '③志望大学・学部・教授・カリキュラムを徹底的に調べる\n⑦研究テーマに関する先行研究を調べる\n⑪教授や研究者の書籍を読む'
+      },
+      '定期テスト対策': {
+        color: '#4caf50',
+        details: '④評定平均を上げるための勉強をする'
+      },
+      '読書': {
+        color: '#ffc107',
+        details: '⑥年に1冊は本を読む\n⑲EQAO推奨の課題図書を読む\n㉘教養として新聞・雑誌を読む'
+      },
+      '小論文': {
+        color: '#e91e63',
+        details: '⑧小論文の基礎・過去問演習を始める\n⑨小論文ノートを作る\n㉙模試・過去問の復習を習慣化する\n㉛小論文の基礎問題をひたすら解く'
+      },
+      '実地活動': {
+        color: '#795548',
+        details: '⑤プログラムや課外活動に参加\n⑩オープンキャンパスに参加\n⑮研究テーマに関する実地調査\n⑯学校で指導的役割を引き受ける\n⑰大会・コンテスト・イベントに参加\n㉑留学・短期留学・スタディツアー\n㉒国内の地域活動・ボランティア'
+      },
+      'オンライン学習': {
+        color: '#607d8b',
+        details: '⑫EQAOの動画・コラムを活用\n㉓学校外の講座・オンラインプログラムを受講'
+      },
+      '書類・面接準備': {
+        color: '#00bcd4',
+        details: '㉗書類の下書きを早期に始める\n㉜面接の想定質問を作る\n㉝志望理由書・自己推薦書を授業外で書く\n㉞プレゼン資料と台本の作成・暗記\n㉕ディスカッション・プレゼンの場に慣れる\n⑱趣味を研究テーマとつなげる\n㉔探究・研究の記録を残す\n㉚自分の「強み」を言語化'
+      },
+      '面談・相談': {
+        color: '#ec407a',
+        details: '⑬塾長面談・三者面談を積極的に申し込む\n⑭LINEでの質問・相談を活用'
+      }
+    };
+
+    // 授業外学習モーダルを開く
+    function openStudyModal() {
+      document.getElementById('studyModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+      
+      // 今日の日付をデフォルト設定
+      const today = new Date();
+      const dateStr = today.toISOString().split('T')[0];
+      document.getElementById('studyDate').value = dateStr;
+      
+      // フォームをリセット
+      document.getElementById('studyCategory').value = '';
+      document.getElementById('studyHours').value = '';
+      document.getElementById('studyMemo').value = '';
+    }
+
+    // 授業外学習モーダルを閉じる
+    function closeStudyModal() {
+      document.getElementById('studyModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    // オーバーレイクリックで閉じる
+    function closeStudyModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeStudyModal();
+      }
+    }
+
+    // カテゴリー詳細を表示
+    function showCategoryDetail() {
+      const category = document.getElementById('studyCategory').value;
+      
+      if (!category) {
+        alert('カテゴリーを選択してください');
+        return;
+      }
+      
+      const categoryInfo = studyCategories[category];
+      
+      document.getElementById('categoryBadge').style.backgroundColor = categoryInfo.color;
+      document.getElementById('categoryName').textContent = category;
+      
+      const details = categoryInfo.details.split('\n');
+      let html = '<ul>';
+      details.forEach(detail => {
+        html += '<li>' + escapeHtml(detail) + '</li>';
+      });
+      html += '</ul>';
+      
+      document.getElementById('categoryContent').innerHTML = html;
+      document.getElementById('categoryDetailPopup').classList.add('show');
+    }
+
+    // カテゴリー詳細を閉じる
+    function closeCategoryDetail() {
+      document.getElementById('categoryDetailPopup').classList.remove('show');
+    }
+
+    // 授業外学習記録を保存
+    async function saveStudyLog() {
+      const studentId = localStorage.getItem('eqao_studentId');
+      const date = document.getElementById('studyDate').value;
+      const category = document.getElementById('studyCategory').value;
+      const hours = parseFloat(document.getElementById('studyHours').value);
+      const memo = document.getElementById('studyMemo').value;
+      
+      // 入力チェック
+      if (!date || !category || !hours) {
+        alert('日付、カテゴリー、時間は必須項目です');
+        return;
+      }
+      
+      if (hours <= 0 || hours % 0.5 !== 0) {
+        alert('時間は0.5時間単位で入力してください');
+        return;
+      }
+      
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: 'saveStudyLog',
+            studentId: studentId,
+            date: date,
+            category: category,
+            hours: hours,
+            memo: memo
+          })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          alert('学習記録を保存しました');
+          closeStudyModal();
+          loadStudyChart();
+        } else {
+          alert('保存に失敗しました: ' + (result.error || '不明なエラー'));
+        }
+      } catch (error) {
+        console.error('保存エラー:', error);
+        alert('エラーが発生しました');
+      }
+    }
+
+    // 週を変更
+    function changeWeek(direction) {
+      currentWeekOffset += direction;
+      loadStudyChart();
+    }
+
+    // 指定された週の日付範囲を取得
+    function getWeekRange(offset) {
+      const today = new Date();
+      const dayOfWeek = today.getDay(); // 0=日曜, 1=月曜, ...
+      const monday = new Date(today);
+      monday.setDate(today.getDate() - dayOfWeek + 1 + (offset * 7));
+      
+      const sunday = new Date(monday);
+      sunday.setDate(monday.getDate() + 6);
+      
+      return {
+        start: monday.toISOString().split('T')[0],
+        end: sunday.toISOString().split('T')[0],
+        dates: Array.from({ length: 7 }, (_, i) => {
+          const date = new Date(monday);
+          date.setDate(monday.getDate() + i);
+          return date.toISOString().split('T')[0];
+        })
+      };
+    }
+
+    // グラフを読み込む
+    async function loadStudyChart() {
+      const studentId = localStorage.getItem('eqao_studentId');
+      
+      if (!studentId) {
+        return;
+      }
+      
+      try {
+        const weekRange = getWeekRange(currentWeekOffset);
+        
+        const result = await apiGet('getStudyStats', {
+          studentId: studentId,
+          startDate: weekRange.start,
+          endDate: weekRange.end
+        });
+        
+        if (result.success) {
+          renderStudyChart(result.stats, result.totalHours, weekRange);
+        } else {
+          console.error('グラフ読み込みエラー:', result.error);
+        }
+      } catch (error) {
+        console.error('グラフ読み込みエラー:', error);
+      }
+    }
+
+    // グラフを描画
+    function renderStudyChart(stats, totalHours, weekRange) {
+      const canvas = document.getElementById('studyChart');
+      const ctx = canvas.getContext('2d');
+      
+      // 既存のグラフを破棄
+      if (studyChart) {
+        studyChart.destroy();
+      }
+      
+      // データセットを構築
+      const datasets = [];
+      const categories = Object.keys(studyCategories);
+      
+      categories.forEach(category => {
+        const data = weekRange.dates.map(date => {
+          return stats[date] && stats[date][category] ? stats[date][category] : 0;
+        });
+        
+        datasets.push({
+          label: category,
+          data: data,
+          backgroundColor: studyCategories[category].color,
+          borderRadius: 4
+        });
+      });
+      
+      // ラベル（日付）
+      const labels = weekRange.dates.map(date => {
+        const d = new Date(date);
+        return (d.getMonth() + 1) + '/' + d.getDate();
+      });
+      
+      // グラフを作成
+      studyChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: datasets
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return context.dataset.label + ': ' + context.parsed.y + '時間';
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              stacked: true,
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              stacked: true,
+              beginAtZero: true,
+              ticks: {
+                stepSize: 1,
+                callback: function(value) {
+                  return value + 'h';
+                }
+              }
+            }
+          }
+        }
+      });
+      
+      // タイトルを更新
+      const startDate = new Date(weekRange.start);
+      const endDate = new Date(weekRange.end);
+      const titleText = (startDate.getMonth() + 1) + '/' + startDate.getDate() + 
+                       ' - ' + (endDate.getMonth() + 1) + '/' + endDate.getDate();
+      document.getElementById('studyChartTitle').textContent = titleText;
+      
+      // 凡例を更新
+      let legendHtml = '';
+      categories.forEach(category => {
+        legendHtml += '<div class="study-legend-item">';
+        legendHtml += '<div class="study-legend-color" style="background:' + studyCategories[category].color + '"></div>';
+        legendHtml += '<span>' + category + '</span>';
+        legendHtml += '</div>';
+      });
+      document.getElementById('studyLegend').innerHTML = legendHtml;
+      
+      // 合計時間を更新
+      const weekLabel = currentWeekOffset === 0 ? '今週' : 
+                        currentWeekOffset < 0 ? Math.abs(currentWeekOffset) + '週前' : 
+                        currentWeekOffset + '週後';
+      document.getElementById('studyTotal').textContent = weekLabel + 'の合計: ' + totalHours.toFixed(1) + '時間';
+    }
+
+    // ページ読み込み時にグラフを表示
+    document.addEventListener('DOMContentLoaded', function() {
+      const loggedIn = localStorage.getItem('eqao_loggedIn');
+      if (loggedIn === 'true') {
+        loadStudyChart();
+      }
+    });
     
   </script>
 
@@ -2858,6 +3525,75 @@ async function viewProfileDetails() {
       </div>
     </div>
   </div>
+
+  <!-- 授業外学習記録モーダル -->
+  <div class="study-modal-overlay" id="studyModalOverlay" onclick="closeStudyModalOnOverlay(event)">
+    <div class="study-modal" onclick="event.stopPropagation()">
+      <div class="study-modal-header">
+        <span class="material-icons">edit_note</span>
+        <h2>授業外学習を記録</h2>
+        <button class="study-modal-close" onclick="closeStudyModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+
+      <div class="study-modal-body">
+        <div class="study-form-group">
+          <label class="study-form-label">日付</label>
+          <input type="date" id="studyDate" class="study-form-input">
+        </div>
+
+        <div class="study-form-group">
+          <label class="study-form-label">カテゴリー</label>
+          <select id="studyCategory" class="study-form-select">
+            <option value="">選択してください</option>
+            <option value="英語学習">英語学習</option>
+            <option value="時事・ニュース">時事・ニュース</option>
+            <option value="大学・研究調査">大学・研究調査</option>
+            <option value="定期テスト対策">定期テスト対策</option>
+            <option value="読書">読書</option>
+            <option value="小論文">小論文</option>
+            <option value="実地活動">実地活動</option>
+            <option value="オンライン学習">オンライン学習</option>
+            <option value="書類・面接準備">書類・面接準備</option>
+            <option value="面談・相談">面談・相談</option>
+          </select>
+          <div class="study-category-info" onclick="showCategoryDetail()">
+            <span class="material-icons">info</span>
+            このカテゴリーの詳細を見る
+          </div>
+        </div>
+
+        <div class="study-form-group">
+          <label class="study-form-label">時間（0.5時間単位）</label>
+          <input type="number" id="studyHours" class="study-form-input" min="0.5" step="0.5" placeholder="例: 1.5">
+        </div>
+
+        <div class="study-form-group">
+          <label class="study-form-label">メモ（任意）</label>
+          <textarea id="studyMemo" class="study-form-textarea" placeholder="例: 英単語200語を暗記"></textarea>
+        </div>
+      </div>
+
+      <div class="study-modal-footer">
+        <button class="study-modal-btn study-modal-btn-cancel" onclick="closeStudyModal()">キャンセル</button>
+        <button class="study-modal-btn study-modal-btn-save" onclick="saveStudyLog()">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- カテゴリー詳細ポップアップ -->
+  <div class="category-detail-popup" id="categoryDetailPopup">
+    <div class="category-detail-header">
+      <div class="category-detail-badge" id="categoryBadge"></div>
+      <span id="categoryName"></span>
+    </div>
+    <div class="category-detail-content" id="categoryContent"></div>
+    <button class="category-detail-close" onclick="closeCategoryDetail()">閉じる</button>
+  </div>
+
+  <!-- Chart.js 読み込み -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
   
 </body>
 </html>
