@@ -279,7 +279,7 @@
     }
 
     .document-type-badge {
-      background: linear-gradient(135deg, #00897B 0%, #26A69A 100%);
+      background: linear-gradient(135deg, #5C6BC0 0%, #7986CB 100%);
       color: white;
       padding: 4px 10px;
       border-radius: 12px;
@@ -431,12 +431,6 @@
             <input type="text" id="searchFaculty" class="search-input" placeholder="例: 経営">
           </div>
         </div>
-        <div class="search-group">
-          <label class="search-label">書類種別</label>
-          <select id="searchDocType" class="search-select">
-            <option value="">すべての種別</option>
-          </select>
-        </div>
         <div class="search-actions">
           <button class="btn-search" onclick="searchDocuments()">
             <span class="material-icons">search</span>
@@ -515,31 +509,6 @@
         } else {
           console.warn('No universities found');
         }
-
-        // 書類種別を取得
-        const typeUrl = `${API_URL}?action=getDocumentTypes`;
-        console.log('Fetching document types from:', typeUrl);
-        const typeResponse = await fetch(typeUrl);
-        
-        console.log('Document types response status:', typeResponse.status);
-        const typeData = await typeResponse.json();
-        console.log('Document types data:', typeData);
-        
-        const typeSelect = document.getElementById('searchDocType');
-        const types = Array.isArray(typeData) ? typeData : (typeData.types || []);
-        console.log('Parsed document types:', types);
-        
-        if (types.length > 0) {
-          types.forEach(type => {
-            const option = document.createElement('option');
-            option.value = type;
-            option.textContent = type;
-            typeSelect.appendChild(option);
-          });
-          console.log('Added', types.length, 'document types to dropdown');
-        } else {
-          console.warn('No document types found');
-        }
       } catch (error) {
         console.error('Error loading filters:', error);
         showToast('データ読み込みエラー: ' + error.message);
@@ -550,9 +519,8 @@
     async function searchDocuments() {
       const university = document.getElementById('searchUniversity').value.trim();
       const faculty = document.getElementById('searchFaculty').value.trim();
-      const docType = document.getElementById('searchDocType').value;
 
-      console.log('Searching with params:', { university, faculty, docType });
+      console.log('Searching with params:', { university, faculty });
 
       const container = document.getElementById('resultsContainer');
       container.innerHTML = `
@@ -566,8 +534,7 @@
         const params = new URLSearchParams({
           action: 'getSubmittedDocuments',
           university: university,
-          faculty: faculty,
-          docType: docType
+          faculty: faculty
         });
         
         const url = `${API_URL}?${params}`;
@@ -668,7 +635,6 @@
     function clearSearch() {
       document.getElementById('searchUniversity').value = '';
       document.getElementById('searchFaculty').value = '';
-      document.getElementById('searchDocType').value = '';
       document.getElementById('resultsContainer').innerHTML = `
         <div class="empty-state">
           <span class="material-icons">description</span>
