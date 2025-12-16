@@ -3924,14 +3924,14 @@
     async function loadChecklist() {
       const studentId = getStudentId();
       try {
-        const url = `${API_URL}?action=getChecklist&studentId=${studentId}`;
+        const url = `${API_URL}?action=getChecklistState&studentId=${studentId}`;
         const response = await fetch(url);
         const data = await response.json();
         
-        if (data) {
-          if (data["高1"]) checkedItems["高1"] = data["高1"];
-          if (data["高2"]) checkedItems["高2"] = data["高2"];
-          if (data["高3"]) checkedItems["高3"] = data["高3"];
+        if (data && data.checkState) {
+          if (data.checkState["高1"]) checkedItems["高1"] = data.checkState["高1"];
+          if (data.checkState["高2"]) checkedItems["高2"] = data.checkState["高2"];
+          if (data.checkState["高3"]) checkedItems["高3"] = data.checkState["高3"];
         }
         
         updateProgressDisplay();
@@ -4333,7 +4333,7 @@
     async function loadSchools() {
       const studentId = getStudentId();
       try {
-        const url = `${API_URL}?action=getSchools&studentId=${studentId}`;
+        const url = `${API_URL}?action=getSchoolData&studentId=${studentId}`;
         const response = await fetch(url);
         const data = await response.json();
         
