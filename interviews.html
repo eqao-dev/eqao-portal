@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>面接の内容 - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .header-title {
+      font-size: 17px;
+      font-weight: 700;
+      flex: 1;
+    }
+
+    /* コンテナ */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* 説明セクション */
+    .info-banner {
+      background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .info-banner .material-icons {
+      font-size: 24px;
+      color: #2E7D32;
+      flex-shrink: 0;
+    }
+
+    .info-banner-text {
+      font-size: 13px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* 検索セクション */
+    .search-section {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .search-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-title .material-icons {
+      font-size: 20px;
+      color: #1a237e;
+    }
+
+    .search-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 500px) {
+      .search-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .search-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .search-label {
+      font-size: 11px;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .search-input {
+      padding: 10px 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    .search-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .btn-search {
+      flex: 1;
+      padding: 12px;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-search:hover {
+      opacity: 0.9;
+    }
+
+    .btn-clear {
+      padding: 12px 20px;
+      background: #f5f5f5;
+      color: #666;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .btn-clear:hover {
+      background: #e0e0e0;
+    }
+
+    /* 結果セクション */
+    .results-section {
+      margin-top: 16px;
+    }
+
+    .results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .results-count {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .results-count strong {
+      color: #1a237e;
+    }
+
+    /* 面接カード */
+    .interview-card {
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .interview-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .interview-header:hover {
+      opacity: 0.95;
+    }
+
+    .interview-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .interview-university {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .interview-faculty {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .interview-expand {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+    }
+
+    .interview-expand.open {
+      transform: rotate(180deg);
+    }
+
+    .interview-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255,255,255,0.2);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+    }
+
+    .meta-tag .material-icons {
+      font-size: 14px;
+    }
+
+    /* 詳細コンテンツ */
+    .interview-content {
+      display: none;
+      padding: 20px;
+    }
+
+    .interview-content.open {
+      display: block;
+    }
+
+    .content-section {
+      margin-bottom: 20px;
+    }
+
+    .content-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-title .material-icons {
+      font-size: 18px;
+    }
+
+    .section-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #333;
+      white-space: pre-wrap;
+      background: #f8f9fc;
+      padding: 14px 16px;
+      border-radius: 10px;
+    }
+
+    /* Q&Aセクション */
+    .qa-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .qa-item {
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .qa-question {
+      background: #E8EAF6;
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a237e;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .qa-question-number {
+      background: #1a237e;
+      color: white;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .qa-answer {
+      padding: 14px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #333;
+      background: white;
+    }
+
+    .qa-answer-label {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .qa-answer-label .material-icons {
+      font-size: 14px;
+    }
+
+    /* アドバイスセクション */
+    .advice-section {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+      border-radius: 12px;
+      padding: 16px;
+      border-left: 4px solid #FFA000;
+    }
+
+    .advice-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #E65100;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .advice-title .material-icons {
+      font-size: 18px;
+    }
+
+    .advice-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #5D4037;
+    }
+
+    /* ローディング */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+
+    .loading .material-icons {
+      font-size: 48px;
+      animation: spin 1s linear infinite;
+      color: #1a237e;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* 空状態 */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+
+    .empty-state .material-icons {
+      font-size: 64px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* 年度タグ */
+    .year-tag {
+      background: rgba(255,255,255,0.25);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="index.html" class="back-btn">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <h1 class="header-title">面接の内容</h1>
+  </header>
+
+  <div class="container">
+    <!-- 説明バナー -->
+    <div class="info-banner">
+      <span class="material-icons">record_voice_over</span>
+      <div class="info-banner-text">
+        過去にEQAO生が受けた面接試験の内容（匿名）を検索できます。<br>
+        実際に聞かれた質問と回答を参考に、面接対策を進めましょう。
+      </div>
+    </div>
+
+    <!-- 検索セクション -->
+    <div class="search-section">
+      <div class="search-title">
+        <span class="material-icons">search</span>
+        面接データを検索
+      </div>
+      <div class="search-form">
+        <div class="search-row">
+          <div class="search-group">
+            <label class="search-label">大学名</label>
+            <input type="text" id="searchUniversity" class="search-input" placeholder="例: 早稲田">
+          </div>
+          <div class="search-group">
+            <label class="search-label">学部・学科</label>
+            <input type="text" id="searchFaculty" class="search-input" placeholder="例: 経営">
+          </div>
+        </div>
+        <div class="search-actions">
+          <button class="btn-search" onclick="searchInterviews()">
+            <span class="material-icons">search</span>
+            検索
+          </button>
+          <button class="btn-clear" onclick="clearSearch()">クリア</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 結果セクション -->
+    <div class="results-section">
+      <div class="results-header">
+        <span class="results-count" id="resultsCount"></span>
+      </div>
+      <div id="resultsContainer">
+        <div class="loading">
+          <span class="material-icons">sync</span>
+          <p>読み込み中...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycbwNKLocT3CfZy5z9mJ1TmMkG5ma-3M-Gxn0IFJUQYb0F6SrTRhGQjvYIoKWUXbgQjUfuA/exec';
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // ログイン確認
+      const loggedIn = localStorage.getItem('eqao_loggedIn');
+      if (!loggedIn) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      // 初期表示（全件）
+      searchInterviews();
+
+      // Enterキーで検索
+      document.getElementById('searchUniversity').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') searchInterviews();
+      });
+      document.getElementById('searchFaculty').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') searchInterviews();
+      });
+    });
+
+    // 検索実行
+    async function searchInterviews() {
+      const university = document.getElementById('searchUniversity').value.trim();
+      const faculty = document.getElementById('searchFaculty').value.trim();
+
+      const container = document.getElementById('resultsContainer');
+      container.innerHTML = `
+        <div class="loading">
+          <span class="material-icons">sync</span>
+          <p>検索中...</p>
+        </div>
+      `;
+
+      try {
+        const params = new URLSearchParams({
+          action: 'getInterviews',
+          university: university,
+          faculty: faculty
+        });
+
+        const response = await fetch(`${API_URL}?${params}`);
+        const results = await response.json();
+
+        renderResults(results);
+      } catch (error) {
+        console.error('Search error:', error);
+        container.innerHTML = `
+          <div class="empty-state">
+            <span class="material-icons">error</span>
+            <p>検索中にエラーが発生しました。<br>もう一度お試しください。</p>
+          </div>
+        `;
+      }
+    }
+
+    // 検索結果を表示
+    function renderResults(results) {
+      const container = document.getElementById('resultsContainer');
+      const countEl = document.getElementById('resultsCount');
+
+      if (!results || results.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <span class="material-icons">search_off</span>
+            <p>該当する面接データが見つかりませんでした。<br>検索条件を変更してお試しください。</p>
+          </div>
+        `;
+        countEl.innerHTML = '';
+        return;
+      }
+
+      countEl.innerHTML = `<strong>${results.length}</strong>件の面接データ`;
+
+      let html = '';
+      results.forEach((item, index) => {
+        const cardId = `interview-${index}`;
+        
+        html += `
+          <div class="interview-card">
+            <div class="interview-header" onclick="toggleInterview('${cardId}')">
+              <div class="interview-title-row">
+                <div>
+                  <div class="interview-university">${escapeHtml(item.university)}</div>
+                  <div class="interview-faculty">${escapeHtml(item.faculty || '学部不明')}</div>
+                </div>
+                <div class="interview-expand" id="${cardId}-expand">
+                  <span class="material-icons">expand_more</span>
+                </div>
+              </div>
+              <div class="interview-meta">
+                ${item.year ? `<span class="meta-tag year-tag"><span class="material-icons">calendar_today</span>${escapeHtml(item.year)}年</span>` : ''}
+                ${item.interviewers ? `<span class="meta-tag"><span class="material-icons">group</span>面接官${escapeHtml(item.interviewers)}人</span>` : ''}
+                ${item.duration ? `<span class="meta-tag"><span class="material-icons">schedule</span>${escapeHtml(item.duration)}分</span>` : ''}
+                ${item.format ? `<span class="meta-tag"><span class="material-icons">person</span>${escapeHtml(item.format)}</span>` : ''}
+              </div>
+            </div>
+            <div class="interview-content" id="${cardId}-content">
+        `;
+
+        // 面接の様子
+        if (item.situation) {
+          html += `
+            <div class="content-section">
+              <div class="section-title">
+                <span class="material-icons">meeting_room</span>
+                面接の様子
+              </div>
+              <div class="section-text">${escapeHtml(item.situation)}</div>
+            </div>
+          `;
+        }
+
+        // 当日の流れ
+        if (item.flow) {
+          html += `
+            <div class="content-section">
+              <div class="section-title">
+                <span class="material-icons">timeline</span>
+                当日の流れ
+              </div>
+              <div class="section-text">${escapeHtml(item.flow)}</div>
+            </div>
+          `;
+        }
+
+        // 質問と回答
+        if (item.questions && item.questions.length > 0) {
+          html += `
+            <div class="content-section">
+              <div class="section-title">
+                <span class="material-icons">quiz</span>
+                質問と回答
+              </div>
+              <div class="qa-list">
+          `;
+
+          item.questions.forEach((qa, qIndex) => {
+            html += `
+              <div class="qa-item">
+                <div class="qa-question">
+                  <span class="qa-question-number">${qIndex + 1}</span>
+                  <span>${escapeHtml(qa.question) || '（質問内容なし）'}</span>
+                </div>
+                ${qa.answer ? `
+                  <div class="qa-answer">
+                    <div class="qa-answer-label">
+                      <span class="material-icons">subdirectory_arrow_right</span>
+                      回答
+                    </div>
+                    ${escapeHtml(qa.answer)}
+                  </div>
+                ` : ''}
+              </div>
+            `;
+          });
+
+          html += `
+              </div>
+            </div>
+          `;
+        }
+
+        // その他印象に残ったこと
+        if (item.other) {
+          html += `
+            <div class="content-section">
+              <div class="section-title">
+                <span class="material-icons">lightbulb</span>
+                その他・印象に残ったこと
+              </div>
+              <div class="section-text">${escapeHtml(item.other)}</div>
+            </div>
+          `;
+        }
+
+        // 後輩へのアドバイス
+        if (item.advice) {
+          html += `
+            <div class="content-section">
+              <div class="advice-section">
+                <div class="advice-title">
+                  <span class="material-icons">chat</span>
+                  後輩へのアドバイス
+                </div>
+                <div class="advice-text">${escapeHtml(item.advice)}</div>
+              </div>
+            </div>
+          `;
+        }
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // カードの開閉
+    function toggleInterview(cardId) {
+      const content = document.getElementById(`${cardId}-content`);
+      const expand = document.getElementById(`${cardId}-expand`);
+
+      content.classList.toggle('open');
+      expand.classList.toggle('open');
+    }
+
+    // 検索クリア
+    function clearSearch() {
+      document.getElementById('searchUniversity').value = '';
+      document.getElementById('searchFaculty').value = '';
+      searchInterviews();
+    }
+
+    // HTMLエスケープ
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+</html>

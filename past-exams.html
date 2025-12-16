@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>過去問 - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .header-title {
+      font-size: 17px;
+      font-weight: 700;
+      flex: 1;
+    }
+
+    /* コンテナ */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* 説明セクション */
+    .info-banner {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .info-banner .material-icons {
+      font-size: 24px;
+      color: #E65100;
+      flex-shrink: 0;
+    }
+
+    .info-banner-text {
+      font-size: 13px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* 検索セクション */
+    .search-section {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .search-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-title .material-icons {
+      font-size: 20px;
+      color: #1a237e;
+    }
+
+    .search-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 500px) {
+      .search-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .search-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .search-label {
+      font-size: 11px;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .search-input {
+      padding: 10px 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    .search-select {
+      padding: 10px 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      background: white;
+      cursor: pointer;
+    }
+
+    .search-select:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    .search-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .btn-search {
+      flex: 1;
+      padding: 12px;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-search:hover {
+      opacity: 0.9;
+    }
+
+    .btn-clear {
+      padding: 12px 20px;
+      background: #f5f5f5;
+      color: #666;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .btn-clear:hover {
+      background: #e0e0e0;
+    }
+
+    /* 結果セクション */
+    .results-section {
+      margin-top: 16px;
+    }
+
+    .results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .results-count {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .results-count strong {
+      color: #1a237e;
+    }
+
+    /* 結果リスト */
+    .results-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* 過去問カード */
+    .exam-card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .exam-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .exam-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #E53935 0%, #EF5350 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .exam-icon .material-icons {
+      font-size: 24px;
+      color: white;
+    }
+
+    .exam-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .exam-university {
+      font-size: 15px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 2px;
+    }
+
+    .exam-details {
+      font-size: 12px;
+      color: #666;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .exam-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #f0f0f0;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .exam-tag .material-icons {
+      font-size: 12px;
+    }
+
+    .exam-year {
+      background: #E8EAF6;
+      color: #1a237e;
+    }
+
+    .exam-type {
+      background: #E0F2F1;
+      color: #00695C;
+    }
+
+    .exam-action {
+      flex-shrink: 0;
+    }
+
+    .btn-pdf {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 10px 16px;
+      background: linear-gradient(135deg, #E53935 0%, #EF5350 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-pdf:hover {
+      opacity: 0.9;
+    }
+
+    .btn-pdf .material-icons {
+      font-size: 18px;
+    }
+
+    /* ローディング */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+
+    .loading .material-icons {
+      font-size: 48px;
+      animation: spin 1s linear infinite;
+      color: #1a237e;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* 空状態 */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+
+    .empty-state .material-icons {
+      font-size: 64px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* グループ表示 */
+    .group-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px 10px 0 0;
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 16px;
+    }
+
+    .group-header:first-child {
+      margin-top: 0;
+    }
+
+    .group-content {
+      background: white;
+      border-radius: 0 0 10px 10px;
+      overflow: hidden;
+    }
+
+    .group-content .exam-card {
+      border-radius: 0;
+      box-shadow: none;
+      border-bottom: 1px solid #eee;
+    }
+
+    .group-content .exam-card:last-child {
+      border-bottom: none;
+    }
+
+    .group-content .exam-card:hover {
+      transform: none;
+      background: #f8f9fc;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="index.html" class="back-btn">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <h1 class="header-title">過去問</h1>
+  </header>
+
+  <div class="container">
+    <!-- 説明バナー -->
+    <div class="info-banner">
+      <span class="material-icons">description</span>
+      <div class="info-banner-text">
+        各大学の小論文過去問（PDF）を検索できます。<br>
+        志望校の傾向を分析して対策に活かしましょう。
+      </div>
+    </div>
+
+    <!-- 検索セクション -->
+    <div class="search-section">
+      <div class="search-title">
+        <span class="material-icons">search</span>
+        過去問を検索
+      </div>
+      <div class="search-form">
+        <div class="search-row">
+          <div class="search-group">
+            <label class="search-label">大学名</label>
+            <input type="text" id="searchUniversity" class="search-input" placeholder="例: 早稲田">
+          </div>
+          <div class="search-group">
+            <label class="search-label">学部</label>
+            <input type="text" id="searchFaculty" class="search-input" placeholder="例: 法学部">
+          </div>
+        </div>
+        <div class="search-row">
+          <div class="search-group">
+            <label class="search-label">年度</label>
+            <select id="searchYear" class="search-select">
+              <option value="">すべての年度</option>
+            </select>
+          </div>
+          <div class="search-group">
+            <label class="search-label">試験種別</label>
+            <select id="searchExamType" class="search-select">
+              <option value="">すべての種別</option>
+            </select>
+          </div>
+        </div>
+        <div class="search-actions">
+          <button class="btn-search" onclick="searchExams()">
+            <span class="material-icons">search</span>
+            検索
+          </button>
+          <button class="btn-clear" onclick="clearSearch()">クリア</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 結果セクション -->
+    <div class="results-section">
+      <div class="results-header">
+        <span class="results-count" id="resultsCount"></span>
+      </div>
+      <div id="resultsContainer">
+        <div class="loading">
+          <span class="material-icons">sync</span>
+          <p>読み込み中...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycbwNKLocT3CfZy5z9mJ1TmMkG5ma-3M-Gxn0IFJUQYb0F6SrTRhGQjvYIoKWUXbgQjUfuA/exec';
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // ログイン確認
+      const loggedIn = localStorage.getItem('eqao_loggedIn');
+      if (!loggedIn) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      // フィルター選択肢を読み込み
+      loadFilters();
+
+      // 初期表示（全件）
+      searchExams();
+
+      // Enterキーで検索
+      document.getElementById('searchUniversity').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') searchExams();
+      });
+      document.getElementById('searchFaculty').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') searchExams();
+      });
+    });
+
+    // フィルター選択肢を読み込み
+    async function loadFilters() {
+      try {
+        const response = await fetch(`${API_URL}?action=getPastExamFilters`);
+        const filters = await response.json();
+
+        // 年度
+        const yearSelect = document.getElementById('searchYear');
+        filters.years.forEach(year => {
+          const option = document.createElement('option');
+          option.value = year;
+          option.textContent = year + '年';
+          yearSelect.appendChild(option);
+        });
+
+        // 試験種別
+        const examTypeSelect = document.getElementById('searchExamType');
+        filters.examTypes.forEach(type => {
+          const option = document.createElement('option');
+          option.value = type;
+          option.textContent = type;
+          examTypeSelect.appendChild(option);
+        });
+      } catch (error) {
+        console.error('Error loading filters:', error);
+      }
+    }
+
+    // 検索実行
+    async function searchExams() {
+      const university = document.getElementById('searchUniversity').value.trim();
+      const faculty = document.getElementById('searchFaculty').value.trim();
+      const year = document.getElementById('searchYear').value;
+      const examType = document.getElementById('searchExamType').value;
+
+      const container = document.getElementById('resultsContainer');
+      container.innerHTML = `
+        <div class="loading">
+          <span class="material-icons">sync</span>
+          <p>検索中...</p>
+        </div>
+      `;
+
+      try {
+        const params = new URLSearchParams({
+          action: 'getPastExams',
+          university: university,
+          faculty: faculty,
+          year: year,
+          examType: examType
+        });
+
+        const response = await fetch(`${API_URL}?${params}`);
+        const results = await response.json();
+
+        renderResults(results);
+      } catch (error) {
+        console.error('Search error:', error);
+        container.innerHTML = `
+          <div class="empty-state">
+            <span class="material-icons">error</span>
+            <p>検索中にエラーが発生しました。<br>もう一度お試しください。</p>
+          </div>
+        `;
+      }
+    }
+
+    // 検索結果を表示
+    function renderResults(results) {
+      const container = document.getElementById('resultsContainer');
+      const countEl = document.getElementById('resultsCount');
+
+      if (!results || results.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <span class="material-icons">search_off</span>
+            <p>該当する過去問が見つかりませんでした。<br>検索条件を変更してお試しください。</p>
+          </div>
+        `;
+        countEl.innerHTML = '';
+        return;
+      }
+
+      countEl.innerHTML = `<strong>${results.length}</strong>件の過去問`;
+
+      // 大学ごとにグループ化
+      const grouped = {};
+      results.forEach(item => {
+        const key = item.university;
+        if (!grouped[key]) {
+          grouped[key] = [];
+        }
+        grouped[key].push(item);
+      });
+
+      let html = '';
+      
+      for (const university in grouped) {
+        html += `
+          <div class="group-header">${escapeHtml(university)}</div>
+          <div class="group-content">
+        `;
+        
+        grouped[university].forEach(item => {
+          html += `
+            <div class="exam-card">
+              <div class="exam-icon">
+                <span class="material-icons">description</span>
+              </div>
+              <div class="exam-info">
+                <div class="exam-university">${escapeHtml(item.faculty || '学部不明')}</div>
+                <div class="exam-details">
+                  <span class="exam-tag exam-year">
+                    <span class="material-icons">calendar_today</span>
+                    ${escapeHtml(item.year)}年
+                  </span>
+                  <span class="exam-tag exam-type">
+                    <span class="material-icons">label</span>
+                    ${escapeHtml(item.examType)}
+                  </span>
+                </div>
+              </div>
+              <div class="exam-action">
+                <a href="${escapeHtml(item.pdfLink)}" target="_blank" class="btn-pdf">
+                  <span class="material-icons">picture_as_pdf</span>
+                  PDF
+                </a>
+              </div>
+            </div>
+          `;
+        });
+        
+        html += `</div>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    // 検索クリア
+    function clearSearch() {
+      document.getElementById('searchUniversity').value = '';
+      document.getElementById('searchFaculty').value = '';
+      document.getElementById('searchYear').value = '';
+      document.getElementById('searchExamType').value = '';
+      searchExams();
+    }
+
+    // HTMLエスケープ
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+</html>
