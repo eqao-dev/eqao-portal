@@ -1422,6 +1422,17 @@
   color: #f44336;
 }
 
+.profile-tab-description {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  background: #f0f4ff;
+  border-left: 3px solid #1a237e;
+  border-radius: 6px;
+  line-height: 1.5;
+}
+
 .profile-form-input,
 .profile-form-select,
 .profile-form-textarea {
@@ -1795,7 +1806,7 @@
       <div class="profile-card">
         <div class="profile-header">
           <span class="material-icons">person</span>
-          📝 プロフィール
+          プロフィール
         </div>
         <div class="profile-body">
           <div class="profile-avatar" id="profileAvatar">👤</div>
@@ -1822,7 +1833,7 @@
       <div class="study-card">
         <div class="study-header">
           <span class="material-icons">trending_up</span>
-          📊 授業外学習
+          授業外学習
         </div>
         <div class="study-body">
           <div class="study-icon">
@@ -2711,6 +2722,9 @@ async function viewProfileDetails() {
 
         <!-- タブ2: 性格・学習スタイル -->
         <div class="profile-tab-content" data-tab="1">
+          <div class="profile-tab-description">
+    当てはまるものを選択してください（複数選択可）
+  </div>
           <div class="profile-checkbox-group">
             <div class="profile-checkbox-item">
               <input type="checkbox" id="personality1" value="即答型">
@@ -2749,6 +2763,9 @@ async function viewProfileDetails() {
 
         <!-- タブ3: 指導の希望 -->
         <div class="profile-tab-content" data-tab="2">
+            <div class="profile-tab-description">
+    希望する指導スタイルを選択してください（複数選択可）
+  </div>
           <div class="profile-checkbox-group">
             <div class="profile-checkbox-item">
               <input type="checkbox" id="teaching1" value="厳しめの指導">
@@ -2787,6 +2804,9 @@ async function viewProfileDetails() {
 
         <!-- タブ4: 生活上の制約 -->
         <div class="profile-tab-content" data-tab="3">
+           <div class="profile-tab-description">
+    当てはまるものを選択してください（複数選択可）
+  </div>
           <div class="profile-checkbox-group">
             <div class="profile-checkbox-item">
               <input type="checkbox" id="constraint1" value="夜の授業が難しい">
