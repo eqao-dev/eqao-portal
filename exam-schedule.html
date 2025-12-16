@@ -953,6 +953,51 @@
       overflow: hidden;
     }
 
+    .my-gantt-header-row {
+      display: flex;
+      background: #E8F5E9;
+      border-bottom: 2px solid #C8E6C9;
+    }
+
+    .my-gantt-label-header {
+      width: 100px;
+      padding: 6px 12px;
+      flex-shrink: 0;
+    }
+
+    .my-gantt-months {
+      flex: 1;
+      display: flex;
+    }
+
+    .my-gantt-month {
+      flex: 1;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 600;
+      color: #2E7D32;
+      padding: 6px 2px;
+      border-left: 1px solid #C8E6C9;
+    }
+
+    .my-gantt-month:first-child {
+      border-left: none;
+    }
+
+    .my-gantt-empty-row {
+      display: flex;
+      align-items: center;
+      min-height: 50px;
+    }
+
+    .my-gantt-placeholder {
+      flex: 1;
+      text-align: center;
+      color: #A5D6A7;
+      font-size: 12px;
+      padding: 16px;
+    }
+
     .my-gantt-empty {
       text-align: center;
       padding: 30px 20px;
@@ -1021,6 +1066,60 @@
     .my-gantt-bar:hover {
       transform: scaleY(1.1);
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    /* ピンポイントイベント用マーカー */
+    .my-gantt-marker {
+      width: 28px;
+      height: 28px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .my-gantt-marker .material-icons {
+      font-size: 14px;
+      color: white;
+      transform: rotate(45deg);
+    }
+
+    .my-gantt-marker:hover {
+      transform: rotate(-45deg) scale(1.15);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    }
+
+    /* モーダル内の学年セレクト */
+    .plan-grade-selector {
+      display: flex;
+      gap: 8px;
+    }
+
+    .plan-grade-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border: 2px solid #43A047;
+      background: white;
+      color: #43A047;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .plan-grade-btn.active {
+      background: linear-gradient(135deg, #43A047 0%, #66BB6A 100%);
+      color: white;
+      box-shadow: 0 2px 8px rgba(67, 160, 71, 0.3);
+    }
+
+    .plan-grade-btn:hover:not(.active) {
+      background: #E8F5E9;
     }
 
     /* カラーピッカー */
@@ -1867,6 +1966,24 @@
       font-size: 12px;
       font-weight: 600;
       color: #666;
+    }
+
+    .form-label .required {
+      color: #E53935;
+      font-size: 11px;
+    }
+
+    .form-label .optional {
+      color: #9E9E9E;
+      font-size: 10px;
+      font-weight: 400;
+    }
+
+    .form-hint {
+      font-size: 11px;
+      color: #9E9E9E;
+      margin-top: 8px;
+      margin-bottom: 12px;
     }
 
     .form-input, .form-select, .form-textarea {
@@ -2867,23 +2984,28 @@
       <div class="modal-body">
         <form id="planForm">
           <div class="form-group">
+            <label class="form-label">学年 <span class="required">*</span></label>
+            <div class="plan-grade-selector">
+              <button type="button" class="plan-grade-btn active" data-grade="高1">高1</button>
+              <button type="button" class="plan-grade-btn" data-grade="高2">高2</button>
+              <button type="button" class="plan-grade-btn" data-grade="高3">高3</button>
+            </div>
+          </div>
+          <div class="form-group">
             <label class="form-label">予定名 <span class="required">*</span></label>
-            <input type="text" class="form-input" id="planName" placeholder="例: 英検対策、志望理由書作成">
+            <input type="text" class="form-input" id="planName" placeholder="例: ○○大学 出願期間、英検試験日">
           </div>
           <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
             <div class="form-group">
-              <label class="form-label">開始月 <span class="required">*</span></label>
-              <select class="form-select" id="planStartMonth">
-                <option value="">選択</option>
-              </select>
+              <label class="form-label">開始日 <span class="required">*</span></label>
+              <input type="date" class="form-input" id="planStartDate">
             </div>
             <div class="form-group">
-              <label class="form-label">終了月 <span class="required">*</span></label>
-              <select class="form-select" id="planEndMonth">
-                <option value="">選択</option>
-              </select>
+              <label class="form-label">終了日 <span class="optional">任意</span></label>
+              <input type="date" class="form-input" id="planEndDate">
             </div>
           </div>
+          <p class="form-hint">※ 試験日など1日だけの場合は開始日のみでOK</p>
           <div class="form-group">
             <label class="form-label">色</label>
             <div class="color-picker" id="colorPicker">
@@ -4348,45 +4470,107 @@
       const grade = selectedGrade;
       const gradePlans = myPlans.filter(p => p.grade === grade);
 
-      if (gradePlans.length === 0) {
-        container.innerHTML = `
-          <div class="my-gantt-empty">
-            <span class="material-icons">event_note</span>
-            <p>予定がありません</p>
-            <p class="sub">「予定を追加」から登録してください</p>
-          </div>
-        `;
-        return;
-      }
-
       const data = idealScheduleData[grade];
       const months = data ? data.months : [];
       const monthCount = months.length;
 
-      let html = '';
-      gradePlans.forEach(plan => {
-        const startIdx = months.indexOf(plan.startMonth);
-        const endIdx = months.indexOf(plan.endMonth);
-        
-        if (startIdx === -1 || endIdx === -1) return;
+      if (monthCount === 0) {
+        container.innerHTML = '<div class="my-gantt-empty"><p>データがありません</p></div>';
+        return;
+      }
 
-        const leftPercent = (startIdx / monthCount) * 100;
-        const widthPercent = ((endIdx - startIdx + 1) / monthCount) * 100;
-        const bgColor = colorMap[plan.color] || colorMap.blue;
+      // 日付を表示用にフォーマット
+      function formatDateShort(dateStr) {
+        if (!dateStr) return '';
+        const d = new Date(dateStr);
+        return `${d.getMonth() + 1}/${d.getDate()}`;
+      }
 
+      // 日付から月インデックスを取得（小数点付き）
+      function getMonthPosition(dateStr) {
+        if (!dateStr) return -1;
+        const d = new Date(dateStr);
+        const month = String(d.getMonth() + 1);
+        const day = d.getDate();
+        const daysInMonth = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+        const monthIdx = months.indexOf(month);
+        if (monthIdx === -1) return -1;
+        // 月内の位置を小数で追加
+        return monthIdx + (day - 1) / daysInMonth;
+      }
+
+      // 月ヘッダーを生成
+      let html = '<div class="my-gantt-header-row">';
+      html += '<div class="my-gantt-label-header"></div>';
+      html += '<div class="my-gantt-months">';
+      months.forEach(m => {
+        html += `<div class="my-gantt-month">${m}月</div>`;
+      });
+      html += '</div></div>';
+
+      if (gradePlans.length === 0) {
+        // 予定がない場合は空の行を表示
         html += `
-          <div class="my-gantt-row">
-            <div class="my-gantt-label" title="${escapeHtml(plan.name)}">${escapeHtml(plan.name)}</div>
+          <div class="my-gantt-empty-row">
+            <div class="my-gantt-label"></div>
             <div class="my-gantt-bar-container">
-              <div class="my-gantt-bar" 
-                   style="margin-left: ${leftPercent}%; width: ${widthPercent}%; background: ${bgColor};"
-                   onclick="openPlanModal(${plan.id})"
-                   title="クリックで編集">
-                ${plan.startMonth}〜${plan.endMonth}月
-              </div>
+              <div class="my-gantt-placeholder">予定を追加してください</div>
             </div>
           </div>
         `;
+        container.innerHTML = html;
+        return;
+      }
+      
+      // 日付順にソート
+      gradePlans.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+      
+      gradePlans.forEach(plan => {
+        const startPos = getMonthPosition(plan.startDate);
+        if (startPos === -1) return;
+
+        const bgColor = colorMap[plan.color] || colorMap.blue;
+        const isPointEvent = !plan.endDate; // 終了日がない = ピンポイント
+
+        if (isPointEvent) {
+          // ピンポイントイベント（マーカー表示）
+          const leftPercent = (startPos / monthCount) * 100;
+          html += `
+            <div class="my-gantt-row">
+              <div class="my-gantt-label" title="${escapeHtml(plan.name)}">${escapeHtml(plan.name)}</div>
+              <div class="my-gantt-bar-container">
+                <div class="my-gantt-marker" 
+                     style="margin-left: ${leftPercent}%; background: ${bgColor};"
+                     onclick="openPlanModal(${plan.id})"
+                     title="${formatDateShort(plan.startDate)}&#10;クリックで編集">
+                  <span class="material-icons">place</span>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          // 期間イベント（バー表示）
+          const endPos = getMonthPosition(plan.endDate);
+          if (endPos === -1) return;
+          
+          const leftPercent = (startPos / monthCount) * 100;
+          const widthPercent = ((endPos - startPos + 0.1) / monthCount) * 100; // 最低幅を確保
+          const displayWidth = Math.max(widthPercent, 3); // 最低3%
+
+          html += `
+            <div class="my-gantt-row">
+              <div class="my-gantt-label" title="${escapeHtml(plan.name)}">${escapeHtml(plan.name)}</div>
+              <div class="my-gantt-bar-container">
+                <div class="my-gantt-bar" 
+                     style="margin-left: ${leftPercent}%; width: ${displayWidth}%; background: ${bgColor};"
+                     onclick="openPlanModal(${plan.id})"
+                     title="${formatDateShort(plan.startDate)}〜${formatDateShort(plan.endDate)}&#10;クリックで編集">
+                  ${formatDateShort(plan.startDate)}〜${formatDateShort(plan.endDate)}
+                </div>
+              </div>
+            </div>
+          `;
+        }
       });
 
       container.innerHTML = html;
@@ -4397,20 +4581,15 @@
       const modal = document.getElementById('planModal');
       const title = document.getElementById('planModalTitle');
       const deleteBtn = document.getElementById('deletePlanBtn');
-      const form = document.getElementById('planForm');
       
-      // 月のセレクトを初期化
-      const data = idealScheduleData[selectedGrade];
-      const months = data ? data.months : [];
-      const startSelect = document.getElementById('planStartMonth');
-      const endSelect = document.getElementById('planEndMonth');
+      const startInput = document.getElementById('planStartDate');
+      const endInput = document.getElementById('planEndDate');
       
-      let monthOptions = '<option value="">選択</option>';
-      months.forEach(m => {
-        monthOptions += `<option value="${m}">${m}月</option>`;
+      // 学年セレクト初期化
+      document.querySelectorAll('.plan-grade-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.onclick = () => selectPlanGrade(btn.dataset.grade);
       });
-      startSelect.innerHTML = monthOptions;
-      endSelect.innerHTML = monthOptions;
       
       // カラーピッカー初期化
       document.querySelectorAll('.color-option').forEach(opt => {
@@ -4427,11 +4606,15 @@
           title.textContent = '予定を編集';
           editingPlanId = planId;
           document.getElementById('planName').value = plan.name;
-          startSelect.value = plan.startMonth;
-          endSelect.value = plan.endMonth;
-          selectedColor = plan.color;
+          startInput.value = plan.startDate || '';
+          endInput.value = plan.endDate || '';
+          selectedColor = plan.color || 'blue';
+          // 学年セレクト
+          document.querySelectorAll('.plan-grade-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.grade === plan.grade);
+          });
           document.querySelectorAll('.color-option').forEach(opt => {
-            opt.classList.toggle('selected', opt.dataset.color === plan.color);
+            opt.classList.toggle('selected', opt.dataset.color === selectedColor);
           });
           deleteBtn.style.display = 'flex';
         }
@@ -4440,12 +4623,23 @@
         title.textContent = '予定を追加';
         editingPlanId = null;
         document.getElementById('planName').value = '';
-        startSelect.value = '';
-        endSelect.value = '';
+        startInput.value = '';
+        endInput.value = '';
         deleteBtn.style.display = 'none';
+        // デフォルトで現在選択中の学年を選択
+        document.querySelectorAll('.plan-grade-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.grade === selectedGrade);
+        });
       }
 
       modal.classList.add('show');
+    }
+
+    // モーダル内の学年を選択
+    function selectPlanGrade(grade) {
+      document.querySelectorAll('.plan-grade-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.grade === grade);
+      });
     }
 
     // モーダルを閉じる
@@ -4465,25 +4659,25 @@
     // 予定を保存
     async function savePlan() {
       const name = document.getElementById('planName').value.trim();
-      const startMonth = document.getElementById('planStartMonth').value;
-      const endMonth = document.getElementById('planEndMonth').value;
+      const startDate = document.getElementById('planStartDate').value;
+      const endDate = document.getElementById('planEndDate').value;
+      
+      // 選択された学年を取得
+      const activeGradeBtn = document.querySelector('.plan-grade-btn.active');
+      const planGrade = activeGradeBtn ? activeGradeBtn.dataset.grade : selectedGrade;
       
       if (!name) {
         alert('予定名を入力してください');
         return;
       }
-      if (!startMonth || !endMonth) {
-        alert('開始月と終了月を選択してください');
+      if (!startDate) {
+        alert('開始日を入力してください');
         return;
       }
 
-      const data = idealScheduleData[selectedGrade];
-      const months = data ? data.months : [];
-      const startIdx = months.indexOf(startMonth);
-      const endIdx = months.indexOf(endMonth);
-      
-      if (startIdx > endIdx) {
-        alert('終了月は開始月以降を選択してください');
+      // 終了日がある場合、開始日以降かチェック
+      if (endDate && new Date(endDate) < new Date(startDate)) {
+        alert('終了日は開始日以降を選択してください');
         return;
       }
 
@@ -4491,19 +4685,20 @@
         // 編集
         const plan = myPlans.find(p => p.id === editingPlanId);
         if (plan) {
+          plan.grade = planGrade;
           plan.name = name;
-          plan.startMonth = startMonth;
-          plan.endMonth = endMonth;
+          plan.startDate = startDate;
+          plan.endDate = endDate || null;
           plan.color = selectedColor;
         }
       } else {
         // 新規追加
         const newPlan = {
           id: Date.now(),
-          grade: selectedGrade,
+          grade: planGrade,
           name: name,
-          startMonth: startMonth,
-          endMonth: endMonth,
+          startDate: startDate,
+          endDate: endDate || null,
           color: selectedColor
         };
         myPlans.push(newPlan);
