@@ -145,7 +145,7 @@
 
     .search-input:focus {
       outline: none;
-      border-color: #5c6bc0;
+      border-color: #1a237e;
     }
 
     .search-select {
@@ -160,7 +160,7 @@
 
     .search-select:focus {
       outline: none;
-      border-color: #5c6bc0;
+      border-color: #1a237e;
     }
 
     .search-actions {
@@ -221,92 +221,111 @@
     }
 
     .results-count strong {
-      color: #5c6bc0;
+      color: #1a237e;
     }
 
-    /* 面接カード */
+    /* 面接カード - 過去問と同じデザイン */
     .interview-card {
-      background: white;
-      border-radius: 16px;
       margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      overflow: hidden;
     }
 
-    .interview-header {
-      background: linear-gradient(135deg, #5c6bc0 0%, #7986cb 100%);
+    .interview-university-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
       color: white;
-      padding: 16px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .interview-header:hover {
-      opacity: 0.95;
-    }
-
-    .interview-title-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .interview-university {
-      font-size: 17px;
+      padding: 14px 20px;
+      border-radius: 12px 12px 0 0;
+      font-size: 16px;
       font-weight: 700;
-      margin-bottom: 4px;
     }
 
-    .interview-faculty {
-      font-size: 13px;
-      opacity: 0.9;
+    .interview-content-card {
+      background: white;
+      border-radius: 0 0 12px 12px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .interview-expand {
-      flex-shrink: 0;
-      width: 28px;
-      height: 28px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 50%;
+    .interview-content-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .interview-basic-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .interview-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #2E7D32 0%, #66BB6A 100%);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.2s;
+      flex-shrink: 0;
     }
 
-    .interview-expand.open {
-      transform: rotate(180deg);
+    .interview-icon .material-icons {
+      font-size: 24px;
+      color: white;
+    }
+
+    .interview-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .interview-faculty {
+      font-size: 15px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 6px;
     }
 
     .interview-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 12px;
     }
 
     .meta-tag {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      background: rgba(255,255,255,0.2);
-      padding: 4px 10px;
+      background: #f0f0f0;
+      padding: 3px 10px;
       border-radius: 12px;
       font-size: 12px;
+      color: #666;
     }
 
     .meta-tag .material-icons {
       font-size: 14px;
     }
 
-    /* 詳細コンテンツ */
-    .interview-content {
-      display: none;
-      padding: 20px;
+    .interview-expand-icon {
+      flex-shrink: 0;
+      color: #999;
+      transition: transform 0.2s;
     }
 
-    .interview-content.open {
+    .interview-expand-icon.open {
+      transform: rotate(180deg);
+    }
+
+    /* 詳細コンテンツ */
+    .interview-detail-content {
+      display: none;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 2px solid #f0f0f0;
+    }
+
+    .interview-detail-content.open {
       display: block;
     }
 
@@ -321,7 +340,7 @@
     .section-title {
       font-size: 13px;
       font-weight: 700;
-      color: #5c6bc0;
+      color: #1a237e;
       margin-bottom: 10px;
       display: flex;
       align-items: center;
@@ -360,14 +379,14 @@
       padding: 12px 14px;
       font-size: 14px;
       font-weight: 600;
-      color: #5c6bc0;
+      color: #1a237e;
       display: flex;
       align-items: flex-start;
       gap: 8px;
     }
 
     .qa-question-number {
-      background: #5c6bc0;
+      background: #1a237e;
       color: white;
       width: 22px;
       height: 22px;
@@ -633,24 +652,27 @@
         
         html += `
           <div class="interview-card">
-            <div class="interview-header" onclick="toggleInterview('${cardId}')">
-              <div class="interview-title-row">
-                <div>
-                  <div class="interview-university">${escapeHtml(item.university)}</div>
-                  <div class="interview-faculty">${escapeHtml(item.faculty || '学部不明')}</div>
-                </div>
-                <div class="interview-expand" id="${cardId}-expand">
-                  <span class="material-icons">expand_more</span>
-                </div>
-              </div>
-              <div class="interview-meta">
-                ${item.year ? `<span class="meta-tag year-tag"><span class="material-icons">calendar_today</span>${escapeHtml(item.year)}年</span>` : ''}
-                ${item.interviewers ? `<span class="meta-tag"><span class="material-icons">group</span>面接官${escapeHtml(item.interviewers)}人</span>` : ''}
-                ${item.duration ? `<span class="meta-tag"><span class="material-icons">schedule</span>${escapeHtml(item.duration)}分</span>` : ''}
-                ${item.format ? `<span class="meta-tag"><span class="material-icons">person</span>${escapeHtml(item.format)}</span>` : ''}
-              </div>
+            <div class="interview-university-header">
+              ${escapeHtml(item.university)}
             </div>
-            <div class="interview-content" id="${cardId}-content">
+            <div class="interview-content-card" onclick="toggleInterview('${cardId}')">
+              <div class="interview-basic-info">
+                <div class="interview-icon">
+                  <span class="material-icons">record_voice_over</span>
+                </div>
+                <div class="interview-details">
+                  <div class="interview-faculty">${escapeHtml(item.faculty || '学部不明')}</div>
+                  <div class="interview-meta">
+                    ${item.year ? `<span class="meta-tag"><span class="material-icons">calendar_today</span>${escapeHtml(item.year)}年</span>` : ''}
+                    ${item.interviewers ? `<span class="meta-tag"><span class="material-icons">group</span>面接官${escapeHtml(item.interviewers)}人</span>` : ''}
+                    ${item.duration ? `<span class="meta-tag"><span class="material-icons">schedule</span>${escapeHtml(item.duration)}分</span>` : ''}
+                    ${item.format ? `<span class="meta-tag"><span class="material-icons">person</span>${escapeHtml(item.format)}</span>` : ''}
+                  </div>
+                </div>
+                <span class="material-icons interview-expand-icon" id="${cardId}-expand">expand_more</span>
+              </div>
+              
+              <div class="interview-detail-content" id="${cardId}-content">
         `;
 
         // 面接の様子
@@ -700,7 +722,7 @@
                 ${qa.answer ? `
                   <div class="qa-answer">
                     <div class="qa-answer-label">
-                      <span class="material-icons">subdirectory_arrow_right</span>
+                      <span class="material-icons">chat_bubble_outline</span>
                       回答
                     </div>
                     ${escapeHtml(qa.answer)}
@@ -716,27 +738,14 @@
           `;
         }
 
-        // その他印象に残ったこと
-        if (item.other) {
-          html += `
-            <div class="content-section">
-              <div class="section-title">
-                <span class="material-icons">lightbulb</span>
-                その他・印象に残ったこと
-              </div>
-              <div class="section-text">${escapeHtml(item.other)}</div>
-            </div>
-          `;
-        }
-
-        // 後輩へのアドバイス
+        // 対策・アドバイス
         if (item.advice) {
           html += `
             <div class="content-section">
               <div class="advice-section">
                 <div class="advice-title">
-                  <span class="material-icons">chat</span>
-                  後輩へのアドバイス
+                  <span class="material-icons">lightbulb</span>
+                  対策・アドバイス
                 </div>
                 <div class="advice-text">${escapeHtml(item.advice)}</div>
               </div>
@@ -745,6 +754,7 @@
         }
 
         html += `
+              </div>
             </div>
           </div>
         `;
@@ -760,6 +770,12 @@
 
       content.classList.toggle('open');
       expand.classList.toggle('open');
+      
+      if (expand.classList.contains('open')) {
+        expand.textContent = 'expand_less';
+      } else {
+        expand.textContent = 'expand_more';
+      }
     }
 
     // 検索クリア

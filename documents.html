@@ -489,17 +489,23 @@
     // フィルター選択肢を読み込み
     async function loadFilters() {
       try {
+        console.log('Loading filters...');
+        
         // 大学一覧を取得
         const uniResponse = await fetch(API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action: 'getUniversityList' })
         });
+        
+        console.log('University response status:', uniResponse.status);
         const uniData = await uniResponse.json();
         console.log('Universities data:', uniData);
         
         const uniSelect = document.getElementById('searchUniversity');
         const universities = Array.isArray(uniData) ? uniData : (uniData.universities || []);
+        console.log('Parsed universities:', universities);
+        
         if (universities.length > 0) {
           universities.forEach(uni => {
             const option = document.createElement('option');
@@ -507,6 +513,9 @@
             option.textContent = uni;
             uniSelect.appendChild(option);
           });
+          console.log('Added', universities.length, 'universities to dropdown');
+        } else {
+          console.warn('No universities found');
         }
 
         // 書類種別を取得
@@ -515,11 +524,15 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action: 'getDocumentTypes' })
         });
+        
+        console.log('Document types response status:', typeResponse.status);
         const typeData = await typeResponse.json();
         console.log('Document types data:', typeData);
         
         const typeSelect = document.getElementById('searchDocType');
         const types = Array.isArray(typeData) ? typeData : (typeData.types || []);
+        console.log('Parsed document types:', types);
+        
         if (types.length > 0) {
           types.forEach(type => {
             const option = document.createElement('option');
@@ -527,10 +540,13 @@
             option.textContent = type;
             typeSelect.appendChild(option);
           });
+          console.log('Added', types.length, 'document types to dropdown');
+        } else {
+          console.warn('No document types found');
         }
       } catch (error) {
         console.error('Error loading filters:', error);
-        showToast('フィルター読み込みエラー');
+        showToast('データ読み込みエラー: ' + error.message);
       }
     }
 
@@ -539,6 +555,8 @@
       const university = document.getElementById('searchUniversity').value.trim();
       const faculty = document.getElementById('searchFaculty').value.trim();
       const docType = document.getElementById('searchDocType').value;
+
+      console.log('Searching with params:', { university, faculty, docType });
 
       const container = document.getElementById('resultsContainer');
       container.innerHTML = `
@@ -560,17 +578,20 @@
           })
         });
         
+        console.log('Search response status:', response.status);
         const data = await response.json();
-        console.log('Search results:', data);
+        console.log('Search response data:', data);
         
         const results = Array.isArray(data) ? data : (data.results || []);
+        console.log('Parsed results:', results.length, 'items');
+        
         renderResults(results);
       } catch (error) {
         console.error('Search error:', error);
         container.innerHTML = `
           <div class="empty-state">
             <span class="material-icons">error</span>
-            <p>検索中にエラーが発生しました。<br>もう一度お試しください。</p>
+            <p>検索中にエラーが発生しました。<br>もう一度お試しください。<br><small>${error.message}</small></p>
           </div>
         `;
       }
