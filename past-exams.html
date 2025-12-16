@@ -487,10 +487,20 @@
     document.addEventListener('DOMContentLoaded', function() {
       // ログイン確認
       const loggedIn = localStorage.getItem('eqao_loggedIn');
+      console.log('Past exams page - checking login:', loggedIn);
+      console.log('localStorage contents:', {
+        eqao_loggedIn: localStorage.getItem('eqao_loggedIn'),
+        eqao_studentId: localStorage.getItem('eqao_studentId'),
+        eqao_studentName: localStorage.getItem('eqao_studentName')
+      });
+      
       if (!loggedIn) {
+        console.warn('Not logged in, redirecting to index.html');
         window.location.href = 'index.html';
         return;
       }
+      
+      console.log('User is logged in, loading page...');
 
       // フィルター選択肢を読み込み
       loadFilters();
@@ -576,6 +586,9 @@
 
         const response = await fetch(`${API_URL}?${params}`);
         const results = await response.json();
+        
+        console.log('Search results:', results);
+        console.log('Number of results:', results ? results.length : 0);
 
         renderResults(results);
       } catch (error) {
@@ -605,11 +618,14 @@
         return;
       }
 
+      console.log('Rendering results:', results);
       countEl.innerHTML = `<strong>${results.length}</strong>件の過去問`;
 
       // 大学ごとにグループ化
       const grouped = {};
       results.forEach(item => {
+        console.log('Item:', item);
+        console.log('PDF Link:', item.pdfLink);
         const key = item.university;
         if (!grouped[key]) {
           grouped[key] = [];
@@ -626,6 +642,11 @@
         `;
         
         grouped[university].forEach(item => {
+          const pdfLink = item.pdfLink || item.pdfUrl || item.url || '';
+          const hasPdf = pdfLink && pdfLink.trim() !== '';
+          
+          console.log('Rendering item:', item.faculty, 'PDF Link:', pdfLink, 'Has PDF:', hasPdf);
+          
           html += `
             <div class="exam-card">
               <div class="exam-icon">
@@ -645,10 +666,17 @@
                 </div>
               </div>
               <div class="exam-action">
-                <a href="${escapeHtml(item.pdfLink)}" target="_blank" class="btn-pdf">
-                  <span class="material-icons">picture_as_pdf</span>
-                  PDF
-                </a>
+                ${hasPdf ? `
+                  <a href="${escapeHtml(pdfLink)}" target="_blank" class="btn-pdf">
+                    <span class="material-icons">picture_as_pdf</span>
+                    PDF
+                  </a>
+                ` : `
+                  <button class="btn-pdf" style="opacity: 0.5; cursor: not-allowed;" disabled title="PDFリンクがありません">
+                    <span class="material-icons">picture_as_pdf</span>
+                    PDF
+                  </button>
+                `}
               </div>
             </div>
           `;

@@ -1738,11 +1738,15 @@
       const loggedIn = localStorage.getItem('eqao_loggedIn');
       const studentName = localStorage.getItem('eqao_studentName');
       
+      console.log('Checking login status:', { loggedIn, studentName });
+      
       if (loggedIn === 'true') {
+        console.log('User is logged in, hiding login overlay');
         document.getElementById('loginOverlay').classList.add('hidden');
         document.getElementById('navUserName').textContent = studentName || '';
         loadNews();
       } else {
+        console.log('User is not logged in, showing login overlay');
         document.getElementById('loginOverlay').classList.remove('hidden');
       }
     }
@@ -1752,6 +1756,8 @@
       const password = document.getElementById('loginPassword').value;
       const errorEl = document.getElementById('loginError');
       const loginBtn = document.getElementById('loginBtn');
+      
+      console.log('Login attempt:', { studentId });
       
       if (!studentId || !password) {
         errorEl.textContent = '生徒番号とパスワードを入力してください';
@@ -1764,9 +1770,13 @@
       loginBtn.textContent = 'ログイン中...';
       
       try {
+        console.log('Calling authenticate API...');
         const result = await apiGet('authenticate', { studentId, password });
+        console.log('API result:', result);
         
         if (result.success) {
+          console.log('Login successful, saving to localStorage...');
+          
           if (false && result.needsPasswordChange) {
             alert('初回ログインのためパスワードを変更してください。');
             localStorage.setItem('eqao_studentId', result.studentId);
@@ -1787,17 +1797,23 @@
           localStorage.setItem('eqao_isAdmin', result.isAdmin ? 'true' : 'false');
           localStorage.removeItem('eqao_needsPasswordChange');
           
+          console.log('localStorage saved:', {
+            eqao_loggedIn: localStorage.getItem('eqao_loggedIn'),
+            eqao_studentName: localStorage.getItem('eqao_studentName')
+          });
+          
           document.getElementById('loginOverlay').classList.add('hidden');
           document.getElementById('navUserName').textContent = result.studentName || '';
           loadNews();
         } else {
+          console.error('Login failed:', result);
           errorEl.textContent = '生徒番号またはパスワードが正しくありません';
           errorEl.style.display = 'block';
         }
       } catch (error) {
+        console.error('Login error:', error);
         errorEl.textContent = 'エラーが発生しました。もう一度お試しください。';
         errorEl.style.display = 'block';
-        console.error(error);
       } finally {
         loginBtn.disabled = false;
         loginBtn.textContent = 'ログイン';

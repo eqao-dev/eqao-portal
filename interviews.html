@@ -555,10 +555,20 @@
     document.addEventListener('DOMContentLoaded', function() {
       // ログイン確認
       const loggedIn = localStorage.getItem('eqao_loggedIn');
+      console.log('Interviews page - checking login:', loggedIn);
+      console.log('localStorage contents:', {
+        eqao_loggedIn: localStorage.getItem('eqao_loggedIn'),
+        eqao_studentId: localStorage.getItem('eqao_studentId'),
+        eqao_studentName: localStorage.getItem('eqao_studentName')
+      });
+      
       if (!loggedIn) {
+        console.warn('Not logged in, redirecting to index.html');
         window.location.href = 'index.html';
         return;
       }
+      
+      console.log('User is logged in, loading page...');
 
       // フィルター選択肢を読み込み
       loadFilters();
