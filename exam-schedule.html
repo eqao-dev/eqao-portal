@@ -2539,7 +2539,7 @@
         <!-- マイガントチャート -->
         <div class="my-gantt-section">
           <div class="my-gantt-header">
-            <span class="my-gantt-title">予定</span>
+            <span class="my-gantt-title">マイ予定</span>
             <button class="add-plan-btn" onclick="openPlanModal()">
               <span class="material-icons">add</span>
               予定を追加
@@ -4725,17 +4725,11 @@
     async function saveMyPlansToAPI() {
       const studentId = getStudentId();
       try {
-        await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'saveMyPlans',
-            studentId: studentId,
-            plans: myPlans
-          }),
-          mode: 'no-cors'
-        });
-        console.log('My plans saved');
+        const plansJson = encodeURIComponent(JSON.stringify(myPlans));
+        const url = `${API_URL}?action=saveMyPlans&studentId=${studentId}&plans=${plansJson}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log('My plans saved:', data);
       } catch (error) {
         console.error('API error:', error);
       }
