@@ -248,6 +248,202 @@
       flex-shrink: 0;
     }
 
+    /* 塾情報バナー（単一・集約版） */
+    .info-banner-single {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
+      border: 2px solid #e8ecf4;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+    }
+
+    .info-banner-single:hover {
+      border-color: #1a237e;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .info-banner-icon-large {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .info-banner-icon-large .material-icons {
+      color: white;
+      font-size: 26px;
+    }
+
+    .info-banner-title-large {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 2px;
+    }
+
+    /* 塾情報モーダル */
+    .info-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .info-modal-overlay.show {
+      display: flex;
+    }
+
+    .info-modal {
+      background: white;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+      animation: modalSlideUp 0.3s ease;
+    }
+
+    @keyframes modalSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .info-modal-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 16px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-modal-header .material-icons {
+      font-size: 22px;
+    }
+
+    .info-modal-close {
+      margin-left: auto;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: background 0.2s;
+    }
+
+    .info-modal-close:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .info-modal-body {
+      padding: 12px;
+    }
+
+    .info-modal-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: #f8f9fc;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+    }
+
+    .info-modal-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-modal-item:hover {
+      background: #e8ecf4;
+      transform: translateX(4px);
+    }
+
+    .info-modal-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .info-modal-icon.blue {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+    }
+
+    .info-modal-icon.orange {
+      background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+      color: white;
+    }
+
+    .info-modal-icon.green {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      color: white;
+    }
+
+    .info-modal-icon .material-icons {
+      font-size: 22px;
+    }
+
+    .info-modal-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .info-modal-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 2px;
+    }
+
+    .info-modal-desc {
+      font-size: 11px;
+      color: #666;
+    }
+
+    .info-modal-item > .material-icons {
+      color: #999;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
     /* 2列グリッド */
     .button-grid-2col {
       display: grid;
@@ -1207,28 +1403,61 @@
       </a>
     </div>
 
-    <!-- 塾情報バナー -->
-    <div class="banner-row">
-      <a href="stats.html" class="info-banner">
-        <div class="info-banner-icon blue">
-          <span class="material-icons">bar_chart</span>
+    <!-- 塾情報バナー（集約版） -->
+    <div class="info-banner-single" onclick="openInfoModal()">
+      <div class="info-banner-icon-large">
+        <span class="material-icons">info</span>
+      </div>
+      <div class="info-banner-content">
+        <div class="info-banner-title-large">塾情報</div>
+        <div class="info-banner-desc">数字・料金・合格実績</div>
+      </div>
+      <span class="material-icons info-banner-arrow">chevron_right</span>
+    </div>
+
+    <!-- 塾情報モーダル -->
+    <div class="info-modal-overlay" id="info-modal-overlay" onclick="closeInfoModal(event)">
+      <div class="info-modal" onclick="event.stopPropagation()">
+        <div class="info-modal-header">
+          <span class="material-icons">info</span>
+          塾情報
+          <button class="info-modal-close" onclick="closeInfoModal()">
+            <span class="material-icons">close</span>
+          </button>
         </div>
-        <div class="info-banner-content">
-          <div class="info-banner-title">数字で見るEQAO</div>
-          <div class="info-banner-desc">在籍データを可視化</div>
+        <div class="info-modal-body">
+          <a href="stats.html" class="info-modal-item">
+            <div class="info-modal-icon blue">
+              <span class="material-icons">bar_chart</span>
+            </div>
+            <div class="info-modal-text">
+              <div class="info-modal-title">数字で見るEQAO</div>
+              <div class="info-modal-desc">在籍生徒のデータを可視化</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </a>
+          <a href="simulator.html" class="info-modal-item">
+            <div class="info-modal-icon orange">
+              <span class="material-icons">calculate</span>
+            </div>
+            <div class="info-modal-text">
+              <div class="info-modal-title">料金シミュレーター</div>
+              <div class="info-modal-desc">コース・コマ数から授業料を計算</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </a>
+          <a href="results.html" class="info-modal-item">
+            <div class="info-modal-icon green">
+              <span class="material-icons">emoji_events</span>
+            </div>
+            <div class="info-modal-text">
+              <div class="info-modal-title">合格実績</div>
+              <div class="info-modal-desc">累計の大学別合格者数</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </a>
         </div>
-        <span class="material-icons info-banner-arrow">chevron_right</span>
-      </a>
-      <a href="simulator.html" class="info-banner">
-        <div class="info-banner-icon orange">
-          <span class="material-icons">calculate</span>
-        </div>
-        <div class="info-banner-content">
-          <div class="info-banner-title">料金シミュレーター</div>
-          <div class="info-banner-desc">授業料を計算</div>
-        </div>
-        <span class="material-icons info-banner-arrow">chevron_right</span>
-      </a>
+      </div>
     </div>
 
     <!-- 2列バナー -->
@@ -1614,6 +1843,18 @@
     function closeNav() {
       document.getElementById('navOverlay').classList.remove('open');
       document.getElementById('navMenu').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // 塾情報モーダル
+    function openInfoModal() {
+      document.getElementById('info-modal-overlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeInfoModal(event) {
+      if (event && event.target !== event.currentTarget) return;
+      document.getElementById('info-modal-overlay').classList.remove('show');
       document.body.style.overflow = '';
     }
   </script>
