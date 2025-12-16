@@ -275,42 +275,169 @@
       box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
     }
 
-    .total-progress-header {
+    .progress-main {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      gap: 24px;
     }
 
-    .total-progress-title {
+    /* 円グラフ */
+    .progress-circle-container {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .progress-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #00e676 0deg,
+        #4fc3f7 calc(var(--progress) * 3.6deg),
+        rgba(255,255,255,0.15) calc(var(--progress) * 3.6deg)
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .progress-circle::before {
+      content: '';
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+    }
+
+    .progress-circle-text {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .progress-circle-percent {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .progress-circle-label {
+      font-size: 10px;
+      opacity: 0.8;
+      margin-top: 2px;
+    }
+
+    /* 統計情報 */
+    .progress-stats {
+      flex: 1;
+    }
+
+    .progress-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+
+    .progress-stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .progress-stat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-size: 14px;
+    }
+
+    .progress-stat-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .progress-stat-icon .material-icons {
+      font-size: 18px;
+    }
+
+    .progress-stat-text {
       opacity: 0.9;
     }
 
-    .total-progress-percent {
-      font-size: 32px;
+    .progress-stat-text strong {
       font-weight: 700;
+      opacity: 1;
     }
 
-    .total-progress-bar {
-      height: 12px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 6px;
-      overflow: hidden;
+    /* 確認テストリンク（控えめ） */
+    .progress-quiz-link {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: opacity 0.2s;
     }
 
-    .total-progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #4fc3f7 0%, #00e676 100%);
-      border-radius: 6px;
-      transition: width 0.5s ease;
+    .progress-quiz-link:hover {
+      opacity: 0.8;
     }
 
-    .total-progress-detail {
-      margin-top: 12px;
+    .progress-quiz-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-size: 13px;
       opacity: 0.9;
-      text-align: right;
+    }
+
+    .progress-quiz-left .material-icons {
+      font-size: 18px;
+    }
+
+    .progress-quiz-arrow {
+      font-size: 18px;
+      opacity: 0.7;
+    }
+
+    /* レスポンシブ対応 */
+    @media (max-width: 480px) {
+      .progress-main {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .progress-circle {
+        width: 100px;
+        height: 100px;
+      }
+
+      .progress-circle::before {
+        width: 74px;
+        height: 74px;
+      }
+
+      .progress-circle-percent {
+        font-size: 24px;
+      }
+
+      .progress-title {
+        font-size: 18px;
+      }
+
+      .progress-stat-row {
+        align-items: center;
+      }
     }
 
     /* 大カテゴリアコーディオン */
@@ -902,29 +1029,42 @@
 
     <!-- 進捗一覧画面 -->
     <div id="progressView" style="display: none;">
-      <!-- 確認テストバナー -->
-      <div class="quiz-banner" onclick="window.location.href='quiz.html'">
-        <div class="quiz-banner-content">
-          <div class="quiz-banner-icon">
-            <span class="material-icons">quiz</span>
-          </div>
-          <div class="quiz-banner-text">
-            <div class="quiz-banner-title">確認テスト</div>
-            <div class="quiz-banner-subtitle">学習の理解度をチェック</div>
-          </div>
-        </div>
-        <span class="material-icons quiz-banner-arrow">arrow_forward</span>
-      </div>
-
+      <!-- 円グラフ風の進捗表示 -->
       <div class="total-progress">
-        <div class="total-progress-header">
-          <span class="total-progress-title">全体の進捗</span>
-          <span id="totalPercent" class="total-progress-percent">0%</span>
+        <div class="progress-main">
+          <div class="progress-circle-container">
+            <div class="progress-circle" id="progressCircle" style="--progress: 0;">
+              <div class="progress-circle-text">
+                <div class="progress-circle-percent" id="totalPercent">0%</div>
+                <div class="progress-circle-label">完了</div>
+              </div>
+            </div>
+          </div>
+          <div class="progress-stats">
+            <div class="progress-title">全体の進捗</div>
+            <div class="progress-stat-row">
+              <div class="progress-stat-item">
+                <div class="progress-stat-icon">
+                  <span class="material-icons">check_circle</span>
+                </div>
+                <div class="progress-stat-text"><strong id="completedCategories">0</strong> / <span id="totalCategories">0</span> カテゴリ完了</div>
+              </div>
+              <div class="progress-stat-item">
+                <div class="progress-stat-icon">
+                  <span class="material-icons">task_alt</span>
+                </div>
+                <div class="progress-stat-text"><strong id="checkedItems">0</strong> / <span id="totalItems">0</span> 項目チェック済</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="total-progress-bar">
-          <div id="totalProgressFill" class="total-progress-fill" style="width: 0%;"></div>
+        <div class="progress-quiz-link" onclick="window.location.href='quiz.html'">
+          <div class="progress-quiz-left">
+            <span class="material-icons">quiz</span>
+            <span>確認テストを受ける</span>
+          </div>
+          <span class="material-icons progress-quiz-arrow">arrow_forward</span>
         </div>
-        <div id="totalDetail" class="total-progress-detail">0 / 0 完了</div>
       </div>
 
       <div id="parentAccordion" class="parent-accordion"></div>
@@ -1191,7 +1331,17 @@
       parentCategories = Object.values(parentMap);
       const totalPercent = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
 
-      return { totalItems, totalChecked, totalPercent, parentCategories };
+      // 完了したカテゴリ数をカウント
+      let completedCats = 0;
+      let totalCats = 0;
+      for (const parent of parentCategories) {
+        for (const cat of parent.categories) {
+          totalCats++;
+          if (cat.percent >= 100) completedCats++;
+        }
+      }
+
+      return { totalItems, totalChecked, totalPercent, parentCategories, completedCats, totalCats };
     }
 
     // ============================================
@@ -1202,10 +1352,15 @@
 
       const progress = calculateProgress();
 
-      // 全体進捗
+      // 円グラフの進捗を更新
+      document.getElementById('progressCircle').style.setProperty('--progress', progress.totalPercent);
       document.getElementById('totalPercent').textContent = progress.totalPercent + '%';
-      document.getElementById('totalProgressFill').style.width = progress.totalPercent + '%';
-      document.getElementById('totalDetail').textContent = progress.totalChecked + ' / ' + progress.totalItems + ' 完了';
+
+      // 統計情報を更新
+      document.getElementById('completedCategories').textContent = progress.completedCats;
+      document.getElementById('totalCategories').textContent = progress.totalCats;
+      document.getElementById('checkedItems').textContent = progress.totalChecked;
+      document.getElementById('totalItems').textContent = progress.totalItems;
 
       // 大カテゴリアコーディオン
       renderParentAccordion(progress.parentCategories);
