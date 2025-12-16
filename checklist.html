@@ -269,7 +269,7 @@
     .total-progress {
       background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
       border-radius: 20px;
-      padding: 24px;
+      padding: 28px;
       margin-bottom: 24px;
       color: white;
       box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
@@ -278,7 +278,8 @@
     .progress-main {
       display: flex;
       align-items: center;
-      gap: 24px;
+      justify-content: center;
+      gap: 48px;
     }
 
     /* 円グラフ */
@@ -308,7 +309,7 @@
       width: 90px;
       height: 90px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      background: linear-gradient(135deg, #232f6e 0%, #2d3a7d 100%);
     }
 
     .progress-circle-text {
@@ -331,7 +332,7 @@
 
     /* 統計情報 */
     .progress-stats {
-      flex: 1;
+      flex-shrink: 0;
     }
 
     .progress-title {
@@ -379,7 +380,7 @@
 
     /* 確認テストリンク（控えめ） */
     .progress-quiz-link {
-      margin-top: 16px;
+      margin-top: 20px;
       padding-top: 16px;
       border-top: 1px solid rgba(255,255,255,0.15);
       display: flex;
@@ -415,6 +416,7 @@
       .progress-main {
         flex-direction: column;
         text-align: center;
+        gap: 20px;
       }
 
       .progress-circle {
