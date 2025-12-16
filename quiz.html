@@ -743,12 +743,14 @@
     // ============================================
     const MASTER_URL = 'checklist_master.json';
     const QUIZ_URL = 'quiz_data.json';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzCFkkw6h6o0iFwObPILE-VCYfjRP1ikmMWOl6DgqIaqIRi657vQIKkjSKuRVTaWJzG/exec';
 
     let masterData = {};
     let quizData = {};
     let checkState = {};
     let parentCategories = {}; // 大カテゴリ → 中カテゴリのマッピング
     let openParents = new Set();
+    let currentUser = null;
 
     // テスト状態
     let currentMidCategory = '';
@@ -790,20 +792,33 @@
     // ============================================
     async function init() {
       const loggedIn = localStorage.getItem('eqao_loggedIn');
-      if (!loggedIn) {
+      const studentId = localStorage.getItem('eqao_studentId');
+      
+      if (!loggedIn || !studentId) {
         window.location.href = 'index.html';
         return;
       }
 
+      currentUser = {
+        studentId: studentId,
+        studentName: localStorage.getItem('eqao_studentName'),
+        password: localStorage.getItem('eqao_password')
+      };
+
+      // ローカルのチェック状態を読み込み
       loadCheckState();
 
       try {
+        // マスターデータ・問題データ・スプレッドシートのチェック状態を並列で読み込み
         const [masterRes, quizRes] = await Promise.all([
           fetch(MASTER_URL),
           fetch(QUIZ_URL)
         ]);
         masterData = await masterRes.json();
         quizData = await quizRes.json();
+
+        // スプレッドシートから最新のチェック状態を取得
+        await loadFromSpreadsheet();
 
         // 大カテゴリ → 中カテゴリのマッピングを作成
         for (const [midCat, content] of Object.entries(masterData)) {
@@ -832,6 +847,33 @@
         }
       } catch (e) {
         console.error('チェック状態の読み込みエラー:', e);
+      }
+    }
+
+    // スプレッドシートから最新のチェック状態を取得
+    async function loadFromSpreadsheet() {
+      if (!currentUser) return;
+
+      try {
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'getChecklistState');
+        url.searchParams.set('studentId', currentUser.studentId);
+
+        const response = await fetch(url.toString());
+        const result = await response.json();
+
+        if (result.success && result.checkState) {
+          const serverState = result.checkState;
+          // サーバーの状態をマージ（サーバー優先）
+          for (const category in serverState) {
+            checkState[category] = serverState[category];
+          }
+          // ローカルにも保存
+          localStorage.setItem('eqao_checkState_v2', JSON.stringify(checkState));
+        }
+      } catch (error) {
+        console.error('サーバーからの読み込みエラー:', error);
+        // エラー時はローカルの状態を使用（既に読み込み済み）
       }
     }
 
@@ -1144,14 +1186,16 @@
     // ============================================
     // ビュー切り替え
     // ============================================
-    function showCategoryList() {
+    async function showCategoryList() {
       document.getElementById('headerTitle').textContent = '確認テスト';
       document.getElementById('categoryView').style.display = 'block';
       document.getElementById('quizView').style.display = 'none';
       document.getElementById('resultView').style.display = 'none';
       
-      // カテゴリ一覧を再描画（進捗が更新されている可能性があるため）
-      loadCheckState();
+      // スプレッドシートから最新のチェック状態を取得
+      await loadFromSpreadsheet();
+      
+      // カテゴリ一覧を再描画
       displayCategories();
       
       // 以前開いていた大カテゴリを再度開く
