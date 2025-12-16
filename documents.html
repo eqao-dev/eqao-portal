@@ -490,11 +490,17 @@
     async function loadFilters() {
       try {
         // 大学一覧を取得
-        const uniResponse = await fetch(`${API_URL}?action=getUniversityList`);
-        const universities = await uniResponse.json();
+        const uniResponse = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'getUniversityList' })
+        });
+        const uniData = await uniResponse.json();
+        console.log('Universities data:', uniData);
         
         const uniSelect = document.getElementById('searchUniversity');
-        if (Array.isArray(universities)) {
+        const universities = Array.isArray(uniData) ? uniData : (uniData.universities || []);
+        if (universities.length > 0) {
           universities.forEach(uni => {
             const option = document.createElement('option');
             option.value = uni;
@@ -504,11 +510,17 @@
         }
 
         // 書類種別を取得
-        const typeResponse = await fetch(`${API_URL}?action=getDocumentTypes`);
-        const types = await typeResponse.json();
+        const typeResponse = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'getDocumentTypes' })
+        });
+        const typeData = await typeResponse.json();
+        console.log('Document types data:', typeData);
         
         const typeSelect = document.getElementById('searchDocType');
-        if (Array.isArray(types)) {
+        const types = Array.isArray(typeData) ? typeData : (typeData.types || []);
+        if (types.length > 0) {
           types.forEach(type => {
             const option = document.createElement('option');
             option.value = type;
@@ -518,6 +530,7 @@
         }
       } catch (error) {
         console.error('Error loading filters:', error);
+        showToast('フィルター読み込みエラー');
       }
     }
 
@@ -536,16 +549,21 @@
       `;
 
       try {
-        const params = new URLSearchParams({
-          action: 'getSubmittedDocuments',
-          university: university,
-          faculty: faculty,
-          docType: docType
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'getSubmittedDocuments',
+            university: university,
+            faculty: faculty,
+            docType: docType
+          })
         });
-
-        const response = await fetch(`${API_URL}?${params}`);
-        const results = await response.json();
-
+        
+        const data = await response.json();
+        console.log('Search results:', data);
+        
+        const results = Array.isArray(data) ? data : (data.results || []);
         renderResults(results);
       } catch (error) {
         console.error('Search error:', error);
