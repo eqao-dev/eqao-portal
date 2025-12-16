@@ -203,6 +203,76 @@
       background: #e0e0e0;
     }
 
+    /* 表示件数選択 */
+    .results-per-page {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .per-page-label {
+      font-size: 13px;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .per-page-select {
+      padding: 6px 10px;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 13px;
+      background: white;
+      cursor: pointer;
+    }
+
+    .per-page-select:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    /* ページネーション */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 16px;
+    }
+
+    .pagination-btn {
+      padding: 8px 16px;
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .pagination-btn:hover:not(:disabled) {
+      background: #f5f5f5;
+      border-color: #1a237e;
+    }
+
+    .pagination-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .pagination-info {
+      font-size: 13px;
+      color: #666;
+      padding: 0 8px;
+    }
+
     /* 結果セクション */
     .results-section {
       margin-top: 16px;
@@ -532,6 +602,16 @@
           </button>
           <button class="btn-clear" onclick="clearSearch()">クリア</button>
         </div>
+        <div class="results-per-page">
+          <label class="per-page-label">表示件数:</label>
+          <select id="resultsPerPage" class="per-page-select" onchange="changeResultsPerPage()">
+            <option value="10">10件</option>
+            <option value="20" selected>20件</option>
+            <option value="50">50件</option>
+            <option value="100">100件</option>
+            <option value="-1">全件</option>
+          </select>
+        </div>
       </div>
     </div>
 
@@ -546,11 +626,29 @@
           <p>読み込み中...</p>
         </div>
       </div>
+      
+      <!-- ページネーション -->
+      <div id="pagination" class="pagination" style="display: none;">
+        <button class="pagination-btn" id="prevBtn" onclick="previousPage()">
+          <span class="material-icons">chevron_left</span>
+          前へ
+        </button>
+        <span class="pagination-info" id="pageInfo">1 / 1</span>
+        <button class="pagination-btn" id="nextBtn" onclick="nextPage()">
+          次へ
+          <span class="material-icons">chevron_right</span>
+        </button>
+      </div>
     </div>
   </div>
 
   <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbzCFkkw6h6o0iFwObPILE-VCYfjRP1ikmMWOl6DgqIaqIRi657vQIKkjSKuRVTaWJzG/exec';
+
+    // ページネーション用変数
+    let allResults = [];
+    let currentPage = 1;
+    let resultsPerPage = 20;
 
     document.addEventListener('DOMContentLoaded', function() {
       // ログイン確認
@@ -626,7 +724,11 @@
         const response = await fetch(`${API_URL}?${params}`);
         const results = await response.json();
 
-        renderResults(results);
+        // 全結果を保存
+        allResults = results || [];
+        currentPage = 1;
+        
+        renderPaginatedResults();
       } catch (error) {
         console.error('Search error:', error);
         container.innerHTML = `
@@ -771,6 +873,91 @@
       });
 
       container.innerHTML = html;
+    }
+
+    // ページネーション対応の表示
+    function renderPaginatedResults() {
+      const container = document.getElementById('resultsContainer');
+      const countEl = document.getElementById('resultsCount');
+      const paginationEl = document.getElementById('pagination');
+
+      if (!allResults || allResults.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <span class="material-icons">search_off</span>
+            <p>該当する面接データが見つかりませんでした。<br>検索条件を変更してお試しください。</p>
+          </div>
+        `;
+        countEl.innerHTML = '';
+        paginationEl.style.display = 'none';
+        return;
+      }
+
+      const totalResults = allResults.length;
+      
+      // ページネーション計算
+      let startIndex, endIndex, totalPages;
+      
+      if (resultsPerPage === -1) {
+        // 全件表示
+        startIndex = 0;
+        endIndex = totalResults;
+        totalPages = 1;
+        currentPage = 1;
+      } else {
+        totalPages = Math.ceil(totalResults / resultsPerPage);
+        startIndex = (currentPage - 1) * resultsPerPage;
+        endIndex = Math.min(startIndex + resultsPerPage, totalResults);
+      }
+      
+      const pageResults = allResults.slice(startIndex, endIndex);
+      
+      // 結果件数表示
+      if (resultsPerPage === -1) {
+        countEl.innerHTML = `<strong>${totalResults}</strong>件の面接データ`;
+      } else {
+        countEl.innerHTML = `<strong>${totalResults}</strong>件中 ${startIndex + 1}〜${endIndex}件を表示`;
+      }
+      
+      // 結果を表示
+      renderResults(pageResults);
+      
+      // ページネーションUI更新
+      if (resultsPerPage === -1 || totalPages <= 1) {
+        paginationEl.style.display = 'none';
+      } else {
+        paginationEl.style.display = 'flex';
+        document.getElementById('pageInfo').textContent = `${currentPage} / ${totalPages}`;
+        document.getElementById('prevBtn').disabled = currentPage === 1;
+        document.getElementById('nextBtn').disabled = currentPage === totalPages;
+      }
+      
+      // ページトップにスクロール
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 表示件数変更
+    function changeResultsPerPage() {
+      resultsPerPage = parseInt(document.getElementById('resultsPerPage').value);
+      currentPage = 1;
+      renderPaginatedResults();
+    }
+
+    // 前のページへ
+    function previousPage() {
+      if (currentPage > 1) {
+        currentPage--;
+        renderPaginatedResults();
+      }
+    }
+
+    // 次のページへ
+    function nextPage() {
+      const totalPages = Math.ceil(allResults.length / resultsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderPaginatedResults();
+      }
     }
 
     // カードの開閉
