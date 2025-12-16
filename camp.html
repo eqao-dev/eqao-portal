@@ -323,6 +323,97 @@
       line-height: 1.7;
     }
 
+    /* YouTube動画セクション */
+    .video-section {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      padding: 40px 16px;
+    }
+
+    .video-section .section-title-en,
+    .video-section .section-title-ja {
+      color: white;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 500px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .video-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s;
+    }
+
+    .video-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .video-thumbnail {
+      position: relative;
+      padding-top: 56.25%;
+      background: #000;
+    }
+
+    .video-thumbnail img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(255,0,0,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-play-btn .material-icons {
+      font-size: 32px;
+      color: white;
+      margin-left: 4px;
+    }
+
+    .video-info {
+      padding: 16px;
+    }
+
+    .video-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.4;
+    }
+
+    .video-subtitle {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+
     /* ポイントセクション */
     .points-grid {
       display: grid;
@@ -696,7 +787,7 @@
     </div>
     <div class="nav-section">
       <a href="camp.html" class="nav-item">
-        <span class="material-icons">camping</span>
+        <span class="material-icons">wb_sunny</span>
         <span>EQAO CAMP</span>
       </a>
       <a href="mcff.html" class="nav-item">
@@ -714,7 +805,7 @@
   <section class="hero">
     <div class="hero-content">
       <div class="hero-badge">
-        <span class="material-icons">camping</span>
+        <span class="material-icons">wb_sunny</span>
         夏期限定プログラム
       </div>
       <h2 class="hero-title">
@@ -761,6 +852,44 @@
         <span class="message-highlight">かけがえのない思い出と自己成長</span>を<br>
         手に入れましょう。
       </p>
+    </div>
+  </section>
+
+  <!-- 動画セクション -->
+  <section class="video-section">
+    <div class="container">
+      <div class="section-title">
+        <div class="section-title-en">MOVIE</div>
+        <h3 class="section-title-ja">過去のCAMPの様子</h3>
+      </div>
+
+      <div class="video-grid">
+        <a href="https://youtu.be/ih513EXZ2d8?si=q_RxM0Q0WHk_bTA" target="_blank" class="video-card">
+          <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/ih513EXZ2d8/mqdefault.jpg" alt="EQAO CAMP動画1">
+            <div class="video-play-btn">
+              <span class="material-icons">play_arrow</span>
+            </div>
+          </div>
+          <div class="video-info">
+            <div class="video-title">EQAO CAMP ダイジェスト</div>
+            <div class="video-subtitle">YouTubeで見る</div>
+          </div>
+        </a>
+
+        <a href="https://youtu.be/E8lOERvav2g?si=o_sKuApasXvndx8H" target="_blank" class="video-card">
+          <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/E8lOERvav2g/mqdefault.jpg" alt="EQAO CAMP動画2">
+            <div class="video-play-btn">
+              <span class="material-icons">play_arrow</span>
+            </div>
+          </div>
+          <div class="video-info">
+            <div class="video-title">参加者インタビュー</div>
+            <div class="video-subtitle">YouTubeで見る</div>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 
