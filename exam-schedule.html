@@ -2185,18 +2185,19 @@
 
     .school-empty {
       text-align: center;
-      padding: 40px 20px;
+      padding: 16px 20px;
       color: #999;
     }
 
     .school-empty .material-icons {
-      font-size: 48px;
-      margin-bottom: 12px;
+      font-size: 32px;
+      margin-bottom: 8px;
       opacity: 0.5;
     }
 
     .school-empty p {
-      font-size: 14px;
+      font-size: 13px;
+      margin: 0;
     }
 
     /* モーダル */
@@ -2607,6 +2608,182 @@
 
     .homework-empty p {
       font-size: 14px;
+    }
+
+    /* ============================================
+       担任進捗報告セクション
+       ============================================ */
+    .progress-report-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .progress-report-tab {
+      flex-shrink: 0;
+      padding: 8px 14px;
+      border: 2px solid #E0E0E0;
+      border-radius: 20px;
+      background: white;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .progress-report-tab:hover {
+      border-color: #7B1FA2;
+      background: #F3E5F5;
+    }
+
+    .progress-report-tab.active {
+      border-color: #7B1FA2;
+      background: linear-gradient(135deg, #7B1FA2 0%, #9C27B0 100%);
+      color: white;
+    }
+
+    .progress-report-card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #E0E0E0;
+    }
+
+    .progress-report-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #EEE;
+    }
+
+    .progress-report-meta {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .progress-report-meta strong {
+      color: #7B1FA2;
+    }
+
+    .progress-report-section {
+      margin-bottom: 16px;
+    }
+
+    .progress-report-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .progress-report-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #7B1FA2;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .progress-report-section-title .material-icons {
+      font-size: 16px;
+    }
+
+    .progress-report-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px;
+    }
+
+    .progress-report-item {
+      background: #F8F9FA;
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+
+    .progress-report-item-label {
+      font-size: 10px;
+      color: #999;
+      margin-bottom: 4px;
+    }
+
+    .progress-report-item-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .progress-report-schools {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .progress-report-school {
+      background: #F8F9FA;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .progress-report-school-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .progress-report-school-detail {
+      font-size: 11px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .progress-report-advice {
+      background: #FFF8E1;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .progress-report-tasks {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .progress-report-task {
+      background: #F3E5F5;
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+
+    .progress-report-task-label {
+      font-size: 10px;
+      color: #7B1FA2;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .progress-report-task-value {
+      font-size: 13px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .progress-report-empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: #CE93D8;
+    }
+
+    .progress-report-empty .material-icons {
+      font-size: 48px;
+      margin-bottom: 12px;
+      opacity: 0.5;
     }
 
     /* ==============================
@@ -3090,6 +3267,31 @@
         <div class="homework-empty" id="homeworkEmpty" style="display:none;">
           <span class="material-icons">inbox</span>
           <p>授業履歴がありません</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 担任進捗報告セクション -->
+    <div class="section">
+      <div class="section-header">
+        <span class="material-icons">assessment</span>
+        <span class="section-title">担任からの進捗報告</span>
+      </div>
+      <div class="section-content">
+        <!-- 月タブ -->
+        <div class="progress-report-tabs" id="progressReportTabs">
+          <!-- JSで描画 -->
+        </div>
+
+        <!-- 報告カード -->
+        <div id="progressReportContent">
+          <!-- JSで描画 -->
+        </div>
+
+        <!-- 空状態 -->
+        <div class="progress-report-empty" id="progressReportEmpty" style="display:none;">
+          <span class="material-icons">description</span>
+          <p>進捗報告がありません</p>
         </div>
       </div>
     </div>
@@ -4264,7 +4466,7 @@
       
       // 空状態の表示切り替え
       if (schools.length === 0) {
-        emptyState.style.display = 'block';
+        emptyState.style.display = 'none'; // 追加ボタンがあるので空状態メッセージは不要
         detailCard.classList.remove('show');
       } else {
         emptyState.style.display = 'none';
@@ -5579,6 +5781,213 @@
       }
     }
 
+    // ============================================
+    // 担任進捗報告関連
+    // ============================================
+
+    let progressReports = [];
+    let selectedReportIndex = 0;
+
+    // 進捗報告を読み込み
+    async function loadProgressReports() {
+      const studentId = getStudentId();
+      try {
+        const url = `${API_URL}?action=getMeetingData&studentId=${studentId}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data && Array.isArray(data) && data.length > 0) {
+          progressReports = data;
+          selectedReportIndex = 0;
+          renderProgressReportTabs();
+          renderProgressReportContent();
+          document.getElementById('progressReportEmpty').style.display = 'none';
+        } else {
+          progressReports = [];
+          document.getElementById('progressReportTabs').innerHTML = '';
+          document.getElementById('progressReportContent').innerHTML = '';
+          document.getElementById('progressReportEmpty').style.display = 'block';
+        }
+      } catch (error) {
+        console.error('API error:', error);
+        progressReports = [];
+        document.getElementById('progressReportEmpty').style.display = 'block';
+      }
+    }
+
+    // 進捗報告タブを描画
+    function renderProgressReportTabs() {
+      const container = document.getElementById('progressReportTabs');
+      if (!container) return;
+
+      let html = '';
+      progressReports.forEach((report, index) => {
+        const isActive = index === selectedReportIndex;
+        const label = report.submitMonth ? `${report.submitMonth}月報告` : report.submitDate;
+        html += `
+          <div class="progress-report-tab ${isActive ? 'active' : ''}" onclick="selectProgressReport(${index})">
+            ${label}
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // 進捗報告を選択
+    function selectProgressReport(index) {
+      selectedReportIndex = index;
+      renderProgressReportTabs();
+      renderProgressReportContent();
+    }
+
+    // 進捗報告内容を描画
+    function renderProgressReportContent() {
+      const container = document.getElementById('progressReportContent');
+      if (!container) return;
+
+      const report = progressReports[selectedReportIndex];
+      if (!report) {
+        container.innerHTML = '';
+        return;
+      }
+
+      // 志望校情報をまとめる
+      const schools = [report.school1, report.school2, report.school3, report.school4]
+        .filter(s => s && s.name);
+
+      // 塾外タスクをまとめる（ラベル付き）
+      const outsideTasks = [];
+      if (report.outsideBasic) outsideTasks.push({ label: '基礎編', value: report.outsideBasic });
+      if (report.outsideDocuments) outsideTasks.push({ label: '書類作成編', value: report.outsideDocuments });
+      if (report.outsideEssay) outsideTasks.push({ label: '小論文編', value: report.outsideEssay });
+      if (report.outsideInterview) outsideTasks.push({ label: '面接編', value: report.outsideInterview });
+      if (report.outsidePresentation) outsideTasks.push({ label: 'プレゼン編', value: report.outsidePresentation });
+      if (report.outsideQualification) outsideTasks.push({ label: '出願資格編', value: report.outsideQualification });
+      if (report.outsideSubmission) outsideTasks.push({ label: '提出書類編', value: report.outsideSubmission });
+
+      let html = `
+        <div class="progress-report-card">
+          <div class="progress-report-header">
+            <div class="progress-report-meta">
+              報告日: <strong>${report.submitDate || '-'}</strong>　
+              担任: <strong>${escapeHtml(report.teacherName || '-')}</strong>
+            </div>
+          </div>
+
+          <!-- 基本情報 -->
+          <div class="progress-report-section">
+            <div class="progress-report-section-title">
+              <span class="material-icons">person</span>
+              基本情報
+            </div>
+            <div class="progress-report-grid">
+              <div class="progress-report-item">
+                <div class="progress-report-item-label">学年</div>
+                <div class="progress-report-item-value">${escapeHtml(report.grade || '-')}</div>
+              </div>
+              <div class="progress-report-item">
+                <div class="progress-report-item-label">評定平均</div>
+                <div class="progress-report-item-value">${escapeHtml(report.gpa || '-')}</div>
+              </div>
+              <div class="progress-report-item">
+                <div class="progress-report-item-label">英語資格</div>
+                <div class="progress-report-item-value">${escapeHtml(report.englishCert || '-')}</div>
+              </div>
+              <div class="progress-report-item">
+                <div class="progress-report-item-label">小論文</div>
+                <div class="progress-report-item-value">${escapeHtml(report.essay || '-')}</div>
+              </div>
+              <div class="progress-report-item">
+                <div class="progress-report-item-label">志望校決定</div>
+                <div class="progress-report-item-value">${escapeHtml(report.schoolDecided || '-')}</div>
+              </div>
+            </div>
+          </div>
+      `;
+
+      // 志望校情報
+      if (schools.length > 0) {
+        html += `
+          <div class="progress-report-section">
+            <div class="progress-report-section-title">
+              <span class="material-icons">school</span>
+              志望校状況
+            </div>
+            <div class="progress-report-schools">
+        `;
+        schools.forEach((school, i) => {
+          html += `
+            <div class="progress-report-school">
+              <div class="progress-report-school-name">第${i + 1}志望: ${escapeHtml(school.name)} ${escapeHtml(school.faculty || '')}</div>
+              <div class="progress-report-school-detail">
+                ${school.requirement ? `受験資格: ${escapeHtml(school.requirement)}<br>` : ''}
+                ${school.documents ? `必要書類: ${escapeHtml(school.documents)}<br>` : ''}
+                ${school.progress ? `書類進捗: ${escapeHtml(school.progress)}` : ''}
+              </div>
+            </div>
+          `;
+        });
+        html += `
+            </div>
+          </div>
+        `;
+      }
+
+      // アドバイス
+      if (report.advice) {
+        html += `
+          <div class="progress-report-section">
+            <div class="progress-report-section-title">
+              <span class="material-icons">tips_and_updates</span>
+              進捗に関するアドバイス
+            </div>
+            <div class="progress-report-advice">${escapeHtml(report.advice)}</div>
+          </div>
+        `;
+      }
+
+      // 授業で注力すべき内容
+      if (report.classroomFocus) {
+        html += `
+          <div class="progress-report-section">
+            <div class="progress-report-section-title">
+              <span class="material-icons">class</span>
+              授業内で重点的に取り組むこと
+            </div>
+            <div class="progress-report-advice">${escapeHtml(report.classroomFocus)}</div>
+          </div>
+        `;
+      }
+
+      // 塾外タスク
+      if (outsideTasks.length > 0) {
+        html += `
+          <div class="progress-report-section">
+            <div class="progress-report-section-title">
+              <span class="material-icons">home</span>
+              授業外でやるべきこと
+            </div>
+            <div class="progress-report-tasks">
+        `;
+        outsideTasks.forEach(task => {
+          html += `
+            <div class="progress-report-task">
+              <div class="progress-report-task-label">${escapeHtml(task.label)}</div>
+              <div class="progress-report-task-value">${escapeHtml(task.value)}</div>
+            </div>
+          `;
+        });
+        html += `
+            </div>
+          </div>
+        `;
+      }
+
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
     // 私のスケジュールから学年選択
     function selectGradeFromMySchedule(grade) {
       // 上の学年ボタンも更新
@@ -5680,6 +6089,9 @@
         
         // マイガントチャートを読み込み
         loadMyPlans();
+        
+        // 担任進捗報告を読み込み
+        loadProgressReports();
         
       } catch (e) {
         console.error('Initialization error:', e);
