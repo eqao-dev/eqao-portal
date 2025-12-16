@@ -856,45 +856,105 @@
     .instructor-notes {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
     }
 
     .instructor-note-item {
       background: white;
       border-radius: 8px;
-      padding: 12px 14px;
-      border-left: 4px solid #9C27B0;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-left: 3px solid #9C27B0;
+    }
+
+    .instructor-note-item.completed {
+      opacity: 0.6;
+      border-left-color: #CE93D8;
+    }
+
+    .instructor-note-checkbox {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 2px solid #9C27B0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .instructor-note-checkbox:hover {
+      background: #F3E5F5;
+    }
+
+    .instructor-note-checkbox.checked {
+      background: #9C27B0;
+      border-color: #9C27B0;
+    }
+
+    .instructor-note-checkbox .material-icons {
+      font-size: 16px;
+      color: white;
+      display: none;
+    }
+
+    .instructor-note-checkbox.checked .material-icons {
+      display: block;
+    }
+
+    .instructor-note-content {
+      flex: 1;
+      min-width: 0;
     }
 
     .instructor-note-text {
       font-size: 13px;
       color: #333;
-      line-height: 1.6;
-      white-space: pre-wrap;
+      line-height: 1.4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .instructor-note-date {
+    .instructor-note-item.completed .instructor-note-text {
+      text-decoration: line-through;
+      color: #999;
+    }
+
+    .instructor-note-deadline {
       font-size: 11px;
       color: #9C27B0;
-      margin-top: 8px;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
+      flex-shrink: 0;
+      padding: 3px 8px;
+      background: #F3E5F5;
+      border-radius: 10px;
     }
 
-    .instructor-note-date .material-icons {
-      font-size: 14px;
+    .instructor-note-deadline .material-icons {
+      font-size: 12px;
+    }
+
+    .instructor-note-deadline.overdue {
+      background: #FFEBEE;
+      color: #C62828;
     }
 
     .instructor-empty {
       text-align: center;
-      padding: 40px 20px;
+      padding: 30px 20px;
       color: #CE93D8;
       font-size: 13px;
     }
 
     .instructor-empty .material-icons {
-      font-size: 36px;
+      font-size: 32px;
       margin-bottom: 8px;
       opacity: 0.7;
     }
@@ -1723,6 +1783,99 @@
     /* ============================================
        志望校／併願校セクション
        ============================================ */
+    
+    /* パターン選択タブ */
+    .pattern-selector {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .pattern-tab {
+      flex: 1;
+      min-width: 60px;
+      padding: 6px 8px;
+      border: 2px solid #E0E0E0;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .pattern-tab:hover {
+      border-color: #1a1a2e;
+      background: #f5f5f5;
+    }
+
+    .pattern-tab.active {
+      border-color: #1a1a2e;
+      background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4a 100%);
+      color: white;
+    }
+
+    .pattern-tab-letter {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .pattern-tab-label {
+      font-size: 10px;
+      line-height: 1.2;
+      opacity: 0.8;
+    }
+
+    .pattern-tab.active .pattern-tab-label {
+      opacity: 1;
+    }
+
+    .pattern-tab-icons {
+      display: flex;
+      gap: 2px;
+    }
+
+    .pattern-tab-icons .material-icons {
+      font-size: 12px;
+    }
+
+    .pattern-tab-icons .check {
+      color: #4CAF50;
+    }
+
+    .pattern-tab-icons .cross {
+      color: #EF5350;
+    }
+
+    .pattern-tab.active .pattern-tab-icons .check {
+      color: #81C784;
+    }
+
+    .pattern-tab.active .pattern-tab-icons .cross {
+      color: #EF9A9A;
+    }
+
+    .pattern-description {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      font-size: 11px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pattern-description .material-icons {
+      font-size: 18px;
+      color: #1a1a2e;
+    }
+
     .school-tabs {
       display: flex;
       gap: 8px;
@@ -1894,6 +2047,61 @@
 
     .school-action-btn.delete-btn:hover {
       background: #FFCDD2;
+    }
+
+    .school-action-btn.copy-btn {
+      background: #F3E5F5;
+      color: #7B1FA2;
+    }
+
+    .school-action-btn.copy-btn:hover {
+      background: #E1BEE7;
+    }
+
+    .copy-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .copy-dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      margin-top: 4px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      z-index: 100;
+      min-width: 140px;
+      overflow: hidden;
+    }
+
+    .copy-dropdown-content.show {
+      display: block;
+    }
+
+    .copy-dropdown-item {
+      padding: 10px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .copy-dropdown-item:hover {
+      background: #F3E5F5;
+    }
+
+    .copy-dropdown-item.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .copy-dropdown-item .material-icons {
+      font-size: 16px;
     }
 
     .school-info-grid {
@@ -2803,6 +3011,44 @@
         <span class="section-title">志望校／併願校戦略</span>
       </div>
       <div class="section-content">
+        <!-- パターン選択タブ -->
+        <div class="pattern-selector">
+          <div class="pattern-tab active" data-pattern="A" onclick="selectPattern('A')">
+            <div class="pattern-tab-letter">A</div>
+            <div class="pattern-tab-icons">
+              <span class="material-icons check">check_circle</span>
+              <span class="material-icons check">check_circle</span>
+            </div>
+          </div>
+          <div class="pattern-tab" data-pattern="B" onclick="selectPattern('B')">
+            <div class="pattern-tab-letter">B</div>
+            <div class="pattern-tab-icons">
+              <span class="material-icons check">check_circle</span>
+              <span class="material-icons cross">cancel</span>
+            </div>
+          </div>
+          <div class="pattern-tab" data-pattern="C" onclick="selectPattern('C')">
+            <div class="pattern-tab-letter">C</div>
+            <div class="pattern-tab-icons">
+              <span class="material-icons cross">cancel</span>
+              <span class="material-icons check">check_circle</span>
+            </div>
+          </div>
+          <div class="pattern-tab" data-pattern="D" onclick="selectPattern('D')">
+            <div class="pattern-tab-letter">D</div>
+            <div class="pattern-tab-icons">
+              <span class="material-icons cross">cancel</span>
+              <span class="material-icons cross">cancel</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- パターン説明 -->
+        <div class="pattern-description" id="patternDescription">
+          <span class="material-icons">info</span>
+          <span id="patternDescText">パターンA：評定平均○ ・ 英語資格○（両方達成のベストケース）</span>
+        </div>
+
         <!-- タブ（志望校一覧） -->
         <div class="school-tabs" id="schoolTabs">
           <!-- JSで描画 -->
@@ -3938,15 +4184,58 @@
     // 志望校／併願校関連
     // ============================================
     
-    let schools = [];
+    // 4パターンの志望校データ
+    let schoolPatterns = {
+      A: [],  // 評定○ 英語○
+      B: [],  // 評定○ 英語×
+      C: [],  // 評定× 英語○
+      D: []   // 評定× 英語×
+    };
+    let selectedPattern = 'A';
     let selectedSchoolIndex = -1;
     let editingSchoolId = null;
+
+    // パターン説明
+    const patternDescriptions = {
+      A: 'パターンA：評定平均○ ・ 英語資格○（両方達成のベストケース）',
+      B: 'パターンB：評定平均○ ・ 英語資格×（評定のみ達成）',
+      C: 'パターンC：評定平均× ・ 英語資格○（英語のみ達成）',
+      D: 'パターンD：評定平均× ・ 英語資格×（両方未達のセーフティプラン）'
+    };
+
+    // パターン選択
+    function selectPattern(pattern) {
+      selectedPattern = pattern;
+      selectedSchoolIndex = -1;
+      
+      // タブのアクティブ状態更新
+      document.querySelectorAll('.pattern-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.pattern === pattern);
+      });
+      
+      // 説明文更新
+      document.getElementById('patternDescText').textContent = patternDescriptions[pattern];
+      
+      // 志望校リスト再描画
+      renderSchoolTabs();
+    }
+
+    // 現在のパターンの志望校配列を取得
+    function getCurrentSchools() {
+      return schoolPatterns[selectedPattern] || [];
+    }
+
+    // 現在のパターンの志望校配列を設定
+    function setCurrentSchools(schools) {
+      schoolPatterns[selectedPattern] = schools;
+    }
 
     // 志望校タブ描画
     function renderSchoolTabs() {
       const container = document.getElementById('schoolTabs');
       const emptyState = document.getElementById('schoolEmpty');
       const detailCard = document.getElementById('schoolDetail');
+      const schools = getCurrentSchools();
       
       let html = '';
       
@@ -3997,6 +4286,7 @@
     // 志望校詳細描画
     function renderSchoolDetail() {
       const container = document.getElementById('schoolDetail');
+      const schools = getCurrentSchools();
       const school = schools[selectedSchoolIndex];
       
       if (!school) {
@@ -4030,6 +4320,15 @@
               <span class="material-icons">edit</span>
               編集
             </button>
+            <div class="copy-dropdown">
+              <button class="school-action-btn copy-btn" onclick="toggleCopyDropdown(event)">
+                <span class="material-icons">content_copy</span>
+                コピー
+              </button>
+              <div class="copy-dropdown-content" id="copyDropdown">
+                ${renderCopyOptions()}
+              </div>
+            </div>
             <button class="school-action-btn delete-btn" onclick="deleteSchool(${selectedSchoolIndex})">
               <span class="material-icons">delete</span>
             </button>
@@ -4146,9 +4445,11 @@
       toIndex = parseInt(toIndex);
       if (fromIndex === toIndex) return;
       
+      const schools = getCurrentSchools();
       // 配列から要素を取り出して新しい位置に挿入
       const school = schools.splice(fromIndex, 1)[0];
       schools.splice(toIndex, 0, school);
+      setCurrentSchools(schools);
       
       selectedSchoolIndex = toIndex;
       renderSchoolTabs();
@@ -4162,6 +4463,7 @@
       const modal = document.getElementById('schoolModal');
       const title = document.getElementById('modalTitle');
       const form = document.getElementById('schoolForm');
+      const schools = getCurrentSchools();
       
       form.reset();
       editingSchoolId = null;
@@ -4270,10 +4572,14 @@
       
       if (editingSchoolId !== null) {
         // 編集
+        const schools = getCurrentSchools();
         schools[editingSchoolId] = schoolData;
+        setCurrentSchools(schools);
       } else {
         // 新規追加
+        const schools = getCurrentSchools();
         schools.push(schoolData);
+        setCurrentSchools(schools);
         selectedSchoolIndex = schools.length - 1;
       }
       
@@ -4286,12 +4592,14 @@
 
     // 削除
     async function deleteSchool(index) {
+      const schools = getCurrentSchools();
       const school = schools[index];
       if (!confirm(`「${school.universityName} ${school.faculty}」を削除しますか？`)) {
         return;
       }
       
       schools.splice(index, 1);
+      setCurrentSchools(schools);
       if (selectedSchoolIndex >= schools.length) {
         selectedSchoolIndex = Math.max(0, schools.length - 1);
       }
@@ -4302,11 +4610,100 @@
       await saveSchoolsToAPI();
     }
 
-    // APIに保存
+    // コピー先パターンオプションを描画
+    function renderCopyOptions() {
+      const patterns = ['A', 'B', 'C', 'D'];
+      const patternLabels = {
+        A: '評定○ 英語○',
+        B: '評定○ 英語×',
+        C: '評定× 英語○',
+        D: '評定× 英語×'
+      };
+      
+      let html = '';
+      patterns.forEach(p => {
+        const isCurrent = p === selectedPattern;
+        const targetSchools = schoolPatterns[p] || [];
+        const isFull = targetSchools.length >= 6;
+        const disabled = isCurrent || isFull;
+        const disabledClass = disabled ? 'disabled' : '';
+        const icon = isCurrent ? 'block' : (isFull ? 'do_not_disturb' : 'content_copy');
+        const label = isCurrent ? '（現在）' : (isFull ? '（満杯）' : `${targetSchools.length}校`);
+        
+        html += `
+          <div class="copy-dropdown-item ${disabledClass}" onclick="${disabled ? '' : `copySchoolToPattern('${p}')`}">
+            <span class="material-icons">${icon}</span>
+            <span>パターン${p}</span>
+            <span style="margin-left:auto;font-size:11px;opacity:0.7;">${label}</span>
+          </div>
+        `;
+      });
+      
+      return html;
+    }
+
+    // コピードロップダウンを開閉
+    function toggleCopyDropdown(event) {
+      event.stopPropagation();
+      const dropdown = document.getElementById('copyDropdown');
+      dropdown.classList.toggle('show');
+      
+      // 外側クリックで閉じる
+      if (dropdown.classList.contains('show')) {
+        setTimeout(() => {
+          document.addEventListener('click', closeCopyDropdown);
+        }, 0);
+      }
+    }
+
+    function closeCopyDropdown() {
+      const dropdown = document.getElementById('copyDropdown');
+      if (dropdown) {
+        dropdown.classList.remove('show');
+      }
+      document.removeEventListener('click', closeCopyDropdown);
+    }
+
+    // 志望校を別パターンにコピー
+    async function copySchoolToPattern(targetPattern) {
+      const schools = getCurrentSchools();
+      const school = schools[selectedSchoolIndex];
+      
+      if (!school) return;
+      
+      const targetSchools = schoolPatterns[targetPattern] || [];
+      
+      // 6校制限チェック
+      if (targetSchools.length >= 6) {
+        alert('コピー先のパターンは既に6校登録されています');
+        return;
+      }
+      
+      // ディープコピー
+      const copiedSchool = JSON.parse(JSON.stringify(school));
+      
+      // コピー先に追加
+      targetSchools.push(copiedSchool);
+      schoolPatterns[targetPattern] = targetSchools;
+      
+      // ドロップダウンを閉じる
+      closeCopyDropdown();
+      
+      // 再描画
+      renderSchoolTabs();
+      
+      // APIに保存
+      await saveSchoolsToAPI();
+      
+      // 成功メッセージ
+      alert(`パターン${targetPattern}にコピーしました（第${targetSchools.length}志望）`);
+    }
+
+    // APIに保存（4パターン全体を保存）
     async function saveSchoolsToAPI() {
       const studentId = getStudentId();
       try {
-        const schoolsJson = encodeURIComponent(JSON.stringify(schools));
+        const schoolsJson = encodeURIComponent(JSON.stringify(schoolPatterns));
         const url = `${API_URL}?action=saveSchoolData&studentId=${studentId}&schools=${schoolsJson}`;
         const response = await fetch(url);
         const data = await response.json();
@@ -4316,7 +4713,7 @@
       }
     }
 
-    // APIから読み込み
+    // APIから読み込み（4パターン全体を読み込み）
     async function loadSchools() {
       const studentId = getStudentId();
       try {
@@ -4324,8 +4721,24 @@
         const response = await fetch(url);
         const data = await response.json();
         
-        if (data && Array.isArray(data)) {
-          schools = data;
+        if (data && typeof data === 'object') {
+          // 新形式（パターン別オブジェクト）
+          if (data.A || data.B || data.C || data.D) {
+            schoolPatterns = {
+              A: data.A || [],
+              B: data.B || [],
+              C: data.C || [],
+              D: data.D || []
+            };
+          } else if (Array.isArray(data)) {
+            // 旧形式（配列）→ パターンAにマイグレーション
+            schoolPatterns = {
+              A: data,
+              B: [],
+              C: [],
+              D: []
+            };
+          }
         }
         
         renderSchoolTabs();
@@ -5037,17 +5450,65 @@
         return;
       }
 
+      // 今日の日付（期限チェック用）
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
       let html = '';
-      instructorNotes.forEach(note => {
+      instructorNotes.forEach((note, index) => {
+        const isCompleted = note.completed;
+        const completedClass = isCompleted ? 'completed' : '';
+        const checkedClass = isCompleted ? 'checked' : '';
+        
+        // 期限切れチェック
+        let overdueClass = '';
+        if (note.deadline && !isCompleted) {
+          const deadlineDate = parseDeadlineDate(note.deadline);
+          if (deadlineDate && deadlineDate < today) {
+            overdueClass = 'overdue';
+          }
+        }
+        
         html += `
-          <div class="instructor-note-item">
-            <div class="instructor-note-text">${escapeHtml(note.text || '')}</div>
-            ${note.date ? `<div class="instructor-note-date"><span class="material-icons">event</span>${note.date}</div>` : ''}
+          <div class="instructor-note-item ${completedClass}">
+            <div class="instructor-note-checkbox ${checkedClass}" onclick="toggleTodoComplete(${index})">
+              <span class="material-icons">check</span>
+            </div>
+            <div class="instructor-note-content">
+              <div class="instructor-note-text">${escapeHtml(note.text || '')}</div>
+            </div>
+            ${note.deadline ? `<div class="instructor-note-deadline ${overdueClass}"><span class="material-icons">schedule</span>${note.deadline}</div>` : ''}
           </div>
         `;
       });
 
       container.innerHTML = html;
+    }
+
+    // 期限日付をパース
+    function parseDeadlineDate(deadlineStr) {
+      if (!deadlineStr) return null;
+      // "12/25" 形式を想定
+      const parts = deadlineStr.split('/');
+      if (parts.length === 2) {
+        const month = parseInt(parts[0]) - 1;
+        const day = parseInt(parts[1]);
+        const year = new Date().getFullYear();
+        return new Date(year, month, day);
+      }
+      return null;
+    }
+
+    // ToDo完了状態をトグル
+    async function toggleTodoComplete(index) {
+      const note = instructorNotes[index];
+      if (!note) return;
+      
+      note.completed = !note.completed;
+      renderInstructorNotes();
+      
+      // APIに保存（将来実装）
+      // await saveTodoState(note.id, note.completed);
     }
 
     // HTMLエスケープ
