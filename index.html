@@ -1817,27 +1817,32 @@
 }
 
 .study-chart-canvas {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+  max-height: 100px;
 }
 
 .study-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 11px;
-  margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+  font-size: 9px;
+  margin-bottom: 8px;
 }
 
 .study-legend-item {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .study-legend-color {
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
 }
 
 .study-total {
@@ -2178,7 +2183,7 @@
         <button class="study-week-btn" onclick="changeWeek(1)">次週 →</button>
       </div>
     </div>
-    <canvas id="studyChart" class="study-chart-canvas" height="120"></canvas>
+    <canvas id="studyChart" class="study-chart-canvas" height="100"></canvas>
     <div class="study-legend" id="studyLegend"></div>
     <div class="study-total" id="studyTotal">今週の合計: 0時間</div>
     <button class="study-add-btn" onclick="openStudyModal()">
