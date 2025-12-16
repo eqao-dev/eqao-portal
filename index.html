@@ -1144,6 +1144,377 @@
       display: none;
     }
 
+   /* プロフィール・学習記録カード（2列） */
+.card-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.profile-card,
+.study-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-header,
+.study-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a237e;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e8ecf4;
+}
+
+.profile-header .material-icons,
+.study-header .material-icons {
+  font-size: 20px;
+}
+
+.profile-body {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex: 1;
+}
+
+.profile-avatar {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.profile-details {
+  font-size: 11px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.profile-footer {
+  display: flex;
+  gap: 8px;
+}
+
+.profile-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 8px;
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.profile-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
+}
+
+.profile-btn .material-icons {
+  font-size: 16px;
+}
+
+.study-body {
+  text-align: center;
+  padding: 20px 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.study-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+.study-icon .material-icons {
+  font-size: 32px;
+  color: white;
+}
+
+.study-text {
+  font-size: 13px;
+  color: #999;
+  font-weight: 600;
+}
+
+/* プロフィール編集モーダル */
+.profile-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 600;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.profile-modal-overlay.show {
+  display: flex;
+}
+
+.profile-modal {
+  background: white;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalSlideUp 0.3s ease;
+}
+
+.profile-modal-header {
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  color: white;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 20px 20px 0 0;
+}
+
+.profile-modal-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  flex: 1;
+}
+
+.profile-modal-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: background 0.2s;
+}
+
+.profile-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.profile-modal-tabs {
+  display: flex;
+  background: #f5f5f5;
+  border-bottom: 2px solid #e0e0e0;
+  overflow-x: auto;
+}
+
+.profile-tab {
+  flex: 1;
+  padding: 14px 12px;
+  background: none;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  font-family: inherit;
+}
+
+.profile-tab.active {
+  color: #1a237e;
+  background: white;
+  border-bottom-color: #1a237e;
+}
+
+.profile-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.profile-tab-content {
+  display: none;
+}
+
+.profile-tab-content.active {
+  display: block;
+}
+
+.profile-form-group {
+  margin-bottom: 18px;
+}
+
+.profile-form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.profile-form-label.required::after {
+  content: ' *';
+  color: #f44336;
+}
+
+.profile-form-input,
+.profile-form-select,
+.profile-form-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.profile-form-input:focus,
+.profile-form-select:focus,
+.profile-form-textarea:focus {
+  outline: none;
+  border-color: #1a237e;
+}
+
+.profile-form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.profile-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: #f8f9fc;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.profile-checkbox-item:hover {
+  background: #e8ecf4;
+}
+
+.profile-checkbox-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.profile-checkbox-item label {
+  flex: 1;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+}
+
+.profile-modal-footer {
+  padding: 16px 20px;
+  background: #f8f9fc;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  gap: 12px;
+  border-radius: 0 0 20px 20px;
+}
+
+.profile-modal-btn {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.profile-modal-btn-cancel {
+  background: #e0e0e0;
+  color: #666;
+}
+
+.profile-modal-btn-cancel:hover {
+  background: #d0d0d0;
+}
+
+.profile-modal-btn-save {
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  color: white;
+}
+
+.profile-modal-btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26, 35, 126, 0.3);
+}
+
+@media (max-width: 480px) {
+  .card-row {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-tab {
+    font-size: 11px;
+    padding: 12px 8px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -1403,7 +1774,48 @@
         <div class="news-loading">読み込み中...</div>
       </div>
     </div>
+    <div class="card-row">
+      <!-- プロフィールカード -->
+      <div class="profile-card">
+        <div class="profile-header">
+          <span class="material-icons">person</span>
+          📝 プロフィール
+        </div>
+        <div class="profile-body">
+          <div class="profile-avatar" id="profileAvatar">👤</div>
+          <div class="profile-info">
+            <div class="profile-name" id="profileName">未登録</div>
+            <div class="profile-details" id="profileDetails">
+              プロフィールを登録してください
+            </div>
+          </div>
+        </div>
+        <div class="profile-footer">
+          <button class="profile-btn" onclick="openProfileModal()">
+            <span class="material-icons">edit</span>
+            編集
+          </button>
+          <button class="profile-btn" onclick="viewProfileDetails()">
+            <span class="material-icons">info</span>
+            詳細
+          </button>
+        </div>
+      </div>
 
+      <!-- 授業外学習カード（準備中） -->
+      <div class="study-card">
+        <div class="study-header">
+          <span class="material-icons">trending_up</span>
+          📊 授業外学習
+        </div>
+        <div class="study-body">
+          <div class="study-icon">
+            <span class="material-icons">construction</span>
+          </div>
+          <div class="study-text">準備中</div>
+        </div>
+      </div>
+    </div>
     <div class="line-section">
       <a href="https://lin.ee/nM1pgho" target="_blank" class="line-btn">
         <span class="material-icons">chat</span>
@@ -1913,6 +2325,474 @@
       document.getElementById('info-modal-overlay').classList.remove('show');
       document.body.style.overflow = '';
     }
+// ========================================
+    // プロフィール機能
+    // ========================================
+
+    let currentTab = 0;
+
+    // プロフィールモーダルを開く
+    function openProfileModal() {
+      document.getElementById('profileModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+      loadProfileData();
+    }
+
+    // プロフィールモーダルを閉じる
+    function closeProfileModal() {
+      document.getElementById('profileModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    // オーバーレイクリックで閉じる
+    function closeProfileModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeProfileModal();
+      }
+    }
+
+    // タブ切り替え
+    function switchTab(tabIndex) {
+      currentTab = tabIndex;
+      
+      const tabs = document.querySelectorAll('.profile-tab');
+      const contents = document.querySelectorAll('.profile-tab-content');
+      
+      tabs.forEach((tab, index) => {
+        if (index === tabIndex) {
+          tab.classList.add('active');
+        } else {
+          tab.classList.remove('active');
+        }
+      });
+      
+      contents.forEach((content, index) => {
+        if (index === tabIndex) {
+          content.classList.add('active');
+        } else {
+          content.classList.remove('active');
+        }
+      });
+    }
+
+    // プロフィールデータを読み込む
+    async function loadProfileData() {
+      const studentId = localStorage.getItem('eqao_studentId');
+      
+      try {
+        const result = await apiGet('getProfile', { studentId });
+        
+        if (result.success && result.profile) {
+          const profile = result.profile;
+          
+          // 基本情報
+          document.getElementById('profileGrade').value = profile.grade || '';
+          document.getElementById('profileSchool').value = profile.school || '';
+          document.getElementById('profileMajor').value = profile.major || '';
+          document.getElementById('profileEnglish').value = profile.english || '';
+          document.getElementById('profileClub').value = profile.club || '';
+          document.getElementById('profileClubLevel').value = profile.clubLevel || '';
+          
+          // 性格・学習スタイル
+          const personality = profile.personality || [];
+          for (let i = 1; i <= 8; i++) {
+            const checkbox = document.getElementById('personality' + i);
+            if (checkbox) {
+              checkbox.checked = personality.includes(checkbox.value);
+            }
+          }
+          
+          // 指導希望
+          const teachingStyle = profile.teachingStyle || [];
+          for (let i = 1; i <= 8; i++) {
+            const checkbox = document.getElementById('teaching' + i);
+            if (checkbox) {
+              checkbox.checked = teachingStyle.includes(checkbox.value);
+            }
+          }
+          
+          // 生活制約
+          const constraints = profile.constraints || [];
+          for (let i = 1; i <= 8; i++) {
+            const checkbox = document.getElementById('constraint' + i);
+            if (checkbox) {
+              checkbox.checked = constraints.includes(checkbox.value);
+            }
+          }
+          
+          // 備考
+          document.getElementById('profileNotes').value = profile.notes || '';
+        }
+      } catch (error) {
+        console.error('プロフィール読み込みエラー:', error);
+      }
+    }
+
+    // プロフィールを保存
+    async function saveProfile() {
+      const studentId = localStorage.getItem('eqao_studentId');
+      const studentName = localStorage.getItem('eqao_studentName');
+      
+      // 必須項目チェック
+      const grade = document.getElementById('profileGrade').value;
+      const major = document.getElementById('profileMajor').value;
+      
+      if (!grade || !major) {
+        alert('学年と志望系統は必須項目です');
+        return;
+      }
+      
+      // チェックボックスの値を取得
+      const personality = [];
+      for (let i = 1; i <= 8; i++) {
+        const checkbox = document.getElementById('personality' + i);
+        if (checkbox && checkbox.checked) {
+          personality.push(checkbox.value);
+        }
+      }
+      
+      const teachingStyle = [];
+      for (let i = 1; i <= 8; i++) {
+        const checkbox = document.getElementById('teaching' + i);
+        if (checkbox && checkbox.checked) {
+          teachingStyle.push(checkbox.value);
+        }
+      }
+      
+      const constraints = [];
+      for (let i = 1; i <= 8; i++) {
+        const checkbox = document.getElementById('constraint' + i);
+        if (checkbox && checkbox.checked) {
+          constraints.push(checkbox.value);
+        }
+      }
+      
+      const profileData = {
+        studentId: studentId,
+        name: studentName,
+        grade: grade,
+        school: document.getElementById('profileSchool').value,
+        major: major,
+        english: document.getElementById('profileEnglish').value,
+        club: document.getElementById('profileClub').value,
+        clubLevel: document.getElementById('profileClubLevel').value,
+        personality: personality,
+        teachingStyle: teachingStyle,
+        constraints: constraints,
+        notes: document.getElementById('profileNotes').value
+      };
+      
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: 'saveProfile',
+            ...profileData
+          })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          alert('プロフィールを保存しました');
+          closeProfileModal();
+          loadProfileCard();
+        } else {
+          alert('保存に失敗しました: ' + (result.error || '不明なエラー'));
+        }
+      } catch (error) {
+        console.error('保存エラー:', error);
+        alert('エラーが発生しました');
+      }
+    }
+
+    // プロフィールカードを更新
+    async function loadProfileCard() {
+      const studentId = localStorage.getItem('eqao_studentId');
+      
+      try {
+        const result = await apiGet('getProfile', { studentId });
+        
+        if (result.success && result.profile) {
+          const profile = result.profile;
+          
+          // カード表示を更新
+          document.getElementById('profileName').textContent = profile.name || '未登録';
+          
+          let details = [];
+          if (profile.grade) details.push(profile.grade);
+          if (profile.major) details.push(profile.major);
+          if (profile.school) details.push(profile.school);
+          if (profile.english) details.push(profile.english);
+          
+          document.getElementById('profileDetails').innerHTML = details.join('<br>') || 'プロフィールを登録してください';
+        }
+      } catch (error) {
+        console.error('プロフィール読み込みエラー:', error);
+      }
+    }
+
+    // プロフィール詳細を表示
+    async function viewProfileDetails() {
+      const studentId = localStorage.getItem('eqao_studentId');
+      
+      try {
+        const result = await apiGet('getProfile', { studentId });
+        
+        if (result.success && result.profile) {
+          const profile = result.profile;
+          
+          let message = '【基本情報】\n';
+          message += '学年: ' + (profile.grade || '未登録') + '\n';
+          message += '高校: ' + (profile.school || '未登録') + '\n';
+          message += '志望系統: ' + (profile.major || '未登録') + '\n';
+          message += '英語資格: ' + (profile.english || '未登録') + '\n';
+          message += '部活動: ' + (profile.club || '未登録') + '\n';
+          message += '部活動量: ' + (profile.clubLevel || '未登録') + '\n\n';
+          
+          if (profile.personality && profile.personality.length > 0) {
+            message += '【性格・学習スタイル】\n';
+            message += profile.personality.join(', ') + '\n\n';
+          }
+          
+          if (profile.teachingStyle && profile.teachingStyle.length > 0) {
+            message += '【指導の希望】\n';
+            message += profile.teachingStyle.join(', ') + '\n\n';
+          }
+          
+          if (profile.constraints && profile.constraints.length > 0) {
+            message += '【生活上の制約】\n';
+            message += profile.constraints.join(', ') + '\n\n';
+          }
+          
+          if (profile.notes) {
+            message += '【備考】\n';
+            message += profile.notes + '\n';
+          }
+          
+          alert(message);
+        } else {
+          alert('プロフィールが登録されていません');
+        }
+      } catch (error) {
+        console.error('プロフィール読み込みエラー:', error);
+        alert('エラーが発生しました');
+      }
+    }
+
+    // ページ読み込み時にプロフィールカードを更新
+    document.addEventListener('DOMContentLoaded', function() {
+      const loggedIn = localStorage.getItem('eqao_loggedIn');
+      if (loggedIn === 'true') {
+        loadProfileCard();
+      }
+    });
+    
   </script>
+
+<!-- プロフィール編集モーダル -->
+  <div class="profile-modal-overlay" id="profileModalOverlay" onclick="closeProfileModalOnOverlay(event)">
+    <div class="profile-modal" onclick="event.stopPropagation()">
+      <div class="profile-modal-header">
+        <span class="material-icons">edit</span>
+        <h2>プロフィール編集</h2>
+        <button class="profile-modal-close" onclick="closeProfileModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+
+      <div class="profile-modal-tabs">
+        <button class="profile-tab active" onclick="switchTab(0)">基本情報</button>
+        <button class="profile-tab" onclick="switchTab(1)">性格・学習</button>
+        <button class="profile-tab" onclick="switchTab(2)">指導希望</button>
+        <button class="profile-tab" onclick="switchTab(3)">生活制約</button>
+        <button class="profile-tab" onclick="switchTab(4)">備考</button>
+      </div>
+
+      <div class="profile-modal-body">
+        <!-- タブ1: 基本情報 -->
+        <div class="profile-tab-content active" data-tab="0">
+          <div class="profile-form-group">
+            <label class="profile-form-label required">学年</label>
+            <select id="profileGrade" class="profile-form-select">
+              <option value="">選択してください</option>
+              <option value="高1">高1</option>
+              <option value="高2">高2</option>
+              <option value="高3">高3</option>
+              <option value="既卒">既卒</option>
+            </select>
+          </div>
+
+          <div class="profile-form-group">
+            <label class="profile-form-label">高校名</label>
+            <input type="text" id="profileSchool" class="profile-form-input" placeholder="例：〇〇高校">
+          </div>
+
+          <div class="profile-form-group">
+            <label class="profile-form-label required">志望系統</label>
+            <select id="profileMajor" class="profile-form-select">
+              <option value="">選択してください</option>
+              <option value="文系">文系</option>
+              <option value="理系">理系</option>
+              <option value="文理融合">文理融合</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+
+          <div class="profile-form-group">
+            <label class="profile-form-label">英語資格</label>
+            <input type="text" id="profileEnglish" class="profile-form-input" placeholder="例：TOEFL 80 / 英検準1級">
+          </div>
+
+          <div class="profile-form-group">
+            <label class="profile-form-label">部活動</label>
+            <input type="text" id="profileClub" class="profile-form-input" placeholder="例：サッカー部">
+          </div>
+
+          <div class="profile-form-group">
+            <label class="profile-form-label">部活動量</label>
+            <select id="profileClubLevel" class="profile-form-select">
+              <option value="">選択してください</option>
+              <option value="ハード（週6日以上）">ハード（週6日以上）</option>
+              <option value="普通（週3〜5日）">普通（週3〜5日）</option>
+              <option value="少なめ（週1〜2日）">少なめ（週1〜2日）</option>
+              <option value="なし">なし</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- タブ2: 性格・学習スタイル -->
+        <div class="profile-tab-content" data-tab="1">
+          <div class="profile-checkbox-group">
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="personality1" value="即答型">
+              <label for="personality1">即答型（すぐ答えたい）</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="personality2" value="熟考型">
+              <label for="personality2">熟考型（じっくり考えたい）</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="personality3" value="論理重視">
+              <label for="personality3">論理重視（理屈で納得したい）</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="personality4" value="感覚重視">
+              <label for="personality4">感覚重視（感覚的に掴みたい）</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="personality5" value="指摘に強い">
+              <label for="personality5">指摘に強い（はっきり言ってほしい）</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="personality6" value="指摘に弱い">
+              <label for="personality6">指摘に弱い（優しく伝えてほしい）</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="personality7" value="自主性高い">
+              <label for="personality7">自主性高い（自分で進められる）</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="personality8" value="伴走型">
+              <label for="personality8">伴走型（一緒に進めてほしい）</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- タブ3: 指導の希望 -->
+        <div class="profile-tab-content" data-tab="2">
+          <div class="profile-checkbox-group">
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="teaching1" value="厳しめの指導">
+              <label for="teaching1">厳しめの指導を希望</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="teaching2" value="寄り添い型の指導">
+              <label for="teaching2">寄り添い型の指導を希望</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="teaching3" value="課題多め">
+              <label for="teaching3">課題多めを希望</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="teaching4" value="課題少なめ">
+              <label for="teaching4">課題少なめを希望</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="teaching5" value="頻繁なフィードバック">
+              <label for="teaching5">頻繁なフィードバック希望</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="teaching6" value="自分のペース">
+              <label for="teaching6">自分のペースで進めたい</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="teaching7" value="モチベーション管理">
+              <label for="teaching7">モチベーション管理してほしい</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="teaching8" value="自己管理">
+              <label for="teaching8">自己管理できる</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- タブ4: 生活上の制約 -->
+        <div class="profile-tab-content" data-tab="3">
+          <div class="profile-checkbox-group">
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="constraint1" value="夜の授業が難しい">
+              <label for="constraint1">夜の授業が難しい</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="constraint2" value="朝の授業が難しい">
+              <label for="constraint2">朝の授業が難しい</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="constraint3" value="部活後は疲労">
+              <label for="constraint3">部活後は疲労が大きい</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="constraint4" value="平日時間制約">
+              <label for="constraint4">平日は時間制約が大きい</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="constraint5" value="精神的波">
+              <label for="constraint5">精神的な波がある</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="constraint6" value="集中力短め">
+              <label for="constraint6">集中力が短め</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="constraint7" value="オンライン希望">
+              <label for="constraint7">できるだけオンライン希望</label>
+            </div>
+            <div class="profile-checkbox-item">
+              <input type="checkbox" id="constraint8" value="対面希望">
+              <label for="constraint8">できるだけ対面希望</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- タブ5: 備考 -->
+        <div class="profile-tab-content" data-tab="4">
+          <div class="profile-form-group">
+            <label class="profile-form-label">その他、配慮してほしいこと</label>
+            <textarea id="profileNotes" class="profile-form-textarea" placeholder="例：家庭の事情、健康面、特に配慮してほしいことなど"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-modal-footer">
+        <button class="profile-modal-btn profile-modal-btn-cancel" onclick="closeProfileModal()">キャンセル</button>
+        <button class="profile-modal-btn profile-modal-btn-save" onclick="saveProfile()">保存</button>
+      </div>
+    </div>
+  </div>
+  
 </body>
 </html>
