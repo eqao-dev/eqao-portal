@@ -3884,21 +3884,14 @@
       renderChecklist();
       updateProgressDisplay();
       
-      // APIに保存
+      // APIに保存（全学年まとめて保存）
       const studentId = getStudentId();
       try {
-        await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'saveChecklist',
-            studentId: studentId,
-            grade: grade,
-            checkedItems: checked
-          }),
-          mode: 'no-cors'
-        });
-        console.log('Checklist saved');
+        const checkStateJson = encodeURIComponent(JSON.stringify(checkedItems));
+        const url = `${API_URL}?action=syncChecklistState&studentId=${studentId}&checkState=${checkStateJson}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log('Checklist saved:', data);
       } catch (error) {
         console.error('API error:', error);
       }
@@ -4313,17 +4306,11 @@
     async function saveSchoolsToAPI() {
       const studentId = getStudentId();
       try {
-        await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'saveSchools',
-            studentId: studentId,
-            schools: schools
-          }),
-          mode: 'no-cors'
-        });
-        console.log('Schools saved');
+        const schoolsJson = encodeURIComponent(JSON.stringify(schools));
+        const url = `${API_URL}?action=saveSchoolData&studentId=${studentId}&schools=${schoolsJson}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log('Schools saved:', data);
       } catch (error) {
         console.error('API error:', error);
       }
@@ -5017,21 +5004,13 @@
       // 編集モードを閉じる
       toggleGoalsEdit();
 
-      // APIに保存
+      // APIに保存（GET方式）
       try {
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'saveGoals',
-            studentId: studentId,
-            grade: grade,
-            month: month,
-            content: newGoals
-          }),
-          mode: 'no-cors'
-        });
-        console.log('Goals saved to API');
+        const contentEncoded = encodeURIComponent(newGoals);
+        const url = `${API_URL}?action=saveGoals&studentId=${studentId}&grade=${grade}&month=${month}&content=${contentEncoded}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log('Goals saved to API:', data);
       } catch (error) {
         console.error('API error:', error);
       }
