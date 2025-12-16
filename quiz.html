@@ -111,121 +111,185 @@
       line-height: 1.6;
     }
 
-    .category-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    /* 大カテゴリアコーディオン */
+    .parent-section {
+      margin-bottom: 16px;
     }
 
-    .category-card {
+    .parent-header {
       background: white;
       border-radius: 12px;
-      padding: 16px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       transition: all 0.2s;
     }
 
-    .category-card.unlocked {
-      cursor: pointer;
+    .parent-header:hover {
+      background: #f8f9fc;
     }
 
-    .category-card.unlocked:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    .parent-header.open {
+      border-radius: 12px 12px 0 0;
+      background: #f0f4ff;
     }
 
-    .category-card.locked {
-      opacity: 0.7;
-    }
-
-    .category-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .category-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+    .parent-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      flex-shrink: 0;
     }
 
-    .category-icon.unlocked {
-      background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);
+    .parent-icon .material-icons {
+      font-size: 20px;
       color: white;
     }
 
-    .category-icon.locked {
-      background: #e0e0e0;
-      color: #999;
-    }
+    .parent-icon.color-blue { background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%); }
+    .parent-icon.color-cyan { background: linear-gradient(135deg, #00838f 0%, #4dd0e1 100%); }
+    .parent-icon.color-purple { background: linear-gradient(135deg, #6a1b9a 0%, #ab47bc 100%); }
+    .parent-icon.color-amber { background: linear-gradient(135deg, #ff8f00 0%, #ffc107 100%); }
+    .parent-icon.color-orange { background: linear-gradient(135deg, #e65100 0%, #ff9800 100%); }
+    .parent-icon.color-green { background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%); }
+    .parent-icon.color-pink { background: linear-gradient(135deg, #c2185b 0%, #f06292 100%); }
+    .parent-icon.color-red { background: linear-gradient(135deg, #c62828 0%, #ef5350 100%); }
+    .parent-icon.color-indigo { background: linear-gradient(135deg, #283593 0%, #5c6bc0 100%); }
+    .parent-icon.color-teal { background: linear-gradient(135deg, #00695c 0%, #26a69a 100%); }
 
-    .category-info {
+    .parent-name {
       flex: 1;
-    }
-
-    .category-name {
       font-size: 15px;
       font-weight: 600;
       color: #333;
-      margin-bottom: 4px;
     }
 
-    .category-meta {
-      font-size: 12px;
-      color: #888;
+    .parent-badge {
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 12px;
     }
 
-    .category-status {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .category-status.unlocked {
-      color: #00897b;
-    }
-
-    .category-status.locked {
+    .parent-badge.none {
+      background: #f5f5f5;
       color: #999;
     }
 
-    .progress-bar-container {
-      height: 8px;
-      background: #e0e0e0;
-      border-radius: 4px;
-      overflow: hidden;
-      margin-top: 12px;
+    .parent-arrow {
+      color: #999;
+      transition: transform 0.3s;
     }
 
-    .progress-bar-fill {
-      height: 100%;
-      border-radius: 4px;
-      transition: width 0.3s ease;
+    .parent-header.open .parent-arrow {
+      transform: rotate(180deg);
     }
 
-    .progress-bar-fill.complete {
-      background: linear-gradient(90deg, #00897b, #26a69a);
+    .parent-content {
+      display: none;
+      background: white;
+      border-radius: 0 0 12px 12px;
+      padding: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
-    .progress-bar-fill.incomplete {
-      background: linear-gradient(90deg, #1a237e, #3949ab);
+    .parent-content.open {
+      display: block;
     }
 
-    .category-progress-text {
+    /* 中カテゴリカード */
+    .mid-category-card {
+      background: #f8f9fc;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 6px;
+      transition: all 0.2s;
+    }
+
+    .mid-category-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .mid-category-card.unlocked {
+      cursor: pointer;
+    }
+
+    .mid-category-card.unlocked:hover {
+      background: #e8f5e9;
+    }
+
+    .mid-category-card.locked {
+      opacity: 0.6;
+    }
+
+    .mid-category-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-top: 8px;
+      gap: 10px;
+    }
+
+    .mid-category-status {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .mid-category-status.unlocked {
+      background: #4caf50;
+      color: white;
+    }
+
+    .mid-category-status.locked {
+      background: #e0e0e0;
+      color: #999;
+    }
+
+    .mid-category-status .material-icons {
+      font-size: 16px;
+    }
+
+    .mid-category-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .mid-category-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: #333;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mid-category-meta {
+      font-size: 11px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .mid-category-progress {
+      width: 50px;
+      text-align: right;
       font-size: 12px;
-      color: #666;
+      font-weight: 600;
+      color: #1a237e;
+    }
+
+    .mid-category-progress.complete {
+      color: #4caf50;
     }
 
     /* テスト画面 */
@@ -606,7 +670,7 @@
         </div>
         <div class="intro-desc">
           チェックリストを全て完了したカテゴリのテストを受けられます。<br>
-          各テストはランダムで10問出題されます。
+          各テストはランダムで最大10問出題されます。
         </div>
       </div>
 
@@ -615,7 +679,7 @@
         <div>データを読み込み中...</div>
       </div>
 
-      <div id="categoryList" class="category-list"></div>
+      <div id="categoryList"></div>
     </div>
 
     <!-- テスト画面 -->
@@ -623,7 +687,6 @@
       <div class="quiz-header">
         <div class="quiz-progress">
           <span class="quiz-progress-text" id="quizProgressText">問題 1 / 10</span>
-          <span class="quiz-progress-text" id="quizCategoryName"></span>
         </div>
         <div class="quiz-progress-bar">
           <div class="quiz-progress-fill" id="quizProgressFill" style="width: 10%"></div>
@@ -685,29 +748,55 @@
     let quizData = {};
     let checkState = {};
     let parentCategories = {}; // 大カテゴリ → 中カテゴリのマッピング
+    let openParents = new Set();
 
     // テスト状態
+    let currentMidCategory = '';
     let currentParent = '';
     let currentQuizzes = [];
     let currentIndex = 0;
     let answers = [];
     let answered = false;
 
+    // 大カテゴリの色
+    const parentColors = {
+      '基礎理解・マインドセット': 'blue',
+      '自己分析・研究テーマ': 'cyan',
+      '書類作成': 'purple',
+      '出願・試験当日': 'amber',
+      '小論文対策': 'orange',
+      '面接対策': 'green',
+      'レポート作成': 'pink',
+      'プレゼンテーション・GD対策': 'red',
+      '志望校・併願校戦略': 'indigo',
+      '日常学習・保護者向け': 'teal'
+    };
+
+    const parentIcons = {
+      '基礎理解・マインドセット': 'lightbulb',
+      '自己分析・研究テーマ': 'person_search',
+      '書類作成': 'description',
+      '出願・試験当日': 'event',
+      '小論文対策': 'edit_note',
+      '面接対策': 'record_voice_over',
+      'レポート作成': 'article',
+      'プレゼンテーション・GD対策': 'present_to_all',
+      '志望校・併願校戦略': 'school',
+      '日常学習・保護者向け': 'menu_book'
+    };
+
     // ============================================
     // 初期化
     // ============================================
     async function init() {
-      // ログイン確認
       const loggedIn = localStorage.getItem('eqao_loggedIn');
       if (!loggedIn) {
         window.location.href = 'index.html';
         return;
       }
 
-      // チェック状態を読み込み
       loadCheckState();
 
-      // マスターデータ読み込み
       try {
         const [masterRes, quizRes] = await Promise.all([
           fetch(MASTER_URL),
@@ -747,7 +836,7 @@
     }
 
     // ============================================
-    // カテゴリ一覧表示
+    // カテゴリ一覧表示（中カテゴリ単位）
     // ============================================
     function displayCategories() {
       document.getElementById('loadingCategory').style.display = 'none';
@@ -761,78 +850,139 @@
         const midCats = parentCategories[parent] || [];
         if (midCats.length === 0) continue;
 
-        // 進捗計算
-        let totalItems = 0;
-        let checkedItems = 0;
+        // この大カテゴリに問題がある中カテゴリを取得
+        const quizMidCats = quizData[parent] ? quizData[parent].mid_categories : [];
+        
+        // 受験可能な中カテゴリ数をカウント
+        let unlockedCount = 0;
+        const midCatDetails = [];
 
         for (const midCat of midCats) {
+          // この中カテゴリに問題があるか確認
+          const hasQuiz = quizMidCats.includes(midCat.name);
+          if (!hasQuiz) continue;
+
+          // 進捗計算
           const catState = checkState[midCat.name] || {};
           const catData = masterData[midCat.name];
           const items = catData ? catData.items || [] : [];
 
-          totalItems += items.length;
+          let checked = 0;
           for (const item of items) {
-            if (catState[item.no]) checkedItems++;
+            if (catState[item.no]) checked++;
           }
+
+          const percent = items.length > 0 ? Math.round((checked / items.length) * 100) : 0;
+          const isUnlocked = percent >= 100;
+
+          if (isUnlocked) unlockedCount++;
+
+          // 問題数をカウント
+          const quizCount = quizData[parent].quizzes.filter(q => q.mid_category === midCat.name).length;
+
+          midCatDetails.push({
+            name: midCat.name,
+            itemsCount: items.length,
+            checked,
+            percent,
+            isUnlocked,
+            quizCount
+          });
         }
 
-        const percent = totalItems > 0 ? Math.round((checkedItems / totalItems) * 100) : 0;
-        const isUnlocked = percent >= 100;
-        const quizCount = quizData[parent] ? quizData[parent].total_quizzes : 0;
+        if (midCatDetails.length === 0) continue;
 
-        const card = document.createElement('div');
-        card.className = 'category-card ' + (isUnlocked ? 'unlocked' : 'locked');
-        if (isUnlocked) {
-          card.onclick = () => startQuiz(parent);
-        }
+        // 大カテゴリセクション
+        const section = document.createElement('div');
+        section.className = 'parent-section';
+        section.dataset.parent = parent;
 
-        card.innerHTML = `
-          <div class="category-header">
-            <div class="category-icon ${isUnlocked ? 'unlocked' : 'locked'}">
-              <span class="material-icons">${isUnlocked ? 'check_circle' : 'lock'}</span>
+        const color = parentColors[parent] || 'blue';
+        const icon = parentIcons[parent] || 'folder';
+
+        section.innerHTML = `
+          <div class="parent-header" onclick="toggleParent('${escapeHtml(parent)}')">
+            <div class="parent-icon color-${color}">
+              <span class="material-icons">${icon}</span>
             </div>
-            <div class="category-info">
-              <div class="category-name">${escapeHtml(parent)}</div>
-              <div class="category-meta">${quizCount}問 / ${midCats.length}中カテゴリ</div>
-            </div>
-            <div class="category-status ${isUnlocked ? 'unlocked' : 'locked'}">
-              ${isUnlocked ? 
-                '<span class="material-icons">play_circle</span>受験可能' : 
-                '<span class="material-icons">lock</span>未解放'}
-            </div>
+            <div class="parent-name">${escapeHtml(parent)}</div>
+            <div class="parent-badge ${unlockedCount === 0 ? 'none' : ''}">${unlockedCount}/${midCatDetails.length} 受験可能</div>
+            <span class="material-icons parent-arrow">expand_more</span>
           </div>
-          <div class="progress-bar-container">
-            <div class="progress-bar-fill ${isUnlocked ? 'complete' : 'incomplete'}" style="width: ${percent}%"></div>
-          </div>
-          <div class="category-progress-text">
-            <span>チェックリスト進捗</span>
-            <span>${checkedItems} / ${totalItems} (${percent}%)</span>
+          <div class="parent-content" id="content-${escapeHtml(parent).replace(/[・\/]/g, '')}">
+            ${midCatDetails.map(mc => renderMidCategoryCard(mc, parent)).join('')}
           </div>
         `;
 
-        container.appendChild(card);
+        container.appendChild(section);
+      }
+    }
+
+    function renderMidCategoryCard(mc, parent) {
+      return `
+        <div class="mid-category-card ${mc.isUnlocked ? 'unlocked' : 'locked'}" 
+             ${mc.isUnlocked ? `onclick="startQuiz('${escapeHtml(mc.name)}', '${escapeHtml(parent)}')"` : ''}>
+          <div class="mid-category-header">
+            <div class="mid-category-status ${mc.isUnlocked ? 'unlocked' : 'locked'}">
+              <span class="material-icons">${mc.isUnlocked ? 'check' : 'lock'}</span>
+            </div>
+            <div class="mid-category-info">
+              <div class="mid-category-name">${escapeHtml(mc.name)}</div>
+              <div class="mid-category-meta">${mc.quizCount}問 / ${mc.checked}/${mc.itemsCount}項目完了</div>
+            </div>
+            <div class="mid-category-progress ${mc.isUnlocked ? 'complete' : ''}">${mc.percent}%</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function toggleParent(parentName) {
+      const section = document.querySelector(`.parent-section[data-parent="${parentName}"]`);
+      if (!section) return;
+
+      const header = section.querySelector('.parent-header');
+      const contentId = 'content-' + parentName.replace(/[・\/]/g, '');
+      const content = document.getElementById(contentId);
+
+      if (header.classList.contains('open')) {
+        header.classList.remove('open');
+        content.classList.remove('open');
+        openParents.delete(parentName);
+      } else {
+        header.classList.add('open');
+        content.classList.add('open');
+        openParents.add(parentName);
       }
     }
 
     // ============================================
-    // テスト開始
+    // テスト開始（中カテゴリ単位）
     // ============================================
-    function startQuiz(parentName) {
+    function startQuiz(midCategoryName, parentName) {
+      currentMidCategory = midCategoryName;
       currentParent = parentName;
-      const data = quizData[parentName];
-      if (!data || !data.quizzes || data.quizzes.length === 0) {
+
+      const parentData = quizData[parentName];
+      if (!parentData || !parentData.quizzes) {
         alert('問題データがありません');
         return;
       }
 
-      // ランダムに10問選択
-      const allQuizzes = [...data.quizzes];
-      shuffleArray(allQuizzes);
-      currentQuizzes = allQuizzes.slice(0, 10);
+      // この中カテゴリの問題を抽出
+      const categoryQuizzes = parentData.quizzes.filter(q => q.mid_category === midCategoryName);
+      if (categoryQuizzes.length === 0) {
+        alert('この中カテゴリには問題がありません');
+        return;
+      }
 
-      // 選択肢をシャッフル（正解位置を記録）
+      // ランダムに最大10問選択
+      const allQuizzes = [...categoryQuizzes];
+      shuffleArray(allQuizzes);
+      currentQuizzes = allQuizzes.slice(0, Math.min(10, allQuizzes.length));
+
+      // 選択肢をシャッフル
       currentQuizzes.forEach(q => {
-        const correctAnswer = q.choices[0]; // 元の正解
+        const correctAnswer = q.choices[0];
         const shuffledChoices = [...q.choices];
         shuffleArray(shuffledChoices);
         q.shuffledChoices = shuffledChoices;
@@ -843,8 +993,7 @@
       answers = [];
       answered = false;
 
-      document.getElementById('headerTitle').textContent = parentName;
-      document.getElementById('quizCategoryName').textContent = parentName;
+      document.getElementById('headerTitle').textContent = midCategoryName;
 
       showQuizView();
       displayQuestion();
@@ -864,15 +1013,12 @@
       const quiz = currentQuizzes[currentIndex];
       answered = false;
 
-      // 進捗更新
       document.getElementById('quizProgressText').textContent = `問題 ${currentIndex + 1} / ${currentQuizzes.length}`;
       document.getElementById('quizProgressFill').style.width = `${((currentIndex + 1) / currentQuizzes.length) * 100}%`;
 
-      // 問題表示
       document.getElementById('quizMidCategory').textContent = quiz.mid_category;
       document.getElementById('quizQuestion').textContent = quiz.question;
 
-      // 選択肢表示
       const choicesContainer = document.getElementById('quizChoices');
       choicesContainer.innerHTML = '';
       const labels = ['A', 'B', 'C', 'D'];
@@ -888,7 +1034,6 @@
         choicesContainer.appendChild(btn);
       });
 
-      // 解説・次へボタンを隠す
       document.getElementById('quizExplanation').classList.remove('show');
       document.getElementById('nextBtn').classList.remove('show');
     }
@@ -908,7 +1053,6 @@
         explanation: quiz.explanation
       });
 
-      // 選択肢の状態更新
       const buttons = document.querySelectorAll('.choice-btn');
       buttons.forEach((btn, index) => {
         btn.style.pointerEvents = 'none';
@@ -919,11 +1063,9 @@
         }
       });
 
-      // 解説表示
       document.getElementById('explanationText').textContent = quiz.explanation;
       document.getElementById('quizExplanation').classList.add('show');
 
-      // 次へボタン表示
       const nextBtn = document.getElementById('nextBtn');
       nextBtn.textContent = currentIndex === currentQuizzes.length - 1 ? '結果を見る' : '次の問題';
       nextBtn.classList.add('show');
@@ -945,7 +1087,6 @@
       const correctCount = answers.filter(a => a.isCorrect).length;
       const percent = Math.round((correctCount / answers.length) * 100);
 
-      // アイコン・タイトル・メッセージ
       const iconEl = document.getElementById('resultIcon');
       const iconText = document.getElementById('resultIconText');
       const titleEl = document.getElementById('resultTitle');
@@ -976,7 +1117,6 @@
 
       document.getElementById('resultScore').innerHTML = `${correctCount}<span>/${answers.length}</span>`;
 
-      // 復習リスト
       const reviewList = document.getElementById('reviewList');
       reviewList.innerHTML = '';
 
@@ -998,7 +1138,7 @@
     }
 
     function retryQuiz() {
-      startQuiz(currentParent);
+      startQuiz(currentMidCategory, currentParent);
     }
 
     // ============================================
@@ -1009,6 +1149,24 @@
       document.getElementById('categoryView').style.display = 'block';
       document.getElementById('quizView').style.display = 'none';
       document.getElementById('resultView').style.display = 'none';
+      
+      // カテゴリ一覧を再描画（進捗が更新されている可能性があるため）
+      loadCheckState();
+      displayCategories();
+      
+      // 以前開いていた大カテゴリを再度開く
+      openParents.forEach(parent => {
+        const section = document.querySelector(`.parent-section[data-parent="${parent}"]`);
+        if (section) {
+          const header = section.querySelector('.parent-header');
+          const contentId = 'content-' + parent.replace(/[・\/]/g, '');
+          const content = document.getElementById(contentId);
+          if (header && content) {
+            header.classList.add('open');
+            content.classList.add('open');
+          }
+        }
+      });
     }
 
     function showQuizView() {
