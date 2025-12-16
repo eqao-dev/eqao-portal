@@ -899,6 +899,168 @@
       opacity: 0.7;
     }
 
+    /* マイガントチャート */
+    .my-gantt-section {
+      background: #E8F5E9;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .my-gantt-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .my-gantt-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #2E7D32;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .add-plan-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      background: linear-gradient(135deg, #43A047 0%, #66BB6A 100%);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .add-plan-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(67, 160, 71, 0.4);
+    }
+
+    .add-plan-btn .material-icons {
+      font-size: 16px;
+    }
+
+    .my-gantt-chart {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .my-gantt-empty {
+      text-align: center;
+      padding: 30px 20px;
+      color: #81C784;
+    }
+
+    .my-gantt-empty .material-icons {
+      font-size: 36px;
+      margin-bottom: 8px;
+      opacity: 0.7;
+    }
+
+    .my-gantt-empty p {
+      font-size: 13px;
+    }
+
+    .my-gantt-empty .sub {
+      font-size: 11px;
+      margin-top: 4px;
+      opacity: 0.8;
+    }
+
+    .my-gantt-row {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #E8F5E9;
+      min-height: 36px;
+    }
+
+    .my-gantt-row:last-child {
+      border-bottom: none;
+    }
+
+    .my-gantt-label {
+      width: 100px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #333;
+      flex-shrink: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .my-gantt-bar-container {
+      flex: 1;
+      display: flex;
+      padding: 4px 8px;
+    }
+
+    .my-gantt-bar {
+      height: 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: white;
+      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .my-gantt-bar:hover {
+      transform: scaleY(1.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    /* カラーピッカー */
+    .color-picker {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .color-option {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .color-option:hover {
+      transform: scale(1.1);
+    }
+
+    .color-option.selected {
+      border-color: #333;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    /* 削除ボタン */
+    .modal-btn.delete {
+      background: linear-gradient(135deg, #E53935 0%, #EF5350 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .modal-btn.delete .material-icons {
+      font-size: 16px;
+    }
+
     /* 進捗バー */
     .progress-section {
       background: #B2DFDB;
@@ -2257,6 +2419,24 @@
           </div>
         </div>
 
+        <!-- マイガントチャート -->
+        <div class="my-gantt-section">
+          <div class="my-gantt-header">
+            <span class="my-gantt-title">マイ予定</span>
+            <button class="add-plan-btn" onclick="openPlanModal()">
+              <span class="material-icons">add</span>
+              予定を追加
+            </button>
+          </div>
+          <div class="my-gantt-chart" id="myGanttChart">
+            <div class="my-gantt-empty">
+              <span class="material-icons">event_note</span>
+              <p>予定がありません</p>
+              <p class="sub">「予定を追加」から登録してください</p>
+            </div>
+          </div>
+        </div>
+
         <!-- 2カラムレイアウト -->
         <div class="my-schedule-split">
           <!-- 左側: 今月やること -->
@@ -2671,6 +2851,62 @@
       <div class="modal-footer">
         <button type="button" class="modal-btn cancel" onclick="closeSchoolModal()">キャンセル</button>
         <button type="button" class="modal-btn save" onclick="saveSchool()">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- マイ予定追加/編集モーダル -->
+  <div class="modal-overlay" id="planModal">
+    <div class="modal-content" style="max-width: 400px;">
+      <div class="modal-header">
+        <h2 class="modal-title" id="planModalTitle">予定を追加</h2>
+        <button class="modal-close" onclick="closePlanModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="planForm">
+          <div class="form-group">
+            <label class="form-label">予定名 <span class="required">*</span></label>
+            <input type="text" class="form-input" id="planName" placeholder="例: 英検対策、志望理由書作成">
+          </div>
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="form-group">
+              <label class="form-label">開始月 <span class="required">*</span></label>
+              <select class="form-select" id="planStartMonth">
+                <option value="">選択</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">終了月 <span class="required">*</span></label>
+              <select class="form-select" id="planEndMonth">
+                <option value="">選択</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">色</label>
+            <div class="color-picker" id="colorPicker">
+              <div class="color-option selected" data-color="blue" style="background: #2196F3;"></div>
+              <div class="color-option" data-color="green" style="background: #4CAF50;"></div>
+              <div class="color-option" data-color="yellow" style="background: #FFC107;"></div>
+              <div class="color-option" data-color="orange" style="background: #FF9800;"></div>
+              <div class="color-option" data-color="purple" style="background: #9C27B0;"></div>
+              <div class="color-option" data-color="cyan" style="background: #00BCD4;"></div>
+              <div class="color-option" data-color="red" style="background: #F44336;"></div>
+              <div class="color-option" data-color="gray" style="background: #9E9E9E;"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="modal-btn delete" id="deletePlanBtn" onclick="deletePlan()" style="display: none;">
+          <span class="material-icons">delete</span>
+          削除
+        </button>
+        <div style="flex: 1;"></div>
+        <button type="button" class="modal-btn cancel" onclick="closePlanModal()">キャンセル</button>
+        <button type="button" class="modal-btn save" onclick="savePlan()">保存</button>
       </div>
     </div>
   </div>
@@ -4085,7 +4321,248 @@
     // データ（APIから取得）
     let monthlyGoals = {};
     let instructorNotes = [];
+    let myPlans = [];
+    let editingPlanId = null;
+    let selectedColor = 'blue';
     let isLoading = false;
+
+    // カラーマップ
+    const colorMap = {
+      blue: '#2196F3',
+      green: '#4CAF50',
+      yellow: '#FFC107',
+      orange: '#FF9800',
+      purple: '#9C27B0',
+      cyan: '#00BCD4',
+      red: '#F44336',
+      gray: '#9E9E9E'
+    };
+
+    // ============================================
+    // マイガントチャート関連
+    // ============================================
+
+    // マイガントチャート描画
+    function renderMyGanttChart() {
+      const container = document.getElementById('myGanttChart');
+      const grade = selectedGrade;
+      const gradePlans = myPlans.filter(p => p.grade === grade);
+
+      if (gradePlans.length === 0) {
+        container.innerHTML = `
+          <div class="my-gantt-empty">
+            <span class="material-icons">event_note</span>
+            <p>予定がありません</p>
+            <p class="sub">「予定を追加」から登録してください</p>
+          </div>
+        `;
+        return;
+      }
+
+      const data = idealScheduleData[grade];
+      const months = data ? data.months : [];
+      const monthCount = months.length;
+
+      let html = '';
+      gradePlans.forEach(plan => {
+        const startIdx = months.indexOf(plan.startMonth);
+        const endIdx = months.indexOf(plan.endMonth);
+        
+        if (startIdx === -1 || endIdx === -1) return;
+
+        const leftPercent = (startIdx / monthCount) * 100;
+        const widthPercent = ((endIdx - startIdx + 1) / monthCount) * 100;
+        const bgColor = colorMap[plan.color] || colorMap.blue;
+
+        html += `
+          <div class="my-gantt-row">
+            <div class="my-gantt-label" title="${escapeHtml(plan.name)}">${escapeHtml(plan.name)}</div>
+            <div class="my-gantt-bar-container">
+              <div class="my-gantt-bar" 
+                   style="margin-left: ${leftPercent}%; width: ${widthPercent}%; background: ${bgColor};"
+                   onclick="openPlanModal(${plan.id})"
+                   title="クリックで編集">
+                ${plan.startMonth}〜${plan.endMonth}月
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // 予定モーダルを開く
+    function openPlanModal(planId = null) {
+      const modal = document.getElementById('planModal');
+      const title = document.getElementById('planModalTitle');
+      const deleteBtn = document.getElementById('deletePlanBtn');
+      const form = document.getElementById('planForm');
+      
+      // 月のセレクトを初期化
+      const data = idealScheduleData[selectedGrade];
+      const months = data ? data.months : [];
+      const startSelect = document.getElementById('planStartMonth');
+      const endSelect = document.getElementById('planEndMonth');
+      
+      let monthOptions = '<option value="">選択</option>';
+      months.forEach(m => {
+        monthOptions += `<option value="${m}">${m}月</option>`;
+      });
+      startSelect.innerHTML = monthOptions;
+      endSelect.innerHTML = monthOptions;
+      
+      // カラーピッカー初期化
+      document.querySelectorAll('.color-option').forEach(opt => {
+        opt.classList.remove('selected');
+        opt.onclick = () => selectColor(opt.dataset.color);
+      });
+      document.querySelector('.color-option[data-color="blue"]').classList.add('selected');
+      selectedColor = 'blue';
+
+      if (planId !== null) {
+        // 編集モード
+        const plan = myPlans.find(p => p.id === planId);
+        if (plan) {
+          title.textContent = '予定を編集';
+          editingPlanId = planId;
+          document.getElementById('planName').value = plan.name;
+          startSelect.value = plan.startMonth;
+          endSelect.value = plan.endMonth;
+          selectedColor = plan.color;
+          document.querySelectorAll('.color-option').forEach(opt => {
+            opt.classList.toggle('selected', opt.dataset.color === plan.color);
+          });
+          deleteBtn.style.display = 'flex';
+        }
+      } else {
+        // 新規モード
+        title.textContent = '予定を追加';
+        editingPlanId = null;
+        document.getElementById('planName').value = '';
+        startSelect.value = '';
+        endSelect.value = '';
+        deleteBtn.style.display = 'none';
+      }
+
+      modal.classList.add('show');
+    }
+
+    // モーダルを閉じる
+    function closePlanModal() {
+      document.getElementById('planModal').classList.remove('show');
+      editingPlanId = null;
+    }
+
+    // 色を選択
+    function selectColor(color) {
+      selectedColor = color;
+      document.querySelectorAll('.color-option').forEach(opt => {
+        opt.classList.toggle('selected', opt.dataset.color === color);
+      });
+    }
+
+    // 予定を保存
+    async function savePlan() {
+      const name = document.getElementById('planName').value.trim();
+      const startMonth = document.getElementById('planStartMonth').value;
+      const endMonth = document.getElementById('planEndMonth').value;
+      
+      if (!name) {
+        alert('予定名を入力してください');
+        return;
+      }
+      if (!startMonth || !endMonth) {
+        alert('開始月と終了月を選択してください');
+        return;
+      }
+
+      const data = idealScheduleData[selectedGrade];
+      const months = data ? data.months : [];
+      const startIdx = months.indexOf(startMonth);
+      const endIdx = months.indexOf(endMonth);
+      
+      if (startIdx > endIdx) {
+        alert('終了月は開始月以降を選択してください');
+        return;
+      }
+
+      if (editingPlanId !== null) {
+        // 編集
+        const plan = myPlans.find(p => p.id === editingPlanId);
+        if (plan) {
+          plan.name = name;
+          plan.startMonth = startMonth;
+          plan.endMonth = endMonth;
+          plan.color = selectedColor;
+        }
+      } else {
+        // 新規追加
+        const newPlan = {
+          id: Date.now(),
+          grade: selectedGrade,
+          name: name,
+          startMonth: startMonth,
+          endMonth: endMonth,
+          color: selectedColor
+        };
+        myPlans.push(newPlan);
+      }
+
+      closePlanModal();
+      renderMyGanttChart();
+      await saveMyPlansToAPI();
+    }
+
+    // 予定を削除
+    async function deletePlan() {
+      if (!editingPlanId) return;
+      
+      if (confirm('この予定を削除しますか？')) {
+        myPlans = myPlans.filter(p => p.id !== editingPlanId);
+        closePlanModal();
+        renderMyGanttChart();
+        await saveMyPlansToAPI();
+      }
+    }
+
+    // APIに保存
+    async function saveMyPlansToAPI() {
+      const studentId = getStudentId();
+      try {
+        await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'saveMyPlans',
+            studentId: studentId,
+            plans: myPlans
+          }),
+          mode: 'no-cors'
+        });
+        console.log('My plans saved');
+      } catch (error) {
+        console.error('API error:', error);
+      }
+    }
+
+    // APIから読み込み
+    async function loadMyPlans() {
+      const studentId = getStudentId();
+      try {
+        const url = `${API_URL}?action=getMyPlans&studentId=${studentId}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data && Array.isArray(data)) {
+          myPlans = data;
+        }
+        renderMyGanttChart();
+      } catch (error) {
+        console.error('API error:', error);
+        renderMyGanttChart();
+      }
+    }
 
     // 今月やること: 編集モード切り替え
     function toggleGoalsEdit() {
@@ -4354,6 +4831,9 @@
         // 授業履歴を描画
         renderLessonList();
         
+        // マイガントチャートを読み込み
+        loadMyPlans();
+        
       } catch (e) {
         console.error('Initialization error:', e);
       }
@@ -4378,6 +4858,9 @@
       
       // ガントチャート再描画
       renderGanttChart();
+      
+      // マイガントチャート再描画
+      renderMyGanttChart();
       
       // 最初の月を選択
       const data = idealScheduleData[grade];
