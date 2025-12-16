@@ -1809,13 +1809,13 @@
     }
 
     .pattern-tab:hover {
-      border-color: #1a1a2e;
-      background: #f5f5f5;
+      border-color: #00897B;
+      background: #E0F2F1;
     }
 
     .pattern-tab.active {
-      border-color: #1a1a2e;
-      background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4a 100%);
+      border-color: #00897B;
+      background: linear-gradient(135deg, #00897B 0%, #26A69A 100%);
       color: white;
     }
 
@@ -1852,11 +1852,11 @@
     }
 
     .pattern-tab.active .pattern-tab-icons .check {
-      color: #81C784;
+      color: #A5D6A7;
     }
 
     .pattern-tab.active .pattern-tab-icons .cross {
-      color: #EF9A9A;
+      color: #FFCDD2;
     }
 
     .pattern-description {
@@ -5793,25 +5793,30 @@
       const studentId = getStudentId();
       try {
         const url = `${API_URL}?action=getMeetingData&studentId=${studentId}`;
+        console.log('Loading progress reports...');
         const response = await fetch(url);
         const data = await response.json();
+        console.log('Progress reports data:', data);
         
         if (data && Array.isArray(data) && data.length > 0) {
           progressReports = data;
           selectedReportIndex = 0;
           renderProgressReportTabs();
           renderProgressReportContent();
-          document.getElementById('progressReportEmpty').style.display = 'none';
         } else {
           progressReports = [];
-          document.getElementById('progressReportTabs').innerHTML = '';
-          document.getElementById('progressReportContent').innerHTML = '';
-          document.getElementById('progressReportEmpty').style.display = 'block';
+          const tabsContainer = document.getElementById('progressReportTabs');
+          const contentContainer = document.getElementById('progressReportContent');
+          const emptyState = document.getElementById('progressReportEmpty');
+          if (tabsContainer) tabsContainer.innerHTML = '';
+          if (contentContainer) contentContainer.innerHTML = '';
+          if (emptyState) emptyState.style.display = 'block';
         }
       } catch (error) {
-        console.error('API error:', error);
+        console.error('Progress reports API error:', error);
         progressReports = [];
-        document.getElementById('progressReportEmpty').style.display = 'block';
+        const emptyState = document.getElementById('progressReportEmpty');
+        if (emptyState) emptyState.style.display = 'block';
       }
     }
 
@@ -5823,7 +5828,28 @@
       let html = '';
       progressReports.forEach((report, index) => {
         const isActive = index === selectedReportIndex;
-        const label = report.submitMonth ? `${report.submitMonth}月報告` : report.submitDate;
+        
+        // submitMonthの処理（日付文字列、数値、文字列に対応）
+        let label = '';
+        if (report.submitMonth) {
+          // ISO形式の日付文字列の場合
+          if (String(report.submitMonth).includes('T') || String(report.submitMonth).includes('-')) {
+            try {
+              const d = new Date(report.submitMonth);
+              label = `${d.getMonth() + 1}月報告`;
+            } catch (e) {
+              label = report.submitDate || '報告';
+            }
+          } else {
+            // 数値または月の文字列の場合
+            label = `${report.submitMonth}月報告`;
+          }
+        } else if (report.submitDate) {
+          label = report.submitDate;
+        } else {
+          label = `報告${index + 1}`;
+        }
+        
         html += `
           <div class="progress-report-tab ${isActive ? 'active' : ''}" onclick="selectProgressReport(${index})">
             ${label}
@@ -5844,27 +5870,32 @@
     // 進捗報告内容を描画
     function renderProgressReportContent() {
       const container = document.getElementById('progressReportContent');
+      const emptyState = document.getElementById('progressReportEmpty');
       if (!container) return;
 
       const report = progressReports[selectedReportIndex];
       if (!report) {
         container.innerHTML = '';
+        if (emptyState) emptyState.style.display = 'block';
         return;
       }
+      
+      // 空状態を非表示
+      if (emptyState) emptyState.style.display = 'none';
 
-      // 志望校情報をまとめる
+      // 志望校情報をまとめる（nameが空でないもの）
       const schools = [report.school1, report.school2, report.school3, report.school4]
-        .filter(s => s && s.name);
+        .filter(s => s && s.name && s.name.trim() !== '');
 
-      // 塾外タスクをまとめる（ラベル付き）
+      // 塾外タスクをまとめる（ラベル付き、空でないもののみ）
       const outsideTasks = [];
-      if (report.outsideBasic) outsideTasks.push({ label: '基礎編', value: report.outsideBasic });
-      if (report.outsideDocuments) outsideTasks.push({ label: '書類作成編', value: report.outsideDocuments });
-      if (report.outsideEssay) outsideTasks.push({ label: '小論文編', value: report.outsideEssay });
-      if (report.outsideInterview) outsideTasks.push({ label: '面接編', value: report.outsideInterview });
-      if (report.outsidePresentation) outsideTasks.push({ label: 'プレゼン編', value: report.outsidePresentation });
-      if (report.outsideQualification) outsideTasks.push({ label: '出願資格編', value: report.outsideQualification });
-      if (report.outsideSubmission) outsideTasks.push({ label: '提出書類編', value: report.outsideSubmission });
+      if (report.outsideBasic && report.outsideBasic.trim()) outsideTasks.push({ label: '基礎編', value: report.outsideBasic });
+      if (report.outsideDocuments && report.outsideDocuments.trim()) outsideTasks.push({ label: '書類作成編', value: report.outsideDocuments });
+      if (report.outsideEssay && report.outsideEssay.trim()) outsideTasks.push({ label: '小論文編', value: report.outsideEssay });
+      if (report.outsideInterview && report.outsideInterview.trim()) outsideTasks.push({ label: '面接編', value: report.outsideInterview });
+      if (report.outsidePresentation && report.outsidePresentation.trim()) outsideTasks.push({ label: 'プレゼン編', value: report.outsidePresentation });
+      if (report.outsideQualification && report.outsideQualification.trim()) outsideTasks.push({ label: '出願資格編', value: report.outsideQualification });
+      if (report.outsideSubmission && report.outsideSubmission.trim()) outsideTasks.push({ label: '提出書類編', value: report.outsideSubmission });
 
       let html = `
         <div class="progress-report-card">
@@ -5935,7 +5966,7 @@
       }
 
       // アドバイス
-      if (report.advice) {
+      if (report.advice && report.advice.trim()) {
         html += `
           <div class="progress-report-section">
             <div class="progress-report-section-title">
@@ -5948,7 +5979,7 @@
       }
 
       // 授業で注力すべき内容
-      if (report.classroomFocus) {
+      if (report.classroomFocus && report.classroomFocus.trim()) {
         html += `
           <div class="progress-report-section">
             <div class="progress-report-section-title">
