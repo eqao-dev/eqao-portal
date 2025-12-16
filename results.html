@@ -38,16 +38,14 @@
     .header-content {
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 12px;
-      max-width: 400px;
+      max-width: 600px;
       margin: 0 auto;
-      position: relative;
+      padding: 0 16px;
     }
     
     .back-button {
-      position: absolute;
-      left: 0;
+      flex-shrink: 0;
       width: 36px;
       height: 36px;
       background: rgba(255,255,255,0.15);
@@ -491,8 +489,9 @@
     <div class="footnote">
       <p class="footnote-title">データについて</p>
       <p class="footnote-text">
-        ・これまでの累計合格者数です<br>
+        ・塾発足からの累計合格者数です<br>
         ・同一年度に複数合格した場合もそれぞれカウント<br>
+        ・データは年に1回更新されます
       </p>
     </div>
     
