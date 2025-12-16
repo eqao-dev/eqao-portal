@@ -398,28 +398,6 @@
       -webkit-touch-callout: none;
     }
 
-    .copy-btn {
-      margin-top: 12px;
-      padding: 8px 16px;
-      background: #f5f5f5;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 12px;
-      color: #666;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .copy-btn:hover {
-      background: #e0e0e0;
-    }
-
-    .copy-btn .material-icons {
-      font-size: 16px;
-    }
-
     /* ローディング */
     .loading {
       text-align: center;
@@ -734,10 +712,6 @@
               </div>
               <div class="document-content" id="${docId}-content">
                 <div class="document-text">${escapeHtml(doc.content)}</div>
-                <button class="copy-btn" onclick="copyText(\`${escapeForJs(doc.content)}\`)">
-                  <span class="material-icons">content_copy</span>
-                  コピー
-                </button>
               </div>
             </div>
           `;
@@ -862,15 +836,6 @@
       document.getElementById('resultsCount').innerHTML = '';
     }
 
-    // テキストをコピー
-    function copyText(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        showToast('コピーしました');
-      }).catch(() => {
-        showToast('コピーに失敗しました');
-      });
-    }
-
     // トースト表示
     function showToast(message) {
       const toast = document.getElementById('toast');
@@ -947,15 +912,6 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
-    }
-
-    // JSエスケープ（テンプレートリテラル用）
-    function escapeForJs(str) {
-      if (!str) return '';
-      return str
-        .replace(/\\/g, '\\\\')
-        .replace(/`/g, '\\`')
-        .replace(/\$/g, '\\$');
     }
   </script>
 </body>
