@@ -1254,6 +1254,17 @@
   font-size: 16px;
 }
 
+.profile-btn:disabled {
+  background: linear-gradient(135deg, #bdbdbd 0%, #9e9e9e 100%);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.profile-btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 .study-body {
   text-align: center;
   padding: 20px 10px;
@@ -2515,39 +2526,68 @@
     }
 
     // プロフィールカードを更新
-    async function loadProfileCard() {
-      const studentId = localStorage.getItem('eqao_studentId');
+    // プロフィールカードを更新
+async function loadProfileCard() {
+  const studentId = localStorage.getItem('eqao_studentId');
+  
+  // 詳細ボタンの参照を取得
+  const detailButtons = document.querySelectorAll('.profile-btn');
+  let detailBtn = null;
+  detailButtons.forEach(btn => {
+    if (btn.textContent.includes('詳細')) {
+      detailBtn = btn;
+    }
+  });
+  
+  try {
+    const result = await apiGet('getProfile', { studentId });
+    
+    if (result.success && result.profile) {
+      const profile = result.profile;
       
-      try {
-        const result = await apiGet('getProfile', { studentId });
-        
-        if (result.success && result.profile) {
-          const profile = result.profile;
-          
-          // カード表示を更新
-          document.getElementById('profileName').textContent = profile.name || '未登録';
-          
-          let details = [];
-          if (profile.grade) details.push(profile.grade);
-          if (profile.major) details.push(profile.major);
-          if (profile.school) details.push(profile.school);
-          if (profile.english) details.push(profile.english);
-          
-          document.getElementById('profileDetails').innerHTML = details.join('<br>') || 'プロフィールを登録してください';
-        }
-      } catch (error) {
-        console.error('プロフィール読み込みエラー:', error);
+      // カード表示を更新
+      document.getElementById('profileName').textContent = profile.name || '未登録';
+      
+      let details = [];
+      if (profile.grade) details.push(profile.grade);
+      if (profile.major) details.push(profile.major);
+      if (profile.school) details.push(profile.school);
+      if (profile.english) details.push(profile.english);
+      
+      document.getElementById('profileDetails').innerHTML = details.join('<br>') || 'プロフィールを登録してください';
+      
+      // 詳細ボタンを有効化
+      if (detailBtn) {
+        detailBtn.disabled = false;
+      }
+    } else {
+      // プロフィール未登録の場合、詳細ボタンを無効化
+      if (detailBtn) {
+        detailBtn.disabled = true;
       }
     }
+  } catch (error) {
+    console.error('プロフィール読み込みエラー:', error);
+    // エラー時も詳細ボタンを無効化
+    if (detailBtn) {
+      detailBtn.disabled = true;
+    }
+  }
+}
 
     // プロフィール詳細を表示
-    async function viewProfileDetails() {
-      const studentId = localStorage.getItem('eqao_studentId');
-      
-      try {
-        const result = await apiGet('getProfile', { studentId });
-        
-        if (result.success && result.profile) {
+async function viewProfileDetails() {
+  const studentId = localStorage.getItem('eqao_studentId');
+  
+  try {
+    const result = await apiGet('getProfile', { studentId });
+    
+    // プロフィールが存在しない場合は早期return
+    if (!result.success || !result.profile) {
+      return;
+    }
+    
+    if (result.success && result.profile) {
           const profile = result.profile;
           
           let message = '【基本情報】\n';
