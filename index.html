@@ -181,6 +181,80 @@
       flex-shrink: 0;
     }
 
+    /* 塾情報バナー */
+    .info-banner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
+      border: 2px solid #e8ecf4;
+      border-radius: 14px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+    }
+
+    .info-banner:hover {
+      border-color: #1a237e;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .info-banner-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .info-banner-icon.blue {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+    }
+
+    .info-banner-icon.orange {
+      background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+    }
+
+    .info-banner-icon .material-icons {
+      color: white;
+      font-size: 24px;
+    }
+
+    .info-banner-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .info-banner-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 2px;
+    }
+
+    .info-banner-desc {
+      font-size: 10px;
+      color: #666;
+    }
+
+    .info-banner-arrow {
+      color: #999;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    /* 2列グリッド */
+    .button-grid-2col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
     .section {
       margin-bottom: 24px;
     }
@@ -1133,6 +1207,30 @@
       </a>
     </div>
 
+    <!-- 塾情報バナー -->
+    <div class="banner-row">
+      <a href="stats.html" class="info-banner">
+        <div class="info-banner-icon blue">
+          <span class="material-icons">bar_chart</span>
+        </div>
+        <div class="info-banner-content">
+          <div class="info-banner-title">数字で見るEQAO</div>
+          <div class="info-banner-desc">在籍データを可視化</div>
+        </div>
+        <span class="material-icons info-banner-arrow">chevron_right</span>
+      </a>
+      <a href="simulator.html" class="info-banner">
+        <div class="info-banner-icon orange">
+          <span class="material-icons">calculate</span>
+        </div>
+        <div class="info-banner-content">
+          <div class="info-banner-title">料金シミュレーター</div>
+          <div class="info-banner-desc">授業料を計算</div>
+        </div>
+        <span class="material-icons info-banner-arrow">chevron_right</span>
+      </a>
+    </div>
+
     <!-- 2列バナー -->
     <div class="banner-row">
       <a href="forms.html" class="faq-banner">
@@ -1279,25 +1377,19 @@
 
     <div class="section">
       <h2 class="section-title">プログラム申し込み</h2>
-      <div class="button-grid">
+      <div class="button-grid-2col">
         <a href="camp.html" class="menu-btn">
           <div class="icon-wrapper icon-red">
             <span class="material-icons">camping</span>
           </div>
           <span>EQAO<br>CAMP</span>
         </a>
-       <a href="study-tour.html" class="menu-btn">
-  <div class="icon-wrapper icon-red">
-    <span class="material-icons">flight</span>
-  </div>
-  <span>EQAO<br>STUDY TOUR</span>
-</a>
-        <span class="menu-btn disabled">
+        <a href="study-tour.html" class="menu-btn">
           <div class="icon-wrapper icon-red">
-            <span class="material-icons">volunteer_activism</span>
+            <span class="material-icons">flight</span>
           </div>
-          <span>EQAO<br>VOLUNTEER</span>
-        </span>
+          <span>EQAO<br>STUDY TOUR</span>
+        </a>
       </div>
     </div>
 
