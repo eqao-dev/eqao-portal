@@ -372,6 +372,12 @@
       padding: 16px;
       background: white;
       border-top: 1px solid #e0e0e0;
+      /* コピー防止 */
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -webkit-touch-callout: none;
     }
 
     .document-content.open {
@@ -384,6 +390,12 @@
       color: #333;
       white-space: pre-wrap;
       word-break: break-word;
+      /* コピー防止の強化 */
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -webkit-touch-callout: none;
     }
 
     .copy-btn {
@@ -530,6 +542,9 @@
         <div class="empty-state">
           <span class="material-icons">description</span>
           <p>検索条件を入力して<br>「検索」ボタンを押してください</p>
+          <p style="font-size: 12px; color: #999; margin-top: 12px;">
+            ⓘ 書類内容はコピー保護されています
+          </p>
         </div>
       </div>
       
@@ -581,6 +596,9 @@
 
       // フィルター選択肢を取得
       loadFilters();
+
+      // コピー防止機能を有効化
+      enableCopyProtection();
 
       // Enterキーで検索
       document.getElementById('searchFaculty').addEventListener('keypress', function(e) {
@@ -861,6 +879,63 @@
       setTimeout(() => {
         toast.classList.remove('show');
       }, 2000);
+    }
+
+    // コピー防止機能
+    function enableCopyProtection() {
+      // 右クリックメニューを無効化
+      document.addEventListener('contextmenu', function(e) {
+        const target = e.target;
+        // document-content内のみ無効化
+        if (target.closest('.document-content')) {
+          e.preventDefault();
+          showToast('この内容はコピーできません');
+          return false;
+        }
+      });
+
+      // コピーショートカットを無効化（Ctrl+C / Cmd+C）
+      document.addEventListener('keydown', function(e) {
+        const target = e.target;
+        // document-content内のみ無効化
+        if (target.closest('.document-content')) {
+          if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+            e.preventDefault();
+            showToast('この内容はコピーできません');
+            return false;
+          }
+        }
+      });
+
+      // コピーイベントを無効化
+      document.addEventListener('copy', function(e) {
+        const selection = window.getSelection();
+        const target = selection.anchorNode;
+        // document-content内のみ無効化
+        if (target && target.parentElement && target.parentElement.closest('.document-content')) {
+          e.preventDefault();
+          showToast('この内容はコピーできません');
+          return false;
+        }
+      });
+
+      // ドラッグを無効化
+      document.addEventListener('dragstart', function(e) {
+        const target = e.target;
+        if (target.closest('.document-content')) {
+          e.preventDefault();
+          return false;
+        }
+      });
+
+      // テキスト選択開始を無効化
+      document.addEventListener('selectstart', function(e) {
+        const target = e.target;
+        if (target.closest('.document-content')) {
+          e.preventDefault();
+          return false;
+        }
+      });
     }
 
     // HTMLエスケープ
