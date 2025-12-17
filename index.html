@@ -9,7 +9,6 @@
   <title>EQAO PORTAL</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="css/nav-menu.css">
   <style>
     * {
       margin: 0;
@@ -807,6 +806,208 @@
 
     .menu-toggle .material-icons {
       font-size: 26px;
+    }
+
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .nav-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100%;
+      background: white;
+      z-index: 201;
+      transition: right 0.3s ease;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+      overflow-y: auto;
+    }
+
+    .nav-menu.open {
+      right: 0;
+    }
+
+    .nav-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 20px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-header-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .nav-user-section {
+      padding: 16px 20px;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    }
+
+    .nav-user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+    }
+
+    .nav-user-info .material-icons {
+      font-size: 24px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .nav-user-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: white;
+    }
+
+    .nav-logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: inherit;
+    }
+
+    .nav-logout-btn:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .nav-logout-btn .material-icons {
+      font-size: 16px;
+    }
+
+    .nav-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+    }
+
+    .nav-section {
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #999;
+      padding: 8px 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      color: #333;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-item:hover {
+      background: #f5f5f5;
+    }
+
+    .nav-item .material-icons {
+      font-size: 22px;
+      color: #1a237e;
+    }
+
+    .nav-item span {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-badge {
+      background: #ff5722;
+      color: white;
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: auto;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .nav-badge-wip {
+      background: #9e9e9e;
+      color: white;
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: auto;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-item.disabled {
+      color: #bbb;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .nav-item.disabled .material-icons {
+      color: #ccc;
+    }
+
+
+    .nav-category {
+      padding: 10px 20px 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #1a237e;
+      background: #f5f5f5;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .nav-category:first-child {
+      border-top: none;
+    }
+
+    .nav-divider {
+      height: 1px;
+      background: #e0e0e0;
+      margin: 8px 0;
     }
 
     .hamburger-btn {
@@ -1768,6 +1969,7 @@
 }
 
 
+
 .study-loading {
   text-align: center;
   padding: 40px 20px;
@@ -2008,7 +2210,210 @@
     </button>
   </header>
 
+  <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
+
   <!-- ナビゲーションメニュー -->
+  <div id="navMenu" class="nav-menu">
+    <div class="nav-header">
+      <span class="nav-header-title">メニュー</span>
+      <button class="nav-close" onclick="closeNav()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+
+    <div class="nav-user-section">
+      <div class="nav-user-info">
+        <span class="material-icons">person</span>
+        <span id="navUserName" class="nav-user-name"></span>
+      </div>
+      <button class="nav-logout-btn" onclick="doLogout()">
+        <span class="material-icons">logout</span>
+        <span>ログアウト</span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <a href="password-change.html" class="nav-item">
+        <span class="material-icons">lock</span>
+        <span>パスワード変更</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <a href="index.html" class="nav-item">
+        <span class="material-icons">home</span>
+        <span>ホーム</span>
+      </a>
+      <a href="faq.html" class="nav-item">
+        <span class="material-icons">help</span>
+        <span>よくある質問</span>
+      </a>
+      <a href="forms.html" class="nav-item">
+        <span class="material-icons">list_alt</span>
+        <span>各種申し込みフォーム一覧</span>
+      </a>
+    </div>
+
+    <div class="nav-category">スケジュール</div>
+    <div class="nav-section">
+      <a href="yearly-schedule.html" class="nav-item">
+        <span class="material-icons">calendar_month</span>
+        <span>年間スケジュール</span>
+      </a>
+      <a href="exam-schedule.html" class="nav-item">
+        <span class="material-icons">school</span>
+        <span>受験スケジュール</span>
+      </a>
+      <a href="schedule.html" class="nav-item">
+        <span class="material-icons">event_note</span>
+        <span>授業スケジュール</span>
+      </a>
+    </div>
+
+    <div class="nav-category">チェックリスト一覧</div>
+    <div class="nav-section">
+      <a href="checklist.html" class="nav-item">
+        <span class="material-icons">checklist</span>
+        <span>チェックリスト教材</span>
+      </a>
+      <a href="progress.html" class="nav-item">
+        <span class="material-icons">trending_up</span>
+        <span>自己/進捗管理シート</span>
+      </a>
+      <a href="school-list.html" class="nav-item">
+        <span class="material-icons">location_city</span>
+        <span>志望校/併願校管理シート</span>
+      </a>
+    </div>
+
+    <div class="nav-category">教材</div>
+    <div class="nav-section">
+      <a href="https://one-stream.io/join/user/dfc86da0-9483-45b9-97e9-2b633cb669ac" target="_blank" class="nav-item">
+        <span class="material-icons">play_circle</span>
+        <span>動画教材（onestream）</span>
+      </a>
+      <a href="materials.html" class="nav-item">
+        <span class="material-icons">folder_shared</span>
+        <span>生徒共通教材一覧</span>
+      </a>
+      <span class="nav-item disabled">
+        <span class="material-icons">description</span>
+        <span>授業書類一覧</span>
+      </span>
+    </div>
+
+    <div class="nav-category">受験対策データベース</div>
+    <div class="nav-section">
+      <a href="past-exams.html" class="nav-item">
+        <span class="material-icons">description</span>
+        <span>過去問</span>
+      </a>
+      <a href="documents.html" class="nav-item">
+        <span class="material-icons">assignment</span>
+        <span>生徒の書類</span>
+      </a>
+      <a href="interviews.html" class="nav-item">
+        <span class="material-icons">record_voice_over</span>
+        <span>面接の内容</span>
+      </a>
+    </div>
+
+    <div class="nav-category">コンテンツ</div>
+    <div class="nav-section">
+      <a href="videos.html" class="nav-item">
+        <span class="material-icons">video_library</span>
+        <span>過去の集団授業動画</span>
+      </a>
+      <a href="https://www.notion.so/EQAO-COMMUNITY-LINE-21f5f9664112803a8ee2cff1a4d5e2a7" class="nav-item" target="_blank">
+        <span class="material-icons">dashboard</span>
+        <span>生徒プラットフォーム</span>
+      </a>
+      <a href="column.html" class="nav-item">
+        <span class="material-icons">article</span>
+        <span>コラム一覧</span>
+      </a>
+    </div>
+
+    <div class="nav-category">イベント申し込み</div>
+    <div class="nav-section">
+      <a href="moshi.html" class="nav-item">
+        <span class="material-icons">quiz</span>
+        <span>EQAO模試</span>
+      </a>
+      <a href="mcff.html" class="nav-item">
+        <span class="material-icons">mic</span>
+        <span>MCFF申し込み</span>
+      </a>
+      <a href="party.html" class="nav-item">
+        <span class="material-icons">celebration</span>
+        <span>EQAO PARTY</span>
+      </a>
+    </div>
+
+    <div class="nav-category">プログラム申し込み</div>
+    <div class="nav-section">
+      <a href="camp.html" class="nav-item">
+        <span class="material-icons">camping</span>
+        <span>EQAO CAMP</span>
+      </a>
+      <a href="study-tour.html" class="nav-item">
+  <span class="material-icons">flight</span>
+  <span>EQAO STUDY TOUR</span>
+</a>
+      <span class="nav-item disabled">
+        <span class="material-icons">volunteer_activism</span>
+        <span>EQAO VOLUNTEER</span>
+      </span>
+    </div>
+
+    <div class="nav-category">カリキュラム</div>
+    <div class="nav-section">
+      <a href="zoom-links.html" class="nav-item">
+        <span class="material-icons">videocam</span>
+        <span>Zoomリンク一覧</span>
+      </a>
+      <a href="curriculum.html" class="nav-item">
+        <span class="material-icons">route</span>
+        <span>授業の流れ</span>
+      </a>
+      <a href="curriculum-support.html" class="nav-item">
+        <span class="material-icons">account_tree</span>
+        <span>カリキュラムとサポート体制</span>
+      </a>
+    </div>
+
+    <div class="nav-category">ルール関連</div>
+    <div class="nav-section">
+      <a href="rules.html" class="nav-item">
+        <span class="material-icons">gavel</span>
+        <span>生徒/保護者ルール一覧</span>
+      </a>
+      <span class="nav-item disabled">
+        <span class="material-icons">auto_stories</span>
+        <span>パンフレット</span>
+      </span>
+      <span class="nav-item disabled">
+        <span class="material-icons">policy</span>
+        <span>基本事項規定書</span>
+      </span>
+    </div>
+
+    <div class="nav-category">公式LINE</div>
+    <div class="nav-section">
+      <a href="https://lin.ee/V95VMNQ" target="_blank" class="nav-item">
+        <span class="material-icons">chat</span>
+        <span>塾生専用公式LINE</span>
+      </a>
+      <a href="https://lin.ee/QmJJihb" target="_blank" class="nav-item">
+        <span class="material-icons">campaign</span>
+        <span>保護者専用公式LINE[配信用]</span>
+      </a>
+      <a href="https://lin.ee/x3WPAvR" target="_blank" class="nav-item">
+        <span class="material-icons">mail</span>
+        <span>保護者専用公式LINE[連絡用]</span>
+      </a>
+    </div>
+  </div>
 
   <div class="container">
     <div class="news-section">
@@ -2567,6 +2972,18 @@
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
+    }
+
+    function openNav() {
+      document.getElementById('navOverlay').classList.add('open');
+      document.getElementById('navMenu').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav() {
+      document.getElementById('navOverlay').classList.remove('open');
+      document.getElementById('navMenu').classList.remove('open');
+      document.body.style.overflow = '';
     }
 
     // 塾情報モーダル
@@ -3836,6 +4253,6 @@ studyChart = new Chart(ctx, {
     </div>
   </div>
 </div>
-  <script src="js/nav-menu.js"></script>
+  
 </body>
 </html>

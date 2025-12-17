@@ -18,7 +18,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="css/nav-menu.css">
   
   <style>
     * {
@@ -446,7 +445,185 @@
       }
     }
 
-    
+    /* ハンバーガーメニュー */
+    .hamburger-btn {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .nav-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100%;
+      background: white;
+      z-index: 201;
+      transition: right 0.3s ease;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+      overflow-y: auto;
+    }
+
+    .nav-menu.open {
+      right: 0;
+    }
+
+    .nav-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 20px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-header-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .nav-user-section {
+      padding: 16px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #283593 0%, #3949ab 100%);
+    }
+
+    .nav-user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+    }
+
+    .nav-user-info .material-icons {
+      font-size: 24px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .nav-user-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 8px;
+      color: rgba(255,255,255,0.9);
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: inherit;
+    }
+
+    .nav-logout-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .nav-logout-btn .material-icons {
+      font-size: 16px;
+    }
+
+    .nav-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+    }
+
+    .nav-category {
+      font-size: 11px;
+      font-weight: 700;
+      color: #999;
+      padding: 16px 16px 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-section {
+      padding: 4px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      color: #333;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-item:hover {
+      background: #f5f5f5;
+    }
+
+    .nav-item .material-icons {
+      font-size: 22px;
+      color: #1a237e;
+    }
+
+    .nav-item span {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-badge {
+      background: #ff5722;
+      color: white;
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: auto;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
 
     .nav-badge-wip {
       background: #9e9e9e;
@@ -476,7 +653,167 @@
     <span class="material-icons">menu</span>
   </button>
 
+  <!-- ナビゲーションオーバーレイ -->
+  <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
+
   <!-- ナビゲーションメニュー -->
+  <div id="navMenu" class="nav-menu">
+    <div class="nav-header">
+      <span class="nav-header-title">メニュー</span>
+      <button class="nav-close" onclick="closeNav()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+
+    <div class="nav-user-section">
+      <div class="nav-user-info">
+        <span class="material-icons">person</span>
+        <span id="navUserName" class="nav-user-name"></span>
+      </div>
+      <button class="nav-logout-btn" onclick="doLogout()">
+        <span class="material-icons">logout</span>
+        <span>ログアウト</span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <a href="index.html" class="nav-item">
+        <span class="material-icons">home</span>
+        <span>ホーム</span>
+      </a>
+    </div>
+
+    <div class="nav-category">スケジュール</div>
+    <div class="nav-section">
+      <a href="yearly-schedule.html" class="nav-item">
+        <span class="material-icons">calendar_month</span>
+        <span>年間スケジュール</span>
+      </a>
+      <a href="exam-schedule.html" class="nav-item">
+        <span class="material-icons">school</span>
+        <span>受験スケジュール</span>
+        <span class="nav-badge">個別</span>
+      </a>
+      <a href="schedule.html" class="nav-item">
+        <span class="material-icons">event_note</span>
+        <span>授業スケジュール</span>
+        <span class="nav-badge">個別</span>
+      </a>
+    </div>
+
+    <div class="nav-category">学習管理</div>
+    <div class="nav-section">
+      <a href="checklist.html" class="nav-item">
+        <span class="material-icons">checklist</span>
+        <span>チェックリスト教材</span>
+        <span class="nav-badge">個別</span>
+      </a>
+    </div>
+
+    <div class="nav-category">コンテンツ</div>
+    <div class="nav-section">
+      <a href="videos.html" class="nav-item">
+        <span class="material-icons">video_library</span>
+        <span>過去の集団授業動画</span>
+      </a>
+      <a href="column.html" class="nav-item">
+        <span class="material-icons">article</span>
+        <span>コラム一覧</span>
+      </a>
+    </div>
+
+    <div class="nav-category">面談申し込み</div>
+    <div class="nav-section">
+      <a href="meeting-principal.html" class="nav-item">
+        <span class="material-icons">person</span>
+        <span>塾長面談</span>
+      </a>
+      <a href="meeting-sansya.html" class="nav-item">
+        <span class="material-icons">groups</span>
+        <span>三者面談</span>
+      </a>
+      <a href="meeting-tantou.html" class="nav-item">
+        <span class="material-icons">support_agent</span>
+        <span>担任面談</span>
+      </a>
+    </div>
+
+    <div class="nav-category">各種申し込み</div>
+    <div class="nav-section">
+      <a href="forms.html" class="nav-item">
+        <span class="material-icons">list_alt</span>
+        <span>各種申し込みフォーム一覧</span>
+      </a>
+    </div>
+
+    <div class="nav-category">カリキュラム</div>
+    <div class="nav-section">
+      <a href="zoom-links.html" class="nav-item">
+        <span class="material-icons">videocam</span>
+        <span>Zoomリンク一覧</span>
+      </a>
+    </div>
+
+    <div class="nav-category">ルール関連</div>
+    <div class="nav-section">
+      <a href="rules.html" class="nav-item">
+        <span class="material-icons">gavel</span>
+        <span>生徒/保護者ルール一覧</span>
+      </a>
+    </div>
+
+    <div class="nav-category">イベント</div>
+    <div class="nav-section">
+      <a href="mcff.html" class="nav-item">
+        <span class="material-icons">mic</span>
+        <span>MCFF プレゼン大会</span>
+      </a>
+    </div>
+  </div>
+
+  
+  <!-- メインコンテンツ -->
+  <main class="main">
+    <!-- ヒーロー -->
+    <div class="hero">
+      <div class="hero-badge">
+        <span class="material-icons" style="font-size: 14px;">mic</span>
+        次回開催準備中
+      </div>
+      <p class="hero-title-sub">MCFF 全国高校生</p>
+      <h1 class="hero-title">プレゼンテーション<br>コンテスト</h1>
+      <div class="hero-theme">「夢を、語れ！」</div>
+    </div>
+    
+    <!-- 準備中メッセージ -->
+    <div class="coming-soon-card">
+      <div class="coming-soon-icon">
+        <span class="material-icons" style="font-size: 28px;">settings</span>
+      </div>
+      <p class="coming-soon-text">次回開催に向けて詳細を準備中です</p>
+      <p class="coming-soon-sub">決まり次第、こちらでお知らせします</p>
+    </div>
+    
+    <!-- 理念 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">
+          <span class="material-icons" style="font-size: 20px;">auto_awesome</span>
+        </div>
+        <h2 class="section-title">大会理念</h2>
+      </div>
+      <div class="section-content">
+        <div class="philosophy">
+          <p class="philosophy-text">
+            胸の奥底に潜む小さな夢を語ることで、<br>
+            夢が周囲を巻き込み、<br>
+            社会に変革をもたらす力となる。<br><br>
+            未来を創る若者の可能性を信じ、<br>
+            その夢を存分に語る場を提供する。
+          </p>
+        </div>
+      </div>
+    </div>
     
     <!-- 表彰 -->
     <div class="section">
@@ -538,9 +875,38 @@
       };
       document.querySelector('.cta-notice').style.display = 'none';
     }
+  
+    // ハンバーガーメニュー
+    function openNav() {
+      document.getElementById('navMenu').classList.add('open');
+      document.getElementById('navOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav() {
+      document.getElementById('navMenu').classList.remove('open');
+      document.getElementById('navOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function doLogout() {
+      localStorage.removeItem('eqao_loggedIn');
+      localStorage.removeItem('eqao_studentId');
+      localStorage.removeItem('eqao_studentName');
+      localStorage.removeItem('eqao_password');
+      localStorage.removeItem('eqao_rowIndex');
+      localStorage.removeItem('eqao_isAdmin');
+      window.location.href = 'index.html';
+    }
+
+    function setNavUserName() {
+      const studentName = localStorage.getItem('eqao_studentName');
+      const navUserName = document.getElementById('navUserName');
+      if (navUserName) {
+        navUserName.textContent = studentName || '';
+      }
     }
 
   </script>
-  <script src="js/nav-menu.js"></script>
 </body>
 </html>

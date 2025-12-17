@@ -10,7 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="css/nav-menu.css">
   
   <style>
     * {
@@ -1416,7 +1415,7 @@
               クーリングオフを行うためには、<strong>「契約日から授業を一度も受けていない状態」</strong>であることが必要です。</p>
               
               <p><strong>手続き方法</strong><br>
-              クーリングオフを希望される場合は、期間内に <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="deb7b0b8b19ebbafbfb1f0bdb1f0b4ae">[email&#160;protected]</a></strong> までクーリングオフに必要な書類を送信してください。</p>
+              クーリングオフを希望される場合は、期間内に <strong>info@eqao.co.jp</strong> までクーリングオフに必要な書類を送信してください。</p>
               
               <div class="note">
                 契約解除が成立した場合、既にお支払いいただいた金額は全額返金いたします。返金は、契約解除の通知を受けてから14日以内に行われます。
@@ -1623,7 +1622,7 @@
     </div>
   </main>
   
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     // 料金設定
     const ENROLLMENT_FEE = 39800;  // 入塾金
     const MATERIAL_FEE = 19800;    // 教材費
@@ -1698,4 +1697,11 @@
       document.body.style.overflow = '';
     }
     
-    // 情報アコー
+    // 情報アコーディオン開閉
+    function toggleInfoAccordion(itemId) {
+      const item = document.getElementById(itemId);
+      item.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
