@@ -1885,9 +1885,12 @@
   background: #e0e0e0;
 }
 
-.study-chart-canvas {
+/* ★修正: Chart.js用ラッパー追加 */
+.study-chart-wrapper {
+  position: relative;
+  height: 140px;
+  width: 100%;
   margin-bottom: 12px;
-  height: 140px; 
 }
 
 .study-legend {
@@ -2276,7 +2279,10 @@
         <button class="study-week-btn" onclick="changeWeek(1)">次週 →</button>
       </div>
     </div>
-    <canvas id="studyChart" class="study-chart-canvas"></canvas>
+    <!-- ★修正: canvasをラッパーで囲む -->
+    <div class="study-chart-wrapper">
+      <canvas id="studyChart"></canvas>
+    </div>
     <div class="study-total" id="studyTotal">今週の合計: 0時間</div>
     <button class="study-add-btn" onclick="openStudyModal()">
       <span class="material-icons">add</span>
@@ -3418,10 +3424,7 @@ function renderStudyChart(stats, totalHours, weekRange) {
   const canvas = document.getElementById('studyChart');
   const ctx = canvas.getContext('2d');
   
-  // キャンバスのサイズを強制設定
-  canvas.style.height = '140px';
-  canvas.style.width = '100%';
-  canvas.height = 140;
+  // ★修正: 強制サイズ設定を削除（ラッパーに任せる）
   
   // 既存のグラフを破棄
   if (studyChart) {
@@ -3477,7 +3480,7 @@ studyChart = new Chart(ctx, {
   },
   options: {
     responsive: true,
-    maintainAspectRatio: false,  // ← これが重要
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false
