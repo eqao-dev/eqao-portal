@@ -1042,6 +1042,7 @@ function renderContent() {
     const data = await apiGet('getSchoolList', { studentId });
     
     console.log('APIレスポンス:', data);
+    console.log('APIレスポンス(JSON):', JSON.stringify(data));  // ← 追加
     console.log('data.success:', data ? data.success : 'データなし');
     console.log('data.schools:', data ? data.schools : 'なし');
     console.log('schools数:', data && data.schools ? data.schools.length : 0);
