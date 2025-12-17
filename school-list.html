@@ -987,6 +987,376 @@
       color: #333;
       line-height: 1.5;
     }
+    /* ========================================
+       スマホ向けコンパクト表示
+    ======================================== */
+    @media (max-width: 600px) {
+      .container {
+        padding: 12px 12px;
+      }
+
+      /* 上部アクションバー - コンパクトに */
+      .top-action-bar {
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .action-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+        border-radius: 8px;
+        gap: 5px;
+      }
+
+      .action-btn .material-icons {
+        font-size: 16px;
+      }
+
+      /* セクション - コンパクトに */
+      .section {
+        border-radius: 12px;
+        margin-bottom: 14px;
+      }
+
+      .section-header {
+        padding: 10px 14px;
+        gap: 8px;
+      }
+
+      .section-header .material-icons {
+        font-size: 18px;
+      }
+
+      .section-title {
+        font-size: 14px;
+      }
+
+      .section-content {
+        padding: 12px;
+      }
+
+      /* パターンタブ - コンパクトに */
+      .pattern-tabs {
+        gap: 6px;
+        margin-bottom: 14px;
+      }
+
+      .pattern-tab {
+        padding: 8px 6px;
+        border-radius: 8px;
+        border-width: 1.5px;
+      }
+
+      .pattern-tab-header {
+        gap: 4px;
+        margin-bottom: 4px;
+      }
+
+      .pattern-tab-letter {
+        font-size: 16px;
+      }
+
+      .pattern-tab-name {
+        font-size: 9px;
+        padding: 1px 5px;
+      }
+
+      .pattern-tab-icons {
+        gap: 4px;
+        margin-bottom: 4px;
+        font-size: 10px;
+      }
+
+      .pattern-tab-icons .material-icons {
+        font-size: 12px;
+      }
+
+      .pattern-tab-count {
+        font-size: 11px;
+      }
+
+      .pattern-tab-count-num {
+        font-size: 14px;
+      }
+
+      /* 学校カード - コンパクトに */
+      .pattern-school-list {
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      .school-card {
+        border-radius: 10px;
+      }
+
+      .school-card-header {
+        padding: 10px 12px;
+        gap: 10px;
+      }
+
+      .school-rank {
+        width: 26px;
+        height: 26px;
+        font-size: 11px;
+      }
+
+      .school-name {
+        font-size: 13px;
+      }
+
+      .school-faculty {
+        font-size: 11px;
+      }
+
+      .school-badge {
+        padding: 2px 6px;
+        font-size: 9px;
+      }
+
+      .school-detail-inner {
+        padding: 12px 14px;
+      }
+
+      .detail-section {
+        margin-bottom: 12px;
+      }
+
+      .detail-section-title {
+        font-size: 11px;
+        margin-bottom: 8px;
+        padding-bottom: 4px;
+      }
+
+      .detail-section-title .material-icons {
+        font-size: 14px;
+      }
+
+      .detail-grid {
+        gap: 8px;
+      }
+
+      .detail-label {
+        font-size: 10px;
+      }
+
+      .detail-value {
+        font-size: 12px;
+      }
+
+      /* 表示モード切替 - コンパクトに */
+      .view-mode-toggle {
+        margin-bottom: 14px;
+        padding: 3px;
+        border-radius: 8px;
+      }
+
+      .view-mode-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+        gap: 4px;
+        border-radius: 6px;
+      }
+
+      .view-mode-btn .material-icons {
+        font-size: 14px;
+      }
+
+      /* 一覧表示 - コンパクトに */
+      .all-schools-list {
+        gap: 8px;
+      }
+
+      .list-school-card {
+        border-radius: 10px;
+      }
+
+      .list-school-header {
+        padding: 10px 12px;
+        gap: 8px;
+      }
+
+      .list-pattern-badge {
+        padding: 3px 6px;
+        font-size: 9px;
+        border-radius: 5px;
+      }
+
+      .list-school-name {
+        font-size: 13px;
+      }
+
+      .list-school-faculty {
+        font-size: 11px;
+      }
+
+      /* 全パターン比較 - コンパクトに */
+      .compare-pattern-selector {
+        gap: 6px;
+        margin-bottom: 14px;
+      }
+
+      .compare-pattern-btn {
+        padding: 8px 10px;
+        gap: 8px;
+        border-radius: 8px;
+      }
+
+      .compare-pattern-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 13px;
+      }
+
+      .compare-pattern-label {
+        font-size: 11px;
+      }
+
+      .compare-pattern-count {
+        font-size: 10px;
+      }
+
+      /* 比較カード - コンパクトに */
+      .compare-cards-wrapper {
+        margin: 0 -12px;
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .compare-cards {
+        gap: 10px;
+      }
+
+      .compare-card {
+        width: 220px;
+        min-width: 220px;
+        border-radius: 10px;
+      }
+
+      .compare-card-header {
+        padding: 12px;
+      }
+
+      .compare-card-rank {
+        font-size: 10px;
+        margin-bottom: 4px;
+      }
+
+      .compare-card-name {
+        font-size: 13px;
+        margin-bottom: 2px;
+      }
+
+      .compare-card-faculty {
+        font-size: 10px;
+        margin-bottom: 6px;
+      }
+
+      .compare-card-badge {
+        padding: 2px 8px;
+        font-size: 9px;
+      }
+
+      .compare-card-section {
+        padding: 10px 12px;
+      }
+
+      .compare-card-section-title {
+        font-size: 10px;
+        margin-bottom: 6px;
+      }
+
+      .compare-card-section-title .material-icons {
+        font-size: 12px;
+      }
+
+      .compare-card-item {
+        margin-bottom: 5px;
+        font-size: 10px;
+      }
+
+      /* 下部リンク - コンパクトに */
+      .link-to-schedule {
+        padding: 10px 14px;
+        font-size: 12px;
+        border-radius: 8px;
+        margin-top: 14px;
+        gap: 6px;
+      }
+
+      .link-to-schedule .material-icons {
+        font-size: 16px;
+      }
+
+      /* 空状態 - コンパクトに */
+      .empty-state {
+        padding: 30px 16px;
+      }
+
+      .empty-state .material-icons {
+        font-size: 40px;
+        margin-bottom: 8px;
+      }
+
+      .empty-state p {
+        font-size: 12px;
+      }
+
+      /* モーダル - コンパクトに */
+      .modal-overlay {
+        padding: 12px;
+      }
+
+      .modal-header {
+        padding: 12px 14px;
+      }
+
+      .modal-title {
+        font-size: 14px;
+      }
+
+      .modal-title .material-icons {
+        font-size: 18px;
+      }
+
+      .modal-close {
+        width: 30px;
+        height: 30px;
+      }
+
+      .modal-body {
+        padding: 14px;
+      }
+
+      .ratio-guide-intro {
+        font-size: 12px;
+        margin-bottom: 12px;
+      }
+
+      .ratio-item {
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        gap: 10px;
+      }
+
+      .ratio-badge {
+        padding: 4px 8px;
+        font-size: 10px;
+      }
+
+      .ratio-desc {
+        font-size: 11px;
+      }
+
+      /* スクロールヒント */
+      .scroll-hint {
+        font-size: 10px;
+        margin-top: 8px;
+      }
+
+      .scroll-hint .material-icons {
+        font-size: 14px;
+      }
+    }
   </style>
 </head>
 <body>
