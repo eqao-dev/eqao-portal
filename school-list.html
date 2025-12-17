@@ -1080,11 +1080,10 @@ function renderContent() {
       renderCompareView();
     }
 
-    // サマリー更新
-    function updateSummary() {
-      const total = schools.length;
-      document.getElementById('totalCount').textContent = total;
-    }
+ function updateSummary() {
+  const total = schools.length;
+  document.getElementById('schoolCount').textContent = total;
+}
 
     // 表示切り替え
     function setView(view) {
