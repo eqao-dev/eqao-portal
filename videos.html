@@ -4,10 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <title>過去の集団授業動画一覧 - EQAO PORTAL</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     * {
@@ -20,17 +18,20 @@
       font-family: 'Noto Sans JP', sans-serif;
       background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
       min-height: 100vh;
-      padding-bottom: 40px;
+      color: #333;
     }
 
+    /* ========================================
+       ヘッダー
+    ======================================== */
     .header {
       background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
       color: white;
-      padding: 16px 20px;
+      padding: 14px 16px;
       display: flex;
       align-items: center;
-      gap: 16px;
-      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.5);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -47,169 +48,487 @@
       border-radius: 50%;
       color: white;
       cursor: pointer;
-      transition: background 0.3s;
+      text-decoration: none;
+      transition: all 0.3s;
     }
 
     .back-btn:hover {
       background: rgba(255,255,255,0.25);
+      transform: scale(1.05);
     }
 
     .header-title {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
-      letter-spacing: 2px;
+      flex: 1;
     }
 
+    .header-menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .header-menu-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* ========================================
+       ヒーローセクション
+    ======================================== */
+    .hero {
+      background: #1a237e;
+      padding: 40px 20px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero-icon .material-icons {
+      font-size: 40px;
+      color: white;
+    }
+
+    .hero-title {
+      font-size: 24px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      color: white;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .hero-stats {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 12px 24px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-stats-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-stats-icon .material-icons {
+      font-size: 20px;
+      color: white;
+    }
+
+    .hero-stats-text {
+      font-size: 14px;
+      color: white;
+    }
+
+    .hero-stats-count {
+      font-size: 22px;
+      font-weight: 900;
+      color: #feca57;
+    }
+
+    /* ========================================
+       メインコンテンツ
+    ======================================== */
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 20px 16px;
+      padding: 30px 16px 60px;
     }
 
-    /* ローディング */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .section-label-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section-label-icon .material-icons {
+      font-size: 18px;
+      color: white;
+    }
+
+    .section-label-text {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    /* フィルター用プルダウン */
+    .section-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .filter-select-wrapper {
+      position: relative;
+      flex: 1;
+      max-width: 300px;
+    }
+
+    .filter-select {
+      width: 100%;
+      padding: 12px 40px 12px 16px;
+      font-size: 14px;
+      font-family: inherit;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      background: white;
+      color: #333;
+      cursor: pointer;
+      appearance: none;
+      transition: all 0.2s;
+    }
+
+    .filter-select:hover {
+      border-color: #1a237e;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: #1a237e;
+      box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+    }
+
+    .filter-select-arrow {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      pointer-events: none;
+    }
+
+    .clear-filter-btn {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 14px;
+      background: #f0f0f5;
+      border: none;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #666;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .clear-filter-btn:hover {
+      background: #e0e0e5;
+    }
+
+    .clear-filter-btn.show {
+      display: flex;
+    }
+
+    .clear-filter-btn .material-icons {
+      font-size: 16px;
+    }
+
+    /* ========================================
+       動画グリッド
+    ======================================== */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    /* ========================================
+       動画カード
+    ======================================== */
+    .video-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+
+    .video-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(26, 35, 126, 0.2);
+    }
+
+    .video-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(26, 35, 126, 0.1) 0%, rgba(74, 20, 140, 0.1) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 1;
+      pointer-events: none;
+      border-radius: 16px;
+    }
+
+    .video-card:hover::before {
+      opacity: 1;
+    }
+
+    /* サムネイル */
+    .video-thumbnail {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+
+    .video-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .video-card:hover .video-thumbnail img {
+      transform: scale(1.1);
+    }
+
+    .video-thumbnail-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        transparent 50%,
+        rgba(0, 0, 0, 0.7) 100%
+      );
+    }
+
+    /* 再生ボタン */
+    .video-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      width: 64px;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .video-play-btn .material-icons {
+      font-size: 32px;
+      color: #1a237e;
+      margin-left: 4px;
+    }
+
+    .video-card:hover .video-play-btn {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .video-play-btn::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.5);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    /* カード本体 */
+    .video-card-body {
+      padding: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .video-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .video-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    .video-card-meta .material-icons {
+      font-size: 16px;
+    }
+
+    /* ========================================
+       ローディング
+    ======================================== */
     .loading {
       text-align: center;
-      padding: 40px;
+      padding: 60px 20px;
       color: #666;
     }
 
     .loading-spinner {
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border: 4px solid #e0e0e0;
       border-top-color: #1a237e;
       border-radius: 50%;
       animation: spin 1s linear infinite;
-      margin: 0 auto 16px;
+      margin: 0 auto 20px;
     }
 
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
 
-    .card-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(26, 35, 126, 0.15);
-    }
-
-    .card-thumbnail {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-      background: #eee;
-    }
-
-    .card-body {
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .card-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, #c62828 0%, #ef5350 100%);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .card-icon .material-icons {
-      color: white;
-      font-size: 20px;
-    }
-
-    .card-content {
-      flex: 1;
-    }
-
-    .card-title {
+    .loading p {
       font-size: 14px;
-      font-weight: 600;
-      color: #333;
     }
 
-    .card-subtitle {
-      font-size: 11px;
-      color: #888;
-      margin-top: 2px;
-    }
-
-    .card-arrow {
-      color: #ccc;
-    }
-
-    /* 結果なし */
+    /* ========================================
+       結果なし
+    ======================================== */
     .no-results {
       text-align: center;
-      padding: 60px 20px;
+      padding: 80px 20px;
       color: #888;
     }
 
     .no-results .material-icons {
-      font-size: 48px;
-      margin-bottom: 16px;
-      opacity: 0.5;
+      font-size: 64px;
+      margin-bottom: 20px;
+      opacity: 0.4;
     }
 
-    /* レスポンシブ */
-    @media (max-width: 480px) {
-      .header-title {
-        font-size: 16px;
-      }
-
-      .card {
-        padding: 14px 16px;
-      }
-
-      .card-icon {
-        width: 44px;
-        height: 44px;
-      }
-
-      .card-title {
-        font-size: 14px;
-      }
+    .no-results p {
+      font-size: 16px;
     }
 
-    /* ハンバーガーメニュー */
-    .hamburger-btn {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-      border: none;
-      border-radius: 50%;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    /* ========================================
+       フッターヒント
+    ======================================== */
+    .footer-hint {
+      text-align: center;
+      padding: 30px 20px;
+      color: #999;
+      font-size: 12px;
     }
 
+    .footer-hint .material-icons {
+      font-size: 16px;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+
+    /* ========================================
+       ハンバーガーメニュー
+    ======================================== */
     .nav-overlay {
       position: fixed;
       top: 0;
@@ -257,7 +576,19 @@
     .nav-header-title {
       font-size: 16px;
       font-weight: 700;
-      letter-spacing: 1px;
+    }
+
+    .nav-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
     }
 
     .nav-user-section {
@@ -278,7 +609,7 @@
 
     .nav-user-info .material-icons {
       font-size: 24px;
-      color: rgba(255,255,255,0.7);
+      opacity: 0.7;
     }
 
     .nav-user-name {
@@ -294,106 +625,71 @@
       background: rgba(255,255,255,0.15);
       border: none;
       border-radius: 8px;
-      color: rgba(255,255,255,0.9);
+      color: white;
       font-size: 12px;
       cursor: pointer;
-      transition: background 0.2s;
       font-family: inherit;
-    }
-
-    .nav-logout-btn:hover {
-      background: rgba(255,255,255,0.25);
     }
 
     .nav-logout-btn .material-icons {
       font-size: 16px;
     }
 
-    .nav-close {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      background: rgba(255,255,255,0.15);
-      border: none;
-      border-radius: 50%;
-      color: white;
-      cursor: pointer;
-    }
-
     .nav-category {
+      padding: 12px 20px 8px;
       font-size: 11px;
-      font-weight: 700;
-      color: #999;
-      padding: 16px 16px 8px;
+      color: #888;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
     .nav-section {
-      padding: 4px 0;
-      border-bottom: 1px solid #eee;
+      padding: 0 12px;
     }
 
     .nav-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 16px;
+      padding: 12px 14px;
       color: #333;
       text-decoration: none;
-      transition: background 0.2s;
+      border-radius: 10px;
+      transition: all 0.2s;
+      font-size: 14px;
     }
 
     .nav-item:hover {
-      background: #f5f5f5;
+      background: #f0f0f5;
     }
 
     .nav-item .material-icons {
-      font-size: 22px;
-      color: #1a237e;
-    }
-
-    .nav-item span {
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 20px;
+      color: #666;
     }
 
     .nav-badge {
-      background: #ff5722;
+      background: #1a237e;
       color: white;
       font-size: 9px;
-      padding: 2px 6px;
-      border-radius: 4px;
+      padding: 2px 8px;
+      border-radius: 10px;
       margin-left: auto;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .nav-badge-wip {
-      background: #9e9e9e;
-      color: white;
-      font-size: 9px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-left: auto;
-      white-space: nowrap;
-      flex-shrink: 0;
     }
   </style>
 </head>
 <body>
+  <!-- ヘッダー -->
   <header class="header">
-    <button class="back-btn" onclick="goBack()">
+    <a href="index.html" class="back-btn">
       <span class="material-icons">arrow_back</span>
+    </a>
+    <h1 class="header-title">過去の集団授業動画</h1>
+    <button class="header-menu-btn" onclick="openNav()">
+      <span class="material-icons">menu</span>
     </button>
-    <h1 class="header-title">過去の集団授業動画一覧</h1>
   </header>
-  <!-- ハンバーガーボタン -->
-  <button class="hamburger-btn" onclick="openNav()">
-    <span class="material-icons">menu</span>
-  </button>
 
   <!-- ナビゲーションオーバーレイ -->
   <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
@@ -418,7 +714,7 @@
       </button>
     </div>
 
-    <div class="nav-section">
+    <div class="nav-section" style="padding-top: 12px;">
       <a href="index.html" class="nav-item">
         <span class="material-icons">home</span>
         <span>ホーム</span>
@@ -436,35 +732,22 @@
         <span>受験スケジュール</span>
         <span class="nav-badge">個別</span>
       </a>
-      <a href="schedule.html" class="nav-item">
-        <span class="material-icons">event_note</span>
-        <span>授業スケジュール</span>
-        <span class="nav-badge">個別</span>
-      </a>
     </div>
 
-    <div class="nav-category">学習管理</div>
+    <div class="nav-category">学習</div>
     <div class="nav-section">
       <a href="checklist.html" class="nav-item">
         <span class="material-icons">checklist</span>
         <span>チェックリスト教材</span>
         <span class="nav-badge">個別</span>
       </a>
-    </div>
-
-    <div class="nav-category">コンテンツ</div>
-    <div class="nav-section">
-      <a href="videos.html" class="nav-item">
+      <a href="videos.html" class="nav-item" style="background: #e8eaf6;">
         <span class="material-icons">video_library</span>
         <span>過去の集団授業動画</span>
       </a>
-      <a href="column.html" class="nav-item">
-        <span class="material-icons">article</span>
-        <span>コラム一覧</span>
-      </a>
     </div>
 
-    <div class="nav-category">面談申し込み</div>
+    <div class="nav-category">面談</div>
     <div class="nav-section">
       <a href="meeting-principal.html" class="nav-item">
         <span class="material-icons">person</span>
@@ -474,57 +757,71 @@
         <span class="material-icons">groups</span>
         <span>三者面談</span>
       </a>
-      <a href="meeting-tantou.html" class="nav-item">
-        <span class="material-icons">support_agent</span>
-        <span>担任面談</span>
-      </a>
-    </div>
-
-    <div class="nav-category">各種申し込み</div>
-    <div class="nav-section">
-      <a href="forms.html" class="nav-item">
-        <span class="material-icons">list_alt</span>
-        <span>各種申し込みフォーム一覧</span>
-      </a>
-    </div>
-
-    <div class="nav-category">カリキュラム</div>
-    <div class="nav-section">
-      <a href="zoom-links.html" class="nav-item">
-        <span class="material-icons">videocam</span>
-        <span>Zoomリンク一覧</span>
-      </a>
-    </div>
-
-    <div class="nav-category">ルール関連</div>
-    <div class="nav-section">
-      <a href="rules.html" class="nav-item">
-        <span class="material-icons">gavel</span>
-        <span>生徒/保護者ルール一覧</span>
-      </a>
-    </div>
-
-    <div class="nav-category">イベント</div>
-    <div class="nav-section">
-      <a href="mcff.html" class="nav-item">
-        <span class="material-icons">mic</span>
-        <span>MCFF プレゼン大会</span>
-      </a>
     </div>
   </div>
 
+  <!-- ヒーローセクション -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-icon">
+        <span class="material-icons">play_circle</span>
+      </div>
+      <h2 class="hero-title">授業動画ライブラリ</h2>
+      <p class="hero-subtitle">
+        過去の集団授業をいつでも何度でも復習できます。<br>
+        わからなかったところを繰り返しチェックしよう！
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stats-icon">
+          <span class="material-icons">movie</span>
+        </div>
+        <div class="hero-stats-text">
+          <span class="hero-stats-count" id="videoCount">-</span> 本の動画が視聴可能
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- メインコンテンツ -->
   <div class="container">
-    <div id="loading" class="loading">
-      <div class="loading-spinner"></div>
-      <p>読み込み中...</p>
+    <div class="section-header-row">
+      <div class="section-label">
+        <div class="section-label-icon">
+          <span class="material-icons">video_library</span>
+        </div>
+        <span class="section-label-text">すべての動画</span>
+      </div>
+      <div class="filter-select-wrapper">
+        <select class="filter-select" id="videoFilter" onchange="filterVideos()">
+          <option value="">動画を選択...</option>
+        </select>
+        <span class="material-icons filter-select-arrow">expand_more</span>
+      </div>
+      <button class="clear-filter-btn" id="clearFilterBtn" onclick="clearFilter()">
+        <span class="material-icons">close</span>
+        フィルター解除
+      </button>
     </div>
 
-    <div id="cardList" class="card-list" style="display: none;"></div>
-    
+    <!-- ローディング -->
+    <div id="loading" class="loading">
+      <div class="loading-spinner"></div>
+      <p>動画を読み込み中...</p>
+    </div>
+
+    <!-- 動画グリッド -->
+    <div id="videoGrid" class="video-grid" style="display: none;"></div>
+
+    <!-- 結果なし -->
     <div id="noResults" class="no-results" style="display: none;">
-      <span class="material-icons">search_off</span>
+      <span class="material-icons">videocam_off</span>
       <p>動画がありません</p>
+    </div>
+
+    <!-- フッターヒント -->
+    <div class="footer-hint" id="footerHint" style="display: none;">
+      <span class="material-icons">touch_app</span>
+      動画をタップして再生
     </div>
   </div>
 
@@ -534,122 +831,179 @@
     // ============================================
     const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
 
-    async function apiGet(action, params = {}) {
-      const url = new URL(API_URL);
-      url.searchParams.set('action', action);
-      for (const [key, value] of Object.entries(params)) {
-        if (value !== undefined && value !== null) {
-          url.searchParams.set(key, value);
-        }
-      }
-      
-      const response = await fetch(url.toString());
-      if (!response.ok) {
-        throw new Error('API Error: ' + response.status);
-      }
-      return await response.json();
-    }
+    // ============================================
+    // 状態管理
+    // ============================================
+    let allVideos = [];
 
-    // 戻るボタン
-    function goBack() {
-      window.location.href = 'index.html?t=' + new Date().getTime();
-    }
-
-    // ページ読み込み時
+    // ============================================
+    // 初期化
+    // ============================================
     document.addEventListener('DOMContentLoaded', function() {
       setNavUserName();
       loadVideos();
     });
 
+    // ============================================
     // 動画一覧を読み込み
+    // ============================================
     async function loadVideos() {
       try {
-        const data = await apiGet('getVideos');
-        displayData(data);
+        const url = `${API_URL}?action=getVideos`;
+        const response = await fetch(url);
+        const data = await response.json();
+        allVideos = data || [];
+        populateFilter(allVideos);
+        displayVideos(allVideos);
       } catch (error) {
         handleError(error);
       }
     }
 
-    // データを表示
-    function displayData(data) {
-      document.getElementById('loading').style.display = 'none';
+    // ============================================
+    // フィルタープルダウンを作成
+    // ============================================
+    function populateFilter(data) {
+      const filterSelect = document.getElementById('videoFilter');
+      filterSelect.innerHTML = '<option value="">すべての動画を表示</option>';
       
-      const cardList = document.getElementById('cardList');
-      cardList.innerHTML = '';
-
-      if (!data || data.length === 0) {
-        document.getElementById('noResults').style.display = 'block';
-        return;
-      }
-
-      cardList.style.display = 'flex';
-
-      data.forEach(function(item) {
-        const card = document.createElement('a');
-        card.className = 'card';
-        card.href = item.url || item.link;
-        card.target = '_blank';
-
-        // YouTubeのサムネイルURLを生成
-        const videoId = getYoutubeVideoId(item.url || item.link);
-        const thumbnailUrl = videoId 
-          ? 'https://img.youtube.com/vi/' + videoId + '/mqdefault.jpg'
-          : '';
-
-        card.innerHTML = `
-          ${thumbnailUrl ? '<img class="card-thumbnail" src="' + thumbnailUrl + '" alt="">' : ''}
-          <div class="card-body">
-            <div class="card-icon">
-              <span class="material-icons">play_circle</span>
-            </div>
-            <div class="card-content">
-              <div class="card-title">${escapeHtml(item.title)}</div>
-              <div class="card-subtitle">タップして再生</div>
-            </div>
-            <span class="material-icons card-arrow">chevron_right</span>
-          </div>
-        `;
-
-        cardList.appendChild(card);
+      data.forEach((item, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = item.title || `動画 ${index + 1}`;
+        filterSelect.appendChild(option);
       });
     }
 
+    // ============================================
+    // フィルター適用
+    // ============================================
+    function filterVideos() {
+      const filterValue = document.getElementById('videoFilter').value;
+      const clearBtn = document.getElementById('clearFilterBtn');
+      
+      if (filterValue === '') {
+        // すべて表示
+        displayVideos(allVideos);
+        clearBtn.classList.remove('show');
+      } else {
+        // 選択した動画のみ表示
+        const selectedIndex = parseInt(filterValue);
+        const selectedVideo = allVideos[selectedIndex];
+        displayVideos([selectedVideo]);
+        clearBtn.classList.add('show');
+      }
+    }
+
+    // ============================================
+    // フィルター解除
+    // ============================================
+    function clearFilter() {
+      document.getElementById('videoFilter').value = '';
+      document.getElementById('clearFilterBtn').classList.remove('show');
+      displayVideos(allVideos);
+    }
+
+    // ============================================
+    // 動画を表示
+    // ============================================
+    function displayVideos(data) {
+      document.getElementById('loading').style.display = 'none';
+      
+      const videoGrid = document.getElementById('videoGrid');
+      videoGrid.innerHTML = '';
+
+      if (!data || data.length === 0) {
+        document.getElementById('noResults').style.display = 'block';
+        videoGrid.style.display = 'none';
+        document.getElementById('footerHint').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('noResults').style.display = 'none';
+
+      // 動画カウント更新（全動画数）
+      document.getElementById('videoCount').textContent = allVideos.length;
+
+      videoGrid.style.display = 'grid';
+      document.getElementById('footerHint').style.display = 'block';
+
+      data.forEach(function(item, index) {
+        const videoId = getYoutubeVideoId(item.url || item.link);
+        const thumbnailUrl = videoId 
+          ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`
+          : '';
+
+        const card = document.createElement('a');
+        card.className = 'video-card';
+        card.href = item.url || item.link;
+        card.target = '_blank';
+
+        card.innerHTML = `
+          <div class="video-thumbnail">
+            ${thumbnailUrl 
+              ? `<img src="${thumbnailUrl}" alt="${escapeHtml(item.title)}" loading="lazy">`
+              : '<div style="width:100%;height:100%;background:#eee;"></div>'
+            }
+            <div class="video-thumbnail-overlay"></div>
+            <div class="video-play-btn">
+              <span class="material-icons">play_arrow</span>
+            </div>
+          </div>
+          <div class="video-card-body">
+            <div class="video-card-title">${escapeHtml(item.title)}</div>
+            <div class="video-card-meta">
+              <span class="material-icons">smart_display</span>
+              <span>タップして再生</span>
+            </div>
+          </div>
+        `;
+
+        videoGrid.appendChild(card);
+      });
+    }
+
+    // ============================================
     // YouTubeのVideo IDを抽出
+    // ============================================
     function getYoutubeVideoId(url) {
       if (!url) return null;
-      // youtu.be/XXXXX 形式
       let match = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
       if (match) return match[1];
-      // youtube.com/watch?v=XXXXX 形式
       match = url.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/);
       if (match) return match[1];
-      // youtube.com/embed/XXXXX 形式
       match = url.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/);
       if (match) return match[1];
       return null;
     }
 
+    // ============================================
     // エラーハンドリング
+    // ============================================
     function handleError(error) {
       document.getElementById('loading').style.display = 'none';
-      document.getElementById('noResults').style.display = 'block';
-      document.getElementById('noResults').innerHTML = `
-        <span class="material-icons">error</span>
-        <p>データの読み込みに失敗しました</p>
+      const noResults = document.getElementById('noResults');
+      noResults.style.display = 'block';
+      noResults.innerHTML = `
+        <span class="material-icons">error_outline</span>
+        <p>読み込みに失敗しました</p>
       `;
       console.error(error);
     }
 
+    // ============================================
     // HTMLエスケープ
+    // ============================================
     function escapeHtml(text) {
       if (!text) return '';
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
     }
-  
-    // ハンバーガーメニュー
+
+    // ============================================
+    // ナビゲーション
+    // ============================================
     function openNav() {
       document.getElementById('navMenu').classList.add('open');
       document.getElementById('navOverlay').classList.add('open');
@@ -676,10 +1030,9 @@
       const studentName = localStorage.getItem('eqao_studentName');
       const navUserName = document.getElementById('navUserName');
       if (navUserName) {
-        navUserName.textContent = studentName || '';
+        navUserName.textContent = studentName || 'ゲスト';
       }
     }
-
   </script>
 </body>
 </html>
