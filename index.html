@@ -1165,6 +1165,7 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
+   height: 100%; 
 }
 
 .profile-header,
@@ -1845,9 +1846,11 @@
 
 /* グラフ表示エリア */
 .study-chart-container {
-  padding: 16px;
+  padding: 0; 
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
 }
-
 .study-chart-header {
   display: flex;
   align-items: center;
@@ -1929,6 +1932,7 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
+  margin-top: auto;
 }
 
 .study-add-btn:hover {
@@ -3378,96 +3382,140 @@ async function viewProfileDetails() {
     }
 
     // グラフを描画
-    function renderStudyChart(stats, totalHours, weekRange) {
-      const canvas = document.getElementById('studyChart');
-      const ctx = canvas.getContext('2d');
+function renderStudyChart(stats, totalHours, weekRange) {
+  const canvas = document.getElementById('studyChart');
+  const ctx = canvas.getContext('2d');
+  
+  // 既存のグラフを破棄
+  if (studyChart) {
+    studyChart.destroy();
+  }
+  
+  // メモデータを保持するオブジェクト
+  const memoData = {};
+  
+  // データセットを構築
+  const datasets = [];
+  const categories = Object.keys(studyCategories);
+  
+  categories.forEach(category => {
+    const data = weekRange.dates.map(date => {
+      const dateData = stats[date] && stats[date][category];
       
-      // 既存のグラフを破棄
-      if (studyChart) {
-        studyChart.destroy();
+      // メモを保存
+      if (dateData) {
+        if (!memoData[date]) {
+          memoData[date] = {};
+        }
+        memoData[date][category] = {
+          hours: dateData.hours || dateData,  // 旧データ対応
+          memos: dateData.memos || []
+        };
+        return dateData.hours || dateData;
       }
       
-      // データセットを構築
-      const datasets = [];
-      const categories = Object.keys(studyCategories);
-      
-      categories.forEach(category => {
-        const data = weekRange.dates.map(date => {
-          return stats[date] && stats[date][category] ? stats[date][category] : 0;
-        });
-        
-        datasets.push({
-          label: category,
-          data: data,
-          backgroundColor: studyCategories[category].color,
-          borderRadius: 4
-        });
-      });
-      
-      // ラベル（日付）
-      const labels = weekRange.dates.map(date => {
-        const d = new Date(date);
-        return (d.getMonth() + 1) + '/' + d.getDate();
-      });
-      
-      // グラフを作成
-      studyChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: datasets
+      return 0;
+    });
+    
+    datasets.push({
+      label: category,
+      data: data,
+      backgroundColor: studyCategories[category].color,
+      borderRadius: 4
+    });
+  });
+  
+  // ラベル（日付）
+  const labels = weekRange.dates.map(date => {
+    const d = new Date(date);
+    return (d.getMonth() + 1) + '/' + d.getDate();
+  });
+  
+  // グラフを作成
+  studyChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: datasets
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
         },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false
-            },
-            tooltip: {
-              callbacks: {
-                label: function(context) {
-                  return context.dataset.label + ': ' + context.parsed.y + '時間';
+        tooltip: {
+          callbacks: {
+            // ツールチップをカスタマイズ
+            label: function(context) {
+              const category = context.dataset.label;
+              const hours = context.parsed.y;
+              const dateIndex = context.dataIndex;
+              const date = weekRange.dates[dateIndex];
+              
+              let label = category + ': ' + hours + '時間';
+              
+              // メモがあれば追加
+              if (memoData[date] && memoData[date][category]) {
+                const memos = memoData[date][category].memos;
+                if (memos.length > 0) {
+                  label += '\n💬 ' + memos.join(', ');
                 }
               }
+              
+              return label;
+            },
+            // 複数行表示を有効化
+            title: function(context) {
+              return context[0].label;
             }
           },
-          scales: {
-            x: {
-              stacked: true,
-              grid: {
-                display: false
-              }
-            },
-            y: {
-              stacked: true,
-              beginAtZero: true,
-              ticks: {
-                stepSize: 1,
-                callback: function(value) {
-                  return value + 'h';
-                }
-              }
+          // ツールチップのスタイル調整
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          padding: 12,
+          bodySpacing: 6,
+          bodyFont: {
+            size: 12
+          },
+          displayColors: true
+        }
+      },
+      scales: {
+        x: {
+          stacked: true,
+          grid: {
+            display: false
+          }
+        },
+        y: {
+          stacked: true,
+          beginAtZero: true,
+          ticks: {
+            stepSize: 1,
+            callback: function(value) {
+              return value + 'h';
             }
           }
         }
-      });
-      
-      // タイトルを更新
-      const startDate = new Date(weekRange.start);
-      const endDate = new Date(weekRange.end);
-      const titleText = (startDate.getMonth() + 1) + '/' + startDate.getDate() + 
-                       ' - ' + (endDate.getMonth() + 1) + '/' + endDate.getDate();
-      document.getElementById('studyChartTitle').textContent = titleText;
-    
-      
-      // 合計時間を更新
-      const weekLabel = currentWeekOffset === 0 ? '今週' : 
-                        currentWeekOffset < 0 ? Math.abs(currentWeekOffset) + '週前' : 
-                        currentWeekOffset + '週後';
-      document.getElementById('studyTotal').textContent = weekLabel + 'の合計: ' + totalHours.toFixed(1) + '時間';
+      }
     }
+  });
+  
+  // タイトルを更新
+  const startDate = new Date(weekRange.start);
+  const endDate = new Date(weekRange.end);
+  const titleText = (startDate.getMonth() + 1) + '/' + startDate.getDate() + 
+                   ' - ' + (endDate.getMonth() + 1) + '/' + endDate.getDate();
+  document.getElementById('studyChartTitle').textContent = titleText;
 
+  
+  // 合計時間を更新
+  const weekLabel = currentWeekOffset === 0 ? '今週' : 
+                    currentWeekOffset < 0 ? Math.abs(currentWeekOffset) + '週前' : 
+                    currentWeekOffset + '週後';
+  document.getElementById('studyTotal').textContent = weekLabel + 'の合計: ' + totalHours.toFixed(1) + '時間';
+}
     // ページ読み込み時にグラフを表示
     document.addEventListener('DOMContentLoaded', function() {
       const loggedIn = localStorage.getItem('eqao_loggedIn');
