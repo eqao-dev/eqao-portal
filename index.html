@@ -1921,14 +1921,18 @@
   flex-shrink: 0;
 }
 
-.study-add-btn {
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-  color: white;
+.study-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 0;
+}
+
+.study-btn {
+  flex: 1;
+  padding: 10px 8px;
   border: none;
   border-radius: 10px;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
@@ -1936,39 +1940,35 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  margin-top: 0;
+  gap: 4px;
   flex-shrink: 0;
 }
 
-.study-add-btn:hover {
+.study-btn .material-icons {
+  font-size: 16px;
+}
+
+.study-btn-add {
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  color: white;
+}
+
+.study-btn-add:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
 }
 
-.study-manage-btn {
-  width: 100%;
-  padding: 10px;
+.study-btn-manage {
   background: white;
   color: #1a237e;
   border: 2px solid #1a237e;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 8px;
-  flex-shrink: 0;
 }
 
-.study-manage-btn:hover {
+.study-btn-manage:hover {
   background: #f0f4ff;
 }
+
+
 
 .study-loading {
   text-align: center;
@@ -2475,14 +2475,16 @@
       <canvas id="studyChart"></canvas>
     </div>
     <div class="study-total" id="studyTotal">今週の合計: 0時間</div>
-    <button class="study-add-btn" onclick="openStudyModal()">
-      <span class="material-icons">add</span>
-      今日の学習を記録
-    </button>
-    <button class="study-manage-btn" onclick="openManageModal()">
-      <span class="material-icons">edit_note</span>
-      記録を管理
-    </button>
+    <div class="study-buttons">
+  <button class="study-btn study-btn-add" onclick="openStudyModal()">
+    <span class="material-icons">add</span>
+    今日の学習を記録
+  </button>
+  <button class="study-btn study-btn-manage" onclick="openManageModal()">
+    <span class="material-icons">edit_note</span>
+    記録を管理
+  </button>
+</div>
   </div>
 </div>
     </div>
