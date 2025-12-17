@@ -883,36 +883,43 @@
 
     <!-- コンテンツ -->
     <div id="mainContent" style="display: none;">
-      <!-- サマリー（シンプル版） -->
-      <div class="summary-card">
-        <div class="summary-main">
-          <div class="summary-icon">
-            <span class="material-icons">school</span>
-          </div>
-          <div class="summary-text">
-            <span class="summary-title">志望校／併願校</span>
-            <span class="summary-count" id="totalCount">0</span>
-            <span class="summary-unit">校</span>
-            <span class="summary-label">登録済み</span>
-          </div>
-        </div>
-        <a href="exam-schedule.html" class="summary-edit-btn">
-          <span class="material-icons">edit</span>
-          志望校／併願校を編集する
-        </a>
+  <!-- サマリー（シンプル版） -->
+  <div id="summaryCard" class="summary-card">
+    <div class="summary-main">
+      <div class="summary-icon">
+        <span class="material-icons">school</span>
       </div>
+      <div class="summary-text">
+        <span class="summary-title">志望校／併願校</span>
+        <span class="summary-count" id="schoolCount">0</span>
+        <span class="summary-unit">校</span>
+        <span class="summary-label">登録済み</span>
+      </div>
+    </div>
+    <a href="exam-schedule.html" class="summary-edit-btn">
+      <span class="material-icons">edit</span>
+      志望校／併願校を編集する
+    </a>
+  </div>
 
-      <!-- 表示切り替え -->
-      <div class="view-toggle">
-        <button class="view-btn active" id="viewCards" onclick="setView('cards')">
-          <span class="material-icons">view_list</span>
-          リスト表示
-        </button>
-        <button class="view-btn" id="viewCompare" onclick="setView('compare')">
-          <span class="material-icons">table_chart</span>
-          比較表示
-        </button>
-      </div>
+  <!-- 表示切り替え -->
+  <div id="viewToggle" class="view-toggle">
+    <button class="view-btn active" id="viewCards" onclick="setView('cards')">
+      <span class="material-icons">view_list</span>
+      リスト表示
+    </button>
+    <button class="view-btn" id="viewCompare" onclick="setView('compare')">
+      <span class="material-icons">table_chart</span>
+      比較表示
+    </button>
+  </div>
+
+  <!-- リスト表示（アコーディオン） -->
+  <div id="listView"></div>
+
+  <!-- 比較表示 -->
+  <div id="compareView" style="display: none;"></div>
+</div>
 
       <!-- リスト表示（アコーディオン） -->
       <div id="cardsView"></div>
