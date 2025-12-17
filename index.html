@@ -1190,7 +1190,7 @@
   gap: 10px;
   margin-bottom: 12px;
   flex: 1;
-  height: 200px;  /* ← もっと小さく */
+  max-height: 240px;  /* ← 最大高さを設定 */
   overflow-y: auto;
   padding: 4px;
 }
@@ -1215,7 +1215,9 @@
 }
 
 .profile-basic-info {
-  text-align: center;
+  display: flex;  /* ← 横並びに変更 */
+  align-items: center;  /* ← 中央揃え */
+  gap: 12px;  /* ← アイコンと名前の間隔 */
   padding-bottom: 12px;
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 10px;
@@ -1270,13 +1272,14 @@
   flex: 1;
   min-width: 0;
 }
-
+    
 .profile-name {
-  font-size: 15px;
+  font-size: 16px;  /* ← サイズを少し小さく */
   font-weight: 700;
   color: #333;
-  margin-bottom: 6px;
+  text-align: left;  /* ← 左揃えに */
 }
+
 
 .profile-details {
   font-size: 11px;
@@ -2962,11 +2965,11 @@ async function loadProfileCard() {
       
       // プロフィール表示HTML作成
       let html = `
-        <div class="profile-basic-info">
-          <div class="profile-avatar" id="profileAvatar">👤</div>
-          <div class="profile-name" id="profileName">${escapeHtml(studentName)}</div>
-        </div>
-      `;
+  <div class="profile-basic-info">
+    <div class="profile-avatar">👤</div>
+    <div class="profile-name">${escapeHtml(studentName)}</div>
+  </div>
+`;
       
       // 学年・志望系統
       if (profile.grade || profile.major) {
