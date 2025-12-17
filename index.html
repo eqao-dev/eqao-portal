@@ -1977,6 +1977,186 @@
   font-size: 13px;
 }
 
+/* 記録管理モーダル */
+.manage-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 800;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.manage-modal-overlay.show {
+  display: flex;
+}
+
+.manage-modal {
+  background: white;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalSlideUp 0.3s ease;
+}
+
+.manage-modal-header {
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  color: white;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 20px 20px 0 0;
+  flex-shrink: 0;
+}
+
+.manage-modal-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  flex: 1;
+}
+
+.manage-modal-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: background 0.2s;
+}
+
+.manage-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.manage-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.manage-loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+  font-size: 13px;
+}
+
+.manage-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+  font-size: 13px;
+}
+
+.manage-log-item {
+  background: #f8f9fc;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border-left: 4px solid #1a237e;
+}
+
+.manage-log-item:last-child {
+  margin-bottom: 0;
+}
+
+.manage-log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.manage-log-date {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a237e;
+}
+
+.manage-log-category {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.manage-log-info {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.manage-log-memo {
+  font-size: 12px;
+  color: #888;
+  font-style: italic;
+  margin-bottom: 12px;
+  padding: 8px;
+  background: white;
+  border-radius: 6px;
+}
+
+.manage-log-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.manage-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.manage-btn-edit {
+  background: #1a237e;
+  color: white;
+}
+
+.manage-btn-edit:hover {
+  background: #0d1642;
+}
+
+.manage-btn-delete {
+  background: #f44336;
+  color: white;
+}
+
+.manage-btn-delete:hover {
+  background: #d32f2f;
+}
+
+.manage-btn .material-icons {
+  font-size: 16px;
+}
+    
   </style>
 </head>
 <body>
@@ -3419,6 +3599,207 @@ async function viewProfileDetails() {
       }
     }
 
+    // ========================================
+// 記録管理機能
+// ========================================
+
+// 記録管理モーダルを開く
+function openManageModal() {
+  document.getElementById('manageModalOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  loadStudyLogs();
+}
+
+// 記録管理モーダルを閉じる
+function closeManageModal() {
+  document.getElementById('manageModalOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// オーバーレイクリックで閉じる
+function closeManageModalOnOverlay(event) {
+  if (event.target === event.currentTarget) {
+    closeManageModal();
+  }
+}
+
+// 学習記録一覧を読み込む
+async function loadStudyLogs() {
+  const studentId = localStorage.getItem('eqao_studentId');
+  const modalBody = document.getElementById('manageModalBody');
+  
+  modalBody.innerHTML = '<div class="manage-loading">読み込み中...</div>';
+  
+  try {
+    const result = await apiGet('getStudyLogs', {
+      studentId: studentId,
+      days: 14 // 直近14日分
+    });
+    
+    if (result.success && result.logs && result.logs.length > 0) {
+      displayStudyLogs(result.logs);
+    } else {
+      modalBody.innerHTML = '<div class="manage-empty">記録がありません</div>';
+    }
+  } catch (error) {
+    console.error('記録読み込みエラー:', error);
+    modalBody.innerHTML = '<div class="manage-empty">記録の読み込みに失敗しました</div>';
+  }
+}
+
+// 学習記録一覧を表示
+function displayStudyLogs(logs) {
+  const modalBody = document.getElementById('manageModalBody');
+  
+  let html = '';
+  
+  logs.forEach(log => {
+    const categoryColor = studyCategories[log.category]?.color || '#999';
+    
+    html += `
+      <div class="manage-log-item">
+        <div class="manage-log-header">
+          <div class="manage-log-date">${escapeHtml(log.date)}</div>
+        </div>
+        <div class="manage-log-category" style="background-color: ${categoryColor}">
+          ${escapeHtml(log.category)}
+        </div>
+        <div class="manage-log-info">
+          <strong>${log.hours}時間</strong>
+        </div>
+        ${log.memo ? '<div class="manage-log-memo">💬 ' + escapeHtml(log.memo) + '</div>' : ''}
+        <div class="manage-log-actions">
+          <button class="manage-btn manage-btn-edit" onclick="editStudyLog(${log.rowIndex}, '${log.date}', '${escapeHtml(log.category)}', ${log.hours}, '${escapeHtml(log.memo).replace(/'/g, "\\'")}')">
+            <span class="material-icons">edit</span>
+            編集
+          </button>
+          <button class="manage-btn manage-btn-delete" onclick="deleteStudyLogConfirm(${log.rowIndex})">
+            <span class="material-icons">delete</span>
+            削除
+          </button>
+        </div>
+      </div>
+    `;
+  });
+  
+  modalBody.innerHTML = html;
+}
+
+// 学習記録を編集
+function editStudyLog(rowIndex, date, category, hours, memo) {
+  // 既存の記録モーダルを閉じる
+  closeManageModal();
+  
+  // 編集モードで記録モーダルを開く
+  document.getElementById('studyModalOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  
+  // フォームに値をセット
+  document.getElementById('studyDate').value = date;
+  document.getElementById('studyCategory').value = category;
+  document.getElementById('studyHours').value = hours;
+  document.getElementById('studyMemo').value = memo;
+  
+  // 保存ボタンを編集モードに変更
+  const saveBtn = document.querySelector('.study-modal-btn-save');
+  saveBtn.textContent = '更新';
+  saveBtn.onclick = function() {
+    updateStudyLog(rowIndex);
+  };
+}
+
+// 学習記録を更新
+async function updateStudyLog(rowIndex) {
+  const studentId = localStorage.getItem('eqao_studentId');
+  const date = document.getElementById('studyDate').value;
+  const category = document.getElementById('studyCategory').value;
+  const hours = parseFloat(document.getElementById('studyHours').value);
+  const memo = document.getElementById('studyMemo').value;
+  
+  // 入力チェック
+  if (!date || !category || !hours) {
+    alert('日付、カテゴリー、時間は必須項目です');
+    return;
+  }
+  
+  if (hours <= 0 || hours % 0.5 !== 0) {
+    alert('時間は0.5時間単位で入力してください');
+    return;
+  }
+  
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'updateStudyLog',
+        rowIndex: rowIndex,
+        studentId: studentId,
+        date: date,
+        category: category,
+        hours: hours,
+        memo: memo
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      alert('学習記録を更新しました');
+      closeStudyModal();
+      
+      // 保存ボタンを元に戻す
+      const saveBtn = document.querySelector('.study-modal-btn-save');
+      saveBtn.textContent = '保存';
+      saveBtn.onclick = saveStudyLog;
+      
+      // グラフを更新
+      loadStudyChart();
+    } else {
+      alert('更新に失敗しました: ' + (result.error || '不明なエラー'));
+    }
+  } catch (error) {
+    console.error('更新エラー:', error);
+    alert('エラーが発生しました');
+  }
+}
+
+// 学習記録の削除確認
+function deleteStudyLogConfirm(rowIndex) {
+  if (confirm('この記録を削除しますか？')) {
+    deleteStudyLogExecute(rowIndex);
+  }
+}
+
+// 学習記録を削除
+async function deleteStudyLogExecute(rowIndex) {
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'deleteStudyLog',
+        rowIndex: rowIndex
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      alert('学習記録を削除しました');
+      
+      // 記録一覧を再読み込み
+      loadStudyLogs();
+      
+      // グラフを更新
+      loadStudyChart();
+    } else {
+      alert('削除に失敗しました: ' + (result.error || '不明なエラー'));
+    }
+  } catch (error) {
+    console.error('削除エラー:', error);
+    alert('エラーが発生しました');
+  }
+}
+
     // グラフを描画
 function renderStudyChart(stats, totalHours, weekRange) {
   const canvas = document.getElementById('studyChart');
@@ -3842,6 +4223,23 @@ studyChart = new Chart(ctx, {
 
   <!-- Chart.js 読み込み -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+<!-- 記録管理モーダル -->
+<div class="manage-modal-overlay" id="manageModalOverlay" onclick="closeManageModalOnOverlay(event)">
+  <div class="manage-modal" onclick="event.stopPropagation()">
+    <div class="manage-modal-header">
+      <span class="material-icons">edit_note</span>
+      <h2>学習記録を管理</h2>
+      <button class="manage-modal-close" onclick="closeManageModal()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    
+    <div class="manage-modal-body" id="manageModalBody">
+      <div class="manage-loading">読み込み中...</div>
+    </div>
+  </div>
+</div>
   
 </body>
 </html>
