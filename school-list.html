@@ -798,6 +798,107 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
+/* パターンタブ */
+.pattern-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.pattern-tab {
+  background: white;
+  border: 2px solid #B2DFDB;
+  border-radius: 12px;
+  padding: 12px 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.pattern-tab:hover {
+  background: #E0F2F1;
+}
+
+.pattern-tab.active {
+  background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
+  border-color: #00695C;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 105, 92, 0.3);
+}
+
+.pattern-label {
+  font-size: 18px;
+  font-weight: 700;
+  color: #00695C;
+}
+
+.pattern-tab.active .pattern-label {
+  color: white;
+}
+
+.pattern-badges {
+  display: flex;
+  gap: 4px;
+}
+
+.badge-check,
+.badge-cross {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.badge-check {
+  background: #4CAF50;
+  color: white;
+}
+
+.badge-cross {
+  background: #F44336;
+  color: white;
+}
+
+.pattern-tab.active .badge-check,
+.pattern-tab.active .badge-cross {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+/* パターン説明 */
+.pattern-info {
+  background: #E0F2F1;
+  border-left: 4px solid #00897B;
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #00695C;
+}
+
+.pattern-info .material-icons {
+  font-size: 18px;
+  color: #00897B;
+}
+
+@media (max-width: 480px) {
+  .pattern-tabs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+    
   </style>
 </head>
 <body>
@@ -901,7 +1002,48 @@
       志望校／併願校を編集する
     </a>
   </div>
+<div class="pattern-tabs">
+  <button class="pattern-tab active" data-pattern="A" onclick="switchPattern('A')">
+    <span class="pattern-label">A</span>
+    <div class="pattern-badges">
+      <span class="badge-check">✓</span>
+      <span class="badge-check">✓</span>
+    </div>
+  </button>
+  <button class="pattern-tab" data-pattern="B" onclick="switchPattern('B')">
+    <span class="pattern-label">B</span>
+    <div class="pattern-badges">
+      <span class="badge-cross">✗</span>
+      <span class="badge-cross">✗</span>
+    </div>
+  </button>
+  <button class="pattern-tab" data-pattern="C" onclick="switchPattern('C')">
+    <span class="pattern-label">C</span>
+    <div class="pattern-badges">
+      <span class="badge-cross">✗</span>
+      <span class="badge-check">✓</span>
+    </div>
+  </button>
+  <button class="pattern-tab" data-pattern="D" onclick="switchPattern('D')">
+    <span class="pattern-label">D</span>
+    <div class="pattern-badges">
+      <span class="badge-check">✓</span>
+      <span class="badge-cross">✗</span>
+    </div>
+  </button>
+</div>
 
+<!-- パターン説明 -->
+<div class="pattern-info">
+  <span class="material-icons">info</span>
+  <span id="patternDescription">パターンA：評定平均○・英語資格○（両方達成のベストケース）</span>
+</div>
+
+<!-- 表示切り替え -->
+<div id="viewToggle" class="view-toggle">
+  <!-- ... 既存の表示切り替えボタン ... -->
+</div>
+      
   <!-- 表示切り替え -->
   <div id="viewToggle" class="view-toggle">
     <button class="view-btn active" id="viewCards" onclick="setView('cards')">
@@ -960,6 +1102,7 @@ function escapeHtml(text) {
     let schools = [];
     let currentView = 'cards';
     let openSchoolIndex = -1;
+    let currentPattern = 'A'; 
 
     // 生徒IDを取得
     function getStudentId() {
@@ -1096,6 +1239,54 @@ function renderContent() {
       document.getElementById('compareView').style.display = view === 'compare' ? 'block' : 'none';
     }
 
+    // パターン切り替え
+function switchPattern(pattern) {
+  currentPattern = pattern;
+  
+  // タブの表示切り替え
+  document.querySelectorAll('.pattern-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.pattern === pattern);
+  });
+  
+  // パターン説明を更新
+  const descriptions = {
+    'A': 'パターンA：評定平均○・英語資格○（両方達成のベストケース）',
+    'B': 'パターンB：評定平均×・英語資格×（両方未達成）',
+    'C': 'パターンC：評定平均×・英語資格○（英語資格のみ達成）',
+    'D': 'パターンD：評定平均○・英語資格×（評定平均のみ達成）'
+  };
+  document.getElementById('patternDescription').textContent = descriptions[pattern];
+  
+  // リセット
+  openSchoolIndex = -1;
+  
+  // 再描画
+  renderCardsView();
+  renderCompareView();
+}
+
+    // パターンでフィルタリング
+function getFilteredSchools() {
+  // 全データをA,B,C,Dに振り分ける想定
+  // exam-schedule.htmlで保存される際に、パターンが自動で割り当てられている
+  
+  const allSchools = schools || [];
+  
+  // パターンがある場合はそれでフィルタ
+  const filtered = allSchools.filter(school => {
+    // パターンが明示的に設定されている場合
+    if (school.pattern) {
+      return school.pattern === currentPattern;
+    }
+    
+    // パターンが設定されていない場合（後方互換性）
+    // 全て表示
+    return true;
+  });
+  
+  return filtered;
+}
+
     // アコーディオン開閉
     function toggleSchool(index) {
       if (openSchoolIndex === index) {
@@ -1107,11 +1298,24 @@ function renderContent() {
     }
 
     // リスト表示（アコーディオン）
-    function renderCardsView() {
-      const container = document.getElementById('cardsView');
-      let html = '<div class="school-list">';
-      
-      schools.forEach((school, index) => {
+function renderCardsView() {
+  const container = document.getElementById('listView');
+  const filteredSchools = getFilteredSchools();
+  
+  if (filteredSchools.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <span class="material-icons">school</span>
+        <h3>このパターンの学校はありません</h3>
+        <p>他のパターンを確認してください</p>
+      </div>
+    `;
+    return;
+  }
+  
+  let html = '<div class="school-list">';
+  
+  filteredSchools.forEach((school, index) => {
         const rank = index + 1;
         let rankClass = '';
         if (rank === 1) rankClass = 'first';
@@ -1360,110 +1564,118 @@ function renderContent() {
     }
 
     // 比較表示
-    function renderCompareView() {
-      const container = document.getElementById('compareView');
-      
-      if (schools.length === 0) {
-        container.innerHTML = '';
-        return;
-      }
-      
-      let html = `
-        <div class="compare-section">
-          <div class="compare-header">
-            <span class="material-icons">compare</span>
-            <span class="compare-title">基本情報比較</span>
-          </div>
-          <div class="compare-table-wrapper">
-            <table class="compare-table">
-              <thead>
-                <tr>
-                  <th>項目</th>
-                  ${schools.map((s, i) => `<th>${i + 1}. ${escapeHtml(s.universityName)}</th>`).join('')}
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>学部</td>${schools.map(s => `<td>${escapeHtml(s.faculty || '-')}</td>`).join('')}</tr>
-                <tr><td>学科</td>${schools.map(s => `<td>${escapeHtml(s.department || '-')}</td>`).join('')}</tr>
-                <tr><td>専願/併願</td>${schools.map(s => `<td>${escapeHtml(s.applicationType || '-')}</td>`).join('')}</tr>
-                <tr><td>地域</td>${schools.map(s => `<td>${escapeHtml(s.region || '-')}</td>`).join('')}</tr>
-                <tr><td>英語資格</td>${schools.map(s => `<td>${escapeHtml(s.englishReq || '-')}</td>`).join('')}</tr>
-                <tr><td>評定条件</td>${schools.map(s => `<td>${escapeHtml(s.gpaReq || '-')}</td>`).join('')}</tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-      
-      html += `
-        <div class="compare-section">
-          <div class="compare-header">
-            <span class="material-icons">assignment</span>
-            <span class="compare-title">試験内容比較</span>
-          </div>
-          <div class="compare-table-wrapper">
-            <table class="compare-table">
-              <thead>
-                <tr>
-                  <th>項目</th>
-                  ${schools.map((s, i) => `<th>${i + 1}. ${escapeHtml(s.universityName)}</th>`).join('')}
-                </tr>
-              </thead>
-              <tbody>
-                ${renderCompareRow('小論文', 'essay')}
-                ${renderCompareRow('面接', 'interview')}
-                ${renderCompareRow('口頭試問', 'oral')}
-                ${renderCompareRow('GD', 'groupDiscussion')}
-                ${renderCompareRow('英語面接', 'englishInterview')}
-                ${renderCompareRow('プレゼン', 'present')}
-                ${renderCompareRow('二次科目', 'secondExam')}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-      
-      html += `
-        <div class="compare-section">
-          <div class="compare-header">
-            <span class="material-icons">event</span>
-            <span class="compare-title">日程・データ比較</span>
-          </div>
-          <div class="compare-table-wrapper">
-            <table class="compare-table">
-              <thead>
-                <tr>
-                  <th>項目</th>
-                  ${schools.map((s, i) => `<th>${i + 1}. ${escapeHtml(s.universityName)}</th>`).join('')}
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>入試日程</td>${schools.map(s => `<td>${formatDate(s.examDate) || '-'}</td>`).join('')}</tr>
-                <tr><td>合格発表</td>${schools.map(s => `<td>${formatDate(s.firstResultDate) || '-'}</td>`).join('')}</tr>
-                <tr><td>偏差値</td>${schools.map(s => `<td>${escapeHtml(s.deviation || '-')}</td>`).join('')}</tr>
-                <tr><td>倍率</td>${schools.map(s => `<td>${escapeHtml(s.ratio || '-')}</td>`).join('')}</tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-      
-      container.innerHTML = html;
-    }
+// 比較表示
+function renderCompareView() {
+  const container = document.getElementById('compareView');
+  const filteredSchools = getFilteredSchools();
+  
+  if (filteredSchools.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <span class="material-icons">school</span>
+        <h3>このパターンの学校はありません</h3>
+        <p>他のパターンを確認してください</p>
+      </div>
+    `;
+    return;
+  }
+  
+  let html = `
+    <div class="compare-section">
+      <div class="compare-header">
+        <span class="material-icons">compare</span>
+        <span class="compare-title">基本情報比較</span>
+      </div>
+      <div class="compare-table-wrapper">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>項目</th>
+              ${filteredSchools.map((s, i) => `<th>${i + 1}. ${escapeHtml(s.universityName)}</th>`).join('')}
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>学部</td>${filteredSchools.map(s => `<td>${escapeHtml(s.faculty || '-')}</td>`).join('')}</tr>
+            <tr><td>学科</td>${filteredSchools.map(s => `<td>${escapeHtml(s.department || '-')}</td>`).join('')}</tr>
+            <tr><td>専願/併願</td>${filteredSchools.map(s => `<td>${escapeHtml(s.applicationType || '-')}</td>`).join('')}</tr>
+            <tr><td>地域</td>${filteredSchools.map(s => `<td>${escapeHtml(s.region || '-')}</td>`).join('')}</tr>
+            <tr><td>英語資格</td>${filteredSchools.map(s => `<td>${escapeHtml(s.englishReq || '-')}</td>`).join('')}</tr>
+            <tr><td>評定条件</td>${filteredSchools.map(s => `<td>${escapeHtml(s.gpaReq || '-')}</td>`).join('')}</tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+  
+  html += `
+    <div class="compare-section">
+      <div class="compare-header">
+        <span class="material-icons">assignment</span>
+        <span class="compare-title">試験内容比較</span>
+      </div>
+      <div class="compare-table-wrapper">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>項目</th>
+              ${filteredSchools.map((s, i) => `<th>${i + 1}. ${escapeHtml(s.universityName)}</th>`).join('')}
+            </tr>
+          </thead>
+          <tbody>
+            ${renderCompareRow('小論文', 'essay', filteredSchools)}
+            ${renderCompareRow('面接', 'interview', filteredSchools)}
+            ${renderCompareRow('口頭試問', 'oral', filteredSchools)}
+            ${renderCompareRow('GD', 'groupDiscussion', filteredSchools)}
+            ${renderCompareRow('英語面接', 'englishInterview', filteredSchools)}
+            ${renderCompareRow('プレゼン', 'present', filteredSchools)}
+            ${renderCompareRow('二次科目', 'secondExam', filteredSchools)}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+  
+  html += `
+    <div class="compare-section">
+      <div class="compare-header">
+        <span class="material-icons">event</span>
+        <span class="compare-title">日程・データ比較</span>
+      </div>
+      <div class="compare-table-wrapper">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>項目</th>
+              ${filteredSchools.map((s, i) => `<th>${i + 1}. ${escapeHtml(s.universityName)}</th>`).join('')}
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>入試日程</td>${filteredSchools.map(s => `<td>${formatDate(s.examDate) || '-'}</td>`).join('')}</tr>
+            <tr><td>合格発表</td>${filteredSchools.map(s => `<td>${formatDate(s.firstResultDate) || '-'}</td>`).join('')}</tr>
+            <tr><td>偏差値</td>${filteredSchools.map(s => `<td>${escapeHtml(s.deviation || '-')}</td>`).join('')}</tr>
+            <tr><td>倍率</td>${filteredSchools.map(s => `<td>${escapeHtml(s.ratio || '-')}</td>`).join('')}</tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+  
+  container.innerHTML = html;
+}
 
-    function renderCompareRow(label, key) {
-      return `
-        <tr>
-          <td>${label}</td>
-          ${schools.map(s => {
-            const val = s[key];
-            if (val === '有') return '<td class="compare-yes">✓</td>';
-            if (val === '無') return '<td class="compare-no">−</td>';
-            return `<td>${escapeHtml(val || '-')}</td>`;
-          }).join('')}
-        </tr>
-      `;
-    }
+    function renderCompareRow(label, key, schoolsList) {
+  return `
+    <tr>
+      <td>${label}</td>
+      ${schoolsList.map(s => {
+        const val = s[key];
+        if (val === '有') return '<td class="compare-yes">✓</td>';
+        if (val === '無') return '<td class="compare-no">−</td>';
+        return `<td>${escapeHtml(val || '-')}</td>`;
+      }).join('')}
+    </tr>
+  `;
+}
 
     // ============================================
     // ナビゲーション
