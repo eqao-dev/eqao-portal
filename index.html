@@ -1850,12 +1850,15 @@
   flex: 1; 
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
+
 .study-chart-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 16px;
+  flex-shrink: 0;
 }
 
 .study-chart-title {
@@ -1885,8 +1888,9 @@
 }
 
 .study-chart-canvas {
-  margin-bottom: 8px;
-  max-height: 120px;
+  margin-bottom: 12px;
+  flex: 1;
+  min-height: 150px;
 }
 
 .study-legend {
@@ -1913,7 +1917,8 @@
   text-align: center;
   font-size: 13px;
   color: #666;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
 }
 
 .study-add-btn {
@@ -1932,12 +1937,37 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  margin-top: 8px;
+  margin-top: 0;
+  flex-shrink: 0;
 }
 
 .study-add-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
+}
+
+.study-manage-btn {
+  width: 100%;
+  padding: 10px;
+  background: white;
+  color: #1a237e;
+  border: 2px solid #1a237e;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+.study-manage-btn:hover {
+  background: #f0f4ff;
 }
 
 .study-loading {
@@ -2235,6 +2265,7 @@
       </div>
 
       <!-- 授業外学習カード -->
+<!-- 授業外学習カード -->
 <div class="study-card">
   <div class="study-header">
     <span class="material-icons">trending_up</span>
@@ -2248,11 +2279,15 @@
         <button class="study-week-btn" onclick="changeWeek(1)">次週 →</button>
       </div>
     </div>
-    <canvas id="studyChart" class="study-chart-canvas" height="100"></canvas>
+    <canvas id="studyChart" class="study-chart-canvas"></canvas>
     <div class="study-total" id="studyTotal">今週の合計: 0時間</div>
     <button class="study-add-btn" onclick="openStudyModal()">
       <span class="material-icons">add</span>
       今日の学習を記録
+    </button>
+    <button class="study-manage-btn" onclick="openManageModal()">
+      <span class="material-icons">edit_note</span>
+      記録を管理
     </button>
   </div>
 </div>
@@ -3432,75 +3467,73 @@ function renderStudyChart(stats, totalHours, weekRange) {
   });
   
   // グラフを作成
-  studyChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: datasets
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          callbacks: {
-            // ツールチップをカスタマイズ
-            label: function(context) {
-              const category = context.dataset.label;
-              const hours = context.parsed.y;
-              const dateIndex = context.dataIndex;
-              const date = weekRange.dates[dateIndex];
-              
-              let label = category + ': ' + hours + '時間';
-              
-              // メモがあれば追加
-              if (memoData[date] && memoData[date][category]) {
-                const memos = memoData[date][category].memos;
-                if (memos.length > 0) {
-                  label += '\n💬 ' + memos.join(', ');
-                }
-              }
-              
-              return label;
-            },
-            // 複数行表示を有効化
-            title: function(context) {
-              return context[0].label;
-            }
-          },
-          // ツールチップのスタイル調整
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          padding: 12,
-          bodySpacing: 6,
-          bodyFont: {
-            size: 12
-          },
-          displayColors: true
-        }
+studyChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: labels,
+    datasets: datasets
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,  // ← これが重要
+    plugins: {
+      legend: {
+        display: false
       },
-      scales: {
-        x: {
-          stacked: true,
-          grid: {
-            display: false
+      tooltip: {
+        callbacks: {
+          // ツールチップをカスタマイズ
+          label: function(context) {
+            const category = context.dataset.label;
+            const hours = context.parsed.y;
+            const dateIndex = context.dataIndex;
+            const date = weekRange.dates[dateIndex];
+            
+            let label = category + ': ' + hours + '時間';
+            
+            // メモがあれば追加
+            if (memoData[date] && memoData[date][category]) {
+              const memos = memoData[date][category].memos;
+              if (memos.length > 0) {
+                label += '\n💬 ' + memos.join(', ');
+              }
+            }
+            
+            return label;
+          },
+          title: function(context) {
+            return context[0].label;
           }
         },
-        y: {
-          stacked: true,
-          beginAtZero: true,
-          ticks: {
-            stepSize: 1,
-            callback: function(value) {
-              return value + 'h';
-            }
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        padding: 12,
+        bodySpacing: 6,
+        bodyFont: {
+          size: 12
+        },
+        displayColors: true
+      }
+    },
+    scales: {
+      x: {
+        stacked: true,
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        stacked: true,
+        beginAtZero: true,
+        ticks: {
+          stepSize: 1,
+          callback: function(value) {
+            return value + 'h';
           }
         }
       }
     }
-  });
+  }
+});
   
   // タイトルを更新
   const startDate = new Date(weekRange.start);
