@@ -1002,6 +1002,7 @@
       志望校／併願校を編集する
     </a>
   </div>
+<!-- パターンタブ -->
 <div class="pattern-tabs">
   <button class="pattern-tab active" data-pattern="A" onclick="switchPattern('A')">
     <span class="pattern-label">A</span>
@@ -1013,7 +1014,7 @@
   <button class="pattern-tab" data-pattern="B" onclick="switchPattern('B')">
     <span class="pattern-label">B</span>
     <div class="pattern-badges">
-      <span class="badge-cross">✗</span>
+      <span class="badge-check">✓</span>
       <span class="badge-cross">✗</span>
     </div>
   </button>
@@ -1027,7 +1028,7 @@
   <button class="pattern-tab" data-pattern="D" onclick="switchPattern('D')">
     <span class="pattern-label">D</span>
     <div class="pattern-badges">
-      <span class="badge-check">✓</span>
+      <span class="badge-cross">✗</span>
       <span class="badge-cross">✗</span>
     </div>
   </button>
@@ -1240,6 +1241,7 @@ function renderContent() {
     }
 
     // パターン切り替え
+// パターン切り替え
 function switchPattern(pattern) {
   currentPattern = pattern;
   
@@ -1251,9 +1253,9 @@ function switchPattern(pattern) {
   // パターン説明を更新
   const descriptions = {
     'A': 'パターンA：評定平均○・英語資格○（両方達成のベストケース）',
-    'B': 'パターンB：評定平均×・英語資格×（両方未達成）',
+    'B': 'パターンB：評定平均○・英語資格×（評定平均のみ達成）',
     'C': 'パターンC：評定平均×・英語資格○（英語資格のみ達成）',
-    'D': 'パターンD：評定平均○・英語資格×（評定平均のみ達成）'
+    'D': 'パターンD：評定平均×・英語資格×（両方未達成）'
   };
   document.getElementById('patternDescription').textContent = descriptions[pattern];
   
