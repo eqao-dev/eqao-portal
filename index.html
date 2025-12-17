@@ -3294,23 +3294,20 @@ async function viewProfileDetails() {
         alert('時間は0.5時間単位で入力してください');
         return;
       }
-      
-      try {
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            action: 'saveStudyLog',
-            studentId: studentId,
-            date: date,
-            category: category,
-            hours: hours,
-            memo: memo
-          })
-        });
-        
+  
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'saveStudyLog',
+        studentId: studentId,
+        date: date,
+        category: category,
+        hours: hours,
+        memo: memo
+      })
+    });
+    
         const result = await response.json();
         
         if (result.success) {
