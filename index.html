@@ -2070,7 +2070,7 @@
   margin-bottom: 8px;
   border-left: 3px solid #1a237e;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
 }
 
@@ -2123,16 +2123,17 @@
 
 .manage-log-actions {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-direction: row;  /* ← columnからrowに変更 */
+  gap: 6px;
   flex-shrink: 0;
+  margin-left: auto;  /* ← 追加：右端に配置 */
 }
 
 .manage-btn {
-  padding: 6px 10px;
+  padding: 6px 8px;  /* ← 10pxから8pxに */
   border: none;
   border-radius: 6px;
-  font-size: 11px;
+  font-size: 10px;  /* ← 11pxから10pxに */
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
@@ -2140,8 +2141,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 2px;  /* ← 3pxから2pxに */
   white-space: nowrap;
+  min-width: 50px;  /* ← 追加：最小幅を設定 */
 }
 
 .manage-btn-edit {
