@@ -970,6 +970,50 @@ function escapeHtml(text) {
         .replace(/'/g, '&#039;');
     }
 
+    function renderEmptyState() {
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('summaryCard').style.display = 'none';
+  document.getElementById('viewToggle').style.display = 'none';
+  document.getElementById('listView').innerHTML = '';
+  document.getElementById('compareView').innerHTML = '';
+  
+  const container = document.getElementById('listView');
+  container.innerHTML = `
+    <div class="empty-state">
+      <span class="material-icons">school</span>
+      <h3>志望校が登録されていません</h3>
+      <p>受験スケジュールページから<br>志望校を登録してください</p>
+      <a href="exam-schedule.html">
+        <span class="material-icons">add</span>
+        志望校を登録する
+      </a>
+    </div>
+  `;
+}
+
+function renderContent() {
+  document.getElementById('loadingState').style.display = 'none';
+  
+  if (schools.length === 0) {
+    renderEmptyState();
+    return;
+  }
+  
+  // サマリーカードを表示
+  document.getElementById('summaryCard').style.display = 'flex';
+  document.getElementById('schoolCount').textContent = schools.length;
+  
+  // ビュー切り替えを表示
+  document.getElementById('viewToggle').style.display = 'flex';
+  
+  // 初期表示
+  if (currentView === 'list') {
+    renderListView();
+  } else {
+    renderCompareView();
+  }
+}
+
     // 日付フォーマット
     function formatDate(dateStr) {
       if (!dateStr) return '';
