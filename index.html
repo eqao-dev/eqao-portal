@@ -1191,9 +1191,28 @@
   gap: 10px;
   margin-bottom: 12px;
   flex: 1;
-  height: 330px;
+  height: 280px;  /* ← 授業外学習カードと同じ高さに */
   overflow-y: auto;
   padding: 4px;
+}
+
+/* スクロールバーのスタイル（オプション） */
+.profile-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.profile-body::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 3px;
+}
+
+.profile-body::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.profile-body::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
 }
 
 .profile-basic-info {
