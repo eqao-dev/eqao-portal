@@ -7,6 +7,7 @@
   <title>授業の流れ - EQAO PORTAL</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -456,115 +457,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
 
-    .nav-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 200;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .nav-overlay.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .nav-menu {
-      position: fixed;
-      top: 0;
-      right: -300px;
-      width: 280px;
-      height: 100%;
-      background: white;
-      z-index: 201;
-      transition: right 0.3s ease;
-      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
-      overflow-y: auto;
-    }
-
-    .nav-menu.open { right: 0; }
-
-    .nav-header {
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-      color: white;
-      padding: 20px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-header-title {
-      font-size: 16px;
-      font-weight: 700;
-    }
-
-    .nav-close {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      background: rgba(255,255,255,0.15);
-      border: none;
-      border-radius: 50%;
-      color: white;
-      cursor: pointer;
-    }
-
-    .nav-section {
-      padding: 8px 0;
-      border-bottom: 1px solid #eee;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      color: #333;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-
-    .nav-item:hover { background: #f5f5f5; }
-
-    .nav-item .material-icons {
-      font-size: 22px;
-      color: #1a237e;
-    }
-
-    .nav-item span {
-      font-size: 14px;
-      font-weight: 500;
-    }
-.guide-link-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 16px;
-  padding: 12px 20px;
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  transition: all 0.3s;
-}
-
-.guide-link-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
-}
-
-.guide-link-btn .material-icons {
-  font-size: 18px;
-}
+    
     
   </style>
 </head>
@@ -579,83 +472,6 @@
   <button class="hamburger-btn" onclick="openNav()">
     <span class="material-icons">menu</span>
   </button>
-
-  <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
-  <div id="navMenu" class="nav-menu">
-    <div class="nav-header">
-      <span class="nav-header-title">メニュー</span>
-      <button class="nav-close" onclick="closeNav()">
-        <span class="material-icons">close</span>
-      </button>
-    </div>
-    <div class="nav-section">
-      <a href="index.html" class="nav-item">
-        <span class="material-icons">home</span>
-        <span>ホーム</span>
-      </a>
-      <a href="curriculum.html" class="nav-item">
-        <span class="material-icons">school</span>
-        <span>授業の流れ</span>
-      </a>
-      <a href="support.html" class="nav-item">
-        <span class="material-icons">support_agent</span>
-        <span>サポート体制</span>
-      </a>
-    </div>
-  </div>
-
-  <div class="container">
-    <!-- タブ切り替え -->
-    <div class="tab-container">
-      <button class="tab-btn active" onclick="switchTab('individual')">
-        <span class="material-icons">person</span>
-        個別授業
-      </button>
-      <button class="tab-btn" onclick="switchTab('group')">
-        <span class="material-icons">groups</span>
-        集団授業
-      </button>
-    </div>
-
-    <!-- 個別授業タブ -->
-    <div id="individualTab" class="tab-content active">
-      <!-- イントロ -->
-      <div class="intro-section">
-        <div class="intro-title">
-          <span class="material-icons">lightbulb</span>
-          EQAOの授業が大切にしていること
-        </div>
-        <div class="intro-text">
-          EQAOでは「なぜそれをやるのか（Why）」を最も大切にしています。表面的なテクニックではなく、本質を理解することで、書類・小論文・面接のすべてで安定した実力を発揮できるようになります。
-        </div>
-        <a href="curriculum-guide.html" class="guide-link-btn">
-  <span class="material-icons">menu_book</span>
-  科目詳細ガイドを見る
-</a>
-        
-        <div class="whw-container">
-          <div class="whw-card">
-            <div class="whw-icon why">
-              <span class="material-icons">help</span>
-            </div>
-            <div class="whw-title">Why（なぜ）</div>
-            <div class="whw-desc">その科目が必要な理由・目的を理解する</div>
-          </div>
-          <div class="whw-card">
-            <div class="whw-icon how">
-              <span class="material-icons">build</span>
-            </div>
-            <div class="whw-title">How（どうやって）</div>
-            <div class="whw-desc">具体的な方法・手順・視点を学ぶ</div>
-          </div>
-          <div class="whw-card">
-            <div class="whw-icon what">
-              <span class="material-icons">edit</span>
-            </div>
-            <div class="whw-title">What（何を）</div>
-            <div class="whw-desc">実際に手を動かして実践する</div>
-          </div>
-        </div>
       </div>
 
       <!-- 10大科目 -->
@@ -985,23 +801,12 @@
       element.classList.toggle('open');
     }
 
-    function openNav() {
-      document.getElementById('navMenu').classList.add('open');
-      document.getElementById('navOverlay').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeNav() {
-      document.getElementById('navMenu').classList.remove('open');
-      document.getElementById('navOverlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
     // 初期化
     document.addEventListener('DOMContentLoaded', function() {
       renderCurriculum();
       renderGroupSchedule();
     });
   </script>
+  <script src="js/nav-menu.js"></script>
 </body>
 </html>

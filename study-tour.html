@@ -7,6 +7,7 @@
   <title>EQAO STUDY TOUR - EQAO PORTAL</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -755,80 +756,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
 
-    .nav-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 200;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .nav-overlay.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .nav-menu {
-      position: fixed;
-      top: 0;
-      right: -300px;
-      width: 280px;
-      height: 100%;
-      background: white;
-      z-index: 201;
-      transition: right 0.3s ease;
-      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
-      overflow-y: auto;
-    }
-
-    .nav-menu.open { right: 0; }
-
-    .nav-header {
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-      color: white;
-      padding: 20px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-header-title { font-size: 16px; font-weight: 700; }
-
-    .nav-close {
-      width: 36px;
-      height: 36px;
-      background: rgba(255,255,255,0.15);
-      border: none;
-      border-radius: 50%;
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .nav-section { padding: 8px 0; border-bottom: 1px solid #eee; }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      color: #333;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-
-    .nav-item:hover { background: #f5f5f5; }
-
-    .nav-item .material-icons { font-size: 22px; color: #1a237e; }
-
-    .nav-item span { font-size: 14px; font-weight: 500; }
+    
 
     /* レスポンシブ */
     @media (max-width: 480px) {
@@ -854,120 +782,6 @@
   <button class="hamburger-btn" onclick="openNav()">
     <span class="material-icons">menu</span>
   </button>
-
-  <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
-  <div id="navMenu" class="nav-menu">
-    <div class="nav-header">
-      <span class="nav-header-title">メニュー</span>
-      <button class="nav-close" onclick="closeNav()">
-        <span class="material-icons">close</span>
-      </button>
-    </div>
-    <div class="nav-section">
-      <a href="index.html" class="nav-item">
-        <span class="material-icons">home</span>
-        <span>ホーム</span>
-      </a>
-    </div>
-    <div class="nav-section">
-      <a href="camp.html" class="nav-item">
-        <span class="material-icons">camping</span>
-        <span>EQAO CAMP</span>
-      </a>
-      <a href="study-tour.html" class="nav-item">
-        <span class="material-icons">flight</span>
-        <span>EQAO STUDY TOUR</span>
-      </a>
-      <a href="party.html" class="nav-item">
-        <span class="material-icons">celebration</span>
-        <span>EQAO PARTY</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- ヒーローセクション -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="material-icons">flight</span>
-        海外スタディツアー
-      </div>
-      <h2 class="hero-title">
-        <span>近いようで遠い国</span><br>
-        カンボジアで<br>
-        新たな価値観に出会う
-      </h2>
-      <p class="hero-subtitle">
-        日本では経験できない1週間。<br>
-        異文化に触れ、国際協力の現場を見つめ、<br>
-        自分の「すき」と「できること」を見つける旅へ。
-      </p>
-      <div class="hero-location">
-        <span class="material-icons">place</span>
-        カンボジア 約1週間
-      </div>
-
-      <a href="#" class="hero-cta-btn" onclick="return false;">
-        <span class="material-icons">edit</span>
-        申し込みはこちら
-      </a>
-      <p class="hero-cta-note">※申し込み開始までしばらくお待ちください</p>
-    </div>
-  </section>
-
-  <!-- フィロソフィー -->
-  <div class="philosophy-banner">
-    「すき」を見つけて、「すき」を伸ばす。
-    <small>EQAO Philosophy</small>
-  </div>
-
-  <!-- メッセージセクション -->
-  <section class="message-section">
-    <div class="message-content">
-      <div class="message-block">
-        <div class="message-block-title">
-          <span class="material-icons">public</span>
-          東南アジアに、カンボジアに目を向ける
-        </div>
-        <p class="message-text">
-          皆さんが「留学」と聞いて思い浮かべる国はどのような国でしょうか。アメリカ、イギリス、オーストラリア...しかし、今回の学びの舞台は<span class="message-highlight">カンボジア</span>。<br><br>
-          カンボジアは、歴史的遺産、特色ある伝統文化、豊かな自然など様々な魅力がある一方で、格差問題や人権問題といった課題が根強く残っているのも現状です。<br><br>
-          グローバル化が進む今日に求められる力は「完璧な英語力」ではなく、<span class="message-highlight">「英語力に囚われないコミュニケーション能力」</span>です。
-        </p>
-      </div>
-
-      <div class="message-block">
-        <div class="message-block-title">
-          <span class="material-icons">handshake</span>
-          国際協力を見つめ直す
-        </div>
-        <p class="message-text">
-          相互に影響し合い、大きく変動し続ける現代のグローバル社会において、求められる国際協力も変化し続けます。<br><br>
-          実際に国際協力の現場へ足を運び、子どもたちや職員の方々とコミュニケーションをとったり自分の目で見たりすることで、<span class="message-highlight">今後何が国際協力に求められるのか</span>考えましょう。<br><br>
-          今後の国際協力に対して自分自身はどのように関わりを持てるのか、検討する貴重な機会になります。
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 目的 -->
-  <section class="section section-gray">
-    <div class="container">
-      <div class="section-title">
-        <div class="section-title-en">PURPOSE</div>
-        <h3 class="section-title-ja">STUDY TOURの目的</h3>
-      </div>
-
-      <div class="purpose-list">
-        <div class="purpose-card">
-          <div class="purpose-icon">
-            <span class="material-icons">diversity_3</span>
-          </div>
-          <div class="purpose-content">
-            <div class="purpose-title">異文化体験で新しい視点を獲得</div>
-            <div class="purpose-desc">異文化に触れることによって、今後のグローバル社会で必要とされる新しい視点やアイデアの獲得と共生の意識を培います。</div>
-          </div>
-        </div>
 
         <div class="purpose-card">
           <div class="purpose-icon">
@@ -1191,17 +1005,6 @@
   </footer>
 
   <script>
-    function openNav() {
-      document.getElementById('navMenu').classList.add('open');
-      document.getElementById('navOverlay').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeNav() {
-      document.getElementById('navMenu').classList.remove('open');
-      document.getElementById('navOverlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
 
     // 申し込みボタンを有効化する場合はこの関数を呼ぶ
     function enableApplication() {
@@ -1229,5 +1032,6 @@
     // 申し込み開始時にこのコメントを外す
     // enableApplication();
   </script>
+  <script src="js/nav-menu.js"></script>
 </body>
 </html>
