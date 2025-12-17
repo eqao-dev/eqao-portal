@@ -3418,6 +3418,11 @@ function renderStudyChart(stats, totalHours, weekRange) {
   const canvas = document.getElementById('studyChart');
   const ctx = canvas.getContext('2d');
   
+  // キャンバスのサイズを強制設定
+  canvas.style.height = '140px';
+  canvas.style.width = '100%';
+  canvas.height = 140;
+  
   // 既存のグラフを破棄
   if (studyChart) {
     studyChart.destroy();
