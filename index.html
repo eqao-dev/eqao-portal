@@ -2044,7 +2044,7 @@
 }
 
 .manage-modal-body {
-  padding: 20px;
+  padding: 16px;
   overflow-y: auto;
   flex: 1;
 }
@@ -2065,66 +2065,74 @@
 
 .manage-log-item {
   background: #f8f9fc;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 12px;
-  border-left: 4px solid #1a237e;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-left: 3px solid #1a237e;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .manage-log-item:last-child {
   margin-bottom: 0;
 }
 
+.manage-log-main {
+  flex: 1;
+  min-width: 0;
+}
+
 .manage-log-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 8px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
 }
 
 .manage-log-date {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: #1a237e;
 }
 
 .manage-log-category {
   display: inline-block;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
   font-weight: 600;
   color: white;
-  margin-bottom: 8px;
 }
 
 .manage-log-info {
-  font-size: 13px;
+  font-size: 12px;
   color: #666;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .manage-log-memo {
-  font-size: 12px;
+  font-size: 11px;
   color: #888;
   font-style: italic;
-  margin-bottom: 12px;
-  padding: 8px;
+  padding: 4px 8px;
   background: white;
-  border-radius: 6px;
+  border-radius: 4px;
+  margin-top: 4px;
 }
 
 .manage-log-actions {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
 }
 
 .manage-btn {
-  flex: 1;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border: none;
-  border-radius: 8px;
-  font-size: 12px;
+  border-radius: 6px;
+  font-size: 11px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
@@ -2132,7 +2140,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 3px;
+  white-space: nowrap;
 }
 
 .manage-btn-edit {
@@ -2154,7 +2163,7 @@
 }
 
 .manage-btn .material-icons {
-  font-size: 16px;
+  font-size: 14px;
 }
     
   </style>
