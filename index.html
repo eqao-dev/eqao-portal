@@ -1187,9 +1187,53 @@
 
 .profile-body {
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  gap: 10px;
   margin-bottom: 12px;
   flex: 1;
+  height: 330px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.profile-basic-info {
+  text-align: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 10px;
+}
+
+.profile-detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
+  background: #f8f9fc;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.profile-detail-icon {
+  color: #1a237e;
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.profile-detail-content {
+  flex: 1;
+  line-height: 1.5;
+  color: #333;
+}
+
+.profile-detail-label {
+  font-weight: 600;
+  color: #1a237e;
+  margin-bottom: 3px;
+}
+
+.profile-detail-value {
+  color: #666;
 }
 
 .profile-avatar {
@@ -2878,10 +2922,10 @@
       }
     }
 
-    // プロフィールカードを更新
-    // プロフィールカードを更新
+   // プロフィールカードを更新
 async function loadProfileCard() {
   const studentId = localStorage.getItem('eqao_studentId');
+  const studentName = localStorage.getItem('eqao_studentName');
   
   // 詳細ボタンの参照を取得
   const detailButtons = document.querySelectorAll('.profile-btn');
@@ -2898,30 +2942,142 @@ async function loadProfileCard() {
     if (result.success && result.profile) {
       const profile = result.profile;
       
-      // カード表示を更新
-      document.getElementById('profileName').textContent = profile.name || '未登録';
+      // プロフィール表示HTML作成
+      let html = `
+        <div class="profile-basic-info">
+          <div class="profile-avatar" id="profileAvatar">👤</div>
+          <div class="profile-name" id="profileName">${escapeHtml(studentName)}</div>
+        </div>
+      `;
       
-      let details = [];
-      if (profile.grade) details.push(profile.grade);
-      if (profile.major) details.push(profile.major);
-      if (profile.school) details.push(profile.school);
-      if (profile.english) details.push(profile.english);
+      // 学年・志望系統
+      if (profile.grade || profile.major) {
+        html += `
+          <div class="profile-detail-row">
+            <span class="material-icons profile-detail-icon">school</span>
+            <div class="profile-detail-content">
+              <div class="profile-detail-label">学年・志望系統</div>
+              <div class="profile-detail-value">${escapeHtml(profile.grade || '')} ${profile.major ? '/ ' + escapeHtml(profile.major) : ''}</div>
+            </div>
+          </div>
+        `;
+      }
       
-      document.getElementById('profileDetails').innerHTML = details.join('<br>') || 'プロフィールを登録してください';
+      // 高校
+      if (profile.school) {
+        html += `
+          <div class="profile-detail-row">
+            <span class="material-icons profile-detail-icon">account_balance</span>
+            <div class="profile-detail-content">
+              <div class="profile-detail-label">高校</div>
+              <div class="profile-detail-value">${escapeHtml(profile.school)}</div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // 英語資格
+      if (profile.english) {
+        html += `
+          <div class="profile-detail-row">
+            <span class="material-icons profile-detail-icon">emoji_events</span>
+            <div class="profile-detail-content">
+              <div class="profile-detail-label">英語資格</div>
+              <div class="profile-detail-value">${escapeHtml(profile.english)}</div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // 部活動
+      if (profile.club) {
+        html += `
+          <div class="profile-detail-row">
+            <span class="material-icons profile-detail-icon">sports_soccer</span>
+            <div class="profile-detail-content">
+              <div class="profile-detail-label">部活動</div>
+              <div class="profile-detail-value">${escapeHtml(profile.club)}${profile.clubLevel ? ' （' + escapeHtml(profile.clubLevel) + '）' : ''}</div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // 性格
+      if (profile.personality && profile.personality.length > 0) {
+        html += `
+          <div class="profile-detail-row">
+            <span class="material-icons profile-detail-icon">psychology</span>
+            <div class="profile-detail-content">
+              <div class="profile-detail-label">性格・学習スタイル</div>
+              <div class="profile-detail-value">${escapeHtml(profile.personality.join('、'))}</div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // 指導希望
+      if (profile.teachingStyle && profile.teachingStyle.length > 0) {
+        html += `
+          <div class="profile-detail-row">
+            <span class="material-icons profile-detail-icon">school</span>
+            <div class="profile-detail-content">
+              <div class="profile-detail-label">指導の希望</div>
+              <div class="profile-detail-value">${escapeHtml(profile.teachingStyle.join('、'))}</div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // 生活制約
+      if (profile.constraints && profile.constraints.length > 0) {
+        html += `
+          <div class="profile-detail-row">
+            <span class="material-icons profile-detail-icon">schedule</span>
+            <div class="profile-detail-content">
+              <div class="profile-detail-label">生活上の制約</div>
+              <div class="profile-detail-value">${escapeHtml(profile.constraints.join('、'))}</div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // 備考
+      if (profile.notes) {
+        html += `
+          <div class="profile-detail-row">
+            <span class="material-icons profile-detail-icon">note</span>
+            <div class="profile-detail-content">
+              <div class="profile-detail-label">備考</div>
+              <div class="profile-detail-value">${escapeHtml(profile.notes)}</div>
+            </div>
+          </div>
+        `;
+      }
+      
+      document.querySelector('.profile-body').innerHTML = html;
       
       // 詳細ボタンを有効化
       if (detailBtn) {
         detailBtn.disabled = false;
       }
     } else {
-      // プロフィール未登録の場合、詳細ボタンを無効化
+      // プロフィール未登録
+      document.querySelector('.profile-body').innerHTML = `
+        <div class="profile-avatar" id="profileAvatar">👤</div>
+        <div class="profile-info">
+          <div class="profile-name" id="profileName">未登録</div>
+          <div class="profile-details" id="profileDetails">
+            プロフィールを登録してください
+          </div>
+        </div>
+      `;
+      
       if (detailBtn) {
         detailBtn.disabled = true;
       }
     }
   } catch (error) {
     console.error('プロフィール読み込みエラー:', error);
-    // エラー時も詳細ボタンを無効化
     if (detailBtn) {
       detailBtn.disabled = true;
     }
