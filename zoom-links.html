@@ -203,6 +203,30 @@
       display: block;
     }
 
+    /* ヘルプリンク */
+    .help-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 0;
+      background: none;
+      border: none;
+      color: #1a237e;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.2s;
+    }
+
+    .help-link:hover {
+      opacity: 0.7;
+    }
+
+    .help-link .material-icons {
+      font-size: 18px;
+    }
+
     /* ========================================
        五十音インデックス
     ======================================== */
@@ -838,6 +862,10 @@
             <span class="material-icons">close</span>
           </button>
         </div>
+        <button class="help-link" onclick="openHelpModal()">
+          <span class="material-icons">help_outline</span>
+          Zoomに入れない場合は？
+        </button>
       </div>
 
       <!-- 五十音インデックス -->
