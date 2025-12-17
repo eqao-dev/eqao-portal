@@ -94,6 +94,7 @@
 }
 
 .nav-user-info .material-icons {
+  font-family: 'Material Icons';
   font-size: 22px;
   opacity: 0.8;
 }
@@ -123,6 +124,7 @@
 }
 
 .nav-logout-btn .material-icons {
+  font-family: 'Material Icons';
   font-size: 14px;
 }
 
@@ -162,22 +164,33 @@
 }
 
 .nav-item .material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
   font-size: 20px;
   width: 24px;
   text-align: center;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* アイコンカラー（ホームと統一） */
-.nav-item .icon-blue { color: #1e88e5; }
-.nav-item .icon-indigo { color: #3949ab; }
-.nav-item .icon-purple { color: #7b1fa2; }
-.nav-item .icon-teal { color: #00897b; }
-.nav-item .icon-orange { color: #f57c00; }
-.nav-item .icon-red { color: #e53935; }
-.nav-item .icon-pink { color: #d81b60; }
-.nav-item .icon-green { color: #43a047; }
-.nav-item .icon-brown { color: #6d4c41; }
-.nav-item .icon-line { color: #06c755; }
+.nav-item .material-icons.icon-blue { color: #1e88e5; }
+.nav-item .material-icons.icon-indigo { color: #3949ab; }
+.nav-item .material-icons.icon-purple { color: #7b1fa2; }
+.nav-item .material-icons.icon-teal { color: #00897b; }
+.nav-item .material-icons.icon-orange { color: #f57c00; }
+.nav-item .material-icons.icon-red { color: #e53935; }
+.nav-item .material-icons.icon-pink { color: #d81b60; }
+.nav-item .material-icons.icon-green { color: #43a047; }
+.nav-item .material-icons.icon-brown { color: #6d4c41; }
+.nav-item .material-icons.icon-line { color: #06c755; }
 
 /* 現在のページハイライト */
 .nav-item.active {
@@ -214,6 +227,7 @@
 }
 
 .nav-badge-external {
+  font-family: 'Material Icons';
   color: #999;
   font-size: 14px;
   margin-left: auto;

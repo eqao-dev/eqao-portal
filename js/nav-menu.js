@@ -84,7 +84,7 @@ const NAV_MENU_STRUCTURE = [
   {
     category: 'プログラム申し込み',
     items: [
-      { href: 'camp.html', icon: 'camping', iconColor: 'icon-red', label: 'EQAO CAMP' },
+      { href: 'camp.html', icon: 'park', iconColor: 'icon-red', label: 'EQAO CAMP' },
       { href: 'study-tour.html', icon: 'flight', iconColor: 'icon-red', label: 'EQAO STUDY TOUR' }
     ]
   },
