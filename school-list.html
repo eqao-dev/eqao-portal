@@ -961,23 +961,32 @@
     // データ読み込み
     // ============================================
     async function loadSchools() {
-      const studentId = getStudentId();
-      try {
-        const url = `${API_URL}?action=getSchools&studentId=${studentId}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        
-        if (data && Array.isArray(data)) {
-          schools = data;
-        }
-        
-        renderContent();
-      } catch (error) {
-        console.error('API error:', error);
-        renderContent();
-      }
+  const studentId = localStorage.getItem('eqao_studentId');
+  
+  console.log('=== デバッグ開始 ===');
+  console.log('生徒番号:', studentId);
+  
+  try {
+    const data = await apiGet('getSchoolList', { studentId });
+    
+    console.log('APIレスポンス:', data);
+    console.log('data.success:', data ? data.success : 'データなし');
+    console.log('data.schools:', data ? data.schools : 'なし');
+    console.log('schools数:', data && data.schools ? data.schools.length : 0);
+    
+    if (data && data.success) {
+      schools = data.schools || [];
+      console.log('学校リスト:', schools);
+      renderContent();
+    } else {
+      console.log('空状態を表示');
+      renderEmptyState();
     }
-
+  } catch (error) {
+    console.error('Error loading schools:', error);
+    renderEmptyState();
+  }
+}
     // ============================================
     // 描画
     // ============================================
