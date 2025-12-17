@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
   
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -100,120 +101,6 @@
 
     .menu-btn:hover {
       background: rgba(255,255,255,0.25);
-    }
-
-    .nav-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 200;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .nav-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .nav-menu {
-      position: fixed;
-      top: 0;
-      right: -320px;
-      width: 300px;
-      max-width: 85%;
-      height: 100%;
-      background: white;
-      z-index: 201;
-      transition: right 0.3s ease;
-      overflow-y: auto;
-      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
-    }
-
-    .nav-menu.active {
-      right: 0;
-    }
-
-    .nav-header {
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-      color: white;
-      padding: 24px 20px;
-    }
-
-    .nav-header-title {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .nav-header-subtitle {
-      font-size: 12px;
-      opacity: 0.8;
-    }
-
-    .nav-section {
-      padding: 12px 0;
-      border-bottom: 1px solid #eee;
-    }
-
-    .nav-section-title {
-      font-size: 11px;
-      color: #888;
-      padding: 8px 20px;
-      font-weight: 500;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 20px;
-      color: #333;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-
-    .nav-item:hover {
-      background: #f5f5f5;
-    }
-
-    .nav-item .material-icons {
-      font-size: 22px;
-      color: #1a237e;
-    }
-
-    .nav-item-text {
-      font-size: 14px;
-    }
-
-    .nav-item.disabled {
-      color: #bbb;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
-    .nav-item.disabled .material-icons {
-      color: #ccc;
-    }
-
-    .nav-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: rgba(255,255,255,0.2);
-      border: none;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
     
     /* メインコンテンツ */
@@ -579,185 +466,10 @@
       <span class="material-icons">person</span>
       <span id="navUserName"></span>
     </div>
-    <button class="menu-btn" onclick="toggleMenu()">
+    <button class="menu-btn" onclick="openNav()">
       <span class="material-icons">menu</span>
     </button>
   </header>
-
-  <!-- ナビゲーションメニュー -->
-  <div class="nav-overlay" id="navOverlay" onclick="toggleMenu()"></div>
-  <nav class="nav-menu" id="navMenu">
-    <button class="nav-close" onclick="toggleMenu()">
-      <span class="material-icons">close</span>
-    </button>
-    <div class="nav-header">
-      <div class="nav-header-title">EQAO PORTAL</div>
-      <div class="nav-header-subtitle" id="navHeaderUser">メニュー</div>
-    </div>
-    
-    <div class="nav-section">
-      <a href="index.html" class="nav-item">
-        <span class="material-icons">home</span>
-        <span class="nav-item-text">ホーム</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">スケジュール</div>
-      <a href="schedule.html" class="nav-item">
-        <span class="material-icons">event</span>
-        <span class="nav-item-text">授業スケジュール</span>
-      </a>
-      <a href="exam-schedule.html" class="nav-item">
-        <span class="material-icons">school</span>
-        <span class="nav-item-text">受験スケジュール</span>
-      </a>
-      <a href="yearly-schedule.html" class="nav-item">
-        <span class="material-icons">calendar_month</span>
-        <span class="nav-item-text">年間スケジュール</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">チェックリスト</div>
-      <a href="checklist.html" class="nav-item">
-        <span class="material-icons">checklist</span>
-        <span class="nav-item-text">チェックリスト</span>
-      </a>
-      <a href="#" class="nav-item disabled">
-        <span class="material-icons">assessment</span>
-        <span class="nav-item-text">自己/進捗管理シート</span>
-      </a>
-      <a href="#" class="nav-item disabled">
-        <span class="material-icons">format_list_bulleted</span>
-        <span class="nav-item-text">志望校/併願校管理シート</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">教材</div>
-      <a href="#" class="nav-item disabled">
-        <span class="material-icons">play_circle</span>
-        <span class="nav-item-text">動画教材一覧</span>
-      </a>
-      <a href="#" class="nav-item disabled">
-        <span class="material-icons">folder_shared</span>
-        <span class="nav-item-text">生徒共通教材一覧</span>
-      </a>
-      <a href="#" class="nav-item disabled">
-        <span class="material-icons">description</span>
-        <span class="nav-item-text">授業書類一覧</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">コンテンツ</div>
-      <a href="column.html" class="nav-item">
-        <span class="material-icons">auto_stories</span>
-        <span class="nav-item-text">コラム一覧</span>
-      </a>
-      <a href="#" class="nav-item disabled">
-        <span class="material-icons">hub</span>
-        <span class="nav-item-text">生徒プラットフォーム</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">イベント申し込み</div>
-      <a href="mcff.html" class="nav-item">
-        <span class="material-icons">campaign</span>
-        <span class="nav-item-text">MCFF</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">各種申し込み</div>
-      <a href="#" class="nav-item disabled">
-        <span class="material-icons">edit_calendar</span>
-        <span class="nav-item-text">スケジュールフォーム</span>
-      </a>
-      <a href="forms.html" class="nav-item">
-        <span class="material-icons">add_circle</span>
-        <span class="nav-item-text">授業追加フォーム</span>
-      </a>
-      <a href="videos.html" class="nav-item">
-        <span class="material-icons">video_library</span>
-        <span class="nav-item-text">動画視聴報告フォーム</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">追加対策</div>
-      <a href="#" class="nav-item disabled">
-        <span class="material-icons">menu_book</span>
-        <span class="nav-item-text">課題図書対策追加フォーム</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">プログラム</div>
-      <a href="#" class="nav-item disabled">
-        <span class="material-icons">cottage</span>
-        <span class="nav-item-text">EQAO CAMP</span>
-      </a>
-      <a href="#" class="nav-item disabled">
-        <span class="material-icons">flight</span>
-        <span class="nav-item-text">EQAO STUDY TOUR</span>
-      </a>
-      <a href="#" class="nav-item disabled">
-        <span class="material-icons">volunteer_activism</span>
-        <span class="nav-item-text">EQAO VOLUNTEER</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">面談</div>
-      <a href="zoom-links.html" class="nav-item">
-        <span class="material-icons">videocam</span>
-        <span class="nav-item-text">Zoomリンク一覧</span>
-      </a>
-      <a href="meeting-tantou.html" class="nav-item">
-        <span class="material-icons">support_agent</span>
-        <span class="nav-item-text">担当講師面談予約</span>
-      </a>
-      <a href="meeting-sansya.html" class="nav-item">
-        <span class="material-icons">groups</span>
-        <span class="nav-item-text">三者面談予約</span>
-      </a>
-      <a href="meeting-principal.html" class="nav-item">
-        <span class="material-icons">person</span>
-        <span class="nav-item-text">代表面談予約</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">カリキュラム</div>
-      <a href="#" class="nav-item disabled">
-        <span class="material-icons">route</span>
-        <span class="nav-item-text">授業の流れ</span>
-      </a>
-      <a href="curriculum-support.html" class="nav-item">
-        <span class="material-icons">timeline</span>
-        <span class="nav-item-text">カリキュラムとサポート体制</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">ルール関連</div>
-      <a href="rules.html" class="nav-item">
-        <span class="material-icons">gavel</span>
-        <span class="nav-item-text">ルール一覧</span>
-      </a>
-      <a href="#" class="nav-item disabled">
-        <span class="material-icons">menu_book</span>
-        <span class="nav-item-text">パンフレット</span>
-      </a>
-      <a href="#" class="nav-item disabled">
-        <span class="material-icons">article</span>
-        <span class="nav-item-text">基本事項規定書</span>
-      </a>
-    </div>
-  </nav>
   
   <!-- メインコンテンツ -->
   <main class="main">
@@ -1761,7 +1473,6 @@
     // Lucideアイコン初期化
     document.addEventListener('DOMContentLoaded', function() {
       lucide.createIcons();
-      setNavUserName();
     });
     
     // カテゴリ切り替え
@@ -1798,21 +1509,7 @@
         item.classList.add('open');
       }
     }
-
-    // ナビゲーションメニュー
-    function toggleMenu() {
-      document.getElementById('navOverlay').classList.toggle('active');
-      document.getElementById('navMenu').classList.toggle('active');
-    }
-
-    function setNavUserName() {
-      const studentName = localStorage.getItem('eqao_studentName') || '';
-      const navUserName = document.getElementById('navUserName');
-      const navHeaderUser = document.getElementById('navHeaderUser');
-      
-      if (navUserName) navUserName.textContent = studentName;
-      if (navHeaderUser) navHeaderUser.textContent = studentName ? studentName + ' さん' : 'メニュー';
-    }
   </script>
+  <script src="js/nav-menu.js"></script>
 </body>
 </html>

@@ -77,6 +77,10 @@
   background: rgba(255,255,255,0.25);
 }
 
+.nav-close .material-icons {
+  font-size: 20px;
+}
+
 /* ユーザーセクション */
 .nav-user-section {
   padding: 14px 16px;
@@ -94,9 +98,8 @@
 }
 
 .nav-user-info .material-icons {
-  font-family: 'Material Icons';
   font-size: 22px;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .nav-user-name {
@@ -124,7 +127,6 @@
 }
 
 .nav-logout-btn .material-icons {
-  font-family: 'Material Icons';
   font-size: 14px;
 }
 
@@ -136,8 +138,7 @@
   color: #1a237e;
   background: #f5f7fa;
   border-top: 1px solid #e8ecf4;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 /* セクション */
@@ -149,8 +150,8 @@
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
+  gap: 12px;
+  padding: 11px 12px;
   color: #333;
   text-decoration: none;
   border-radius: 8px;
@@ -164,23 +165,13 @@
 }
 
 .nav-item .material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
   font-size: 20px;
   width: 24px;
   text-align: center;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-smoothing: antialiased;
+  flex-shrink: 0;
 }
 
-/* アイコンカラー（ホームと統一） */
+/* アイコンカラー */
 .nav-item .material-icons.icon-blue { color: #1e88e5; }
 .nav-item .material-icons.icon-indigo { color: #3949ab; }
 .nav-item .material-icons.icon-purple { color: #7b1fa2; }
@@ -203,17 +194,6 @@
   color: #1a237e !important;
 }
 
-/* 無効リンク */
-.nav-item.disabled {
-  color: #bbb;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.nav-item.disabled .material-icons {
-  color: #ccc !important;
-}
-
 /* バッジ */
 .nav-badge {
   background: #1a237e;
@@ -227,10 +207,10 @@
 }
 
 .nav-badge-external {
-  font-family: 'Material Icons';
   color: #999;
-  font-size: 14px;
+  font-size: 16px;
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 /* フッター */

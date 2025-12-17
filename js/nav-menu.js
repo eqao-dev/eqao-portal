@@ -6,7 +6,7 @@
 // メニュー構造（index.htmlのボタン配置順に合わせる）
 const NAV_MENU_STRUCTURE = [
   {
-    category: null, // カテゴリーなし（ホーム）
+    category: null,
     items: [
       { href: 'index.html', icon: 'home', iconColor: 'icon-indigo', label: 'ホーム' }
     ]
@@ -47,7 +47,7 @@ const NAV_MENU_STRUCTURE = [
     items: [
       { href: 'checklist.html', icon: 'checklist', iconColor: 'icon-teal', label: 'チェックリスト教材', badge: '個別' },
       { href: 'progress.html', icon: 'trending_up', iconColor: 'icon-teal', label: '自己/進捗管理シート' },
-      { href: 'school-list.html', icon: 'location_city', iconColor: 'icon-teal', label: '志望校/併願校管理シート' }
+      { href: 'school-list.html', icon: 'location_city', iconColor: 'icon-teal', label: '志望校/併願校管理' }
     ]
   },
   {
@@ -111,6 +111,14 @@ function getCurrentPage() {
   return page;
 }
 
+// HTMLエスケープ
+function escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
 // メニューHTMLを生成
 function generateNavMenuHTML() {
   const currentPage = getCurrentPage();
@@ -148,17 +156,14 @@ function generateNavMenuHTML() {
     section.items.forEach(item => {
       const isActive = item.href === currentPage;
       const isExternal = item.external;
-      const isDisabled = item.disabled;
       
       let classes = 'nav-item';
       if (isActive) classes += ' active';
-      if (isDisabled) classes += ' disabled';
       
       const target = isExternal ? ' target="_blank"' : '';
-      const href = isDisabled ? 'javascript:void(0)' : item.href;
       
       html += `
-        <a href="${href}" class="${classes}"${target}>
+        <a href="${item.href}" class="${classes}"${target}>
           <span class="material-icons ${item.iconColor}">${item.icon}</span>
           <span>${item.label}</span>
           ${item.badge ? `<span class="nav-badge">${item.badge}</span>` : ''}
@@ -180,23 +185,13 @@ function generateNavMenuHTML() {
   return html;
 }
 
-// HTMLエスケープ
-function escapeHtml(text) {
-  if (!text) return '';
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-
 // メニューを挿入
 function initNavMenu() {
-  // 既存のナビメニューがあれば削除
   const existingOverlay = document.getElementById('navOverlay');
   const existingMenu = document.getElementById('navMenu');
   if (existingOverlay) existingOverlay.remove();
   if (existingMenu) existingMenu.remove();
   
-  // 新しいメニューを挿入
   const navHTML = generateNavMenuHTML();
   document.body.insertAdjacentHTML('beforeend', navHTML);
 }
@@ -224,15 +219,6 @@ function doLogout() {
   localStorage.removeItem('eqao_rowIndex');
   localStorage.removeItem('eqao_isAdmin');
   window.location.href = 'index.html';
-}
-
-// ユーザー名を更新
-function setNavUserName() {
-  const studentName = localStorage.getItem('eqao_studentName');
-  const navUserName = document.getElementById('navUserName');
-  if (navUserName) {
-    navUserName.textContent = studentName || 'ゲスト';
-  }
 }
 
 // DOMContentLoadedで初期化

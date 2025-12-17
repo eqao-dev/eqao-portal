@@ -9,6 +9,7 @@
   <title>自己／進捗管理シート - EQAO PORTAL</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -520,37 +521,8 @@
   </header>
 
   <!-- ナビゲーションオーバーレイ -->
-  <div class="nav-overlay" id="navOverlay" onclick="closeNav()"></div>
   
   <!-- ナビゲーションメニュー -->
-  <nav class="nav-menu" id="navMenu">
-    <div class="nav-header">
-      <span class="nav-user" id="navUserName">ゲスト</span>
-      <button class="nav-close" onclick="closeNav()">
-        <span class="material-icons">close</span>
-      </button>
-    </div>
-    <a href="index.html" class="nav-item">
-      <span class="material-icons">home</span>
-      <span class="nav-item-text">ホーム</span>
-    </a>
-    <a href="schedule.html" class="nav-item">
-      <span class="material-icons">calendar_today</span>
-      <span class="nav-item-text">授業スケジュール</span>
-    </a>
-    <a href="checklist.html" class="nav-item">
-      <span class="material-icons">checklist</span>
-      <span class="nav-item-text">チェックリスト</span>
-    </a>
-    <a href="progress.html" class="nav-item">
-      <span class="material-icons">trending_up</span>
-      <span class="nav-item-text">自己／進捗管理シート</span>
-    </a>
-    <a href="#" class="nav-item nav-logout" onclick="doLogout(); return false;">
-      <span class="material-icons">logout</span>
-      <span class="nav-item-text">ログアウト</span>
-    </a>
-  </nav>
 
   <!-- メインコンテンツ -->
   <div class="container">
@@ -840,25 +812,6 @@
     // ============================================
     // ナビゲーション
     // ============================================
-    function openNav() {
-      document.getElementById('navMenu').classList.add('open');
-      document.getElementById('navOverlay').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeNav() {
-      document.getElementById('navMenu').classList.remove('open');
-      document.getElementById('navOverlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function doLogout() {
-      localStorage.removeItem('eqao_loggedIn');
-      localStorage.removeItem('eqao_studentId');
-      localStorage.removeItem('eqao_studentName');
-      localStorage.removeItem('eqao_password');
-      window.location.href = 'index.html';
-    }
 
     // ============================================
     // ユーティリティ
@@ -902,5 +855,6 @@
       render();
     });
   </script>
+  <script src="js/nav-menu.js"></script>
 </body>
 </html>
