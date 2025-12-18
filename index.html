@@ -556,6 +556,202 @@
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     }
 
+    /* 規定更新バナー */
+    .rule-update-banner {
+      display: none;
+      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      border: 1px solid #ffb74d;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+
+    .rule-update-banner:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 152, 0, 0.2);
+    }
+
+    .rule-update-banner.show {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .rule-update-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .rule-update-icon {
+      width: 32px;
+      height: 32px;
+      background: #ff9800;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .rule-update-icon .material-icons {
+      font-size: 18px;
+      color: white;
+    }
+
+    .rule-update-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e65100;
+    }
+
+    .rule-update-arrow {
+      color: #ff9800;
+      font-size: 20px;
+    }
+
+    /* 規定更新モーダル */
+    .rule-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .rule-modal-overlay.show {
+      display: flex;
+    }
+
+    .rule-modal {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 400px;
+      max-height: 70vh;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .rule-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+      color: white;
+    }
+
+    .rule-modal-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .rule-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .rule-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .rule-modal-body {
+      padding: 0;
+      max-height: calc(70vh - 120px);
+      overflow-y: auto;
+    }
+
+    .rule-update-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 14px 20px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .rule-update-item:hover {
+      background: #fff8e1;
+    }
+
+    .rule-update-item:last-child {
+      border-bottom: none;
+    }
+
+    .rule-update-row1 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .rule-update-cat {
+      background: #ff9800;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .rule-update-date {
+      font-size: 11px;
+      color: #999;
+      flex-shrink: 0;
+    }
+
+    .rule-update-title {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.4;
+    }
+
+    .rule-modal-footer {
+      padding: 12px 20px;
+      background: #f5f5f5;
+      text-align: center;
+    }
+
+    .rule-modal-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #1a237e;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .rule-modal-link:hover {
+      text-decoration: underline;
+    }
+
     .news-header {
       display: flex;
       align-items: center;
@@ -2223,6 +2419,42 @@
         <div class="news-loading">読み込み中...</div>
       </div>
     </div>
+
+    <!-- 規定更新バナー（更新がある場合のみ表示） -->
+    <div class="rule-update-banner" id="ruleUpdateBanner" onclick="openRuleModal()">
+      <div class="rule-update-content">
+        <div class="rule-update-icon">
+          <span class="material-icons">gavel</span>
+        </div>
+        <span class="rule-update-text" id="ruleUpdateText">規定が更新されました</span>
+      </div>
+      <span class="material-icons rule-update-arrow">chevron_right</span>
+    </div>
+
+    <!-- 規定更新モーダル -->
+    <div class="rule-modal-overlay" id="ruleModalOverlay" onclick="closeRuleModal(event)">
+      <div class="rule-modal" onclick="event.stopPropagation()">
+        <div class="rule-modal-header">
+          <div class="rule-modal-title">
+            <span class="material-icons">gavel</span>
+            規定更新情報
+          </div>
+          <button class="rule-modal-close" onclick="closeRuleModal()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <div class="rule-modal-body" id="ruleModalBody">
+          <!-- 動的に生成 -->
+        </div>
+        <div class="rule-modal-footer">
+          <a href="rules.html" class="rule-modal-link">
+            すべての規定を見る
+            <span class="material-icons" style="font-size: 18px;">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
     <div class="card-row">
       <!-- プロフィールカード -->
       <div class="profile-card">
@@ -2622,6 +2854,7 @@
           navUserNameEl.textContent = studentName || '';
         }
         loadNews();
+        loadRuleUpdates();
       } else {
         console.log('User is not logged in, showing login overlay');
         document.getElementById('loginOverlay').classList.remove('hidden');
@@ -2685,6 +2918,7 @@
             navUserNameEl.textContent = result.studentName || '';
           }
           loadNews();
+          loadRuleUpdates();
         } else {
           console.error('Login failed:', result);
           errorEl.textContent = '生徒番号またはパスワードが正しくありません';
@@ -2761,6 +2995,69 @@
       const newsList = document.getElementById('newsList');
       newsList.innerHTML = '<div class="news-empty">お知らせを読み込めませんでした</div>';
       console.error(error);
+    }
+
+    // 規定更新バナーの読み込み
+    async function loadRuleUpdates() {
+      try {
+        const data = await apiGet('getBasicRuleUpdates', { days: 7 });
+        displayRuleUpdates(data);
+      } catch (error) {
+        console.error('規定更新の読み込みエラー:', error);
+        // エラー時はバナーを非表示のまま
+      }
+    }
+
+    // 規定更新データを保持
+    let ruleUpdatesData = [];
+
+    function displayRuleUpdates(data) {
+      const banner = document.getElementById('ruleUpdateBanner');
+      const text = document.getElementById('ruleUpdateText');
+      
+      if (!data || !data.success || !data.updates || data.updates.length === 0) {
+        banner.classList.remove('show');
+        ruleUpdatesData = [];
+        return;
+      }
+      
+      ruleUpdatesData = data.updates;
+      const count = data.updates.length;
+      text.textContent = '規定が' + count + '件更新されました（直近7日間）';
+      banner.classList.add('show');
+      
+      // モーダルの内容を生成
+      renderRuleModal(data.updates);
+    }
+
+    function renderRuleModal(updates) {
+      const modalBody = document.getElementById('ruleModalBody');
+      
+      let html = '';
+      updates.forEach(function(item) {
+        html += `
+          <a href="rules.html" class="rule-update-item">
+            <div class="rule-update-row1">
+              <span class="rule-update-cat">${escapeHtml(item.categoryName || '')}</span>
+              <span class="rule-update-date">${escapeHtml(item.updatedAt)}</span>
+            </div>
+            <span class="rule-update-title">${escapeHtml(item.title)}</span>
+          </a>
+        `;
+      });
+      
+      modalBody.innerHTML = html;
+    }
+
+    function openRuleModal() {
+      document.getElementById('ruleModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeRuleModal(event) {
+      if (event && event.target !== event.currentTarget) return;
+      document.getElementById('ruleModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
     }
 
     function escapeHtml(text) {
