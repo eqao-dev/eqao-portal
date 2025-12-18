@@ -1357,6 +1357,412 @@
         font-size: 14px;
       }
     }
+
+    /* ========================================
+       穴場情報モーダル
+    ======================================== */
+    .anaba-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .anaba-modal-overlay.show {
+      display: flex;
+    }
+
+    .anaba-modal {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 800px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      animation: anabaSlideIn 0.3s ease;
+    }
+
+    @keyframes anabaSlideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .anaba-modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #E0E0E0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%);
+      border-radius: 16px 16px 0 0;
+    }
+
+    .anaba-modal-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #00695C;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .anaba-modal-close {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      transition: all 0.2s;
+    }
+
+    .anaba-modal-close:hover {
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .anaba-modal-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0;
+    }
+
+    /* カテゴリタブ */
+    .anaba-tabs {
+      display: flex;
+      border-bottom: 2px solid #E0E0E0;
+      background: #FAFAFA;
+      overflow-x: auto;
+    }
+
+    .anaba-tab {
+      flex: 1;
+      min-width: 80px;
+      padding: 12px 8px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #666;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .anaba-tab:hover {
+      background: #E0F2F1;
+    }
+
+    .anaba-tab.active {
+      color: #00695C;
+      border-bottom-color: #00695C;
+      background: white;
+    }
+
+    .anaba-tab-icon {
+      font-size: 22px;
+      display: block;
+      margin-bottom: 4px;
+      color: #666;
+    }
+
+    .anaba-tab.active .anaba-tab-icon {
+      color: #00695C;
+    }
+
+    /* 注意喚起エリア */
+    .anaba-caution {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+      padding: 14px 16px;
+      border-left: 4px solid #FF9800;
+      margin: 16px;
+      border-radius: 8px;
+    }
+
+    .anaba-caution-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #E65100;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .anaba-caution-text {
+      font-size: 12px;
+      color: #5D4037;
+      line-height: 1.6;
+    }
+
+    .anaba-caution-detail {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed #FFCC80;
+      font-size: 11px;
+      line-height: 1.6;
+      color: #5D4037;
+    }
+
+    .anaba-caution-detail.show {
+      display: block;
+    }
+
+    .anaba-caution-toggle {
+      font-size: 11px;
+      color: #FF6F00;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+    }
+
+    .anaba-caution-toggle:hover {
+      text-decoration: underline;
+    }
+
+    /* フィルタエリア */
+    .anaba-filters {
+      padding: 12px 16px;
+      background: #F5F5F5;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .anaba-filter-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .anaba-filter-label {
+      font-size: 11px;
+      color: #666;
+      font-weight: 600;
+    }
+
+    .anaba-filter-select {
+      padding: 6px 10px;
+      border: 1px solid #DDD;
+      border-radius: 6px;
+      font-size: 12px;
+      background: white;
+      cursor: pointer;
+    }
+
+    .anaba-filter-select:focus {
+      outline: none;
+      border-color: #00695C;
+    }
+
+    .anaba-result-count {
+      font-size: 12px;
+      color: #666;
+      margin-left: auto;
+    }
+
+    /* データリスト */
+    .anaba-list {
+      padding: 16px;
+    }
+
+    .anaba-item {
+      background: white;
+      border: 1px solid #E0E0E0;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+
+    .anaba-item:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .anaba-item-header {
+      padding: 12px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .anaba-item-main {
+      flex: 1;
+    }
+
+    .anaba-item-univ {
+      font-size: 14px;
+      font-weight: 700;
+      color: #00695C;
+      margin-bottom: 2px;
+    }
+
+    .anaba-item-faculty {
+      font-size: 12px;
+      color: #333;
+    }
+
+    .anaba-item-badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .anaba-badge {
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .anaba-badge.hyotei {
+      background: #E3F2FD;
+      color: #1565C0;
+    }
+
+    .anaba-badge.eiken {
+      background: #F3E5F5;
+      color: #7B1FA2;
+    }
+
+    .anaba-badge.heigan {
+      background: #E8F5E9;
+      color: #2E7D32;
+    }
+
+    .anaba-badge.sengan {
+      background: #FFEBEE;
+      color: #C62828;
+    }
+
+    .anaba-badge.ratio {
+      background: #FFF8E1;
+      color: #F57F17;
+    }
+
+    .anaba-item-area {
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      background: #ECEFF1;
+      color: #546E7A;
+    }
+
+    .anaba-item-detail {
+      display: none;
+      padding: 0 14px 14px;
+      border-top: 1px dashed #E0E0E0;
+    }
+
+    .anaba-item-detail.show {
+      display: block;
+    }
+
+    .anaba-item-point {
+      font-size: 12px;
+      color: #555;
+      line-height: 1.6;
+      margin-top: 10px;
+      padding: 10px;
+      background: #FAFAFA;
+      border-radius: 6px;
+    }
+
+    .anaba-item-expand {
+      color: #00695C;
+      font-size: 20px;
+      transition: transform 0.2s;
+    }
+
+    .anaba-item-expand.open {
+      transform: rotate(180deg);
+    }
+
+    /* 空の状態 */
+    .anaba-empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: #999;
+    }
+
+    .anaba-empty .material-icons {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    /* ローディング */
+    .anaba-loading {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .anaba-loading .material-icons {
+      font-size: 36px;
+      color: #00695C;
+      animation: spin 1s linear infinite;
+    }
+
+    /* モバイル対応 */
+    @media (max-width: 600px) {
+      .anaba-modal {
+        max-height: 95vh;
+        border-radius: 12px;
+      }
+
+      .anaba-tab {
+        padding: 10px 6px;
+        font-size: 11px;
+      }
+
+      .anaba-tab-icon {
+        font-size: 18px;
+      }
+
+      .anaba-filters {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .anaba-filter-group {
+        justify-content: space-between;
+      }
+
+      .anaba-result-count {
+        margin-left: 0;
+        text-align: right;
+      }
+
+      .anaba-item-header {
+        padding: 10px 12px;
+      }
+
+      .anaba-item-univ {
+        font-size: 13px;
+      }
+
+      .anaba-item-faculty {
+        font-size: 11px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1380,6 +1786,10 @@
         <span class="material-icons">edit_calendar</span>
         志望校を編集する
       </a>
+      <button class="action-btn secondary" onclick="openAnabaModal()">
+        <span class="material-icons">lightbulb</span>
+        穴場情報
+      </button>
       <button class="action-btn secondary" onclick="openRatioGuide()">
         <span class="material-icons">info</span>
         倍率の目安
@@ -2058,8 +2468,328 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeRatioGuide();
+        closeAnabaModal();
       }
     });
+  </script>
+
+  <!-- ========================================
+       穴場情報モーダル
+  ======================================== -->
+  <div class="anaba-modal-overlay" id="anabaModalOverlay" onclick="closeAnabaModal(event)">
+    <div class="anaba-modal" onclick="event.stopPropagation()">
+      <div class="anaba-modal-header">
+        <div class="anaba-modal-title">
+          <span class="material-icons">lightbulb</span>
+          穴場・出願戦略情報
+        </div>
+        <button class="anaba-modal-close" onclick="closeAnabaModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="anaba-modal-body">
+        <!-- カテゴリタブ -->
+        <div class="anaba-tabs">
+          <div class="anaba-tab active" data-category="穴場" onclick="selectAnabaCategory('穴場')">
+            <span class="material-icons anaba-tab-icon">stars</span>
+            穴場
+          </div>
+          <div class="anaba-tab" data-category="評定緩い" onclick="selectAnabaCategory('評定緩い')">
+            <span class="material-icons anaba-tab-icon">assessment</span>
+            評定基準
+          </div>
+          <div class="anaba-tab" data-category="英検不要" onclick="selectAnabaCategory('英検不要')">
+            <span class="material-icons anaba-tab-icon">translate</span>
+            英語資格
+          </div>
+          <div class="anaba-tab" data-category="併願専願" onclick="selectAnabaCategory('併願専願')">
+            <span class="material-icons anaba-tab-icon">checklist</span>
+            併願・専願
+          </div>
+        </div>
+
+        <!-- 注意喚起エリア -->
+        <div class="anaba-caution" id="anabaCaution">
+          <div class="anaba-caution-title">
+            <span class="material-icons">warning</span>
+            <span id="anabaCautionTitle">このカテゴリの注意点</span>
+          </div>
+          <div class="anaba-caution-text" id="anabaCautionSummary"></div>
+          <div class="anaba-caution-toggle" onclick="toggleCautionDetail()">
+            <span>詳しく見る</span>
+            <span class="material-icons" id="cautionToggleIcon">expand_more</span>
+          </div>
+          <div class="anaba-caution-detail" id="anabaCautionDetail"></div>
+        </div>
+
+        <!-- フィルタエリア -->
+        <div class="anaba-filters">
+          <div class="anaba-filter-group">
+            <span class="anaba-filter-label">大学:</span>
+            <select class="anaba-filter-select" id="anabaFilterUniv" onchange="filterAnabaList()">
+              <option value="">すべて</option>
+            </select>
+          </div>
+          <div class="anaba-filter-group">
+            <span class="anaba-filter-label">エリア:</span>
+            <select class="anaba-filter-select" id="anabaFilterArea" onchange="filterAnabaList()">
+              <option value="">すべて</option>
+              <option value="関東">関東</option>
+              <option value="関西">関西</option>
+            </select>
+          </div>
+          <div class="anaba-filter-group">
+            <span class="anaba-filter-label">併願:</span>
+            <select class="anaba-filter-select" id="anabaFilterHeigan" onchange="filterAnabaList()">
+              <option value="">すべて</option>
+              <option value="可">併願可</option>
+              <option value="不可">専願のみ</option>
+            </select>
+          </div>
+          <div class="anaba-result-count" id="anabaResultCount">0件</div>
+        </div>
+
+        <!-- データリスト -->
+        <div class="anaba-list" id="anabaList">
+          <div class="anaba-loading">
+            <span class="material-icons">sync</span>
+            <p>読み込み中...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ========================================
+    // 穴場情報機能
+    // ========================================
+    
+    const ANABA_SPREADSHEET_ID = '1vL1u4LL8H-MnLut9owlXSpJLRHsuRhl8mIDE-0-8voM';
+    let anabaData = [];
+    let currentCategory = '穴場';
+    let anabaDataLoaded = false;
+
+    // 注意喚起テキスト
+    const cautionTexts = {
+      '穴場': {
+        title: '穴場（低倍率）についての注意点',
+        summary: '倍率が低い＝穴場ではありません。狙い目は"戦える土俵"かどうかです。',
+        detail: '単純に倍率が低い学部を探すのではなく、「出願条件を満たし、自分の強みと噛み合い、論理的に戦える場所」を選ぶことが、合格への最短ルートです。\n\nここで紹介する学部はいずれも、「条件を満たす生徒には非常に有利に働く」「志望理由が合わせやすい」などの理由で"穴場"と呼べる枠です。\n\n適切な戦略を立てて、確実に合格を勝ち取りましょう。'
+      },
+      '評定緩い': {
+        title: '評定基準が緩い大学についての注意点',
+        summary: '評定不要＝受かりやすい、ではありません。他の要素がより厳しく評価されます。',
+        detail: '評定平均の要件がないということは「評定平均が高くない人でも出願できる」というメリットがある一方で、同じように評定が高くない多くの受験生も殺到するため、倍率が高くなりやすい傾向があります。\n\n◆評定平均が見られない＝他の部分がより厳しく見られる\n出願時に評定を評価されない場合でも、その代わりに「活動実績」「研究プロセス」「志望理由書の完成度」「課外活動」「表現力」などが重視されます。\n\n◆戦略的に出願するための考え方\n自分が評定以外でどのような強みを持っているのかを明確にし、それをどのようにアピールするかを戦略的に考えることが重要です。'
+      },
+      '英検不要': {
+        title: '英語資格が不要な大学についての注意点',
+        summary: '英語資格が不要でも、他の要素（活動実績・志望理由等）で差がつきます。',
+        detail: '英検などの語学資格条件がない学部・学科では、その分、活動実績や志望理由書の完成度、研究テーマの深さなどが重視される傾向があります。\n\n英語資格が不要だからといって「誰でも受かる」わけではなく、むしろ他の受験生と同じフィールドで厳しく比較されることになります。'
+      },
+      '併願専願': {
+        title: '併願・専願についての注意点',
+        summary: '併願可能な大学は戦略的に活用。専願の場合は覚悟を持って臨みましょう。',
+        detail: '併願可能な大学は、複数の選択肢を持ちながら受験戦略を組み立てられるメリットがあります。\n\n一方、専願の大学は「合格したら必ず入学する」という約束のもとで出願するため、本当にその大学に行きたいかどうかを慎重に考える必要があります。\n\nまた、大学によっては「文言は曖昧だが実質専願」というケースもあるため、必ず募集要項を確認してください。'
+      }
+    };
+
+    // モーダル開閉
+    function openAnabaModal() {
+      document.getElementById('anabaModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+      
+      if (!anabaDataLoaded) {
+        loadAnabaData();
+      } else {
+        renderAnabaList();
+      }
+    }
+
+    function closeAnabaModal(e) {
+      if (e && e.target !== e.currentTarget) return;
+      document.getElementById('anabaModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    // データ読み込み
+    async function loadAnabaData() {
+      try {
+        const url = `https://docs.google.com/spreadsheets/d/${ANABA_SPREADSHEET_ID}/gviz/tq?tqx=out:json`;
+        const response = await fetch(url);
+        const text = await response.text();
+        
+        // JSONを抽出
+        const jsonMatch = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?$/);
+        if (!jsonMatch) throw new Error('データ形式エラー');
+        
+        const json = JSON.parse(jsonMatch[1]);
+        const rows = json.table.rows;
+        
+        // ヘッダーをスキップしてデータを取得
+        anabaData = rows.slice(1).map(row => {
+          const cells = row.c;
+          return {
+            univ: cells[0]?.v || '',
+            faculty: cells[1]?.v || '',
+            department: cells[2]?.v || '',
+            method: cells[3]?.v || '',
+            hyotei: cells[4]?.v || '',
+            eiken: cells[5]?.v || '',
+            heigan: cells[6]?.v || '',
+            ratio: cells[7]?.v || '',
+            category: cells[8]?.v || '',
+            point: cells[9]?.v || '',
+            area: cells[10]?.v || ''
+          };
+        }).filter(item => item.univ && item.category);
+        
+        anabaDataLoaded = true;
+        updateUnivFilter();
+        renderAnabaList();
+        
+      } catch (error) {
+        console.error('穴場データ読み込みエラー:', error);
+        document.getElementById('anabaList').innerHTML = `
+          <div class="anaba-empty">
+            <span class="material-icons">error</span>
+            <p>データの読み込みに失敗しました</p>
+          </div>
+        `;
+      }
+    }
+
+    // 大学フィルタ更新
+    function updateUnivFilter() {
+      const categoryData = anabaData.filter(item => item.category === currentCategory);
+      const univs = [...new Set(categoryData.map(item => item.univ))].sort();
+      
+      const select = document.getElementById('anabaFilterUniv');
+      select.innerHTML = '<option value="">すべて</option>' + 
+        univs.map(u => `<option value="${u}">${u}</option>`).join('');
+    }
+
+    // カテゴリ選択
+    function selectAnabaCategory(category) {
+      currentCategory = category;
+      
+      // タブのアクティブ状態更新
+      document.querySelectorAll('.anaba-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.category === category);
+      });
+      
+      // 注意喚起テキスト更新
+      updateCautionText();
+      
+      // フィルタリセット
+      document.getElementById('anabaFilterUniv').value = '';
+      document.getElementById('anabaFilterArea').value = '';
+      document.getElementById('anabaFilterHeigan').value = '';
+      
+      // 大学フィルタ更新
+      updateUnivFilter();
+      
+      // リスト描画
+      renderAnabaList();
+    }
+
+    // 注意喚起テキスト更新
+    function updateCautionText() {
+      const caution = cautionTexts[currentCategory];
+      document.getElementById('anabaCautionTitle').textContent = caution.title;
+      document.getElementById('anabaCautionSummary').textContent = caution.summary;
+      document.getElementById('anabaCautionDetail').innerHTML = caution.detail.replace(/\n/g, '<br>');
+      
+      // 詳細を閉じる
+      document.getElementById('anabaCautionDetail').classList.remove('show');
+      document.getElementById('cautionToggleIcon').textContent = 'expand_more';
+    }
+
+    // 詳細トグル
+    function toggleCautionDetail() {
+      const detail = document.getElementById('anabaCautionDetail');
+      const icon = document.getElementById('cautionToggleIcon');
+      const isOpen = detail.classList.toggle('show');
+      icon.textContent = isOpen ? 'expand_less' : 'expand_more';
+    }
+
+    // フィルタリング
+    function filterAnabaList() {
+      renderAnabaList();
+    }
+
+    // リスト描画
+    function renderAnabaList() {
+      const listEl = document.getElementById('anabaList');
+      
+      // フィルタ値取得
+      const filterUniv = document.getElementById('anabaFilterUniv').value;
+      const filterArea = document.getElementById('anabaFilterArea').value;
+      const filterHeigan = document.getElementById('anabaFilterHeigan').value;
+      
+      // フィルタリング
+      let filtered = anabaData.filter(item => item.category === currentCategory);
+      
+      if (filterUniv) {
+        filtered = filtered.filter(item => item.univ === filterUniv);
+      }
+      if (filterArea) {
+        filtered = filtered.filter(item => item.area === filterArea);
+      }
+      if (filterHeigan) {
+        filtered = filtered.filter(item => item.heigan === filterHeigan);
+      }
+      
+      // 件数表示
+      document.getElementById('anabaResultCount').textContent = `${filtered.length}件`;
+      
+      // 空の場合
+      if (filtered.length === 0) {
+        listEl.innerHTML = `
+          <div class="anaba-empty">
+            <span class="material-icons">search_off</span>
+            <p>該当するデータがありません</p>
+          </div>
+        `;
+        return;
+      }
+      
+      // リスト生成
+      listEl.innerHTML = filtered.map((item, index) => `
+        <div class="anaba-item">
+          <div class="anaba-item-header" onclick="toggleAnabaDetail(${index})">
+            <div class="anaba-item-main">
+              <div class="anaba-item-univ">${item.univ}</div>
+              <div class="anaba-item-faculty">${item.faculty}${item.department ? ' ' + item.department : ''}</div>
+              <div class="anaba-item-badges">
+                ${item.hyotei ? `<span class="anaba-badge hyotei">評定: ${item.hyotei}</span>` : ''}
+                ${item.eiken ? `<span class="anaba-badge eiken">英語: ${item.eiken}</span>` : ''}
+                ${item.heigan === '可' ? '<span class="anaba-badge heigan">併願可</span>' : ''}
+                ${item.heigan === '不可' || item.heigan === '専願' ? '<span class="anaba-badge sengan">専願</span>' : ''}
+                ${item.ratio && item.ratio !== '-' ? `<span class="anaba-badge ratio">倍率: ${item.ratio}</span>` : ''}
+              </div>
+            </div>
+            <span class="anaba-item-area">${item.area}</span>
+            <span class="material-icons anaba-item-expand" id="anabaExpand${index}">expand_more</span>
+          </div>
+          <div class="anaba-item-detail" id="anabaDetail${index}">
+            ${item.method ? `<div class="anaba-item-point"><strong>入試方式:</strong> ${item.method}</div>` : ''}
+            ${item.point ? `<div class="anaba-item-point">${item.point}</div>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 詳細トグル
+    function toggleAnabaDetail(index) {
+      const detail = document.getElementById(`anabaDetail${index}`);
+      const icon = document.getElementById(`anabaExpand${index}`);
+      const isOpen = detail.classList.toggle('show');
+      icon.classList.toggle('open', isOpen);
+    }
+
+    // 初期化時に注意喚起テキスト設定
+    updateCautionText();
   </script>
 </body>
 </html>
