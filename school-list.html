@@ -1482,6 +1482,616 @@
       color: #00695C;
     }
 
+    /* ========================================
+       報告ボタン（書類・一次・二次）
+    ======================================== */
+    .report-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed #E0E0E0;
+    }
+
+    .report-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      flex: 1;
+    }
+
+    .report-btn .material-icons {
+      font-size: 18px;
+    }
+
+    .report-btn.doc-btn {
+      background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+      color: #1565C0;
+      border: 1px solid #90CAF9;
+    }
+
+    .report-btn.doc-btn:hover {
+      background: linear-gradient(135deg, #BBDEFB 0%, #90CAF9 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(21, 101, 192, 0.2);
+    }
+
+    .report-btn.doc-btn .count {
+      background: #1565C0;
+      color: white;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-size: 11px;
+      margin-left: 4px;
+    }
+
+    .report-btn.result-btn {
+      background: #F5F5F5;
+      color: #BDBDBD;
+      cursor: not-allowed;
+      border: 1px solid #E0E0E0;
+    }
+
+    .report-btn.result-btn.active {
+      background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+      color: #2E7D32;
+      border: 1px solid #A5D6A7;
+      cursor: pointer;
+    }
+
+    .report-btn.result-btn.active:hover {
+      background: linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(46, 125, 50, 0.2);
+    }
+
+    .report-btn.result-btn.reported {
+      background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+      color: #2E7D32;
+      border: 1px solid #A5D6A7;
+    }
+
+    .report-btn.result-btn.reported .material-icons {
+      color: #2E7D32;
+    }
+
+    /* 書類ステータスバッジ（SNS通知風） */
+    .doc-status-icon {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .doc-status-icon .material-icons {
+      font-size: 24px;
+      color: #78909C;
+    }
+
+    .doc-status-icon.has-docs .material-icons {
+      color: #1565C0;
+    }
+
+    .doc-status-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 9px;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .doc-status-badge.count-zero {
+      background: #E53935;
+      animation: pulseRed 2s ease-in-out infinite;
+    }
+
+    .doc-status-badge.count-positive {
+      background: #43A047;
+    }
+
+    @keyframes pulseRed {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* 書類バッジ凡例 */
+    .doc-badge-legend {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      background: #F5F5F5;
+      border-radius: 8px;
+      font-size: 11px;
+      color: #666;
+    }
+
+    .doc-badge-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .doc-badge-legend .legend-icon {
+      position: relative;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .doc-badge-legend .legend-icon .material-icons {
+      font-size: 18px;
+      color: #78909C;
+    }
+
+    .doc-badge-legend .legend-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      font-size: 9px;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .doc-badge-legend .legend-badge.red {
+      background: #E53935;
+    }
+
+    .doc-badge-legend .legend-badge.green {
+      background: #43A047;
+    }
+
+    @media (max-width: 600px) {
+      .doc-badge-legend {
+        flex-direction: column;
+        gap: 6px;
+        padding: 10px;
+      }
+    }
+
+    /* ========================================
+       書類提出モーダル
+    ======================================== */
+    .doc-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .doc-modal-overlay.show {
+      display: flex;
+    }
+
+    .doc-modal {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      animation: docSlideIn 0.3s ease;
+    }
+
+    @keyframes docSlideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .doc-modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #E0E0E0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+      border-radius: 16px 16px 0 0;
+    }
+
+    .doc-modal-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1565C0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .doc-modal-title .material-icons {
+      font-size: 22px;
+    }
+
+    .doc-modal-univ {
+      font-size: 12px;
+      color: #1976D2;
+      margin-top: 4px;
+    }
+
+    .doc-modal-close {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      transition: all 0.2s;
+    }
+
+    .doc-modal-close:hover {
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .doc-modal-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .doc-form-group {
+      margin-bottom: 16px;
+    }
+
+    .doc-form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 6px;
+    }
+
+    .doc-form-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #DDD;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .doc-form-input:focus {
+      outline: none;
+      border-color: #1565C0;
+      box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.1);
+    }
+
+    .doc-input-type {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .doc-input-type label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .doc-form-textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 12px;
+      border: 1px solid #DDD;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    .doc-form-textarea:focus {
+      outline: none;
+      border-color: #1565C0;
+      box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.1);
+    }
+
+    .doc-file-input-wrapper {
+      position: relative;
+      display: none;
+    }
+
+    .doc-file-input-wrapper.show {
+      display: block;
+    }
+
+    .doc-file-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 20px;
+      border: 2px dashed #BBDEFB;
+      border-radius: 8px;
+      background: #F5F9FF;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .doc-file-label:hover {
+      border-color: #1565C0;
+      background: #E3F2FD;
+    }
+
+    .doc-file-label .material-icons {
+      font-size: 28px;
+      color: #1565C0;
+    }
+
+    .doc-file-label span {
+      font-size: 13px;
+      color: #1565C0;
+    }
+
+    .doc-file-input {
+      display: none;
+    }
+
+    .doc-file-selected {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      background: #E3F2FD;
+      border-radius: 8px;
+      margin-top: 8px;
+    }
+
+    .doc-file-selected.show {
+      display: flex;
+    }
+
+    .doc-file-selected .file-name {
+      flex: 1;
+      font-size: 12px;
+      color: #1565C0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .doc-file-selected .remove-file {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #666;
+      padding: 2px;
+    }
+
+    .doc-text-wrapper {
+      display: none;
+    }
+
+    .doc-text-wrapper.show {
+      display: block;
+    }
+
+    .doc-submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #1565C0 0%, #1976D2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .doc-submit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(21, 101, 192, 0.3);
+    }
+
+    .doc-submit-btn:disabled {
+      background: #BDBDBD;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* 履歴セクション */
+    .doc-history-section {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #E0E0E0;
+    }
+
+    .doc-history-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .doc-history-title .material-icons {
+      font-size: 18px;
+      color: #1565C0;
+    }
+
+    .doc-history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .doc-history-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      background: #FAFAFA;
+      border-radius: 8px;
+      border: 1px solid #EEE;
+    }
+
+    .doc-history-item-info {
+      flex: 1;
+    }
+
+    .doc-history-item-type {
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .doc-history-item-date {
+      font-size: 11px;
+      color: #999;
+      margin-top: 2px;
+    }
+
+    .doc-history-item-badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+    }
+
+    .doc-history-item-badge.text {
+      background: #E8F5E9;
+      color: #2E7D32;
+    }
+
+    .doc-history-item-badge.file {
+      background: #E3F2FD;
+      color: #1565C0;
+    }
+
+    .doc-history-view-btn {
+      padding: 6px 12px;
+      background: white;
+      border: 1px solid #1565C0;
+      color: #1565C0;
+      border-radius: 6px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .doc-history-view-btn:hover {
+      background: #E3F2FD;
+    }
+
+    .doc-history-empty {
+      text-align: center;
+      padding: 20px;
+      color: #999;
+      font-size: 13px;
+    }
+
+    /* 内容表示モーダル */
+    .doc-content-modal {
+      max-width: 700px;
+    }
+
+    .doc-content-body {
+      padding: 20px;
+      white-space: pre-wrap;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #333;
+      background: #FAFAFA;
+      border-radius: 8px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .doc-content-file-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px;
+      background: #E3F2FD;
+      border-radius: 8px;
+      color: #1565C0;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .doc-content-file-link:hover {
+      background: #BBDEFB;
+    }
+
+    /* モバイル対応 */
+    @media (max-width: 600px) {
+      .report-buttons {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .report-btn {
+        padding: 10px 12px;
+        font-size: 12px;
+      }
+
+      .report-btn .material-icons {
+        font-size: 16px;
+      }
+
+      .doc-modal {
+        max-height: 95vh;
+      }
+
+      .doc-modal-header {
+        padding: 14px 16px;
+      }
+
+      .doc-modal-body {
+        padding: 16px;
+      }
+    }
+
     /* 注意喚起エリア */
     .anaba-caution {
       background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
@@ -1854,6 +2464,25 @@
           </div>
         </div>
 
+        <!-- 書類バッジ凡例 -->
+        <div class="doc-badge-legend">
+          <span>📄 の数字＝提出済み書類数</span>
+          <div class="doc-badge-legend-item">
+            <div class="legend-icon">
+              <span class="material-icons">description</span>
+              <span class="legend-badge red">0</span>
+            </div>
+            <span>未提出</span>
+          </div>
+          <div class="doc-badge-legend-item">
+            <div class="legend-icon">
+              <span class="material-icons">description</span>
+              <span class="legend-badge green">3</span>
+            </div>
+            <span>3件提出済</span>
+          </div>
+        </div>
+
         <!-- 選択パターンの大学リスト -->
         <div id="patternSchoolList">
           <div class="loading-state" id="loadingState">
@@ -1890,6 +2519,25 @@
             <span class="material-icons">view_column</span>
             全パターン比較
           </button>
+        </div>
+
+        <!-- 書類バッジ凡例 -->
+        <div class="doc-badge-legend">
+          <span>📄 の数字＝提出済み書類数</span>
+          <div class="doc-badge-legend-item">
+            <div class="legend-icon">
+              <span class="material-icons">description</span>
+              <span class="legend-badge red">0</span>
+            </div>
+            <span>未提出</span>
+          </div>
+          <div class="doc-badge-legend-item">
+            <div class="legend-icon">
+              <span class="material-icons">description</span>
+              <span class="legend-badge green">3</span>
+            </div>
+            <span>3件提出済</span>
+          </div>
         </div>
 
         <!-- 一覧表示 -->
@@ -2144,6 +2792,18 @@
     function renderSchoolCard(school, rank, idPrefix) {
       const typeClass = school.applicationType === '専願' ? 'sengan' : (school.applicationType === '併願' ? 'heigan' : '');
       const cardId = `${idPrefix}`;
+      const univKey = `${school.universityName}|${school.faculty}`;
+      const docCount = documentSummary[univKey] || 0;
+      
+      // SNS通知風バッジ
+      const badgeClass = docCount > 0 ? 'count-positive' : 'count-zero';
+      const iconClass = docCount > 0 ? 'has-docs' : '';
+      const statusIcon = `
+        <div class="doc-status-icon ${iconClass}">
+          <span class="material-icons">description</span>
+          <span class="doc-status-badge ${badgeClass}">${docCount}</span>
+        </div>
+      `;
       
       return `
         <div class="school-card" id="${cardId}">
@@ -2153,11 +2813,28 @@
               <div class="school-name">${escapeHtml(school.universityName || '')}</div>
               <div class="school-faculty">${escapeHtml(school.faculty || '')}${school.department ? ' ' + escapeHtml(school.department) : ''}</div>
             </div>
+            ${statusIcon}
             ${school.applicationType ? `<span class="school-badge ${typeClass}">${escapeHtml(school.applicationType)}</span>` : ''}
             <span class="material-icons school-expand">expand_more</span>
           </div>
           <div class="school-detail">
             <div class="school-detail-inner">
+              <!-- 報告ボタン -->
+              <div class="report-buttons" onclick="event.stopPropagation()">
+                <button class="report-btn doc-btn" onclick="openDocModal('${escapeHtml(school.universityName || '')}', '${escapeHtml(school.faculty || '')}')">
+                  <span class="material-icons">description</span>
+                  書類提出
+                  ${docCount > 0 ? `<span class="count">${docCount}</span>` : ''}
+                </button>
+                <button class="report-btn result-btn" disabled title="準備中">
+                  <span class="material-icons">looks_one</span>
+                  一次報告
+                </button>
+                <button class="report-btn result-btn" disabled title="準備中">
+                  <span class="material-icons">looks_two</span>
+                  二次報告
+                </button>
+              </div>
               ${renderDetailSections(school)}
             </div>
           </div>
@@ -2304,6 +2981,18 @@
         const { pattern, rank, school } = item;
         const typeClass = school.applicationType === '専願' ? 'sengan' : (school.applicationType === '併願' ? 'heigan' : '');
         const cardId = `list-${idx}`;
+        const univKey = `${school.universityName}|${school.faculty}`;
+        const docCount = documentSummary[univKey] || 0;
+        
+        // SNS通知風バッジ
+        const badgeClass = docCount > 0 ? 'count-positive' : 'count-zero';
+        const iconClass = docCount > 0 ? 'has-docs' : '';
+        const statusIcon = `
+          <div class="doc-status-icon ${iconClass}">
+            <span class="material-icons">description</span>
+            <span class="doc-status-badge ${badgeClass}">${docCount}</span>
+          </div>
+        `;
         
         return `
           <div class="list-school-card" id="${cardId}">
@@ -2313,11 +3002,28 @@
                 <div class="list-school-name">${escapeHtml(school.universityName || '')}</div>
                 <div class="list-school-faculty">${escapeHtml(school.faculty || '')}${school.department ? ' ' + escapeHtml(school.department) : ''}</div>
               </div>
+              ${statusIcon}
               ${school.applicationType ? `<span class="school-badge ${typeClass}">${escapeHtml(school.applicationType)}</span>` : ''}
               <span class="material-icons school-expand">expand_more</span>
             </div>
             <div class="list-school-detail">
               <div class="school-detail-inner">
+                <!-- 報告ボタン -->
+                <div class="report-buttons" onclick="event.stopPropagation()">
+                  <button class="report-btn doc-btn" onclick="openDocModal('${escapeHtml(school.universityName || '')}', '${escapeHtml(school.faculty || '')}')">
+                    <span class="material-icons">description</span>
+                    書類提出
+                    ${docCount > 0 ? `<span class="count">${docCount}</span>` : ''}
+                  </button>
+                  <button class="report-btn result-btn" disabled title="準備中">
+                    <span class="material-icons">looks_one</span>
+                    一次報告
+                  </button>
+                  <button class="report-btn result-btn" disabled title="準備中">
+                    <span class="material-icons">looks_two</span>
+                    二次報告
+                  </button>
+                </div>
                 ${renderDetailSections(school)}
               </div>
             </div>
@@ -2790,6 +3496,395 @@
 
     // 初期化時に注意喚起テキスト設定
     updateCautionText();
+  </script>
+
+  <!-- ========================================
+       書類提出モーダル
+  ======================================== -->
+  <div class="doc-modal-overlay" id="docModalOverlay" onclick="closeDocModal(event)">
+    <div class="doc-modal" onclick="event.stopPropagation()">
+      <div class="doc-modal-header">
+        <div>
+          <div class="doc-modal-title">
+            <span class="material-icons">description</span>
+            書類提出
+          </div>
+          <div class="doc-modal-univ" id="docModalUniv"></div>
+        </div>
+        <button class="doc-modal-close" onclick="closeDocModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="doc-modal-body">
+        <!-- 入力フォーム -->
+        <div class="doc-form-group">
+          <label class="doc-form-label">書類の種類</label>
+          <input type="text" class="doc-form-input" id="docType" placeholder="例：志望理由書、活動報告書など">
+        </div>
+
+        <div class="doc-form-group">
+          <label class="doc-form-label">入力方法</label>
+          <div class="doc-input-type">
+            <label>
+              <input type="radio" name="inputType" value="text" checked onchange="toggleInputType()">
+              テキストで入力
+            </label>
+            <label>
+              <input type="radio" name="inputType" value="file" onchange="toggleInputType()">
+              ファイルをアップロード
+            </label>
+          </div>
+        </div>
+
+        <!-- テキスト入力 -->
+        <div class="doc-text-wrapper show" id="docTextWrapper">
+          <textarea class="doc-form-textarea" id="docContent" placeholder="書類の内容を入力してください..."></textarea>
+        </div>
+
+        <!-- ファイルアップロード -->
+        <div class="doc-file-input-wrapper" id="docFileWrapper">
+          <label class="doc-file-label" for="docFileInput">
+            <span class="material-icons">cloud_upload</span>
+            <span>クリックしてファイルを選択</span>
+          </label>
+          <input type="file" class="doc-file-input" id="docFileInput" accept="image/*,.pdf,.doc,.docx" onchange="handleFileSelect(event)">
+          <div class="doc-file-selected" id="docFileSelected">
+            <span class="material-icons">insert_drive_file</span>
+            <span class="file-name" id="docFileName"></span>
+            <button class="remove-file" onclick="removeSelectedFile()">
+              <span class="material-icons">close</span>
+            </button>
+          </div>
+        </div>
+
+        <button class="doc-submit-btn" id="docSubmitBtn" onclick="submitDocument()">
+          <span class="material-icons">send</span>
+          提出する
+        </button>
+
+        <!-- 履歴セクション -->
+        <div class="doc-history-section">
+          <div class="doc-history-title">
+            <span class="material-icons">history</span>
+            提出履歴
+          </div>
+          <div class="doc-history-list" id="docHistoryList">
+            <div class="doc-history-empty">まだ提出履歴はありません</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 書類内容表示モーダル -->
+  <div class="doc-modal-overlay" id="docContentModalOverlay" onclick="closeDocContentModal(event)">
+    <div class="doc-modal doc-content-modal" onclick="event.stopPropagation()">
+      <div class="doc-modal-header">
+        <div>
+          <div class="doc-modal-title">
+            <span class="material-icons">article</span>
+            <span id="docContentTitle">書類内容</span>
+          </div>
+          <div class="doc-modal-univ" id="docContentDate"></div>
+        </div>
+        <button class="doc-modal-close" onclick="closeDocContentModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="doc-modal-body">
+        <div id="docContentBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ========================================
+    // 書類提出機能
+    // ========================================
+    
+    const DOCUMENT_SPREADSHEET_ID = '1mNdZJWWR_9UnNIy6LvLZ7a3TqdTAz3mVQilbNk85AyU';
+    let currentDocUniv = '';
+    let currentDocFaculty = '';
+    let selectedFile = null;
+    let documentSummary = {};
+
+    // モーダル開閉
+    function openDocModal(univName, faculty) {
+      currentDocUniv = univName;
+      currentDocFaculty = faculty;
+      
+      document.getElementById('docModalUniv').textContent = `${univName} ${faculty}`;
+      document.getElementById('docType').value = '';
+      document.getElementById('docContent').value = '';
+      removeSelectedFile();
+      
+      // テキスト入力をデフォルトに
+      document.querySelector('input[name="inputType"][value="text"]').checked = true;
+      toggleInputType();
+      
+      // 履歴を読み込み
+      loadDocumentHistory();
+      
+      document.getElementById('docModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDocModal(e) {
+      if (e && e.target !== e.currentTarget) return;
+      document.getElementById('docModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function closeDocContentModal(e) {
+      if (e && e.target !== e.currentTarget) return;
+      document.getElementById('docContentModalOverlay').classList.remove('show');
+    }
+
+    // 入力タイプ切り替え
+    function toggleInputType() {
+      const inputType = document.querySelector('input[name="inputType"]:checked').value;
+      document.getElementById('docTextWrapper').classList.toggle('show', inputType === 'text');
+      document.getElementById('docFileWrapper').classList.toggle('show', inputType === 'file');
+    }
+
+    // ファイル選択処理
+    function handleFileSelect(event) {
+      const file = event.target.files[0];
+      if (file) {
+        selectedFile = file;
+        document.getElementById('docFileName').textContent = file.name;
+        document.getElementById('docFileSelected').classList.add('show');
+      }
+    }
+
+    function removeSelectedFile() {
+      selectedFile = null;
+      document.getElementById('docFileInput').value = '';
+      document.getElementById('docFileSelected').classList.remove('show');
+    }
+
+    // 書類提出
+    async function submitDocument() {
+      const docType = document.getElementById('docType').value.trim();
+      const inputType = document.querySelector('input[name="inputType"]:checked').value;
+      const content = document.getElementById('docContent').value.trim();
+      
+      if (!docType) {
+        alert('書類の種類を入力してください');
+        return;
+      }
+      
+      if (inputType === 'text' && !content) {
+        alert('内容を入力してください');
+        return;
+      }
+      
+      if (inputType === 'file' && !selectedFile) {
+        alert('ファイルを選択してください');
+        return;
+      }
+      
+      // ログイン中の生徒番号を取得
+      const studentId = localStorage.getItem('studentNumber') || '';
+      if (!studentId) {
+        alert('ログインが必要です');
+        return;
+      }
+      
+      const submitBtn = document.getElementById('docSubmitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="material-icons">sync</span> 送信中...';
+      
+      try {
+        let requestData = {
+          studentId: studentId,
+          univName: currentDocUniv,
+          faculty: currentDocFaculty,
+          docType: docType,
+          inputType: inputType
+        };
+        
+        if (inputType === 'text') {
+          requestData.content = content;
+        } else {
+          // ファイルをBase64に変換
+          const base64Data = await fileToBase64(selectedFile);
+          requestData.fileData = base64Data;
+          requestData.fileName = selectedFile.name;
+          requestData.mimeType = selectedFile.type;
+        }
+        
+        const response = await fetch(API_URL + '?action=submitDocument', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          alert('書類を提出しました');
+          document.getElementById('docType').value = '';
+          document.getElementById('docContent').value = '';
+          removeSelectedFile();
+          
+          // 履歴を再読み込み
+          loadDocumentHistory();
+          
+          // サマリーを更新
+          loadDocumentSummary();
+        } else {
+          alert('エラー: ' + (result.error || '送信に失敗しました'));
+        }
+        
+      } catch (error) {
+        console.error('書類提出エラー:', error);
+        alert('送信中にエラーが発生しました');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span class="material-icons">send</span> 提出する';
+      }
+    }
+
+    // ファイルをBase64に変換
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          const base64 = reader.result.split(',')[1];
+          resolve(base64);
+        };
+        reader.onerror = error => reject(error);
+      });
+    }
+
+    // 書類履歴を読み込み
+    async function loadDocumentHistory() {
+      const historyList = document.getElementById('docHistoryList');
+      const studentId = localStorage.getItem('studentNumber') || '';
+      
+      if (!studentId) {
+        historyList.innerHTML = '<div class="doc-history-empty">ログインが必要です</div>';
+        return;
+      }
+      
+      historyList.innerHTML = '<div class="doc-history-empty">読み込み中...</div>';
+      
+      try {
+        const params = new URLSearchParams({
+          action: 'getDocumentHistory',
+          studentId: studentId,
+          univName: currentDocUniv,
+          faculty: currentDocFaculty
+        });
+        
+        const response = await fetch(API_URL + '?' + params);
+        const result = await response.json();
+        
+        if (result.success && result.history && result.history.length > 0) {
+          historyList.innerHTML = result.history.map(item => `
+            <div class="doc-history-item">
+              <div class="doc-history-item-info">
+                <div class="doc-history-item-type">
+                  ${escapeHtml(item.docType)}
+                  <span class="doc-history-item-badge ${item.inputType}">${item.inputType === 'text' ? 'テキスト' : 'ファイル'}</span>
+                </div>
+                <div class="doc-history-item-date">${item.timestamp}</div>
+              </div>
+              <button class="doc-history-view-btn" onclick="viewDocumentContent(${item.id})">
+                内容を見る
+              </button>
+            </div>
+          `).join('');
+        } else {
+          historyList.innerHTML = '<div class="doc-history-empty">まだ提出履歴はありません</div>';
+        }
+        
+      } catch (error) {
+        console.error('履歴取得エラー:', error);
+        historyList.innerHTML = '<div class="doc-history-empty">読み込みに失敗しました</div>';
+      }
+    }
+
+    // 書類内容を表示
+    async function viewDocumentContent(rowId) {
+      try {
+        const params = new URLSearchParams({
+          action: 'getDocumentContent',
+          rowId: rowId
+        });
+        
+        const response = await fetch(API_URL + '?' + params);
+        const result = await response.json();
+        
+        if (result.success && result.document) {
+          const doc = result.document;
+          document.getElementById('docContentTitle').textContent = doc.docType;
+          document.getElementById('docContentDate').textContent = doc.timestamp;
+          
+          if (doc.inputType === 'text') {
+            document.getElementById('docContentBody').innerHTML = `
+              <div class="doc-content-body">${escapeHtml(doc.content)}</div>
+            `;
+          } else {
+            document.getElementById('docContentBody').innerHTML = `
+              <a href="${doc.content}" target="_blank" class="doc-content-file-link">
+                <span class="material-icons">open_in_new</span>
+                ${escapeHtml(doc.fileName)} を開く
+              </a>
+            `;
+          }
+          
+          document.getElementById('docContentModalOverlay').classList.add('show');
+        } else {
+          alert('内容の取得に失敗しました');
+        }
+        
+      } catch (error) {
+        console.error('内容取得エラー:', error);
+        alert('読み込み中にエラーが発生しました');
+      }
+    }
+
+    // 書類サマリーを読み込み（カード表示用）
+    async function loadDocumentSummary() {
+      const studentId = localStorage.getItem('studentNumber') || '';
+      if (!studentId) return;
+      
+      try {
+        const params = new URLSearchParams({
+          action: 'getDocumentSummary',
+          studentId: studentId
+        });
+        
+        const response = await fetch(API_URL + '?' + params);
+        const result = await response.json();
+        
+        if (result.success && result.summary) {
+          documentSummary = {};
+          result.summary.forEach(item => {
+            const key = `${item.univName}|${item.faculty}`;
+            documentSummary[key] = item.count;
+          });
+          
+          // カードを再描画
+          renderPatternSchools();
+          if (currentListView === 'list') {
+            renderListViewSchools();
+          }
+        }
+        
+      } catch (error) {
+        console.error('サマリー取得エラー:', error);
+      }
+    }
+
+    // ページ読み込み時にサマリーを取得
+    document.addEventListener('DOMContentLoaded', function() {
+      // 少し遅延させてログイン状態確認後に実行
+      setTimeout(loadDocumentSummary, 1000);
+    });
   </script>
 </body>
 </html>
