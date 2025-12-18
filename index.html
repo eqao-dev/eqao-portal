@@ -2529,7 +2529,7 @@
       <div class="button-grid-2col">
         <a href="camp.html" class="menu-btn">
           <div class="icon-wrapper icon-red">
-            <span class="material-icons">camping</span>
+            <span class="material-icons">wb_sunny</span>
           </div>
           <span>EQAO<br>CAMP</span>
         </a>
@@ -2617,7 +2617,10 @@
       if (loggedIn === 'true') {
         console.log('User is logged in, hiding login overlay');
         document.getElementById('loginOverlay').classList.add('hidden');
-        document.getElementById('navUserName').textContent = studentName || '';
+        const navUserNameEl = document.getElementById('navUserName');
+        if (navUserNameEl) {
+          navUserNameEl.textContent = studentName || '';
+        }
         loadNews();
       } else {
         console.log('User is not logged in, showing login overlay');
@@ -2677,7 +2680,10 @@
           });
           
           document.getElementById('loginOverlay').classList.add('hidden');
-          document.getElementById('navUserName').textContent = result.studentName || '';
+          const navUserNameEl = document.getElementById('navUserName');
+          if (navUserNameEl) {
+            navUserNameEl.textContent = result.studentName || '';
+          }
           loadNews();
         } else {
           console.error('Login failed:', result);
