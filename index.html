@@ -2408,6 +2408,18 @@
   </header>
 
   <div class="container">
+    <div class="news-section">
+      <div class="news-header">
+        <div class="news-icon">
+          <span class="material-icons">campaign</span>
+        </div>
+        <span class="news-title">お知らせ</span>
+      </div>
+      <div id="newsList" class="news-list">
+        <div class="news-loading">読み込み中...</div>
+      </div>
+    </div>
+
     <!-- 規定更新バナー（更新がある場合のみ表示） -->
     <div class="rule-update-banner" id="ruleUpdateBanner" onclick="openRuleModal()">
       <div class="rule-update-content">
@@ -2440,18 +2452,6 @@
             <span class="material-icons" style="font-size: 18px;">arrow_forward</span>
           </a>
         </div>
-      </div>
-    </div>
-
-    <div class="news-section">
-      <div class="news-header">
-        <div class="news-icon">
-          <span class="material-icons">campaign</span>
-        </div>
-        <span class="news-title">お知らせ</span>
-      </div>
-      <div id="newsList" class="news-list">
-        <div class="news-loading">読み込み中...</div>
       </div>
     </div>
 
@@ -3021,13 +3021,18 @@
         return;
       }
       
-      ruleUpdatesData = data.updates;
-      const count = data.updates.length;
+      // 更新日が新しい順にソート
+      const sortedUpdates = data.updates.sort(function(a, b) {
+        return new Date(b.updatedAt) - new Date(a.updatedAt);
+      });
+      
+      ruleUpdatesData = sortedUpdates;
+      const count = sortedUpdates.length;
       text.textContent = '規定が' + count + '件更新されました（直近7日間）';
       banner.classList.add('show');
       
       // モーダルの内容を生成
-      renderRuleModal(data.updates);
+      renderRuleModal(sortedUpdates);
     }
 
     function renderRuleModal(updates) {
