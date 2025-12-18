@@ -198,6 +198,19 @@
       return await response.json();
     }
 
+    async function apiGet(action, params = {}) {
+      const url = new URL(API_URL);
+      url.searchParams.set('action', action);
+      Object.entries(params).forEach(([key, value]) => {
+        url.searchParams.set(key, value);
+      });
+      const response = await fetch(url.toString());
+      if (!response.ok) {
+        throw new Error('API Error: ' + response.status);
+      }
+      return await response.json();
+    }
+
     // Enterキーでログイン
     document.getElementById('password').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') login();
