@@ -26,6 +26,7 @@
   let currentUser = null;
   let columns = [];
   let readStatus = {};
+  let globalReadTitles = new Set(); // グローバル既読タイトル
   let currentPage = 1;
   let pageSize = DEFAULT_PAGE_SIZE;
   let filterMode = 'all'; // 'all', 'unread', 'read'
@@ -55,6 +56,15 @@
       return [config.category];
     }
     return [];
+  }
+
+  // ===== グローバル既読をローカル既読に反映 =====
+  function applyGlobalReadStatus() {
+    columns.forEach((col, index) => {
+      if (globalReadTitles.has(col.title) && !readStatus[index]) {
+        readStatus[index] = true;
+      }
+    });
   }
 
   // ===== フィルター済みコラム取得 =====
@@ -287,6 +297,13 @@
       delete readStatus[index];
     } else {
       readStatus[index] = true;
+      
+      // グローバル既読も保存（チェックを付けた場合のみ）
+      const title = columns[index]?.title;
+      if (title && !globalReadTitles.has(title)) {
+        globalReadTitles.add(title);
+        saveGlobalReadColumn(title);
+      }
     }
     saveReadStatus();
     updateCheckUI(index);
@@ -298,10 +315,40 @@
   function markAsRead(index) {
     if (!readStatus[index]) {
       readStatus[index] = true;
+      
+      // グローバル既読も保存
+      const title = columns[index]?.title;
+      if (title && !globalReadTitles.has(title)) {
+        globalReadTitles.add(title);
+        saveGlobalReadColumn(title);
+      }
+      
       saveReadStatus();
       updateCheckUI(index);
       updateProgress();
       renderControls();
+    }
+  }
+  
+  // ===== グローバル既読を保存 =====
+  async function saveGlobalReadColumn(title) {
+    // ローカルにも保存（バックアップ）
+    const savedGlobal = localStorage.getItem(`eqao_global_read_${currentUser.studentId}`);
+    const globalList = savedGlobal ? JSON.parse(savedGlobal) : [];
+    if (!globalList.includes(title)) {
+      globalList.push(title);
+      localStorage.setItem(`eqao_global_read_${currentUser.studentId}`, JSON.stringify(globalList));
+    }
+    
+    // サーバーに保存
+    try {
+      const url = new URL(API_URL);
+      url.searchParams.set('action', 'saveReadColumn');
+      url.searchParams.set('studentId', currentUser.studentId);
+      url.searchParams.set('title', title);
+      await fetch(url.toString());
+    } catch (error) {
+      console.error('グローバル既読の保存エラー:', error);
     }
   }
 
@@ -408,6 +455,7 @@
     
     try {
       const allColumns = [];
+      const seenTitles = new Set(); // 重複チェック用
       
       for (const category of categories) {
         const url = new URL(API_URL);
@@ -419,6 +467,12 @@
         
         if (Array.isArray(data)) {
           data.forEach(col => {
+            // タイトルで重複チェック（同じタイトルのコラムはスキップ）
+            if (seenTitles.has(col.title)) {
+              return; // 既に追加済みならスキップ
+            }
+            seenTitles.add(col.title);
+            
             // 複数カテゴリの場合のみカテゴリ情報を付与
             if (categories.length > 1) {
               col.category = category;
@@ -493,6 +547,22 @@
       studentName: localStorage.getItem('eqao_studentName')
     };
 
+    // グローバル既読タイトルを読み込み
+    try {
+      const res = await fetch(`${API_URL}?action=getReadColumns&studentId=${currentUser.studentId}`);
+      const result = await res.json();
+      if (result.success && result.titles) {
+        globalReadTitles = new Set(result.titles);
+      }
+    } catch (error) {
+      console.error('グローバル既読読み込みエラー:', error);
+      // ローカルストレージからフォールバック
+      const savedGlobal = localStorage.getItem(`eqao_global_read_${currentUser.studentId}`);
+      if (savedGlobal) {
+        globalReadTitles = new Set(JSON.parse(savedGlobal));
+      }
+    }
+
     // 完了済みチェック＆読了状態読み込み
     let progressData = {};
     try {
@@ -526,6 +596,9 @@
 
     // コラムデータ読み込み
     await loadColumns();
+    
+    // グローバル既読をローカル既読に反映
+    applyGlobalReadStatus();
 
     // 描画
     renderControls();
