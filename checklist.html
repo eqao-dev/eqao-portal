@@ -9,6 +9,7 @@
   <title>チェックリスト - EQAO PORTAL</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
   <style>
     * {
       margin: 0;
@@ -995,32 +996,10 @@
       <span class="material-icons">person</span>
       <span id="navUserName"></span>
     </div>
-    <button class="menu-btn" onclick="toggleMenu()">
+    <button class="hamburger-btn" onclick="openNav()">
       <span class="material-icons">menu</span>
     </button>
   </header>
-
-  <!-- ナビゲーションメニュー（省略版） -->
-  <div class="nav-overlay" id="navOverlay" onclick="toggleMenu()"></div>
-  <nav class="nav-menu" id="navMenu">
-    <button class="nav-close" onclick="toggleMenu()">
-      <span class="material-icons">close</span>
-    </button>
-    <div class="nav-header">
-      <div class="nav-header-title">EQAO PORTAL</div>
-      <div class="nav-header-subtitle" id="navHeaderUser">メニュー</div>
-    </div>
-    <div class="nav-section">
-      <a href="index.html" class="nav-item">
-        <span class="material-icons">home</span>
-        <span class="nav-item-text">ホーム</span>
-      </a>
-      <a href="quiz.html" class="nav-item">
-        <span class="material-icons">quiz</span>
-        <span class="nav-item-text">確認テスト</span>
-      </a>
-    </div>
-  </nav>
 
   <div class="container">
     <!-- ローディング -->
@@ -1692,5 +1671,7 @@
       }
     });
   </script>
+  
+  <script src="js/nav-menu.js"></script>
 </body>
 </html>

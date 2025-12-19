@@ -7,6 +7,7 @@
   <title>科目詳細ガイド - EQAO PORTAL</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -386,6 +387,10 @@
       <span class="material-icons">arrow_back</span>
     </a>
     <h1 class="header-title">科目詳細ガイド</h1>
+    <button class="hamburger-btn" onclick="openNav()">
+      <span class="material-icons">menu</span>
+    </button>
+
   </header>
 
   <div class="container">
@@ -1032,5 +1037,6 @@
       toggle.classList.toggle('open');
     }
   </script>
+  <script src="js/nav-menu.js"></script>
 </body>
 </html>

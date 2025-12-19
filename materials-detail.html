@@ -7,6 +7,7 @@
   <title>教材詳細 - EQAO PORTAL</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
   <style>
     * {
       margin: 0;
@@ -437,6 +438,10 @@
       <h1 id="categoryTitle">読み込み中...</h1>
       <p class="subtitle">チェックして学習進捗を管理</p>
     </div>
+    <button class="hamburger-btn" onclick="openNav()">
+      <span class="material-icons">menu</span>
+    </button>
+
   </header>
 
   <div class="container">
@@ -743,5 +748,6 @@
       return div.innerHTML;
     }
   </script>
+  <script src="js/nav-menu.js"></script>
 </body>
 </html>
