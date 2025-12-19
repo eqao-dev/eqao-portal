@@ -589,17 +589,29 @@
         studentName: localStorage.getItem('eqao_studentName')
       };
 
-      // 完了済みチェック（サーバーから読み込み）
+      // 完了済みチェック＆読了状態読み込み（サーバーから）
       let progressData = {};
       try {
         const res = await fetch(`${API_URL}?action=getLessonProgress&studentId=${currentUser.studentId}`);
         const result = await res.json();
         if (result.success && result.progress) {
           progressData = result.progress;
+          
+          // 読了状態を復元
+          if (progressData[THEME_ID]?.readArticles) {
+            progressData[THEME_ID].readArticles.forEach(index => {
+              readStatus[index] = true;
+            });
+          }
         }
       } catch (error) {
+        console.error('進捗読み込みエラー:', error);
         // フォールバック：ローカルストレージ
         progressData = JSON.parse(localStorage.getItem(`eqao_lesson_progress_${currentUser.studentId}`) || '{}');
+        const savedReadStatus = localStorage.getItem(`eqao_input_read_${currentUser.studentId}_${THEME_ID}`);
+        if (savedReadStatus) {
+          readStatus = JSON.parse(savedReadStatus);
+        }
       }
       
       if (progressData[THEME_ID]?.inputCompleted) {
@@ -608,12 +620,6 @@
         document.getElementById('completeFooter').style.display = 'none';
         document.getElementById('loadingOverlay').style.display = 'none';
         return;
-      }
-
-      // 読了状態を読み込み
-      const savedReadStatus = localStorage.getItem(`eqao_input_read_${currentUser.studentId}_${THEME_ID}`);
-      if (savedReadStatus) {
-        readStatus = JSON.parse(savedReadStatus);
       }
 
       // コラムデータ読み込み
@@ -733,9 +739,33 @@
       }
     }
 
-    // 読了状態保存
-    function saveReadStatus() {
+    // 読了状態保存（サーバー＋ローカル）
+    async function saveReadStatus() {
+      // ローカルにも保存（バックアップ）
       localStorage.setItem(`eqao_input_read_${currentUser.studentId}_${THEME_ID}`, JSON.stringify(readStatus));
+      
+      // 読了済み記事のインデックス配列を作成
+      const readArticles = Object.keys(readStatus).filter(k => readStatus[k]).map(k => parseInt(k));
+      const total = columns.length;
+      const percent = total > 0 ? Math.round((readArticles.length / total) * 100) : 0;
+      
+      // サーバーに保存
+      try {
+        await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'saveLessonProgress',
+            studentId: currentUser.studentId,
+            themeId: THEME_ID,
+            inputCompleted: false,
+            inputProgress: percent,
+            readArticles: readArticles
+          })
+        });
+      } catch (error) {
+        console.error('読了状態の保存エラー:', error);
+      }
     }
 
     // 進捗更新
@@ -774,12 +804,16 @@
       completeBtn.innerHTML = '<span class="material-icons">sync</span> 保存中...';
 
       try {
+        // 読了済み記事のインデックス配列
+        const readArticles = Object.keys(readStatus).filter(k => readStatus[k]).map(k => parseInt(k));
+        
         // ローカルストレージに保存（バックアップ）
         const progressData = JSON.parse(localStorage.getItem(`eqao_lesson_progress_${currentUser.studentId}`) || '{}');
         progressData[THEME_ID] = progressData[THEME_ID] || {};
         progressData[THEME_ID].inputCompleted = true;
         progressData[THEME_ID].inputCompletedAt = new Date().toISOString();
         progressData[THEME_ID].inputProgress = 100;
+        progressData[THEME_ID].readArticles = readArticles;
         localStorage.setItem(`eqao_lesson_progress_${currentUser.studentId}`, JSON.stringify(progressData));
 
         // サーバー保存
@@ -791,7 +825,8 @@
             studentId: currentUser.studentId,
             themeId: THEME_ID,
             inputCompleted: true,
-            inputProgress: 100
+            inputProgress: 100,
+            readArticles: readArticles
           })
         });
 
