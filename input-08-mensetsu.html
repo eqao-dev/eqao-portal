@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>面接編 インプット - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      min-height: 100vh;
+      padding-bottom: 100px;
+    }
+
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(21, 101, 192, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .header-content {
+      flex: 1;
+    }
+
+    .header-label {
+      font-size: 11px;
+      opacity: 0.8;
+      letter-spacing: 1px;
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* 進捗バー */
+    .progress-section {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .progress-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .progress-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .progress-count {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .progress-count strong {
+      color: #1565c0;
+      font-size: 18px;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #1565c0 0%, #42a5f5 100%);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    /* 注意書き */
+    .notice-box {
+      background: #e3f2fd;
+      border-left: 4px solid #1565c0;
+      padding: 16px;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 20px;
+    }
+
+    .notice-box p {
+      font-size: 13px;
+      color: #1565c0;
+      line-height: 1.6;
+    }
+
+    .notice-box .material-icons {
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+
+    /* チェックリストセクション（将来用） */
+    .checklist-section {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      display: none; /* 将来有効化 */
+    }
+
+    .checklist-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .checklist-title .material-icons {
+      color: #1565c0;
+    }
+
+    /* コラムセクション */
+    .column-section {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+
+    .column-header {
+      background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .column-header .material-icons {
+      font-size: 24px;
+    }
+
+    .column-header-text h2 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .column-header-text p {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .column-list {
+      padding: 0;
+    }
+
+    .column-item {
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .column-item:last-child {
+      border-bottom: none;
+    }
+
+    .column-item-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .column-item-header:hover {
+      background: #f8f9fa;
+    }
+
+    .column-check {
+      width: 24px;
+      height: 24px;
+      border: 2px solid #e0e0e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+
+    .column-check.checked {
+      background: #43a047;
+      border-color: #43a047;
+      color: white;
+    }
+
+    .column-check .material-icons {
+      font-size: 16px;
+      display: none;
+    }
+
+    .column-check.checked .material-icons {
+      display: block;
+    }
+
+    .column-item-info {
+      flex: 1;
+    }
+
+    .column-item-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 2px;
+    }
+
+    .column-item-date {
+      font-size: 11px;
+      color: #888;
+    }
+
+    .column-expand {
+      color: #999;
+      transition: transform 0.3s;
+    }
+
+    .column-item.open .column-expand {
+      transform: rotate(180deg);
+    }
+
+    .column-content {
+      display: none;
+      padding: 0 20px 20px 56px;
+    }
+
+    .column-item.open .column-content {
+      display: block;
+    }
+
+    .column-content-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #444;
+      white-space: pre-wrap;
+    }
+
+    /* 完了ボタン（固定フッター） */
+    .complete-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 16px 20px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+
+    .complete-footer-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .complete-status {
+      flex: 1;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .complete-status strong {
+      color: #1565c0;
+    }
+
+    .complete-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #43a047 0%, #66bb6a 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    .complete-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(67, 160, 71, 0.4);
+    }
+
+    .complete-btn:disabled {
+      background: #e0e0e0;
+      color: #9e9e9e;
+      cursor: not-allowed;
+    }
+
+    .complete-btn .material-icons {
+      font-size: 20px;
+    }
+
+    /* 完了済み表示 */
+    .already-completed {
+      background: #e8f5e9;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .already-completed .material-icons {
+      font-size: 48px;
+      color: #43a047;
+      margin-bottom: 12px;
+    }
+
+    .already-completed h3 {
+      font-size: 18px;
+      color: #2e7d32;
+      margin-bottom: 8px;
+    }
+
+    .already-completed p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 16px;
+    }
+
+    .already-completed .btn-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .already-completed .btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .already-completed .btn-primary {
+      background: linear-gradient(135deg, #7b1fa2 0%, #9c27b0 100%);
+      color: white;
+    }
+
+    .already-completed .btn-secondary {
+      background: #f5f5f5;
+      color: #666;
+    }
+
+    /* ローディング */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255,255,255,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .loading-spinner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .loading-spinner .material-icons {
+      font-size: 48px;
+      color: #1565c0;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* 空状態 */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #888;
+    }
+
+    .empty-state .material-icons {
+      font-size: 64px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 600px) {
+      .complete-footer-inner {
+        flex-direction: column;
+      }
+
+      .complete-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .column-content {
+        padding-left: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="lesson-materials.html" class="back-btn">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <div class="header-content">
+      <div class="header-label">STEP 8 インプット</div>
+      <div class="header-title">面接の本質理解</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- 完了済み表示（該当時のみ表示） -->
+    <div class="already-completed" id="alreadyCompleted" style="display: none;">
+      <span class="material-icons">check_circle</span>
+      <h3>インプット完了済み</h3>
+      <p>このセクションは完了しています。アウトプットに進むか、復習のためにもう一度読み直すことができます。</p>
+      <div class="btn-group">
+        <a href="output-08-mensetsu.html" class="btn btn-primary">
+          <span class="material-icons">edit_note</span>
+          アウトプットへ進む
+        </a>
+        <a href="#" class="btn btn-secondary" onclick="showContent(); return false;">
+          <span class="material-icons">replay</span>
+          復習する
+        </a>
+      </div>
+    </div>
+
+    <!-- メインコンテンツ -->
+    <div id="mainContent">
+      <!-- 進捗バー -->
+      <div class="progress-section">
+        <div class="progress-header">
+          <div class="progress-title">読了進捗</div>
+          <div class="progress-count">
+            <strong id="readCount">0</strong> / <span id="totalCount">0</span> 記事
+          </div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- 注意書き -->
+      <div class="notice-box">
+        <p>
+          <span class="material-icons">info</span>
+          各記事を開いて内容を確認し、チェックを入れてください。すべての記事にチェックを入れると「完了」ボタンが有効になります。
+        </p>
+      </div>
+
+      <!-- チェックリストセクション（将来用） -->
+      <div class="checklist-section" id="checklistSection">
+        <div class="checklist-title">
+          <span class="material-icons">checklist</span>
+          面接チェックリスト
+        </div>
+        <!-- チェックリスト項目（将来実装） -->
+      </div>
+
+      <!-- コラムセクション -->
+      <div class="column-section">
+        <div class="column-header">
+          <span class="material-icons">article</span>
+          <div class="column-header-text">
+            <h2>面接編 コラム</h2>
+            <p>面接対策の基礎知識と実践ポイント</p>
+          </div>
+        </div>
+        <div class="column-list" id="columnList">
+          <!-- JavaScriptで生成 -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 完了ボタン（固定フッター） -->
+  <div class="complete-footer" id="completeFooter">
+    <div class="complete-footer-inner">
+      <div class="complete-status">
+        <span id="statusText">すべての記事を読んでください</span>
+      </div>
+      <button class="complete-btn" id="completeBtn" disabled onclick="completeInput()">
+        <span class="material-icons">check_circle</span>
+        インプット完了
+      </button>
+    </div>
+  </div>
+
+  <!-- ローディング -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner">
+      <span class="material-icons">sync</span>
+      <span>コラムを読み込み中...</span>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
+    const THEME_ID = 8; // 面接編
+    
+    let currentUser = null;
+    let columns = [];
+    let readStatus = {}; // { columnIndex: true/false }
+
+    // 初期化
+    document.addEventListener('DOMContentLoaded', async function() {
+      // ログインチェック
+      const userData = localStorage.getItem('eqao_user');
+      if (!userData) {
+        window.location.href = 'login.html';
+        return;
+      }
+      currentUser = JSON.parse(userData);
+
+      // 完了済みチェック（サーバーから読み込み）
+      let progressData = {};
+      try {
+        const res = await fetch(`${API_URL}?action=getLessonProgress&studentId=${currentUser.studentId}`);
+        const result = await res.json();
+        if (result.success && result.progress) {
+          progressData = result.progress;
+        }
+      } catch (error) {
+        // フォールバック：ローカルストレージ
+        progressData = JSON.parse(localStorage.getItem(`eqao_lesson_progress_${currentUser.studentId}`) || '{}');
+      }
+      
+      if (progressData[THEME_ID]?.inputCompleted) {
+        document.getElementById('alreadyCompleted').style.display = 'block';
+        document.getElementById('mainContent').style.display = 'none';
+        document.getElementById('completeFooter').style.display = 'none';
+        document.getElementById('loadingOverlay').style.display = 'none';
+        return;
+      }
+
+      // 読了状態を読み込み
+      const savedReadStatus = localStorage.getItem(`eqao_input_read_${currentUser.studentId}_${THEME_ID}`);
+      if (savedReadStatus) {
+        readStatus = JSON.parse(savedReadStatus);
+      }
+
+      // コラムデータ読み込み
+      await loadColumns();
+
+      // 描画
+      renderColumns();
+      updateProgress();
+
+      // ローディング非表示
+      document.getElementById('loadingOverlay').style.display = 'none';
+    });
+
+    // コラムデータ読み込み
+    async function loadColumns() {
+      try {
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'getColumn');
+        url.searchParams.set('category', '面接編');
+        
+        const res = await fetch(url.toString());
+        const data = await res.json();
+        
+        if (Array.isArray(data)) {
+          columns = data;
+        } else {
+          columns = [];
+        }
+      } catch (error) {
+        console.error('コラム読み込みエラー:', error);
+        columns = [];
+      }
+    }
+
+    // コラム描画
+    function renderColumns() {
+      const container = document.getElementById('columnList');
+      
+      if (columns.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <span class="material-icons">article</span>
+            <p>面接編のコラムがありません</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = columns.map((col, index) => {
+        const isRead = readStatus[index] || false;
+        
+        return `
+          <div class="column-item" data-index="${index}">
+            <div class="column-item-header" onclick="toggleColumn(${index})">
+              <div class="column-check ${isRead ? 'checked' : ''}" onclick="event.stopPropagation(); toggleRead(${index})">
+                <span class="material-icons">check</span>
+              </div>
+              <div class="column-item-info">
+                <div class="column-item-title">${escapeHtml(col.title)}</div>
+                <div class="column-item-date">${col.date || ''}</div>
+              </div>
+              <span class="material-icons column-expand">expand_more</span>
+            </div>
+            <div class="column-content">
+              <div class="column-content-text">${escapeHtml(col.content)}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // コラム開閉
+    function toggleColumn(index) {
+      const item = document.querySelector(`.column-item[data-index="${index}"]`);
+      item.classList.toggle('open');
+      
+      // 開いたら自動的に既読にする
+      if (item.classList.contains('open') && !readStatus[index]) {
+        // 少し遅延して既読にする（内容を見たとみなす）
+        setTimeout(() => {
+          if (item.classList.contains('open')) {
+            markAsRead(index);
+          }
+        }, 1000);
+      }
+    }
+
+    // 既読トグル
+    function toggleRead(index) {
+      if (readStatus[index]) {
+        delete readStatus[index];
+      } else {
+        readStatus[index] = true;
+      }
+      saveReadStatus();
+      updateCheckUI(index);
+      updateProgress();
+    }
+
+    // 既読にする
+    function markAsRead(index) {
+      if (!readStatus[index]) {
+        readStatus[index] = true;
+        saveReadStatus();
+        updateCheckUI(index);
+        updateProgress();
+      }
+    }
+
+    // チェックUI更新
+    function updateCheckUI(index) {
+      const check = document.querySelector(`.column-item[data-index="${index}"] .column-check`);
+      if (readStatus[index]) {
+        check.classList.add('checked');
+      } else {
+        check.classList.remove('checked');
+      }
+    }
+
+    // 読了状態保存
+    function saveReadStatus() {
+      localStorage.setItem(`eqao_input_read_${currentUser.studentId}_${THEME_ID}`, JSON.stringify(readStatus));
+    }
+
+    // 進捗更新
+    function updateProgress() {
+      const total = columns.length;
+      const read = Object.keys(readStatus).filter(k => readStatus[k]).length;
+      const percent = total > 0 ? Math.round((read / total) * 100) : 0;
+
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('readCount').textContent = read;
+      document.getElementById('progressFill').style.width = percent + '%';
+
+      // 完了ボタンの状態
+      const completeBtn = document.getElementById('completeBtn');
+      const statusText = document.getElementById('statusText');
+
+      if (read >= total && total > 0) {
+        completeBtn.disabled = false;
+        statusText.innerHTML = '<strong>すべての記事を読みました！</strong>';
+      } else {
+        completeBtn.disabled = true;
+        statusText.textContent = `あと ${total - read} 記事を読んでください`;
+      }
+
+      // 進捗データを保存（インプット完了前）
+      const progressData = JSON.parse(localStorage.getItem(`eqao_lesson_progress_${currentUser.studentId}`) || '{}');
+      progressData[THEME_ID] = progressData[THEME_ID] || {};
+      progressData[THEME_ID].inputProgress = percent;
+      localStorage.setItem(`eqao_lesson_progress_${currentUser.studentId}`, JSON.stringify(progressData));
+    }
+
+    // インプット完了
+    async function completeInput() {
+      const completeBtn = document.getElementById('completeBtn');
+      completeBtn.disabled = true;
+      completeBtn.innerHTML = '<span class="material-icons">sync</span> 保存中...';
+
+      try {
+        // ローカルストレージに保存（バックアップ）
+        const progressData = JSON.parse(localStorage.getItem(`eqao_lesson_progress_${currentUser.studentId}`) || '{}');
+        progressData[THEME_ID] = progressData[THEME_ID] || {};
+        progressData[THEME_ID].inputCompleted = true;
+        progressData[THEME_ID].inputCompletedAt = new Date().toISOString();
+        progressData[THEME_ID].inputProgress = 100;
+        localStorage.setItem(`eqao_lesson_progress_${currentUser.studentId}`, JSON.stringify(progressData));
+
+        // サーバー保存
+        await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'saveLessonProgress',
+            studentId: currentUser.studentId,
+            themeId: THEME_ID,
+            inputCompleted: true,
+            inputProgress: 100
+          })
+        });
+
+        // 完了メッセージ
+        alert('インプット完了！アウトプットに進みましょう。');
+        
+        // アウトプットページへ遷移
+        window.location.href = 'output-08-mensetsu.html';
+
+      } catch (error) {
+        console.error('保存エラー:', error);
+        alert('保存に失敗しました。もう一度お試しください。');
+        completeBtn.disabled = false;
+        completeBtn.innerHTML = '<span class="material-icons">check_circle</span> インプット完了';
+      }
+    }
+
+    // 復習表示
+    function showContent() {
+      document.getElementById('alreadyCompleted').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+      document.getElementById('completeFooter').style.display = 'block';
+      
+      // ボタンを「復習完了」に変更
+      const completeBtn = document.getElementById('completeBtn');
+      completeBtn.disabled = false;
+      completeBtn.innerHTML = '<span class="material-icons">arrow_forward</span> アウトプットへ進む';
+      completeBtn.onclick = function() {
+        window.location.href = 'output-08-mensetsu.html';
+      };
+    }
+
+    // ユーティリティ
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>

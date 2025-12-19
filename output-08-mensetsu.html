@@ -1,0 +1,2504 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>面接 アウトプット - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, #e65100 0%, #f57c00 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(230, 81, 0, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn, .menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover, .menu-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      flex: 1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* メインタブ */
+    .main-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      background: white;
+      padding: 8px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .main-tab {
+      flex: 1;
+      padding: 14px 20px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+    }
+
+    .main-tab.active {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+    }
+
+    .main-tab:not(.active) {
+      color: #666;
+    }
+
+    .main-tab:not(.active):hover {
+      background: #f5f5f5;
+    }
+
+    .main-tab.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .main-tab .material-icons {
+      font-size: 20px;
+    }
+
+    /* サブタブ */
+    .sub-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .sub-tab {
+      padding: 10px 20px;
+      border: 2px solid #e0e0e0;
+      background: white;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+
+    .sub-tab.active {
+      background: #1a237e;
+      color: white;
+      border-color: #1a237e;
+    }
+
+    .sub-tab:not(.active):hover {
+      border-color: #1a237e;
+      color: #1a237e;
+    }
+
+    .sub-tab .material-icons {
+      font-size: 18px;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* 面接対策ヘッダー */
+    .interview-header {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .interview-progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .progress-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: conic-gradient(#4caf50 var(--progress, 0%), #e0e0e0 0%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .progress-circle::before {
+      content: '';
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .progress-circle span {
+      position: relative;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a237e;
+    }
+
+    .progress-text {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .progress-text strong {
+      color: #1a237e;
+      font-size: 18px;
+    }
+
+    .pdf-export-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    .pdf-export-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(229, 57, 53, 0.4);
+    }
+
+    /* コントロールバー */
+    .control-bar {
+      background: white;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .control-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #666;
+      white-space: nowrap;
+    }
+
+    .control-select {
+      padding: 8px 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: inherit;
+      background: white;
+      cursor: pointer;
+      min-width: 140px;
+    }
+
+    .control-select:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    .jump-select {
+      min-width: 320px;
+    }
+
+    .jump-select optgroup {
+      font-weight: 700;
+      color: #1a237e;
+      padding: 8px 0;
+    }
+
+    .jump-select option {
+      padding: 4px 8px;
+    }
+
+    .jump-btn {
+      padding: 8px 16px;
+      background: #1a237e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .jump-btn:hover {
+      background: #283593;
+    }
+
+    .jump-btn .material-icons {
+      font-size: 18px;
+    }
+
+    /* カテゴリフィルター */
+    .category-filter {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-chip {
+      padding: 6px 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      background: white;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .filter-chip.active {
+      background: #1a237e;
+      color: white;
+      border-color: #1a237e;
+    }
+
+    .filter-chip:not(.active):hover {
+      border-color: #1a237e;
+    }
+
+    /* ページネーション */
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .page-info {
+      font-size: 13px;
+      color: #666;
+      white-space: nowrap;
+    }
+
+    .page-btn {
+      width: 36px;
+      height: 36px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .page-btn:hover:not(:disabled) {
+      border-color: #1a237e;
+      color: #1a237e;
+    }
+
+    .page-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .page-btn .material-icons {
+      font-size: 20px;
+    }
+
+    /* 質問コンテナ */
+    .questions-container {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    /* 質問カード */
+    .question-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid #eee;
+      scroll-margin-top: 100px;
+    }
+
+    .question-card:last-child {
+      border-bottom: none;
+    }
+
+    .question-card.highlight {
+      animation: highlightPulse 2s ease-out;
+    }
+
+    @keyframes highlightPulse {
+      0% { box-shadow: inset 0 0 0 3px #ff9800; }
+      100% { box-shadow: inset 0 0 0 0px #ff9800; }
+    }
+
+    .question-side {
+      padding: 20px;
+      background: #fafbfc;
+      border-right: 1px solid #eee;
+    }
+
+    .question-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .question-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: #1a237e;
+      color: white;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .question-category-badge {
+      font-size: 11px;
+      padding: 3px 10px;
+      background: #e8eaf6;
+      color: #1a237e;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    .question-category-badge.back {
+      background: #fce4ec;
+      color: #c2185b;
+    }
+
+    .question-category-badge.pressure {
+      background: #fff3e0;
+      color: #e65100;
+    }
+
+    .question-category-badge.custom {
+      background: #f3e5f5;
+      color: #e65100;
+    }
+
+    .question-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    .question-hint {
+      background: #fff3e0;
+      border-left: 3px solid #ff9800;
+      padding: 12px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .question-hint-title {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+      color: #f57c00;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+
+    .question-hint-title .material-icons {
+      font-size: 16px;
+    }
+
+    .answer-side {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .answer-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .answer-status.answered {
+      color: #4caf50;
+    }
+
+    .answer-status.unanswered {
+      color: #999;
+    }
+
+    .answer-status .material-icons {
+      font-size: 16px;
+    }
+
+    .answer-textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      line-height: 1.6;
+      resize: vertical;
+      transition: border-color 0.3s;
+    }
+
+    .answer-textarea:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    .answer-textarea::placeholder {
+      color: #aaa;
+    }
+
+    .instructor-comment {
+      background: #e3f2fd;
+      border-left: 3px solid #2196f3;
+      padding: 12px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: #1565c0;
+      line-height: 1.5;
+    }
+
+    .instructor-comment-title {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+
+    .instructor-comment-title .material-icons {
+      font-size: 16px;
+    }
+
+    .no-comment {
+      color: #999;
+      font-style: italic;
+    }
+
+    .answer-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .save-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    .save-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
+    }
+
+    .save-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .save-btn .material-icons {
+      font-size: 18px;
+    }
+
+    .save-status {
+      font-size: 12px;
+      color: #999;
+    }
+
+    .save-status.saved {
+      color: #4caf50;
+    }
+
+    /* ローディング */
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #e0e0e0;
+      border-top-color: #1a237e;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* 同期ステータス */
+    .sync-status {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+
+    .sync-status.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .sync-status.success {
+      background: #4caf50;
+    }
+
+    .sync-status.error {
+      background: #f44336;
+    }
+
+    .sync-status .material-icons {
+      font-size: 18px;
+      animation: rotate 1s linear infinite;
+    }
+
+    .sync-status.success .material-icons,
+    .sync-status.error .material-icons {
+      animation: none;
+    }
+
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+
+    /* 準備中 */
+    .coming-soon {
+      text-align: center;
+      padding: 80px 20px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .coming-soon .material-icons {
+      font-size: 64px;
+      color: #ccc;
+      margin-bottom: 16px;
+    }
+
+    .coming-soon h3 {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .coming-soon p {
+      font-size: 14px;
+      color: #999;
+    }
+
+    /* 下部ページネーション */
+    .pagination-bottom {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+      padding: 16px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .page-numbers {
+      display: flex;
+      gap: 4px;
+    }
+
+    .page-number {
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .page-number:hover {
+      background: #e8eaf6;
+    }
+
+    .page-number.active {
+      background: #1a237e;
+      color: white;
+    }
+
+    .page-number.ellipsis {
+      cursor: default;
+    }
+
+    .page-number.ellipsis:hover {
+      background: transparent;
+    }
+
+    /* 結果なし */
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+
+    .no-results .material-icons {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    /* スマホ対応 */
+    @media (max-width: 768px) {
+      .container {
+        padding: 12px;
+      }
+
+      .main-tabs {
+        padding: 6px;
+      }
+
+      .main-tab {
+        padding: 12px 16px;
+        font-size: 13px;
+      }
+
+      .main-tab .tab-label {
+        display: none;
+      }
+
+      .sub-tabs {
+        gap: 4px;
+      }
+
+      .sub-tab {
+        padding: 8px 14px;
+        font-size: 12px;
+      }
+
+      .sub-tab .tab-label {
+        display: none;
+      }
+
+      .interview-header {
+        padding: 16px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .interview-progress {
+        justify-content: center;
+      }
+
+      .pdf-export-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .control-bar {
+        padding: 12px;
+        gap: 12px;
+      }
+
+      .control-group {
+        width: 100%;
+      }
+
+      .control-select, .jump-select {
+        flex: 1;
+        min-width: unset;
+      }
+
+      .category-filter {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .pagination {
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
+      }
+
+      /* スマホ用アコーディオン */
+      .question-card {
+        display: block;
+      }
+
+      .question-side {
+        border-right: none;
+        border-bottom: none;
+        padding: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .question-side > .question-content {
+        flex: 1;
+      }
+
+      .question-header {
+        margin-bottom: 8px;
+      }
+
+      .question-text {
+        margin-bottom: 0;
+        font-size: 14px;
+      }
+
+      .question-side .question-hint {
+        display: none;
+      }
+
+      .question-toggle {
+        display: flex;
+        align-items: center;
+        color: #999;
+        transition: transform 0.3s;
+        flex-shrink: 0;
+      }
+
+      .question-side.collapsed .question-toggle {
+        transform: rotate(-90deg);
+      }
+
+      .answer-side {
+        display: none;
+        border-top: 1px solid #eee;
+        padding: 16px;
+      }
+
+      .answer-side.expanded {
+        display: flex;
+      }
+
+      .mobile-hint {
+        display: block;
+        margin-bottom: 12px;
+      }
+
+      .answer-textarea {
+        min-height: 100px;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .question-toggle {
+        display: none;
+      }
+
+      .mobile-hint {
+        display: none;
+      }
+    }
+
+    /* インプット未完了オーバーレイ */
+    .input-required-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255,255,255,0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .input-required-content {
+      text-align: center;
+      padding: 40px;
+    }
+
+    .input-required-content .material-icons {
+      font-size: 64px;
+      color: #9e9e9e;
+      margin-bottom: 20px;
+    }
+
+    .input-required-content h3 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 12px;
+    }
+
+    .input-required-content p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    .btn-to-input {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+      color: white;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-to-input:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(21, 101, 192, 0.4);
+    }
+
+    /* 授業記録フォーム */
+    .lesson-record-form {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .form-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-title .material-icons {
+      color: #e65100;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .form-input, .form-textarea {
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: #e65100;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .flex-1 {
+      flex: 1;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 16px;
+    }
+
+    .btn-save-record {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #e65100 0%, #f57c00 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    .btn-save-record:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(230, 81, 0, 0.4);
+    }
+
+    /* 授業記録一覧 */
+    .lesson-record-list {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .list-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .list-title .material-icons {
+      color: #e65100;
+    }
+
+    .record-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .record-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .record-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: #fafafa;
+      cursor: pointer;
+    }
+
+    .record-date {
+      font-size: 14px;
+      font-weight: 700;
+      color: #e65100;
+      white-space: nowrap;
+    }
+
+    .record-school {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .record-teacher {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .record-expand {
+      color: #999;
+      transition: transform 0.3s;
+    }
+
+    .record-card.open .record-expand {
+      transform: rotate(180deg);
+    }
+
+    .record-content {
+      display: none;
+      padding: 16px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .record-card.open .record-content {
+      display: block;
+    }
+
+    .record-section {
+      margin-bottom: 16px;
+    }
+
+    .record-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .record-section-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #e65100;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .record-section-content {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .record-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .improvement-box {
+      background: #fff3e0;
+      padding: 12px;
+      border-radius: 8px;
+      border-left: 3px solid #ff9800;
+    }
+
+    .good-box {
+      background: #e8f5e9;
+      padding: 12px;
+      border-radius: 8px;
+      border-left: 3px solid #4caf50;
+    }
+
+    .no-records {
+      text-align: center;
+      padding: 40px;
+      color: #888;
+    }
+
+    .no-records .material-icons {
+      font-size: 48px;
+      opacity: 0.5;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        flex-direction: column;
+      }
+
+      .record-two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .record-header {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="lesson-materials.html" class="back-btn">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <div class="header-content" style="flex: 1;">
+      <div style="font-size: 11px; opacity: 0.8; letter-spacing: 1px;">STEP 8 アウトプット</div>
+      <h1 class="header-title" style="font-size: 16px;">面接の実践</h1>
+    </div>
+    <button class="menu-btn" onclick="openNav && openNav()">
+      <span class="material-icons">menu</span>
+    </button>
+  </header>
+
+  <!-- インプット未完了チェック -->
+  <div class="input-required-overlay" id="inputRequiredOverlay" style="display: none;">
+    <div class="input-required-content">
+      <span class="material-icons">lock</span>
+      <h3>インプットが完了していません</h3>
+      <p>アウトプットに進む前に、インプットを完了してください。</p>
+      <a href="input-08-mensetsu.html" class="btn-to-input">
+        <span class="material-icons">menu_book</span>
+        インプットへ進む
+      </a>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- アウトプット編 -->
+    <div id="outputContent" class="tab-content active">
+      <!-- サブタブ -->
+      <div class="sub-tabs">
+        <button class="sub-tab active" data-subtab="questions">
+          <span class="material-icons">quiz</span>
+          <span class="tab-label">質問回答</span>
+        </button>
+        <button class="sub-tab" data-subtab="lesson-record">
+          <span class="material-icons">history_edu</span>
+          <span class="tab-label">授業記録</span>
+        </button>
+      </div>
+
+      <!-- 質問回答タブ -->
+      <div id="questionsTab" class="tab-content active">
+        <!-- ヘッダー -->
+        <div class="interview-header">
+          <div class="interview-progress">
+            <div class="progress-circle" id="progressCircle" style="--progress: 0%;">
+              <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-text">
+              <strong id="answeredCount">0</strong> / <span id="totalCount">0</span> 問回答済み
+            </div>
+          </div>
+          <button class="pdf-export-btn" onclick="exportPDF()">
+            <span class="material-icons">picture_as_pdf</span>
+            PDF出力
+          </button>
+        </div>
+
+        <!-- コントロールバー -->
+        <div class="control-bar">
+          <!-- 質問ジャンプ -->
+          <div class="control-group">
+            <span class="control-label">質問にジャンプ:</span>
+            <select class="control-select jump-select" id="jumpSelect">
+              <option value="">-- 選択してください --</option>
+            </select>
+            <button class="jump-btn" onclick="jumpToQuestion()">
+              <span class="material-icons">arrow_forward</span>
+              移動
+            </button>
+          </div>
+
+          <!-- カテゴリフィルター -->
+          <div class="category-filter">
+            <button class="filter-chip active" data-filter="all">すべて</button>
+            <button class="filter-chip" data-filter="front">前編</button>
+            <button class="filter-chip" data-filter="back">後編</button>
+            <button class="filter-chip" data-filter="pressure">深掘り・圧迫</button>
+            <button class="filter-chip" data-filter="custom">講師追加</button>
+            <button class="filter-chip" data-filter="unanswered">未回答のみ</button>
+          </div>
+
+          <!-- 表示件数＆ページネーション -->
+          <div class="pagination">
+            <div class="control-group">
+              <span class="control-label">表示:</span>
+              <select class="control-select" id="perPageSelect" style="min-width: 80px;">
+                <option value="10">10件</option>
+                <option value="20" selected>20件</option>
+                <option value="50">50件</option>
+                <option value="all">全て</option>
+              </select>
+            </div>
+            <button class="page-btn" id="prevBtn" onclick="changePage(-1)">
+              <span class="material-icons">chevron_left</span>
+            </button>
+            <span class="page-info"><span id="currentPage">1</span> / <span id="totalPages">1</span></span>
+            <button class="page-btn" id="nextBtn" onclick="changePage(1)">
+              <span class="material-icons">chevron_right</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ローディング -->
+        <div id="loading" class="loading">
+          <div class="loading-spinner"></div>
+          <p>読み込み中...</p>
+        </div>
+
+        <!-- 質問一覧 -->
+        <div class="questions-container" id="questionsContainer" style="display:none;"></div>
+
+        <!-- 下部ページネーション -->
+        <div class="pagination-bottom" id="paginationBottom" style="display:none;">
+          <button class="page-btn" onclick="changePage(-1)">
+            <span class="material-icons">chevron_left</span>
+          </button>
+          <div class="page-numbers" id="pageNumbers"></div>
+          <button class="page-btn" onclick="changePage(1)">
+            <span class="material-icons">chevron_right</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- 授業記録タブ -->
+      <div id="lessonRecordTab" class="tab-content">
+        <!-- 新規授業記録追加 -->
+        <div class="lesson-record-form">
+          <h3 class="form-title">
+            <span class="material-icons">add_circle</span>
+            新しい授業記録を追加
+          </h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>日付</label>
+              <input type="date" id="lessonDate" class="form-input">
+            </div>
+            <div class="form-group">
+              <label>志望校</label>
+              <input type="text" id="lessonSchool" class="form-input" placeholder="例：法政大学 現代ビジネス学部">
+            </div>
+            <div class="form-group">
+              <label>担当者</label>
+              <input type="text" id="lessonTeacher" class="form-input" placeholder="例：山田先生">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>実施した質問（改行で区切り）</label>
+            <textarea id="lessonQuestions" class="form-textarea" rows="4" placeholder="質問1&#10;質問2&#10;質問3"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label>改善ポイント</label>
+              <textarea id="lessonImprovement" class="form-textarea" rows="3" placeholder="改善が必要な点"></textarea>
+            </div>
+            <div class="form-group flex-1">
+              <label>良かったポイント</label>
+              <textarea id="lessonGoodPoints" class="form-textarea" rows="3" placeholder="良かった点"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>総合コメント</label>
+            <textarea id="lessonComment" class="form-textarea" rows="3" placeholder="担当者からのコメント"></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="btn-save-record" onclick="saveLessonRecord()">
+              <span class="material-icons">save</span>
+              記録を保存
+            </button>
+          </div>
+        </div>
+
+        <!-- 過去の授業記録一覧 -->
+        <div class="lesson-record-list">
+          <h3 class="list-title">
+            <span class="material-icons">history</span>
+            過去の授業記録
+          </h3>
+          <div id="lessonRecordList" class="record-cards">
+            <!-- JavaScriptで生成 -->
+          </div>
+          <div id="noRecords" class="no-records" style="display: none;">
+            <span class="material-icons">event_busy</span>
+            <p>まだ授業記録がありません</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 同期ステータス -->
+  <div id="syncStatus" class="sync-status">
+    <span class="material-icons">sync</span>
+    <span id="syncMessage">保存中...</span>
+  </div>
+
+  <script src="js/nav-menu.js"></script>
+  <script>
+    // ============================================
+    // 設定
+    // ============================================
+    const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
+    const MATERIALS_JSON_URL = 'materials.json';
+    const THEME_ID = 8; // 面接編
+
+    // ============================================
+    // 状態管理
+    // ============================================
+    let currentUser = null;
+    let interviewQuestions = { front: [], back: [], pressure: [] };
+    let customQuestions = [];
+    let answers = {};
+    let unsavedChanges = {};
+    let lessonRecords = []; // 授業記録
+    
+    // フィルター・ページネーション
+    let allQuestions = [];
+    let filteredQuestions = [];
+    let currentFilter = 'all';
+    let currentPage = 1;
+    let perPage = 20;
+
+    // ============================================
+    // 初期化
+    // ============================================
+    document.addEventListener('DOMContentLoaded', async function() {
+      // ログイン確認
+      const loggedIn = localStorage.getItem('eqao_loggedIn');
+      if (!loggedIn) {
+        localStorage.setItem('eqao_returnUrl', location.href);
+        location.href = 'login.html';
+        return;
+      }
+
+      currentUser = {
+        studentId: localStorage.getItem('eqao_studentId'),
+        studentName: localStorage.getItem('eqao_studentName'),
+        password: localStorage.getItem('eqao_password')
+      };
+
+      // インプット完了チェック（サーバーから読み込み）
+      let progressData = {};
+      try {
+        const res = await fetch(`${API_URL}?action=getLessonProgress&studentId=${currentUser.studentId}`);
+        const result = await res.json();
+        if (result.success && result.progress) {
+          progressData = result.progress;
+        }
+      } catch (error) {
+        // フォールバック：ローカルストレージ
+        progressData = JSON.parse(localStorage.getItem(`eqao_lesson_progress_${currentUser.studentId}`) || '{}');
+      }
+      
+      if (!progressData[THEME_ID]?.inputCompleted) {
+        // インプット未完了
+        document.getElementById('inputRequiredOverlay').style.display = 'flex';
+        return;
+      }
+
+      // タブ切り替え設定
+      setupTabs();
+      setupFilters();
+      setupPerPageSelect();
+
+      // 面接データ読み込み
+      await loadInterviewData();
+      
+      // 授業記録読み込み
+      loadLessonRecords();
+      
+      // 日付のデフォルト値を今日に設定
+      document.getElementById('lessonDate').value = new Date().toISOString().split('T')[0];
+    });
+
+    // ============================================
+    // タブ切り替え
+    // ============================================
+    function setupTabs() {
+      // サブタブ切り替え
+      document.querySelectorAll('.sub-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          document.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          const tabName = this.dataset.subtab;
+          document.getElementById('questionsTab').classList.toggle('active', tabName === 'questions');
+          document.getElementById('lessonRecordTab').classList.toggle('active', tabName === 'lesson-record');
+        });
+      });
+    }
+
+    // ============================================
+    // フィルター設定
+    // ============================================
+    function setupFilters() {
+      document.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.addEventListener('click', function() {
+          document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
+          currentFilter = this.dataset.filter;
+          currentPage = 1;
+          applyFilter();
+          renderQuestions();
+        });
+      });
+    }
+
+    function applyFilter() {
+      if (currentFilter === 'all') {
+        filteredQuestions = [...allQuestions];
+      } else if (currentFilter === 'unanswered') {
+        filteredQuestions = allQuestions.filter(q => !answers[q.id]?.answer?.trim());
+      } else {
+        filteredQuestions = allQuestions.filter(q => q.category === currentFilter);
+      }
+    }
+
+    // ============================================
+    // 表示件数設定
+    // ============================================
+    function setupPerPageSelect() {
+      document.getElementById('perPageSelect').addEventListener('change', function() {
+        if (this.value === 'all') {
+          perPage = 9999;
+        } else {
+          perPage = parseInt(this.value);
+        }
+        currentPage = 1;
+        renderQuestions();
+      });
+    }
+
+    // ============================================
+    // 面接データ読み込み
+    // ============================================
+    async function loadInterviewData() {
+      try {
+        // 1. materials.jsonから面接問題を取得
+        const materialsRes = await fetch(MATERIALS_JSON_URL);
+        const materials = await materialsRes.json();
+        
+        // 前編
+        interviewQuestions.front = materials
+          .filter(item => item.category === '面接【基礎問題 前編】')
+          .map((item, index) => ({
+            id: `front_${index}`,
+            category: 'front',
+            categoryLabel: '前編',
+            number: index + 1,
+            question: item.name,
+            hint: item.detail
+          }));
+        
+        // 後編
+        interviewQuestions.back = materials
+          .filter(item => item.category === '面接【基礎問題 後編】')
+          .map((item, index) => ({
+            id: `back_${index}`,
+            category: 'back',
+            categoryLabel: '後編',
+            number: index + 1,
+            question: item.name,
+            hint: item.detail
+          }));
+        
+        // 深掘り・圧迫
+        interviewQuestions.pressure = materials
+          .filter(item => item.category === '面接【深掘り・圧迫】')
+          .map((item, index) => ({
+            id: `pressure_${index}`,
+            category: 'pressure',
+            categoryLabel: '深掘り・圧迫',
+            number: index + 1,
+            question: item.name,
+            hint: item.detail
+          }));
+
+        // 2. サーバーから保存済み回答を取得
+        await loadAnswersFromServer();
+
+        // 3. 講師追加の深掘り質問を取得
+        await loadCustomQuestions();
+
+        // 4. 全質問を結合
+        allQuestions = [
+          ...interviewQuestions.front,
+          ...interviewQuestions.back,
+          ...interviewQuestions.pressure,
+          ...customQuestions.map((q, index) => ({
+            id: `custom_${index}`,
+            category: 'custom',
+            categoryLabel: '講師追加',
+            number: index + 1,
+            question: q.question,
+            hint: ''
+          }))
+        ];
+
+        // 5. フィルター適用
+        applyFilter();
+
+        // 6. UI描画
+        renderJumpSelect();
+        renderQuestions();
+        updateProgress();
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('questionsContainer').style.display = 'block';
+        document.getElementById('paginationBottom').style.display = 'flex';
+
+      } catch (error) {
+        console.error('データ読み込みエラー:', error);
+        document.getElementById('loading').innerHTML = `
+          <span class="material-icons" style="font-size:48px;color:#f44336;">error</span>
+          <p>読み込みに失敗しました</p>
+        `;
+      }
+    }
+
+    // ============================================
+    // サーバーから回答取得
+    // ============================================
+    async function loadAnswersFromServer() {
+      try {
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'getInterviewAnswers');
+        url.searchParams.set('studentId', currentUser.studentId);
+        
+        const res = await fetch(url.toString());
+        const result = await res.json();
+        
+        if (result.success && result.answers) {
+          answers = result.answers;
+        }
+      } catch (error) {
+        console.error('回答取得エラー:', error);
+        const saved = localStorage.getItem(`eqao_interview_${currentUser.studentId}`);
+        if (saved) {
+          answers = JSON.parse(saved);
+        }
+      }
+    }
+
+    // ============================================
+    // 講師追加の深掘り質問取得
+    // ============================================
+    async function loadCustomQuestions() {
+      try {
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'getCustomInterviewQuestions');
+        url.searchParams.set('studentId', currentUser.studentId);
+        
+        const res = await fetch(url.toString());
+        const result = await res.json();
+        
+        if (result.success && result.questions) {
+          customQuestions = result.questions;
+        }
+      } catch (error) {
+        console.error('深掘り質問取得エラー:', error);
+      }
+    }
+
+    // ============================================
+    // ジャンプセレクト描画
+    // ============================================
+    function renderJumpSelect() {
+      const select = document.getElementById('jumpSelect');
+      let html = '<option value="">-- 選択してください --</option>';
+      
+      // カテゴリ別にグループ化
+      const categories = [
+        { key: 'front', label: '前編', questions: interviewQuestions.front },
+        { key: 'back', label: '後編', questions: interviewQuestions.back },
+        { key: 'pressure', label: '深掘り・圧迫', questions: interviewQuestions.pressure }
+      ];
+      
+      categories.forEach(cat => {
+        const answeredCount = cat.questions.filter(q => answers[q.id]?.answer?.trim()).length;
+        html += `<optgroup label="▼ ${cat.label}（${cat.questions.length}問）- ${answeredCount}問回答済">`;
+        cat.questions.forEach(q => {
+          const isAnswered = answers[q.id]?.answer?.trim();
+          const suffix = isAnswered ? ' [済]' : '';
+          const displayText = `Q${q.number}. ${q.question.substring(0, 25)}${q.question.length > 25 ? '...' : ''}${suffix}`;
+          html += `<option value="${q.id}">${displayText}</option>`;
+        });
+        html += '</optgroup>';
+      });
+      
+      // 講師追加
+      if (customQuestions.length > 0) {
+        const customQs = customQuestions.map((q, i) => ({
+          id: `custom_${i}`,
+          number: i + 1,
+          question: q.question
+        }));
+        const answeredCount = customQs.filter(q => answers[q.id]?.answer?.trim()).length;
+        html += `<optgroup label="▼ 講師追加の深掘り（${customQs.length}問）- ${answeredCount}問回答済">`;
+        customQs.forEach(q => {
+          const isAnswered = answers[q.id]?.answer?.trim();
+          const suffix = isAnswered ? ' [済]' : '';
+          const displayText = `Q${q.number}. ${q.question.substring(0, 25)}${q.question.length > 25 ? '...' : ''}${suffix}`;
+          html += `<option value="${q.id}">${displayText}</option>`;
+        });
+        html += '</optgroup>';
+      }
+      
+      select.innerHTML = html;
+    }
+
+    // ============================================
+    // 質問一覧描画
+    // ============================================
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+      
+      // ページネーション計算
+      const totalItems = filteredQuestions.length;
+      const totalPages = Math.ceil(totalItems / perPage);
+      const startIndex = (currentPage - 1) * perPage;
+      const endIndex = Math.min(startIndex + perPage, totalItems);
+      const pageQuestions = filteredQuestions.slice(startIndex, endIndex);
+      
+      if (pageQuestions.length === 0) {
+        container.innerHTML = `
+          <div class="no-results">
+            <span class="material-icons">search_off</span>
+            <p>該当する質問がありません</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = pageQuestions.map(q => renderQuestionCard(q)).join('');
+      }
+      
+      // ページネーション更新
+      updatePagination(totalPages);
+      
+      // スマホ用アコーディオン設定
+      if (window.innerWidth <= 768) {
+        document.querySelectorAll('.question-side').forEach(side => {
+          side.classList.add('collapsed');
+        });
+      }
+    }
+
+    function renderQuestionCard(q) {
+      const answer = answers[q.id] || { answer: '', comment: '' };
+      const isAnswered = answer.answer && answer.answer.trim() !== '';
+      const hasHint = q.hint && q.hint.trim() !== '';
+      
+      const badgeClass = q.category === 'back' ? 'back' : 
+                         q.category === 'pressure' ? 'pressure' : 
+                         q.category === 'custom' ? 'custom' : '';
+      
+      return `
+        <div class="question-card" id="q_${q.id}" data-question-id="${q.id}" data-category="${q.category}">
+          <div class="question-side" onclick="toggleMobileAnswer('${q.id}')">
+            <div class="question-content">
+              <div class="question-header">
+                <span class="question-number">${q.number}</span>
+                <span class="question-category-badge ${badgeClass}">${q.categoryLabel}</span>
+              </div>
+              <div class="question-text">${escapeHtml(q.question)}</div>
+              ${hasHint ? `
+              <div class="question-hint">
+                <div class="question-hint-title">
+                  <span class="material-icons">lightbulb</span>
+                  ヒント
+                </div>
+                ${escapeHtml(q.hint)}
+              </div>
+              ` : ''}
+            </div>
+            <span class="material-icons question-toggle">expand_more</span>
+          </div>
+          <div class="answer-side" id="answer_${q.id}">
+            ${hasHint ? `
+            <div class="mobile-hint">
+              <div class="question-hint">
+                <div class="question-hint-title">
+                  <span class="material-icons">lightbulb</span>
+                  ヒント
+                </div>
+                ${escapeHtml(q.hint)}
+              </div>
+            </div>
+            ` : ''}
+            <div class="answer-status ${isAnswered ? 'answered' : 'unanswered'}">
+              <span class="material-icons">${isAnswered ? 'check_circle' : 'radio_button_unchecked'}</span>
+              ${isAnswered ? '回答済み' : '未回答'}
+            </div>
+            <textarea 
+              class="answer-textarea" 
+              id="textarea_${q.id}"
+              placeholder="回答を入力してください..."
+              oninput="markUnsaved('${q.id}')"
+            >${escapeHtml(answer.answer || '')}</textarea>
+            <div class="instructor-comment">
+              <div class="instructor-comment-title">
+                <span class="material-icons">chat</span>
+                講師コメント
+              </div>
+              ${answer.comment ? escapeHtml(answer.comment) : '<span class="no-comment">コメントはありません</span>'}
+            </div>
+            <div class="answer-actions">
+              <button class="save-btn" onclick="saveAnswer('${q.id}')" id="saveBtn_${q.id}">
+                <span class="material-icons">save</span>
+                保存
+              </button>
+              <span class="save-status" id="saveStatus_${q.id}"></span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ============================================
+    // ページネーション更新
+    // ============================================
+    function updatePagination(totalPages) {
+      document.getElementById('currentPage').textContent = currentPage;
+      document.getElementById('totalPages').textContent = totalPages || 1;
+      document.getElementById('prevBtn').disabled = currentPage <= 1;
+      document.getElementById('nextBtn').disabled = currentPage >= totalPages;
+      
+      // 下部ページ番号
+      const pageNumbersEl = document.getElementById('pageNumbers');
+      let html = '';
+      
+      if (totalPages <= 7) {
+        for (let i = 1; i <= totalPages; i++) {
+          html += `<button class="page-number ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+        }
+      } else {
+        // 1
+        html += `<button class="page-number ${1 === currentPage ? 'active' : ''}" onclick="goToPage(1)">1</button>`;
+        
+        if (currentPage > 3) {
+          html += `<button class="page-number ellipsis">...</button>`;
+        }
+        
+        // 現在ページ周辺
+        const start = Math.max(2, currentPage - 1);
+        const end = Math.min(totalPages - 1, currentPage + 1);
+        for (let i = start; i <= end; i++) {
+          html += `<button class="page-number ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+        }
+        
+        if (currentPage < totalPages - 2) {
+          html += `<button class="page-number ellipsis">...</button>`;
+        }
+        
+        // 最後
+        html += `<button class="page-number ${totalPages === currentPage ? 'active' : ''}" onclick="goToPage(${totalPages})">${totalPages}</button>`;
+      }
+      
+      pageNumbersEl.innerHTML = html;
+    }
+
+    function changePage(delta) {
+      const totalPages = Math.ceil(filteredQuestions.length / perPage);
+      const newPage = currentPage + delta;
+      if (newPage >= 1 && newPage <= totalPages) {
+        currentPage = newPage;
+        renderQuestions();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function goToPage(page) {
+      currentPage = page;
+      renderQuestions();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ============================================
+    // 質問ジャンプ
+    // ============================================
+    function jumpToQuestion() {
+      const select = document.getElementById('jumpSelect');
+      const questionId = select.value;
+      if (!questionId) return;
+      
+      // フィルターをリセット
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      document.querySelector('[data-filter="all"]').classList.add('active');
+      currentFilter = 'all';
+      applyFilter();
+      
+      // 該当質問のページを計算
+      const questionIndex = filteredQuestions.findIndex(q => q.id === questionId);
+      if (questionIndex === -1) return;
+      
+      currentPage = Math.floor(questionIndex / perPage) + 1;
+      renderQuestions();
+      
+      // 少し待ってからスクロール＆ハイライト
+      setTimeout(() => {
+        const element = document.getElementById('q_' + questionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          element.classList.add('highlight');
+          setTimeout(() => element.classList.remove('highlight'), 2000);
+          
+          // スマホの場合は展開
+          if (window.innerWidth <= 768) {
+            const questionSide = element.querySelector('.question-side');
+            const answerSide = element.querySelector('.answer-side');
+            questionSide.classList.remove('collapsed');
+            answerSide.classList.add('expanded');
+          }
+        }
+      }, 100);
+    }
+
+    // ============================================
+    // スマホ用アコーディオン
+    // ============================================
+    function toggleMobileAnswer(questionId) {
+      if (window.innerWidth > 768) return;
+      
+      const card = document.querySelector(`[data-question-id="${questionId}"]`);
+      const questionSide = card.querySelector('.question-side');
+      const answerSide = document.getElementById(`answer_${questionId}`);
+      
+      questionSide.classList.toggle('collapsed');
+      answerSide.classList.toggle('expanded');
+    }
+
+    // ============================================
+    // 回答保存
+    // ============================================
+    function markUnsaved(questionId) {
+      unsavedChanges[questionId] = true;
+      const statusEl = document.getElementById(`saveStatus_${questionId}`);
+      if (statusEl) {
+        statusEl.textContent = '未保存';
+        statusEl.classList.remove('saved');
+      }
+    }
+
+    async function saveAnswer(questionId) {
+      const textarea = document.getElementById(`textarea_${questionId}`);
+      const saveBtn = document.getElementById(`saveBtn_${questionId}`);
+      const statusEl = document.getElementById(`saveStatus_${questionId}`);
+      const answerText = textarea.value.trim();
+      
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = '<span class="material-icons">sync</span> 保存中...';
+      
+      try {
+        // ローカル保存
+        if (!answers[questionId]) {
+          answers[questionId] = {};
+        }
+        answers[questionId].answer = answerText;
+        localStorage.setItem(`eqao_interview_${currentUser.studentId}`, JSON.stringify(answers));
+        
+        // サーバー保存
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'saveInterviewAnswer');
+        url.searchParams.set('studentId', currentUser.studentId);
+        url.searchParams.set('questionId', questionId);
+        url.searchParams.set('answer', answerText);
+        
+        const res = await fetch(url.toString());
+        const result = await res.json();
+        
+        if (result.success) {
+          showSyncStatus('保存しました', 'success');
+          statusEl.textContent = '保存済み';
+          statusEl.classList.add('saved');
+          delete unsavedChanges[questionId];
+          
+          // ステータス更新
+          const statusIcon = document.querySelector(`[data-question-id="${questionId}"] .answer-status`);
+          if (statusIcon) {
+            const isAnswered = answerText !== '';
+            statusIcon.className = `answer-status ${isAnswered ? 'answered' : 'unanswered'}`;
+            statusIcon.innerHTML = `
+              <span class="material-icons">${isAnswered ? 'check_circle' : 'radio_button_unchecked'}</span>
+              ${isAnswered ? '回答済み' : '未回答'}
+            `;
+          }
+          
+          updateProgress();
+          renderJumpSelect();
+        } else {
+          throw new Error(result.error || '保存に失敗しました');
+        }
+        
+      } catch (error) {
+        console.error('保存エラー:', error);
+        showSyncStatus('保存に失敗しました', 'error');
+        statusEl.textContent = 'エラー';
+      }
+      
+      saveBtn.disabled = false;
+      saveBtn.innerHTML = '<span class="material-icons">save</span> 保存';
+    }
+
+    // ============================================
+    // 進捗更新
+    // ============================================
+    function updateProgress() {
+      const total = allQuestions.length;
+      const answered = allQuestions.filter(q => answers[q.id]?.answer?.trim()).length;
+      const percent = total > 0 ? Math.round((answered / total) * 100) : 0;
+      
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('answeredCount').textContent = answered;
+      document.getElementById('progressPercent').textContent = percent + '%';
+      document.getElementById('progressCircle').style.setProperty('--progress', percent + '%');
+    }
+
+    // ============================================
+    // PDF出力
+    // ============================================
+    async function exportPDF() {
+      showSyncStatus('PDF生成中...', '');
+      
+      // 回答済みの質問のみ抽出
+      const frontAnswered = interviewQuestions.front.filter(q => answers[q.id]?.answer?.trim());
+      const backAnswered = interviewQuestions.back.filter(q => answers[q.id]?.answer?.trim());
+      const pressureAnswered = interviewQuestions.pressure.filter(q => answers[q.id]?.answer?.trim());
+      const customAnswered = customQuestions.filter((q, i) => answers[`custom_${i}`]?.answer?.trim());
+      
+      if (frontAnswered.length === 0 && backAnswered.length === 0 && pressureAnswered.length === 0 && customAnswered.length === 0) {
+        showSyncStatus('回答済みの質問がありません', 'error');
+        return;
+      }
+      
+      // PDF用HTMLを生成
+      const printWindow = window.open('', '_blank');
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <title>面接回答集 - ${currentUser.studentName}</title>
+          <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { 
+              font-family: 'Noto Sans JP', sans-serif; 
+              padding: 40px;
+              line-height: 1.8;
+              color: #333;
+            }
+            .header {
+              text-align: center;
+              margin-bottom: 40px;
+              padding-bottom: 20px;
+              border-bottom: 2px solid #1a237e;
+            }
+            .header h1 {
+              font-size: 24px;
+              color: #1a237e;
+              margin-bottom: 8px;
+            }
+            .header .meta {
+              font-size: 14px;
+              color: #666;
+            }
+            .section {
+              margin-bottom: 32px;
+            }
+            .section-title {
+              font-size: 18px;
+              font-weight: 700;
+              color: #1a237e;
+              padding: 10px 16px;
+              background: #e8eaf6;
+              border-radius: 8px;
+              margin-bottom: 20px;
+            }
+            .qa-item {
+              margin-bottom: 24px;
+              page-break-inside: avoid;
+            }
+            .question {
+              font-weight: 700;
+              font-size: 15px;
+              margin-bottom: 8px;
+              display: flex;
+              gap: 8px;
+            }
+            .question-num {
+              background: #1a237e;
+              color: white;
+              width: 24px;
+              height: 24px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 12px;
+              flex-shrink: 0;
+            }
+            .answer {
+              padding: 16px;
+              background: #f5f5f5;
+              border-radius: 8px;
+              border-left: 4px solid #1a237e;
+              white-space: pre-wrap;
+            }
+            @media print {
+              body { padding: 20px; }
+              .qa-item { page-break-inside: avoid; }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h1>面接回答集</h1>
+            <div class="meta">${currentUser.studentName} ｜ ${new Date().toLocaleDateString('ja-JP')} 作成</div>
+          </div>
+          
+          ${frontAnswered.length > 0 ? `
+            <div class="section">
+              <div class="section-title">基礎問題 前編</div>
+              ${frontAnswered.map(q => `
+                <div class="qa-item">
+                  <div class="question">
+                    <span class="question-num">${q.number}</span>
+                    ${escapeHtml(q.question)}
+                  </div>
+                  <div class="answer">${escapeHtml(answers[q.id].answer)}</div>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+          
+          ${backAnswered.length > 0 ? `
+            <div class="section">
+              <div class="section-title">基礎問題 後編</div>
+              ${backAnswered.map(q => `
+                <div class="qa-item">
+                  <div class="question">
+                    <span class="question-num">${q.number}</span>
+                    ${escapeHtml(q.question)}
+                  </div>
+                  <div class="answer">${escapeHtml(answers[q.id].answer)}</div>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+          
+          ${pressureAnswered.length > 0 ? `
+            <div class="section">
+              <div class="section-title">深掘り・圧迫</div>
+              ${pressureAnswered.map(q => `
+                <div class="qa-item">
+                  <div class="question">
+                    <span class="question-num">${q.number}</span>
+                    ${escapeHtml(q.question)}
+                  </div>
+                  <div class="answer">${escapeHtml(answers[q.id].answer)}</div>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+          
+          ${customAnswered.length > 0 ? `
+            <div class="section">
+              <div class="section-title">講師追加の深掘り質問</div>
+              ${customAnswered.map((q, i) => `
+                <div class="qa-item">
+                  <div class="question">
+                    <span class="question-num">${i + 1}</span>
+                    ${escapeHtml(q.question)}
+                  </div>
+                  <div class="answer">${escapeHtml(answers[\`custom_\${i}\`].answer)}</div>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+          
+          <script>
+            window.onload = function() {
+              window.print();
+            };
+          <\/script>
+        </body>
+        </html>
+      `);
+      printWindow.document.close();
+      
+      showSyncStatus('PDF出力画面を開きました', 'success');
+    }
+
+    // ============================================
+    // ユーティリティ
+    // ============================================
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function showSyncStatus(message, type) {
+      const el = document.getElementById('syncStatus');
+      const msgEl = document.getElementById('syncMessage');
+      
+      el.className = 'sync-status show';
+      if (type === 'success') el.classList.add('success');
+      if (type === 'error') el.classList.add('error');
+      
+      msgEl.textContent = message;
+      
+      const icon = el.querySelector('.material-icons');
+      if (type === 'success') icon.textContent = 'check_circle';
+      else if (type === 'error') icon.textContent = 'error';
+      else icon.textContent = 'sync';
+      
+      setTimeout(() => {
+        el.classList.remove('show');
+      }, 3000);
+    }
+
+    // ページ離脱時の警告
+    window.addEventListener('beforeunload', function(e) {
+      if (Object.keys(unsavedChanges).length > 0) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+
+    // リサイズ時にアコーディオン再設定
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        document.querySelectorAll('.answer-side').forEach(side => {
+          side.classList.remove('expanded');
+        });
+        document.querySelectorAll('.question-side').forEach(side => {
+          side.classList.remove('collapsed');
+        });
+      }
+    });
+
+    // ============================================
+    // 授業記録機能
+    // ============================================
+    
+    // 授業記録読み込み
+    async function loadLessonRecords() {
+      try {
+        // サーバーから読み込み
+        const res = await fetch(`${API_URL}?action=getLessonRecords&studentId=${currentUser.studentId}&themeId=${THEME_ID}`);
+        const result = await res.json();
+        
+        if (result.success && result.records) {
+          lessonRecords = result.records;
+        } else {
+          // フォールバック：ローカルストレージ
+          const saved = localStorage.getItem(`eqao_lesson_records_${currentUser.studentId}_${THEME_ID}`);
+          if (saved) {
+            lessonRecords = JSON.parse(saved);
+          }
+        }
+      } catch (error) {
+        console.error('授業記録読み込みエラー:', error);
+        // フォールバック：ローカルストレージ
+        const saved = localStorage.getItem(`eqao_lesson_records_${currentUser.studentId}_${THEME_ID}`);
+        if (saved) {
+          lessonRecords = JSON.parse(saved);
+        }
+      }
+      renderLessonRecords();
+    }
+
+    // 授業記録保存
+    async function saveLessonRecord() {
+      const date = document.getElementById('lessonDate').value;
+      const school = document.getElementById('lessonSchool').value.trim();
+      const teacher = document.getElementById('lessonTeacher').value.trim();
+      const questions = document.getElementById('lessonQuestions').value.trim();
+      const improvement = document.getElementById('lessonImprovement').value.trim();
+      const goodPoints = document.getElementById('lessonGoodPoints').value.trim();
+      const comment = document.getElementById('lessonComment').value.trim();
+
+      if (!date) {
+        alert('日付を入力してください');
+        return;
+      }
+
+      const record = {
+        date,
+        school,
+        teacher,
+        questions,
+        improvement,
+        goodPoints,
+        comment
+      };
+
+      try {
+        // サーバーに保存
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'saveLessonRecord',
+            studentId: currentUser.studentId,
+            themeId: THEME_ID,
+            record: record
+          })
+        });
+        
+        const result = await res.json();
+        
+        if (result.success) {
+          // ローカルにも追加（即時表示用）
+          record.id = result.recordId;
+          record.createdAt = new Date().toISOString();
+          lessonRecords.unshift(record);
+          
+          // ローカルストレージにもバックアップ
+          localStorage.setItem(`eqao_lesson_records_${currentUser.studentId}_${THEME_ID}`, JSON.stringify(lessonRecords));
+
+          // フォームをクリア
+          document.getElementById('lessonSchool').value = '';
+          document.getElementById('lessonTeacher').value = '';
+          document.getElementById('lessonQuestions').value = '';
+          document.getElementById('lessonImprovement').value = '';
+          document.getElementById('lessonGoodPoints').value = '';
+          document.getElementById('lessonComment').value = '';
+          document.getElementById('lessonDate').value = new Date().toISOString().split('T')[0];
+
+          showSyncStatus('授業記録を保存しました', 'success');
+          renderLessonRecords();
+        } else {
+          throw new Error(result.error || '保存に失敗しました');
+        }
+      } catch (error) {
+        console.error('保存エラー:', error);
+        showSyncStatus('保存に失敗しました', 'error');
+      }
+    }
+
+    // 授業記録表示
+    function renderLessonRecords() {
+      const container = document.getElementById('lessonRecordList');
+      const noRecords = document.getElementById('noRecords');
+
+      if (lessonRecords.length === 0) {
+        container.innerHTML = '';
+        noRecords.style.display = 'block';
+        return;
+      }
+
+      noRecords.style.display = 'none';
+      container.innerHTML = lessonRecords.map(record => `
+        <div class="record-card" data-id="${record.id}">
+          <div class="record-header" onclick="toggleRecordCard(${record.id})">
+            <div class="record-date">${formatDate(record.date)}</div>
+            <div class="record-school">${escapeHtml(record.school) || '（志望校未設定）'}</div>
+            <div class="record-teacher">${escapeHtml(record.teacher) || ''}</div>
+            <span class="material-icons record-expand">expand_more</span>
+          </div>
+          <div class="record-content">
+            ${record.questions ? `
+              <div class="record-section">
+                <div class="record-section-title">
+                  <span class="material-icons">quiz</span>
+                  実施した質問
+                </div>
+                <div class="record-section-content">${escapeHtml(record.questions)}</div>
+              </div>
+            ` : ''}
+            
+            <div class="record-two-col">
+              ${record.improvement ? `
+                <div class="record-section">
+                  <div class="record-section-title">
+                    <span class="material-icons">trending_up</span>
+                    改善ポイント
+                  </div>
+                  <div class="improvement-box">
+                    <div class="record-section-content">${escapeHtml(record.improvement)}</div>
+                  </div>
+                </div>
+              ` : ''}
+              
+              ${record.goodPoints ? `
+                <div class="record-section">
+                  <div class="record-section-title">
+                    <span class="material-icons">thumb_up</span>
+                    良かったポイント
+                  </div>
+                  <div class="good-box">
+                    <div class="record-section-content">${escapeHtml(record.goodPoints)}</div>
+                  </div>
+                </div>
+              ` : ''}
+            </div>
+            
+            ${record.comment ? `
+              <div class="record-section">
+                <div class="record-section-title">
+                  <span class="material-icons">comment</span>
+                  総合コメント
+                </div>
+                <div class="record-section-content">${escapeHtml(record.comment)}</div>
+              </div>
+            ` : ''}
+            
+            <div style="text-align: right; margin-top: 12px;">
+              <button onclick="deleteRecord(${record.id})" style="background: none; border: none; color: #999; cursor: pointer; font-size: 12px; display: inline-flex; align-items: center; gap: 4px;">
+                <span class="material-icons" style="font-size: 16px;">delete</span>
+                削除
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 記録カード開閉
+    function toggleRecordCard(id) {
+      const card = document.querySelector(`.record-card[data-id="${id}"]`);
+      card.classList.toggle('open');
+    }
+
+    // 記録削除
+    async function deleteRecord(id) {
+      if (!confirm('この授業記録を削除しますか？')) return;
+      
+      try {
+        // サーバーから削除
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'deleteLessonRecord',
+            recordId: id
+          })
+        });
+        
+        const result = await res.json();
+        
+        if (result.success) {
+          lessonRecords = lessonRecords.filter(r => r.id != id);
+          localStorage.setItem(`eqao_lesson_records_${currentUser.studentId}_${THEME_ID}`, JSON.stringify(lessonRecords));
+          renderLessonRecords();
+          showSyncStatus('削除しました', 'success');
+        } else {
+          throw new Error(result.error || '削除に失敗しました');
+        }
+      } catch (error) {
+        console.error('削除エラー:', error);
+        showSyncStatus('削除に失敗しました', 'error');
+      }
+    }
+
+    // 日付フォーマット
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const date = new Date(dateStr);
+      return `${date.getMonth() + 1}/${date.getDate()}`;
+    }
+  </script>
+</body>
+</html>
