@@ -741,6 +741,10 @@
 
     // 読了状態保存（サーバー＋ローカル）
     async function saveReadStatus() {
+      console.log('=== saveReadStatus called ===');
+      console.log('currentUser:', currentUser);
+      console.log('readStatus:', readStatus);
+      
       // ローカルにも保存（バックアップ）
       localStorage.setItem(`eqao_input_read_${currentUser.studentId}_${THEME_ID}`, JSON.stringify(readStatus));
       
@@ -749,20 +753,24 @@
       const total = columns.length;
       const percent = total > 0 ? Math.round((readArticles.length / total) * 100) : 0;
       
-      // サーバーに保存
+      console.log('readArticles:', readArticles);
+      console.log('percent:', percent);
+      
+      // サーバーに保存（GETで送信）
       try {
-        await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'saveLessonProgress',
-            studentId: currentUser.studentId,
-            themeId: THEME_ID,
-            inputCompleted: false,
-            inputProgress: percent,
-            readArticles: readArticles
-          })
-        });
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'saveLessonProgress');
+        url.searchParams.set('studentId', currentUser.studentId);
+        url.searchParams.set('themeId', THEME_ID);
+        url.searchParams.set('inputCompleted', 'false');
+        url.searchParams.set('inputProgress', percent);
+        url.searchParams.set('readArticles', JSON.stringify(readArticles));
+        
+        console.log('Fetching URL:', url.toString());
+        
+        const res = await fetch(url.toString());
+        const text = await res.text();
+        console.log('Server response:', text);
       } catch (error) {
         console.error('読了状態の保存エラー:', error);
       }
@@ -816,19 +824,16 @@
         progressData[THEME_ID].readArticles = readArticles;
         localStorage.setItem(`eqao_lesson_progress_${currentUser.studentId}`, JSON.stringify(progressData));
 
-        // サーバー保存
-        await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'saveLessonProgress',
-            studentId: currentUser.studentId,
-            themeId: THEME_ID,
-            inputCompleted: true,
-            inputProgress: 100,
-            readArticles: readArticles
-          })
-        });
+        // サーバー保存（GETで送信）
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'saveLessonProgress');
+        url.searchParams.set('studentId', currentUser.studentId);
+        url.searchParams.set('themeId', THEME_ID);
+        url.searchParams.set('inputCompleted', 'true');
+        url.searchParams.set('inputProgress', '100');
+        url.searchParams.set('readArticles', JSON.stringify(readArticles));
+        
+        await fetch(url.toString());
 
         // 完了メッセージ
         alert('インプット完了！アウトプットに進みましょう。');
