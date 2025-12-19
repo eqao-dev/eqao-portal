@@ -709,87 +709,13 @@
       <span class="material-icons">person</span>
       <span id="navHeaderUser"></span>
     </span>
-    <button class="menu-btn" onclick="toggleMenu()">
-      <span class="material-icons">menu</span>
-    </button>
     <button class="hamburger-btn" onclick="openNav()">
       <span class="material-icons">menu</span>
     </button>
 
   </header>
 
-  <div id="navOverlay" class="nav-overlay" onclick="toggleMenu()"></div>
-
-  <nav id="navMenu" class="nav-menu">
-    <div class="nav-header">
-      <div class="nav-header-title" id="navHeaderUserMenu">メニュー</div>
-      <div class="nav-header-subtitle">EQAO PORTAL</div>
-      <button class="nav-close" onclick="toggleMenu()">
-        <span class="material-icons">close</span>
-      </button>
-    </div>
-
-    <div class="nav-section">
-      <a href="index.html" class="nav-item">
-        <span class="material-icons">home</span>
-        <span class="nav-item-text">ホーム</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">スケジュール</div>
-      <a href="yearly-schedule.html" class="nav-item">
-        <span class="material-icons">calendar_month</span>
-        <span class="nav-item-text">年間スケジュール</span>
-      </a>
-      <a href="schedule.html" class="nav-item">
-        <span class="material-icons">event_note</span>
-        <span class="nav-item-text">授業スケジュール</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">イベント</div>
-      <a href="moshi.html" class="nav-item">
-        <span class="material-icons">quiz</span>
-        <span class="nav-item-text">EQAO模試</span>
-      </a>
-      <a href="party.html" class="nav-item">
-        <span class="material-icons">celebration</span>
-        <span class="nav-item-text">EQAO PARTY</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">各種申し込み</div>
-      <a href="forms.html" class="nav-item">
-        <span class="material-icons">add_circle</span>
-        <span class="nav-item-text">授業追加フォーム</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">面談</div>
-      <a href="zoom-links.html" class="nav-item">
-        <span class="material-icons">videocam</span>
-        <span class="nav-item-text">Zoomリンク一覧</span>
-      </a>
-      <a href="meeting-tantou.html" class="nav-item">
-        <span class="material-icons">support_agent</span>
-        <span class="nav-item-text">担当講師面談予約</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">ルール関連</div>
-      <a href="rules.html" class="nav-item">
-        <span class="material-icons">gavel</span>
-        <span class="nav-item-text">ルール一覧</span>
-      </a>
-    </div>
-  </nav>
-
-  <div class="container">
+<div class="container">
     <!-- ヒーローセクション -->
     <div class="hero-section">
       <div class="hero-icon">
@@ -1059,11 +985,6 @@
 
     function goBack() {
       window.location.href = 'index.html?t=' + new Date().getTime();
-    }
-
-    function toggleMenu() {
-      document.getElementById('navOverlay').classList.toggle('active');
-      document.getElementById('navMenu').classList.toggle('active');
     }
 
     function setNavUserName() {

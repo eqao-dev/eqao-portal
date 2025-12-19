@@ -38,14 +38,14 @@ const NAV_MENU_STRUCTURE = [
     category: 'スケジュール',
     items: [
       { href: 'yearly-schedule.html', icon: 'calendar_month', iconColor: 'icon-blue', label: '年間スケジュール' },
-      { href: 'exam-schedule.html', icon: 'school', iconColor: 'icon-indigo', label: '受験スケジュール', badge: '個別' },
-      { href: 'schedule.html', icon: 'event_note', iconColor: 'icon-purple', label: '授業スケジュール', badge: '個別' }
+      { href: 'exam-schedule.html', icon: 'school', iconColor: 'icon-indigo', label: '受験スケジュール' },
+      { href: 'schedule.html', icon: 'event_note', iconColor: 'icon-purple', label: '授業スケジュール' }
     ]
   },
   {
     category: 'チェックリスト',
     items: [
-      { href: 'checklist.html', icon: 'checklist', iconColor: 'icon-teal', label: 'チェックリスト教材', badge: '個別' },
+      { href: 'checklist.html', icon: 'checklist', iconColor: 'icon-teal', label: 'チェックリスト教材' },
       { href: 'progress.html', icon: 'trending_up', iconColor: 'icon-teal', label: '自己/進捗管理シート' },
       { href: 'school-list.html', icon: 'location_city', iconColor: 'icon-teal', label: '志望校/併願校管理シート' }
     ]
