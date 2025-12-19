@@ -1970,13 +1970,28 @@
     // ============================================
     // 回答保存
     // ============================================
+    
+    // 自動保存用タイマー
+    const autoSaveTimers = {};
+
+    // 未保存マーク＋自動保存タイマー開始
     function markUnsaved(questionId) {
       unsavedChanges[questionId] = true;
       const statusEl = document.getElementById(`saveStatus_${questionId}`);
       if (statusEl) {
-        statusEl.textContent = '未保存';
+        statusEl.textContent = '入力中...';
         statusEl.classList.remove('saved');
       }
+      
+      // 既存タイマーをクリア
+      if (autoSaveTimers[questionId]) {
+        clearTimeout(autoSaveTimers[questionId]);
+      }
+      
+      // 5秒後に自動保存
+      autoSaveTimers[questionId] = setTimeout(() => {
+        saveAnswer(questionId);
+      }, 5000);
     }
 
     async function saveAnswer(questionId) {
