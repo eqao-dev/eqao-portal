@@ -473,12 +473,16 @@
     // 初期化
     document.addEventListener('DOMContentLoaded', async function() {
       // ログインチェック
-      const userData = localStorage.getItem('eqao_user');
-      if (!userData) {
+      const loggedIn = localStorage.getItem('eqao_loggedIn');
+      if (!loggedIn) {
+        localStorage.setItem('eqao_returnUrl', location.href);
         window.location.href = 'login.html';
         return;
       }
-      currentUser = JSON.parse(userData);
+      currentUser = {
+        studentId: localStorage.getItem('eqao_studentId'),
+        studentName: localStorage.getItem('eqao_studentName')
+      };
 
       // 進捗データ読み込み
       await loadProgress();
