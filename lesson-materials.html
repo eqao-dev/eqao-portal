@@ -80,7 +80,7 @@
       font-size: 18px;
       font-weight: 700;
       color: #1a237e;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -90,24 +90,42 @@
       font-size: 24px;
     }
 
+    /* 縦並びフロー */
     .intro-flow {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 20px;
     }
 
     .flow-step {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 20px;
-      background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+      gap: 10px;
+      padding: 10px 24px;
+      background: #f5f5f5;
       border-radius: 24px;
       font-weight: 600;
-      color: #1a237e;
+      font-size: 14px;
+      color: #333;
+      width: 260px;
+      justify-content: center;
+    }
+
+    .flow-step.step-input {
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      color: #1565c0;
+    }
+
+    .flow-step.step-output {
+      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      color: #e65100;
+    }
+
+    .flow-step.step-redo {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      color: #2e7d32;
     }
 
     .flow-step .material-icons {
@@ -115,17 +133,59 @@
     }
 
     .flow-arrow {
-      font-size: 24px;
-      color: #9e9e9e;
+      font-size: 20px;
+      color: #bdbdbd;
     }
 
-    .intro-note {
-      background: #fff8e1;
-      border-left: 4px solid #ffc107;
-      padding: 12px 16px;
-      border-radius: 0 8px 8px 0;
+    /* 使い方セクション */
+    .how-to-use {
+      background: #fafafa;
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+
+    .how-to-title {
       font-size: 13px;
-      color: #795548;
+      font-weight: 700;
+      color: #666;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .how-to-title .material-icons {
+      font-size: 18px;
+      color: #1a237e;
+    }
+
+    .how-to-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .how-to-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .step-number {
+      width: 22px;
+      height: 22px;
+      background: #1a237e;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
     }
 
     /* テーマカード */
@@ -326,12 +386,9 @@
         flex-direction: column;
       }
 
-      .intro-flow {
-        flex-direction: column;
-      }
-
-      .flow-arrow {
-        transform: rotate(90deg);
+      .flow-step {
+        width: 100%;
+        max-width: 280px;
       }
     }
   </style>
@@ -351,24 +408,49 @@
         <span class="material-icons">school</span>
         本質理解からの実践
       </div>
+      
+      <!-- 縦並びフロー -->
       <div class="intro-flow">
-        <div class="flow-step">
+        <div class="flow-step step-input">
           <span class="material-icons">menu_book</span>
           インプット（読む・見る）
         </div>
-        <span class="material-icons flow-arrow">arrow_forward</span>
-        <div class="flow-step">
+        <span class="material-icons flow-arrow">arrow_downward</span>
+        <div class="flow-step step-output">
           <span class="material-icons">edit_note</span>
           アウトプット（書く・練習）
         </div>
-        <span class="material-icons flow-arrow">arrow_forward</span>
-        <div class="flow-step">
+        <span class="material-icons flow-arrow">arrow_downward</span>
+        <div class="flow-step step-redo">
           <span class="material-icons">replay</span>
           リドゥ（再学習・改善）
         </div>
       </div>
-      <div class="intro-note">
-        ⚠️ インプットを完了しないとアウトプットに進めません。必ず順番に取り組んでください。
+      
+      <!-- 使い方 -->
+      <div class="how-to-use">
+        <div class="how-to-title">
+          <span class="material-icons">help_outline</span>
+          このページの使い方
+        </div>
+        <div class="how-to-steps">
+          <div class="how-to-step">
+            <span class="step-number">1</span>
+            <span>各テーマの<strong>「インプット」</strong>ボタンを押して、コラムを読む</span>
+          </div>
+          <div class="how-to-step">
+            <span class="step-number">2</span>
+            <span>全て読み終わったら<strong>「完了」</strong>ボタンを押す</span>
+          </div>
+          <div class="how-to-step">
+            <span class="step-number">3</span>
+            <span><strong>「アウトプット」</strong>が解放されるので、実践ワークに取り組む</span>
+          </div>
+          <div class="how-to-step">
+            <span class="step-number">4</span>
+            <span>必要に応じてインプットに戻って復習（これがリドゥ！）</span>
+          </div>
+        </div>
       </div>
     </div>
 

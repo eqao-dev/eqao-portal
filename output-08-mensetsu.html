@@ -2203,15 +2203,17 @@
           ${customAnswered.length > 0 ? `
             <div class="section">
               <div class="section-title">講師追加の深掘り質問</div>
-              ${customAnswered.map((q, i) => `
+              ${customAnswered.map((q, i) => {
+                const customKey = 'custom_' + i;
+                return `
                 <div class="qa-item">
                   <div class="question">
                     <span class="question-num">${i + 1}</span>
                     ${escapeHtml(q.question)}
                   </div>
-                  <div class="answer">${escapeHtml(answers[\`custom_\${i}\`].answer)}</div>
+                  <div class="answer">${escapeHtml(answers[customKey]?.answer || '')}</div>
                 </div>
-              `).join('')}
+              `}).join('')}
             </div>
           ` : ''}
           
@@ -2335,18 +2337,20 @@
       };
 
       try {
-        // サーバーに保存
-        const res = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'saveLessonRecord',
-            studentId: currentUser.studentId,
-            themeId: THEME_ID,
-            record: record
-          })
-        });
+        // サーバーに保存（GETで送信）
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'saveLessonRecord');
+        url.searchParams.set('studentId', currentUser.studentId);
+        url.searchParams.set('themeId', THEME_ID);
+        url.searchParams.set('date', date);
+        url.searchParams.set('school', school);
+        url.searchParams.set('teacher', teacher);
+        url.searchParams.set('questions', questions);
+        url.searchParams.set('improvement', improvement);
+        url.searchParams.set('goodPoints', goodPoints);
+        url.searchParams.set('comment', comment);
         
+        const res = await fetch(url.toString());
         const result = await res.json();
         
         if (result.success) {
@@ -2467,16 +2471,12 @@
       if (!confirm('この授業記録を削除しますか？')) return;
       
       try {
-        // サーバーから削除
-        const res = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'deleteLessonRecord',
-            recordId: id
-          })
-        });
+        // サーバーから削除（GETで送信）
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'deleteLessonRecord');
+        url.searchParams.set('recordId', id);
         
+        const res = await fetch(url.toString());
         const result = await res.json();
         
         if (result.success) {
