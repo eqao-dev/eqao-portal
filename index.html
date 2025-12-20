@@ -69,228 +69,452 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 20px 16px;
     }
 
-    .line-section {
+    @media (min-width: 1024px) {
+      .container {
+        padding: 24px 32px;
+      }
+    }
+
+    /* ========================================
+       クイックアクセスグリッド
+    ======================================== */
+    .quick-access-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      gap: 10px;
       margin-bottom: 24px;
     }
 
-    .line-btn {
+    @media (min-width: 768px) {
+      .quick-access-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 12px;
+      }
+    }
+
+    .quick-access-item {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 6px;
       padding: 14px 8px;
-      background: linear-gradient(135deg, #06c755 0%, #00b341 100%);
-      color: white;
-      text-decoration: none;
       border-radius: 12px;
       font-size: 11px;
-      font-weight: 500;
+      font-weight: 600;
       text-align: center;
-      box-shadow: 0 4px 15px rgba(6, 199, 85, 0.3);
-      transition: all 0.3s ease;
+      text-decoration: none;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s;
+      min-height: 80px;
       line-height: 1.3;
     }
 
-    .line-btn:hover {
+    .quick-access-item:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(6, 199, 85, 0.4);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     }
 
-    .line-btn .material-icons {
+    .quick-access-item .material-icons {
+      font-size: 24px;
+    }
+
+    .quick-access-item small {
+      font-size: 9px;
+      opacity: 0.85;
+    }
+
+    .quick-access-item.green {
+      background: linear-gradient(135deg, #06c755 0%, #00b341 100%);
+      box-shadow: 0 4px 15px rgba(6, 199, 85, 0.3);
+    }
+
+    .quick-access-item.blue {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+    }
+
+    .quick-access-item.indigo {
+      background: linear-gradient(135deg, #283593 0%, #5c6bc0 100%);
+      box-shadow: 0 4px 15px rgba(40, 53, 147, 0.3);
+    }
+
+    .quick-access-item.purple {
+      background: linear-gradient(135deg, #4527a0 0%, #7e57c2 100%);
+      box-shadow: 0 4px 15px rgba(69, 39, 160, 0.3);
+    }
+
+    .quick-access-item.orange {
+      background: linear-gradient(135deg, #e65100 0%, #ff9800 100%);
+      box-shadow: 0 4px 15px rgba(230, 81, 0, 0.3);
+    }
+
+    .quick-access-item.pink {
+      background: linear-gradient(135deg, #ad1457 0%, #ec407a 100%);
+      box-shadow: 0 4px 15px rgba(173, 20, 87, 0.3);
+    }
+
+    .quick-access-item.amber {
+      background: linear-gradient(135deg, #ff8f00 0%, #ffc107 100%);
+      box-shadow: 0 4px 15px rgba(255, 143, 0, 0.3);
+    }
+
+    .quick-access-item.teal {
+      background: linear-gradient(135deg, #00695c 0%, #26a69a 100%);
+      box-shadow: 0 4px 15px rgba(0, 105, 92, 0.3);
+    }
+
+    @media (min-width: 768px) {
+      .quick-access-item {
+        padding: 16px 10px;
+        font-size: 12px;
+        min-height: 90px;
+      }
+
+      .quick-access-item .material-icons {
+        font-size: 26px;
+      }
+    }
+
+    /* ========================================
+       区切り線
+    ======================================== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ddd, transparent);
+    }
+
+    .section-divider-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* ========================================
+       セクションナビゲーション
+    ======================================== */
+    .section-nav-wrapper {
+      margin-bottom: 20px;
+    }
+
+    .section-nav-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 8px;
+      padding-left: 4px;
+    }
+
+    .section-nav-label .material-icons {
+      font-size: 16px;
+    }
+
+    .section-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 0;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .section-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .section-nav-item {
+      flex-shrink: 0;
+      padding: 10px 16px;
+      background: white;
+      border: 2px solid #e8ecf4;
+      border-radius: 25px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .section-nav-item:hover {
+      border-color: #1a237e;
+      color: #1a237e;
+      background: #f0f4ff;
+    }
+
+    .section-nav-item.active {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-color: #1a237e;
+      color: white;
+    }
+
+    @media (min-width: 768px) {
+      .section-nav {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .section-nav-item {
+        padding: 10px 20px;
+        font-size: 13px;
+      }
+    }
+
+    /* ========================================
+       検索機能
+    ======================================== */
+    .search-trigger {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: white;
+      border: 2px solid #e8ecf4;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .search-trigger:hover {
+      border-color: #1a237e;
+      box-shadow: 0 2px 12px rgba(26, 35, 126, 0.1);
+    }
+
+    .search-trigger .material-icons {
+      color: #999;
       font-size: 22px;
     }
 
-    /* 2列バナー */
-    .banner-row {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 24px;
+    .search-trigger-text {
+      flex: 1;
+      font-size: 14px;
+      color: #999;
     }
 
-    .banner-row .faq-banner {
+    .search-trigger-hint {
+      font-size: 11px;
+      color: #bbb;
+      background: #f5f5f5;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    /* 検索モーダル */
+    .search-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 900;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .search-modal-overlay.show {
+      display: flex;
+    }
+
+    .search-modal {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 80vh;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: modalSlideUp 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .search-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      border-bottom: 1px solid #e8ecf4;
+      flex-shrink: 0;
+    }
+
+    .search-header .material-icons {
+      color: #1a237e;
+      font-size: 24px;
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      font-size: 16px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: #bbb;
+    }
+
+    .search-close {
+      background: #f5f5f5;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #666;
+      transition: background 0.2s;
+    }
+
+    .search-close:hover {
+      background: #e0e0e0;
+    }
+
+    .search-results {
+      padding: 12px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .search-result-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .search-result-item:hover {
+      background: #f5f7fa;
+    }
+
+    .search-result-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .search-result-icon .material-icons {
+      color: white;
+      font-size: 20px;
+    }
+
+    .search-result-icon.icon-blue { background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); }
+    .search-result-icon.icon-indigo { background: linear-gradient(135deg, #283593 0%, #5c6bc0 100%); }
+    .search-result-icon.icon-purple { background: linear-gradient(135deg, #4527a0 0%, #7e57c2 100%); }
+    .search-result-icon.icon-teal { background: linear-gradient(135deg, #00695c 0%, #26a69a 100%); }
+    .search-result-icon.icon-orange { background: linear-gradient(135deg, #e65100 0%, #ff9800 100%); }
+    .search-result-icon.icon-pink { background: linear-gradient(135deg, #ad1457 0%, #ec407a 100%); }
+    .search-result-icon.icon-green { background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%); }
+    .search-result-icon.icon-red { background: linear-gradient(135deg, #c62828 0%, #ef5350 100%); }
+    .search-result-icon.icon-amber { background: linear-gradient(135deg, #ff8f00 0%, #ffc107 100%); }
+    .search-result-icon.icon-brown { background: linear-gradient(135deg, #4e342e 0%, #8d6e63 100%); }
+
+    .search-result-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .search-result-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .search-result-category {
+      font-size: 11px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .search-no-results {
+      text-align: center;
+      padding: 30px 20px;
+      color: #999;
+    }
+
+    .search-no-results .material-icons {
+      font-size: 48px;
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+
+    .search-examples {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .search-examples-title {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .search-examples-title .material-icons {
+      font-size: 16px;
+      opacity: 1;
       margin-bottom: 0;
     }
 
-    /* FAQバナー */
-    .faq-banner {
+    .search-example-tags {
       display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px 20px;
-      background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
-      border: 2px solid #e8ecf4;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .search-example-tag {
+      padding: 6px 12px;
+      background: #f0f4ff;
+      border: 1px solid #e0e7ff;
       border-radius: 16px;
-      margin-bottom: 24px;
-      text-decoration: none;
-      color: inherit;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-      transition: all 0.3s ease;
-    }
-
-    .faq-banner:hover {
-      border-color: #1a237e;
-      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.15);
-      transform: translateY(-2px);
-    }
-
-    .faq-banner-icon {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .faq-banner-icon .material-icons {
-      color: white;
-      font-size: 26px;
-    }
-
-    .faq-banner-content {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .faq-banner-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #1a237e;
-      margin-bottom: 2px;
-    }
-
-    .faq-banner-desc {
       font-size: 12px;
-      color: #666;
-    }
-
-    .faq-banner-arrow {
-      color: #999;
-      font-size: 24px;
-      flex-shrink: 0;
-    }
-
-    /* 塾情報バナー */
-    .info-banner {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 16px;
-      background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
-      border: 2px solid #e8ecf4;
-      border-radius: 14px;
-      text-decoration: none;
-      color: inherit;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-      transition: all 0.3s ease;
-    }
-
-    .info-banner:hover {
-      border-color: #1a237e;
-      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.15);
-      transform: translateY(-2px);
-    }
-
-    .info-banner-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .info-banner-icon.blue {
-      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-    }
-
-    .info-banner-icon.orange {
-      background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
-    }
-
-    .info-banner-icon .material-icons {
-      color: white;
-      font-size: 24px;
-    }
-
-    .info-banner-content {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .info-banner-title {
-      font-size: 13px;
-      font-weight: 700;
       color: #1a237e;
-      margin-bottom: 2px;
-    }
-
-    .info-banner-desc {
-      font-size: 10px;
-      color: #666;
-    }
-
-    .info-banner-arrow {
-      color: #999;
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-
-    /* 塾情報バナー（単一・集約版） */
-    .info-banner-single {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px 20px;
-      background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
-      border: 2px solid #e8ecf4;
-      border-radius: 16px;
-      margin-bottom: 24px;
       cursor: pointer;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-      transition: all 0.3s ease;
+      transition: all 0.2s;
     }
 
-    .info-banner-single:hover {
-      border-color: #1a237e;
-      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.15);
-      transform: translateY(-2px);
-    }
-
-    .info-banner-icon-large {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .info-banner-icon-large .material-icons {
+    .search-example-tag:hover {
+      background: #1a237e;
       color: white;
-      font-size: 26px;
-    }
-
-    .info-banner-title-large {
-      font-size: 16px;
-      font-weight: 700;
-      color: #1a237e;
-      margin-bottom: 2px;
+      border-color: #1a237e;
     }
 
     /* 塾情報モーダル */
@@ -445,6 +669,93 @@
       flex-shrink: 0;
     }
 
+    .info-modal-icon.red {
+      background: linear-gradient(135deg, #e53935 0%, #ef5350 100%);
+      color: white;
+    }
+
+    /* PV動画モーダル */
+    .pv-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 600;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .pv-modal-overlay.show {
+      display: flex;
+    }
+
+    .pv-modal {
+      background: white;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 700px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      animation: modalSlideUp 0.3s ease;
+    }
+
+    .pv-modal-header {
+      background: linear-gradient(135deg, #e53935 0%, #ef5350 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pv-modal-header h2 {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .pv-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: background 0.2s;
+    }
+
+    .pv-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .pv-modal-body {
+      padding: 0;
+    }
+
+    .pv-video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      background: #000;
+    }
+
+    .pv-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
     /* 2列グリッド */
     .button-grid-2col {
       display: grid;
@@ -479,6 +790,48 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .button-grid {
+        gap: 16px;
+      }
+
+      .menu-btn {
+        padding: 24px 12px;
+        min-height: 120px;
+        font-size: 13px;
+      }
+
+      .menu-btn .icon-wrapper {
+        width: 52px;
+        height: 52px;
+      }
+
+      .menu-btn .icon-wrapper .material-icons {
+        font-size: 28px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .button-grid {
+        gap: 20px;
+      }
+
+      .menu-btn {
+        padding: 28px 16px;
+        min-height: 130px;
+        font-size: 14px;
+      }
+
+      .menu-btn .icon-wrapper {
+        width: 56px;
+        height: 56px;
+      }
+
+      .menu-btn .icon-wrapper .material-icons {
+        font-size: 30px;
+      }
     }
 
     .menu-btn {
@@ -2364,6 +2717,361 @@
 .manage-btn .material-icons {
   font-size: 14px;
 }
+
+/* ========================================
+   はじめにご確認ください セクション
+======================================== */
+.onboarding-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  border-radius: 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.onboarding-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.onboarding-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+.onboarding-banner-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.onboarding-banner-icon .material-icons {
+  color: white;
+  font-size: 26px;
+}
+
+.onboarding-banner-content {
+  flex: 1;
+  color: white;
+}
+
+.onboarding-banner-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.onboarding-banner-desc {
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+.onboarding-banner-arrow {
+  color: white;
+  opacity: 0.8;
+}
+
+.onboarding-banner-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #e53935;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* はじめにモーダル */
+.onboarding-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 600;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.onboarding-modal-overlay.show {
+  display: flex;
+}
+
+.onboarding-modal {
+  background: white;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 420px;
+  max-height: 85vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalSlideUp 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.onboarding-modal-header {
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  color: white;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.onboarding-modal-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  flex: 1;
+}
+
+.onboarding-modal-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: background 0.2s;
+}
+
+.onboarding-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.onboarding-modal-body {
+  padding: 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.onboarding-progress {
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.onboarding-progress-bar {
+  flex: 1;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.onboarding-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff6b35, #f7931e);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.onboarding-progress-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+}
+
+.onboarding-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #f8f9fc;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.onboarding-item:hover {
+  background: #e8ecf4;
+  transform: translateX(4px);
+}
+
+.onboarding-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.onboarding-item.disabled:hover {
+  transform: none;
+}
+
+.onboarding-check {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.onboarding-check .material-icons {
+  font-size: 18px;
+  color: transparent;
+}
+
+.onboarding-check.checked {
+  background: linear-gradient(135deg, #43a047, #66bb6a);
+  border-color: #43a047;
+}
+
+.onboarding-check.checked .material-icons {
+  color: white;
+}
+
+.onboarding-item-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.onboarding-item-icon .material-icons {
+  color: white;
+  font-size: 20px;
+}
+
+.onboarding-item-icon.video {
+  background: linear-gradient(135deg, #e53935, #ef5350);
+}
+
+.onboarding-item-icon.document {
+  background: linear-gradient(135deg, #1a237e, #3949ab);
+}
+
+.onboarding-item-icon.purple {
+  background: linear-gradient(135deg, #4527a0, #7e57c2);
+}
+
+.onboarding-item-icon.brown {
+  background: linear-gradient(135deg, #4e342e, #8d6e63);
+}
+
+.onboarding-item-icon.disabled {
+  background: #bdbdbd;
+}
+
+.onboarding-item-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.onboarding-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.onboarding-item-desc {
+  font-size: 11px;
+  color: #888;
+}
+
+.onboarding-item-badge {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.onboarding-item-badge.wip {
+  background: #f5f5f5;
+  color: #9e9e9e;
+}
+
+.onboarding-item > .material-icons {
+  color: #ccc;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.onboarding-modal-footer {
+  padding: 16px 20px;
+  background: #f8f9fc;
+  border-top: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+.onboarding-complete-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #43a047, #66bb6a);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.onboarding-complete-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(67, 160, 71, 0.3);
+}
+
+.onboarding-complete-btn:disabled {
+  background: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+}
     
   </style>
 </head>
@@ -2408,6 +3116,140 @@
   </header>
 
   <div class="container">
+    <!-- はじめにご確認ください バナー -->
+    <div class="onboarding-banner" id="onboardingBanner" onclick="openOnboardingModal()" style="display: none;">
+      <div class="onboarding-banner-icon">
+        <span class="material-icons">menu_book</span>
+      </div>
+      <div class="onboarding-banner-content">
+        <div class="onboarding-banner-title">はじめにご確認ください</div>
+        <div class="onboarding-banner-desc">料金・スケジュール・授業ルールなど重要事項をまとめています</div>
+      </div>
+      <span class="material-icons onboarding-banner-arrow">chevron_right</span>
+      <span class="onboarding-banner-badge" id="onboardingBadge">必読</span>
+    </div>
+
+    <!-- はじめにモーダル -->
+    <div class="onboarding-modal-overlay" id="onboardingModalOverlay" onclick="closeOnboardingModalOnOverlay(event)">
+      <div class="onboarding-modal" onclick="event.stopPropagation()">
+        <div class="onboarding-modal-header">
+          <span class="material-icons">menu_book</span>
+          <h2>はじめにご確認ください</h2>
+          <button class="onboarding-modal-close" onclick="closeOnboardingModal()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+
+        <div class="onboarding-modal-body">
+          <div class="onboarding-progress">
+            <div class="onboarding-progress-bar">
+              <div class="onboarding-progress-fill" id="onboardingProgressFill" style="width: 0%"></div>
+            </div>
+            <div class="onboarding-progress-text"><span id="onboardingCheckedCount">0</span>/5 完了</div>
+          </div>
+
+          <!-- 料金ルール動画 -->
+          <div class="onboarding-item" data-key="fee-rule" onclick="openOnboardingItem('fee-rule', 'https://youtu.be/9VwlMYNy2aE')">
+            <div class="onboarding-check" id="check-fee-rule">
+              <span class="material-icons">check</span>
+            </div>
+            <div class="onboarding-item-icon video">
+              <span class="material-icons">play_circle</span>
+            </div>
+            <div class="onboarding-item-content">
+              <div class="onboarding-item-title">料金ルール</div>
+              <div class="onboarding-item-desc">授業料・支払いについて</div>
+            </div>
+            <span class="onboarding-item-badge">動画</span>
+            <span class="material-icons">chevron_right</span>
+          </div>
+
+          <!-- スケジュールルール動画 -->
+          <div class="onboarding-item" data-key="schedule-rule" onclick="openOnboardingItem('schedule-rule', 'https://youtu.be/S182BdSHzdk')">
+            <div class="onboarding-check" id="check-schedule-rule">
+              <span class="material-icons">check</span>
+            </div>
+            <div class="onboarding-item-icon video">
+              <span class="material-icons">play_circle</span>
+            </div>
+            <div class="onboarding-item-content">
+              <div class="onboarding-item-title">スケジュールルール</div>
+              <div class="onboarding-item-desc">授業日程・振替について</div>
+            </div>
+            <span class="onboarding-item-badge">動画</span>
+            <span class="material-icons">chevron_right</span>
+          </div>
+
+          <!-- 基本事項規定 -->
+          <div class="onboarding-item" data-key="basic-rule" onclick="openOnboardingItem('basic-rule', 'rules.html')">
+            <div class="onboarding-check" id="check-basic-rule">
+              <span class="material-icons">check</span>
+            </div>
+            <div class="onboarding-item-icon brown">
+              <span class="material-icons">gavel</span>
+            </div>
+            <div class="onboarding-item-content">
+              <div class="onboarding-item-title">基本事項規定および生徒保護者規則</div>
+              <div class="onboarding-item-desc">ルール一覧</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </div>
+
+          <!-- 授業の流れ -->
+          <div class="onboarding-item" data-key="lesson-flow" onclick="openOnboardingItem('lesson-flow', 'curriculum.html')">
+            <div class="onboarding-check" id="check-lesson-flow">
+              <span class="material-icons">check</span>
+            </div>
+            <div class="onboarding-item-icon purple">
+              <span class="material-icons">route</span>
+            </div>
+            <div class="onboarding-item-content">
+              <div class="onboarding-item-title">授業の流れ</div>
+              <div class="onboarding-item-desc">授業の進め方について</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </div>
+
+          <!-- カリキュラム内容 -->
+          <div class="onboarding-item" data-key="curriculum" onclick="openOnboardingItem('curriculum', 'curriculum-support.html')">
+            <div class="onboarding-check" id="check-curriculum">
+              <span class="material-icons">check</span>
+            </div>
+            <div class="onboarding-item-icon purple">
+              <span class="material-icons">account_tree</span>
+            </div>
+            <div class="onboarding-item-content">
+              <div class="onboarding-item-title">カリキュラム内容</div>
+              <div class="onboarding-item-desc">カリキュラムとサポート体制</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </div>
+
+          <!-- カリキュラム動画（準備中） -->
+          <div class="onboarding-item disabled" data-key="curriculum-video">
+            <div class="onboarding-check" id="check-curriculum-video">
+              <span class="material-icons">check</span>
+            </div>
+            <div class="onboarding-item-icon disabled">
+              <span class="material-icons">play_circle</span>
+            </div>
+            <div class="onboarding-item-content">
+              <div class="onboarding-item-title">カリキュラム動画</div>
+              <div class="onboarding-item-desc">準備中</div>
+            </div>
+            <span class="onboarding-item-badge wip">準備中</span>
+          </div>
+        </div>
+
+        <div class="onboarding-modal-footer">
+          <button class="onboarding-complete-btn" id="onboardingCompleteBtn" onclick="completeOnboarding()" disabled>
+            <span class="material-icons">check_circle</span>
+            すべて確認済みにして非表示
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="news-section">
       <div class="news-header">
         <div class="news-icon">
@@ -2516,44 +3358,56 @@
   </div>
 </div>
     </div>
-    <div class="line-section">
-      <a href="https://lin.ee/nM1pgho" target="_blank" class="line-btn">
+
+    <!-- クイックアクセス（統一グリッド） -->
+    <div class="quick-access-grid">
+      <a href="https://lin.ee/nM1pgho" target="_blank" class="quick-access-item green">
         <span class="material-icons">chat</span>
-        塾生専用<br>公式LINE
+        <span>塾生LINE</span>
       </a>
-      <a href="https://lin.ee/qbBTdgx" target="_blank" class="line-btn">
+      <a href="https://lin.ee/qbBTdgx" target="_blank" class="quick-access-item green">
         <span class="material-icons">family_restroom</span>
-        保護者専用<br>公式LINE<br>[配信用]
+        <span>保護者LINE<br><small>配信用</small></span>
       </a>
-      <a href="https://lin.ee/x3WPAvR" target="_blank" class="line-btn">
+      <a href="https://lin.ee/x3WPAvR" target="_blank" class="quick-access-item green">
         <span class="material-icons">mail</span>
-        保護者専用<br>公式LINE<br>[連絡用]
+        <span>保護者LINE<br><small>連絡用</small></span>
+      </a>
+      <div class="quick-access-item blue" onclick="openInfoModal()">
+        <span class="material-icons">info</span>
+        <span>EQAO情報</span>
+      </div>
+      <a href="forms.html" class="quick-access-item amber">
+        <span class="material-icons">list_alt</span>
+        <span>各種申し込み</span>
+      </a>
+      <a href="faq.html" class="quick-access-item teal">
+        <span class="material-icons">help</span>
+        <span>よくある質問</span>
       </a>
     </div>
 
-    <!-- 塾情報バナー（集約版） -->
-    <div class="info-banner-single" onclick="openInfoModal()">
-      <div class="info-banner-icon-large">
-        <span class="material-icons">info</span>
-      </div>
-      <div class="info-banner-content">
-        <div class="info-banner-title-large">塾情報</div>
-        <div class="info-banner-desc">数字・料金・合格実績</div>
-      </div>
-      <span class="material-icons info-banner-arrow">chevron_right</span>
-    </div>
-
-    <!-- 塾情報モーダル -->
+    <!-- EQAO情報モーダル -->
     <div class="info-modal-overlay" id="info-modal-overlay" onclick="closeInfoModal(event)">
       <div class="info-modal" onclick="event.stopPropagation()">
         <div class="info-modal-header">
           <span class="material-icons">info</span>
-          塾情報
+          EQAO情報
           <button class="info-modal-close" onclick="closeInfoModal()">
             <span class="material-icons">close</span>
           </button>
         </div>
         <div class="info-modal-body">
+          <div class="info-modal-item" onclick="openPvModal()">
+            <div class="info-modal-icon red">
+              <span class="material-icons">play_circle</span>
+            </div>
+            <div class="info-modal-text">
+              <div class="info-modal-title">PV動画</div>
+              <div class="info-modal-desc">EQAOの紹介動画（約1分）</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </div>
           <a href="stats.html" class="info-modal-item">
             <div class="info-modal-icon blue">
               <span class="material-icons">bar_chart</span>
@@ -2588,31 +3442,60 @@
       </div>
     </div>
 
-    <!-- 2列バナー -->
-    <div class="banner-row">
-      <a href="forms.html" class="faq-banner">
-        <div class="faq-banner-icon">
-          <span class="material-icons">list_alt</span>
+    <!-- PV動画モーダル -->
+    <div class="pv-modal-overlay" id="pvModalOverlay" onclick="closePvModalOnOverlay(event)">
+      <div class="pv-modal" onclick="event.stopPropagation()">
+        <div class="pv-modal-header">
+          <span class="material-icons">play_circle</span>
+          <h2>EQAO PV動画</h2>
+          <button class="pv-modal-close" onclick="closePvModal()">
+            <span class="material-icons">close</span>
+          </button>
         </div>
-        <div class="faq-banner-content">
-          <div class="faq-banner-title">各種申し込み</div>
-          <div class="faq-banner-desc">フォーム一覧</div>
+        <div class="pv-modal-body">
+          <div class="pv-video-container">
+            <iframe 
+              id="pvVideoIframe"
+              src="" 
+              title="EQAO PV動画"
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
+          </div>
         </div>
-        <span class="material-icons faq-banner-arrow">chevron_right</span>
-      </a>
-      <a href="faq.html" class="faq-banner">
-        <div class="faq-banner-icon">
-          <span class="material-icons">help</span>
-        </div>
-        <div class="faq-banner-content">
-          <div class="faq-banner-title">よくある質問</div>
-          <div class="faq-banner-desc">Q&A</div>
-        </div>
-        <span class="material-icons faq-banner-arrow">chevron_right</span>
-      </a>
+      </div>
     </div>
 
-    <div class="section">
+    <!-- 区切り線 -->
+    <div class="section-divider">
+      <span class="section-divider-text">メニュー</span>
+    </div>
+
+    <!-- 検索バー -->
+    <div class="search-trigger" onclick="openSearchModal()">
+      <span class="material-icons">search</span>
+      <span class="search-trigger-text">ページ・機能を検索...</span>
+      <span class="search-trigger-hint">Ctrl+K</span>
+    </div>
+
+    <!-- セクションナビゲーション -->
+    <div class="section-nav-wrapper">
+      <div class="section-nav-label">
+        <span class="material-icons">vertical_align_bottom</span>
+        セクションへ移動
+      </div>
+      <div class="section-nav" id="sectionNav">
+        <a href="#section-schedule" class="section-nav-item" data-section="section-schedule">スケジュール</a>
+        <a href="#section-checklist" class="section-nav-item" data-section="section-checklist">チェックリスト</a>
+        <a href="#section-learning" class="section-nav-item" data-section="section-learning">学習コンテンツ</a>
+        <a href="#section-exam" class="section-nav-item" data-section="section-exam">受験対策</a>
+        <a href="#section-event" class="section-nav-item" data-section="section-event">イベント</a>
+        <a href="#section-curriculum" class="section-nav-item" data-section="section-curriculum">カリキュラム</a>
+      </div>
+    </div>
+
+    <div class="section" id="section-schedule">
       <h2 class="section-title">スケジュール</h2>
       <div class="button-grid">
         <a href="yearly-schedule.html" class="menu-btn">
@@ -2636,7 +3519,7 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="section-checklist">
       <h2 class="section-title">チェックリスト一覧</h2>
       <div class="button-grid">
         <a href="checklist.html" class="menu-btn">
@@ -2660,8 +3543,8 @@
       </div>
     </div>
 
-    <div class="section">
-      <h2 class="section-title">教材</h2>
+    <div class="section" id="section-learning">
+      <h2 class="section-title">学習コンテンツ</h2>
       <div class="button-grid">
         <a href="https://one-stream.io/join/user/dfc86da0-9483-45b9-97e9-2b633cb669ac" target="_blank" class="menu-btn">
           <div class="icon-wrapper icon-orange">
@@ -2675,6 +3558,24 @@
           </div>
           <span>生徒共通<br>教材一覧</span>
         </a>
+        <a href="videos.html" class="menu-btn">
+          <div class="icon-wrapper icon-pink">
+            <span class="material-icons">video_library</span>
+          </div>
+          <span>過去の集団<br>授業動画</span>
+        </a>
+        <a href="https://www.notion.so/EQAO-COMMUNITY-LINE-21f5f9664112803a8ee2cff1a4d5e2a7" target="_blank" class="menu-btn">
+          <div class="icon-wrapper icon-pink">
+            <span class="material-icons">dashboard</span>
+          </div>
+          <span>生徒<br>プラットフォーム</span>
+        </a>
+        <a href="column.html" class="menu-btn">
+          <div class="icon-wrapper icon-pink">
+            <span class="material-icons">article</span>
+          </div>
+          <span>コラム<br>一覧</span>
+        </a>
         <span class="menu-btn disabled">
           <div class="icon-wrapper icon-orange">
             <span class="material-icons">description</span>
@@ -2684,7 +3585,7 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="section-exam">
       <h2 class="section-title">受験対策データベース</h2>
       <div class="button-grid">
         <a href="past-exams.html" class="menu-btn">
@@ -2708,32 +3609,8 @@
       </div>
     </div>
 
-    <div class="section">
-      <h2 class="section-title">コンテンツ</h2>
-      <div class="button-grid">
-        <a href="videos.html" class="menu-btn">
-          <div class="icon-wrapper icon-pink">
-            <span class="material-icons">video_library</span>
-          </div>
-          <span>過去の集団<br>授業動画</span>
-        </a>
-        <a href="https://www.notion.so/EQAO-COMMUNITY-LINE-21f5f9664112803a8ee2cff1a4d5e2a7" target="_blank" class="menu-btn">
-          <div class="icon-wrapper icon-pink">
-            <span class="material-icons">dashboard</span>
-          </div>
-          <span>生徒<br>プラットフォーム</span>
-        </a>
-        <a href="column.html" class="menu-btn">
-          <div class="icon-wrapper icon-pink">
-            <span class="material-icons">article</span>
-          </div>
-          <span>コラム<br>一覧</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2 class="section-title">イベント申し込み</h2>
+    <div class="section" id="section-event">
+      <h2 class="section-title">イベント・プログラム</h2>
       <div class="button-grid">
         <a href="moshi.html" class="menu-btn">
           <div class="icon-wrapper icon-green">
@@ -2751,14 +3628,8 @@
           <div class="icon-wrapper icon-green">
             <span class="material-icons">celebration</span>
           </div>
-          <span>EQAO PARTY<br>FOR NEXT STAGE</span>
+          <span>EQAO PARTY</span>
         </a>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2 class="section-title">プログラム申し込み</h2>
-      <div class="button-grid-2col">
         <a href="camp.html" class="menu-btn">
           <div class="icon-wrapper icon-red">
             <span class="material-icons">wb_sunny</span>
@@ -2774,8 +3645,8 @@
       </div>
     </div>
 
-    <div class="section">
-      <h2 class="section-title">カリキュラム</h2>
+    <div class="section" id="section-curriculum">
+      <h2 class="section-title">カリキュラム・ルール</h2>
       <div class="button-grid">
         <a href="zoom-links.html" class="menu-btn">
           <div class="icon-wrapper icon-purple">
@@ -2795,24 +3666,45 @@
           </div>
           <span>カリキュラムと<br>サポート体制</span>
         </a>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2 class="section-title">ルール関連</h2>
-      <div class="button-grid-2col">
         <a href="rules.html" class="menu-btn">
           <div class="icon-wrapper icon-brown">
             <span class="material-icons">gavel</span>
           </div>
           <span>基本事項規定および<br>生徒保護者規則</span>
         </a>
-        <span class="menu-btn disabled">
-          <div class="icon-wrapper icon-brown">
-            <span class="material-icons">auto_stories</span>
+      </div>
+    </div>
+
+    <!-- 検索モーダル -->
+    <div class="search-modal-overlay" id="searchModalOverlay" onclick="closeSearchModalOnOverlay(event)">
+      <div class="search-modal" onclick="event.stopPropagation()">
+        <div class="search-header">
+          <span class="material-icons">search</span>
+          <input type="text" class="search-input" id="searchInput" placeholder="ページ・機能を検索..." oninput="handleSearch(this.value)">
+          <button class="search-close" onclick="closeSearchModal()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <div class="search-results" id="searchResults">
+          <div class="search-no-results" id="searchInitial">
+            <span class="material-icons">search</span>
+            <p>キーワードを入力して検索</p>
+            <div class="search-examples">
+              <div class="search-examples-title">
+                <span class="material-icons">lightbulb</span>
+                検索例
+              </div>
+              <div class="search-example-tags">
+                <span class="search-example-tag" onclick="searchFromExample('スケジュール')">スケジュール</span>
+                <span class="search-example-tag" onclick="searchFromExample('振替')">振替</span>
+                <span class="search-example-tag" onclick="searchFromExample('zoom')">Zoom</span>
+                <span class="search-example-tag" onclick="searchFromExample('過去問')">過去問</span>
+                <span class="search-example-tag" onclick="searchFromExample('面談')">面談</span>
+                <span class="search-example-tag" onclick="searchFromExample('料金')">料金</span>
+              </div>
+            </div>
           </div>
-          <span>パンフレット</span>
-        </span>
+        </div>
       </div>
     </div>
 
@@ -2823,6 +3715,337 @@
 
   <script>
  const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
+
+    // ========================================
+    // 検索機能
+    // ========================================
+    const SEARCH_DATA = [
+      // スケジュール
+      { title: '年間スケジュール', href: 'yearly-schedule.html', category: 'スケジュール', icon: 'calendar_month', color: 'icon-blue', keywords: ['年間', 'スケジュール', '予定', 'カレンダー'] },
+      { title: '受験スケジュール', href: 'exam-schedule.html', category: 'スケジュール', icon: 'school', color: 'icon-indigo', keywords: ['受験', 'スケジュール', '入試', '日程'] },
+      { title: '授業スケジュール', href: 'schedule.html', category: 'スケジュール', icon: 'event_note', color: 'icon-purple', keywords: ['授業', 'スケジュール', '時間割'] },
+      // チェックリスト
+      { title: 'チェックリスト教材', href: 'checklist.html', category: 'チェックリスト', icon: 'checklist', color: 'icon-teal', keywords: ['チェックリスト', '教材', '確認'] },
+      { title: '自己/進捗管理シート', href: 'progress.html', category: 'チェックリスト', icon: 'trending_up', color: 'icon-teal', keywords: ['進捗', '管理', '自己', 'シート'] },
+      { title: '志望校/併願校管理シート', href: 'school-list.html', category: 'チェックリスト', icon: 'location_city', color: 'icon-teal', keywords: ['志望校', '併願校', '管理', '大学'] },
+      // 学習コンテンツ
+      { title: '動画教材（onestream）', href: 'https://one-stream.io/join/user/dfc86da0-9483-45b9-97e9-2b633cb669ac', category: '学習コンテンツ', icon: 'play_circle', color: 'icon-orange', keywords: ['動画', '教材', 'onestream', '映像'], external: true },
+      { title: '生徒共通教材一覧', href: 'materials.html', category: '学習コンテンツ', icon: 'folder_shared', color: 'icon-orange', keywords: ['教材', '資料', '共通'] },
+      { title: '過去の集団授業動画', href: 'videos.html', category: '学習コンテンツ', icon: 'video_library', color: 'icon-pink', keywords: ['動画', '集団授業', '過去'] },
+      { title: '生徒プラットフォーム', href: 'https://www.notion.so/EQAO-COMMUNITY-LINE-21f5f9664112803a8ee2cff1a4d5e2a7', category: '学習コンテンツ', icon: 'dashboard', color: 'icon-pink', keywords: ['プラットフォーム', 'notion', 'コミュニティ'], external: true },
+      { title: 'コラム一覧', href: 'column.html', category: '学習コンテンツ', icon: 'article', color: 'icon-pink', keywords: ['コラム', '記事', '読み物'] },
+      // 受験対策
+      { title: '過去問', href: 'past-exams.html', category: '受験対策', icon: 'description', color: 'icon-red', keywords: ['過去問', '入試', '問題'] },
+      { title: '生徒の書類', href: 'documents.html', category: '受験対策', icon: 'assignment', color: 'icon-red', keywords: ['書類', '志望理由書', '自己推薦'] },
+      { title: '面接の内容', href: 'interviews.html', category: '受験対策', icon: 'record_voice_over', color: 'icon-red', keywords: ['面接', '質問', '対策'] },
+      // イベント・プログラム
+      { title: 'EQAO模試', href: 'moshi.html', category: 'イベント', icon: 'quiz', color: 'icon-green', keywords: ['模試', 'テスト', '試験'] },
+      { title: 'MCFF申し込み', href: 'mcff.html', category: 'イベント', icon: 'mic', color: 'icon-green', keywords: ['MCFF', 'プレゼン', '発表'] },
+      { title: 'EQAO PARTY', href: 'party.html', category: 'イベント', icon: 'celebration', color: 'icon-green', keywords: ['パーティー', 'イベント', '交流'] },
+      { title: 'EQAO CAMP', href: 'camp.html', category: 'プログラム', icon: 'wb_sunny', color: 'icon-red', keywords: ['キャンプ', '合宿', '夏', '冬'] },
+      { title: 'EQAO STUDY TOUR', href: 'study-tour.html', category: 'プログラム', icon: 'flight', color: 'icon-red', keywords: ['スタディツアー', '旅行', '海外'] },
+      // カリキュラム・ルール
+      { title: 'Zoomリンク一覧', href: 'zoom-links.html', category: 'カリキュラム', icon: 'videocam', color: 'icon-purple', keywords: ['zoom', 'リンク', 'オンライン', 'ミーティング'] },
+      { title: '授業の流れ', href: 'curriculum.html', category: 'カリキュラム', icon: 'route', color: 'icon-purple', keywords: ['授業', '流れ', '進め方'] },
+      { title: 'カリキュラムとサポート体制', href: 'curriculum-support.html', category: 'カリキュラム', icon: 'account_tree', color: 'icon-purple', keywords: ['カリキュラム', 'サポート', '体制'] },
+      { title: '基本事項規定および生徒保護者規則', href: 'rules.html', category: 'ルール', icon: 'gavel', color: 'icon-brown', keywords: ['ルール', '規定', '規則', '保護者'] },
+      // その他
+      { title: '各種申し込みフォーム', href: 'forms.html', category: '申し込み', icon: 'list_alt', color: 'icon-indigo', keywords: ['フォーム', '申し込み', '振替', '欠席'] },
+      { title: 'よくある質問', href: 'faq.html', category: 'ヘルプ', icon: 'help', color: 'icon-indigo', keywords: ['FAQ', '質問', 'ヘルプ', 'よくある'] },
+      { title: '数字で見るEQAO', href: 'stats.html', category: 'EQAO情報', icon: 'bar_chart', color: 'icon-indigo', keywords: ['数字', '統計', 'データ'] },
+      { title: '料金シミュレーター', href: 'simulator.html', category: 'EQAO情報', icon: 'calculate', color: 'icon-orange', keywords: ['料金', 'シミュレーター', '計算', '授業料'] },
+      { title: '合格実績', href: 'results.html', category: 'EQAO情報', icon: 'emoji_events', color: 'icon-green', keywords: ['合格', '実績', '大学'] },
+      // 面談
+      { title: '塾長面談', href: 'meeting-principal.html', category: '面談', icon: 'person', color: 'icon-teal', keywords: ['塾長', '面談', '相談'] },
+      { title: '三者面談', href: 'meeting-sansya.html', category: '面談', icon: 'family_restroom', color: 'icon-teal', keywords: ['三者', '面談', '保護者'] },
+      { title: '担任面談', href: 'meeting-tantou.html', category: '面談', icon: 'support_agent', color: 'icon-teal', keywords: ['担任', '面談', '相談'] },
+    ];
+
+    function openSearchModal() {
+      document.getElementById('searchModalOverlay').classList.add('show');
+      document.getElementById('searchInput').focus();
+      document.body.style.overflow = 'hidden';
+    }
+
+    function getSearchInitialHTML() {
+      return `
+        <div class="search-no-results" id="searchInitial">
+          <span class="material-icons">search</span>
+          <p>キーワードを入力して検索</p>
+          <div class="search-examples">
+            <div class="search-examples-title">
+              <span class="material-icons">lightbulb</span>
+              検索例
+            </div>
+            <div class="search-example-tags">
+              <span class="search-example-tag" onclick="searchFromExample('スケジュール')">スケジュール</span>
+              <span class="search-example-tag" onclick="searchFromExample('振替')">振替</span>
+              <span class="search-example-tag" onclick="searchFromExample('zoom')">Zoom</span>
+              <span class="search-example-tag" onclick="searchFromExample('過去問')">過去問</span>
+              <span class="search-example-tag" onclick="searchFromExample('面談')">面談</span>
+              <span class="search-example-tag" onclick="searchFromExample('料金')">料金</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function searchFromExample(keyword) {
+      const input = document.getElementById('searchInput');
+      input.value = keyword;
+      handleSearch(keyword);
+    }
+
+    function closeSearchModal() {
+      document.getElementById('searchModalOverlay').classList.remove('show');
+      document.getElementById('searchInput').value = '';
+      document.getElementById('searchResults').innerHTML = getSearchInitialHTML();
+      document.body.style.overflow = '';
+    }
+
+    function closeSearchModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeSearchModal();
+      }
+    }
+
+    function handleSearch(query) {
+      const resultsContainer = document.getElementById('searchResults');
+      
+      if (!query.trim()) {
+        resultsContainer.innerHTML = getSearchInitialHTML();
+        return;
+      }
+
+      const q = query.toLowerCase();
+      const results = SEARCH_DATA.filter(item => {
+        return item.title.toLowerCase().includes(q) ||
+               item.category.toLowerCase().includes(q) ||
+               item.keywords.some(k => k.toLowerCase().includes(q));
+      });
+
+      if (results.length === 0) {
+        resultsContainer.innerHTML = `
+          <div class="search-no-results">
+            <span class="material-icons">search_off</span>
+            <p>「${escapeHtml(query)}」に一致する結果がありません</p>
+          </div>
+        `;
+        return;
+      }
+
+      resultsContainer.innerHTML = results.map(item => `
+        <a href="${item.href}" class="search-result-item" ${item.external ? 'target="_blank"' : ''} onclick="closeSearchModal()">
+          <div class="search-result-icon ${item.color}">
+            <span class="material-icons">${item.icon}</span>
+          </div>
+          <div class="search-result-content">
+            <div class="search-result-title">${escapeHtml(item.title)}</div>
+            <div class="search-result-category">${escapeHtml(item.category)}</div>
+          </div>
+          <span class="material-icons" style="color: #ccc;">chevron_right</span>
+        </a>
+      `).join('');
+    }
+
+    // Ctrl+K でショートカット
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        openSearchModal();
+      }
+      if (e.key === 'Escape') {
+        closeSearchModal();
+      }
+    });
+
+    // ========================================
+    // セクションナビゲーション
+    // ========================================
+    function initSectionNav() {
+      const navItems = document.querySelectorAll('.section-nav-item');
+      
+      navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('data-section');
+          const targetSection = document.getElementById(targetId);
+          
+          if (targetSection) {
+            const headerHeight = 70;
+            const targetPosition = targetSection.offsetTop - headerHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+
+            // アクティブ状態を更新
+            navItems.forEach(n => n.classList.remove('active'));
+            this.classList.add('active');
+          }
+        });
+      });
+
+      // スクロール時にアクティブなセクションを更新
+      window.addEventListener('scroll', updateActiveSection);
+    }
+
+    function updateActiveSection() {
+      const sections = ['section-schedule', 'section-checklist', 'section-learning', 'section-exam', 'section-event', 'section-curriculum'];
+      const navItems = document.querySelectorAll('.section-nav-item');
+      const headerHeight = 100;
+
+      let currentSection = sections[0];
+      
+      sections.forEach(sectionId => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= headerHeight) {
+            currentSection = sectionId;
+          }
+        }
+      });
+
+      navItems.forEach(item => {
+        if (item.getAttribute('data-section') === currentSection) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+
+    // ページ読み込み時に初期化
+    document.addEventListener('DOMContentLoaded', function() {
+      initSectionNav();
+    });
+
+    // ========================================
+    // はじめにご確認ください（オンボーディング）
+    // ========================================
+    const ONBOARDING_ITEMS = ['fee-rule', 'schedule-rule', 'basic-rule', 'lesson-flow', 'curriculum'];
+    const ONBOARDING_STORAGE_KEY = 'eqao_onboarding_checked';
+    const ONBOARDING_COMPLETED_KEY = 'eqao_onboarding_completed';
+
+    function getOnboardingStatus() {
+      const saved = localStorage.getItem(ONBOARDING_STORAGE_KEY);
+      return saved ? JSON.parse(saved) : {};
+    }
+
+    function saveOnboardingStatus(status) {
+      localStorage.setItem(ONBOARDING_STORAGE_KEY, JSON.stringify(status));
+    }
+
+    function isOnboardingCompleted() {
+      return localStorage.getItem(ONBOARDING_COMPLETED_KEY) === 'true';
+    }
+
+    function initOnboarding() {
+      // 完了済みなら非表示
+      if (isOnboardingCompleted()) {
+        document.getElementById('onboardingBanner').style.display = 'none';
+        return;
+      }
+
+      // バナーを表示
+      document.getElementById('onboardingBanner').style.display = 'flex';
+
+      // チェック状態を復元
+      const status = getOnboardingStatus();
+      ONBOARDING_ITEMS.forEach(key => {
+        if (status[key]) {
+          const checkEl = document.getElementById('check-' + key);
+          if (checkEl) checkEl.classList.add('checked');
+        }
+      });
+
+      updateOnboardingProgress();
+    }
+
+    function updateOnboardingProgress() {
+      const status = getOnboardingStatus();
+      const checkedCount = ONBOARDING_ITEMS.filter(key => status[key]).length;
+      const total = ONBOARDING_ITEMS.length;
+      const percent = Math.round((checkedCount / total) * 100);
+
+      // 進捗バー更新
+      const progressFill = document.getElementById('onboardingProgressFill');
+      const countEl = document.getElementById('onboardingCheckedCount');
+      if (progressFill) progressFill.style.width = percent + '%';
+      if (countEl) countEl.textContent = checkedCount;
+
+      // 完了ボタンの有効化
+      const completeBtn = document.getElementById('onboardingCompleteBtn');
+      if (completeBtn) {
+        completeBtn.disabled = checkedCount < total;
+      }
+
+      // バッジ更新
+      const badge = document.getElementById('onboardingBadge');
+      if (badge) {
+        if (checkedCount === total) {
+          badge.textContent = '完了！';
+          badge.style.background = '#43a047';
+        } else if (checkedCount > 0) {
+          badge.textContent = `残り${total - checkedCount}件`;
+        }
+      }
+    }
+
+    function openOnboardingModal() {
+      document.getElementById('onboardingModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeOnboardingModal() {
+      document.getElementById('onboardingModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function closeOnboardingModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeOnboardingModal();
+      }
+    }
+
+    function openOnboardingItem(key, url) {
+      // 準備中の項目はスキップ
+      if (key === 'curriculum-video') return;
+
+      // チェックをつける
+      const status = getOnboardingStatus();
+      status[key] = true;
+      saveOnboardingStatus(status);
+
+      // UIを更新
+      const checkEl = document.getElementById('check-' + key);
+      if (checkEl) checkEl.classList.add('checked');
+      updateOnboardingProgress();
+
+      // リンクを開く
+      if (url.startsWith('http')) {
+        window.open(url, '_blank');
+      } else {
+        window.open(url, '_blank');
+      }
+    }
+
+    function completeOnboarding() {
+      // 完了フラグを保存
+      localStorage.setItem(ONBOARDING_COMPLETED_KEY, 'true');
+      
+      // モーダルを閉じる
+      closeOnboardingModal();
+      
+      // バナーを非表示
+      document.getElementById('onboardingBanner').style.display = 'none';
+    }
+
+    // ========================================
+    // API関連
+    // ========================================
 
     async function apiGet(action, params = {}) {
       const url = new URL(API_URL);
@@ -2855,6 +4078,7 @@
         }
         loadNews();
         loadRuleUpdates();
+        initOnboarding();
       } else {
         console.log('User is not logged in, showing login overlay');
         document.getElementById('loginOverlay').classList.remove('hidden');
@@ -3083,6 +4307,35 @@
       document.getElementById('info-modal-overlay').classList.remove('show');
       document.body.style.overflow = '';
     }
+
+    // ========================================
+    // PV動画モーダル
+    // ========================================
+    const PV_VIDEO_URL = 'https://www.youtube.com/embed/Mq5gDtpVKsQ?autoplay=1';
+
+    function openPvModal() {
+      // 先にEQAO情報モーダルを閉じる
+      document.getElementById('info-modal-overlay').classList.remove('show');
+      
+      // PVモーダルを開く
+      document.getElementById('pvModalOverlay').classList.add('show');
+      document.getElementById('pvVideoIframe').src = PV_VIDEO_URL;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePvModal() {
+      document.getElementById('pvModalOverlay').classList.remove('show');
+      // 動画を停止（srcを空にする）
+      document.getElementById('pvVideoIframe').src = '';
+      document.body.style.overflow = '';
+    }
+
+    function closePvModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closePvModal();
+      }
+    }
+
 // ========================================
     // プロフィール機能
     // ========================================
