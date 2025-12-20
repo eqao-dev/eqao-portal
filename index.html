@@ -2726,35 +2726,18 @@
   align-items: center;
   gap: 14px;
   padding: 16px 20px;
-  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
   border-radius: 16px;
   margin-bottom: 20px;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 4px 15px rgba(26, 35, 126, 0.25);
   transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
-}
-
-.onboarding-banner::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
-  animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
 }
 
 .onboarding-banner:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+  box-shadow: 0 6px 20px rgba(26, 35, 126, 0.35);
 }
 
 .onboarding-banner-icon {
@@ -2796,15 +2779,15 @@
 
 .onboarding-banner-badge {
   position: absolute;
-  top: -4px;
-  right: -4px;
+  top: -8px;
+  right: 12px;
   background: #e53935;
   color: white;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
-  padding: 4px 8px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  padding: 5px 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(229, 57, 53, 0.4);
 }
 
 /* はじめにモーダル */
@@ -3117,7 +3100,7 @@
 
   <div class="container">
     <!-- はじめにご確認ください バナー -->
-    <div class="onboarding-banner" id="onboardingBanner" onclick="openOnboardingModal()" style="display: none;">
+    <div class="onboarding-banner" id="onboardingBanner" onclick="openOnboardingModal()">
       <div class="onboarding-banner-icon">
         <span class="material-icons">menu_book</span>
       </div>
@@ -3126,7 +3109,6 @@
         <div class="onboarding-banner-desc">料金・スケジュール・授業ルールなど重要事項をまとめています</div>
       </div>
       <span class="material-icons onboarding-banner-arrow">chevron_right</span>
-      <span class="onboarding-banner-badge" id="onboardingBadge">必読</span>
     </div>
 
     <!-- はじめにモーダル -->
@@ -3141,18 +3123,8 @@
         </div>
 
         <div class="onboarding-modal-body">
-          <div class="onboarding-progress">
-            <div class="onboarding-progress-bar">
-              <div class="onboarding-progress-fill" id="onboardingProgressFill" style="width: 0%"></div>
-            </div>
-            <div class="onboarding-progress-text"><span id="onboardingCheckedCount">0</span>/5 完了</div>
-          </div>
-
           <!-- 料金ルール動画 -->
-          <div class="onboarding-item" data-key="fee-rule" onclick="openOnboardingItem('fee-rule', 'https://youtu.be/9VwlMYNy2aE')">
-            <div class="onboarding-check" id="check-fee-rule">
-              <span class="material-icons">check</span>
-            </div>
+          <a href="https://youtu.be/9VwlMYNy2aE" target="_blank" class="onboarding-item">
             <div class="onboarding-item-icon video">
               <span class="material-icons">play_circle</span>
             </div>
@@ -3162,13 +3134,10 @@
             </div>
             <span class="onboarding-item-badge">動画</span>
             <span class="material-icons">chevron_right</span>
-          </div>
+          </a>
 
           <!-- スケジュールルール動画 -->
-          <div class="onboarding-item" data-key="schedule-rule" onclick="openOnboardingItem('schedule-rule', 'https://youtu.be/S182BdSHzdk')">
-            <div class="onboarding-check" id="check-schedule-rule">
-              <span class="material-icons">check</span>
-            </div>
+          <a href="https://youtu.be/S182BdSHzdk" target="_blank" class="onboarding-item">
             <div class="onboarding-item-icon video">
               <span class="material-icons">play_circle</span>
             </div>
@@ -3178,13 +3147,10 @@
             </div>
             <span class="onboarding-item-badge">動画</span>
             <span class="material-icons">chevron_right</span>
-          </div>
+          </a>
 
           <!-- 基本事項規定 -->
-          <div class="onboarding-item" data-key="basic-rule" onclick="openOnboardingItem('basic-rule', 'rules.html')">
-            <div class="onboarding-check" id="check-basic-rule">
-              <span class="material-icons">check</span>
-            </div>
+          <a href="rules.html" class="onboarding-item">
             <div class="onboarding-item-icon brown">
               <span class="material-icons">gavel</span>
             </div>
@@ -3193,13 +3159,10 @@
               <div class="onboarding-item-desc">ルール一覧</div>
             </div>
             <span class="material-icons">chevron_right</span>
-          </div>
+          </a>
 
           <!-- 授業の流れ -->
-          <div class="onboarding-item" data-key="lesson-flow" onclick="openOnboardingItem('lesson-flow', 'curriculum.html')">
-            <div class="onboarding-check" id="check-lesson-flow">
-              <span class="material-icons">check</span>
-            </div>
+          <a href="curriculum.html" class="onboarding-item">
             <div class="onboarding-item-icon purple">
               <span class="material-icons">route</span>
             </div>
@@ -3208,13 +3171,10 @@
               <div class="onboarding-item-desc">授業の進め方について</div>
             </div>
             <span class="material-icons">chevron_right</span>
-          </div>
+          </a>
 
           <!-- カリキュラム内容 -->
-          <div class="onboarding-item" data-key="curriculum" onclick="openOnboardingItem('curriculum', 'curriculum-support.html')">
-            <div class="onboarding-check" id="check-curriculum">
-              <span class="material-icons">check</span>
-            </div>
+          <a href="curriculum-support.html" class="onboarding-item">
             <div class="onboarding-item-icon purple">
               <span class="material-icons">account_tree</span>
             </div>
@@ -3223,13 +3183,10 @@
               <div class="onboarding-item-desc">カリキュラムとサポート体制</div>
             </div>
             <span class="material-icons">chevron_right</span>
-          </div>
+          </a>
 
           <!-- カリキュラム動画（準備中） -->
-          <div class="onboarding-item disabled" data-key="curriculum-video">
-            <div class="onboarding-check" id="check-curriculum-video">
-              <span class="material-icons">check</span>
-            </div>
+          <div class="onboarding-item disabled">
             <div class="onboarding-item-icon disabled">
               <span class="material-icons">play_circle</span>
             </div>
@@ -3239,13 +3196,6 @@
             </div>
             <span class="onboarding-item-badge wip">準備中</span>
           </div>
-        </div>
-
-        <div class="onboarding-modal-footer">
-          <button class="onboarding-complete-btn" id="onboardingCompleteBtn" onclick="completeOnboarding()" disabled>
-            <span class="material-icons">check_circle</span>
-            すべて確認済みにして非表示
-          </button>
         </div>
       </div>
     </div>
@@ -3938,60 +3888,9 @@
       localStorage.setItem(ONBOARDING_STORAGE_KEY, JSON.stringify(status));
     }
 
-    function isOnboardingCompleted() {
-      return localStorage.getItem(ONBOARDING_COMPLETED_KEY) === 'true';
-    }
-
+    // オンボーディング（シンプル版 - 常に表示）
     function initOnboarding() {
-      // 完了済みなら非表示
-      if (isOnboardingCompleted()) {
-        document.getElementById('onboardingBanner').style.display = 'none';
-        return;
-      }
-
-      // バナーを表示
-      document.getElementById('onboardingBanner').style.display = 'flex';
-
-      // チェック状態を復元
-      const status = getOnboardingStatus();
-      ONBOARDING_ITEMS.forEach(key => {
-        if (status[key]) {
-          const checkEl = document.getElementById('check-' + key);
-          if (checkEl) checkEl.classList.add('checked');
-        }
-      });
-
-      updateOnboardingProgress();
-    }
-
-    function updateOnboardingProgress() {
-      const status = getOnboardingStatus();
-      const checkedCount = ONBOARDING_ITEMS.filter(key => status[key]).length;
-      const total = ONBOARDING_ITEMS.length;
-      const percent = Math.round((checkedCount / total) * 100);
-
-      // 進捗バー更新
-      const progressFill = document.getElementById('onboardingProgressFill');
-      const countEl = document.getElementById('onboardingCheckedCount');
-      if (progressFill) progressFill.style.width = percent + '%';
-      if (countEl) countEl.textContent = checkedCount;
-
-      // 完了ボタンの有効化
-      const completeBtn = document.getElementById('onboardingCompleteBtn');
-      if (completeBtn) {
-        completeBtn.disabled = checkedCount < total;
-      }
-
-      // バッジ更新
-      const badge = document.getElementById('onboardingBadge');
-      if (badge) {
-        if (checkedCount === total) {
-          badge.textContent = '完了！';
-          badge.style.background = '#43a047';
-        } else if (checkedCount > 0) {
-          badge.textContent = `残り${total - checkedCount}件`;
-        }
-      }
+      // 常に表示（何もしない）
     }
 
     function openOnboardingModal() {
