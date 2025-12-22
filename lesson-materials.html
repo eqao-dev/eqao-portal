@@ -759,42 +759,113 @@
       white-space: nowrap;
     }
 
+    /* セグメントフィルタータブ */
+    .segment-filter {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .segment-tab {
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #f5f7fa;
+      color: #666;
+      border: none;
+    }
+
+    .segment-tab:hover {
+      background: #e8eaf6;
+      color: #1a237e;
+    }
+
+    .segment-tab.active {
+      background: #1a237e;
+      color: white;
+    }
+
     /* セグメント */
     .segment-group {
-      margin-bottom: 16px;
+      margin-bottom: 20px;
+    }
+
+    .segment-group.hidden {
+      display: none;
+    }
+
+    .segment-header {
+      background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 12px;
     }
 
     .segment-title {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
-      color: #666;
-      padding: 8px 0;
-      border-bottom: 1px solid #eee;
-      margin-bottom: 8px;
+      color: #1a237e;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .segment-title .segment-number {
+      background: #1a237e;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .segment-description {
+      font-size: 12px;
+      color: #5c6bc0;
+      line-height: 1.4;
     }
 
     .checklist-items {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 8px;
     }
 
+    /* チェックリストアイテム（アコーディオン対応） */
     .checklist-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px;
+      background: white;
+      border: 1px solid #e0e0e0;
       border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.2s;
+      overflow: hidden;
+      transition: all 0.2s;
     }
 
     .checklist-item:hover {
-      background: #f5f7fa;
+      border-color: #1a237e;
+      box-shadow: 0 2px 8px rgba(26, 35, 126, 0.1);
     }
 
     .checklist-item.checked {
       background: #e8f5e9;
+      border-color: #4caf50;
+    }
+
+    .item-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      cursor: pointer;
     }
 
     .check-box {
@@ -829,17 +900,50 @@
       font-size: 14px;
       color: #333;
       line-height: 1.4;
+      font-weight: 500;
     }
 
-    .item-link {
-      color: #1a237e;
+    .item-toggle {
+      color: #999;
       font-size: 20px;
-      opacity: 0.5;
-      transition: opacity 0.2s;
+      transition: transform 0.3s;
     }
 
-    .checklist-item:hover .item-link {
-      opacity: 1;
+    .checklist-item.expanded .item-toggle {
+      transform: rotate(180deg);
+    }
+
+    /* 詳細コンテンツ */
+    .item-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      background: #fafafa;
+      border-top: 1px solid #eee;
+    }
+
+    .checklist-item.expanded .item-detail {
+      max-height: 1000px;
+    }
+
+    .item-detail-content {
+      padding: 16px;
+      font-size: 13px;
+      color: #444;
+      line-height: 1.8;
+    }
+
+    .item-detail-content strong {
+      color: #1a237e;
+    }
+
+    /* 詳細内の見出し風スタイル */
+    .detail-section {
+      margin-bottom: 12px;
+    }
+
+    .detail-section:last-child {
+      margin-bottom: 0;
     }
 
     /* 小テストへボタン */
@@ -1363,6 +1467,11 @@
           <div class="progress-text" id="checklistProgressText">0 / 15</div>
         </div>
 
+        <!-- セグメントフィルター -->
+        <div class="segment-filter" id="segmentFilter">
+          <!-- JavaScriptで生成 -->
+        </div>
+
         <div id="checklistContent">
           <!-- JavaScriptで生成 -->
         </div>
@@ -1600,44 +1709,118 @@
       }
     }
 
+    // ===== セグメントフィルター用の状態 =====
+    let currentSegmentFilter = 'ALL';
+
     // ===== チェックリスト描画 =====
     function renderChecklist() {
       const container = document.getElementById('checklistContent');
+      const filterContainer = document.getElementById('segmentFilter');
       
-      // セグメントでグループ化
+      // セグメントでグループ化（順序を保持）
+      const segmentOrder = [];
       const segments = {};
+      const segmentDescriptions = {};
+      
       inputItems.forEach(item => {
         if (!segments[item.segment]) {
           segments[item.segment] = [];
+          segmentOrder.push(item.segment);
+          segmentDescriptions[item.segment] = item.segmentDescription || '';
         }
         segments[item.segment].push(item);
       });
       
+      // セグメントフィルタータブを生成
+      let filterHtml = `<button class="segment-tab ${currentSegmentFilter === 'ALL' ? 'active' : ''}" onclick="filterSegment('ALL')">すべて</button>`;
+      segmentOrder.forEach(segment => {
+        filterHtml += `<button class="segment-tab ${currentSegmentFilter === segment ? 'active' : ''}" onclick="filterSegment('${segment}')">${segment}</button>`;
+      });
+      filterContainer.innerHTML = filterHtml;
+      
+      // チェックリストを生成
       let html = '';
-      for (const [segment, items] of Object.entries(segments)) {
+      segmentOrder.forEach(segment => {
+        const items = segments[segment];
+        const description = segmentDescriptions[segment];
+        const isHidden = currentSegmentFilter !== 'ALL' && currentSegmentFilter !== segment;
+        
         html += `
-          <div class="segment-group">
-            <div class="segment-title">セグメント ${segment}</div>
+          <div class="segment-group ${isHidden ? 'hidden' : ''}" data-segment="${segment}">
+            <div class="segment-header">
+              <div class="segment-title">
+                <span class="segment-number">${segment}</span>
+                ${description}
+              </div>
+            </div>
             <div class="checklist-items">
               ${items.map(item => {
                 const isChecked = checkedItems.includes(item.itemId);
+                const hasDetail = item.detail && item.detail.trim() !== '';
                 return `
-                  <div class="checklist-item ${isChecked ? 'checked' : ''}" data-item-id="${item.itemId}" onclick="toggleCheckItem(${item.itemId})">
-                    <div class="check-box">
-                      <span class="material-icons">check</span>
+                  <div class="checklist-item ${isChecked ? 'checked' : ''}" data-item-id="${item.itemId}">
+                    <div class="item-header">
+                      <div class="check-box" onclick="event.stopPropagation(); toggleCheckItem(${item.itemId})">
+                        <span class="material-icons">check</span>
+                      </div>
+                      <div class="item-title" onclick="toggleItemDetail(${item.itemId})">${item.title}</div>
+                      ${hasDetail ? `<span class="material-icons item-toggle" onclick="toggleItemDetail(${item.itemId})">expand_more</span>` : ''}
                     </div>
-                    <div class="item-title">${item.title}</div>
-                    ${item.columnLink ? `<span class="material-icons item-link" onclick="event.stopPropagation(); window.open('${item.columnLink}', '_blank')">open_in_new</span>` : ''}
+                    ${hasDetail ? `
+                      <div class="item-detail">
+                        <div class="item-detail-content">${formatDetailText(item.detail)}</div>
+                      </div>
+                    ` : ''}
                   </div>
                 `;
               }).join('')}
             </div>
           </div>
         `;
-      }
+      });
       
       container.innerHTML = html;
       updateChecklistProgress();
+    }
+
+    // ===== 詳細テキストのフォーマット =====
+    function formatDetailText(text) {
+      if (!text) return '';
+      // ■を見出しスタイルに変換
+      return text
+        .replace(/■/g, '<br><strong>■')
+        .replace(/（(\d)）/g, '</strong><br>（$1）')
+        .replace(/\n/g, '<br>');
+    }
+
+    // ===== セグメントフィルター =====
+    function filterSegment(segment) {
+      currentSegmentFilter = segment;
+      
+      // タブのアクティブ状態を更新
+      document.querySelectorAll('.segment-tab').forEach(tab => {
+        tab.classList.remove('active');
+        if ((segment === 'ALL' && tab.textContent === 'すべて') || tab.textContent === segment) {
+          tab.classList.add('active');
+        }
+      });
+      
+      // セグメントグループの表示/非表示を切り替え
+      document.querySelectorAll('.segment-group').forEach(group => {
+        if (segment === 'ALL' || group.dataset.segment === segment) {
+          group.classList.remove('hidden');
+        } else {
+          group.classList.add('hidden');
+        }
+      });
+    }
+
+    // ===== 詳細のアコーディオン切り替え =====
+    function toggleItemDetail(itemId) {
+      const item = document.querySelector(`[data-item-id="${itemId}"]`);
+      if (item) {
+        item.classList.toggle('expanded');
+      }
     }
 
     // ===== チェック切り替え =====
