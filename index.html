@@ -170,6 +170,16 @@
       box-shadow: 0 4px 15px rgba(0, 105, 92, 0.3);
     }
 
+    .quick-access-item.red {
+      background: linear-gradient(135deg, #c62828 0%, #e53935 100%);
+      box-shadow: 0 4px 15px rgba(198, 40, 40, 0.3);
+    }
+
+    .quick-access-item.purple {
+      background: linear-gradient(135deg, #6a1b9a 0%, #9c27b0 100%);
+      box-shadow: 0 4px 15px rgba(106, 27, 154, 0.3);
+    }
+
     @media (min-width: 768px) {
       .quick-access-item {
         padding: 16px 10px;
@@ -180,6 +190,672 @@
       .quick-access-item .material-icons {
         font-size: 26px;
       }
+    }
+
+    /* ========================================
+       LINEモーダル
+    ======================================== */
+    .line-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 700;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .line-modal-overlay.show {
+      display: flex;
+    }
+
+    .line-modal {
+      background: white;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 400px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: modalSlideUp 0.3s ease;
+    }
+
+    .line-modal-header {
+      background: linear-gradient(135deg, #06c755 0%, #00b341 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .line-modal-header h2 {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .line-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: background 0.2s;
+    }
+
+    .line-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .line-modal-body {
+      padding: 16px;
+    }
+
+    .line-modal-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: #f8f9fc;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+    }
+
+    .line-modal-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .line-modal-item:hover {
+      background: #e8f5e9;
+      transform: translateX(4px);
+    }
+
+    .line-modal-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #06c755 0%, #00b341 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .line-modal-icon .material-icons {
+      color: white;
+      font-size: 24px;
+    }
+
+    .line-modal-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .line-modal-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 2px;
+    }
+
+    .line-modal-desc {
+      font-size: 11px;
+      color: #888;
+    }
+
+    .line-modal-item > .material-icons {
+      color: #ccc;
+      font-size: 20px;
+    }
+
+    .line-modal-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 20px;
+      background: #f0f4ff;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-size: 13px;
+      color: #1a237e;
+    }
+
+    .line-modal-footer:hover {
+      background: #e8ecf4;
+    }
+
+    .line-modal-footer .material-icons:first-child {
+      font-size: 18px;
+      color: #06c755;
+    }
+
+    .line-modal-footer span:nth-child(2) {
+      flex: 1;
+    }
+
+    .line-modal-footer .material-icons:last-child {
+      font-size: 18px;
+      color: #ccc;
+    }
+
+    /* ========================================
+       LINE返信原則（補足テキスト）
+    ======================================== */
+    .line-rule-note {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      background: #f8f9fc;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .line-rule-note:hover {
+      background: #e8ecf4;
+      color: #1a237e;
+    }
+
+    .line-rule-note .material-icons:first-child {
+      font-size: 18px;
+      color: #06c755;
+    }
+
+    .line-rule-note span:nth-child(2) {
+      flex: 1;
+    }
+
+    .line-rule-note .material-icons:last-child {
+      font-size: 18px;
+      color: #ccc;
+    }
+
+    /* ========================================
+       サブバナー（緊急連絡・面談予約）
+    ======================================== */
+    .sub-banner-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .sub-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .sub-banner:hover {
+      transform: translateY(-2px);
+    }
+
+    .sub-banner.emergency {
+      background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
+      border: 2px solid #ffcdd2;
+    }
+
+    .sub-banner.emergency:hover {
+      border-color: #e53935;
+      box-shadow: 0 4px 15px rgba(229, 57, 53, 0.2);
+    }
+
+    .sub-banner.emergency .sub-banner-icon {
+      background: linear-gradient(135deg, #e53935 0%, #ef5350 100%);
+    }
+
+    .sub-banner.meeting {
+      background: linear-gradient(135deg, #f3f0ff 0%, #ede7f6 100%);
+      border: 2px solid #d1c4e9;
+    }
+
+    .sub-banner.meeting:hover {
+      border-color: #7e57c2;
+      box-shadow: 0 4px 15px rgba(126, 87, 194, 0.2);
+    }
+
+    .sub-banner.meeting .sub-banner-icon {
+      background: linear-gradient(135deg, #7e57c2 0%, #9575cd 100%);
+    }
+
+    .sub-banner-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .sub-banner-icon .material-icons {
+      color: white;
+      font-size: 20px;
+    }
+
+    .sub-banner-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .sub-banner-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .sub-banner-desc {
+      font-size: 10px;
+      color: #888;
+    }
+
+    .sub-banner-arrow {
+      color: #bbb;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 768px) {
+      .sub-banner {
+        padding: 14px 18px;
+        gap: 12px;
+      }
+
+      .sub-banner-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .sub-banner-title {
+        font-size: 13px;
+      }
+
+      .sub-banner-desc {
+        font-size: 11px;
+      }
+    }
+
+    /* ========================================
+       面談予約モーダル
+    ======================================== */
+    .meeting-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 700;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .meeting-modal-overlay.show {
+      display: flex;
+    }
+
+    .meeting-modal {
+      background: white;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 400px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: modalSlideUp 0.3s ease;
+    }
+
+    .meeting-modal-header {
+      background: linear-gradient(135deg, #7e57c2 0%, #9575cd 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .meeting-modal-header h2 {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .meeting-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: background 0.2s;
+    }
+
+    .meeting-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .meeting-modal-body {
+      padding: 20px;
+    }
+
+    .meeting-modal-intro {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .meeting-modal-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: #f8f9fc;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+    }
+
+    .meeting-modal-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .meeting-modal-item:hover {
+      background: #e8ecf4;
+      transform: translateX(4px);
+    }
+
+    .meeting-modal-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .meeting-modal-icon .material-icons {
+      color: white;
+      font-size: 24px;
+    }
+
+    .meeting-modal-icon.principal {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+    }
+
+    .meeting-modal-icon.sansya {
+      background: linear-gradient(135deg, #00695c 0%, #26a69a 100%);
+    }
+
+    .meeting-modal-icon.tantou {
+      background: linear-gradient(135deg, #f57c00 0%, #ffb74d 100%);
+    }
+
+    .meeting-modal-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .meeting-modal-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 2px;
+    }
+
+    .meeting-modal-desc {
+      font-size: 11px;
+      color: #888;
+    }
+
+    .meeting-modal-item > .material-icons {
+      color: #ccc;
+      font-size: 20px;
+    }
+
+    /* ========================================
+       LINE返信原則モーダル
+    ======================================== */
+    .line-rule-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 700;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .line-rule-modal-overlay.show {
+      display: flex;
+    }
+
+    .line-rule-modal {
+      background: white;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 550px;
+      max-height: 85vh;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: modalSlideUp 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .line-rule-modal-header {
+      background: linear-gradient(135deg, #06c755 0%, #00b341 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .line-rule-modal-header h2 {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .line-rule-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: background 0.2s;
+    }
+
+    .line-rule-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .line-rule-modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .line-rule-intro {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #e8ecf4;
+    }
+
+    .line-rule-section {
+      margin-bottom: 20px;
+    }
+
+    .line-rule-section h3 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 10px;
+    }
+
+    .line-rule-section h3 .material-icons {
+      font-size: 20px;
+      color: #06c755;
+    }
+
+    .line-rule-section p {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .line-rule-section strong {
+      color: #e53935;
+    }
+
+    .line-rule-box {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .line-rule-item {
+      margin-bottom: 12px;
+    }
+
+    .line-rule-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .line-rule-item strong {
+      display: block;
+      font-size: 12px;
+      color: #1a237e;
+      margin-bottom: 4px;
+    }
+
+    .line-rule-item p {
+      font-size: 13px;
+      color: #555;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .line-rule-item small {
+      color: #888;
+    }
+
+    .line-rule-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .line-rule-action {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .line-rule-action:hover {
+      transform: translateX(4px);
+    }
+
+    .line-rule-action.emergency {
+      background: linear-gradient(135deg, #fff5f5 0%, #ffebee 100%);
+      border: 1px solid #ffcdd2;
+    }
+
+    .line-rule-action.emergency .material-icons {
+      color: #e53935;
+      font-size: 24px;
+    }
+
+    .line-rule-action.meeting {
+      background: linear-gradient(135deg, #f3f0ff 0%, #ede7f6 100%);
+      border: 1px solid #d1c4e9;
+    }
+
+    .line-rule-action.meeting .material-icons {
+      color: #7e57c2;
+      font-size: 24px;
+    }
+
+    .line-rule-action strong {
+      display: block;
+      font-size: 13px;
+      color: #333;
+    }
+
+    .line-rule-action small {
+      font-size: 11px;
+      color: #888;
+    }
+
+    .line-rule-footer-note {
+      background: #f0f4ff;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 16px;
+    }
+
+    .line-rule-footer-note p {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.6;
+      margin: 0;
+      text-align: center;
     }
 
     /* ========================================
@@ -3311,18 +3987,10 @@
 
     <!-- クイックアクセス（統一グリッド） -->
     <div class="quick-access-grid">
-      <a href="https://lin.ee/nM1pgho" target="_blank" class="quick-access-item green">
+      <div class="quick-access-item green" onclick="openLineModal()">
         <span class="material-icons">chat</span>
-        <span>塾生LINE</span>
-      </a>
-      <a href="https://lin.ee/qbBTdgx" target="_blank" class="quick-access-item green">
-        <span class="material-icons">family_restroom</span>
-        <span>保護者LINE<br><small>配信用</small></span>
-      </a>
-      <a href="https://lin.ee/x3WPAvR" target="_blank" class="quick-access-item green">
-        <span class="material-icons">mail</span>
-        <span>保護者LINE<br><small>連絡用</small></span>
-      </a>
+        <span>LINE</span>
+      </div>
       <div class="quick-access-item blue" onclick="openInfoModal()">
         <span class="material-icons">info</span>
         <span>EQAO情報</span>
@@ -3335,6 +4003,175 @@
         <span class="material-icons">help</span>
         <span>よくある質問</span>
       </a>
+      <a href="https://forms.gle/ijJqayjPRZZsQY5r9" target="_blank" class="quick-access-item red">
+        <span class="material-icons">priority_high</span>
+        <span>緊急連絡</span>
+      </a>
+      <div class="quick-access-item purple" onclick="openMeetingModal()">
+        <span class="material-icons">event</span>
+        <span>面談予約</span>
+      </div>
+    </div>
+
+    <!-- LINEモーダル -->
+    <div class="line-modal-overlay" id="lineModalOverlay" onclick="closeLineModalOnOverlay(event)">
+      <div class="line-modal" onclick="event.stopPropagation()">
+        <div class="line-modal-header">
+          <span class="material-icons">chat</span>
+          <h2>LINE</h2>
+          <button class="line-modal-close" onclick="closeLineModal()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <div class="line-modal-body">
+          <a href="https://lin.ee/nM1pgho" target="_blank" class="line-modal-item">
+            <div class="line-modal-icon">
+              <span class="material-icons">person</span>
+            </div>
+            <div class="line-modal-text">
+              <div class="line-modal-title">塾生LINE</div>
+              <div class="line-modal-desc">生徒本人用の連絡先</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </a>
+          <a href="https://lin.ee/qbBTdgx" target="_blank" class="line-modal-item">
+            <div class="line-modal-icon">
+              <span class="material-icons">campaign</span>
+            </div>
+            <div class="line-modal-text">
+              <div class="line-modal-title">保護者LINE（配信用）</div>
+              <div class="line-modal-desc">お知らせの配信</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </a>
+          <a href="https://lin.ee/x3WPAvR" target="_blank" class="line-modal-item">
+            <div class="line-modal-icon">
+              <span class="material-icons">mail</span>
+            </div>
+            <div class="line-modal-text">
+              <div class="line-modal-title">保護者LINE（連絡用）</div>
+              <div class="line-modal-desc">個別のやり取り</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </a>
+        </div>
+        <div class="line-modal-footer" onclick="openLineRuleModal(true)">
+          <span class="material-icons">info</span>
+          <span>LINEの返信原則について</span>
+          <span class="material-icons">chevron_right</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 面談予約モーダル -->
+    <div class="meeting-modal-overlay" id="meetingModalOverlay" onclick="closeMeetingModalOnOverlay(event)">
+      <div class="meeting-modal" onclick="event.stopPropagation()">
+        <div class="meeting-modal-header">
+          <span class="material-icons">event</span>
+          <h2>面談予約</h2>
+          <button class="meeting-modal-close" onclick="closeMeetingModal()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <div class="meeting-modal-body">
+          <p class="meeting-modal-intro">ご希望の面談を選択してください</p>
+          <a href="meeting-principal.html" class="meeting-modal-item">
+            <div class="meeting-modal-icon principal">
+              <span class="material-icons">person</span>
+            </div>
+            <div class="meeting-modal-text">
+              <div class="meeting-modal-title">塾長面談</div>
+              <div class="meeting-modal-desc">塾長との個別相談</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </a>
+          <a href="meeting-sansya.html" class="meeting-modal-item">
+            <div class="meeting-modal-icon sansya">
+              <span class="material-icons">family_restroom</span>
+            </div>
+            <div class="meeting-modal-text">
+              <div class="meeting-modal-title">三者面談</div>
+              <div class="meeting-modal-desc">生徒・保護者・担任での面談</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </a>
+          <a href="meeting-tantou.html" class="meeting-modal-item">
+            <div class="meeting-modal-icon tantou">
+              <span class="material-icons">support_agent</span>
+            </div>
+            <div class="meeting-modal-text">
+              <div class="meeting-modal-title">担任面談</div>
+              <div class="meeting-modal-desc">担任との個別相談</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LINE返信原則モーダル -->
+    <div class="line-rule-modal-overlay" id="lineRuleModalOverlay" onclick="closeLineRuleModalOnOverlay(event)">
+      <div class="line-rule-modal" onclick="event.stopPropagation()">
+        <div class="line-rule-modal-header">
+          <span class="material-icons">chat</span>
+          <h2>LINE返信原則</h2>
+          <button class="line-rule-modal-close" onclick="closeLineRuleModal()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <div class="line-rule-modal-body">
+          <p class="line-rule-intro">EQAOでは、迅速かつ正確な情報共有を実現するため、LINEでのご連絡に関する「返信原則」と「運用ルール」を定めています。</p>
+
+          <div class="line-rule-section">
+            <h3><span class="material-icons">schedule</span> 対応曜日・営業時間</h3>
+            <div class="line-rule-box">
+              <div class="line-rule-item">
+                <strong>代表</strong>
+                <p>月曜日・火曜日：原則 対応不可<br><small>（緊急時は緊急連絡フォームから）</small></p>
+              </div>
+              <div class="line-rule-item">
+                <strong>運営（公式LINE / 事務局）</strong>
+                <p>土日祝日：完全休業<br>営業時間：月〜金 10:00〜20:00</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="line-rule-section">
+            <h3><span class="material-icons">reply</span> 返信速度の基準</h3>
+            <p>土日祝日を除く<strong>「3営業日以内」</strong>に必ず返信します。<br>内容が複雑な場合は、別途「面談」または「メール」でのご案内に切り替える場合があります。</p>
+          </div>
+
+          <div class="line-rule-section">
+            <h3><span class="material-icons">visibility</span> "既読"について</h3>
+            <p>LINEはシステム連携の都合で、<strong>内容を確認していなくても既読が付く場合があります。</strong><br>既読の有無ではなく、上記の返信ルールを基準にお待ちください。</p>
+          </div>
+
+          <div class="line-rule-section">
+            <h3><span class="material-icons">warning</span> LINEの課題とお願い</h3>
+            <p>LINEは手軽な反面、質問が大量に届きやすく重要な連絡が埋もれるリスクがあります。<br><strong>緊急・重要な連絡</strong>は以下を優先してください：</p>
+            <div class="line-rule-actions">
+              <a href="https://forms.gle/ijJqayjPRZZsQY5r9" target="_blank" class="line-rule-action emergency">
+                <span class="material-icons">priority_high</span>
+                <div>
+                  <strong>緊急連絡フォーム</strong>
+                  <small>急ぎの連絡はこちら</small>
+                </div>
+              </a>
+              <a href="forms.html" class="line-rule-action meeting">
+                <span class="material-icons">event</span>
+                <div>
+                  <strong>面談予約フォーム</strong>
+                  <small>詳しい相談はこちら</small>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="line-rule-footer-note">
+            <p>LINEは皆さまとの距離を縮め、相談しやすい環境を保つために導入しているサービスです。<br>適切な運用のため、ご理解とご協力をお願いいたします。</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- EQAO情報モーダル -->
@@ -4193,6 +5030,77 @@
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
+    }
+
+    // ========================================
+    // LINEモーダル
+    // ========================================
+    function openLineModal() {
+      document.getElementById('lineModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLineModal() {
+      document.getElementById('lineModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function closeLineModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeLineModal();
+      }
+    }
+
+    // ========================================
+    // LINE返信原則モーダル
+    // ========================================
+    let openedFromLineModal = false;
+
+    function openLineRuleModal(fromLine = false) {
+      openedFromLineModal = fromLine;
+      
+      // LINEモーダルが開いていたら閉じる
+      document.getElementById('lineModalOverlay').classList.remove('show');
+      
+      document.getElementById('lineRuleModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLineRuleModal() {
+      document.getElementById('lineRuleModalOverlay').classList.remove('show');
+      
+      // LINEモーダルから開いた場合は戻る
+      if (openedFromLineModal) {
+        document.getElementById('lineModalOverlay').classList.add('show');
+        openedFromLineModal = false;
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+
+    function closeLineRuleModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeLineRuleModal();
+      }
+    }
+
+    // ========================================
+    // 面談予約モーダル
+    // ========================================
+    function openMeetingModal() {
+      document.getElementById('meetingModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMeetingModal() {
+      document.getElementById('meetingModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function closeMeetingModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeMeetingModal();
+      }
     }
 
     // 塾情報モーダル
