@@ -4865,7 +4865,9 @@
           localStorage.setItem('eqao_loggedIn', 'true');
           localStorage.setItem('eqao_rowIndex', result.rowIndex);
           localStorage.setItem('eqao_isAdmin', result.isAdmin ? 'true' : 'false');
+          localStorage.setItem('eqao_hasVideoAccess', result.hasVideoAccess ? 'true' : 'false');  // ← 追加
           localStorage.removeItem('eqao_needsPasswordChange');
+          localStorage.removeItem('eqao_hasVideoAccess');
           
           console.log('localStorage saved:', {
             eqao_loggedIn: localStorage.getItem('eqao_loggedIn'),
