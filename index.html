@@ -2011,6 +2011,48 @@
       font-size: 11px;
     }
 
+    /* フィードバックセクション */
+    .feedback-section {
+      padding: 0 16px 16px;
+    }
+
+    .feedback-section-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      box-shadow: 0 2px 8px rgba(63, 81, 181, 0.3);
+    }
+
+    .feedback-section-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(63, 81, 181, 0.4);
+    }
+
+    .feedback-section-btn .material-icons:first-child {
+      font-size: 22px;
+    }
+
+    .feedback-section-btn span:nth-child(2) {
+      flex: 1;
+      text-align: left;
+    }
+
+    .feedback-section-btn .material-icons:last-child {
+      font-size: 20px;
+      opacity: 0.8;
+    }
+
     .menu-toggle {
       display: flex;
       align-items: center;
@@ -4495,6 +4537,15 @@
       </div>
     </div>
 
+    <!-- フィードバックセクション -->
+    <div class="feedback-section">
+      <button class="feedback-section-btn" onclick="openFeedbackModal()">
+        <span class="material-icons">feedback</span>
+        <span>不具合報告・ご要望はこちら</span>
+        <span class="material-icons">chevron_right</span>
+      </button>
+    </div>
+
     <footer class="footer">
       <p>© 2025 EQAO Education Group</p>
     </footer>
@@ -4845,8 +4896,6 @@
         console.log('API result:', result);
         
         if (result.success) {
-          console.log('API Response:', result);
-          console.log('hasVideoAccess from API:', result.hasVideoAccess);
           console.log('Login successful, saving to localStorage...');
           
           if (false && result.needsPasswordChange) {
@@ -4867,7 +4916,6 @@
           localStorage.setItem('eqao_loggedIn', 'true');
           localStorage.setItem('eqao_rowIndex', result.rowIndex);
           localStorage.setItem('eqao_isAdmin', result.isAdmin ? 'true' : 'false');
-          localStorage.setItem('eqao_hasVideoAccess', result.hasVideoAccess ? 'true' : 'false');  // ← 追加
           localStorage.removeItem('eqao_needsPasswordChange');
           
           console.log('localStorage saved:', {

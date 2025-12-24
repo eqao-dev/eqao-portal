@@ -166,6 +166,14 @@ function generateNavMenuHTML() {
   });
   
   html += `
+      <!-- フィードバックボタン -->
+      <div class="nav-feedback-section">
+        <button class="nav-feedback-btn" onclick="openFeedbackModal()">
+          <span class="material-icons">feedback</span>
+          <span>不具合報告・ご要望</span>
+        </button>
+      </div>
+      
       <div class="nav-footer">
         © 2025 EQAO Education Group
       </div>
@@ -229,6 +237,502 @@ function setNavUserName() {
   const navUserName = document.getElementById('navUserName');
   if (navUserName) {
     navUserName.textContent = studentName || 'ゲスト';
+  }
+}
+
+// ============================================
+// フィードバックモーダル
+// ============================================
+const FEEDBACK_API_URL = 'https://script.google.com/macros/s/AKfycbzskl5amlvabH3zreoRKO0jXa93v4xJj_wQEbFqnDpN_qYUSTGISFjOtHdw-ixmpzlp/exec';
+
+function generateFeedbackModalHTML() {
+  return `
+    <div id="feedbackModalOverlay" class="feedback-modal-overlay" onclick="closeFeedbackModalOnOverlay(event)">
+      <div class="feedback-modal" onclick="event.stopPropagation()">
+        <div class="feedback-modal-header">
+          <span class="material-icons">feedback</span>
+          <h2>不具合報告・ご要望</h2>
+          <button class="feedback-modal-close" onclick="closeFeedbackModal()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        
+        <div class="feedback-modal-body">
+          <div class="feedback-form-group">
+            <label class="feedback-label">報告種別 <span class="required">*</span></label>
+            <div class="feedback-type-selector">
+              <label class="feedback-type-option">
+                <input type="radio" name="feedbackType" value="不具合" checked>
+                <span class="feedback-type-btn">
+                  <span class="material-icons">bug_report</span>
+                  不具合
+                </span>
+              </label>
+              <label class="feedback-type-option">
+                <input type="radio" name="feedbackType" value="要望">
+                <span class="feedback-type-btn">
+                  <span class="material-icons">lightbulb</span>
+                  要望
+                </span>
+              </label>
+              <label class="feedback-type-option">
+                <input type="radio" name="feedbackType" value="その他">
+                <span class="feedback-type-btn">
+                  <span class="material-icons">help</span>
+                  その他
+                </span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="feedback-form-group">
+            <label class="feedback-label">該当ページ</label>
+            <input type="text" id="feedbackPage" class="feedback-input" readonly>
+          </div>
+          
+          <div class="feedback-form-group">
+            <label class="feedback-label">詳細内容 <span class="required">*</span></label>
+            <textarea id="feedbackContent" class="feedback-textarea" rows="5" placeholder="具体的な内容をご記入ください&#10;&#10;【不具合の場合】&#10;・どのような操作をしたか&#10;・どのような問題が起きたか&#10;&#10;【要望の場合】&#10;・どのような機能が欲しいか"></textarea>
+          </div>
+        </div>
+        
+        <div class="feedback-modal-footer">
+          <button class="feedback-btn-cancel" onclick="closeFeedbackModal()">キャンセル</button>
+          <button class="feedback-btn-submit" onclick="submitFeedback()">
+            <span class="material-icons">send</span>
+            送信
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function generateFeedbackStylesHTML() {
+  return `
+    <style id="feedbackModalStyles">
+      /* フィードバックボタン（ナビ内） */
+      .nav-feedback-section {
+        padding: 16px;
+        border-top: 1px solid #eee;
+      }
+      
+      .nav-feedback-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 12px 16px;
+        background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: inherit;
+      }
+      
+      .nav-feedback-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(63, 81, 181, 0.4);
+      }
+      
+      .nav-feedback-btn .material-icons {
+        font-size: 20px;
+      }
+      
+      /* フィードバックモーダル */
+      .feedback-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 10000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      
+      .feedback-modal-overlay.show {
+        display: flex;
+      }
+      
+      .feedback-modal {
+        background: white;
+        border-radius: 16px;
+        width: 100%;
+        max-width: 480px;
+        max-height: 90vh;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        animation: feedbackModalIn 0.3s ease;
+      }
+      
+      @keyframes feedbackModalIn {
+        from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+      }
+      
+      .feedback-modal-header {
+        background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
+        color: white;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      
+      .feedback-modal-header h2 {
+        flex: 1;
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0;
+      }
+      
+      .feedback-modal-header > .material-icons {
+        font-size: 24px;
+      }
+      
+      .feedback-modal-close {
+        background: rgba(255,255,255,0.2);
+        border: none;
+        color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      
+      .feedback-modal-close:hover {
+        background: rgba(255,255,255,0.3);
+      }
+      
+      .feedback-modal-body {
+        padding: 20px;
+        max-height: 60vh;
+        overflow-y: auto;
+      }
+      
+      .feedback-form-group {
+        margin-bottom: 20px;
+      }
+      
+      .feedback-form-group:last-child {
+        margin-bottom: 0;
+      }
+      
+      .feedback-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+      }
+      
+      .feedback-label .required {
+        color: #e53935;
+      }
+      
+      .feedback-type-selector {
+        display: flex;
+        gap: 8px;
+      }
+      
+      .feedback-type-option {
+        flex: 1;
+        cursor: pointer;
+      }
+      
+      .feedback-type-option input {
+        display: none;
+      }
+      
+      .feedback-type-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 12px 8px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #666;
+        transition: all 0.2s;
+      }
+      
+      .feedback-type-btn .material-icons {
+        font-size: 24px;
+      }
+      
+      .feedback-type-option input:checked + .feedback-type-btn {
+        border-color: #3f51b5;
+        background: #e8eaf6;
+        color: #3f51b5;
+      }
+      
+      .feedback-input {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+        background: #f5f5f5;
+        color: #666;
+      }
+      
+      .feedback-textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: inherit;
+        resize: vertical;
+        min-height: 120px;
+      }
+      
+      .feedback-textarea:focus {
+        outline: none;
+        border-color: #3f51b5;
+        box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.1);
+      }
+      
+      .feedback-modal-footer {
+        padding: 16px 20px;
+        border-top: 1px solid #eee;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+      }
+      
+      .feedback-btn-cancel {
+        padding: 10px 20px;
+        background: #e0e0e0;
+        color: #666;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-family: inherit;
+      }
+      
+      .feedback-btn-cancel:hover {
+        background: #d0d0d0;
+      }
+      
+      .feedback-btn-submit {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 24px;
+        background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: inherit;
+      }
+      
+      .feedback-btn-submit:hover {
+        box-shadow: 0 4px 12px rgba(63, 81, 181, 0.4);
+      }
+      
+      .feedback-btn-submit:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      
+      .feedback-btn-submit .material-icons {
+        font-size: 18px;
+      }
+      
+      /* 送信中スピナー */
+      .feedback-spinner {
+        width: 18px;
+        height: 18px;
+        border: 2px solid rgba(255,255,255,0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: feedbackSpin 0.8s linear infinite;
+      }
+      
+      @keyframes feedbackSpin {
+        to { transform: rotate(360deg); }
+      }
+      
+      /* 送信完了メッセージ */
+      .feedback-success {
+        text-align: center;
+        padding: 40px 20px;
+      }
+      
+      .feedback-success-icon {
+        width: 64px;
+        height: 64px;
+        background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+      }
+      
+      .feedback-success-icon .material-icons {
+        font-size: 36px;
+        color: white;
+      }
+      
+      .feedback-success-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 8px;
+      }
+      
+      .feedback-success-text {
+        font-size: 14px;
+        color: #666;
+      }
+    </style>
+  `;
+}
+
+function initFeedbackModal() {
+  // スタイルを追加
+  if (!document.getElementById('feedbackModalStyles')) {
+    document.head.insertAdjacentHTML('beforeend', generateFeedbackStylesHTML());
+  }
+  
+  // モーダルを追加
+  if (!document.getElementById('feedbackModalOverlay')) {
+    document.body.insertAdjacentHTML('beforeend', generateFeedbackModalHTML());
+  }
+}
+
+function openFeedbackModal() {
+  // ナビを閉じる
+  closeNav();
+  
+  // モーダルを初期化
+  initFeedbackModal();
+  
+  // 現在のページを設定
+  const pageInput = document.getElementById('feedbackPage');
+  if (pageInput) {
+    pageInput.value = window.location.pathname.split('/').pop() || 'index.html';
+  }
+  
+  // 内容をリセット
+  const contentArea = document.getElementById('feedbackContent');
+  if (contentArea) {
+    contentArea.value = '';
+  }
+  
+  // 種別をリセット
+  const firstRadio = document.querySelector('input[name="feedbackType"]');
+  if (firstRadio) {
+    firstRadio.checked = true;
+  }
+  
+  // モーダルを表示
+  document.getElementById('feedbackModalOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeFeedbackModal() {
+  const overlay = document.getElementById('feedbackModalOverlay');
+  if (overlay) {
+    overlay.classList.remove('show');
+  }
+  document.body.style.overflow = '';
+}
+
+function closeFeedbackModalOnOverlay(event) {
+  if (event.target === event.currentTarget) {
+    closeFeedbackModal();
+  }
+}
+
+async function submitFeedback() {
+  const typeInput = document.querySelector('input[name="feedbackType"]:checked');
+  const pageInput = document.getElementById('feedbackPage');
+  const contentInput = document.getElementById('feedbackContent');
+  const submitBtn = document.querySelector('.feedback-btn-submit');
+  
+  const type = typeInput ? typeInput.value : '';
+  const page = pageInput ? pageInput.value : '';
+  const content = contentInput ? contentInput.value.trim() : '';
+  
+  if (!content) {
+    alert('詳細内容を入力してください');
+    return;
+  }
+  
+  // ボタンを無効化
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span class="feedback-spinner"></span>送信中...';
+  
+  try {
+    const studentId = localStorage.getItem('eqao_studentId') || '';
+    const studentName = localStorage.getItem('eqao_studentName') || '';
+    
+    const params = new URLSearchParams({
+      action: 'submitFeedback',
+      type: type,
+      page: page,
+      content: content,
+      studentId: studentId,
+      studentName: studentName,
+      userAgent: navigator.userAgent
+    });
+    
+    const response = await fetch(FEEDBACK_API_URL + '?' + params.toString());
+    const result = await response.json();
+    
+    if (result.success) {
+      // 成功メッセージを表示
+      const modalBody = document.querySelector('.feedback-modal-body');
+      const modalFooter = document.querySelector('.feedback-modal-footer');
+      
+      modalBody.innerHTML = `
+        <div class="feedback-success">
+          <div class="feedback-success-icon">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="feedback-success-title">送信完了しました</div>
+          <div class="feedback-success-text">ご報告ありがとうございます。<br>確認次第対応いたします。</div>
+        </div>
+      `;
+      
+      modalFooter.innerHTML = `
+        <button class="feedback-btn-submit" onclick="closeFeedbackModal()" style="background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);">
+          閉じる
+        </button>
+      `;
+    } else {
+      throw new Error(result.message || '送信に失敗しました');
+    }
+  } catch (error) {
+    console.error('Feedback error:', error);
+    alert('送信に失敗しました。時間をおいて再度お試しください。');
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<span class="material-icons">send</span>送信';
   }
 }
 
