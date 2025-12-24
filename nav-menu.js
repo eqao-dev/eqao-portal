@@ -126,10 +126,16 @@ function generateNavMenuHTML() {
           <span class="material-icons">person</span>
           <span id="navUserName" class="nav-user-name">${escapeHtml(studentName)}</span>
         </div>
-        <button class="nav-logout-btn" onclick="doLogout()">
-          <span class="material-icons">logout</span>
-          <span>ログアウト</span>
-        </button>
+        <div class="nav-user-actions">
+          <a href="password-change.html" class="nav-password-btn">
+            <span class="material-icons">key</span>
+            <span>パスワード変更</span>
+          </a>
+          <button class="nav-logout-btn" onclick="doLogout()">
+            <span class="material-icons">logout</span>
+            <span>ログアウト</span>
+          </button>
+        </div>
       </div>
   `;
   

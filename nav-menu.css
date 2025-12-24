@@ -1,0 +1,370 @@
+/* ========================================
+   共通ナビゲーションメニュー
+   nav-menu.css
+======================================== */
+
+/* ========================================
+   共通ヘッダー
+======================================== */
+.common-header {
+  background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+  padding: 12px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+}
+
+.common-header-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.common-header .back-btn {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.common-header .back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.common-header .header-logo {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.common-header .header-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.common-header .header-title {
+  flex: 1;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ハンバーガーボタン */
+.hamburger-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-left: auto;
+}
+
+.hamburger-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.hamburger-btn .material-icons {
+  font-size: 24px;
+}
+
+/* オーバーレイ */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.nav-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* メニュー本体 */
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 280px;
+  height: 100%;
+  background: white;
+  z-index: 201;
+  transition: right 0.3s ease;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+  overflow-y: auto;
+}
+
+.nav-menu.open {
+  right: 0;
+}
+
+/* ヘッダー */
+.nav-header {
+  background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+  color: white;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-header-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.nav-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.nav-close:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* ユーザーセクション */
+.nav-user-section {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #283593 0%, #3949ab 100%);
+}
+
+.nav-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.nav-user-info .material-icons {
+  font-family: 'Material Icons';
+  font-size: 22px;
+  opacity: 0.8;
+}
+
+.nav-user-name {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.nav-user-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-password-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nav-password-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.nav-password-btn .material-icons {
+  font-family: 'Material Icons';
+  font-size: 14px;
+}
+
+.nav-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.nav-logout-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.nav-logout-btn .material-icons {
+  font-family: 'Material Icons';
+  font-size: 14px;
+}
+
+/* カテゴリー */
+.nav-category {
+  padding: 12px 16px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #1a237e;
+  background: #f5f7fa;
+  border-top: 1px solid #e8ecf4;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* セクション */
+.nav-section {
+  padding: 6px 8px;
+}
+
+/* アイテム */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.2s;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.nav-item:hover {
+  background: #f0f2f8;
+}
+
+.nav-item .material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  width: 24px;
+  text-align: center;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* アイコンカラー（ホームと統一） */
+.nav-item .material-icons.icon-blue { color: #1e88e5; }
+.nav-item .material-icons.icon-indigo { color: #3949ab; }
+.nav-item .material-icons.icon-purple { color: #7b1fa2; }
+.nav-item .material-icons.icon-teal { color: #00897b; }
+.nav-item .material-icons.icon-orange { color: #f57c00; }
+.nav-item .material-icons.icon-red { color: #e53935; }
+.nav-item .material-icons.icon-pink { color: #d81b60; }
+.nav-item .material-icons.icon-green { color: #43a047; }
+.nav-item .material-icons.icon-brown { color: #6d4c41; }
+.nav-item .material-icons.icon-line { color: #06c755; }
+
+/* 現在のページハイライト */
+.nav-item.active {
+  background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+  color: #1a237e;
+  font-weight: 600;
+}
+
+.nav-item.active .material-icons {
+  color: #1a237e !important;
+}
+
+/* 無効リンク */
+.nav-item.disabled {
+  color: #bbb;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.nav-item.disabled .material-icons {
+  color: #ccc !important;
+}
+
+/* バッジ */
+.nav-badge {
+  background: #1a237e;
+  color: white;
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: auto;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav-badge-external {
+  font-family: 'Material Icons';
+  color: #999;
+  font-size: 14px;
+  margin-left: auto;
+}
+
+/* フッター */
+.nav-footer {
+  padding: 16px;
+  text-align: center;
+  font-size: 10px;
+  color: #999;
+  border-top: 1px solid #e8ecf4;
+  margin-top: 10px;
+}

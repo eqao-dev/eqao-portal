@@ -91,6 +91,7 @@
 
     .section-content {
       padding: 16px;
+      overflow: hidden;
     }
 
     /* 学年選択ボタン */
@@ -1008,10 +1009,32 @@
       font-size: 16px;
     }
 
+    .my-gantt-scroll-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px;
+      background: #E8F5E9;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 11px;
+      color: #2E7D32;
+    }
+
+    .my-gantt-scroll-hint .material-icons {
+      font-size: 16px;
+    }
+
     .my-gantt-chart {
       background: white;
       border-radius: 8px;
-      overflow: hidden;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .my-gantt-inner {
+      min-width: 600px;
     }
 
     .my-gantt-header-row {
@@ -1021,18 +1044,24 @@
     }
 
     .my-gantt-label-header {
-      width: 100px;
-      padding: 6px 12px;
+      width: 80px;
+      padding: 6px 8px;
       flex-shrink: 0;
+      position: sticky;
+      left: 0;
+      background: #E8F5E9;
+      z-index: 5;
     }
 
     .my-gantt-months {
       flex: 1;
       display: flex;
+      min-width: 520px;
     }
 
     .my-gantt-month {
       flex: 1;
+      min-width: 40px;
       text-align: center;
       font-size: 10px;
       font-weight: 600;
@@ -1049,6 +1078,11 @@
       display: flex;
       align-items: center;
       min-height: 50px;
+      min-width: 600px;
+    }
+
+    .my-gantt-empty-row .my-gantt-label {
+      background: white;
     }
 
     .my-gantt-placeholder {
@@ -1057,6 +1091,7 @@
       color: #A5D6A7;
       font-size: 12px;
       padding: 16px;
+      min-width: 520px;
     }
 
     .my-gantt-empty {
@@ -1093,8 +1128,8 @@
     }
 
     .my-gantt-label {
-      width: 100px;
-      padding: 4px 12px;
+      width: 80px;
+      padding: 4px 8px;
       font-size: 11px;
       font-weight: 600;
       color: #333;
@@ -1102,6 +1137,10 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      position: sticky;
+      left: 0;
+      background: white;
+      z-index: 5;
     }
 
     .my-gantt-bar-container {
@@ -1109,6 +1148,7 @@
       display: flex;
       padding: 3px 8px;
       position: relative;
+      min-width: 520px;
     }
 
     .my-gantt-bar {
@@ -3205,6 +3245,11 @@
               <span class="material-icons">add</span>
               予定を追加
             </button>
+          </div>
+          <!-- スクロールヒント -->
+          <div class="my-gantt-scroll-hint">
+            <span class="material-icons">swipe</span>
+            <span>左右にスクロールできます</span>
           </div>
           <div class="my-gantt-chart" id="myGanttChart">
             <div class="my-gantt-empty">
