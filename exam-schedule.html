@@ -2883,6 +2883,150 @@
         padding: 6px 12px;
       }
     }
+
+    /* セクションヘルプボタン */
+    .section-help-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: rgba(0, 105, 92, 0.15);
+      border: none;
+      border-radius: 50%;
+      color: #00695C;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-left: auto;
+    }
+
+    .section-help-btn:hover {
+      background: rgba(0, 105, 92, 0.25);
+    }
+
+    .section-help-btn .material-icons {
+      font-size: 18px;
+    }
+
+    /* ヘルプモーダル */
+    .help-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .help-modal-overlay.show {
+      display: flex;
+    }
+
+    .help-modal {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 480px;
+      max-height: 80vh;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: helpModalIn 0.3s ease;
+    }
+
+    @keyframes helpModalIn {
+      from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .help-modal-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
+      color: white;
+    }
+
+    .help-modal-header .material-icons {
+      font-size: 24px;
+    }
+
+    .help-modal-header h3 {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .help-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .help-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .help-modal-body {
+      padding: 20px;
+      max-height: 55vh;
+      overflow-y: auto;
+    }
+
+    .help-modal-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #00695C;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .help-modal-title .material-icons {
+      font-size: 20px;
+    }
+
+    .help-modal-text {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.8;
+    }
+
+    .help-modal-footer {
+      padding: 16px 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .help-close-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .help-close-btn:hover {
+      opacity: 0.9;
+    }
   </style>
 </head>
 <body>
@@ -2994,6 +3138,9 @@
       <div class="section-header">
         <span class="material-icons">timeline</span>
         <span class="section-title">理想スケジュール</span>
+        <button class="section-help-btn" onclick="openSectionHelp('ideal')">
+          <span class="material-icons">help_outline</span>
+        </button>
       </div>
       <div class="section-content">
         <!-- 学年選択 -->
@@ -3030,6 +3177,9 @@
       <div class="section-header">
         <span class="material-icons">checklist</span>
         <span class="section-title">私のスケジュール</span>
+        <button class="section-help-btn" onclick="openSectionHelp('mySchedule')">
+          <span class="material-icons">help_outline</span>
+        </button>
       </div>
       <div class="section-content">
         <!-- 学年・月セレクター -->
@@ -3134,6 +3284,9 @@
       <div class="section-header">
         <span class="material-icons">analytics</span>
         <span class="section-title">総合進捗状況</span>
+        <button class="section-help-btn" onclick="openSectionHelp('progress')">
+          <span class="material-icons">help_outline</span>
+        </button>
       </div>
       <div class="section-content">
         <div class="progress-summary">
@@ -3187,6 +3340,9 @@
       <div class="section-header">
         <span class="material-icons">school</span>
         <span class="section-title">志望校／併願校戦略</span>
+        <button class="section-help-btn" onclick="openSectionHelp('school')">
+          <span class="material-icons">help_outline</span>
+        </button>
       </div>
       <div class="section-content">
         <!-- パターン選択タブ -->
@@ -3250,6 +3406,9 @@
       <div class="section-header">
         <span class="material-icons">assignment</span>
         <span class="section-title">宿題・授業履歴</span>
+        <button class="section-help-btn" onclick="openSectionHelp('homework')">
+          <span class="material-icons">help_outline</span>
+        </button>
       </div>
       <div class="section-content">
         <!-- 授業リスト（横スクロール） -->
@@ -3277,6 +3436,9 @@
       <div class="section-header">
         <span class="material-icons">assessment</span>
         <span class="section-title">担任からの進捗報告</span>
+        <button class="section-help-btn" onclick="openSectionHelp('report')">
+          <span class="material-icons">help_outline</span>
+        </button>
       </div>
       <div class="section-content">
         <!-- 月タブ -->
@@ -3294,6 +3456,25 @@
           <span class="material-icons">description</span>
           <p>進捗報告がありません</p>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- セクションヘルプモーダル -->
+  <div class="help-modal-overlay" id="helpModalOverlay" onclick="closeHelpModalOnOverlay(event)">
+    <div class="help-modal" onclick="event.stopPropagation()">
+      <div class="help-modal-header">
+        <span class="material-icons">help_outline</span>
+        <h3 id="helpModalTitle">このセクションについて</h3>
+        <button class="help-modal-close" onclick="closeHelpModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="help-modal-body" id="helpModalBody">
+        <!-- JSで動的に内容を切り替え -->
+      </div>
+      <div class="help-modal-footer">
+        <button class="help-close-btn" onclick="closeHelpModal()">閉じる</button>
       </div>
     </div>
   </div>
@@ -3608,6 +3789,80 @@
   </div>
 
   <script>
+    // ============================================
+    // セクションヘルプモーダル
+    // ============================================
+    const sectionHelpContent = {
+      ideal: {
+        title: '理想スケジュールとは？',
+        icon: 'timeline',
+        content: `高1から高3のそれぞれの月で、どういうことをしておくのが理想か、EQAOが提示しているモデルスケジュールです。<br><br>
+学年と月を選択すると、その時期に取り組むべき「具体的な行動」が表示されます。自分の学習計画の参考にしてください。`
+      },
+      mySchedule: {
+        title: '私のスケジュールとは？',
+        icon: 'checklist',
+        content: `あなた自身がどの学年のどの月に何をするか、上部の理想スケジュールを参考にしながら予定を追加していく部分です。<br><br>
+<strong>◯月にやること</strong><br>
+自分で決めたToDoを入力していきましょう。<br><br>
+<strong>◯月の提示</strong><br>
+担当講師があなたに対してやるべきことを指示してくれます。その内容がここに表示されます。`
+      },
+      progress: {
+        title: '総合進捗状況とは？',
+        icon: 'analytics',
+        content: `各学年で達成しておきたい内容、取り組んでおきたい内容のチェックリストです。<br><br>
+自分が「できた」「取り組めた」と感じたものにチェックをつけていきましょう。全体の達成率が可視化されるので、モチベーション維持にも役立ちます。`
+      },
+      school: {
+        title: '志望校／併願校戦略とは？',
+        icon: 'school',
+        content: `自分の志望校や併願校の情報を入力する部分です。<br><br>
+目標の評定に達した場合／達しない場合、英語資格を取得した場合／しない場合の<strong>4パターン（A〜D）</strong>の志望校・併願校戦略を考えて登録しましょう。<br><br>
+志望順位は適宜変更し、常に自分の今の志望校を可視化して意識することが大切です。`
+      },
+      homework: {
+        title: '宿題・授業履歴とは？',
+        icon: 'assignment',
+        content: `各授業の実施後に、講師から授業の報告が送られます。その内容を履歴として閲覧できる部分です。<br><br>
+「この日はこんなことをした」「次回までにやること」などを確認し、やるべきことの把握に活用してください。`
+      },
+      report: {
+        title: '担任からの進捗報告とは？',
+        icon: 'assessment',
+        content: `毎月、担任から1か月の進捗報告が送信されます。<br><br>
+その内容をここで閲覧できます。担任からのフィードバックを確認し、次月の学習に活かしましょう。`
+      }
+    };
+
+    function openSectionHelp(sectionKey) {
+      const helpData = sectionHelpContent[sectionKey];
+      if (!helpData) return;
+
+      document.getElementById('helpModalTitle').textContent = helpData.title;
+      document.getElementById('helpModalBody').innerHTML = `
+        <div class="help-modal-title">
+          <span class="material-icons">${helpData.icon}</span>
+          ${helpData.title}
+        </div>
+        <p class="help-modal-text">${helpData.content}</p>
+      `;
+
+      document.getElementById('helpModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeHelpModal() {
+      document.getElementById('helpModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function closeHelpModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeHelpModal();
+      }
+    }
+
     // ============================================
     // 大科目データ（追加）
     // ============================================

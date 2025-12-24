@@ -2047,7 +2047,7 @@
 
     .feedback-section-btn span:nth-child(2) {
       flex: 1;
-      text-align: left;
+      text-align: center;
     }
 
     .feedback-section-btn .material-icons:last-child {
@@ -2455,6 +2455,31 @@
 .study-header .material-icons {
   font-size: 20px;
 }
+
+.section-help-btn-small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: rgba(26, 35, 126, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: #1a237e;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: auto;
+  padding: 0;
+}
+
+.section-help-btn-small:hover {
+  background: rgba(26, 35, 126, 0.2);
+}
+
+.section-help-btn-small .material-icons {
+  font-size: 16px;
+}
+
 .profile-body {
   display: flex;
   flex-direction: column;
@@ -3775,6 +3800,381 @@
   color: #999;
   cursor: not-allowed;
 }
+
+/* ========================================
+   ポータルの使い方 セクション
+======================================== */
+.guide-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);
+  border-radius: 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 137, 123, 0.25);
+  transition: all 0.3s ease;
+}
+
+.guide-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 137, 123, 0.35);
+}
+
+.guide-banner-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.guide-banner-icon .material-icons {
+  color: white;
+  font-size: 26px;
+}
+
+.guide-banner-content {
+  flex: 1;
+  color: white;
+}
+
+.guide-banner-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.guide-banner-desc {
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+.guide-banner-arrow {
+  color: white;
+  opacity: 0.8;
+}
+
+/* ポータルの使い方モーダル */
+.guide-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.guide-modal-overlay.show {
+  display: flex;
+}
+
+.guide-modal {
+  background: white;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 540px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: guideModalIn 0.3s ease;
+}
+
+@keyframes guideModalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.guide-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);
+  color: white;
+  border-radius: 20px 20px 0 0;
+  flex-shrink: 0;
+}
+
+.guide-modal-header .material-icons {
+  font-size: 28px;
+}
+
+.guide-modal-header h2 {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.guide-modal-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.guide-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.guide-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+}
+
+.guide-qa-item {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.guide-qa-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.guide-question {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.guide-q-icon {
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.guide-q-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.5;
+  padding-top: 2px;
+}
+
+.guide-answer {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-left: 36px;
+}
+
+.guide-a-icon {
+  width: 22px;
+  height: 22px;
+  background: #f0f0f0;
+  color: #666;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.guide-a-text {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.7;
+}
+
+.guide-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #e8f5e9;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 16px;
+}
+
+.guide-tip .material-icons {
+  color: #43a047;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.guide-tip p {
+  font-size: 13px;
+  color: #2e7d32;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.help-icon-sample {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  color: #555;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+.guide-modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #eee;
+  flex-shrink: 0;
+}
+
+.guide-close-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.guide-close-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 137, 123, 0.3);
+}
+
+/* セクションヘルプモーダル */
+.section-help-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.section-help-modal-overlay.show {
+  display: flex;
+}
+
+.section-help-modal {
+  background: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: sectionHelpModalIn 0.3s ease;
+}
+
+@keyframes sectionHelpModalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.section-help-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  color: white;
+  border-radius: 16px 16px 0 0;
+}
+
+.section-help-modal-header .material-icons {
+  font-size: 24px;
+}
+
+.section-help-modal-header h3 {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.section-help-modal-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-help-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.section-help-modal-body {
+  padding: 20px;
+}
+
+.section-help-modal-body p {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.section-help-modal-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #eee;
+}
+
+.section-help-close-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.section-help-close-btn:hover {
+  opacity: 0.9;
+}
     
   </style>
 </head>
@@ -3920,6 +4320,115 @@
       </div>
     </div>
 
+    <!-- ポータルの使い方 バナー -->
+    <div class="guide-banner" onclick="openGuideModal()">
+      <div class="guide-banner-icon">
+        <span class="material-icons">help_outline</span>
+      </div>
+      <div class="guide-banner-content">
+        <div class="guide-banner-title">ポータルの使い方</div>
+        <div class="guide-banner-desc">初めての方はこちらをご確認ください</div>
+      </div>
+      <span class="material-icons guide-banner-arrow">chevron_right</span>
+    </div>
+
+    <!-- ポータルの使い方モーダル -->
+    <div class="guide-modal-overlay" id="guideModalOverlay" onclick="closeGuideModalOnOverlay(event)">
+      <div class="guide-modal" onclick="event.stopPropagation()">
+        <div class="guide-modal-header">
+          <span class="material-icons">help_outline</span>
+          <h2>ポータルの使い方</h2>
+          <button class="guide-modal-close" onclick="closeGuideModal()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+
+        <div class="guide-modal-body">
+          <!-- Q1 -->
+          <div class="guide-qa-item">
+            <div class="guide-question">
+              <div class="guide-q-icon">Q</div>
+              <div class="guide-q-text">このポータルって結局何ができるの？</div>
+            </div>
+            <div class="guide-answer">
+              <div class="guide-a-icon">A</div>
+              <div class="guide-a-text">EQAOで授業を実施していく上での全ての管理ができるページです。全ての情報が集まっている図書館のようなものです。あなた個人で積み上げて作っていく資料もあれば、全員が見れる教材や情報も全て揃っています。ここをスタートとしてアクセスしたい情報に辿り着けるようになっています。</div>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="guide-qa-item">
+            <div class="guide-question">
+              <div class="guide-q-icon">Q</div>
+              <div class="guide-q-text">最初に何をすればいい？</div>
+            </div>
+            <div class="guide-answer">
+              <div class="guide-a-icon">A</div>
+              <div class="guide-a-text">まずは「はじめにご確認ください」の内容を確認し、自身のプロフィールを設定しましょう。画面上部左のプロフィールの欄に「編集」がありますので登録をお願いします。後から変更もできます。講師の方がこの情報をもとにあなたに合った授業を提供します。</div>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="guide-qa-item">
+            <div class="guide-question">
+              <div class="guide-q-icon">Q</div>
+              <div class="guide-q-text">チェックリストとか色々あるけど、全部使わないとダメ？</div>
+            </div>
+            <div class="guide-answer">
+              <div class="guide-a-icon">A</div>
+              <div class="guide-a-text">それぞれの目指すもの、目標とするものによって大事なものは変わってきます。全員が必ず使って欲しいものもあればそうでないものもあります。全て使わないといけないわけではなく、自身の求めているもの、うまく活用できるものがあれば積極的に使ってください。授業を通して講師の方とどれを使っていくか相談しながらやってもらうのもOKです。</div>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="guide-qa-item">
+            <div class="guide-question">
+              <div class="guide-q-icon">Q</div>
+              <div class="guide-q-text">これって毎日見る必要ある？</div>
+            </div>
+            <div class="guide-answer">
+              <div class="guide-a-icon">A</div>
+              <div class="guide-a-text">授業のスケジュールや自身の進捗の確認、進捗に合わせて随時入力をするところ、授業外学習を登録するところなどがありますので、ぜひ毎日アクセスしてみてください。</div>
+            </div>
+          </div>
+
+          <!-- Q5 -->
+          <div class="guide-qa-item">
+            <div class="guide-question">
+              <div class="guide-q-icon">Q</div>
+              <div class="guide-q-text">使い方がわからなかったり、エラーが出たらどうすればいい？</div>
+            </div>
+            <div class="guide-answer">
+              <div class="guide-a-icon">A</div>
+              <div class="guide-a-text">使い方がわからない場合は講師に聞く、LINEグループで担当者へ確認するなど、直接連絡ができるプラットフォームがありますのでご活用ください。不具合についてはトップ画面の最下部にある「不具合報告・ご要望はこちら」からシステム設計者へ直接連絡してください。（エラー解消の連絡は基本的に個別では行われませんが順次修正していきます。）</div>
+            </div>
+          </div>
+
+          <!-- Q6 -->
+          <div class="guide-qa-item">
+            <div class="guide-question">
+              <div class="guide-q-icon">Q</div>
+              <div class="guide-q-text">動画や教材は、塾以外の場所（家など）でも見れる？</div>
+            </div>
+            <div class="guide-answer">
+              <div class="guide-a-icon">A</div>
+              <div class="guide-a-text">インターネット環境があるところであればどこでも閲覧が可能です。</div>
+            </div>
+          </div>
+
+          <!-- 補足情報 -->
+          <div class="guide-tip">
+            <span class="material-icons">lightbulb</span>
+            <p>各ページのヘッダーにある <span class="help-icon-sample">?</span> ボタンをタップすると、そのページの使い方を確認できます。</p>
+          </div>
+        </div>
+
+        <div class="guide-modal-footer">
+          <button class="guide-close-btn" onclick="closeGuideModal()">閉じる</button>
+        </div>
+      </div>
+    </div>
+
     <div class="news-section">
       <div class="news-header">
         <div class="news-icon">
@@ -3973,6 +4482,9 @@
         <div class="profile-header">
           <span class="material-icons">person</span>
           プロフィール
+          <button class="section-help-btn-small" onclick="openSectionHelp('profile')">
+            <span class="material-icons">help_outline</span>
+          </button>
         </div>
         <div class="profile-body">
           <div class="profile-avatar" id="profileAvatar">👤</div>
@@ -4001,6 +4513,9 @@
   <div class="study-header">
     <span class="material-icons">trending_up</span>
     授業外学習
+    <button class="section-help-btn-small" onclick="openSectionHelp('study')">
+      <span class="material-icons">help_outline</span>
+    </button>
   </div>
   <div class="study-chart-container">
     <div class="study-chart-header">
@@ -4796,6 +5311,23 @@
     function closeOnboardingModalOnOverlay(event) {
       if (event.target === event.currentTarget) {
         closeOnboardingModal();
+      }
+    }
+
+    // ポータルの使い方モーダル
+    function openGuideModal() {
+      document.getElementById('guideModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeGuideModal() {
+      document.getElementById('guideModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function closeGuideModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeGuideModal();
       }
     }
 
@@ -6154,6 +6686,71 @@ studyChart = new Chart(ctx, {
         loadStudyChart();
       }
     });
+
+    // ============================================
+    // セクションヘルプ（プロフィール・授業外学習）
+    // ============================================
+    const sectionHelpData = {
+      profile: {
+        title: 'プロフィールとは？',
+        icon: 'person',
+        content: '自分の簡単なプロフィールを設定するところです。<br><br>この情報をもとに講師は授業の進め方などを検討します。また、自分自身の自己分析にもつながります。'
+      },
+      study: {
+        title: '授業外学習とは？',
+        icon: 'trending_up',
+        content: '授業外で行った学習を記録し、自分の学習時間や量を可視化するところです。<br><br>積み上げていること、継続していることを可視化して、モチベーション維持や自信につなげてください。'
+      }
+    };
+
+    function openSectionHelp(key) {
+      const data = sectionHelpData[key];
+      if (!data) return;
+
+      // モーダルが存在しなければ作成
+      if (!document.getElementById('sectionHelpModal')) {
+        const modalHTML = `
+          <div id="sectionHelpModal" class="section-help-modal-overlay" onclick="closeSectionHelpOnOverlay(event)">
+            <div class="section-help-modal" onclick="event.stopPropagation()">
+              <div class="section-help-modal-header">
+                <span class="material-icons" id="sectionHelpIcon">help_outline</span>
+                <h3 id="sectionHelpTitle">ヘルプ</h3>
+                <button class="section-help-modal-close" onclick="closeSectionHelp()">
+                  <span class="material-icons">close</span>
+                </button>
+              </div>
+              <div class="section-help-modal-body">
+                <p id="sectionHelpContent"></p>
+              </div>
+              <div class="section-help-modal-footer">
+                <button class="section-help-close-btn" onclick="closeSectionHelp()">閉じる</button>
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+      }
+
+      document.getElementById('sectionHelpIcon').textContent = data.icon;
+      document.getElementById('sectionHelpTitle').textContent = data.title;
+      document.getElementById('sectionHelpContent').innerHTML = data.content;
+      document.getElementById('sectionHelpModal').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSectionHelp() {
+      const modal = document.getElementById('sectionHelpModal');
+      if (modal) {
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function closeSectionHelpOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeSectionHelp();
+      }
+    }
 
     // ============================================
     // フィードバックモーダル

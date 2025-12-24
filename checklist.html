@@ -984,6 +984,149 @@
     .completion-quiz-btn .material-icons {
       font-size: 18px;
     }
+
+    /* ヘルプボタン */
+    .help-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .help-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .help-btn .material-icons {
+      font-size: 22px;
+    }
+
+    /* ヘルプモーダル */
+    .help-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .help-modal-overlay.show {
+      display: flex;
+    }
+
+    .help-modal {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 440px;
+      max-height: 80vh;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: helpModalIn 0.3s ease;
+    }
+
+    @keyframes helpModalIn {
+      from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .help-modal-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+    }
+
+    .help-modal-header .material-icons {
+      font-size: 24px;
+    }
+
+    .help-modal-header h3 {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .help-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .help-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .help-modal-body {
+      padding: 20px;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+
+    .help-modal-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .help-modal-title .material-icons {
+      font-size: 20px;
+    }
+
+    .help-modal-text {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.8;
+    }
+
+    .help-modal-footer {
+      padding: 16px 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .help-close-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .help-close-btn:hover {
+      opacity: 0.9;
+    }
   </style>
 </head>
 <body>
@@ -992,6 +1135,9 @@
       <span class="material-icons">arrow_back</span>
     </button>
     <div class="header-title" id="headerTitle">チェックリスト</div>
+    <button class="help-btn" onclick="openHelpModal()">
+      <span class="material-icons">help_outline</span>
+    </button>
     <div class="header-user">
       <span class="material-icons">person</span>
       <span id="navUserName"></span>
@@ -1093,7 +1239,53 @@
     <span id="syncMessage">同期中...</span>
   </div>
 
+  <!-- ヘルプモーダル -->
+  <div class="help-modal-overlay" id="helpModalOverlay" onclick="closeHelpModalOnOverlay(event)">
+    <div class="help-modal" onclick="event.stopPropagation()">
+      <div class="help-modal-header">
+        <span class="material-icons">help_outline</span>
+        <h3>このページについて</h3>
+        <button class="help-modal-close" onclick="closeHelpModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="help-modal-body">
+        <div class="help-modal-title">
+          <span class="material-icons">checklist</span>
+          チェックリストとは？
+        </div>
+        <p class="help-modal-text">
+          様々な項目において、確認しておいた方がいい内容のチェックリストです。<br><br>
+          小論文で気をつけること、面接でやってはいけないことなど、実践に取り組む前に事前確認しておくことで質の高いパフォーマンスを引き出すことができます。<br><br>
+          出願時の注意点などもまとめているので、それぞれのタイミングで事前に確認し、チェックをつけてください。
+        </p>
+      </div>
+      <div class="help-modal-footer">
+        <button class="help-close-btn" onclick="closeHelpModal()">閉じる</button>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // ============================================
+    // ヘルプモーダル
+    // ============================================
+    function openHelpModal() {
+      document.getElementById('helpModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeHelpModal() {
+      document.getElementById('helpModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function closeHelpModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeHelpModal();
+      }
+    }
+
     // ============================================
     // 設定
     // ============================================
