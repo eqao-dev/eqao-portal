@@ -526,6 +526,79 @@
       vertical-align: middle;
       margin-right: 4px;
     }
+
+　/* ========================================
+    アクセス制限メッセージ
+    ======================================== */
+    .access-denied {
+      min-height: calc(100vh - 70px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+    }
+
+    .access-denied-content {
+      text-align: center;
+      max-width: 400px;
+    }
+
+    .access-denied-icon {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #e53935 0%, #ef5350 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      box-shadow: 0 8px 30px rgba(229, 57, 53, 0.3);
+    }
+
+    .access-denied-icon .material-icons {
+      font-size: 48px;
+      color: white;
+    }
+
+    .access-denied-title {
+      font-size: 24px;
+      font-weight: 900;
+      color: #333;
+      margin-bottom: 16px;
+    }
+
+    .access-denied-text {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .access-denied-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+    }
+
+    .access-denied-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(26, 35, 126, 0.4);
+    }
+
+    .access-denied-btn .material-icons {
+      font-size: 20px;
+    }
+    
   </style>
 </head>
 <body>
@@ -561,6 +634,24 @@
       </div>
     </div>
   </section>
+
+  <!-- アクセス制限メッセージ -->
+  <div id="accessDenied" class="access-denied" style="display: none;">
+    <div class="access-denied-content">
+      <div class="access-denied-icon">
+        <span class="material-icons">lock</span>
+      </div>
+      <h2 class="access-denied-title">購入者限定コンテンツ</h2>
+      <p class="access-denied-text">
+        この動画コンテンツは「動画教材」を<br>
+        ご購入いただいた方のみ視聴できます。
+      </p>
+      <a href="index.html" class="access-denied-btn">
+        <span class="material-icons">home</span>
+        トップページへ戻る
+      </a>
+    </div>
+  </div>
 
   <!-- メインコンテンツ -->
   <div class="container">
@@ -621,6 +712,15 @@
     // ============================================
     document.addEventListener('DOMContentLoaded', function() {
       setNavUserName();
+      const hasVideoAccess = localStorage.getItem('eqao_hasVideoAccess') === 'true';
+      
+      if (!hasVideoAccess) {
+        // アクセス権なし → 制限メッセージを表示
+        document.querySelector('.hero').style.display = 'none';
+        document.querySelector('.container').style.display = 'none';
+        document.getElementById('accessDenied').style.display = 'flex';
+        return;
+      }
       loadVideos();
     });
 
