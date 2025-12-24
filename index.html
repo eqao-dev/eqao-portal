@@ -4845,6 +4845,8 @@
         console.log('API result:', result);
         
         if (result.success) {
+          console.log('API Response:', result);
+          console.log('hasVideoAccess from API:', result.hasVideoAccess);
           console.log('Login successful, saving to localStorage...');
           
           if (false && result.needsPasswordChange) {
