@@ -6201,13 +6201,19 @@ studyChart = new Chart(ctx, {
               </div>
               
               <div class="feedback-form-group">
-                <label class="feedback-label">該当ページ</label>
-                <input type="text" id="feedbackPage" class="feedback-input" readonly>
+                <label class="feedback-label">該当ページ・機能（任意）</label>
+                <input type="text" id="feedbackPage" class="feedback-input" placeholder="例：受験スケジュール、チェックリスト など">
               </div>
               
               <div class="feedback-form-group">
                 <label class="feedback-label">詳細内容 <span class="required">*</span></label>
                 <textarea id="feedbackContent" class="feedback-textarea" rows="5" placeholder="具体的な内容をご記入ください"></textarea>
+              </div>
+              
+              <div class="feedback-notice">
+                <p>※ 順次対応いたしますので、修正はしばらくお待ちください。</p>
+                <p>※ 個別の対応報告は基本的に行っておりません。更新後にご確認ください。</p>
+                <p>※ ご要望については、必要に応じて個別にご連絡する場合があります。また、全てのご要望にお応えできるとは限りませんのでご了承ください。</p>
               </div>
             </div>
             
@@ -6353,8 +6359,32 @@ studyChart = new Chart(ctx, {
             border: 1px solid #e0e0e0;
             border-radius: 8px;
             font-size: 14px;
+            background: white;
+            color: #333;
+            font-family: inherit;
+          }
+          
+          .feedback-input:focus {
+            outline: none;
+            border-color: #3f51b5;
+          }
+          
+          .feedback-notice {
             background: #f5f5f5;
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-top: 8px;
+          }
+          
+          .feedback-notice p {
+            font-size: 11px;
             color: #666;
+            line-height: 1.6;
+            margin: 0 0 4px 0;
+          }
+          
+          .feedback-notice p:last-child {
+            margin-bottom: 0;
           }
           
           .feedback-textarea {
@@ -6480,7 +6510,7 @@ studyChart = new Chart(ctx, {
       
       const pageInput = document.getElementById('feedbackPage');
       if (pageInput) {
-        pageInput.value = window.location.pathname.split('/').pop() || 'index.html';
+        pageInput.value = '';
       }
       
       const contentArea = document.getElementById('feedbackContent');
