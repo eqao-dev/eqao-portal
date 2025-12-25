@@ -1386,30 +1386,38 @@
     }
 
     async function loadFromSpreadsheet() {
-      if (!currentUser) return;
+  if (!currentUser) return;
 
-      try {
-        const url = new URL(API_URL);
-        url.searchParams.set('action', 'getChecklistStateOld');
-        url.searchParams.set('studentId', currentUser.studentId);
+  try {
+    const url = new URL(API_URL);
+    url.searchParams.set('action', 'getChecklistStateOld');
+    url.searchParams.set('studentId', currentUser.studentId);
 
-        const response = await fetch(url.toString());
-        const result = await response.json();
+    const response = await fetch(url.toString());
+    const result = await response.json();
 
-        if (result.success && result.checkState) {
-          const serverState = result.checkState;
-          for (const category in serverState) {
-            if (!checkState[category]) {
-              checkState[category] = serverState[category];
-            }
-          }
-          saveCheckState();
-          displayProgress();
+    if (result.success && result.checkState) {
+      const serverState = result.checkState;
+      let hasNewData = false;
+      for (const category in serverState) {
+        if (!checkState[category]) {
+          checkState[category] = serverState[category];
+          hasNewData = true;
         }
-      } catch (error) {
-        console.error('サーバーからの読み込みエラー:', error);
+      }
+      if (hasNewData) {
+        // ローカルストレージのみ保存（pendingSyncは立てない）
+        try {
+          localStorage.setItem(getStorageKey('state'), JSON.stringify(checkState));
+          localStorage.setItem(getStorageKey('lastModified'), Date.now().toString());
+        } catch (e) {}
+        displayProgress();
       }
     }
+  } catch (error) {
+    console.error('サーバーからの読み込みエラー:', error);
+  }
+}
 
     function showSyncStatus(message, type) {
       const statusEl = document.getElementById('syncStatus');
