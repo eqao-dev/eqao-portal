@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>カリキュラムとサポート体制 - EQAO PORTAL</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #f1f5f9;
+      min-height: 100vh;
+      color: #374151;
+    }
+    
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+    
+    .back-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+    
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      flex: 1;
+    }
+
+    .header-user {
+      font-size: 12px;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .header-user .material-icons {
+      font-size: 16px;
+    }
+
+    /* ハンバーガーメニュー */
+    .menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .menu-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .nav-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      max-width: 85%;
+      height: 100%;
+      background: white;
+      z-index: 201;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+    }
+
+    .nav-menu.active {
+      right: 0;
+    }
+
+    .nav-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 24px 20px;
+    }
+
+    .nav-header-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .nav-header-subtitle {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .nav-section {
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav-section-title {
+      font-size: 11px;
+      color: #888;
+      padding: 8px 20px;
+      font-weight: 500;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      color: #333;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-item:hover {
+      background: #f5f5f5;
+    }
+
+    .nav-item .material-icons {
+      font-size: 22px;
+      color: #1a237e;
+    }
+
+    .nav-item-text {
+      font-size: 14px;
+    }
+
+    .nav-item.disabled {
+      color: #bbb;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .nav-item.disabled .material-icons {
+      color: #ccc;
+    }
+
+    .nav-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* メインコンテンツ */
+    .main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+    
+    /* イントロセクション */
+    .intro {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    
+    .intro-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1a237e;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .intro-text {
+      font-size: 14px;
+      color: #4b5563;
+      line-height: 1.8;
+    }
+    
+    .intro-highlight {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 16px;
+      font-size: 13px;
+      color: #1e40af;
+      line-height: 1.6;
+    }
+    
+    /* カテゴリグリッド */
+    .category-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .category-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 2px solid transparent;
+    }
+    
+    .category-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    
+    .category-card.active {
+      border-color: #1a237e;
+      background: #f8fafc;
+    }
+    
+    .category-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+    }
+    
+    .category-card:nth-child(1) .category-icon { background: #dbeafe; color: #1d4ed8; }
+    .category-card:nth-child(2) .category-icon { background: #d1fae5; color: #059669; }
+    .category-card:nth-child(3) .category-icon { background: #fef3c7; color: #d97706; }
+    .category-card:nth-child(4) .category-icon { background: #fce7f3; color: #db2777; }
+    
+    .category-name {
+      font-size: 13px;
+      font-weight: bold;
+      color: #374151;
+      line-height: 1.4;
+    }
+    
+    .category-count {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+    
+    /* コンテンツエリア */
+    .content-area {
+      display: none;
+    }
+    
+    .content-area.active {
+      display: block;
+    }
+    
+    .content-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    
+    .content-header-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .content-header-icon.curriculum { background: #dbeafe; color: #1d4ed8; }
+    .content-header-icon.support { background: #d1fae5; color: #059669; }
+    .content-header-icon.program { background: #fef3c7; color: #d97706; }
+    .content-header-icon.strength { background: #fce7f3; color: #db2777; }
+    
+    .content-header-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #1a237e;
+    }
+    
+    /* アコーディオン */
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .accordion-item {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .accordion-header:hover {
+      background: #f9fafb;
+    }
+    
+    .accordion-item.open .accordion-header {
+      background: #f8fafc;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .accordion-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .accordion-icon.blue { background: #eff6ff; color: #3b82f6; }
+    .accordion-icon.green { background: #ecfdf5; color: #10b981; }
+    .accordion-icon.yellow { background: #fefce8; color: #eab308; }
+    .accordion-icon.purple { background: #f3e8ff; color: #a855f7; }
+    .accordion-icon.pink { background: #fdf2f8; color: #ec4899; }
+    .accordion-icon.orange { background: #fff7ed; color: #f97316; }
+    .accordion-icon.cyan { background: #ecfeff; color: #06b6d4; }
+    .accordion-icon.red { background: #fef2f2; color: #ef4444; }
+    
+    .accordion-title {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+      line-height: 1.4;
+    }
+    
+    .accordion-arrow {
+      color: #9ca3af;
+      transition: transform 0.2s;
+    }
+    
+    .accordion-item.open .accordion-arrow {
+      transform: rotate(180deg);
+    }
+    
+    .accordion-content {
+      display: none;
+      padding: 16px;
+      background: #fafafa;
+    }
+    
+    .accordion-item.open .accordion-content {
+      display: block;
+    }
+    
+    .accordion-text {
+      font-size: 13px;
+      color: #4b5563;
+      line-height: 1.8;
+    }
+    
+    .accordion-text p {
+      margin-bottom: 12px;
+    }
+    
+    .accordion-text p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .accordion-list {
+      margin: 12px 0;
+      padding-left: 0;
+      list-style: none;
+    }
+    
+    .accordion-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+    
+    .accordion-list li::before {
+      content: '•';
+      position: absolute;
+      left: 6px;
+      color: #1a237e;
+      font-weight: bold;
+    }
+    
+    .accordion-highlight {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 12px;
+      font-size: 12px;
+      color: #92400e;
+      line-height: 1.6;
+    }
+    
+    .accordion-subheading {
+      font-weight: bold;
+      color: #1a237e;
+      margin: 16px 0 8px;
+      font-size: 13px;
+    }
+    
+    .accordion-subheading:first-child {
+      margin-top: 0;
+    }
+    
+    /* フッター */
+    .footer-link {
+      text-align: center;
+      margin-top: 32px;
+    }
+    
+    .footer-link a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #6b7280;
+      text-decoration: none;
+      font-size: 13px;
+      padding: 12px 20px;
+      background: white;
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+    
+    .footer-link a:hover {
+      background: #f3f4f6;
+      color: #1a237e;
+    }
+    
+    /* レスポンシブ */
+    @media (min-width: 768px) {
+      .main {
+        padding: 32px 24px 60px;
+      }
+      
+      .intro {
+        padding: 28px;
+      }
+      
+      .intro-title {
+        font-size: 20px;
+      }
+      
+      .category-grid {
+        gap: 16px;
+      }
+      
+      .category-card {
+        padding: 24px 20px;
+      }
+      
+      .category-icon {
+        width: 56px;
+        height: 56px;
+      }
+      
+      .category-name {
+        font-size: 14px;
+      }
+      
+      .accordion-header {
+        padding: 16px 20px;
+      }
+      
+      .accordion-content {
+        padding: 20px;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .header {
+        padding: 20px 32px;
+      }
+      
+      .main {
+        max-width: 900px;
+      }
+      
+      .category-card:hover {
+        transform: translateY(-4px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <a href="index.html" class="back-btn">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <h1 class="header-title">カリキュラムとサポート体制</h1>
+    <div class="header-user">
+      <span class="material-icons">person</span>
+      <span id="navUserName"></span>
+    </div>
+<button class="hamburger-btn" onclick="openNav()">
+      <span class="material-icons">menu</span>
+    </button>
+
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="main">
+    <!-- イントロ -->
+    <section class="intro">
+      <h2 class="intro-title">
+        <i data-lucide="book-open" style="width:20px;height:20px;color:#1a237e;"></i>
+        EQAOの学習設計
+      </h2>
+      <p class="intro-text">
+        EQAOは「授業がある」だけの塾ではありません。<br><br>
+        総合型選抜は、志望理由書・活動・研究テーマ・小論文・面接・プレゼン・出願管理・併願戦略などが絡み合う入試です。<br><br>
+        だからEQAOは、個別授業・集団授業・管理体制・教材・面談・ポータル・連絡体制・コミュニティ・AIサポートが連動する<strong>「総合型選抜専用のフルスタック型システム」</strong>として設計されています。
+      </p>
+      <div class="intro-highlight">
+        💡 下記のカテゴリから気になる項目をタップしてご確認ください
+      </div>
+    </section>
+    
+    <!-- カテゴリ選択 -->
+    <div class="category-grid">
+      <div class="category-card active" onclick="showCategory('curriculum')">
+        <div class="category-icon">
+          <i data-lucide="graduation-cap" style="width:24px;height:24px;"></i>
+        </div>
+        <div class="category-name">カリキュラム</div>
+        <div class="category-count">13項目</div>
+      </div>
+      <div class="category-card" onclick="showCategory('support')">
+        <div class="category-icon">
+          <i data-lucide="users" style="width:24px;height:24px;"></i>
+        </div>
+        <div class="category-name">サポート体制</div>
+        <div class="category-count">12項目</div>
+      </div>
+      <div class="category-card" onclick="showCategory('program')">
+        <div class="category-icon">
+          <i data-lucide="calendar-days" style="width:24px;height:24px;"></i>
+        </div>
+        <div class="category-name">プログラム<br>イベント</div>
+        <div class="category-count">13項目</div>
+      </div>
+      <div class="category-card" onclick="showCategory('strength')">
+        <div class="category-icon">
+          <i data-lucide="star" style="width:24px;height:24px;"></i>
+        </div>
+        <div class="category-name">EQAOの強み</div>
+        <div class="category-count">6項目</div>
+      </div>
+    </div>
+    
+    <!-- カリキュラム -->
+    <div class="content-area active" id="content-curriculum">
+      <div class="content-header">
+        <div class="content-header-icon curriculum">
+          <i data-lucide="graduation-cap" style="width:20px;height:20px;"></i>
+        </div>
+        <h3 class="content-header-title">カリキュラム</h3>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon blue"><i data-lucide="user" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">完全オーダーメイド＋完全マンツーマン授業</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>EQAOの授業は、すべてが<strong>完全オーダーメイド</strong>で設計されています。</p>
+              <p>生徒一人ひとりの状況はバラバラであり、総合型選抜は「同じ教材・同じスケジュール」で勝てる仕組みではありません。</p>
+              <p>以下の要素を前提に、授業回数・カリキュラム内容をすべてカスタマイズします：</p>
+              <ul class="accordion-list">
+                <li>志望校の数・設定や提出書類の構成</li>
+                <li>出願スケジュール</li>
+                <li>必要科目（小論文／面接／プレゼン／活動／研究計画）</li>
+                <li>各ご家庭のご予算</li>
+              </ul>
+              <p>授業は原則すべて<strong>1対1（完全マンツーマン）</strong>。オンライン・対面どちらも対応可能です。</p>
+              <div class="accordion-highlight">
+                📍 オンライン8：対面2のハイブリッド比率が一般的。地方在住の方も同じクオリティで受講できます。
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon green"><i data-lucide="users" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">年間33回構成の集団授業</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>マンツーマン授業だけでなく、年間33回の<strong>集団授業</strong>も実施します。</p>
+              <p>個別最適化を行いながら、集団授業で「基礎ライン」を底上げすることで、学習効率と合格の再現性を最大化します。</p>
+              <ul class="accordion-list">
+                <li>1年間を通じて毎週同じ曜日に固定開催</li>
+                <li>基礎 → 応用 → 発展 のステップアップ方式</li>
+                <li>全授業をアーカイブ化、いつでも振り返り可能</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon yellow"><i data-lucide="calendar-check" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">スケジュール・出願・進捗の徹底可視化</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>志望校戦略・併願校戦略・出願スケジュールなどを<strong>徹底的に可視化</strong>し、抜け漏れゼロの体制を整えています。</p>
+              <ul class="accordion-list">
+                <li>志望校・併願校の出願期間一覧</li>
+                <li>二次試験の内容（小論文・面接・プレゼン・口頭試問など）</li>
+                <li>各科目ごとの「やるべきこと一覧」とチェックリスト</li>
+                <li>「いつまでにどの状態になっていれば良いか」スケジュール表</li>
+                <li>生徒の進捗状況を常時計測</li>
+              </ul>
+              <div class="accordion-highlight">
+                ⚠️ 総合型選抜は、努力していても"方向"がズレていると落ちます。だからEQAOは、努力量だけでなく、努力の方向と期限まで管理します。
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon purple"><i data-lucide="book-open" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">オーダーメイド＋独自問題集の教材</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>EQAOの教材は、市販品の寄せ集めではありません。過去データ・指導現場の実例・大学別傾向を踏まえ、すべてカスタマイズされた<strong>独自教材</strong>です。</p>
+              
+              <p class="accordion-subheading">小論文教材</p>
+              <ul class="accordion-list">
+                <li>基礎問題 → 応用問題 → 発展問題の三段階構成</li>
+                <li>過去の受験傾向を踏まえた"実戦形式"</li>
+              </ul>
+              
+              <p class="accordion-subheading">面接教材</p>
+              <ul class="accordion-list">
+                <li>想定質問リスト（定番質問・圧迫面接・深掘り質問）</li>
+                <li>「質問が想定外で答えられなかった」という失敗を防ぐ設計</li>
+              </ul>
+              
+              <p>その他にも、志望理由書、自己推薦書、レポートにおける独自開発教材とシステムを導入！</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon pink"><i data-lucide="play-circle" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">数百本の短尺動画教材</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>塾長・玉村がすべて解説した短尺動画が<strong>数百本</strong>。</p>
+              <ul class="accordion-list">
+                <li>基礎・応用・発展</li>
+                <li>志望理由書・小論文・面接</li>
+                <li>研究テーマ・活動の作り方</li>
+                <li>ツールの使い方</li>
+              </ul>
+              <p>基本、全動画に<strong>クイズ・ミニテスト</strong>が付属し、視聴状況も把握可能。見ていない生徒には必ず連絡します。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon orange"><i data-lucide="file-text" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">1000以上の文章教材・コラム・記事</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>LINEでの文章教材・コラム・記事配信など、すべてのコンテンツを閲覧できます。</p>
+              <p>その数はなんと<strong>1000を超えます</strong>。</p>
+              <p>ネットにはない、有益な情報が文章で全て把握可能です。動画と文章の両軸で理解を深められます。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon cyan"><i data-lucide="search" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">研究テーマ・論文・教授の探し方ツール一式</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>総合型選抜に必要なあらゆるツールを提供します。</p>
+              <ul class="accordion-list">
+                <li>研究テーマの見つけ方</li>
+                <li>先行研究の探し方・論文の読み方</li>
+                <li>教授リサーチの方法</li>
+                <li>課外活動の作り方</li>
+                <li>調査設計のやり方</li>
+              </ul>
+              <p>これらはすべて手順書としてまとめられています。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon red"><i data-lucide="database" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">過去データ（志望理由書・面接・過去問）閲覧可能</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>過去の志願者データを閲覧できるため、生徒の成長スピードが速くなります。</p>
+              <ul class="accordion-list">
+                <li>志望理由書・自己推薦書・レポート</li>
+                <li>面接の質問と回答例</li>
+                <li>各大学の過去問</li>
+              </ul>
+              <div class="accordion-highlight">
+                💡 「情報格差」を完全にゼロにする設計。生のリアルな情報を全て閲覧可能です！
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon blue"><i data-lucide="users-round" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">3〜5名のチーム制による多面的指導</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>EQAO最大の特徴が、<strong>担任チーム制（3〜4名担当）</strong>です。</p>
+              <p>担任1人＋複数名がローテーションしながら、多角的な視点で生徒を支えます。</p>
+              <ul class="accordion-list">
+                <li>相性が合わなければ交代OK</li>
+                <li>気に入った講師がいれば固定指名もOK（有料）</li>
+                <li>多面的なフィードバックが可能</li>
+                <li>進捗の見落としがゼロになる</li>
+              </ul>
+              <div class="accordion-highlight">
+                ⚠️ 総合型選抜は、「一人の指導者の視点」に偏ると危険。だからEQAOは"多面性"を仕組み化しています。
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon green"><i data-lucide="message-circle" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">月1回の担任面談＋代表精査体制</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>毎月、担任による<strong>進捗管理面談</strong>を実施します。</p>
+              <ul class="accordion-list">
+                <li>1ヶ月の振り返り</li>
+                <li>現状の課題の発見</li>
+                <li>今やるべきことの整理</li>
+                <li>メンタルケア・不安の解消</li>
+              </ul>
+              <p>面談内容はすべて生徒管理部署に共有され、最終的に<strong>代表の玉村が精査</strong>します。「担当任せにしない」ための仕組みです。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon yellow"><i data-lucide="clipboard-list" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">授業報告の完全透明化</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>授業が終わるたびに、詳細な授業・宿題報告が即送信されます。</p>
+              <ul class="accordion-list">
+                <li>何をやったか・どこでつまずいたか</li>
+                <li>宿題内容・次回までに必要な準備</li>
+                <li>取り組み姿勢（遅刻なども可視化）</li>
+              </ul>
+              <p>この報告は、<strong>生徒本人・保護者の双方に必ず共有</strong>されます。保護者が不安を感じる余地をゼロにします。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon purple"><i data-lucide="home" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">授業外学習（自宅学習）の報告と可視化</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>授業以外の学習もすべて報告してもらい、どれだけ努力したかを可視化します。</p>
+              <ul class="accordion-list">
+                <li>どの課題・問題をやったか</li>
+                <li>何が未完了か</li>
+                <li>進捗の遅れがどこにあるか</li>
+              </ul>
+              <p>「授業だけ頑張って、家で止まる」状態を作りません。すべてポータル上で可視化されます！</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon pink"><i data-lucide="heart-handshake" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">塾生交流会（月1回）</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>月1回、オンラインで塾生交流会（全体会）を開催しています。</p>
+              <ul class="accordion-list">
+                <li>他学年との交流</li>
+                <li>志望理由や研究テーマの共有</li>
+                <li>質問会・相談会</li>
+                <li>モチベーションの維持</li>
+              </ul>
+              <div class="accordion-highlight">
+                💡 総合型選抜は"孤独になった瞬間に崩れる"受験でもあります。だからEQAOは「一人で戦わない」コミュニティづくりを重視しています。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- サポート体制 -->
+    <div class="content-area" id="content-support">
+      <div class="content-header">
+        <div class="content-header-icon support">
+          <i data-lucide="users" style="width:20px;height:20px;"></i>
+        </div>
+        <h3 class="content-header-title">サポート体制</h3>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon green"><i data-lucide="message-square" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">月1回の担任進捗管理面談</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>担任による毎月の進捗管理面談（15〜30分）を実施します。</p>
+              <ul class="accordion-list">
+                <li>1ヶ月の振り返り</li>
+                <li>勉強・活動・書類の進度確認</li>
+                <li>取り組み姿勢の確認・課題発見</li>
+                <li>不安の解消・今月やるべき内容を明確化</li>
+              </ul>
+              <p>面談内容は、生徒管理部署 → 代表および運営へ共有され、最終的に代表がすべて精査し、支援方針を確認します。報告内容は保護者のメールにも、ポータルにも届きます。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon blue"><i data-lucide="user-check" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">塾長面談・三者面談も無料で実施</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>担任面談だけでなく、<strong>塾長面談・三者面談</strong>（生徒＋保護者）も、月1回／15〜30分／無料（オンライン）で実施できます。</p>
+              <p>塾長が直接進捗を確認することで、以下の見落としをゼロにします：</p>
+              <ul class="accordion-list">
+                <li>戦略のズレ・研究テーマの甘さ</li>
+                <li>書類の本質のズレ</li>
+                <li>メンタル面の不安・家庭での状況</li>
+                <li>課題の滞留</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon yellow"><i data-lucide="file-check" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">授業報告の完全公開</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>EQAOの大きな強みが<strong>授業報告の完全透明化</strong>です。</p>
+              <p>授業ごとに以下を詳細に記述し、生徒本人・保護者の双方へ必ず送信します：</p>
+              <ul class="accordion-list">
+                <li>何をやったか・どこでつまずいたか</li>
+                <li>どの部分が改善されているか</li>
+                <li>宿題／次回までの課題</li>
+                <li>遅刻の有無・取り組み姿勢</li>
+              </ul>
+              <p>保護者側から「何をやっているか分からない」「進んでいるのか心配」という状況が一切起こりません。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon purple"><i data-lucide="eye" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">遅刻・姿勢・取り組みの全管理</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>授業態度も含めてすべて可視化します。</p>
+              <ul class="accordion-list">
+                <li>遅刻・姿勢</li>
+                <li>非認知能力</li>
+                <li>書類の修正スピード</li>
+              </ul>
+              <p>これらは保護者にも共有されるため、家庭内でもサポートしやすくなります。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon orange"><i data-lucide="layout-dashboard" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">EQAO PORTAL（生徒専用プラットフォーム）</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>生徒専用の統合型プラットフォーム（EQAOポータル）があります。以下がすべて集約されています：</p>
+              <ul class="accordion-list">
+                <li>動画教材・文章教材・コラム・記事</li>
+                <li>過去の志望理由書・自己推薦書・レポート</li>
+                <li>過去の面接データ・過去問データ・各大学の傾向</li>
+                <li>課外活動ガイド・研究テーマ探索ガイド</li>
+                <li>面談・授業報告・進捗状況・チェックリスト</li>
+                <li>スケジュール一覧・公式ルール</li>
+              </ul>
+              <div class="accordion-highlight">
+                💡 生徒や保護者がこのポータルさえ見れば分かるシステムになっています。
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon cyan"><i data-lucide="message-circle" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">生徒個人専用LINEグループ</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>生徒は専用のLINEグループへ参加し、<strong>いつでも質問できます</strong>。原則3日以内に必ず返信。</p>
+              <ul class="accordion-list">
+                <li>小論文・面接の質問</li>
+                <li>研究テーマ・調べ方の相談</li>
+                <li>出願書類の記述の確認</li>
+                <li>課外活動の相談</li>
+              </ul>
+              <p>孤独な受験をさせません。わからないを放置することはNG。あなたしかいないLINEグループだからこそできる自由なコミュニケーション。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon pink"><i data-lucide="split" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">保護者専用LINE／生徒専用LINE（役割分離）</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>保護者専用LINEと生徒専用LINEの<strong>2種類</strong>があり、役割を完全に分離しています。</p>
+              
+              <p class="accordion-subheading">保護者LINE</p>
+              <ul class="accordion-list">
+                <li>塾からの公式連絡配信用</li>
+                <li>個別の連絡、請求・手続き</li>
+              </ul>
+              
+              <p class="accordion-subheading">生徒LINE</p>
+              <ul class="accordion-list">
+                <li>塾からの公式連絡配信用</li>
+              </ul>
+              
+              <p>連絡の混線や取りこぼしを防ぎます。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon green"><i data-lucide="phone-off" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">問い合わせは電話不要（すべてLINEで完結）</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>EQAOは電話受付を基本的に行わず、公式LINEおよび専用グループLINEで完結します。</p>
+              <ul class="accordion-list">
+                <li>すぐ連絡できる</li>
+                <li>記録が残る</li>
+                <li>情報が整理される</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon blue"><i data-lucide="plus-circle" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">追加授業（コマ追加）も自由に可能</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>必要に応じて、授業コマを追加して強化できます：</p>
+              <ul class="accordion-list">
+                <li>出願前・小論文の直前・面接前</li>
+                <li>研究テーマの追い込み</li>
+                <li>志望理由書の最終仕上げ</li>
+                <li>併願の増加</li>
+              </ul>
+              <p>生徒の状況に合わせた柔軟な運営を重視しています。</p>
+              <div class="accordion-highlight">
+                📍 振替は6時間前申告で可能！
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon yellow"><i data-lucide="bot" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">AIエージェントによる24時間質問サポート</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>全情報を<strong>AIエージェント</strong>に搭載しています。</p>
+              <ul class="accordion-list">
+                <li>サービス・カリキュラムの質問</li>
+                <li>動画教材・書類の質問</li>
+                <li>調べ方・過去データの探し方</li>
+                <li>面接対策の質問</li>
+              </ul>
+              <p>生徒・保護者はいつでも質問でき、<strong>EQAO専用のAI</strong>が即座に回答します。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon purple"><i data-lucide="book" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">ルール・基本事項はすべて閲覧可能</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>生徒保護者向けの以下は、すべて最新状態で公開されています：</p>
+              <ul class="accordion-list">
+                <li>基本事項集・ルールブック</li>
+                <li>面談の流れ・提出物一覧</li>
+                <li>書類作成の手順・注意点</li>
+                <li>追加コース案内・併願校管理</li>
+                <li>活動ガイド</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon red"><i data-lucide="video" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">動画教材のリクエスト制度</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>生徒は「このテーマの動画を作ってほしい」というリクエストを送れます。</p>
+              <ul class="accordion-list">
+                <li>この大学の過去問解説が欲しい</li>
+                <li>この学部の志望理由書の書き方を知りたい</li>
+                <li>この研究テーマの深掘り動画が欲しい</li>
+              </ul>
+              <p>EQAOは柔軟に対応し、動画教材を追加していきます。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- プログラム・イベント -->
+    <div class="content-area" id="content-program">
+      <div class="content-header">
+        <div class="content-header-icon program">
+          <i data-lucide="calendar-days" style="width:20px;height:20px;"></i>
+        </div>
+        <h3 class="content-header-title">プログラム・イベント</h3>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon yellow"><i data-lucide="trophy" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">プレゼン大会 MCFF（活動実績づくり）</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>生徒が学びを発信し、<strong>活動実績として活用できるプレゼン大会MCFF</strong>を運営しています。</p>
+              <ul class="accordion-list">
+                <li>生徒自身がテーマ設定</li>
+                <li>研究内容・活動内容を整理して発表</li>
+                <li>審査・フィードバックあり</li>
+                <li>他の受験生の発表から学べる</li>
+                <li>活動実績として書類に記載可能</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon blue"><i data-lucide="lightbulb" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">塾内イベント主催制度（EQAO MIZUKARA）</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>生徒が主体的にイベントを立ち上げることが可能です。</p>
+              <ul class="accordion-list">
+                <li>学校での課題をテーマにしたイベント</li>
+                <li>社会問題を扱うオンライン会議</li>
+                <li>交流会・プレゼン企画の主催</li>
+                <li>インタビュー企画・クラブ活動型イベント</li>
+              </ul>
+              <p>こうした自主企画が活動実績になり、総合型選抜で大きなアピールポイントになります。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon orange"><i data-lucide="tent" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">EQAO CAMP（2泊3日の書類集中合宿）</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>EQAOの夏の名物プログラムが、2泊3日の<strong>EQAO CAMP</strong>（書類制作集中合宿）です。</p>
+              <ul class="accordion-list">
+                <li>2泊3日で書類を徹底的に仕上げる</li>
+                <li>塾長・講師が常に添削</li>
+                <li>全国の仲間と取り組むため集中力が上がる</li>
+                <li>研究テーマの深掘りが一気に進む</li>
+                <li>志望理由書・自己推薦書の完成度が飛躍的に上がる</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon green"><i data-lucide="languages" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">EQAO ENGLISH（英語資格取得プログラム）</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>英語資格取得を支援する専用プログラムがあります。</p>
+              <ul class="accordion-list">
+                <li>英検・IELTS・TEAP対応</li>
+                <li>生徒のレベルに合わせた学習計画</li>
+                <li>英検2級〜準1級まで対応</li>
+                <li>IELTSのスピーキング・ライティングも対策</li>
+                <li>小論文・面接の内容と連動可能</li>
+              </ul>
+              <p>「総合型 × 英語資格」を最速で仕上げるプログラムです。コマを購入することで対策可能です。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon purple"><i data-lucide="pencil" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">EQAO IPPAN（一般入試対策）＋評定向上</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>一般入試を併願するための対策プログラム（<strong>EQAO IPPAN</strong>）も用意しています。</p>
+              <ul class="accordion-list">
+                <li>共通テスト対策</li>
+                <li>一般入試の英語・国語対策</li>
+                <li>数学・理科など必要科目の個別指導</li>
+              </ul>
+              
+              <p class="accordion-subheading">評定（内申）向上プログラム</p>
+              <ul class="accordion-list">
+                <li>レポート作成支援・学校提出物の添削</li>
+                <li>テスト勉強方法の指導</li>
+                <li>提出物管理の仕組み化</li>
+                <li>科目ごとの学習戦略作り</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon cyan"><i data-lucide="plane" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">カンボジアスタディツアー（EQAO STUDY TOUR）</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>夏に<strong>カンボジアスタディツアー</strong>（教育・国際協力プログラム）を実施しています。</p>
+              <ul class="accordion-list">
+                <li>海外での教育支援を体験</li>
+                <li>国際問題を現地で学ぶ</li>
+                <li>海外でのフィールドワーク体験</li>
+                <li>活動実績として高評価</li>
+                <li>書類にも面接にも強く反映可能</li>
+              </ul>
+              <p>国際系志望の生徒に特に人気のプログラムです。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon pink"><i data-lucide="clipboard-check" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">EQAO模試（総合型選抜を点数化）</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>「総合型選抜の実力」を可視化するために、独自の<strong>EQAO模試</strong>を運営しています。</p>
+              
+              <p class="accordion-subheading">測定項目</p>
+              <ul class="accordion-list">
+                <li>小論文・志望理由書・自己推薦書</li>
+                <li>面接・口頭試問・プレゼン</li>
+                <li>思考力・論理性・表現力</li>
+              </ul>
+              
+              <p>総合型は本来「数値化しづらい」入試ですが、EQAO模試はそれを点数化・可視化。現在地が明確化し、合格までの距離が見えます。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon red"><i data-lucide="book-marked" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">EQAO BOOK（独自書籍）による学習支援</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>EQAOは独自に書籍も出版しています。</p>
+              <ul class="accordion-list">
+                <li>総合型選抜の攻略法</li>
+                <li>志望理由書の書き方</li>
+              </ul>
+              <p>出版物を通して、体系的に学べる環境を整えています。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon blue"><i data-lucide="file-video" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">小論文の解説動画</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>小論文に関しては、基礎・応用・発展すべてに対応した解説動画があります。</p>
+              <ul class="accordion-list">
+                <li>書き方・思考法</li>
+                <li>データの読み取り・構成の作り方</li>
+                <li>具体例の選び方</li>
+                <li>過去問解説・合格者の思考法</li>
+              </ul>
+              <p>短尺で分かりやすく、すべてアーカイブで視聴できます。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon green"><i data-lucide="users" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">コミュニティづくり（塾生交流会・イベント）</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>EQAOはコミュニティも重視しています。</p>
+              <ul class="accordion-list">
+                <li>月1回の塾生交流会</li>
+                <li>相談会</li>
+                <li>同学年・他学年との交流</li>
+                <li>志望校別コミュニティ</li>
+              </ul>
+              <p>孤独な受験にならない環境づくりを徹底しています。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon yellow"><i data-lucide="party-popper" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">合格後イベント（EQAO PARTY FOR NEXT STAGE）</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>合格後には<strong>EQAO PARTY（NEXT STAGE）</strong>を開催します。</p>
+              <ul class="accordion-list">
+                <li>合格を祝う会</li>
+                <li>仲間と過ごす最後のイベント</li>
+                <li>大学生活のアドバイス</li>
+                <li>未来のキャリアを語る場</li>
+                <li>EQAOでの学びを振り返る時間</li>
+              </ul>
+              <p>合格して終わりではなく、「合格のその先」まで見据えたサポートです。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon orange"><i data-lucide="heart" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">試験当日の応援体制</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>EQAOは試験当日に<strong>スタッフが現地へ応援に行く</strong>というユニークな体制を持っています。</p>
+              <ul class="accordion-list">
+                <li>受験当日のメンタルケア</li>
+                <li>ギフトや応援メッセージ</li>
+                <li>不安を取り除くサポート</li>
+                <li>試験会場前で伴走</li>
+              </ul>
+              <div class="accordion-highlight">
+                💪 最後の最後まで、生徒を一人にしません。
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon purple"><i data-lucide="map-pin" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">EQAO FIELD WORK BODY制度</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>フィールドワークをサポートする制度です。現地調査や取材活動をサポートし、活動実績につなげます。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- EQAOの強み -->
+    <div class="content-area" id="content-strength">
+      <div class="content-header">
+        <div class="content-header-icon strength">
+          <i data-lucide="star" style="width:20px;height:20px;"></i>
+        </div>
+        <h3 class="content-header-title">EQAOの強み</h3>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon pink"><i data-lucide="shield-check" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">他塾との違い ― EQAOの位置づけ</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>総合型選抜はこの十年で一気に広まり、「総合型選抜専門」と名乗る塾も急増しています。</p>
+              <p>しかしその中には、「看板だけが専門」で、実際には浅い知識や経験しか持たない塾も少なくありません。</p>
+              <p>EQAOは<strong>「現場で積み上げた実践」と「研究に基づいた理論」</strong>を土台に、本物の総合型選抜対策を構築しています。</p>
+              <p>塾長自身の失敗と逆転合格の経験を出発点に、5年以上にわたり数百人の受験生を指導。さらに毎日4時間以上の研究を今なお継続し、その成果をカリキュラムとして形にしています。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon blue"><i data-lucide="layers" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">カリキュラム面 ― 勝てる設計の中身</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>全員を必ず基礎ラインまで引き上げる仕組みと、その後に一人ひとりの個性に応じて徹底的に仕上げる仕組み。この<strong>二段構え</strong>が最大の特徴です。</p>
+              
+              <p class="accordion-subheading">基礎均一化（80％ラインへの底上げ）</p>
+              <p>プロ講師による解説動画、ステップアップ式の動画教材、オンライン集団授業、独自の進捗管理シートで、入塾時期やスタート地点に関わらず、誰もが同じ水準に到達できます。</p>
+              
+              <p class="accordion-subheading">オーダーメイドのマンツーマン指導（残り20％の仕上げ）</p>
+              <p>研究テーマ決め、志望校や併願校の設定、全書類の作成と添削、面接練習やプレゼン資料作成など、受験に必要なあらゆる要素を一対一で丁寧に支援します。</p>
+              
+              <p class="accordion-subheading">オールインクルーシブ制</p>
+              <p>「書類だけ」「面接だけ」といった部分指導は原則行いません。全体を網羅的に仕上げることこそが、合格の再現性を高める唯一の方法です。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon green"><i data-lucide="network" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">指導体制面 ― 支える仕組み</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>受験生を一人の講師に任せきりにせず、多層的なサポート網を作り、<strong>誰も孤独にしない環境</strong>を整えています。</p>
+              <ul class="accordion-list">
+                <li>オンラインとオフラインのハイブリッド授業（約83%オンライン／約17%対面）</li>
+                <li>担任＋伴走メンター＋コンシェルジュの多層サポート</li>
+                <li>社会人講師と大学生講師のハイブリッド</li>
+                <li>メンター交代制度・指名制度</li>
+                <li>塾長＋専門家によるカリキュラム設計</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon yellow"><i data-lucide="bar-chart-3" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">実績面 ― 数字と透明性</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>EQAOは、関関同立・日東駒専から、慶應・上智・GMARCHまで幅広い大学に多数の合格者を輩出しています。</p>
+              <p><strong>特に上智大学の合格率と合格者数は業界トップクラス</strong>を誇ります。</p>
+              <p>重要なのは、数字だけでなく、合格者インタビューや体験談を公開し、「どう取り組み、どう合格に至ったか」を明示している点です。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon purple"><i data-lucide="heart" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">理念面 ― 合格以上の価値</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>EQAOの理念は<strong>「合格だけでなく、人としての成長を支えること」</strong>です。</p>
+              <p>総合型選抜は、単なる学力試験ではなく「自分を表現する力」「社会に関わる姿勢」を問う入試です。</p>
+              <p>だからEQAOは、認知能力の向上と同時に、<strong>非認知能力（自己決定力・継続力・探究心）</strong>を育てることに重点を置いています。</p>
+              <p>AIが急速に発展する時代だからこそ、人間にしかできない「考える力」「表現する力」「共感する力」を育み、大学入学後も社会に出ても通用する力を備えさせます。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-icon orange"><i data-lucide="user" style="width:16px;height:16px;"></i></div>
+            <span class="accordion-title">代表面 ― 現地主義・実践主義</span>
+            <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-text">
+              <p>EQAOの代表は、自身が<strong>「総合型選抜ネイティブ」</strong>として挑戦した経験を持ちます。</p>
+              <p>制度がまだ浸透していない時期に挑戦し、情報不足や不十分な指導に苦しみ、不合格を経験しました。しかしその悔しさを糧に徹底的に研究し、数週間で逆転合格を果たしました。</p>
+              <p>成功だけではなく失敗も経験したからこそ、受験生の不安や焦りに深く共感できます。そして「同じ思いをさせたくない」という強い決意で塾を設立しました。</p>
+              <div class="accordion-highlight">
+                💡 塾を「お金儲け」ではなく「生徒の将来を守る」ために運営し、現場に立ち続けています。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- フッター -->
+    <div class="footer-link">
+      <a href="index.html">
+        <span class="material-icons" style="font-size: 16px;">arrow_back</span>
+        ホームに戻る
+      </a>
+    </div>
+  </main>
+  
+  <script>
+    // Lucideアイコン初期化
+    document.addEventListener('DOMContentLoaded', function() {
+      lucide.createIcons();
+      setNavUserName();
+    });
+    
+    // カテゴリ切り替え
+    function showCategory(category) {
+      document.querySelectorAll('.category-card').forEach((card, index) => {
+        card.classList.remove('active');
+        const categories = ['curriculum', 'support', 'program', 'strength'];
+        if (categories[index] === category) {
+          card.classList.add('active');
+        }
+      });
+      
+      document.querySelectorAll('.content-area').forEach(area => {
+        area.classList.remove('active');
+      });
+      document.getElementById('content-' + category).classList.add('active');
+      
+      setTimeout(() => {
+        document.getElementById('content-' + category).scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 100);
+    }
+    
+    // アコーディオン開閉
+    function toggleAccordion(header) {
+      const item = header.parentElement;
+      const wasOpen = item.classList.contains('open');
+      
+      if (wasOpen) {
+        item.classList.remove('open');
+      } else {
+        item.classList.add('open');
+      }
+    }
+
+    // ナビゲーションメニュー
+
+    function setNavUserName() {
+      const studentName = localStorage.getItem('eqao_studentName') || '';
+      const navUserName = document.getElementById('navUserName');
+      const navHeaderUser = document.getElementById('navHeaderUser');
+      
+      if (navUserName) navUserName.textContent = studentName;
+      if (navHeaderUser) navHeaderUser.textContent = studentName ? studentName + ' さん' : 'メニュー';
+    }
+  </script>
+  <script src="js/nav-menu.js"></script>
+</body>
+</html>

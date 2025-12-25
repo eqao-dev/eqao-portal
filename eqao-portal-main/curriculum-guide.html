@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>科目詳細ガイド - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #f8f9fc;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-btn:hover { background: rgba(255,255,255,0.25); }
+
+    .header-title { font-size: 17px; font-weight: 700; }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* イントロセクション */
+    .intro-section {
+      background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+      border-radius: 16px;
+      padding: 24px 20px;
+      margin-bottom: 24px;
+    }
+
+    .intro-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .intro-title .material-icons {
+      font-size: 24px;
+    }
+
+    .intro-text {
+      font-size: 14px;
+      line-height: 1.9;
+      color: #333;
+    }
+
+    /* Why-How-Whatセクション */
+    .philosophy-section {
+      background: white;
+      border-radius: 16px;
+      padding: 24px 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .philosophy-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .philosophy-header-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: #1a237e;
+      margin-bottom: 8px;
+    }
+
+    .philosophy-header-subtitle {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .philosophy-flow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .philosophy-flow-item {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .philosophy-flow-arrow {
+      color: #1a237e;
+      font-size: 24px;
+    }
+
+    .philosophy-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .philosophy-card {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 20px;
+      border-left: 4px solid #1a237e;
+    }
+
+    .philosophy-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .philosophy-card-number {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .philosophy-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a237e;
+    }
+
+    .philosophy-card-text {
+      font-size: 13px;
+      line-height: 1.9;
+      color: #444;
+    }
+
+    .philosophy-card-list {
+      margin-top: 12px;
+      padding-left: 20px;
+    }
+
+    .philosophy-card-list li {
+      font-size: 13px;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 4px;
+    }
+
+    /* 注意事項ボックス */
+    .note-box {
+      background: #fff8e1;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      border-left: 4px solid #ff8f00;
+    }
+
+    .note-box-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ff8f00;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .note-box-title .material-icons {
+      font-size: 18px;
+    }
+
+    .note-box-text {
+      font-size: 13px;
+      line-height: 1.8;
+      color: #666;
+    }
+
+    .note-box-list {
+      margin-top: 8px;
+      padding-left: 20px;
+    }
+
+    .note-box-list li {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    /* 科目セクション */
+    .subject-section {
+      margin-bottom: 16px;
+    }
+
+    .subject-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 16px 20px;
+      border-radius: 12px 12px 0 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: background 0.3s;
+    }
+
+    .subject-header:hover {
+      background: linear-gradient(135deg, #283593 0%, #3949ab 100%);
+    }
+
+    .subject-number {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .subject-title {
+      flex: 1;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .subject-toggle {
+      font-size: 24px;
+      transition: transform 0.3s;
+    }
+
+    .subject-toggle.open {
+      transform: rotate(180deg);
+    }
+
+    .subject-content {
+      background: white;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .subject-content.open {
+      max-height: 5000px;
+    }
+
+    .subject-content-inner {
+      padding: 20px;
+    }
+
+    .topic-card {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      border-left: 3px solid #00897B;
+    }
+
+    .topic-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .topic-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .topic-title .material-icons {
+      font-size: 18px;
+      color: #00897B;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .topic-desc {
+      font-size: 13px;
+      line-height: 1.8;
+      color: #555;
+      padding-left: 26px;
+    }
+
+    /* フッター */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #999;
+      font-size: 11px;
+    }
+
+    /* ナビゲーションリンク */
+    .nav-link-section {
+      background: white;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #1a237e;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-link .material-icons {
+      font-size: 20px;
+    }
+
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 480px) {
+      .philosophy-flow {
+        flex-direction: column;
+      }
+      .philosophy-flow-arrow {
+        transform: rotate(90deg);
+      }
+      .subject-title {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="curriculum.html" class="back-btn">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <h1 class="header-title">科目詳細ガイド</h1>
+    <button class="hamburger-btn" onclick="openNav()">
+      <span class="material-icons">menu</span>
+    </button>
+
+  </header>
+
+  <div class="container">
+    <!-- ナビゲーションリンク -->
+    <div class="nav-link-section">
+      <a href="curriculum.html" class="nav-link">
+        <span class="material-icons">arrow_back</span>
+        授業の流れに戻る
+      </a>
+    </div>
+
+    <!-- イントロ -->
+    <div class="intro-section">
+      <h2 class="intro-title">
+        <span class="material-icons">menu_book</span>
+        科目詳細ガイドについて
+      </h2>
+      <p class="intro-text">
+        EQAOの個別授業における"科目"とは、単なる作業の羅列ではなく、<strong>「なぜそれを行うのか」「どんな目的で存在しているのか」</strong>という本質を軸に構築されています。<br><br>
+        このガイドでは、授業で扱う10大科目の詳細と、EQAOが大切にしている思考の順序を解説します。
+      </p>
+    </div>
+
+    <!-- Why-How-What -->
+    <div class="philosophy-section">
+      <div class="philosophy-header">
+        <h3 class="philosophy-header-title">EQAOの思考順序</h3>
+        <p class="philosophy-header-subtitle">授業を担当する際は、常にこの順で考えます</p>
+      </div>
+
+      <div class="philosophy-flow">
+        <div class="philosophy-flow-item">Why（なぜ）</div>
+        <span class="material-icons philosophy-flow-arrow">arrow_forward</span>
+        <div class="philosophy-flow-item">How（どうやって）</div>
+        <span class="material-icons philosophy-flow-arrow">arrow_forward</span>
+        <div class="philosophy-flow-item">What（何を）</div>
+      </div>
+
+      <div class="philosophy-cards">
+        <div class="philosophy-card">
+          <div class="philosophy-card-header">
+            <div class="philosophy-card-number">1</div>
+            <div class="philosophy-card-title">「なぜ（Why）」を最も重視する理由</div>
+          </div>
+          <p class="philosophy-card-text">
+            科目ごとに "なぜそれをやらなければならないのか" を明確に伝えることで、生徒は表面の作業ではなく <strong>背後にある構造・目的・意味</strong> を理解できます。
+          </p>
+          <ul class="philosophy-card-list">
+            <li>その科目が存在する必然性</li>
+            <li>科目を行うことで何が変わるのか</li>
+            <li>受験全体のどの工程と連動しているのか</li>
+            <li>他の科目とどう関係するのか</li>
+          </ul>
+          <p class="philosophy-card-text" style="margin-top: 12px;">
+            こうした「なぜ」を理解した生徒は、作業が自走化し、理解が深まり、書類・小論文・面接での安定感が飛躍的に高まります。
+          </p>
+        </div>
+
+        <div class="philosophy-card">
+          <div class="philosophy-card-header">
+            <div class="philosophy-card-number">2</div>
+            <div class="philosophy-card-title">「どうやって（How）」は目的達成のための手段</div>
+          </div>
+          <p class="philosophy-card-text">
+            「なぜ」を理解した上で、初めて「どうやって」が意味を持ちます。
+          </p>
+          <ul class="philosophy-card-list">
+            <li>何をどの順番でやるのか</li>
+            <li>どんな視点・論理で取り組むのか</li>
+            <li>どのツール・資料を使うのか</li>
+            <li>どのように修正・改善していくのか</li>
+          </ul>
+          <p class="philosophy-card-text" style="margin-top: 12px;">
+            科目のHowは、生徒が迷わないように導くための"具体的な実施方法"であり、メンターは必ず <strong>基準・型・プロセス</strong> を意識して説明します。
+          </p>
+        </div>
+
+        <div class="philosophy-card">
+          <div class="philosophy-card-header">
+            <div class="philosophy-card-number">3</div>
+            <div class="philosophy-card-title">「何を（What）」は生徒が手を動かす具体的作業</div>
+          </div>
+          <p class="philosophy-card-text">
+            科目ごとに何をやるのかは多岐に渡りますが、重要なのは<strong>「What単体で完結させない」</strong>というEQAOの思想です。
+          </p>
+          <ul class="philosophy-card-list">
+            <li>過去の振り返りを書く</li>
+            <li>教授の研究を読む</li>
+            <li>小さな研究活動を実践する</li>
+            <li>小論文を解き、フィードバックを受ける</li>
+            <li>志望理由書を構成ごとに分解して書く</li>
+            <li>面接100問を言語化する</li>
+          </ul>
+          <p class="philosophy-card-text" style="margin-top: 12px;">
+            これらはすべて独立しているのではなく、Whyから連続した一貫した道筋の上に置かれています。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 注意事項 -->
+    <div class="note-box">
+      <div class="note-box-title">
+        <span class="material-icons">info</span>
+        科目は"包括的なカテゴリ"です
+      </div>
+      <p class="note-box-text">
+        授業で扱った内容が必ず1つの科目に完全一致するとは限りません。生徒ごとに進行状況や課題が違うため、科目はあくまで「この内容はこのカテゴリに該当する」という包括的な枠として扱います。
+      </p>
+      <ul class="note-box-list">
+        <li>科目は目安であり、授業を制限するものではない</li>
+        <li>内容が複数科目にまたがる場合もある</li>
+        <li>生徒の進捗に合わせて扱う順番は柔軟に前後してよい</li>
+      </ul>
+    </div>
+
+    <!-- 10大科目 -->
+    <h2 style="font-size: 18px; font-weight: 700; color: #1a237e; margin-bottom: 16px; padding-left: 4px;">10大科目 詳細</h2>
+
+    <!-- 大科目①：全体像理解・進路理解 -->
+    <div class="subject-section">
+      <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-number">①</div>
+        <div class="subject-title">全体像理解・進路理解</div>
+        <span class="material-icons subject-toggle">expand_more</span>
+      </div>
+      <div class="subject-content">
+        <div class="subject-content-inner">
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              総合型選抜の全体理解
+            </div>
+            <p class="topic-desc">総合型選抜とは何か、従来入試との違い、大学側が見ている評価軸を体系的に理解する科目です。最終成果物（書類・面接・小論文）までの全体像を先に把握し、逆算の軸を作ります。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              評定平均と英語資格の位置づけ理解
+            </div>
+            <p class="topic-desc">評定・英語資格がどのように扱われるのか、最低ラインと加点ポイントを理解します。自分がどの程度有利/不利か、どこまで対策が必要かの"現実"を可視化します。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              志望校・併願校の探索方法
+            </div>
+            <p class="topic-desc">大学→学部→学科→教授→授業の順で調べる"検索動線"と判断基準を学びます。併願校の役割や「入れ物としての併願校ではなく戦略的併願」の考え方を理解します。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              教授研究・授業内容の調べ方
+            </div>
+            <p class="topic-desc">公式サイト・シラバス・研究業績・科研費情報から、教授の専門性を読み解く科目です。"教授＝大学の思想そのもの"であるという前提で、マッチング軸を作ります。また、なぜそれが必要かも解説。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              年間ロードマップの構築
+            </div>
+            <p class="topic-desc">自己分析→研究テーマ→書類→小論文→面接の流れを時系列で見える化します。"今どこにいるか／次に何をするか"を迷わず進める進路地図を作ります。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 大科目②：自己分析・現状把握・原材料抽出 -->
+    <div class="subject-section">
+      <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-number">②</div>
+        <div class="subject-title">自己分析・現状把握・原材料抽出</div>
+        <span class="material-icons subject-toggle">expand_more</span>
+      </div>
+      <div class="subject-content">
+        <div class="subject-content-inner">
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              過去の振り返り（ライフライン分析）
+            </div>
+            <p class="topic-desc">成功体験・失敗体験・感情の山谷を整理し、価値観の根源を特定します。この科目で「自分の物語の論理的説明」ができるようになります。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              現在の自己理解と価値観整理
+            </div>
+            <p class="topic-desc">興味・強み・弱み・課題・モチベーション要因を言語化します。"なぜ自分はこの分野を目指すのか"の中核がここで固まります。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              アイデンティティ確立
+            </div>
+            <p class="topic-desc">Who am I / Why me / What should I do を構造化する科目です。大学に提出する自己像の"軸"をブレなくします。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              評定・英語資格の現状整理と目標設定
+            </div>
+            <p class="topic-desc">現状値と目標値を比較し、到達までに必要なタスクを明確化します。学習計画・資格計画をこの段階で確定させます。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              活動歴の棚卸し
+            </div>
+            <p class="topic-desc">これまでの学校内外の活動を全て書き出し、意味付けを行います。表面的な活動ではなく、"その行動が示す性格・強み"を抽出します。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              研究テーマに繋がる素材抽出
+            </div>
+            <p class="topic-desc">「自分だからこそ語れるテーマ」を構築するための原材料を揃えます。興味・強み・経験・課題意識をクロスさせて仮説案を複数作ります。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 大科目③：研究テーマ・志望校マッチング -->
+    <div class="subject-section">
+      <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-number">③</div>
+        <div class="subject-title">研究テーマ・志望校マッチング</div>
+        <span class="material-icons subject-toggle">expand_more</span>
+      </div>
+      <div class="subject-content">
+        <div class="subject-content-inner">
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              合格者事例の理解（書類・面接・自己分析）
+            </div>
+            <p class="topic-desc">過去の合格者の共通項を分析し、評価される構造を学びます。"大学が何を求めているか"を具体例から理解する科目です。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              研究テーマの意義理解
+            </div>
+            <p class="topic-desc">研究テーマが総合型選抜の核心である理由と、どこで使うのかを整理します。書類・面接・小論文すべてに必要であることを実感してもらいます。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              研究テーマ探索/深掘り（クロス/ラテラルシンキング）
+            </div>
+            <p class="topic-desc">自己分析素材からテーマ候補を複数生み出す思考技法を実践します。学術性・独自性・実現可能性を満たすテーマに絞り込みます。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              研究ツールの使い方（論文検索・ResearchMap等）
+            </div>
+            <p class="topic-desc">論文の探し方・教授研究の読み方・先行研究との関係を学びます。"ただの興味"を"学術的主張"へ変換する手法を習得します。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              仮説検証とテーマ深掘り
+            </div>
+            <p class="topic-desc">リサーチクエスチョン→仮説→検証→再設定の思考過程を学びます。大学で学ぶ姿勢を示す"学術的筋力"を鍛えるフェーズです。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              大学・学部・教授とのマッチング精査
+            </div>
+            <p class="topic-desc">研究テーマと大学の理念・カリキュラム・教授研究を照合します。"その大学でなければならない理由"を構造的に作ります。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              併願校の戦略設計
+            </div>
+            <p class="topic-desc">倍率・試験方式・専願/併願可否を踏まえて併願戦略を作ります。第一志望を軸にズレない併願構造を持たせます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 大科目④：研究実践 -->
+    <div class="subject-section">
+      <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-number">④</div>
+        <div class="subject-title">研究実践</div>
+        <span class="material-icons subject-toggle">expand_more</span>
+      </div>
+      <div class="subject-content">
+        <div class="subject-content-inner">
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              研究テーマの実践
+            </div>
+            <p class="topic-desc">フィールドワーク・簡易調査・読書分析など小さな研究を実施します。"口だけではない"実践的証拠を作る大事な科目です。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              先行研究・論文・書籍の読み込み
+            </div>
+            <p class="topic-desc">関連領域の知識と専門用語を吸収し、主張の根拠を補強します。大学レベルの学術的思考の基礎を身につけます。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              ポートフォリオ・プロフィール整理
+            </div>
+            <p class="topic-desc">活動歴・研究・強みを一枚で伝えられる整理を行います。面接・書類での説得力が劇的に上がります。自己推薦書や活動報告で使用します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 大科目⑤：小論文準備 -->
+    <div class="subject-section">
+      <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-number">⑤</div>
+        <div class="subject-title">小論文準備</div>
+        <span class="material-icons subject-toggle">expand_more</span>
+      </div>
+      <div class="subject-content">
+        <div class="subject-content-inner">
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              小論文の本質理解
+            </div>
+            <p class="topic-desc">小論文が「思考の試験」であることを理解し、大学が求める視点を掴みます。結論・理由・根拠・反論・再主張の論理構造を学びます。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              小論文でやってはいけないこと
+            </div>
+            <p class="topic-desc">感情論・一般論・断定・浅い例示など、落ちる書き方を排除します。"伸ばす前に削る"ことで文章が一気に整います。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              小論文テクニック（段落構成・型理解）
+            </div>
+            <p class="topic-desc">結論 → 理由 → 具体例 → 反論 → 結論 の構成を実践します。どの大学でも使える共通型を身につけます。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              小論文基礎演習
+            </div>
+            <p class="topic-desc">短文・基礎課題を通して思考のスピードと文章の基礎体力を付けます。まずは"書ける状態"を作ります。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              小論文応用演習
+            </div>
+            <p class="topic-desc">資料読解・データ分析・要約・複雑テーマなど応用課題に取り組みます。"大学レベルの文章力"へ引き上げる科目です。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              小論文過去問演習
+            </div>
+            <p class="topic-desc">志望校の癖（論調・形式・事例の扱い・文字数）を徹底把握します。"その大学に合わせた書き方"へ最適化します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 大科目⑥：書類作成 -->
+    <div class="subject-section">
+      <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-number">⑥</div>
+        <div class="subject-title">書類作成（志望理由書と自己推薦書）</div>
+        <span class="material-icons subject-toggle">expand_more</span>
+      </div>
+      <div class="subject-content">
+        <div class="subject-content-inner">
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              志望理由書の本質理解
+            </div>
+            <p class="topic-desc">志望理由書は「研究テーマ×大学の思想の接続」で作ることを理解します。自己PRではなく、学術的志向で構築する姿勢を固めます。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              志望理由書の禁止事項理解
+            </div>
+            <p class="topic-desc">抽象論・熱量だけ・関係ない経験の羅列を排除します。合格者が絶対にしない"落ちる要素"を先に除去します。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              志望理由書テクニック（構成・段落）
+            </div>
+            <p class="topic-desc">きっかけ → 課題意識 → 試行錯誤 → 学びの必要性 → マッチング → 学習計画。この"黄金構成"を型として習得します。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              大学調査（教授・授業・理念）
+            </div>
+            <p class="topic-desc">大学公式資料を深読みし、志望理由書に必要な情報を抽出します。"その大学じゃないと意味がない"根拠を作ります。他大学も調べて比較調査を行います。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              志望理由書実践と修正
+            </div>
+            <p class="topic-desc">実際に書き、添削を重ね、論理と熱量を最適化します。面接と書類の一貫性も同時に整えます。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              自己推薦書の構成理解
+            </div>
+            <p class="topic-desc">自己推薦書の目的・位置づけ・大学側の評価観点を整理します。自己PRではなく"大学が見たい要素"を理解します。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              自己推薦書の禁止事項
+            </div>
+            <p class="topic-desc">主観の羅列・感情依存・長文化を防ぎます。読み手にストレスを与えない論理構造を作ります。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              自己アピール技法
+            </div>
+            <p class="topic-desc">強み→根拠→結果→学び という構造でアピールを作ります。抽象語ではなく"行動と言語化"で説得力を作る科目です。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              自己推薦書実践と修正
+            </div>
+            <p class="topic-desc">実際の提出レベルまで書き上げ、面接との整合性を確保します。書類全体を俯瞰し、一貫性を最終チェックします。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 大科目⑦：課題レポート -->
+    <div class="subject-section">
+      <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-number">⑦</div>
+        <div class="subject-title">課題レポート</div>
+        <span class="material-icons subject-toggle">expand_more</span>
+      </div>
+      <div class="subject-content">
+        <div class="subject-content-inner">
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              課題レポートの本質理解
+            </div>
+            <p class="topic-desc">課題レポートは"大学から与えられたテーマに対し、論理的に思考する力"を示す科目です。問われている意図・評価軸・構造（結論→理由→根拠→考察）を理解し、自己主張を整理します。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              課題レポートの禁止事項
+            </div>
+            <p class="topic-desc">感情論・抽象論・テーマ逸脱・主観的体験の羅列/剽窃など"点数が下がる要素"を明確に排除します。大学側の意図からズレないためのチェック観点を習得します。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              課題レポートの構成技法
+            </div>
+            <p class="topic-desc">序論・本論・結論の型を基礎とし、論理の流れ・段落構成を整えます。読み手に負担を与えない"骨格の強い構造"を作る方法を学びます。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              課題レポートの資料読解と要点抽出
+            </div>
+            <p class="topic-desc">与えられた資料・データ・文章から"使うべき情報だけ"を抽出する技術を身につけます。主張の根拠を強化し、論理と資料の接続の仕方を実践します。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              課題レポートの実践と修正
+            </div>
+            <p class="topic-desc">実際に課題レポートを書き、添削を通して論理性・構造・言語表現を改善します。書き直しのプロセスで「学力の伸び」を可視化させます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 大科目⑧：プレゼン -->
+    <div class="subject-section">
+      <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-number">⑧</div>
+        <div class="subject-title">プレゼンテーション</div>
+        <span class="material-icons subject-toggle">expand_more</span>
+      </div>
+      <div class="subject-content">
+        <div class="subject-content-inner">
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              プレゼンテーション本質理解
+            </div>
+            <p class="topic-desc">プレゼンは「伝える」ではなく「理解させる」技術であることを学びます。資料→発話→非言語→想定質問の4点を総合的に扱います。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              プレゼン資料の構造・デザイン
+            </div>
+            <p class="topic-desc">論理構成・ビジュアル配置・スライドの役割を理解します。大学生・社会人レベルの資料作成を身につけます。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              非言語コミュニケーション
+            </div>
+            <p class="topic-desc">声量・間の取り方・姿勢・表情/入退室/所作/服装/髪型をコントロールします。"話す内容と同じくらい評価される項目"を強化します。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              プレゼン原稿の作成と暗記
+            </div>
+            <p class="topic-desc">スクリプト作成→暗記→台本なし発表までを体系化します。何度も練習し、自然な発話へ変換します。棒読みにならないように練習を重ねます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 大科目⑨：面接 -->
+    <div class="subject-section">
+      <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-number">⑨</div>
+        <div class="subject-title">面接</div>
+        <span class="material-icons subject-toggle">expand_more</span>
+      </div>
+      <div class="subject-content">
+        <div class="subject-content-inner">
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              面接の本質理解
+            </div>
+            <p class="topic-desc">面接は「研究テーマ・書類の深掘り」であるという本質を理解します。好印象や雰囲気ではなく"学術的優位性"で戦う準備をします。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              面接禁止事項理解
+            </div>
+            <p class="topic-desc">抽象論・矛盾・視線逸れ・言葉遣いミスなど減点リスクを排除します。面接の"失点ポイント"を明確にします。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              面接基礎100問の言語化
+            </div>
+            <p class="topic-desc">よく出る基礎質問100問を全て言語化し、口で答えられる状態にします。練習量が結果に直結する科目です。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              圧迫面接・深掘り/口頭試問対策
+            </div>
+            <p class="topic-desc">反論・矛盾指摘・価値観の揺さぶりへの対応力を身につけます。動揺せずに"研究テーマに戻る"技術を習得します。</p>
+          </div>
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              発声・表情・視線のコントロール
+            </div>
+            <p class="topic-desc">棒読み防止・緊張対策・声量調整を行います。第一印象と安定感を作る最後の仕上げです。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 大科目⑩：最終確認 / 調整 -->
+    <div class="subject-section">
+      <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-number">⑩</div>
+        <div class="subject-title">最終確認 / 調整</div>
+        <span class="material-icons subject-toggle">expand_more</span>
+      </div>
+      <div class="subject-content">
+        <div class="subject-content-inner">
+          <div class="topic-card">
+            <div class="topic-title">
+              <span class="material-icons">check_circle</span>
+              最終確認と調整・メンタルケア
+            </div>
+            <p class="topic-desc">
+              本科目は、書類・小論文・面接・課題レポート・プレゼンテーションなど すべての科目の最終調整を行う総仕上げの科目です。新しいことを詰め込むのではなく、これまで積み重ねてきた知識・思考・構造を再整理し、当日アウトプットしやすい状態に整えることが目的です。
+            </p>
+          </div>
+          <div class="topic-card" style="border-left-color: #1a237e;">
+            <div class="topic-title" style="color: #333;">
+              <span class="material-icons" style="color: #1a237e;">list</span>
+              主な内容
+            </div>
+            <p class="topic-desc">
+              • 書類（志望理由書・自己推薦書・活動報告書・課題レポート等）の最終チェック<br>
+              • 小論文の型・視点・禁止事項の最終確認<br>
+              • 面接で答える中心軸（研究テーマ・学びの必要性・大学マッチング）の整理<br>
+              • プレゼン資料・非言語・台本の最終微調整<br>
+              • 受験直前のメンタルケア（思考の整理／不安コントロール）<br>
+              • 当日の動線・対策の最終確認
+            </p>
+          </div>
+          <div class="note-box" style="margin-top: 16px; margin-bottom: 0;">
+            <div class="note-box-title">
+              <span class="material-icons">lightbulb</span>
+              ポイント
+            </div>
+            <p class="note-box-text">
+              "何かを新しく足すフェーズではなく、必要なものを取り出しやすい状態に整える整理整頓フェーズ"です。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- フッター -->
+    <footer class="footer">
+      © 2025 EQAO Education Group
+    </footer>
+  </div>
+
+  <script>
+    function toggleSubject(header) {
+      const content = header.nextElementSibling;
+      const toggle = header.querySelector('.subject-toggle');
+      
+      content.classList.toggle('open');
+      toggle.classList.toggle('open');
+    }
+  </script>
+  <script src="js/nav-menu.js"></script>
+</body>
+</html>

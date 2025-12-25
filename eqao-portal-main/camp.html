@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>EQAO CAMP - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #f8f9fc;
+      min-height: 100vh;
+    }
+
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-btn:hover { background: rgba(255,255,255,0.25); }
+
+    .header-title { font-size: 17px; font-weight: 700; }
+
+    /* ヒーローセクション */
+    .hero {
+      background: linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #01579b 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0 80 Q25 60 50 70 T100 60 L100 100 L0 100Z' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E");
+      background-size: cover;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.2);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-badge .material-icons {
+      font-size: 18px;
+    }
+
+    .hero-title {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .hero-title span {
+      color: #ffeb3b;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      line-height: 1.8;
+      opacity: 0.95;
+      margin-bottom: 24px;
+    }
+
+    .hero-days {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.15);
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-days .material-icons {
+      font-size: 24px;
+      color: #ffeb3b;
+    }
+
+    .hero-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 40px;
+      background: #9e9e9e;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 700;
+      margin-top: 24px;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    .hero-cta-btn .material-icons {
+      font-size: 20px;
+      color: white;
+    }
+
+    .hero-cta-btn.active {
+      background: linear-gradient(135deg, #ff6f00 0%, #ff8f00 100%);
+      box-shadow: 0 6px 30px rgba(255, 111, 0, 0.4);
+      cursor: pointer;
+      opacity: 1;
+      transition: all 0.3s;
+    }
+
+    .hero-cta-btn.active:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 40px rgba(255, 111, 0, 0.5);
+    }
+
+    .hero-cta-note {
+      margin-top: 12px;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    /* コンテナ */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* フィロソフィーバナー */
+    .philosophy-banner {
+      background: linear-gradient(135deg, #ff6f00 0%, #ff8f00 100%);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .philosophy-banner small {
+      font-size: 11px;
+      opacity: 0.9;
+      display: block;
+      margin-top: 4px;
+      letter-spacing: 0;
+    }
+
+    /* セクション */
+    .section {
+      padding: 40px 16px;
+    }
+
+    .section-white {
+      background: white;
+    }
+
+    .section-gray {
+      background: #f8f9fc;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .section-title-en {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1a237e;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+
+    .section-title-ja {
+      font-size: 22px;
+      font-weight: 900;
+      color: #333;
+    }
+
+    /* メッセージセクション */
+    .message-section {
+      background: white;
+      padding: 40px 20px;
+    }
+
+    .message-content {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .message-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .message-icon .material-icons {
+      font-size: 32px;
+      color: white;
+    }
+
+    .message-text {
+      font-size: 15px;
+      line-height: 2;
+      color: #444;
+    }
+
+    .message-highlight {
+      background: linear-gradient(transparent 60%, #fff59d 60%);
+      font-weight: 700;
+    }
+
+    /* ミッションカード */
+    .mission-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .mission-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+    }
+
+    .mission-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .mission-number {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 900;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .mission-content {
+      flex: 1;
+    }
+
+    .mission-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .mission-desc {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    /* YouTube動画セクション */
+    .video-section {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      padding: 40px 16px;
+    }
+
+    .video-section .section-title-en,
+    .video-section .section-title-ja {
+      color: white;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 500px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .video-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s;
+    }
+
+    .video-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .video-thumbnail {
+      position: relative;
+      padding-top: 56.25%;
+      background: #000;
+    }
+
+    .video-thumbnail img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(255,0,0,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-play-btn .material-icons {
+      font-size: 32px;
+      color: white;
+      margin-left: 4px;
+    }
+
+    .video-info {
+      padding: 16px;
+    }
+
+    .video-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.4;
+    }
+
+    .video-subtitle {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    /* ポイントセクション */
+    .points-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 500px) {
+      .points-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .point-card {
+      background: white;
+      padding: 24px 16px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .point-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+
+    .point-icon .material-icons {
+      font-size: 28px;
+      color: #1a237e;
+    }
+
+    .point-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    /* こんな人におすすめ */
+    .recommend-list {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .recommend-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: white;
+      padding: 18px 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .recommend-item .material-icons {
+      font-size: 24px;
+      color: #00897B;
+    }
+
+    .recommend-item span {
+      font-size: 14px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    /* 概要セクション */
+    .info-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .info-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 16px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-header .material-icons {
+      font-size: 22px;
+    }
+
+    .info-list {
+      padding: 20px;
+    }
+
+    .info-item {
+      display: flex;
+      padding: 14px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .info-item:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      width: 100px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a237e;
+      flex-shrink: 0;
+    }
+
+    .info-value {
+      font-size: 14px;
+      color: #333;
+      flex: 1;
+    }
+
+    .info-tbd {
+      color: #999;
+      font-style: italic;
+    }
+
+    /* 注意事項 */
+    .notice-section {
+      background: #fff8e1;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 24px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .notice-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #f57c00;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .notice-title .material-icons {
+      font-size: 18px;
+    }
+
+    .notice-text {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    /* CTAセクション */
+    .cta-section {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      padding: 48px 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .cta-title {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .cta-subtitle {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 24px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 18px 48px;
+      background: #9e9e9e;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    .cta-btn .material-icons {
+      font-size: 22px;
+    }
+
+    .cta-btn.active {
+      background: linear-gradient(135deg, #ff6f00 0%, #ff8f00 100%);
+      box-shadow: 0 6px 30px rgba(255, 111, 0, 0.4);
+      cursor: pointer;
+      opacity: 1;
+      transition: all 0.3s;
+    }
+
+    .cta-btn.active:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 40px rgba(255, 111, 0, 0.5);
+    }
+
+    .cta-note {
+      margin-top: 16px;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    .cta-note .material-icons {
+      font-size: 16px;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+
+    /* フッター */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #999;
+      font-size: 11px;
+      background: #f8f9fc;
+    }
+
+    /* ハンバーガーメニュー */
+    .hamburger-btn {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .nav-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100%;
+      background: white;
+      z-index: 201;
+      transition: right 0.3s ease;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+      overflow-y: auto;
+    }
+
+    .nav-menu.open { right: 0; }
+
+    .nav-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 20px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-header-title { font-size: 16px; font-weight: 700; }
+
+    .nav-close {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-section { padding: 8px 0; border-bottom: 1px solid #eee; }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      color: #333;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-item:hover { background: #f5f5f5; }
+
+    .nav-item .material-icons { font-size: 22px; color: #1a237e; }
+
+    .nav-item span { font-size: 14px; font-weight: 500; }
+
+    /* レスポンシブ */
+    @media (max-width: 480px) {
+      .hero { padding: 40px 16px; }
+      .hero-title { font-size: 22px; }
+      .hero-subtitle { font-size: 14px; }
+      .section { padding: 32px 16px; }
+      .section-title-ja { font-size: 20px; }
+      .mission-card { padding: 20px; }
+      .philosophy-banner { font-size: 15px; padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="index.html" class="back-btn">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <h1 class="header-title">EQAO CAMP</h1>
+  </header>
+
+  <button class="hamburger-btn" onclick="openNav()">
+    <span class="material-icons">menu</span>
+  </button>
+
+  <!-- ヒーローセクション -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="material-icons">wb_sunny</span>
+        夏期限定プログラム
+      </div>
+      <h2 class="hero-title">
+        合格はもちろん、<br>
+        <span>"人生が変わる3日間"</span><br>
+        を体感せよ！
+      </h2>
+      <p class="hero-subtitle">
+        受験生にとって夏休みは勝負の時。<br>
+        「どう過ごすか」「誰と過ごすか」で、<br>
+        大学はもちろん、その後の人生観にも大きな影響があります。
+      </p>
+      <div class="hero-days">
+        <span class="material-icons">schedule</span>
+        2泊3日の集中合宿
+      </div>
+
+      <a href="#" class="hero-cta-btn" onclick="return false;">
+        <span class="material-icons">edit</span>
+        申し込みはこちら
+      </a>
+      <p class="hero-cta-note">※申し込み開始までしばらくお待ちください</p>
+    </div>
+  </section>
+
+  <!-- フィロソフィー -->
+  <div class="philosophy-banner">
+    「すき」を見つけて、「すき」を伸ばす。
+    <small>EQAO Philosophy</small>
+  </div>
+
+  <!-- メッセージセクション -->
+  <section class="message-section">
+    <div class="message-content">
+      <div class="message-icon">
+        <span class="material-icons">groups</span>
+      </div>
+      <p class="message-text">
+        EQAO CAMPでは、一人ではなく<br>
+        <span class="message-highlight">仲間と共に学び、励まし合い、</span><br>
+        そして自分の好きな分野をさらに追求する体験ができます。<br><br>
+        2泊3日の合宿を通じて、<br>
+        受験勉強だけでなく、<br>
+        <span class="message-highlight">かけがえのない思い出と自己成長</span>を<br>
+        手に入れましょう。
+      </p>
+    </div>
+  </section>
+
+  <!-- 動画セクション -->
+  <section class="video-section">
+    <div class="container">
+      <div class="section-title">
+        <div class="section-title-en">MOVIE</div>
+        <h3 class="section-title-ja">過去のCAMPの様子</h3>
+      </div>
+
+      <div class="video-grid">
+        <a href="https://youtu.be/ih513EXZ2d8?si=q_RxM0Q0WHk_bTA" target="_blank" class="video-card">
+          <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/ih513EXZ2d8/mqdefault.jpg" alt="EQAO CAMP動画1">
+            <div class="video-play-btn">
+              <span class="material-icons">play_arrow</span>
+            </div>
+          </div>
+          <div class="video-info">
+            <div class="video-title">EQAO CAMP ダイジェスト</div>
+            <div class="video-subtitle">YouTubeで見る</div>
+          </div>
+        </a>
+
+        <a href="https://youtu.be/E8lOERvav2g?si=o_sKuApasXvndx8H" target="_blank" class="video-card">
+          <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/E8lOERvav2g/mqdefault.jpg" alt="EQAO CAMP動画2">
+            <div class="video-play-btn">
+              <span class="material-icons">play_arrow</span>
+            </div>
+          </div>
+          <div class="video-info">
+            <div class="video-title">参加者インタビュー</div>
+            <div class="video-subtitle">YouTubeで見る</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ミッション -->
+  <section class="section section-gray">
+    <div class="container">
+      <div class="section-title">
+        <div class="section-title-en">MISSION</div>
+        <h3 class="section-title-ja">EQAO CAMPの3つの目標</h3>
+      </div>
+
+      <div class="mission-list">
+        <div class="mission-card">
+          <div class="mission-number">1</div>
+          <div class="mission-content">
+            <div class="mission-title">仲間たちと共に入試のモチベーションを高めあう</div>
+            <div class="mission-desc">同じ目標を持つ仲間との出会いが、受験への原動力になります。切磋琢磨できる環境で、自分を高めましょう。</div>
+          </div>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-number">2</div>
+          <div class="mission-content">
+            <div class="mission-title">多数の講師たちと思考を重ね、新たな視座を習得する</div>
+            <div class="mission-desc">書類完成に向けて、複数の講師からフィードバックを受けることで、自分では気づけなかった視点を発見できます。</div>
+          </div>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-number">3</div>
+          <div class="mission-content">
+            <div class="mission-title">書類を完成させ、余裕を持って受験生活を送る</div>
+            <div class="mission-desc">合宿中に書類を完成させることで、心にも時間にも余裕が生まれ、その後の対策に集中できます。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ポイント -->
+  <section class="section section-white">
+    <div class="container">
+      <div class="section-title">
+        <div class="section-title-en">POINT</div>
+        <h3 class="section-title-ja">EQAO CAMPの特徴</h3>
+      </div>
+
+      <div class="points-grid">
+        <div class="point-card">
+          <div class="point-icon">
+            <span class="material-icons">diversity_3</span>
+          </div>
+          <div class="point-title">仲間との<br>出会い</div>
+        </div>
+        <div class="point-card">
+          <div class="point-icon">
+            <span class="material-icons">school</span>
+          </div>
+          <div class="point-title">複数講師の<br>サポート</div>
+        </div>
+        <div class="point-card">
+          <div class="point-icon">
+            <span class="material-icons">description</span>
+          </div>
+          <div class="point-title">書類<br>完成</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- こんな人におすすめ -->
+  <section class="section section-gray">
+    <div class="container">
+      <div class="section-title">
+        <div class="section-title-en">RECOMMEND</div>
+        <h3 class="section-title-ja">こんな人におすすめ</h3>
+      </div>
+
+      <div class="recommend-list">
+        <div class="recommend-item">
+          <span class="material-icons">check_circle</span>
+          <span>書類作成が思うように進んでいない</span>
+        </div>
+        <div class="recommend-item">
+          <span class="material-icons">check_circle</span>
+          <span>一人で勉強するとモチベーションが続かない</span>
+        </div>
+        <div class="recommend-item">
+          <span class="material-icons">check_circle</span>
+          <span>同じ目標を持つ仲間と出会いたい</span>
+        </div>
+        <div class="recommend-item">
+          <span class="material-icons">check_circle</span>
+          <span>複数の講師から多角的なフィードバックが欲しい</span>
+        </div>
+        <div class="recommend-item">
+          <span class="material-icons">check_circle</span>
+          <span>夏休みで一気に差をつけたい</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 概要 -->
+  <section class="section section-white">
+    <div class="container">
+      <div class="section-title">
+        <div class="section-title-en">OVERVIEW</div>
+        <h3 class="section-title-ja">開催概要</h3>
+      </div>
+
+      <div class="info-card">
+        <div class="info-header">
+          <span class="material-icons">info</span>
+          プログラム詳細
+        </div>
+        <div class="info-list">
+          <div class="info-item">
+            <div class="info-label">開催日程</div>
+            <div class="info-value info-tbd">決まり次第お知らせします</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">実施場所</div>
+            <div class="info-value info-tbd">決まり次第お知らせします</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">参加人数</div>
+            <div class="info-value info-tbd">決まり次第お知らせします</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">参加費用</div>
+            <div class="info-value info-tbd">決まり次第お知らせします</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">対象</div>
+            <div class="info-value">EQAO塾生</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice-section">
+        <div class="notice-title">
+          <span class="material-icons">warning</span>
+          ご注意事項
+        </div>
+        <div class="notice-text">
+          ・キャンセルは開催日から30日前までにご報告ください。それ以降はキャンセル料が100%発生します。<br>
+          ・お振込はお申し込みから1週間以内となります。ご入金が確認できない場合は申し込みを取り消しとさせていただきます。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h3 class="cta-title">人生が変わる3日間へ</h3>
+    <p class="cta-subtitle">仲間と一緒に、最高の夏を過ごそう</p>
+    
+    <a href="#" class="cta-btn" onclick="return false;">
+      <span class="material-icons">edit</span>
+      申し込みはこちら
+    </a>
+    
+    <p class="cta-note">
+      <span class="material-icons">info</span>
+      申し込み開始までしばらくお待ちください
+    </p>
+  </section>
+
+  <footer class="footer">
+    © 2025 EQAO Education Group
+  </footer>
+
+  <script>
+    // 申し込みボタンを有効化する場合はこの関数を呼ぶ
+    function enableApplication() {
+      // 下部CTAボタン
+      const btn = document.querySelector('.cta-btn');
+      btn.classList.add('active');
+      btn.href = 'https://forms.gle/vFg7K9oziscP7ACx6';
+      btn.target = '_blank';
+      btn.onclick = null;
+      
+      const note = document.querySelector('.cta-note');
+      note.innerHTML = '<span class="material-icons">arrow_forward</span>外部フォームに移動します';
+
+      // ヒーローセクションのボタン
+      const heroBtn = document.querySelector('.hero-cta-btn');
+      heroBtn.classList.add('active');
+      heroBtn.href = 'https://forms.gle/vFg7K9oziscP7ACx6';
+      heroBtn.target = '_blank';
+      heroBtn.onclick = null;
+
+      const heroNote = document.querySelector('.hero-cta-note');
+      heroNote.textContent = '外部フォームに移動します';
+    }
+
+    // 申し込み開始時にこのコメントを外す
+    // enableApplication();
+  </script>
+  
+  <script src="js/nav-menu.js"></script>
+</body>
+</html>

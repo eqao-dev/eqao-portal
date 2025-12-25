@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>Zoomリンク一覧 - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    /* ========================================
+       ヘッダー
+    ======================================== */
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .header-title {
+      font-size: 17px;
+      font-weight: 700;
+      flex: 1;
+    }
+
+    .header-help-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .header-help-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .header-menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .header-menu-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* ========================================
+       ヒーローセクション
+    ======================================== */
+    .hero {
+      background: #1a237e;
+      padding: 30px 20px 30px;
+      text-align: center;
+    }
+
+    .hero-icon {
+      width: 70px;
+      height: 70px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-icon .material-icons {
+      font-size: 36px;
+      color: white;
+    }
+
+    .hero-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* ========================================
+       メインコンテンツ
+    ======================================== */
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    /* ========================================
+       検索ボックス
+    ======================================== */
+    .search-section {
+      margin-bottom: 16px;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 48px 14px 48px;
+      border: none;
+      border-radius: 14px;
+      font-size: 15px;
+      font-family: inherit;
+      background: white;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.15);
+    }
+
+    .search-input::placeholder {
+      color: #999;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #1a237e;
+      pointer-events: none;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #999;
+      cursor: pointer;
+      padding: 4px;
+      display: none;
+    }
+
+    .search-clear.show {
+      display: block;
+    }
+
+    /* ヘルプリンク */
+    .help-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 0;
+      background: none;
+      border: none;
+      color: #1a237e;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.2s;
+    }
+
+    .help-link:hover {
+      opacity: 0.7;
+    }
+
+    .help-link .material-icons {
+      font-size: 18px;
+    }
+
+    /* ========================================
+       五十音インデックス
+    ======================================== */
+    .gojuon-index {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .gojuon-btn {
+      min-width: 40px;
+      height: 36px;
+      padding: 0 10px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      background: white;
+      color: #333;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .gojuon-btn:hover {
+      border-color: #1a237e;
+      background: #e8eaf6;
+    }
+
+    .gojuon-btn.active {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 2px 8px rgba(26, 35, 126, 0.3);
+    }
+
+    .gojuon-btn.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .gojuon-btn.disabled:hover {
+      border-color: #e0e0e0;
+      background: white;
+    }
+
+    /* ========================================
+       結果カウント
+    ======================================== */
+    .result-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .result-count {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .result-count strong {
+      color: #1a237e;
+      font-weight: 700;
+    }
+
+    /* ========================================
+       講師リスト
+    ======================================== */
+    .staff-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* コンパクトカード */
+    .staff-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      transition: all 0.2s;
+    }
+
+    .staff-card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .staff-card-header {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      gap: 12px;
+    }
+
+    .staff-avatar {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .staff-avatar .material-icons {
+      color: white;
+      font-size: 24px;
+    }
+
+    .staff-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .staff-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .staff-expand-hint {
+      font-size: 11px;
+      color: #999;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .staff-expand-hint .material-icons {
+      font-size: 14px;
+    }
+
+    .staff-card.open .staff-expand-hint .material-icons {
+      transform: rotate(180deg);
+    }
+
+    .zoom-join-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .zoom-join-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
+    }
+
+    .zoom-join-btn .material-icons {
+      font-size: 18px;
+    }
+
+    /* 詳細展開エリア */
+    .staff-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: #f8f9fc;
+    }
+
+    .staff-card.open .staff-detail {
+      max-height: 300px;
+    }
+
+    .staff-detail-inner {
+      padding: 16px;
+      border-top: 1px solid #e8eaf6;
+    }
+
+    .staff-detail-label {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .staff-detail-label .material-icons {
+      font-size: 14px;
+    }
+
+    .staff-detail-content {
+      font-size: 13px;
+      color: #333;
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-all;
+      border-left: 3px solid #1a237e;
+    }
+
+    /* ========================================
+       結果なし
+    ======================================== */
+    .no-results {
+      text-align: center;
+      padding: 50px 20px;
+      color: #888;
+    }
+
+    .no-results .material-icons {
+      font-size: 56px;
+      margin-bottom: 16px;
+      opacity: 0.4;
+    }
+
+    .no-results p {
+      font-size: 14px;
+    }
+
+    /* ========================================
+       ローディング
+    ======================================== */
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+
+    .loading-spinner {
+      width: 44px;
+      height: 44px;
+      border: 4px solid #e0e0e0;
+      border-top-color: #1a237e;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ========================================
+       ヘルプモーダル
+    ======================================== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 16px;
+      max-width: 450px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      animation: modalSlideIn 0.3s ease;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid #E0E0E0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+    }
+
+    .modal-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #f57c00;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-title .material-icons {
+      font-size: 22px;
+    }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover {
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .tips-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .tips-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .tips-item:first-child {
+      padding-top: 0;
+    }
+
+    .tips-item .material-icons {
+      font-size: 22px;
+      color: #f57c00;
+      flex-shrink: 0;
+    }
+
+    .tips-item strong {
+      color: #e65100;
+      font-weight: 600;
+    }
+
+    /* ハイライト */
+    .highlight {
+      background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <a href="index.html" class="back-btn">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <h1 class="header-title">Zoomリンク一覧</h1>
+    <button class="header-help-btn" onclick="openHelpModal()">
+      <span class="material-icons">help_outline</span>
+    </button>
+    <button class="header-menu-btn" onclick="openNav()">
+      <span class="material-icons">menu</span>
+    </button>
+  </header>
+
+  <!-- ヒーローセクション -->
+  <section class="hero">
+    <div class="hero-icon">
+      <span class="material-icons">videocam</span>
+    </div>
+    <h2 class="hero-title">スタッフZoomリンク一覧</h2>
+    <p class="hero-subtitle">授業時間になったら下記のリンクから参加してください</p>
+  </section>
+
+  <!-- メインコンテンツ -->
+  <div class="container">
+    <!-- ローディング -->
+    <div id="loading" class="loading">
+      <div class="loading-spinner"></div>
+      <p>講師情報を読み込み中...</p>
+    </div>
+
+    <!-- コンテンツエリア -->
+    <div id="contentArea" style="display: none;">
+      <!-- 検索ボックス -->
+      <div class="search-section">
+        <div class="search-box">
+          <span class="material-icons search-icon">search</span>
+          <input type="text" id="searchInput" class="search-input" placeholder="講師名で検索...">
+          <button id="searchClear" class="search-clear" onclick="clearSearch()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <button class="help-link" onclick="openHelpModal()">
+          <span class="material-icons">help_outline</span>
+          Zoomに入れない場合は？
+        </button>
+      </div>
+
+      <!-- 五十音インデックス -->
+      <div class="gojuon-index" id="gojuonIndex">
+        <button class="gojuon-btn active" data-filter="all" onclick="filterByGojuon('all')">全員</button>
+        <button class="gojuon-btn" data-filter="ア" onclick="filterByGojuon('ア')">ア</button>
+        <button class="gojuon-btn" data-filter="カ" onclick="filterByGojuon('カ')">カ</button>
+        <button class="gojuon-btn" data-filter="サ" onclick="filterByGojuon('サ')">サ</button>
+        <button class="gojuon-btn" data-filter="タ" onclick="filterByGojuon('タ')">タ</button>
+        <button class="gojuon-btn" data-filter="ナ" onclick="filterByGojuon('ナ')">ナ</button>
+        <button class="gojuon-btn" data-filter="ハ" onclick="filterByGojuon('ハ')">ハ</button>
+        <button class="gojuon-btn" data-filter="マ" onclick="filterByGojuon('マ')">マ</button>
+        <button class="gojuon-btn" data-filter="ヤ" onclick="filterByGojuon('ヤ')">ヤ</button>
+        <button class="gojuon-btn" data-filter="ラ" onclick="filterByGojuon('ラ')">ラ</button>
+        <button class="gojuon-btn" data-filter="ワ" onclick="filterByGojuon('ワ')">ワ</button>
+      </div>
+
+      <!-- 結果情報 -->
+      <div class="result-info">
+        <div class="result-count" id="resultCount">全 0 名の講師</div>
+      </div>
+
+      <!-- 講師リスト -->
+      <div id="staffList" class="staff-list"></div>
+    </div>
+  </div>
+
+  <!-- ヘルプモーダル（Zoomに入れない場合） -->
+  <div class="modal-overlay" id="helpModal" onclick="closeHelpModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="material-icons">help_outline</span>
+          Zoomに入れない場合は？
+        </div>
+        <button class="modal-close" onclick="closeHelpModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="tips-item">
+          <span class="material-icons">content_paste</span>
+          <span>パスワードをコピペする際、<strong>全角文字</strong>や<strong>余分なスペース</strong>が入っていませんか？半角英数字のみで入力してください。</span>
+        </div>
+        <div class="tips-item">
+          <span class="material-icons">space_bar</span>
+          <span>コピー時に<strong>前後にスペース</strong>が含まれることがあります。ペースト後、不要なスペースを削除してください。</span>
+        </div>
+        <div class="tips-item">
+          <span class="material-icons">keyboard</span>
+          <span>うまくいかない場合は、<strong>手入力</strong>でパスワードを打ち込んでみてください。</span>
+        </div>
+        <div class="tips-item">
+          <span class="material-icons">refresh</span>
+          <span>それでも入れない場合は、Zoomアプリを<strong>最新版にアップデート</strong>してから再度お試しください。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ============================================
+    // API設定
+    // ============================================
+    const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
+
+    // ============================================
+    // 状態管理
+    // ============================================
+    let allStaffData = [];
+    let currentFilter = 'all';
+    let currentSearchQuery = '';
+
+    // 五十音行のマッピング
+    const gojuonMap = {
+      'ア': ['ア', 'イ', 'ウ', 'エ', 'オ'],
+      'カ': ['カ', 'キ', 'ク', 'ケ', 'コ', 'ガ', 'ギ', 'グ', 'ゲ', 'ゴ'],
+      'サ': ['サ', 'シ', 'ス', 'セ', 'ソ', 'ザ', 'ジ', 'ズ', 'ゼ', 'ゾ'],
+      'タ': ['タ', 'チ', 'ツ', 'テ', 'ト', 'ダ', 'ヂ', 'ヅ', 'デ', 'ド'],
+      'ナ': ['ナ', 'ニ', 'ヌ', 'ネ', 'ノ'],
+      'ハ': ['ハ', 'ヒ', 'フ', 'ヘ', 'ホ', 'バ', 'ビ', 'ブ', 'ベ', 'ボ', 'パ', 'ピ', 'プ', 'ペ', 'ポ'],
+      'マ': ['マ', 'ミ', 'ム', 'メ', 'モ'],
+      'ヤ': ['ヤ', 'ユ', 'ヨ'],
+      'ラ': ['ラ', 'リ', 'ル', 'レ', 'ロ'],
+      'ワ': ['ワ', 'ヲ', 'ン']
+    };
+
+    // ============================================
+    // 初期化
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+      checkLoginStatus();
+
+      // 検索イベント
+      const searchInput = document.getElementById('searchInput');
+      let searchTimeout;
+      searchInput.addEventListener('input', function(e) {
+        clearTimeout(searchTimeout);
+        const clearBtn = document.getElementById('searchClear');
+        if (e.target.value.trim()) {
+          clearBtn.classList.add('show');
+        } else {
+          clearBtn.classList.remove('show');
+        }
+        searchTimeout = setTimeout(function() {
+          currentSearchQuery = e.target.value.trim();
+          applyFilters();
+        }, 200);
+      });
+    });
+
+    // ============================================
+    // ログインチェック
+    // ============================================
+    function checkLoginStatus() {
+      const loggedIn = localStorage.getItem('eqao_loggedIn');
+      const studentId = localStorage.getItem('eqao_studentId');
+
+      if (loggedIn === 'true' && studentId) {
+        setNavUserName();
+        loadZoomLinks();
+      } else {
+        window.location.href = 'index.html';
+      }
+    }
+
+    // ============================================
+    // Zoomリンク読み込み
+    // ============================================
+    async function loadZoomLinks() {
+      try {
+        const url = `${API_URL}?action=getZoomLinks`;
+        const response = await fetch(url);
+        const data = await response.json();
+        allStaffData = data || [];
+        
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('contentArea').style.display = 'block';
+        
+        updateGojuonButtons();
+        applyFilters();
+      } catch (error) {
+        handleError(error);
+      }
+    }
+
+    // ============================================
+    // 五十音ボタンの有効/無効を更新
+    // ============================================
+    function updateGojuonButtons() {
+      const buttons = document.querySelectorAll('.gojuon-btn[data-filter]');
+      
+      buttons.forEach(btn => {
+        const filter = btn.dataset.filter;
+        if (filter === 'all') return;
+        
+        const hasStaff = allStaffData.some(staff => {
+          const firstChar = toKatakana(staff.name).charAt(0);
+          return gojuonMap[filter] && gojuonMap[filter].includes(firstChar);
+        });
+        
+        if (!hasStaff) {
+          btn.classList.add('disabled');
+        } else {
+          btn.classList.remove('disabled');
+        }
+      });
+    }
+
+    // ============================================
+    // 五十音フィルター
+    // ============================================
+    function filterByGojuon(filter) {
+      const btn = document.querySelector(`.gojuon-btn[data-filter="${filter}"]`);
+      if (btn && btn.classList.contains('disabled')) return;
+      
+      currentFilter = filter;
+      
+      // ボタンのアクティブ状態を更新
+      document.querySelectorAll('.gojuon-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.gojuon-btn[data-filter="${filter}"]`).classList.add('active');
+      
+      applyFilters();
+    }
+
+    // ============================================
+    // フィルター適用
+    // ============================================
+    function applyFilters() {
+      let filtered = [...allStaffData];
+      
+      // 五十音フィルター
+      if (currentFilter !== 'all') {
+        filtered = filtered.filter(staff => {
+          const firstChar = toKatakana(staff.name).charAt(0);
+          return gojuonMap[currentFilter] && gojuonMap[currentFilter].includes(firstChar);
+        });
+      }
+      
+      // 検索フィルター
+      if (currentSearchQuery) {
+        const normalizedQuery = toKatakana(currentSearchQuery);
+        filtered = filtered.filter(staff => {
+          const normalizedName = toKatakana(staff.name);
+          return normalizedName.includes(normalizedQuery);
+        });
+      }
+      
+      displayStaff(filtered);
+    }
+
+    // ============================================
+    // 講師リスト表示
+    // ============================================
+    function displayStaff(data) {
+      const staffList = document.getElementById('staffList');
+      const resultCount = document.getElementById('resultCount');
+
+      // 結果カウント更新
+      if (currentSearchQuery) {
+        resultCount.innerHTML = `「${escapeHtml(currentSearchQuery)}」の検索結果: <strong>${data.length}</strong>件`;
+      } else if (currentFilter !== 'all') {
+        resultCount.innerHTML = `${currentFilter}行: <strong>${data.length}</strong>名`;
+      } else {
+        resultCount.innerHTML = `全 <strong>${allStaffData.length}</strong> 名の講師`;
+      }
+
+      if (!data || data.length === 0) {
+        staffList.innerHTML = `
+          <div class="no-results">
+            <span class="material-icons">search_off</span>
+            <p>該当する講師が見つかりませんでした</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      data.forEach((staff, index) => {
+        const urlMatch = staff.info.match(/(https?:\/\/[^\s]+)/);
+        const zoomUrl = urlMatch ? urlMatch[1] : '#';
+        const cardId = `staff-${index}`;
+
+        // 検索キーワードをハイライト
+        let displayName = escapeHtml(staff.name);
+        if (currentSearchQuery) {
+          const regex = new RegExp('(' + escapeRegex(currentSearchQuery) + ')', 'gi');
+          displayName = displayName.replace(regex, '<span class="highlight">$1</span>');
+        }
+
+        html += `
+          <div class="staff-card" id="${cardId}">
+            <div class="staff-card-header" onclick="toggleStaffDetail('${cardId}')">
+              <div class="staff-avatar">
+                <span class="material-icons">person</span>
+              </div>
+              <div class="staff-info">
+                <div class="staff-name">${displayName}</div>
+                <div class="staff-expand-hint">
+                  <span>詳細を見る</span>
+                  <span class="material-icons">expand_more</span>
+                </div>
+              </div>
+              <a href="${escapeHtml(zoomUrl)}" target="_blank" class="zoom-join-btn" onclick="event.stopPropagation()">
+                <span class="material-icons">videocam</span>
+                参加
+              </a>
+            </div>
+            <div class="staff-detail">
+              <div class="staff-detail-inner">
+                <div class="staff-detail-label">
+                  <span class="material-icons">info</span>
+                  Zoom情報（ID・パスワード）
+                </div>
+                <div class="staff-detail-content">${escapeHtml(staff.info)}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      staffList.innerHTML = html;
+    }
+
+    // ============================================
+    // カード展開
+    // ============================================
+    function toggleStaffDetail(cardId) {
+      document.getElementById(cardId).classList.toggle('open');
+    }
+
+    // ============================================
+    // 検索クリア
+    // ============================================
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('searchClear').classList.remove('show');
+      currentSearchQuery = '';
+      applyFilters();
+    }
+
+    // ============================================
+    // ユーティリティ
+    // ============================================
+    function toKatakana(str) {
+      return str.replace(/[\u3041-\u3096]/g, function(match) {
+        return String.fromCharCode(match.charCodeAt(0) + 0x60);
+      });
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function escapeRegex(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function handleError(error) {
+      console.error(error);
+      document.getElementById('loading').innerHTML = `
+        <span class="material-icons" style="font-size:48px;color:#ccc;margin-bottom:16px;">error_outline</span>
+        <p>データの読み込みに失敗しました</p>
+      `;
+    }
+
+    // ============================================
+    // ヘルプモーダル
+    // ============================================
+    function openHelpModal() {
+      document.getElementById('helpModal').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeHelpModal(event) {
+      if (event && event.target !== event.currentTarget) return;
+      document.getElementById('helpModal').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    // ESCキーでモーダルを閉じる
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeHelpModal();
+      }
+    });
+  </script>
+  <script src="js/nav-menu.js"></script>
+</body>
+</html>

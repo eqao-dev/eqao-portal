@@ -1,0 +1,623 @@
+/**
+ * EQAO Portal - 授業資料インプットページ共通CSS
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+  min-height: 100vh;
+  padding-bottom: 100px;
+}
+
+/* ===== ヘッダー ===== */
+.header {
+  background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(21, 101, 192, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-decoration: none;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.header-content {
+  flex: 1;
+}
+
+.header-label {
+  font-size: 11px;
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+
+/* ===== 進捗バー ===== */
+.progress-section {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.progress-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.progress-count {
+  font-size: 14px;
+  color: #666;
+}
+
+.progress-count strong {
+  color: #1565c0;
+  font-size: 18px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1565c0 0%, #42a5f5 100%);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* ===== 注意書き ===== */
+.notice-box {
+  background: #e3f2fd;
+  border-left: 4px solid #1565c0;
+  padding: 16px;
+  border-radius: 0 12px 12px 0;
+  margin-bottom: 20px;
+}
+
+.notice-box p {
+  font-size: 13px;
+  color: #1565c0;
+  line-height: 1.6;
+}
+
+.notice-box .material-icons {
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+/* ===== コントロール（フィルター・ページネーション） ===== */
+.column-controls {
+  background: white;
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.controls-row + .controls-row {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* フィルターボタン */
+.filter-group {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.filter-btn:hover {
+  background: #e8e8e8;
+}
+
+.filter-btn.active {
+  background: #1565c0;
+  color: white;
+}
+
+.filter-btn .badge {
+  background: rgba(0,0,0,0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.filter-btn.active .badge {
+  background: rgba(255,255,255,0.2);
+}
+
+/* 表示件数 */
+.page-size-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-size-group label {
+  font-size: 13px;
+  color: #666;
+}
+
+.page-size-group select {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  background: white;
+  cursor: pointer;
+}
+
+/* 表示情報 */
+.showing-info {
+  font-size: 13px;
+  color: #888;
+}
+
+/* ページネーション */
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.page-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #666;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: #e0e0e0;
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-btn .material-icons {
+  font-size: 20px;
+}
+
+.page-num {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.page-num:hover {
+  background: #f0f0f0;
+}
+
+.page-num.active {
+  background: #1565c0;
+  color: white;
+}
+
+.page-ellipsis {
+  padding: 0 4px;
+  color: #999;
+}
+
+/* ===== コラムセクション ===== */
+.column-section {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.column-header {
+  background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.column-header .material-icons {
+  font-size: 24px;
+}
+
+.column-header-text h2 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.column-header-text p {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.column-list {
+  padding: 0;
+}
+
+.column-item {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.column-item:last-child {
+  border-bottom: none;
+}
+
+.column-item-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.column-item-header:hover {
+  background: #f8f9fa;
+}
+
+.column-check {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+
+.column-check.checked {
+  background: #43a047;
+  border-color: #43a047;
+  color: white;
+}
+
+.column-check .material-icons {
+  font-size: 16px;
+  display: none;
+}
+
+.column-check.checked .material-icons {
+  display: block;
+}
+
+.column-item-info {
+  flex: 1;
+}
+
+.column-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.column-item-meta {
+  font-size: 11px;
+  color: #888;
+}
+
+.column-item-date {
+  font-size: 11px;
+  color: #888;
+}
+
+.column-item-category {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #e3f2fd;
+  color: #1565c0;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.column-expand {
+  color: #999;
+  transition: transform 0.3s;
+}
+
+.column-item.open .column-expand {
+  transform: rotate(180deg);
+}
+
+.column-content {
+  display: none;
+  padding: 0 20px 20px 56px;
+}
+
+.column-item.open .column-content {
+  display: block;
+}
+
+.column-content-text {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #444;
+  white-space: pre-wrap;
+}
+
+/* ===== 完了済み表示 ===== */
+.already-completed {
+  display: none;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.already-completed .material-icons {
+  font-size: 80px;
+  color: #43a047;
+  margin-bottom: 20px;
+}
+
+.already-completed h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.already-completed p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.already-completed .btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.already-completed .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #e65100 0%, #f57c00 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(230, 81, 0, 0.4);
+}
+
+.btn-secondary {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #e0e0e0;
+}
+
+/* ===== フッター ===== */
+.complete-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 16px 20px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  z-index: 99;
+}
+
+.footer-status {
+  font-size: 13px;
+  color: #666;
+}
+
+.complete-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #43a047 0%, #66bb6a 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+
+.complete-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(67, 160, 71, 0.4);
+}
+
+.complete-btn:disabled {
+  background: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* ===== ローディング ===== */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #1565c0;
+}
+
+.loading-spinner .material-icons {
+  font-size: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== 空状態 ===== */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+}
+
+.empty-state .material-icons {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+/* ===== レスポンシブ ===== */
+@media (max-width: 600px) {
+  .controls-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    justify-content: center;
+  }
+
+  .page-size-group {
+    justify-content: center;
+  }
+
+  .showing-info {
+    text-align: center;
+  }
+
+  .pagination {
+    justify-content: center;
+  }
+
+  .complete-footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}

@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>授業の流れ - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover { background: rgba(255,255,255,0.25); }
+
+    .header-title { font-size: 17px; font-weight: 700; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* タブ切り替え */
+    .tab-container {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: white;
+      padding: 6px;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 14px 16px;
+      border: none;
+      border-radius: 10px;
+      background: transparent;
+      color: #666;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+    }
+
+    .tab-btn .material-icons {
+      font-size: 20px;
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
+    }
+
+    .tab-btn:hover:not(.active) {
+      background: #f5f5f5;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* イントロセクション */
+    .intro-section {
+      background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      border-left: 5px solid #1a237e;
+    }
+
+    .intro-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .intro-title .material-icons {
+      font-size: 22px;
+    }
+
+    .intro-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    /* Why-How-What説明 */
+    .whw-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .whw-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .whw-card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .whw-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+    }
+
+    .whw-icon .material-icons {
+      font-size: 24px;
+      color: white;
+    }
+
+    .whw-icon.why { background: linear-gradient(135deg, #1565C0 0%, #42A5F5 100%); }
+    .whw-icon.how { background: linear-gradient(135deg, #7B1FA2 0%, #BA68C8 100%); }
+    .whw-icon.what { background: linear-gradient(135deg, #E65100 0%, #FFA726 100%); }
+
+    .whw-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 6px;
+    }
+
+    .whw-desc {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* 大科目アコーディオン */
+    .curriculum-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .major-subject {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .major-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .major-header:hover {
+      background: #f9f9f9;
+    }
+
+    .major-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+    }
+
+    .major-info {
+      flex: 1;
+    }
+
+    .major-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .major-count {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .major-arrow {
+      color: #bbb;
+      transition: transform 0.3s;
+    }
+
+    .major-subject.open .major-arrow {
+      transform: rotate(180deg);
+    }
+
+    .major-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .major-subject.open .major-content {
+      max-height: 2000px;
+    }
+
+    .minor-list {
+      padding: 0 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .minor-item {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 14px 16px;
+      border-left: 4px solid #3949ab;
+    }
+
+    .minor-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a237e;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .minor-title .material-icons {
+      font-size: 16px;
+      color: #00897B;
+    }
+
+    .minor-desc {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    /* 集団授業セクション */
+    .group-intro {
+      background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+      border-left: 5px solid #1a237e;
+    }
+
+    .group-intro .intro-title {
+      color: #1a237e;
+    }
+
+    .group-schedule {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .group-category {
+      border-bottom: 1px solid #eee;
+    }
+
+    .group-category:last-child {
+      border-bottom: none;
+    }
+
+    .group-category-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: #f9f9f9;
+      cursor: pointer;
+    }
+
+    .group-category-header:hover {
+      background: #f5f5f5;
+    }
+
+    .category-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+    }
+
+    .category-icon .material-icons {
+      font-size: 18px;
+      color: white;
+    }
+
+    .category-info {
+      flex: 1;
+    }
+
+    .category-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .category-range {
+      font-size: 12px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .category-arrow {
+      color: #bbb;
+      transition: transform 0.3s;
+    }
+
+    .group-category.open .category-arrow {
+      transform: rotate(180deg);
+    }
+
+    .category-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .group-category.open .category-content {
+      max-height: 1000px;
+    }
+
+    .lesson-list {
+      padding: 12px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .lesson-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+
+    .lesson-item:hover {
+      background: #E8EAF6;
+    }
+
+    .lesson-number {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .lesson-title {
+      font-size: 13px;
+      color: #333;
+      flex: 1;
+    }
+
+    /* ハンバーガーメニュー */
+    .hamburger-btn {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .nav-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100%;
+      background: white;
+      z-index: 201;
+      transition: right 0.3s ease;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+      overflow-y: auto;
+    }
+
+    .nav-menu.open { right: 0; }
+
+    .nav-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 20px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-header-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .nav-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+    }
+
+    .nav-section {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      color: #333;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-item:hover { background: #f5f5f5; }
+
+    .nav-item .material-icons {
+      font-size: 22px;
+      color: #1a237e;
+    }
+
+    .nav-item span {
+      font-size: 14px;
+      font-weight: 500;
+    }
+.guide-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.guide-link-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+}
+
+.guide-link-btn .material-icons {
+  font-size: 18px;
+}
+    
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="index.html" class="back-btn">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <h1 class="header-title">授業の流れ／カリキュラム</h1>
+  </header>
+
+  <button class="hamburger-btn" onclick="openNav()">
+    <span class="material-icons">menu</span>
+  </button>
+
+  <div class="container">
+    <!-- タブ切り替え -->
+    <div class="tab-container">
+      <button class="tab-btn active" onclick="switchTab('individual')">
+        <span class="material-icons">person</span>
+        個別授業
+      </button>
+      <button class="tab-btn" onclick="switchTab('group')">
+        <span class="material-icons">groups</span>
+        集団授業
+      </button>
+    </div>
+
+    <!-- 個別授業タブ -->
+    <div id="individualTab" class="tab-content active">
+      <!-- イントロ -->
+      <div class="intro-section">
+        <div class="intro-title">
+          <span class="material-icons">lightbulb</span>
+          EQAOの授業が大切にしていること
+        </div>
+        <div class="intro-text">
+          EQAOでは「なぜそれをやるのか（Why）」を最も大切にしています。表面的なテクニックではなく、本質を理解することで、書類・小論文・面接のすべてで安定した実力を発揮できるようになります。
+        </div>
+        <a href="curriculum-guide.html" class="guide-link-btn">
+  <span class="material-icons">menu_book</span>
+  科目詳細ガイドを見る
+</a>
+        
+        <div class="whw-container">
+          <div class="whw-card">
+            <div class="whw-icon why">
+              <span class="material-icons">help</span>
+            </div>
+            <div class="whw-title">Why（なぜ）</div>
+            <div class="whw-desc">その科目が必要な理由・目的を理解する</div>
+          </div>
+          <div class="whw-card">
+            <div class="whw-icon how">
+              <span class="material-icons">build</span>
+            </div>
+            <div class="whw-title">How（どうやって）</div>
+            <div class="whw-desc">具体的な方法・手順・視点を学ぶ</div>
+          </div>
+          <div class="whw-card">
+            <div class="whw-icon what">
+              <span class="material-icons">edit</span>
+            </div>
+            <div class="whw-title">What（何を）</div>
+            <div class="whw-desc">実際に手を動かして実践する</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10大科目 -->
+      <div class="curriculum-list" id="curriculumList">
+        <!-- JSで生成 -->
+      </div>
+    </div>
+
+    <!-- 集団授業タブ -->
+    <div id="groupTab" class="tab-content">
+      <!-- イントロ -->
+      <div class="group-intro intro-section">
+        <div class="intro-title">
+          <span class="material-icons">groups</span>
+          集団授業について
+        </div>
+        <div class="intro-text">
+          集団授業は全33コマで構成され、総合型選抜に必要な知識を体系的に学びます。基礎から応用まで段階的にステップアップし、個別授業と組み合わせることで効果的に力を伸ばします。
+        </div>
+      </div>
+
+      <!-- 集団授業スケジュール -->
+      <div class="group-schedule" id="groupSchedule">
+        <!-- JSで生成 -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ============================================
+    // 個別授業データ（10大科目）
+    // ============================================
+    const majorSubjects = [
+      {
+        id: 1,
+        title: '全体像理解・進路理解',
+        icon: 'explore',
+        subjects: [
+          { title: '総合型選抜の全体理解', desc: '総合型選抜とは何か、従来入試との違い、大学側が見ている評価軸を体系的に理解します。' },
+          { title: '評定平均と英語資格の位置づけ理解', desc: '評定・英語資格がどのように扱われるのか、自分がどの程度有利/不利かを可視化します。' },
+          { title: '志望校・併願校の探索方法', desc: '大学→学部→学科→教授→授業の順で調べる"検索動線"と判断基準を学びます。' },
+          { title: '教授研究・授業内容の調べ方', desc: '公式サイト・シラバス・研究業績から、教授の専門性を読み解く方法を学びます。' },
+          { title: '年間ロードマップの構築', desc: '自己分析→研究テーマ→書類→小論文→面接の流れを時系列で見える化します。' }
+        ]
+      },
+      {
+        id: 2,
+        title: '自己分析・現状把握・原材料抽出',
+        icon: 'psychology',
+        subjects: [
+          { title: '過去の振り返り（ライフライン分析）', desc: '成功体験・失敗体験・感情の山谷を整理し、価値観の根源を特定します。' },
+          { title: '現在の自己理解と価値観整理', desc: '興味・強み・弱み・課題・モチベーション要因を言語化します。' },
+          { title: 'アイデンティティ確立', desc: 'Who am I / Why me / What should I do を構造化し、自己像の"軸"を固めます。' },
+          { title: '評定・英語資格の現状整理と目標設定', desc: '現状値と目標値を比較し、到達までに必要なタスクを明確化します。' },
+          { title: '活動歴の棚卸し', desc: 'これまでの学校内外の活動を全て書き出し、意味付けを行います。' },
+          { title: '研究テーマに繋がる素材抽出', desc: '興味・強み・経験・課題意識をクロスさせて仮説案を複数作ります。' }
+        ]
+      },
+      {
+        id: 3,
+        title: '研究テーマ・志望校マッチング',
+        icon: 'search',
+        subjects: [
+          { title: '合格者事例の理解', desc: '過去の合格者の共通項を分析し、評価される構造を学びます。' },
+          { title: '研究テーマの意義理解', desc: '研究テーマが総合型選抜の核心である理由と、どこで使うのかを整理します。' },
+          { title: '研究テーマ探索/深掘り', desc: '自己分析素材からテーマ候補を複数生み出す思考技法を実践します。' },
+          { title: '研究ツールの使い方', desc: '論文の探し方・教授研究の読み方・先行研究との関係を学びます。' },
+          { title: '仮説検証とテーマ深掘り', desc: 'リサーチクエスチョン→仮説→検証→再設定の思考過程を学びます。' },
+          { title: '大学・学部・教授とのマッチング精査', desc: '"その大学でなければならない理由"を構造的に作ります。' },
+          { title: '併願校の戦略設計', desc: '倍率・試験方式を踏まえて併願戦略を作ります。' }
+        ]
+      },
+      {
+        id: 4,
+        title: '研究実践',
+        icon: 'science',
+        subjects: [
+          { title: '研究テーマの実践', desc: 'フィールドワーク・簡易調査・読書分析など小さな研究を実施します。' },
+          { title: '先行研究・論文・書籍の読み込み', desc: '関連領域の知識と専門用語を吸収し、主張の根拠を補強します。' },
+          { title: 'ポートフォリオ・プロフィール整理', desc: '活動歴・研究・強みを一枚で伝えられる整理を行います。' }
+        ]
+      },
+      {
+        id: 5,
+        title: '小論文準備',
+        icon: 'edit_note',
+        subjects: [
+          { title: '小論文の本質理解', desc: '小論文が「思考の試験」であることを理解し、論理構造を学びます。' },
+          { title: '小論文でやってはいけないこと', desc: '感情論・一般論・断定など、落ちる書き方を排除します。' },
+          { title: '小論文テクニック（段落構成・型理解）', desc: '結論→理由→具体例→反論→結論の構成を実践します。' },
+          { title: '小論文基礎演習', desc: '短文・基礎課題を通して思考のスピードと文章の基礎体力を付けます。' },
+          { title: '小論文応用演習', desc: '資料読解・データ分析など応用課題に取り組みます。' },
+          { title: '小論文過去問演習', desc: '志望校の癖を徹底把握し、最適化します。' }
+        ]
+      },
+      {
+        id: 6,
+        title: '書類作成（志望理由書と自己推薦書）',
+        icon: 'description',
+        subjects: [
+          { title: '志望理由書の本質理解', desc: '志望理由書は「研究テーマ×大学の思想の接続」で作ることを理解します。' },
+          { title: '志望理由書の禁止事項理解', desc: '抽象論・熱量だけ・関係ない経験の羅列を排除します。' },
+          { title: '志望理由書テクニック（構成・段落）', desc: 'きっかけ→課題意識→試行錯誤→学びの必要性→マッチング→学習計画の構成を習得します。' },
+          { title: '大学調査（教授・授業・理念）', desc: '大学公式資料を深読みし、志望理由書に必要な情報を抽出します。' },
+          { title: '志望理由書実践と修正', desc: '実際に書き、添削を重ね、論理と熱量を最適化します。' },
+          { title: '自己推薦書の構成理解', desc: '自己推薦書の目的・位置づけ・大学側の評価観点を整理します。' },
+          { title: '自己推薦書の禁止事項', desc: '主観の羅列・感情依存・長文化を防ぎます。' },
+          { title: '自己アピール技法', desc: '強み→根拠→結果→学びの構造でアピールを作ります。' },
+          { title: '自己推薦書実践と修正', desc: '実際の提出レベルまで書き上げ、面接との整合性を確保します。' }
+        ]
+      },
+      {
+        id: 7,
+        title: '課題レポート',
+        icon: 'article',
+        subjects: [
+          { title: '課題レポートの本質理解', desc: '大学から与えられたテーマに対し、論理的に思考する力を示す科目です。' },
+          { title: '課題レポートの禁止事項', desc: '感情論・抽象論・テーマ逸脱など"点数が下がる要素"を明確に排除します。' },
+          { title: '課題レポートの構成技法', desc: '序論・本論・結論の型を基礎とし、論理の流れを整えます。' },
+          { title: '課題レポートの資料読解と要点抽出', desc: '与えられた資料から"使うべき情報だけ"を抽出する技術を身につけます。' },
+          { title: '課題レポートの実践と修正', desc: '実際に書き、添削を通して論理性・構造・言語表現を改善します。' }
+        ]
+      },
+      {
+        id: 8,
+        title: 'プレゼンテーション',
+        icon: 'present_to_all',
+        subjects: [
+          { title: 'プレゼンテーション本質理解', desc: 'プレゼンは「伝える」ではなく「理解させる」技術であることを学びます。' },
+          { title: 'プレゼン資料の構造・デザイン', desc: '論理構成・ビジュアル配置・スライドの役割を理解します。' },
+          { title: '非言語コミュニケーション', desc: '声量・間の取り方・姿勢・表情をコントロールします。' },
+          { title: 'プレゼン原稿の作成と暗記', desc: 'スクリプト作成→暗記→台本なし発表までを体系化します。' }
+        ]
+      },
+      {
+        id: 9,
+        title: '面接',
+        icon: 'record_voice_over',
+        subjects: [
+          { title: '面接の本質理解', desc: '面接は「研究テーマ・書類の深掘り」であることを理解します。' },
+          { title: '面接禁止事項理解', desc: '抽象論・矛盾・視線逸れなど減点リスクを排除します。' },
+          { title: '面接基礎100問の言語化', desc: 'よく出る基礎質問100問を全て言語化し、口で答えられる状態にします。' },
+          { title: '圧迫面接・深掘り/口頭試問対策', desc: '反論・矛盾指摘への対応力を身につけます。' },
+          { title: '発声・表情・視線のコントロール', desc: '棒読み防止・緊張対策・声量調整を行います。' }
+        ]
+      },
+      {
+        id: 10,
+        title: '最終確認・調整',
+        icon: 'check_circle',
+        subjects: [
+          { title: '最終確認と調整・メンタルケア', desc: 'すべての科目の最終調整を行う総仕上げの科目です。書類・小論文・面接の最終チェック、受験直前のメンタルケアを行います。' }
+        ]
+      }
+    ];
+
+    // ============================================
+    // 集団授業データ
+    // ============================================
+    const groupLessons = [
+      {
+        category: '基礎理解・戦略',
+        range: '①〜⑥',
+        lessons: [
+          { num: 1, title: '総合型選抜／推薦選抜／公募推薦とは' },
+          { num: 2, title: '志望校／併願校戦略の基礎' },
+          { num: 3, title: '出願資格／活動実績の基礎' },
+          { num: 4, title: '合格までのロードマップと授業外学習' },
+          { num: 5, title: 'すきの見つけ方と伸ばし方／ツール' },
+          { num: 6, title: '受かるための考え方' }
+        ]
+      },
+      {
+        category: '研究・探究',
+        range: '⑦',
+        lessons: [
+          { num: 7, title: '研究・探究の基礎' }
+        ]
+      },
+      {
+        category: '書類作成',
+        range: '⑧〜⑩、⑱〜⑳、㉒〜㉔',
+        lessons: [
+          { num: 8, title: '志望理由書の基礎' },
+          { num: 9, title: '自己推薦書の基礎' },
+          { num: 10, title: '課題レポートの基礎' },
+          { num: 18, title: '提出書類の基礎' },
+          { num: 19, title: '志望理由書／自己推薦書／レポートの良い事例と解説' },
+          { num: 20, title: '参考文献／引用／表現／語彙／書式／タイトル等' },
+          { num: 22, title: '自己推薦書 応用' },
+          { num: 23, title: '志望理由書 応用' },
+          { num: 24, title: 'レポート 応用' }
+        ]
+      },
+      {
+        category: '小論文',
+        range: '⑪〜⑭、㉗㉙㉛㉝',
+        lessons: [
+          { num: 11, title: '小論文の基礎' },
+          { num: 12, title: '小論文の意見提示／要約' },
+          { num: 13, title: '面接／小論文「やってはいけないこと」' },
+          { num: 14, title: '小論文 問題解説' },
+          { num: 27, title: '小論文 実践編01' },
+          { num: 29, title: '小論文 実践編02' },
+          { num: 31, title: '小論文 実践編03' },
+          { num: 33, title: '小論文 実践編04' }
+        ]
+      },
+      {
+        category: '面接',
+        range: '⑯、㉖㉘㉚㉜',
+        lessons: [
+          { num: 16, title: 'プレゼンテーション／面接の基礎' },
+          { num: 26, title: '面接 実践編01' },
+          { num: 28, title: '面接 実践編02' },
+          { num: 30, title: '面接 実践編03' },
+          { num: 32, title: '面接 実践編04' }
+        ]
+      },
+      {
+        category: 'プレゼン・GD・その他',
+        range: '⑮、⑰、㉑、㉕',
+        lessons: [
+          { num: 15, title: 'ポスター／スライドのデザイン基礎' },
+          { num: 17, title: '夏休みの過ごし方と学習／書籍' },
+          { num: 21, title: 'グループディスカッションの基礎' },
+          { num: 25, title: 'よくある質問と集団質問受付' }
+        ]
+      }
+    ];
+
+    // ============================================
+    // 描画処理
+    // ============================================
+    function renderCurriculum() {
+      const container = document.getElementById('curriculumList');
+      let html = '';
+
+      majorSubjects.forEach(major => {
+        html += `
+          <div class="major-subject" data-id="${major.id}">
+            <div class="major-header" onclick="toggleMajor(${major.id})">
+              <div class="major-number">${major.id}</div>
+              <div class="major-info">
+                <div class="major-title">${major.title}</div>
+                <div class="major-count">${major.subjects.length}科目</div>
+              </div>
+              <span class="material-icons major-arrow">expand_more</span>
+            </div>
+            <div class="major-content">
+              <div class="minor-list">
+                ${major.subjects.map(sub => `
+                  <div class="minor-item">
+                    <div class="minor-title">
+                      <span class="material-icons">check_circle</span>
+                      ${sub.title}
+                    </div>
+                    <div class="minor-desc">${sub.desc}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderGroupSchedule() {
+      const container = document.getElementById('groupSchedule');
+      let html = '';
+
+      groupLessons.forEach((cat, index) => {
+        html += `
+          <div class="group-category" data-index="${index}">
+            <div class="group-category-header" onclick="toggleCategory(${index})">
+              <div class="category-icon">
+                <span class="material-icons">school</span>
+              </div>
+              <div class="category-info">
+                <div class="category-title">${cat.category}</div>
+                <div class="category-range">${cat.range}（${cat.lessons.length}コマ）</div>
+              </div>
+              <span class="material-icons category-arrow">expand_more</span>
+            </div>
+            <div class="category-content">
+              <div class="lesson-list">
+                ${cat.lessons.map(lesson => `
+                  <div class="lesson-item">
+                    <div class="lesson-number">${lesson.num}</div>
+                    <div class="lesson-title">${lesson.title}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // ============================================
+    // インタラクション
+    // ============================================
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+      if (tab === 'individual') {
+        document.querySelector('.tab-btn:first-child').classList.add('active');
+        document.getElementById('individualTab').classList.add('active');
+      } else {
+        document.querySelector('.tab-btn:last-child').classList.add('active');
+        document.getElementById('groupTab').classList.add('active');
+      }
+    }
+
+    function toggleMajor(id) {
+      const element = document.querySelector(`.major-subject[data-id="${id}"]`);
+      element.classList.toggle('open');
+    }
+
+    function toggleCategory(index) {
+      const element = document.querySelector(`.group-category[data-index="${index}"]`);
+      element.classList.toggle('open');
+    }
+// 初期化
+    document.addEventListener('DOMContentLoaded', function() {
+      renderCurriculum();
+      renderGroupSchedule();
+    });
+  </script>
+  <script src="js/nav-menu.js"></script>
+</body>
+</html>

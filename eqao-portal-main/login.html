@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>ログイン - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-container {
+      background: white;
+      border-radius: 24px;
+      padding: 40px 32px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .login-header .icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .login-header .icon .material-icons {
+      font-size: 40px;
+      color: white;
+    }
+
+    .login-header h1 {
+      font-size: 24px;
+      color: #1a237e;
+      margin-bottom: 8px;
+    }
+
+    .login-header p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(26, 35, 126, 0.3);
+    }
+
+    .login-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .error-message {
+      background: #ffebee;
+      color: #c62828;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .back-link a {
+      color: #666;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back-link a:hover {
+      color: #1a237e;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <div class="icon">
+        <span class="material-icons">person</span>
+      </div>
+      <h1>ログイン</h1>
+      <p>生徒番号とパスワードを入力してください</p>
+    </div>
+
+    <div id="errorMessage" class="error-message">
+      生徒番号またはパスワードが正しくありません
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">生徒番号</label>
+      <input type="text" id="studentId" class="form-input" placeholder="例：12345">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">パスワード</label>
+      <input type="password" id="password" class="form-input" placeholder="パスワード">
+    </div>
+
+    <button id="loginBtn" class="login-btn" onclick="login()">ログイン</button>
+
+    <div class="back-link">
+      <a href="index.html">← トップに戻る</a>
+    </div>
+  </div>
+
+  <script>
+    // ============================================
+    // API設定
+    // ============================================
+    const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
+
+    async function apiPost(action, data = {}) {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, ...data })
+      });
+      if (!response.ok) {
+        throw new Error('API Error: ' + response.status);
+      }
+      return await response.json();
+    }
+
+    async function apiGet(action, params = {}) {
+      const url = new URL(API_URL);
+      url.searchParams.set('action', action);
+      Object.entries(params).forEach(([key, value]) => {
+        url.searchParams.set(key, value);
+      });
+      const response = await fetch(url.toString());
+      if (!response.ok) {
+        throw new Error('API Error: ' + response.status);
+      }
+      return await response.json();
+    }
+
+    // Enterキーでログイン
+    document.getElementById('password').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') login();
+    });
+
+    async function login() {
+      const studentId = document.getElementById('studentId').value.trim();
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('errorMessage');
+      const loginBtn = document.getElementById('loginBtn');
+
+      if (!studentId || !password) {
+        errorMessage.textContent = '生徒番号とパスワードを入力してください';
+        errorMessage.classList.add('show');
+        return;
+      }
+
+      loginBtn.disabled = true;
+      loginBtn.textContent = 'ログイン中...';
+      errorMessage.classList.remove('show');
+
+      try {
+        const result = await apiGet('authenticate', { studentId, password });
+        
+        if (result.success) {
+          // ログイン情報を保存
+          localStorage.setItem('eqao_studentId', result.studentId);
+          localStorage.setItem('eqao_studentName', result.studentName);
+          localStorage.setItem('eqao_password', password);
+          localStorage.setItem('eqao_loggedIn', 'true');
+          
+          // 元のページに戻る or トップへ
+          const returnUrl = localStorage.getItem('eqao_returnUrl');
+          if (returnUrl) {
+            localStorage.removeItem('eqao_returnUrl');
+            window.location.href = returnUrl;
+          } else {
+            window.location.href = 'index.html';
+          }
+        } else {
+          errorMessage.textContent = '生徒番号またはパスワードが正しくありません';
+          errorMessage.classList.add('show');
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'ログイン';
+        }
+      } catch (error) {
+        errorMessage.textContent = 'エラーが発生しました。もう一度お試しください。';
+        errorMessage.classList.add('show');
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'ログイン';
+        console.error(error);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>EQAO模試 - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      flex: 1;
+    }
+
+    .header-user {
+      font-size: 12px;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .header-user .material-icons {
+      font-size: 16px;
+    }
+
+    /* ハンバーガーメニュー */
+    .menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .menu-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .nav-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      max-width: 85%;
+      height: 100%;
+      background: white;
+      z-index: 201;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+    }
+
+    .nav-menu.active {
+      right: 0;
+    }
+
+    .nav-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 24px 20px;
+    }
+
+    .nav-header-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .nav-header-subtitle {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .nav-section {
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav-section-title {
+      font-size: 11px;
+      color: #888;
+      padding: 8px 20px;
+      font-weight: 500;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      color: #333;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-item:hover {
+      background: #f5f5f5;
+    }
+
+    .nav-item .material-icons {
+      font-size: 22px;
+      color: #1a237e;
+    }
+
+    .nav-item-text {
+      font-size: 14px;
+    }
+
+    .nav-item.disabled {
+      color: #bbb;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .nav-item.disabled .material-icons {
+      color: #ccc;
+    }
+
+    .nav-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* ヒーローセクション */
+    .hero-section {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 20px;
+      padding: 32px 24px;
+      margin-bottom: 24px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+    }
+
+    .hero-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .hero-icon .material-icons {
+      font-size: 40px;
+    }
+
+    .hero-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      opacity: 0.9;
+      line-height: 1.7;
+    }
+
+    /* ステータスバナー */
+    .status-banner {
+      background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-banner .material-icons {
+      font-size: 28px;
+    }
+
+    .status-banner-text {
+      flex: 1;
+    }
+
+    .status-banner-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .status-banner-detail {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    /* セクションカード */
+    .section-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section-icon .material-icons {
+      font-size: 24px;
+      color: #1a237e;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .section-content {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    /* メリットリスト */
+    .merit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .merit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px;
+      background: #f8f9fc;
+      border-radius: 12px;
+    }
+
+    .merit-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .merit-icon .material-icons {
+      font-size: 20px;
+      color: white;
+    }
+
+    .merit-content {
+      flex: 1;
+    }
+
+    .merit-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .merit-desc {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* 試験科目 */
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .subject-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: #f8f9fc;
+      border-radius: 10px;
+    }
+
+    .subject-item .material-icons {
+      font-size: 20px;
+      color: #1a237e;
+    }
+
+    .subject-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    /* 料金テーブル */
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .price-table th,
+    .price-table td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    .price-table th {
+      font-size: 13px;
+      font-weight: 500;
+      color: #888;
+      background: #f8f9fc;
+    }
+
+    .price-table td {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .price-amount {
+      font-weight: 700;
+      color: #1a237e;
+    }
+
+    .price-note {
+      font-size: 12px;
+      color: #888;
+      margin-top: 12px;
+      padding: 12px;
+      background: #fff8e1;
+      border-radius: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .price-note .material-icons {
+      font-size: 18px;
+      color: #f57c00;
+      flex-shrink: 0;
+    }
+
+    /* 実施形式 */
+    .format-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .format-item {
+      padding: 16px;
+      background: #f8f9fc;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .format-item .material-icons {
+      font-size: 32px;
+      color: #1a237e;
+      margin-bottom: 8px;
+    }
+
+    .format-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .format-desc {
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* 注意事項 */
+    .notice-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .notice-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .notice-item .material-icons {
+      font-size: 18px;
+      color: #1a237e;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* 統計 */
+    .stats-banner {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .stats-number {
+      font-size: 36px;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-bottom: 4px;
+    }
+
+    .stats-label {
+      font-size: 14px;
+      color: #388e3c;
+    }
+
+    /* 申し込みボタン */
+    .apply-section {
+      margin-top: 24px;
+    }
+
+    .apply-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 18px 24px;
+      background: #ccc;
+      color: #888;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: not-allowed;
+    }
+
+    .apply-btn .material-icons {
+      font-size: 24px;
+    }
+
+    .apply-note {
+      text-align: center;
+      font-size: 13px;
+      color: #888;
+      margin-top: 12px;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 480px) {
+      .subject-grid,
+      .format-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+/* 成績表サンプル画像 */
+.sample-image-container {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.sample-image {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  border: 1px solid #e0e0e0;
+}
+
+.sample-label {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #888;
+}
+
+    
+  </style>
+</head>
+<body>
+  <header class="header">
+    <button class="back-btn" onclick="goBack()">
+      <span class="material-icons">arrow_back</span>
+    </button>
+    <div class="header-title">EQAO模試</div>
+    <div class="header-user">
+      <span class="material-icons">person</span>
+      <span id="navUserName"></span>
+    </div>
+    <button class="hamburger-btn" onclick="openNav()">
+      <span class="material-icons">menu</span>
+    </button>
+
+  </header>
+
+  <div class="container">
+    <!-- ヒーローセクション -->
+    <div class="hero-section">
+      <div class="hero-icon">
+        <span class="material-icons">quiz</span>
+      </div>
+      <h1 class="hero-title">EQAO模試</h1>
+      <p class="hero-subtitle">
+        本番に近い緊張感の中で実力を確認し<br>
+        課題を発見できる実戦形式の模試
+      </p>
+    </div>
+
+    <!-- ステータスバナー -->
+    <div class="status-banner">
+      <span class="material-icons">info</span>
+      <div class="status-banner-text">
+        <div class="status-banner-title">2026年度の日程は未定です</div>
+        <div class="status-banner-detail">決まり次第、このページでお知らせします</div>
+      </div>
+    </div>
+
+    <!-- 模試を受けるメリット -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">
+          <span class="material-icons">emoji_events</span>
+        </div>
+        <h2 class="section-title">模試を受けるメリット</h2>
+      </div>
+      <div class="merit-list">
+        <div class="merit-item">
+          <div class="merit-icon">
+            <span class="material-icons">visibility</span>
+          </div>
+          <div class="merit-content">
+            <div class="merit-title">本番前に課題を発見できる</div>
+            <div class="merit-desc">通常の練習では見えない弱点が、実戦形式の緊張感の中で明らかになります。本番で初めて問題が出るよりも、模試で事前に把握できることは大きな収穫です。</div>
+          </div>
+        </div>
+        <div class="merit-item">
+          <div class="merit-icon">
+            <span class="material-icons">psychology</span>
+          </div>
+          <div class="merit-content">
+            <div class="merit-title">本番同様の緊張感を体験</div>
+            <div class="merit-desc">時間制限・評価者の目・厳格なルールの中で受験することで、本番で起こりうる「想定外」を事前に経験できます。</div>
+          </div>
+        </div>
+        <div class="merit-item">
+          <div class="merit-icon">
+            <span class="material-icons">trending_up</span>
+          </div>
+          <div class="merit-content">
+            <div class="merit-title">具体的な改善点がわかる</div>
+            <div class="merit-desc">小論文の構成力・面接での受け答え・知識の深さなど、何が足りないかが数値化・可視化されてフィードバックされます。</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- 成績表サンプル -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-icon">
+      <span class="material-icons">assessment</span>
+    </div>
+    <h2 class="section-title">成績表サンプル</h2>
+  </div>
+  <div class="section-content">
+    <p style="margin-bottom: 16px;">模試受験後、以下のような詳細な成績表をお渡しします。レーダーチャートや項目別評価で、自分の強み・弱みが一目でわかります。</p>
+  </div>
+  <div class="sample-image-container">
+    <img src="sample-result.png" alt="EQAO模試 成績表サンプル" class="sample-image">
+    <div class="sample-label">※サンプルイメージです</div>
+  </div>
+</div>
+
+    <!-- 試験科目 -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">
+          <span class="material-icons">assignment</span>
+        </div>
+        <h2 class="section-title">試験科目</h2>
+      </div>
+      <div class="subject-grid">
+        <div class="subject-item">
+          <span class="material-icons">edit_note</span>
+          <span class="subject-name">小論文</span>
+        </div>
+        <div class="subject-item">
+          <span class="material-icons">record_voice_over</span>
+          <span class="subject-name">面接</span>
+        </div>
+        <div class="subject-item">
+          <span class="material-icons">question_answer</span>
+          <span class="subject-name">口頭試問</span>
+        </div>
+        <div class="subject-item">
+          <span class="material-icons">present_to_all</span>
+          <span class="subject-name">プレゼンテーション</span>
+        </div>
+        <div class="subject-item">
+          <span class="material-icons">calculate</span>
+          <span class="subject-name">数学問題</span>
+        </div>
+        <div class="subject-item">
+          <span class="material-icons">translate</span>
+          <span class="subject-name">英語問題</span>
+        </div>
+      </div>
+      <div class="section-content" style="margin-top: 16px;">
+        <p>※特定科目のみの受験も可能です</p>
+        <p>※小論文は意見提示型（120分・3問構成）で、構成力を重視します</p>
+        <p>※面接は評価者2名体制で実施します</p>
+      </div>
+    </div>
+
+    <!-- 実施形式 -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">
+          <span class="material-icons">devices</span>
+        </div>
+        <h2 class="section-title">実施形式</h2>
+      </div>
+      <div class="format-grid">
+        <div class="format-item">
+          <span class="material-icons">apartment</span>
+          <div class="format-name">対面受験</div>
+          <div class="format-desc">EQAO校舎で実施</div>
+        </div>
+        <div class="format-item">
+          <span class="material-icons">laptop_mac</span>
+          <div class="format-name">オンライン受験</div>
+          <div class="format-desc">Zoomで参加</div>
+        </div>
+      </div>
+      <div class="section-content" style="margin-top: 16px;">
+        <p>※結果は受験後3日以内にメールで配布されます</p>
+        <p>※当日の対面⇔オンライン切り替えは不可（1週間前までに連絡）</p>
+      </div>
+    </div>
+
+    <!-- 料金 -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">
+          <span class="material-icons">payments</span>
+        </div>
+        <h2 class="section-title">料金（税込）</h2>
+      </div>
+      <table class="price-table">
+        <tr>
+          <th>コース</th>
+          <th>料金</th>
+        </tr>
+        <tr>
+          <td>通常（小論文＋面接等）</td>
+          <td><span class="price-amount">15,980円</span></td>
+        </tr>
+        <tr>
+          <td>面接のみ</td>
+          <td><span class="price-amount">7,990円</span></td>
+        </tr>
+        <tr>
+          <td>小論文のみ</td>
+          <td><span class="price-amount">11,800円</span></td>
+        </tr>
+      </table>
+      <div class="price-note">
+        <span class="material-icons">info</span>
+        <span>上記は2025年度の料金です。2026年度の料金は変更になる場合があります。</span>
+      </div>
+    </div>
+
+    <!-- 注意事項 -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">
+          <span class="material-icons">warning</span>
+        </div>
+        <h2 class="section-title">注意事項</h2>
+      </div>
+      <div class="notice-list">
+        <div class="notice-item">
+          <span class="material-icons">check_circle</span>
+          <span>模試は完全先着制・定員制での受付となります</span>
+        </div>
+        <div class="notice-item">
+          <span class="material-icons">check_circle</span>
+          <span>キャンセルは7日前まで受付可能です</span>
+        </div>
+        <div class="notice-item">
+          <span class="material-icons">check_circle</span>
+          <span>当日欠席（体調不良含む）はキャンセル料100%となります</span>
+        </div>
+        <div class="notice-item">
+          <span class="material-icons">check_circle</span>
+          <span>遅刻・カンニングは無断キャンセル扱いとなります</span>
+        </div>
+        <div class="notice-item">
+          <span class="material-icons">check_circle</span>
+          <span>服装は制服またはスーツ（本番同様）でお越しください</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 結果の捉え方 -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">
+          <span class="material-icons">lightbulb</span>
+        </div>
+        <h2 class="section-title">模試結果の正しい捉え方</h2>
+      </div>
+      <div class="section-content">
+        <p>EQAO模試は、本番の合否を予測・保証するものではありません。</p>
+        <p style="margin-top: 12px;">結果が想定よりも良くなかった場合でも、「本番前の段階で課題を把握できた」と前向きに捉えてください。</p>
+        <p style="margin-top: 12px;">模試は「失敗してよい場所」です。ここで見つかった課題を修正し、本番で同じ失敗をしないための練習試合として活用しましょう。</p>
+      </div>
+    </div>
+
+    <!-- 申し込みボタン -->
+    <div class="apply-section">
+      <button class="apply-btn" disabled>
+        <span class="material-icons">lock</span>
+        <span>2026年度の申し込みは準備中です</span>
+      </button>
+      <p class="apply-note">日程が決まり次第、申し込みを開始します</p>
+    </div>
+  </div>
+
+  <script>
+    // ログイン確認
+    document.addEventListener('DOMContentLoaded', function() {
+      const loggedIn = localStorage.getItem('eqao_loggedIn');
+      const studentId = localStorage.getItem('eqao_studentId');
+
+      if (!loggedIn || !studentId) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      setNavUserName();
+    });
+
+    function goBack() {
+      window.location.href = 'index.html?t=' + new Date().getTime();
+    }
+
+    function setNavUserName() {
+      const studentName = localStorage.getItem('eqao_studentName') || '';
+      document.getElementById('navUserName').textContent = studentName;
+      document.getElementById('navHeaderUser').textContent = studentName ? studentName + ' さん' : 'メニュー';
+    }
+  </script>
+  <script src="js/nav-menu.js"></script>
+</body>
+</html>

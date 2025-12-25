@@ -1,0 +1,854 @@
+[
+  {
+    "university": "McMaster",
+    "faculty": "Psychology",
+    "department": "Psychology",
+    "count": 1
+  },
+  {
+    "university": "Toronto Metropolitan University",
+    "faculty": "Psychology",
+    "department": "Psychology",
+    "count": 1
+  },
+  {
+    "university": "York University",
+    "faculty": "Psychology",
+    "department": "Psychology",
+    "count": 1
+  },
+  {
+    "university": "フェリス女学院大学",
+    "faculty": "グローバル教養学部",
+    "department": "国際社会学科",
+    "count": 1
+  },
+  {
+    "university": "フェリス女学院大学",
+    "faculty": "国際交流学部",
+    "department": "国際交流学科",
+    "count": 2
+  },
+  {
+    "university": "上智大学",
+    "faculty": "外国語学部",
+    "department": "ドイツ語学会",
+    "count": 1
+  },
+  {
+    "university": "上智大学",
+    "faculty": "外国語学部",
+    "department": "ドイツ語学科",
+    "count": 1
+  },
+  {
+    "university": "上智大学",
+    "faculty": "外国語学部",
+    "department": "ポルトガル語学科",
+    "count": 1
+  },
+  {
+    "university": "上智大学",
+    "faculty": "外国語学部",
+    "department": "英語学科",
+    "count": 2
+  },
+  {
+    "university": "上智大学",
+    "faculty": "文学部",
+    "department": "ドイツ文学科",
+    "count": 3
+  },
+  {
+    "university": "上智大学",
+    "faculty": "文学部",
+    "department": "フランス文学科",
+    "count": 6
+  },
+  {
+    "university": "上智大学",
+    "faculty": "文学部",
+    "department": "哲学科",
+    "count": 1
+  },
+  {
+    "university": "上智大学",
+    "faculty": "文学部",
+    "department": "新聞学科",
+    "count": 5
+  },
+  {
+    "university": "上智大学",
+    "faculty": "文学部",
+    "department": "英文学科",
+    "count": 2
+  },
+  {
+    "university": "上智大学",
+    "faculty": "法学部",
+    "department": "国際関係法学科",
+    "count": 4
+  },
+  {
+    "university": "上智大学",
+    "faculty": "法学部",
+    "department": "地球環境法学科",
+    "count": 2
+  },
+  {
+    "university": "上智大学",
+    "faculty": "法学部",
+    "department": "法律学科",
+    "count": 3
+  },
+  {
+    "university": "上智大学",
+    "faculty": "経済学部",
+    "department": "経営学科",
+    "count": 2
+  },
+  {
+    "university": "上智大学",
+    "faculty": "総合グローバル学部",
+    "department": "総合グローバル学科",
+    "count": 21
+  },
+  {
+    "university": "上智大学",
+    "faculty": "総合人間科学部",
+    "department": "教育学科",
+    "count": 1
+  },
+  {
+    "university": "上智大学",
+    "faculty": "総合人間科学部",
+    "department": "看護学科",
+    "count": 2
+  },
+  {
+    "university": "上智大学",
+    "faculty": "総合人間科学部",
+    "department": "社会学科",
+    "count": 2
+  },
+  {
+    "university": "上智大学",
+    "faculty": "総合人間科学部",
+    "department": "社会福祉学科",
+    "count": 7
+  },
+  {
+    "university": "中央大学",
+    "faculty": "国際経営学部",
+    "department": "国際経営学科",
+    "count": 2
+  },
+  {
+    "university": "中央大学",
+    "faculty": "文学部",
+    "department": "人文社会学科フランス語文学文化専攻",
+    "count": 1
+  },
+  {
+    "university": "中央大学",
+    "faculty": "文学部",
+    "department": "学びのパスポートプログラム専攻",
+    "count": 2
+  },
+  {
+    "university": "中央大学",
+    "faculty": "文学部",
+    "department": "社会学専攻",
+    "count": 1
+  },
+  {
+    "university": "中央大学",
+    "faculty": "経済学部",
+    "department": "経済学科",
+    "count": 1
+  },
+  {
+    "university": "二松学舎大学",
+    "faculty": "国際学部",
+    "department": "国際経済学科",
+    "count": 1
+  },
+  {
+    "university": "二松学舎大学",
+    "faculty": "国際政治経済学部",
+    "department": "国際政治経済学科",
+    "count": 1
+  },
+  {
+    "university": "亜細亜大学",
+    "faculty": "経営学部",
+    "department": "ホスピタリティ・マネジメント学科",
+    "count": 1
+  },
+  {
+    "university": "亜細亜大学",
+    "faculty": "経済学部",
+    "department": "経営学科",
+    "count": 1
+  },
+  {
+    "university": "南山大学",
+    "faculty": "外国語学部",
+    "department": "英米学科",
+    "count": 1
+  },
+  {
+    "university": "南山大学",
+    "faculty": "経営学部",
+    "department": "経営学科",
+    "count": 1
+  },
+  {
+    "university": "同志社大学",
+    "faculty": "グローバル地域文化学部",
+    "department": "グローバル地域文化学科",
+    "count": 5
+  },
+  {
+    "university": "同志社大学",
+    "faculty": "法学部",
+    "department": "法律学科",
+    "count": 1
+  },
+  {
+    "university": "名古屋外国語大学",
+    "faculty": "外国語学部",
+    "department": "英米語学科",
+    "count": 1
+  },
+  {
+    "university": "名桜大学",
+    "faculty": "人間健康学部",
+    "department": "健康スポーツ学科",
+    "count": 1
+  },
+  {
+    "university": "国士舘大学",
+    "faculty": "経営学部",
+    "department": "経営学科",
+    "count": 1
+  },
+  {
+    "university": "国際基督教大学",
+    "faculty": "教養学部",
+    "department": "リベラル・アーツ学科",
+    "count": 1
+  },
+  {
+    "university": "國學院大学",
+    "faculty": "人間開発学部",
+    "department": "初等教育学科",
+    "count": 1
+  },
+  {
+    "university": "國學院大学",
+    "faculty": "文学部",
+    "department": "哲学科",
+    "count": 1
+  },
+  {
+    "university": "國學院大学",
+    "faculty": "文学部",
+    "department": "外国語文化学科",
+    "count": 2
+  },
+  {
+    "university": "國學院大学",
+    "faculty": "文学部",
+    "department": "日本文学科",
+    "count": 1
+  },
+  {
+    "university": "國學院大学",
+    "faculty": "経済学部",
+    "department": "経営学科",
+    "count": 2
+  },
+  {
+    "university": "國學院大学",
+    "faculty": "観光まちづくり学部",
+    "department": "観光まちづくり学科",
+    "count": 16
+  },
+  {
+    "university": "学習院大学",
+    "faculty": "国際社会学部",
+    "department": "国際社会学科",
+    "count": 2
+  },
+  {
+    "university": "学習院大学",
+    "faculty": "国際社会科学部",
+    "department": "国際社会学科",
+    "count": 1
+  },
+  {
+    "university": "学習院大学",
+    "faculty": "国際社会科学部",
+    "department": "国際社会科学科",
+    "count": 1
+  },
+  {
+    "university": "宮城学院女子大学",
+    "faculty": "学芸学部",
+    "department": "英文学科",
+    "count": 1
+  },
+  {
+    "university": "専修大学",
+    "faculty": "",
+    "department": "",
+    "count": 1
+  },
+  {
+    "university": "専修大学",
+    "faculty": "経営学部",
+    "department": "経営学科",
+    "count": 1
+  },
+  {
+    "university": "帝京大学",
+    "faculty": "外国語学部",
+    "department": "ポルトガル語学科",
+    "count": 1
+  },
+  {
+    "university": "帝京大学",
+    "faculty": "教育学部",
+    "department": "教育文化学科",
+    "count": 1
+  },
+  {
+    "university": "帝京大学",
+    "faculty": "経済学部",
+    "department": "経済学科",
+    "count": 2
+  },
+  {
+    "university": "帝京大学",
+    "faculty": "経済学部",
+    "department": "観光経営学科",
+    "count": 1
+  },
+  {
+    "university": "帝京平成大学",
+    "faculty": "人文社会学部",
+    "department": "教育学科",
+    "count": 1
+  },
+  {
+    "university": "慶應大学",
+    "faculty": "経済学部",
+    "department": "経済学科",
+    "count": 1
+  },
+  {
+    "university": "慶應義塾大学",
+    "faculty": "総合政策学部",
+    "department": "環境情報学科",
+    "count": 1
+  },
+  {
+    "university": "成蹊大学",
+    "faculty": "文学部",
+    "department": "国際文化学科",
+    "count": 1
+  },
+  {
+    "university": "成蹊大学",
+    "faculty": "経営学部",
+    "department": "総合経営学科",
+    "count": 1
+  },
+  {
+    "university": "拓殖大学",
+    "faculty": "商学部",
+    "department": "国際ビジネス学科",
+    "count": 1
+  },
+  {
+    "university": "文教大学",
+    "faculty": "国際学部",
+    "department": "国際観光学科",
+    "count": 3
+  },
+  {
+    "university": "日本大学",
+    "faculty": "商学部",
+    "department": "商業学科",
+    "count": 2
+  },
+  {
+    "university": "日本女子大学",
+    "faculty": "人間社会学部",
+    "department": "社会福祉学科",
+    "count": 1
+  },
+  {
+    "university": "日本女子大学",
+    "faculty": "国際文化学部",
+    "department": "国際文化学科",
+    "count": 2
+  },
+  {
+    "university": "日本女子大学",
+    "faculty": "家政学部",
+    "department": "家政経済学科",
+    "count": 1
+  },
+  {
+    "university": "日本女子大学",
+    "faculty": "文学部",
+    "department": "英文学科",
+    "count": 4
+  },
+  {
+    "university": "明治大学",
+    "faculty": "国際日本学部",
+    "department": "国際日本学科",
+    "count": 1
+  },
+  {
+    "university": "明治大学",
+    "faculty": "法学部",
+    "department": "法律学科",
+    "count": 1
+  },
+  {
+    "university": "明治学院大学",
+    "faculty": "国際学部",
+    "department": "国際学科",
+    "count": 3
+  },
+  {
+    "university": "明治学院大学",
+    "faculty": "心理学部",
+    "department": "教育発達学科",
+    "count": 1
+  },
+  {
+    "university": "明治学院大学",
+    "faculty": "社会学部",
+    "department": "社会福祉学科",
+    "count": 1
+  },
+  {
+    "university": "昭和女子大学",
+    "faculty": "グローバルビジネス学部",
+    "department": "グローバルビジネス学科",
+    "count": 1
+  },
+  {
+    "university": "昭和女子大学",
+    "faculty": "人間文化学部",
+    "department": "歴史文化学科",
+    "count": 1
+  },
+  {
+    "university": "昭和女子大学",
+    "faculty": "人間社会学部",
+    "department": "社会福祉学科",
+    "count": 1
+  },
+  {
+    "university": "昭和女子大学",
+    "faculty": "人間社会学部",
+    "department": "福祉社会学科",
+    "count": 2
+  },
+  {
+    "university": "昭和女子大学",
+    "faculty": "国際学部",
+    "department": "国際学科",
+    "count": 1
+  },
+  {
+    "university": "東京女子大学",
+    "faculty": "現代教養学部",
+    "department": "社会コミュニケーション学科",
+    "count": 1
+  },
+  {
+    "university": "東洋大学",
+    "faculty": "国際学部",
+    "department": "国際地域学科",
+    "count": 1
+  },
+  {
+    "university": "東洋大学",
+    "faculty": "社会学部",
+    "department": "",
+    "count": 1
+  },
+  {
+    "university": "東洋大学",
+    "faculty": "社会学部",
+    "department": "社会心理学科",
+    "count": 1
+  },
+  {
+    "university": "東洋大学",
+    "faculty": "福祉社会デザイン学部",
+    "department": "社会福祉学科",
+    "count": 2
+  },
+  {
+    "university": "東洋大学",
+    "faculty": "経済学部",
+    "department": "国際経済学科",
+    "count": 1
+  },
+  {
+    "university": "桜美林大学",
+    "faculty": "健康福祉学群",
+    "department": "スポーツ科学専攻",
+    "count": 1
+  },
+  {
+    "university": "武蔵大学",
+    "faculty": "人文学部",
+    "department": "日本東アジア文化学科",
+    "count": 1
+  },
+  {
+    "university": "武蔵大学",
+    "faculty": "社会学部",
+    "department": "社会学科",
+    "count": 2
+  },
+  {
+    "university": "武蔵大学",
+    "faculty": "経済学部",
+    "department": "経済学科",
+    "count": 3
+  },
+  {
+    "university": "武蔵大学",
+    "faculty": "経済学部",
+    "department": "金融学科",
+    "count": 1
+  },
+  {
+    "university": "武蔵野大学",
+    "faculty": "ウェルビーイング学部",
+    "department": "ウェルビーイング学科",
+    "count": 1
+  },
+  {
+    "university": "武蔵野大学",
+    "faculty": "経済学部",
+    "department": "経済学科",
+    "count": 1
+  },
+  {
+    "university": "沖縄国際大学",
+    "faculty": "産業情報学部",
+    "department": "産業情報学科",
+    "count": 1
+  },
+  {
+    "university": "法政大学",
+    "faculty": "グローバル教養学部",
+    "department": "グローバル教養学科",
+    "count": 3
+  },
+  {
+    "university": "法政大学",
+    "faculty": "人間科学学部",
+    "department": "",
+    "count": 1
+  },
+  {
+    "university": "法政大学",
+    "faculty": "国際文化学部",
+    "department": "国際文化学科",
+    "count": 1
+  },
+  {
+    "university": "法政大学",
+    "faculty": "現代福祉学部",
+    "department": "コミュニティ学科",
+    "count": 1
+  },
+  {
+    "university": "津田塾大学",
+    "faculty": "学芸学部",
+    "department": "英語英文学科",
+    "count": 1
+  },
+  {
+    "university": "津田塾大学",
+    "faculty": "総合政策学部",
+    "department": "総合政策学科",
+    "count": 2
+  },
+  {
+    "university": "淑徳大学",
+    "faculty": "経営学部",
+    "department": "経営学科",
+    "count": 1
+  },
+  {
+    "university": "清泉女子大学",
+    "faculty": "地球市民学部",
+    "department": "地球共生領域",
+    "count": 1
+  },
+  {
+    "university": "獨協大学",
+    "faculty": "外国語学部",
+    "department": "ドイツ語学科",
+    "count": 1
+  },
+  {
+    "university": "甲南大学",
+    "faculty": "経営学部",
+    "department": "経営学科",
+    "count": 1
+  },
+  {
+    "university": "白百合女子大学",
+    "faculty": "文学部",
+    "department": "フランス語フランス文学科",
+    "count": 1
+  },
+  {
+    "university": "神奈川大学",
+    "faculty": "人間科学学部",
+    "department": "",
+    "count": 1
+  },
+  {
+    "university": "神奈川大学",
+    "faculty": "人間科学部",
+    "department": "",
+    "count": 1
+  },
+  {
+    "university": "神奈川大学",
+    "faculty": "国際日本学部",
+    "department": "国際日本学科",
+    "count": 1
+  },
+  {
+    "university": "神田外語大学",
+    "faculty": "外国語学部",
+    "department": "イベロアメリカ言語学科",
+    "count": 1
+  },
+  {
+    "university": "神田外語大学",
+    "faculty": "外国語学部",
+    "department": "国際コミュニケーション学科",
+    "count": 3
+  },
+  {
+    "university": "立命館アジア太平洋大学",
+    "faculty": "アジア太平洋学部",
+    "department": "アジア太平洋学科",
+    "count": 4
+  },
+  {
+    "university": "立命館アジア太平洋大学",
+    "faculty": "国際経営学部",
+    "department": "国際経営学科",
+    "count": 3
+  },
+  {
+    "university": "立命館大学",
+    "faculty": "国際関係学部",
+    "department": "国際関係学科",
+    "count": 3
+  },
+  {
+    "university": "立命館大学",
+    "faculty": "国際関係学部",
+    "department": "国際関係学科 国際関係学専攻",
+    "count": 1
+  },
+  {
+    "university": "立命館大学",
+    "faculty": "文学部",
+    "department": "地域研究学域",
+    "count": 1
+  },
+  {
+    "university": "立命館大学",
+    "faculty": "法学部",
+    "department": "法学科",
+    "count": 1
+  },
+  {
+    "university": "立命館大学",
+    "faculty": "経営学部",
+    "department": "国際経営学科",
+    "count": 1
+  },
+  {
+    "university": "立命館大学",
+    "faculty": "経済学部",
+    "department": "",
+    "count": 1
+  },
+  {
+    "university": "立教大学",
+    "faculty": "経営学部",
+    "department": "国際経営学科",
+    "count": 1
+  },
+  {
+    "university": "立教大学",
+    "faculty": "コミュニティ福祉学部",
+    "department": "コミュニティ政策学科",
+    "count": 1
+  },
+  {
+    "university": "立教大学",
+    "faculty": "コミュニティ福祉学部",
+    "department": "福祉学科",
+    "count": 1
+  },
+  {
+    "university": "立教大学",
+    "faculty": "国際経営学部",
+    "department": "国際経営学科",
+    "count": 1
+  },
+  {
+    "university": "立教大学",
+    "faculty": "文学部",
+    "department": "ドイツ文学専修",
+    "count": 1
+  },
+  {
+    "university": "立教大学",
+    "faculty": "文学部",
+    "department": "ドイツ文学科",
+    "count": 1
+  },
+  {
+    "university": "立教大学",
+    "faculty": "文学部",
+    "department": "文学科フランス文学専修",
+    "count": 1
+  },
+  {
+    "university": "立教大学",
+    "faculty": "理工学部",
+    "department": "物理学科",
+    "count": 1
+  },
+  {
+    "university": "立教大学",
+    "faculty": "社会学部",
+    "department": "現代文化学科",
+    "count": 2
+  },
+  {
+    "university": "立教大学",
+    "faculty": "社会学部",
+    "department": "社会学科",
+    "count": 1
+  },
+  {
+    "university": "立教大学",
+    "faculty": "経営学部",
+    "department": "国際経営学科",
+    "count": 2
+  },
+  {
+    "university": "芝浦工業大学",
+    "faculty": "工学部",
+    "department": "",
+    "count": 1
+  },
+  {
+    "university": "近畿大学",
+    "faculty": "経営学部",
+    "department": "商学科",
+    "count": 1
+  },
+  {
+    "university": "近畿大学",
+    "faculty": "経営学部",
+    "department": "経営学科",
+    "count": 2
+  },
+  {
+    "university": "関西大学",
+    "faculty": "外国語学部",
+    "department": "外国語学科",
+    "count": 1
+  },
+  {
+    "university": "関西大学",
+    "faculty": "社会学部",
+    "department": "社会学科",
+    "count": 1
+  },
+  {
+    "university": "関西学院大学",
+    "faculty": "法学部",
+    "department": "法律学科",
+    "count": 1
+  },
+  {
+    "university": "関西学院大学",
+    "faculty": "経済学部",
+    "department": "",
+    "count": 1
+  },
+  {
+    "university": "関西学院大学",
+    "faculty": "総合政策学部",
+    "department": "",
+    "count": 1
+  },
+  {
+    "university": "青山学院大学",
+    "faculty": "コミュニティ人間学部",
+    "department": "コミュニティ人間学科",
+    "count": 2
+  },
+  {
+    "university": "青山学院大学",
+    "faculty": "コミュニティ人間科学部",
+    "department": "コミュニティ人間科学科",
+    "count": 6
+  },
+  {
+    "university": "青山学院大学",
+    "faculty": "地球社会共生学部",
+    "department": "地球社会共生学科",
+    "count": 9
+  },
+  {
+    "university": "順天堂大学",
+    "faculty": "スポーツ健康科学部",
+    "department": "スポーツ健康科学科",
+    "count": 1
+  },
+  {
+    "university": "順天堂大学",
+    "faculty": "医療科学部",
+    "department": "臨床検査学科",
+    "count": 2
+  },
+  {
+    "university": "順天堂大学",
+    "faculty": "国際教養学部",
+    "department": "国際教養学科",
+    "count": 1
+  },
+  {
+    "university": "駒澤大学",
+    "faculty": "経営学部",
+    "department": "経営学科",
+    "count": 1
+  }
+]
