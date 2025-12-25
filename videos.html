@@ -527,76 +527,106 @@
       margin-right: 4px;
     }
 
-
-    .access-denied {
-      min-height: calc(100vh - 70px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
-    }
-
-    .access-denied-content {
+    /* ========================================
+       アクセスロック画面
+    ======================================== */
+    .access-locked {
+      display: none;
+      padding: 60px 20px;
       text-align: center;
-      max-width: 400px;
     }
 
-    .access-denied-icon {
+    .access-locked.show {
+      display: block;
+    }
+
+    .locked-icon {
       width: 100px;
       height: 100px;
-      background: linear-gradient(135deg, #e53935 0%, #ef5350 100%);
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 24px;
-      box-shadow: 0 8px 30px rgba(229, 57, 53, 0.3);
+      box-shadow: 0 8px 32px rgba(238, 90, 90, 0.3);
     }
 
-    .access-denied-icon .material-icons {
+    .locked-icon .material-icons {
       font-size: 48px;
       color: white;
     }
 
-    .access-denied-title {
-      font-size: 24px;
-      font-weight: 900;
+    .locked-title {
+      font-size: 22px;
+      font-weight: 700;
       color: #333;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
-    .access-denied-text {
+    .locked-message {
       font-size: 14px;
       color: #666;
       line-height: 1.8;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
 
-    .access-denied-btn {
+    .locked-info {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 0 auto;
+      max-width: 400px;
+    }
+
+    .locked-info-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1a237e;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .locked-info-title .material-icons {
+      font-size: 18px;
+    }
+
+    .locked-info-text {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .locked-back-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 14px 28px;
-      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      margin-top: 24px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
       color: white;
       text-decoration: none;
-      border-radius: 12px;
+      border-radius: 8px;
       font-size: 14px;
       font-weight: 600;
       transition: all 0.3s;
-      box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
     }
 
-    .access-denied-btn:hover {
+    .locked-back-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(26, 35, 126, 0.4);
+      box-shadow: 0 4px 16px rgba(26, 35, 126, 0.4);
     }
 
-    .access-denied-btn .material-icons {
-      font-size: 20px;
+    .content-wrapper {
+      display: block;
     }
-    
+
+    .content-wrapper.hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -633,26 +663,34 @@
     </div>
   </section>
 
-  <!-- アクセス制限メッセージ -->
-  <div id="accessDenied" class="access-denied" style="display: none;">
-    <div class="access-denied-content">
-      <div class="access-denied-icon">
-        <span class="material-icons">lock</span>
-      </div>
-      <h2 class="access-denied-title">購入者限定コンテンツ</h2>
-      <p class="access-denied-text">
-        この動画コンテンツは「動画教材」を<br>
-        ご購入いただいた方のみ視聴できます。
-      </p>
-      <a href="index.html" class="access-denied-btn">
-        <span class="material-icons">home</span>
-        トップページへ戻る
-      </a>
+  <!-- アクセスロック画面 -->
+  <div id="accessLocked" class="access-locked">
+    <div class="locked-icon">
+      <span class="material-icons">lock</span>
     </div>
+    <h2 class="locked-title">動画教材は購入者限定です</h2>
+    <p class="locked-message">
+      このコンテンツは動画教材を購入された方のみ<br>
+      ご覧いただけます。
+    </p>
+    <div class="locked-info">
+      <div class="locked-info-title">
+        <span class="material-icons">info</span>
+        動画教材について
+      </div>
+      <p class="locked-info-text">
+        動画教材の購入をご希望の方は、<br>
+        担当講師または事務局までお問い合わせください。
+      </p>
+    </div>
+    <a href="index.html" class="locked-back-btn">
+      <span class="material-icons">arrow_back</span>
+      ホームに戻る
+    </a>
   </div>
 
   <!-- メインコンテンツ -->
-  <div class="container">
+  <div id="contentWrapper" class="container content-wrapper">
     <div class="section-header-row">
       <div class="section-label">
         <div class="section-label-icon">
@@ -710,16 +748,20 @@
     // ============================================
     document.addEventListener('DOMContentLoaded', function() {
       setNavUserName();
-      const hasVideoAccess = localStorage.getItem('eqao_hasVideoAccess') === 'true';
       
-      if (!hasVideoAccess) {
-        // アクセス権なし → 制限メッセージを表示
-        document.querySelector('.hero').style.display = 'none';
-        document.querySelector('.container').style.display = 'none';
-        document.getElementById('accessDenied').style.display = 'flex';
-        return;
+      // アクセス権チェック
+      const hasVideoAccess = localStorage.getItem('eqao_hasVideoAccess') === 'true';
+      const isAdmin = localStorage.getItem('eqao_isAdmin') === 'true';
+      
+      if (hasVideoAccess || isAdmin) {
+        // アクセス許可 → 動画を読み込み
+        loadVideos();
+      } else {
+        // アクセス拒否 → ロック画面を表示
+        document.getElementById('accessLocked').classList.add('show');
+        document.getElementById('contentWrapper').classList.add('hidden');
+        document.getElementById('loading').style.display = 'none';
       }
-      loadVideos();
     });
 
     // ============================================

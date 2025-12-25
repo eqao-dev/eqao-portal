@@ -5490,11 +5490,13 @@
           localStorage.setItem('eqao_loggedIn', 'true');
           localStorage.setItem('eqao_rowIndex', result.rowIndex);
           localStorage.setItem('eqao_isAdmin', result.isAdmin ? 'true' : 'false');
+          localStorage.setItem('eqao_hasVideoAccess', result.hasVideoAccess ? 'true' : 'false');
           localStorage.removeItem('eqao_needsPasswordChange');
           
           console.log('localStorage saved:', {
             eqao_loggedIn: localStorage.getItem('eqao_loggedIn'),
-            eqao_studentName: localStorage.getItem('eqao_studentName')
+            eqao_studentName: localStorage.getItem('eqao_studentName'),
+            eqao_hasVideoAccess: localStorage.getItem('eqao_hasVideoAccess')
           });
           
           document.getElementById('loginOverlay').classList.add('hidden');
