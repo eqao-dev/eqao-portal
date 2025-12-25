@@ -1365,7 +1365,7 @@
 
       try {
         const url = new URL(API_URL);
-        url.searchParams.set('action', 'syncChecklistState');
+        url.searchParams.set('action', 'syncChecklistStateOld'); 
         url.searchParams.set('studentId', currentUser.studentId);
         url.searchParams.set('password', currentUser.password);
         url.searchParams.set('checkState', JSON.stringify(checkState));
@@ -1390,7 +1390,7 @@
 
       try {
         const url = new URL(API_URL);
-        url.searchParams.set('action', 'getChecklistState');
+        url.searchParams.set('action', 'getChecklistStateOld');
         url.searchParams.set('studentId', currentUser.studentId);
 
         const response = await fetch(url.toString());
@@ -1404,6 +1404,7 @@
             }
           }
           saveCheckState();
+          displayProgress();
         }
       } catch (error) {
         console.error('サーバーからの読み込みエラー:', error);
@@ -1848,7 +1849,7 @@
     window.addEventListener('beforeunload', function() {
       if (pendingSync && currentUser) {
         const url = new URL(API_URL);
-        url.searchParams.set('action', 'syncChecklistState');
+        url.searchParams.set('action', 'syncChecklistStateOld');
         url.searchParams.set('studentId', currentUser.studentId);
         url.searchParams.set('password', currentUser.password);
         url.searchParams.set('checkState', JSON.stringify(checkState));
