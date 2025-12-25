@@ -2134,15 +2134,15 @@
       padding: 16px 20px;
       border-bottom: 1px solid #e0e0e0;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 10px;
       background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
     }
 
     .nav-user-info {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       color: white;
     }
 
@@ -2151,10 +2151,48 @@
       color: rgba(255,255,255,0.9);
     }
 
+    .nav-user-id {
+      font-size: 11px;
+      opacity: 0.8;
+      padding: 2px 6px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 4px;
+    }
+
     .nav-user-name {
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       color: white;
+    }
+
+    .nav-user-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .nav-password-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-password-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .nav-password-btn .material-icons {
+      font-size: 16px;
     }
 
     .nav-logout-btn {
@@ -2173,7 +2211,7 @@
     }
 
     .nav-logout-btn:hover {
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.3);
     }
 
     .nav-logout-btn .material-icons {
@@ -6754,456 +6792,6 @@ studyChart = new Chart(ctx, {
       }
     }
 
-    // ============================================
-    // フィードバックモーダル
-    // ============================================
-    const FEEDBACK_API_URL = 'https://script.google.com/macros/s/AKfycbzskl5amlvabH3zreoRKO0jXa93v4xJj_wQEbFqnDpN_qYUSTGISFjOtHdw-ixmpzlp/exec';
-
-    function generateFeedbackModalHTML() {
-      return `
-        <div id="feedbackModalOverlay" class="feedback-modal-overlay" onclick="closeFeedbackModalOnOverlay(event)">
-          <div class="feedback-modal" onclick="event.stopPropagation()">
-            <div class="feedback-modal-header">
-              <span class="material-icons">feedback</span>
-              <h2>不具合報告・ご要望</h2>
-              <button class="feedback-modal-close" onclick="closeFeedbackModal()">
-                <span class="material-icons">close</span>
-              </button>
-            </div>
-            
-            <div class="feedback-modal-body">
-              <div class="feedback-form-group">
-                <label class="feedback-label">報告種別 <span class="required">*</span></label>
-                <div class="feedback-type-selector">
-                  <label class="feedback-type-option">
-                    <input type="radio" name="feedbackType" value="不具合" checked>
-                    <span class="feedback-type-btn">
-                      <span class="material-icons">bug_report</span>
-                      不具合
-                    </span>
-                  </label>
-                  <label class="feedback-type-option">
-                    <input type="radio" name="feedbackType" value="要望">
-                    <span class="feedback-type-btn">
-                      <span class="material-icons">lightbulb</span>
-                      要望
-                    </span>
-                  </label>
-                  <label class="feedback-type-option">
-                    <input type="radio" name="feedbackType" value="その他">
-                    <span class="feedback-type-btn">
-                      <span class="material-icons">help</span>
-                      その他
-                    </span>
-                  </label>
-                </div>
-              </div>
-              
-              <div class="feedback-form-group">
-                <label class="feedback-label">該当ページ・機能（任意）</label>
-                <input type="text" id="feedbackPage" class="feedback-input" placeholder="例：受験スケジュール、チェックリスト など">
-              </div>
-              
-              <div class="feedback-form-group">
-                <label class="feedback-label">詳細内容 <span class="required">*</span></label>
-                <textarea id="feedbackContent" class="feedback-textarea" rows="5" placeholder="具体的な内容をご記入ください"></textarea>
-              </div>
-              
-              <div class="feedback-notice">
-                <p>※ 順次対応いたしますので、修正はしばらくお待ちください。</p>
-                <p>※ 個別の対応報告は基本的に行っておりません。更新後にご確認ください。</p>
-                <p>※ ご要望については、必要に応じて個別にご連絡する場合があります。また、全てのご要望にお応えできるとは限りませんのでご了承ください。</p>
-              </div>
-            </div>
-            
-            <div class="feedback-modal-footer">
-              <button class="feedback-btn-cancel" onclick="closeFeedbackModal()">キャンセル</button>
-              <button class="feedback-btn-submit" onclick="submitFeedback()">
-                <span class="material-icons">send</span>
-                送信
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function generateFeedbackStylesHTML() {
-      return `
-        <style id="feedbackModalStyles">
-          .feedback-modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-          }
-          
-          .feedback-modal-overlay.show {
-            display: flex;
-          }
-          
-          .feedback-modal {
-            background: white;
-            border-radius: 16px;
-            width: 100%;
-            max-width: 480px;
-            max-height: 90vh;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-          }
-          
-          .feedback-modal-header {
-            background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
-            color: white;
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-          }
-          
-          .feedback-modal-header h2 {
-            flex: 1;
-            font-size: 16px;
-            font-weight: 700;
-            margin: 0;
-          }
-          
-          .feedback-modal-header > .material-icons {
-            font-size: 24px;
-          }
-          
-          .feedback-modal-close {
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          
-          .feedback-modal-body {
-            padding: 20px;
-            max-height: 60vh;
-            overflow-y: auto;
-          }
-          
-          .feedback-form-group {
-            margin-bottom: 20px;
-          }
-          
-          .feedback-label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-          }
-          
-          .feedback-label .required {
-            color: #e53935;
-          }
-          
-          .feedback-type-selector {
-            display: flex;
-            gap: 8px;
-          }
-          
-          .feedback-type-option {
-            flex: 1;
-            cursor: pointer;
-          }
-          
-          .feedback-type-option input {
-            display: none;
-          }
-          
-          .feedback-type-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            padding: 12px 8px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #666;
-            transition: all 0.2s;
-          }
-          
-          .feedback-type-btn .material-icons {
-            font-size: 24px;
-          }
-          
-          .feedback-type-option input:checked + .feedback-type-btn {
-            border-color: #3f51b5;
-            background: #e8eaf6;
-            color: #3f51b5;
-          }
-          
-          .feedback-input {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            background: white;
-            color: #333;
-            font-family: inherit;
-          }
-          
-          .feedback-input:focus {
-            outline: none;
-            border-color: #3f51b5;
-          }
-          
-          .feedback-notice {
-            background: #f5f5f5;
-            border-radius: 8px;
-            padding: 12px 14px;
-            margin-top: 8px;
-          }
-          
-          .feedback-notice p {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.6;
-            margin: 0 0 4px 0;
-          }
-          
-          .feedback-notice p:last-child {
-            margin-bottom: 0;
-          }
-          
-          .feedback-textarea {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: inherit;
-            resize: vertical;
-            min-height: 120px;
-          }
-          
-          .feedback-textarea:focus {
-            outline: none;
-            border-color: #3f51b5;
-          }
-          
-          .feedback-modal-footer {
-            padding: 16px 20px;
-            border-top: 1px solid #eee;
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-          }
-          
-          .feedback-btn-cancel {
-            padding: 10px 20px;
-            background: #e0e0e0;
-            color: #666;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-          }
-          
-          .feedback-btn-submit {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 24px;
-            background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-          }
-          
-          .feedback-btn-submit:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-          }
-          
-          .feedback-btn-submit .material-icons {
-            font-size: 18px;
-          }
-          
-          .feedback-spinner {
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: feedbackSpin 0.8s linear infinite;
-          }
-          
-          @keyframes feedbackSpin {
-            to { transform: rotate(360deg); }
-          }
-          
-          .feedback-success {
-            text-align: center;
-            padding: 40px 20px;
-          }
-          
-          .feedback-success-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px;
-          }
-          
-          .feedback-success-icon .material-icons {
-            font-size: 36px;
-            color: white;
-          }
-          
-          .feedback-success-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 8px;
-          }
-          
-          .feedback-success-text {
-            font-size: 14px;
-            color: #666;
-          }
-        </style>
-      `;
-    }
-
-    function initFeedbackModal() {
-      if (!document.getElementById('feedbackModalStyles')) {
-        document.head.insertAdjacentHTML('beforeend', generateFeedbackStylesHTML());
-      }
-      if (!document.getElementById('feedbackModalOverlay')) {
-        document.body.insertAdjacentHTML('beforeend', generateFeedbackModalHTML());
-      }
-    }
-
-    function openFeedbackModal() {
-      initFeedbackModal();
-      
-      const pageInput = document.getElementById('feedbackPage');
-      if (pageInput) {
-        pageInput.value = '';
-      }
-      
-      const contentArea = document.getElementById('feedbackContent');
-      if (contentArea) {
-        contentArea.value = '';
-      }
-      
-      const firstRadio = document.querySelector('input[name="feedbackType"]');
-      if (firstRadio) {
-        firstRadio.checked = true;
-      }
-      
-      document.getElementById('feedbackModalOverlay').classList.add('show');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeFeedbackModal() {
-      const overlay = document.getElementById('feedbackModalOverlay');
-      if (overlay) {
-        overlay.classList.remove('show');
-      }
-      document.body.style.overflow = '';
-    }
-
-    function closeFeedbackModalOnOverlay(event) {
-      if (event.target === event.currentTarget) {
-        closeFeedbackModal();
-      }
-    }
-
-    async function submitFeedback() {
-      const typeInput = document.querySelector('input[name="feedbackType"]:checked');
-      const pageInput = document.getElementById('feedbackPage');
-      const contentInput = document.getElementById('feedbackContent');
-      const submitBtn = document.querySelector('.feedback-btn-submit');
-      
-      const type = typeInput ? typeInput.value : '';
-      const page = pageInput ? pageInput.value : '';
-      const content = contentInput ? contentInput.value.trim() : '';
-      
-      if (!content) {
-        alert('詳細内容を入力してください');
-        return;
-      }
-      
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span class="feedback-spinner"></span>送信中...';
-      
-      try {
-        const studentId = localStorage.getItem('eqao_studentId') || '';
-        const studentName = localStorage.getItem('eqao_studentName') || '';
-        
-        const params = new URLSearchParams({
-          action: 'submitFeedback',
-          type: type,
-          page: page,
-          content: content,
-          studentId: studentId,
-          studentName: studentName,
-          userAgent: navigator.userAgent
-        });
-        
-        const response = await fetch(FEEDBACK_API_URL + '?' + params.toString());
-        const result = await response.json();
-        
-        if (result.success) {
-          const modalBody = document.querySelector('.feedback-modal-body');
-          const modalFooter = document.querySelector('.feedback-modal-footer');
-          
-          modalBody.innerHTML = `
-            <div class="feedback-success">
-              <div class="feedback-success-icon">
-                <span class="material-icons">check</span>
-              </div>
-              <div class="feedback-success-title">送信完了しました</div>
-              <div class="feedback-success-text">ご報告ありがとうございます。<br>確認次第対応いたします。</div>
-            </div>
-          `;
-          
-          modalFooter.innerHTML = `
-            <button class="feedback-btn-submit" onclick="closeFeedbackModal()" style="background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);">
-              閉じる
-            </button>
-          `;
-        } else {
-          throw new Error(result.message || '送信に失敗しました');
-        }
-      } catch (error) {
-        console.error('Feedback error:', error);
-        alert('送信に失敗しました。時間をおいて再度お試しください。');
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<span class="material-icons">send</span>送信';
-      }
-    }
     
   </script>
   <script src="js/nav-menu.js"></script>

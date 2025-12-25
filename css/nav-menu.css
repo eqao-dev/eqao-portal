@@ -176,15 +176,15 @@
 .nav-user-section {
   padding: 14px 16px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
   background: linear-gradient(135deg, #283593 0%, #3949ab 100%);
 }
 
 .nav-user-info {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   color: white;
 }
 
@@ -194,21 +194,60 @@
   opacity: 0.8;
 }
 
+.nav-user-id {
+  font-size: 11px;
+  opacity: 0.8;
+  padding: 2px 6px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 4px;
+}
+
 .nav-user-name {
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nav-user-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-password-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nav-password-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.nav-password-btn .material-icons {
+  font-family: 'Material Icons';
+  font-size: 16px;
 }
 
 .nav-logout-btn {
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 6px 10px;
+  padding: 8px 12px;
   background: rgba(255,255,255,0.15);
   border: none;
   border-radius: 6px;
   color: white;
-  font-size: 11px;
+  font-size: 12px;
   cursor: pointer;
   font-family: inherit;
   transition: background 0.2s;
@@ -220,7 +259,7 @@
 
 .nav-logout-btn .material-icons {
   font-family: 'Material Icons';
-  font-size: 14px;
+  font-size: 16px;
 }
 
 /* カテゴリー */
