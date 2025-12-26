@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ポータルの使い方 - EQAO PORTAL</title>
+  <link rel="apple-touch-icon" href="/logo.png">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #e3e8f4 0%, #d0d9e8 100%);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .header-title {
+      flex: 1;
+    }
+
+    .header-title h1 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .header-title .subtitle {
+      font-size: 11px;
+      opacity: 0.8;
+      margin-top: 2px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* イントロセクション */
+    .intro-section {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .intro-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .intro-title .material-icons {
+      font-size: 28px;
+      color: #3949ab;
+    }
+
+    .intro-text {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.9;
+    }
+
+    .intro-text p {
+      margin-bottom: 16px;
+    }
+
+    .intro-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #e8eaf6 0%, #f5f5f5 100%);
+      border-left: 4px solid #3949ab;
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      font-weight: 500;
+      color: #1a237e;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .feature-item .material-icons {
+      font-size: 18px;
+      color: #43a047;
+    }
+
+    /* ステップセクション */
+    .step-section {
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .step-header {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .step-body {
+      padding: 24px;
+    }
+
+    .step-body p {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .step-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .step-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .step-list-item .material-icons {
+      font-size: 18px;
+      color: #3949ab;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-note {
+      background: #fff8e1;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .step-note .material-icons {
+      font-size: 20px;
+      color: #f9a825;
+      flex-shrink: 0;
+    }
+
+    .step-note p {
+      font-size: 13px;
+      color: #5d4037;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* まとめセクション */
+    .summary-section {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 16px;
+      padding: 28px 24px;
+      color: white;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+    }
+
+    .summary-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .summary-title .material-icons {
+      font-size: 24px;
+    }
+
+    .summary-text {
+      font-size: 14px;
+      line-height: 1.9;
+      opacity: 0.95;
+    }
+
+    .summary-text p {
+      margin-bottom: 14px;
+    }
+
+    .summary-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .summary-points {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+
+    .summary-point {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .summary-point .material-icons {
+      font-size: 18px;
+      color: #81c784;
+    }
+
+    /* アクションボタン */
+    .action-section {
+      text-align: center;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, #43a047 0%, #66bb6a 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(67, 160, 71, 0.3);
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 160, 71, 0.4);
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 32px 24px;
+      }
+
+      .intro-section,
+      .step-body,
+      .summary-section {
+        padding: 32px;
+      }
+
+      .intro-title {
+        font-size: 24px;
+      }
+
+      .step-title {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <button class="back-btn" onclick="location.href='index.html'">
+      <span class="material-icons">arrow_back</span>
+    </button>
+        <div class="header-title">
+      <h1>スタートガイド</h1>
+      <div class="subtitle">目的と推奨ステップ</div>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- イントロ -->
+    <section class="intro-section">
+      <h2 class="intro-title">
+        <span class="material-icons">flag</span>
+        EQAO PORTALの目的
+      </h2>
+      <div class="intro-text">
+        <p>EQAO PORTALは、生徒自身が「自学自習」と「自己管理」を成立させるための統合ポータルです。</p>
+        
+        <p>このポータルには、以下のすべてが集約されています。</p>
+        
+        <div class="feature-list">
+          <div class="feature-item">
+            <span class="material-icons">check_circle</span>
+            学習・進捗管理
+          </div>
+          <div class="feature-item">
+            <span class="material-icons">check_circle</span>
+            スケジュール管理
+          </div>
+          <div class="feature-item">
+            <span class="material-icons">check_circle</span>
+            動画教材・コラム・教材資料
+          </div>
+          <div class="feature-item">
+            <span class="material-icons">check_circle</span>
+            チェックリスト
+          </div>
+          <div class="feature-item">
+            <span class="material-icons">check_circle</span>
+            各種連絡・お知らせ
+          </div>
+          <div class="feature-item">
+            <span class="material-icons">check_circle</span>
+            申請・申告・申し込みフォーム
+          </div>
+          <div class="feature-item">
+            <span class="material-icons">check_circle</span>
+            書類提出・添削のやり取り
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <p>EQAOの塾生として触れる情報・行動のすべてが、このポータルに集約されています。外部ツールを併用する必要はありません。</p>
+        </div>
+
+        <p>このポータルを軸にすることで、「やらなくていいこと」「やるべきこと」「今やるべきこと」が常に整理され、迷うことなく自分自身の基礎力を引き上げることができます。</p>
+      </div>
+    </section>
+
+    <!-- できること -->
+    <section class="intro-section">
+      <h2 class="intro-title">
+        <span class="material-icons">apps</span>
+        EQAO PORTALでできること
+      </h2>
+      <div class="intro-text">
+        <p>EQAO PORTALは、単なる「教材置き場」ではありません。</p>
+        
+        <div class="feature-list">
+          <div class="feature-item">
+            <span class="material-icons">check_circle</span>
+            自学自習を進めるための環境
+          </div>
+          <div class="feature-item">
+            <span class="material-icons">check_circle</span>
+            学習状況を可視化するための管理ツール
+          </div>
+          <div class="feature-item">
+            <span class="material-icons">check_circle</span>
+            進捗を前に進めるためのチェック機能
+          </div>
+          <div class="feature-item">
+            <span class="material-icons">check_circle</span>
+            書類添削・連絡を含めた実務の窓口
+          </div>
+        </div>
+
+        <p>これらを一つにまとめた、総合型選抜に特化した学習・管理ポータルです。</p>
+      </div>
+    </section>
+
+    <!-- STEP 1 -->
+    <section class="step-section">
+      <div class="step-header">
+        <div class="step-number">1</div>
+        <div class="step-title">まずは「全体図」を把握する</div>
+      </div>
+      <div class="step-body">
+        <p>最初に行うべきことは、ポータル全体の構造を把握することです。</p>
+        
+        <div class="step-list">
+          <div class="step-list-item">
+            <span class="material-icons">arrow_forward</span>
+            どんなボタンがあるのか
+          </div>
+          <div class="step-list-item">
+            <span class="material-icons">arrow_forward</span>
+            どのボタンを日常的に使うのか
+          </div>
+          <div class="step-list-item">
+            <span class="material-icons">arrow_forward</span>
+            申請・申し込み・連絡系はどこにあるのか
+          </div>
+        </div>
+
+        <p>LINE連携、各種申し込みフォーム、振替申請、連絡関連など、日常的に使う「ツールとしての機能」をまず理解してください。</p>
+
+        <div class="step-note">
+          <span class="material-icons">lightbulb</span>
+          <p>この段階では、「教材を見る」よりも「使い方を把握する」ことを優先してください。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="step-section">
+      <div class="step-header">
+        <div class="step-number">2</div>
+        <div class="step-title">スケジュール関連を確認する</div>
+      </div>
+      <div class="step-body">
+        <p>次に確認するのが、スケジュール関連です。</p>
+        
+        <div class="step-list">
+          <div class="step-list-item">
+            <span class="material-icons">event</span>
+            授業スケジュール
+          </div>
+          <div class="step-list-item">
+            <span class="material-icons">school</span>
+            受験スケジュール
+          </div>
+          <div class="step-list-item">
+            <span class="material-icons">date_range</span>
+            年間スケジュール
+          </div>
+        </div>
+
+        <p>これらを確認することで、自分の現在地と、これからの流れを把握します。</p>
+
+        <div class="step-note">
+          <span class="material-icons">priority_high</span>
+          <p>総合型選抜では、スケジュール管理そのものが合否に直結します。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section class="step-section">
+      <div class="step-header">
+        <div class="step-number">3</div>
+        <div class="step-title">教材・学習コンテンツで自学自習を進める</div>
+      </div>
+      <div class="step-body">
+        <p>スケジュールを把握したら、次は実際の学習に進みます。</p>
+        
+        <div class="step-list">
+          <div class="step-list-item">
+            <span class="material-icons">play_circle</span>
+            動画教材
+          </div>
+          <div class="step-list-item">
+            <span class="material-icons">article</span>
+            コラム
+          </div>
+          <div class="step-list-item">
+            <span class="material-icons">description</span>
+            教材資料
+          </div>
+          <div class="step-list-item">
+            <span class="material-icons">checklist</span>
+            チェックリスト
+          </div>
+        </div>
+
+        <p>これらを活用しながら、自分自身でインプットと整理を進めてください。</p>
+
+        <div class="step-note">
+          <span class="material-icons">lightbulb</span>
+          <p>このポータルは、「読んで終わり」「見て終わり」ではなく、自学自習を前に進めるための設計になっています。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 4 -->
+    <section class="step-section">
+      <div class="step-header">
+        <div class="step-number">4</div>
+        <div class="step-title">プログラム・イベント・交流関連を確認する</div>
+      </div>
+      <div class="step-body">
+        <p>授業以外にも、様々な活動の情報や申し込みがポータル内にまとめられています。</p>
+        
+        <div class="step-list">
+          <div class="step-list-item">
+            <span class="material-icons">rocket_launch</span>
+            プログラム
+          </div>
+          <div class="step-list-item">
+            <span class="material-icons">celebration</span>
+            イベント
+          </div>
+          <div class="step-list-item">
+            <span class="material-icons">groups</span>
+            交流会
+          </div>
+          <div class="step-list-item">
+            <span class="material-icons">star</span>
+            特別企画
+          </div>
+        </div>
+
+        <p>必要に応じて確認し、自分の目的に合うものを選択してください。</p>
+      </div>
+    </section>
+
+    <!-- STEP 5 -->
+    <section class="step-section">
+      <div class="step-header">
+        <div class="step-number">5</div>
+        <div class="step-title">授業・カリキュラム・規定を確認する</div>
+      </div>
+      <div class="step-body">
+        <p>ポータル下部には、EQAOの全体設計に関わる情報がまとめられています。</p>
+        
+        <div class="step-list">
+          <div class="step-list-item">
+            <span class="material-icons">style</span>
+            授業スタイル
+          </div>
+          <div class="step-list-item">
+            <span class="material-icons">account_tree</span>
+            カリキュラム構成
+          </div>
+          <div class="step-list-item">
+            <span class="material-icons">play_lesson</span>
+            授業の流れ
+          </div>
+          <div class="step-list-item">
+            <span class="material-icons">menu_book</span>
+            授業項目・科目
+          </div>
+          <div class="step-list-item">
+            <span class="material-icons">gavel</span>
+            基本事項規定
+          </div>
+        </div>
+
+        <div class="step-note">
+          <span class="material-icons">info</span>
+          <p>これは「知らなくてよい情報」ではなく、自分がどんな環境で学んでいるのかを理解するための重要な情報です。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- まとめ -->
+    <section class="summary-section">
+      <h2 class="summary-title">
+        <span class="material-icons">emoji_objects</span>
+        最後に
+      </h2>
+      <div class="summary-text">
+        <p>EQAO PORTALは、以下の目的で設計されています。</p>
+        
+        <div class="summary-points">
+          <div class="summary-point">
+            <span class="material-icons">check_circle</span>
+            情報に迷わないため
+          </div>
+          <div class="summary-point">
+            <span class="material-icons">check_circle</span>
+            自学自習を成立させるため
+          </div>
+          <div class="summary-point">
+            <span class="material-icons">check_circle</span>
+            自分自身を管理できるようになるため
+          </div>
+        </div>
+
+        <p>すべてを一度に完璧に使いこなす必要はありません。</p>
+        
+        <p>ですが、「必要なときに」「必要な場所を」「迷わず使える状態」を早い段階で作ることが、その後の成長スピードを大きく左右します。</p>
+        
+        <p>このポータルを「中心」に据え、自分自身の学習と進捗を前に進めてください。</p>
+      </div>
+    </section>
+
+    <!-- アクション -->
+    <div class="action-section">
+      <a href="index.html" class="action-btn">
+        <span class="material-icons">home</span>
+        ポータルトップへ戻る
+      </a>
+    </div>
+  </div>
+</body>
+</html>

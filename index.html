@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +22,7 @@
 
     body {
       font-family: 'Noto Sans JP', sans-serif;
-      background: linear-gradient(135deg, #e3e8f4 0%, #d0d9e8 100%);  
+      background: linear-gradient(135deg, #e3e8f4 0%, #d0d9e8 100%);
       min-height: 100vh;
       padding-bottom: 40px;
     }
@@ -40,15 +41,15 @@
     }
 
     .header .logo {
-  width: 60px;
-  height: 60px;
-  background: white;
-  border-radius: 12px;
-  padding: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+      width: 60px;
+      height: 60px;
+      background: white;
+      border-radius: 12px;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     .header .logo img {
       width: 100%;
@@ -317,7 +318,7 @@
       color: #888;
     }
 
-    .line-modal-item > .material-icons {
+    .line-modal-item>.material-icons {
       color: #ccc;
       font-size: 20px;
     }
@@ -641,7 +642,7 @@
       color: #888;
     }
 
-    .meeting-modal-item > .material-icons {
+    .meeting-modal-item>.material-icons {
       color: #ccc;
       font-size: 20px;
     }
@@ -1111,16 +1112,45 @@
       font-size: 20px;
     }
 
-    .search-result-icon.icon-blue { background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); }
-    .search-result-icon.icon-indigo { background: linear-gradient(135deg, #283593 0%, #5c6bc0 100%); }
-    .search-result-icon.icon-purple { background: linear-gradient(135deg, #4527a0 0%, #7e57c2 100%); }
-    .search-result-icon.icon-teal { background: linear-gradient(135deg, #00695c 0%, #26a69a 100%); }
-    .search-result-icon.icon-orange { background: linear-gradient(135deg, #e65100 0%, #ff9800 100%); }
-    .search-result-icon.icon-pink { background: linear-gradient(135deg, #ad1457 0%, #ec407a 100%); }
-    .search-result-icon.icon-green { background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%); }
-    .search-result-icon.icon-red { background: linear-gradient(135deg, #c62828 0%, #ef5350 100%); }
-    .search-result-icon.icon-amber { background: linear-gradient(135deg, #ff8f00 0%, #ffc107 100%); }
-    .search-result-icon.icon-brown { background: linear-gradient(135deg, #4e342e 0%, #8d6e63 100%); }
+    .search-result-icon.icon-blue {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+    }
+
+    .search-result-icon.icon-indigo {
+      background: linear-gradient(135deg, #283593 0%, #5c6bc0 100%);
+    }
+
+    .search-result-icon.icon-purple {
+      background: linear-gradient(135deg, #4527a0 0%, #7e57c2 100%);
+    }
+
+    .search-result-icon.icon-teal {
+      background: linear-gradient(135deg, #00695c 0%, #26a69a 100%);
+    }
+
+    .search-result-icon.icon-orange {
+      background: linear-gradient(135deg, #e65100 0%, #ff9800 100%);
+    }
+
+    .search-result-icon.icon-pink {
+      background: linear-gradient(135deg, #ad1457 0%, #ec407a 100%);
+    }
+
+    .search-result-icon.icon-green {
+      background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);
+    }
+
+    .search-result-icon.icon-red {
+      background: linear-gradient(135deg, #c62828 0%, #ef5350 100%);
+    }
+
+    .search-result-icon.icon-amber {
+      background: linear-gradient(135deg, #ff8f00 0%, #ffc107 100%);
+    }
+
+    .search-result-icon.icon-brown {
+      background: linear-gradient(135deg, #4e342e 0%, #8d6e63 100%);
+    }
 
     .search-result-content {
       flex: 1;
@@ -1201,7 +1231,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.5);
       z-index: 500;
       display: none;
       align-items: center;
@@ -1218,7 +1248,7 @@
       border-radius: 20px;
       width: 100%;
       max-width: 400px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       overflow: hidden;
       animation: modalSlideUp 0.3s ease;
     }
@@ -1228,6 +1258,7 @@
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -1251,7 +1282,7 @@
 
     .info-modal-close {
       margin-left: auto;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       border: none;
       border-radius: 50%;
       width: 32px;
@@ -1265,7 +1296,7 @@
     }
 
     .info-modal-close:hover {
-      background: rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.3);
     }
 
     .info-modal-body {
@@ -1340,7 +1371,7 @@
       color: #666;
     }
 
-    .info-modal-item > .material-icons {
+    .info-modal-item>.material-icons {
       color: #999;
       font-size: 20px;
       flex-shrink: 0;
@@ -1421,7 +1452,8 @@
     .pv-video-container {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* 16:9 */
+      padding-bottom: 56.25%;
+      /* 16:9 */
       background: #000;
     }
 
@@ -1536,6 +1568,7 @@
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(26, 35, 126, 0.15);
     }
+
     .menu-btn.disabled {
       opacity: 0.4;
       pointer-events: none;
@@ -1566,17 +1599,49 @@
       line-height: 1.4;
     }
 
-    .icon-wrapper.icon-blue { background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); }
-    .icon-wrapper.icon-indigo { background: linear-gradient(135deg, #283593 0%, #5c6bc0 100%); }
-    .icon-wrapper.icon-purple { background: linear-gradient(135deg, #4527a0 0%, #7e57c2 100%); }
-    .icon-wrapper.icon-teal { background: linear-gradient(135deg, #00695c 0%, #26a69a 100%); }
-    .icon-wrapper.icon-orange { background: linear-gradient(135deg, #e65100 0%, #ff9800 100%); }
-    .icon-wrapper.icon-pink { background: linear-gradient(135deg, #ad1457 0%, #ec407a 100%); }
-    .icon-wrapper.icon-green { background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%); }
-    .icon-wrapper.icon-red { background: linear-gradient(135deg, #c62828 0%, #ef5350 100%); }
-    .icon-wrapper.icon-cyan { background: linear-gradient(135deg, #00838f 0%, #4dd0e1 100%); }
-    .icon-wrapper.icon-amber { background: linear-gradient(135deg, #ff8f00 0%, #ffc107 100%); }
-    .icon-wrapper.icon-brown { background: linear-gradient(135deg, #4e342e 0%, #8d6e63 100%); }
+    .icon-wrapper.icon-blue {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+    }
+
+    .icon-wrapper.icon-indigo {
+      background: linear-gradient(135deg, #283593 0%, #5c6bc0 100%);
+    }
+
+    .icon-wrapper.icon-purple {
+      background: linear-gradient(135deg, #4527a0 0%, #7e57c2 100%);
+    }
+
+    .icon-wrapper.icon-teal {
+      background: linear-gradient(135deg, #00695c 0%, #26a69a 100%);
+    }
+
+    .icon-wrapper.icon-orange {
+      background: linear-gradient(135deg, #e65100 0%, #ff9800 100%);
+    }
+
+    .icon-wrapper.icon-pink {
+      background: linear-gradient(135deg, #ad1457 0%, #ec407a 100%);
+    }
+
+    .icon-wrapper.icon-green {
+      background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);
+    }
+
+    .icon-wrapper.icon-red {
+      background: linear-gradient(135deg, #c62828 0%, #ef5350 100%);
+    }
+
+    .icon-wrapper.icon-cyan {
+      background: linear-gradient(135deg, #00838f 0%, #4dd0e1 100%);
+    }
+
+    .icon-wrapper.icon-amber {
+      background: linear-gradient(135deg, #ff8f00 0%, #ffc107 100%);
+    }
+
+    .icon-wrapper.icon-brown {
+      background: linear-gradient(135deg, #4e342e 0%, #8d6e63 100%);
+    }
 
     .news-section {
       background: white;
@@ -1813,13 +1878,13 @@
     }
 
     .news-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  max-height: 150px;
-  overflow-y: auto;
-  padding-right: 4px;
-}
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 150px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
 
     .news-list::-webkit-scrollbar {
       width: 6px;
@@ -1840,26 +1905,26 @@
     }
 
     .news-item {
-  display: flex;
-  gap: 10px;
-  padding: 8px 10px;
-  background: #fafafa;
-  border-radius: 8px;
-  border-left: 2px solid #ff6b6b;
-  transition: background 0.2s;
-}
+      display: flex;
+      gap: 10px;
+      padding: 8px 10px;
+      background: #fafafa;
+      border-radius: 8px;
+      border-left: 2px solid #ff6b6b;
+      transition: background 0.2s;
+    }
 
-.news-item:hover {
-  background: #f0f0f0;
-}
+    .news-item:hover {
+      background: #f0f0f0;
+    }
 
     .news-date {
-  flex-shrink: 0;
-  font-size: 12px;
-  font-weight: 600;
-  color: #ff6b6b;
-  min-width: 40px;
-}
+      flex-shrink: 0;
+      font-size: 12px;
+      font-weight: 600;
+      color: #ff6b6b;
+      min-width: 40px;
+    }
 
     .news-content {
       flex: 1;
@@ -1867,13 +1932,13 @@
     }
 
     .news-item-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: #333;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
     .news-new-badge {
       background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
@@ -1886,20 +1951,27 @@
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.7;
+      }
     }
 
     .news-item-text {
-  font-size: 11px;
-  color: #666;
-  margin-top: 2px;
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
+      font-size: 11px;
+      color: #666;
+      margin-top: 2px;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
 
     .news-empty {
       text-align: center;
@@ -2062,7 +2134,7 @@
       justify-content: center;
       width: 44px;
       height: 44px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -2072,7 +2144,7 @@
     }
 
     .menu-toggle:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
     }
 
     .menu-toggle .material-icons {
@@ -2085,7 +2157,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.5);
       z-index: 200;
       opacity: 0;
       visibility: hidden;
@@ -2106,7 +2178,7 @@
       background: white;
       z-index: 201;
       transition: right 0.3s ease;
-      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+      box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
       overflow-y: auto;
     }
 
@@ -2147,14 +2219,14 @@
 
     .nav-user-info .material-icons {
       font-size: 24px;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255, 255, 255, 0.9);
     }
 
     .nav-user-id {
       font-size: 11px;
       opacity: 0.8;
       padding: 2px 6px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border-radius: 4px;
     }
 
@@ -2175,7 +2247,7 @@
       align-items: center;
       gap: 5px;
       padding: 8px 12px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       border: none;
       border-radius: 8px;
       color: white;
@@ -2187,7 +2259,7 @@
     }
 
     .nav-password-btn:hover {
-      background: rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.3);
     }
 
     .nav-password-btn .material-icons {
@@ -2199,7 +2271,7 @@
       align-items: center;
       gap: 6px;
       padding: 8px 12px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       border: none;
       border-radius: 8px;
       color: white;
@@ -2210,7 +2282,7 @@
     }
 
     .nav-logout-btn:hover {
-      background: rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.3);
     }
 
     .nav-logout-btn .material-icons {
@@ -2223,7 +2295,7 @@
       justify-content: center;
       width: 36px;
       height: 36px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -2289,6 +2361,7 @@
       white-space: nowrap;
       flex-shrink: 0;
     }
+
     .nav-item.disabled {
       color: #bbb;
       cursor: not-allowed;
@@ -2325,7 +2398,7 @@
       justify-content: center;
       width: 44px;
       height: 44px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -2334,7 +2407,7 @@
     }
 
     .hamburger-btn:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
     }
 
     .hamburger-btn .material-icons {
@@ -2458,1765 +2531,1791 @@
       display: none;
     }
 
-   /* プロフィール・学習記録カード（2列） */
-.card-row {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-bottom: 24px;
-  align-items: stretch;  
-}
-
-.profile-card,
-.study-card {
-  background: white;
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-}
-
-.profile-header,
-.study-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #1a237e;
-  margin-bottom: 12px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e8ecf4;
-}
-
-.profile-header .material-icons,
-.study-header .material-icons {
-  font-size: 20px;
-}
-
-.section-help-btn-small {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  background: rgba(26, 35, 126, 0.1);
-  border: none;
-  border-radius: 50%;
-  color: #1a237e;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-left: auto;
-  padding: 0;
-}
-
-.section-help-btn-small:hover {
-  background: rgba(26, 35, 126, 0.2);
-}
-
-.section-help-btn-small .material-icons {
-  font-size: 16px;
-}
-
-.profile-body {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 12px;
-  flex: 1;
-  max-height: 240px;  /* ← 最大高さを設定 */
-  overflow-y: auto;
-  padding: 4px;
-}
-
-/* スクロールバーのスタイル */
-.profile-body::-webkit-scrollbar {
-  width: 6px;
-}
-
-.profile-body::-webkit-scrollbar-track {
-  background: #f0f0f0;
-  border-radius: 3px;
-}
-
-.profile-body::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 3px;
-}
-
-.profile-body::-webkit-scrollbar-thumb:hover {
-  background: #aaa;
-}
-
-.profile-basic-info {
-  display: flex;  /* ← 横並びに変更 */
-  align-items: center;  /* ← 中央揃え */
-  gap: 12px;  /* ← アイコンと名前の間隔 */
-  padding-bottom: 12px;
-  border-bottom: 1px solid #e0e0e0;
-  margin-bottom: 10px;
-}
-
-.profile-detail-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 8px 10px;
-  background: #f8f9fc;
-  border-radius: 8px;
-  font-size: 12px;
-}
-
-.profile-detail-icon {
-  color: #1a237e;
-  font-size: 16px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.profile-detail-content {
-  flex: 1;
-  line-height: 1.5;
-  color: #333;
-}
-
-.profile-detail-label {
-  font-weight: 600;
-  color: #1a237e;
-  margin-bottom: 3px;
-}
-
-.profile-detail-value {
-  color: #666;
-}
-
-.profile-avatar {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  flex-shrink: 0;
-}
-
-.profile-info {
-  flex: 1;
-  min-width: 0;
-}
-    
-.profile-name {
-  font-size: 16px;  /* ← サイズを少し小さく */
-  font-weight: 700;
-  color: #333;
-  text-align: left;  /* ← 左揃えに */
-}
-
-
-.profile-details {
-  font-size: 11px;
-  color: #666;
-  line-height: 1.6;
-}
-
-.profile-footer {
-  display: flex;
-  gap: 8px;
-}
-
-.profile-btn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px 8px;
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 11px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-}
-
-.profile-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
-}
-
-.profile-btn .material-icons {
-  font-size: 16px;
-}
-
-.profile-btn:disabled {
-  background: linear-gradient(135deg, #bdbdbd 0%, #9e9e9e 100%);
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.profile-btn:disabled:hover {
-  transform: none;
-  box-shadow: none;
-}
-
-.study-body {
-  text-align: center;
-  padding: 20px 10px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.study-icon {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 12px;
-}
-
-.study-icon .material-icons {
-  font-size: 32px;
-  color: white;
-}
-
-.study-text {
-  font-size: 13px;
-  color: #999;
-  font-weight: 600;
-}
-
-/* プロフィール編集モーダル */
-.profile-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 600;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-.profile-modal-overlay.show {
-  display: flex;
-}
-
-.profile-modal {
-  background: white;
-  border-radius: 20px;
-  width: 100%;
-  max-width: 500px;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: modalSlideUp 0.3s ease;
-}
-
-.profile-modal-header {
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-  color: white;
-  padding: 18px 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-radius: 20px 20px 0 0;
-}
-
-.profile-modal-header h2 {
-  font-size: 18px;
-  font-weight: 700;
-  flex: 1;
-}
-
-.profile-modal-close {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: white;
-  transition: background 0.2s;
-}
-
-.profile-modal-close:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.profile-modal-tabs {
-  display: flex;
-  background: #f5f5f5;
-  border-bottom: 2px solid #e0e0e0;
-  overflow-x: auto;
-}
-
-.profile-tab {
-  flex: 1;
-  padding: 14px 12px;
-  background: none;
-  border: none;
-  font-size: 12px;
-  font-weight: 600;
-  color: #666;
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-  border-bottom: 3px solid transparent;
-  font-family: inherit;
-}
-
-.profile-tab.active {
-  color: #1a237e;
-  background: white;
-  border-bottom-color: #1a237e;
-}
-
-.profile-modal-body {
-  padding: 20px;
-  overflow-y: auto;
-  flex: 1;
-}
-
-.profile-tab-content {
-  display: none;
-}
-
-.profile-tab-content.active {
-  display: block;
-}
-
-.profile-form-group {
-  margin-bottom: 18px;
-}
-
-.profile-form-label {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 8px;
-}
-
-.profile-form-label.required::after {
-  content: ' *';
-  color: #f44336;
-}
-
-.profile-tab-description {
-  font-size: 12px;
-  color: #666;
-  margin-bottom: 16px;
-  padding: 10px 14px;
-  background: #f0f4ff;
-  border-left: 3px solid #1a237e;
-  border-radius: 6px;
-  line-height: 1.5;
-}
-
-.profile-form-input,
-.profile-form-select,
-.profile-form-textarea {
-  width: 100%;
-  padding: 12px 14px;
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
-  font-size: 14px;
-  font-family: inherit;
-  transition: border-color 0.2s;
-}
-
-.profile-form-input:focus,
-.profile-form-select:focus,
-.profile-form-textarea:focus {
-  outline: none;
-  border-color: #1a237e;
-}
-
-.profile-form-textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-.profile-checkbox-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.profile-checkbox-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px;
-  background: #f8f9fc;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.profile-checkbox-item:hover {
-  background: #e8ecf4;
-}
-
-.profile-checkbox-item input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
-
-.profile-checkbox-item label {
-  flex: 1;
-  font-size: 13px;
-  color: #333;
-  cursor: pointer;
-}
-
-.profile-modal-footer {
-  padding: 16px 20px;
-  background: #f8f9fc;
-  border-top: 1px solid #e0e0e0;
-  display: flex;
-  gap: 12px;
-  border-radius: 0 0 20px 20px;
-}
-
-.profile-modal-btn {
-  flex: 1;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-}
-
-.profile-modal-btn-cancel {
-  background: #e0e0e0;
-  color: #666;
-}
-
-.profile-modal-btn-cancel:hover {
-  background: #d0d0d0;
-}
-
-.profile-modal-btn-save {
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-  color: white;
-}
-
-.profile-modal-btn-save:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(26, 35, 126, 0.3);
-}
-
-@media (max-width: 480px) {
-  .card-row {
-    grid-template-columns: 1fr;
-  }
-
-  .profile-tab {
-    font-size: 11px;
-    padding: 12px 8px;
-  }
-}
-
-/* 授業外学習記録モーダル */
-.study-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 700;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.study-modal-overlay.show {
-  display: flex;
-}
-
-.study-modal {
-  background: white;
-  border-radius: 20px;
-  width: 100%;
-  max-width: 450px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: modalSlideUp 0.3s ease;
-}
-
-.study-modal-header {
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-  color: white;
-  padding: 18px 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-radius: 20px 20px 0 0;
-}
-
-.study-modal-header h2 {
-  font-size: 18px;
-  font-weight: 700;
-  flex: 1;
-}
-
-.study-modal-close {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: white;
-  transition: background 0.2s;
-}
-
-.study-modal-close:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.study-modal-body {
-  padding: 24px;
-}
-
-.study-form-group {
-  margin-bottom: 20px;
-}
-
-.study-form-label {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 8px;
-}
-
-.study-form-input,
-.study-form-select {
-  width: 100%;
-  padding: 12px 14px;
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
-  font-size: 14px;
-  font-family: inherit;
-  transition: border-color 0.2s;
-}
-
-.study-form-input:focus,
-.study-form-select:focus {
-  outline: none;
-  border-color: #1a237e;
-}
-
-.study-form-textarea {
-  width: 100%;
-  padding: 12px 14px;
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
-  font-size: 14px;
-  font-family: inherit;
-  min-height: 80px;
-  resize: vertical;
-}
-
-.study-form-textarea:focus {
-  outline: none;
-  border-color: #1a237e;
-}
-
-.study-category-info {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 6px;
-  font-size: 11px;
-  color: #666;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.study-category-info:hover {
-  color: #1a237e;
-}
-
-.study-category-info .material-icons {
-  font-size: 16px;
-}
-
-.study-modal-footer {
-  padding: 16px 24px;
-  background: #f8f9fc;
-  border-top: 1px solid #e0e0e0;
-  display: flex;
-  gap: 12px;
-  border-radius: 0 0 20px 20px;
-}
-
-.study-modal-btn {
-  flex: 1;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-}
-
-.study-modal-btn-cancel {
-  background: #e0e0e0;
-  color: #666;
-}
-
-.study-modal-btn-cancel:hover {
-  background: #d0d0d0;
-}
-
-.study-modal-btn-save {
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-  color: white;
-}
-
-.study-modal-btn-save:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(26, 35, 126, 0.3);
-}
-
-/* カテゴリー詳細ポップアップ */
-.category-detail-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  z-index: 800;
-  display: none;
-  max-width: 350px;
-  width: 90%;
-}
-
-.category-detail-popup.show {
-  display: block;
-  animation: modalSlideUp 0.2s ease;
-}
-
-.category-detail-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: #1a237e;
-}
-
-.category-detail-badge {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-}
-
-.category-detail-content {
-  font-size: 13px;
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 16px;
-}
-
-.category-detail-content ul {
-  margin: 8px 0;
-  padding-left: 20px;
-}
-
-.category-detail-content li {
-  margin: 4px 0;
-}
-
-.category-detail-close {
-  width: 100%;
-  padding: 10px;
-  background: #1a237e;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-}
-
-/* グラフ表示エリア */
-.study-chart-container {
-  padding: 0; 
-  display: flex;
-  flex-direction: column;
-}
-
-.study-chart-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  flex-shrink: 0;
-}
-
-.study-chart-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: #1a237e;
-}
-
-.study-week-nav {
-  display: flex;
-  gap: 8px;
-}
-
-.study-week-btn {
-  background: #f0f0f0;
-  border: none;
-  border-radius: 8px;
-  padding: 6px 12px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background 0.2s;
-  font-family: inherit;
-}
-
-.study-week-btn:hover {
-  background: #e0e0e0;
-}
-
-/* ★修正: Chart.js用ラッパー追加 */
-.study-chart-wrapper {
-  position: relative;
-  height: 140px;
-  width: 100%;
-  margin-bottom: 12px;
-}
-
-.study-legend {
-  display: none;
-}
-
-.study-legend-item {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.study-legend-color {
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
-  flex-shrink: 0;
-}
-
-.study-total {
-  text-align: center;
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 12px;
-  flex-shrink: 0;
-}
-
-.study-buttons {
-  display: flex;
-  gap: 8px;
-  margin-top: 0;
-}
-
-.study-btn {
-  flex: 1;
-  padding: 10px 8px;
-  border: none;
-  border-radius: 10px;
-  font-size: 11px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  flex-shrink: 0;
-}
-
-.study-btn .material-icons {
-  font-size: 16px;
-}
-
-.study-btn-add {
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-  color: white;
-}
-
-.study-btn-add:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
-}
-
-.study-btn-manage {
-  background: white;
-  color: #1a237e;
-  border: 2px solid #1a237e;
-}
-
-.study-btn-manage:hover {
-  background: #f0f4ff;
-}
-
-
-
-.study-loading {
-  text-align: center;
-  padding: 40px 20px;
-  color: #999;
-  font-size: 13px;
-}
-
-/* 記録管理モーダル */
-.manage-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 800;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.manage-modal-overlay.show {
-  display: flex;
-}
-
-.manage-modal {
-  background: white;
-  border-radius: 20px;
-  width: 100%;
-  max-width: 500px;
-  max-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: modalSlideUp 0.3s ease;
-}
-
-.manage-modal-header {
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-  color: white;
-  padding: 18px 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-radius: 20px 20px 0 0;
-  flex-shrink: 0;
-}
-
-.manage-modal-header h2 {
-  font-size: 18px;
-  font-weight: 700;
-  flex: 1;
-}
-
-.manage-modal-close {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: white;
-  transition: background 0.2s;
-}
-
-.manage-modal-close:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.manage-modal-body {
-  padding: 16px;
-  overflow-y: auto;
-  flex: 1;
-}
-
-.manage-loading {
-  text-align: center;
-  padding: 40px 20px;
-  color: #999;
-  font-size: 13px;
-}
-
-.manage-empty {
-  text-align: center;
-  padding: 40px 20px;
-  color: #999;
-  font-size: 13px;
-}
-
-.manage-log-item {
-  background: #f8f9fc;
-  border-radius: 10px;
-  padding: 12px;
-  margin-bottom: 8px;
-  border-left: 3px solid #1a237e;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.manage-log-item:last-child {
-  margin-bottom: 0;
-}
-
-.manage-log-main {
-  flex: 1;
-  min-width: 0;
-}
-
-.manage-log-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 4px;
-}
-
-.manage-log-date {
-  font-size: 13px;
-  font-weight: 700;
-  color: #1a237e;
-}
-
-.manage-log-category {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 10px;
-  font-weight: 600;
-  color: white;
-}
-
-.manage-log-info {
-  font-size: 12px;
-  color: #666;
-  margin-bottom: 4px;
-}
-
-.manage-log-memo {
-  font-size: 11px;
-  color: #888;
-  font-style: italic;
-  padding: 4px 8px;
-  background: white;
-  border-radius: 4px;
-  margin-top: 4px;
-}
-
-.manage-log-actions {
-  display: flex;
-  flex-direction: row;  /* ← columnからrowに変更 */
-  gap: 6px;
-  flex-shrink: 0;
-  margin-left: auto;  /* ← 追加：右端に配置 */
-}
-
-.manage-btn {
-  padding: 6px 8px;  /* ← 10pxから8pxに */
-  border: none;
-  border-radius: 6px;
-  font-size: 10px;  /* ← 11pxから10pxに */
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;  /* ← 3pxから2pxに */
-  white-space: nowrap;
-  min-width: 50px;  /* ← 追加：最小幅を設定 */
-}
-
-.manage-btn-edit {
-  background: #1a237e;
-  color: white;
-}
-
-.manage-btn-edit:hover {
-  background: #0d1642;
-}
-
-.manage-btn-delete {
-  background: #f44336;
-  color: white;
-}
-
-.manage-btn-delete:hover {
-  background: #d32f2f;
-}
-
-.manage-btn .material-icons {
-  font-size: 14px;
-}
-
-/* ========================================
+    /* プロフィール・学習記録カード（2列） */
+    .card-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+      align-items: stretch;
+    }
+
+    .profile-card,
+    .study-card {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .profile-header,
+    .study-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e8ecf4;
+    }
+
+    .profile-header .material-icons,
+    .study-header .material-icons {
+      font-size: 20px;
+    }
+
+    .section-help-btn-small {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background: rgba(26, 35, 126, 0.1);
+      border: none;
+      border-radius: 50%;
+      color: #1a237e;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-left: auto;
+      padding: 0;
+    }
+
+    .section-help-btn-small:hover {
+      background: rgba(26, 35, 126, 0.2);
+    }
+
+    .section-help-btn-small .material-icons {
+      font-size: 16px;
+    }
+
+    .profile-body {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex: 1;
+      max-height: 240px;
+      /* ← 最大高さを設定 */
+      overflow-y: auto;
+      padding: 4px;
+    }
+
+    /* スクロールバーのスタイル */
+    .profile-body::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .profile-body::-webkit-scrollbar-track {
+      background: #f0f0f0;
+      border-radius: 3px;
+    }
+
+    .profile-body::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 3px;
+    }
+
+    .profile-body::-webkit-scrollbar-thumb:hover {
+      background: #aaa;
+    }
+
+    .profile-basic-info {
+      display: flex;
+      /* ← 横並びに変更 */
+      align-items: center;
+      /* ← 中央揃え */
+      gap: 12px;
+      /* ← アイコンと名前の間隔 */
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e0e0e0;
+      margin-bottom: 10px;
+    }
+
+    .profile-detail-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 8px 10px;
+      background: #f8f9fc;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .profile-detail-icon {
+      color: #1a237e;
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .profile-detail-content {
+      flex: 1;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    .profile-detail-label {
+      font-weight: 600;
+      color: #1a237e;
+      margin-bottom: 3px;
+    }
+
+    .profile-detail-value {
+      color: #666;
+    }
+
+    .profile-avatar {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+
+    .profile-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .profile-name {
+      font-size: 16px;
+      /* ← サイズを少し小さく */
+      font-weight: 700;
+      color: #333;
+      text-align: left;
+      /* ← 左揃えに */
+    }
+
+
+    .profile-details {
+      font-size: 11px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .profile-footer {
+      display: flex;
+      gap: 8px;
+    }
+
+    .profile-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 10px 8px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .profile-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
+    }
+
+    .profile-btn .material-icons {
+      font-size: 16px;
+    }
+
+    .profile-btn:disabled {
+      background: linear-gradient(135deg, #bdbdbd 0%, #9e9e9e 100%);
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .profile-btn:disabled:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .study-body {
+      text-align: center;
+      padding: 20px 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .study-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+
+    .study-icon .material-icons {
+      font-size: 32px;
+      color: white;
+    }
+
+    .study-text {
+      font-size: 13px;
+      color: #999;
+      font-weight: 600;
+    }
+
+    /* プロフィール編集モーダル */
+    .profile-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 600;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .profile-modal-overlay.show {
+      display: flex;
+    }
+
+    .profile-modal {
+      background: white;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: modalSlideUp 0.3s ease;
+    }
+
+    .profile-modal-header {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .profile-modal-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      flex: 1;
+    }
+
+    .profile-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: background 0.2s;
+    }
+
+    .profile-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .profile-modal-tabs {
+      display: flex;
+      background: #f5f5f5;
+      border-bottom: 2px solid #e0e0e0;
+      overflow-x: auto;
+    }
+
+    .profile-tab {
+      flex: 1;
+      padding: 14px 12px;
+      background: none;
+      border: none;
+      font-size: 12px;
+      font-weight: 600;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      font-family: inherit;
+    }
+
+    .profile-tab.active {
+      color: #1a237e;
+      background: white;
+      border-bottom-color: #1a237e;
+    }
+
+    .profile-modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .profile-tab-content {
+      display: none;
+    }
+
+    .profile-tab-content.active {
+      display: block;
+    }
+
+    .profile-form-group {
+      margin-bottom: 18px;
+    }
+
+    .profile-form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .profile-form-label.required::after {
+      content: ' *';
+      color: #f44336;
+    }
+
+    .profile-tab-description {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 16px;
+      padding: 10px 14px;
+      background: #f0f4ff;
+      border-left: 3px solid #1a237e;
+      border-radius: 6px;
+      line-height: 1.5;
+    }
+
+    .profile-form-input,
+    .profile-form-select,
+    .profile-form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    .profile-form-input:focus,
+    .profile-form-select:focus,
+    .profile-form-textarea:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    .profile-form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .profile-checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .profile-checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: #f8f9fc;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .profile-checkbox-item:hover {
+      background: #e8ecf4;
+    }
+
+    .profile-checkbox-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .profile-checkbox-item label {
+      flex: 1;
+      font-size: 13px;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .profile-modal-footer {
+      padding: 16px 20px;
+      background: #f8f9fc;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      gap: 12px;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .profile-modal-btn {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .profile-modal-btn-cancel {
+      background: #e0e0e0;
+      color: #666;
+    }
+
+    .profile-modal-btn-cancel:hover {
+      background: #d0d0d0;
+    }
+
+    .profile-modal-btn-save {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+    }
+
+    .profile-modal-btn-save:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(26, 35, 126, 0.3);
+    }
+
+    @media (max-width: 480px) {
+      .card-row {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-tab {
+        font-size: 11px;
+        padding: 12px 8px;
+      }
+    }
+
+    /* 授業外学習記録モーダル */
+    .study-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 700;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .study-modal-overlay.show {
+      display: flex;
+    }
+
+    .study-modal {
+      background: white;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: modalSlideUp 0.3s ease;
+    }
+
+    .study-modal-header {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .study-modal-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      flex: 1;
+    }
+
+    .study-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: background 0.2s;
+    }
+
+    .study-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .study-modal-body {
+      padding: 24px;
+    }
+
+    .study-form-group {
+      margin-bottom: 20px;
+    }
+
+    .study-form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .study-form-input,
+    .study-form-select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    .study-form-input:focus,
+    .study-form-select:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    .study-form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .study-form-textarea:focus {
+      outline: none;
+      border-color: #1a237e;
+    }
+
+    .study-category-info {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      font-size: 11px;
+      color: #666;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .study-category-info:hover {
+      color: #1a237e;
+    }
+
+    .study-category-info .material-icons {
+      font-size: 16px;
+    }
+
+    .study-modal-footer {
+      padding: 16px 24px;
+      background: #f8f9fc;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      gap: 12px;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .study-modal-btn {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .study-modal-btn-cancel {
+      background: #e0e0e0;
+      color: #666;
+    }
+
+    .study-modal-btn-cancel:hover {
+      background: #d0d0d0;
+    }
+
+    .study-modal-btn-save {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+    }
+
+    .study-modal-btn-save:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(26, 35, 126, 0.3);
+    }
+
+    /* カテゴリー詳細ポップアップ */
+    .category-detail-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      z-index: 800;
+      display: none;
+      max-width: 350px;
+      width: 90%;
+    }
+
+    .category-detail-popup.show {
+      display: block;
+      animation: modalSlideUp 0.2s ease;
+    }
+
+    .category-detail-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #1a237e;
+    }
+
+    .category-detail-badge {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+    }
+
+    .category-detail-content {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .category-detail-content ul {
+      margin: 8px 0;
+      padding-left: 20px;
+    }
+
+    .category-detail-content li {
+      margin: 4px 0;
+    }
+
+    .category-detail-close {
+      width: 100%;
+      padding: 10px;
+      background: #1a237e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* グラフ表示エリア */
+    .study-chart-container {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .study-chart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+
+    .study-chart-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a237e;
+    }
+
+    .study-week-nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    .study-week-btn {
+      background: #f0f0f0;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: inherit;
+    }
+
+    .study-week-btn:hover {
+      background: #e0e0e0;
+    }
+
+    /* ★修正: Chart.js用ラッパー追加 */
+    .study-chart-wrapper {
+      position: relative;
+      height: 140px;
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
+    .study-legend {
+      display: none;
+    }
+
+    .study-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .study-legend-color {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .study-total {
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    .study-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 0;
+    }
+
+    .study-btn {
+      flex: 1;
+      padding: 10px 8px;
+      border: none;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .study-btn .material-icons {
+      font-size: 16px;
+    }
+
+    .study-btn-add {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+    }
+
+    .study-btn-add:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
+    }
+
+    .study-btn-manage {
+      background: white;
+      color: #1a237e;
+      border: 2px solid #1a237e;
+    }
+
+    .study-btn-manage:hover {
+      background: #f0f4ff;
+    }
+
+
+
+    .study-loading {
+      text-align: center;
+      padding: 40px 20px;
+      color: #999;
+      font-size: 13px;
+    }
+
+    /* 記録管理モーダル */
+    .manage-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 800;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .manage-modal-overlay.show {
+      display: flex;
+    }
+
+    .manage-modal {
+      background: white;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: modalSlideUp 0.3s ease;
+    }
+
+    .manage-modal-header {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: 20px 20px 0 0;
+      flex-shrink: 0;
+    }
+
+    .manage-modal-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      flex: 1;
+    }
+
+    .manage-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: background 0.2s;
+    }
+
+    .manage-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .manage-modal-body {
+      padding: 16px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .manage-loading {
+      text-align: center;
+      padding: 40px 20px;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .manage-empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .manage-log-item {
+      background: #f8f9fc;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 8px;
+      border-left: 3px solid #1a237e;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .manage-log-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .manage-log-main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .manage-log-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .manage-log-date {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a237e;
+    }
+
+    .manage-log-category {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .manage-log-info {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    .manage-log-memo {
+      font-size: 11px;
+      color: #888;
+      font-style: italic;
+      padding: 4px 8px;
+      background: white;
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+
+    .manage-log-actions {
+      display: flex;
+      flex-direction: row;
+      /* ← columnからrowに変更 */
+      gap: 6px;
+      flex-shrink: 0;
+      margin-left: auto;
+      /* ← 追加：右端に配置 */
+    }
+
+    .manage-btn {
+      padding: 6px 8px;
+      /* ← 10pxから8pxに */
+      border: none;
+      border-radius: 6px;
+      font-size: 10px;
+      /* ← 11pxから10pxに */
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      /* ← 3pxから2pxに */
+      white-space: nowrap;
+      min-width: 50px;
+      /* ← 追加：最小幅を設定 */
+    }
+
+    .manage-btn-edit {
+      background: #1a237e;
+      color: white;
+    }
+
+    .manage-btn-edit:hover {
+      background: #0d1642;
+    }
+
+    .manage-btn-delete {
+      background: #f44336;
+      color: white;
+    }
+
+    .manage-btn-delete:hover {
+      background: #d32f2f;
+    }
+
+    .manage-btn .material-icons {
+      font-size: 14px;
+    }
+
+    /* ========================================
    はじめにご確認ください セクション
 ======================================== */
-.onboarding-banner {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 20px;
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-  border-radius: 16px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(26, 35, 126, 0.25);
-  transition: all 0.3s ease;
-  position: relative;
-}
+    .onboarding-banner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 16px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(26, 35, 126, 0.25);
+      transition: all 0.3s ease;
+      position: relative;
+    }
 
-.onboarding-banner:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(26, 35, 126, 0.35);
-}
+    .onboarding-banner:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(26, 35, 126, 0.35);
+    }
 
-.onboarding-banner-icon {
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
+    .onboarding-banner-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
 
-.onboarding-banner-icon .material-icons {
-  color: white;
-  font-size: 26px;
-}
+    .onboarding-banner-icon .material-icons {
+      color: white;
+      font-size: 26px;
+    }
 
-.onboarding-banner-content {
-  flex: 1;
-  color: white;
-}
+    .onboarding-banner-content {
+      flex: 1;
+      color: white;
+    }
 
-.onboarding-banner-title {
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 2px;
-}
+    .onboarding-banner-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
 
-.onboarding-banner-desc {
-  font-size: 11px;
-  opacity: 0.9;
-}
+    .onboarding-banner-desc {
+      font-size: 11px;
+      opacity: 0.9;
+    }
 
-.onboarding-banner-arrow {
-  color: white;
-  opacity: 0.8;
-}
+    .onboarding-banner-arrow {
+      color: white;
+      opacity: 0.8;
+    }
 
-.onboarding-banner-badge {
-  position: absolute;
-  top: -8px;
-  right: 12px;
-  background: #e53935;
-  color: white;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 5px 12px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(229, 57, 53, 0.4);
-}
+    .onboarding-banner-badge {
+      position: absolute;
+      top: -8px;
+      right: 12px;
+      background: #e53935;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(229, 57, 53, 0.4);
+    }
 
-/* はじめにモーダル */
-.onboarding-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 600;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
+    /* はじめにモーダル */
+    .onboarding-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 600;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
 
-.onboarding-modal-overlay.show {
-  display: flex;
-}
+    .onboarding-modal-overlay.show {
+      display: flex;
+    }
 
-.onboarding-modal {
-  background: white;
-  border-radius: 20px;
-  width: 100%;
-  max-width: 420px;
-  max-height: 85vh;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: modalSlideUp 0.3s ease;
-  display: flex;
-  flex-direction: column;
-}
+    .onboarding-modal {
+      background: white;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 420px;
+      max-height: 85vh;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: modalSlideUp 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
 
-.onboarding-modal-header {
-  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-  color: white;
-  padding: 18px 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-}
+    .onboarding-modal-header {
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      color: white;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
 
-.onboarding-modal-header h2 {
-  font-size: 18px;
-  font-weight: 700;
-  flex: 1;
-}
+    .onboarding-modal-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      flex: 1;
+    }
 
-.onboarding-modal-close {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: white;
-  transition: background 0.2s;
-}
+    .onboarding-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: background 0.2s;
+    }
 
-.onboarding-modal-close:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
+    .onboarding-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
 
-.onboarding-modal-body {
-  padding: 16px;
-  overflow-y: auto;
-  flex: 1;
-}
+    .onboarding-modal-body {
+      padding: 16px;
+      overflow-y: auto;
+      flex: 1;
+    }
 
-.onboarding-progress {
-  background: #f5f5f5;
-  border-radius: 10px;
-  padding: 12px 16px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+    .onboarding-progress {
+      background: #f5f5f5;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-.onboarding-progress-bar {
-  flex: 1;
-  height: 8px;
-  background: #e0e0e0;
-  border-radius: 4px;
-  overflow: hidden;
-}
+    .onboarding-progress-bar {
+      flex: 1;
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
 
-.onboarding-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #ff6b35, #f7931e);
-  border-radius: 4px;
-  transition: width 0.3s ease;
-}
+    .onboarding-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff6b35, #f7931e);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
 
-.onboarding-progress-text {
-  font-size: 13px;
-  font-weight: 600;
-  color: #333;
-  white-space: nowrap;
-}
+    .onboarding-progress-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      white-space: nowrap;
+    }
 
-.onboarding-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  background: #f8f9fc;
-  border-radius: 12px;
-  margin-bottom: 10px;
-  transition: all 0.2s;
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-}
+    .onboarding-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #f8f9fc;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      transition: all 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
 
-.onboarding-item:hover {
-  background: #e8ecf4;
-  transform: translateX(4px);
-}
+    .onboarding-item:hover {
+      background: #e8ecf4;
+      transform: translateX(4px);
+    }
 
-.onboarding-item.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+    .onboarding-item.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
 
-.onboarding-item.disabled:hover {
-  transform: none;
-}
+    .onboarding-item.disabled:hover {
+      transform: none;
+    }
 
-.onboarding-check {
-  width: 28px;
-  height: 28px;
-  border: 2px solid #ddd;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: all 0.2s;
-}
+    .onboarding-check {
+      width: 28px;
+      height: 28px;
+      border: 2px solid #ddd;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
 
-.onboarding-check .material-icons {
-  font-size: 18px;
-  color: transparent;
-}
+    .onboarding-check .material-icons {
+      font-size: 18px;
+      color: transparent;
+    }
 
-.onboarding-check.checked {
-  background: linear-gradient(135deg, #43a047, #66bb6a);
-  border-color: #43a047;
-}
+    .onboarding-check.checked {
+      background: linear-gradient(135deg, #43a047, #66bb6a);
+      border-color: #43a047;
+    }
 
-.onboarding-check.checked .material-icons {
-  color: white;
-}
+    .onboarding-check.checked .material-icons {
+      color: white;
+    }
 
-.onboarding-item-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
+    .onboarding-item-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
 
-.onboarding-item-icon .material-icons {
-  color: white;
-  font-size: 20px;
-}
+    .onboarding-item-icon .material-icons {
+      color: white;
+      font-size: 20px;
+    }
 
-.onboarding-item-icon.video {
-  background: linear-gradient(135deg, #e53935, #ef5350);
-}
+    .onboarding-item-icon.video {
+      background: linear-gradient(135deg, #e53935, #ef5350);
+    }
 
-.onboarding-item-icon.document {
-  background: linear-gradient(135deg, #1a237e, #3949ab);
-}
+    .onboarding-item-icon.document {
+      background: linear-gradient(135deg, #1a237e, #3949ab);
+    }
 
-.onboarding-item-icon.purple {
-  background: linear-gradient(135deg, #4527a0, #7e57c2);
-}
+    .onboarding-item-icon.purple {
+      background: linear-gradient(135deg, #4527a0, #7e57c2);
+    }
 
-.onboarding-item-icon.brown {
-  background: linear-gradient(135deg, #4e342e, #8d6e63);
-}
+    .onboarding-item-icon.brown {
+      background: linear-gradient(135deg, #4e342e, #8d6e63);
+    }
 
-.onboarding-item-icon.disabled {
-  background: #bdbdbd;
-}
+    .onboarding-item-icon.disabled {
+      background: #bdbdbd;
+    }
 
-.onboarding-item-content {
-  flex: 1;
-  min-width: 0;
-}
+    .onboarding-item-content {
+      flex: 1;
+      min-width: 0;
+    }
 
-.onboarding-item-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 2px;
-}
+    .onboarding-item-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 2px;
+    }
 
-.onboarding-item-desc {
-  font-size: 11px;
-  color: #888;
-}
+    .onboarding-item-desc {
+      font-size: 11px;
+      color: #888;
+    }
 
-.onboarding-item-badge {
-  font-size: 10px;
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-weight: 600;
-  background: #e3f2fd;
-  color: #1565c0;
-}
+    .onboarding-item-badge {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      background: #e3f2fd;
+      color: #1565c0;
+    }
 
-.onboarding-item-badge.wip {
-  background: #f5f5f5;
-  color: #9e9e9e;
-}
+    .onboarding-item-badge.wip {
+      background: #f5f5f5;
+      color: #9e9e9e;
+    }
 
-.onboarding-item > .material-icons {
-  color: #ccc;
-  font-size: 20px;
-  flex-shrink: 0;
-}
+    .onboarding-item>.material-icons {
+      color: #ccc;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
 
-.onboarding-modal-footer {
-  padding: 16px 20px;
-  background: #f8f9fc;
-  border-top: 1px solid #e0e0e0;
-  flex-shrink: 0;
-}
+    .onboarding-modal-footer {
+      padding: 16px 20px;
+      background: #f8f9fc;
+      border-top: 1px solid #e0e0e0;
+      flex-shrink: 0;
+    }
 
-.onboarding-complete-btn {
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #43a047, #66bb6a);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
+    .onboarding-complete-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #43a047, #66bb6a);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
 
-.onboarding-complete-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(67, 160, 71, 0.3);
-}
+    .onboarding-complete-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 160, 71, 0.3);
+    }
 
-.onboarding-complete-btn:disabled {
-  background: #e0e0e0;
-  color: #999;
-  cursor: not-allowed;
-}
+    .onboarding-complete-btn:disabled {
+      background: #e0e0e0;
+      color: #999;
+      cursor: not-allowed;
+    }
 
-/* ========================================
+    /* ========================================
    ポータルの使い方 セクション
 ======================================== */
-.guide-banner {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 20px;
-  background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);
-  border-radius: 16px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 137, 123, 0.25);
-  transition: all 0.3s ease;
-}
+    .guide-banner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);
+      border-radius: 16px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 137, 123, 0.25);
+      transition: all 0.3s ease;
+    }
 
-.guide-banner:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 137, 123, 0.35);
-}
+    .guide-banner:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 137, 123, 0.35);
+    }
 
-.guide-banner-icon {
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
+    .guide-banner-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
 
-.guide-banner-icon .material-icons {
-  color: white;
-  font-size: 26px;
-}
+    .guide-banner-icon .material-icons {
+      color: white;
+      font-size: 26px;
+    }
 
-.guide-banner-content {
-  flex: 1;
-  color: white;
-}
+    .guide-banner-content {
+      flex: 1;
+      color: white;
+    }
 
-.guide-banner-title {
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 2px;
-}
+    .guide-banner-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
 
-.guide-banner-desc {
-  font-size: 11px;
-  opacity: 0.9;
-}
+    .guide-banner-desc {
+      font-size: 11px;
+      opacity: 0.9;
+    }
 
-.guide-banner-arrow {
-  color: white;
-  opacity: 0.8;
-}
+    .guide-banner-arrow {
+      color: white;
+      opacity: 0.8;
+    }
 
-/* ポータルの使い方モーダル */
-.guide-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 1000;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
+    /* ポータルの使い方モーダル */
+    .guide-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-.guide-modal-overlay.show {
-  display: flex;
-}
+    .guide-modal-overlay.show {
+      display: flex;
+    }
 
-.guide-modal {
-  background: white;
-  border-radius: 20px;
-  width: 100%;
-  max-width: 540px;
-  max-height: 85vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: guideModalIn 0.3s ease;
-}
+    .guide-modal {
+      background: white;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 540px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: guideModalIn 0.3s ease;
+    }
 
-@keyframes guideModalIn {
-  from { opacity: 0; transform: scale(0.95) translateY(-10px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
+    @keyframes guideModalIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+      }
 
-.guide-modal-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 18px 24px;
-  background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);
-  color: white;
-  border-radius: 20px 20px 0 0;
-  flex-shrink: 0;
-}
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
 
-.guide-modal-header .material-icons {
-  font-size: 28px;
-}
+    .guide-modal-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 24px;
+      background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);
+      color: white;
+      border-radius: 20px 20px 0 0;
+      flex-shrink: 0;
+    }
 
-.guide-modal-header h2 {
-  flex: 1;
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0;
-}
+    .guide-modal-header .material-icons {
+      font-size: 28px;
+    }
 
-.guide-modal-close {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
+    .guide-modal-header h2 {
+      flex: 1;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+    }
 
-.guide-modal-close:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
+    .guide-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
 
-.guide-modal-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px 24px;
-}
+    .guide-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
 
-.guide-qa-item {
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
-}
+    .guide-modal-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+    }
 
-.guide-qa-item:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
-}
+    .guide-qa-item {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
 
-.guide-question {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-bottom: 10px;
-}
+    .guide-qa-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
 
-.guide-q-icon {
-  width: 26px;
-  height: 26px;
-  background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
+    .guide-question {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
 
-.guide-q-text {
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-  line-height: 1.5;
-  padding-top: 2px;
-}
+    .guide-q-icon {
+      width: 26px;
+      height: 26px;
+      background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
 
-.guide-answer {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-left: 36px;
-}
+    .guide-q-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.5;
+      padding-top: 2px;
+    }
 
-.guide-a-icon {
-  width: 22px;
-  height: 22px;
-  background: #f0f0f0;
-  color: #666;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
+    .guide-answer {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-left: 36px;
+    }
 
-.guide-a-text {
-  font-size: 13px;
-  color: #555;
-  line-height: 1.7;
-}
+    .guide-a-icon {
+      width: 22px;
+      height: 22px;
+      background: #f0f0f0;
+      color: #666;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
 
-.guide-tip {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  background: #e8f5e9;
-  border-radius: 10px;
-  padding: 14px 16px;
-  margin-top: 16px;
-}
+    .guide-a-text {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.7;
+    }
 
-.guide-tip .material-icons {
-  color: #43a047;
-  font-size: 20px;
-  flex-shrink: 0;
-}
+    .guide-tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: #e8f5e9;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 16px;
+    }
 
-.guide-tip p {
-  font-size: 13px;
-  color: #2e7d32;
-  line-height: 1.6;
-  margin: 0;
-}
+    .guide-tip .material-icons {
+      color: #43a047;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
 
-.help-icon-sample {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-  font-size: 12px;
-  font-weight: 700;
-  color: #555;
-  vertical-align: middle;
-  margin: 0 2px;
-}
+    .guide-tip p {
+      font-size: 13px;
+      color: #2e7d32;
+      line-height: 1.6;
+      margin: 0;
+    }
 
-.guide-modal-footer {
-  padding: 16px 24px;
-  border-top: 1px solid #eee;
-  flex-shrink: 0;
-}
+    .help-icon-sample {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      color: #555;
+      vertical-align: middle;
+      margin: 0 2px;
+    }
 
-.guide-close-btn {
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-}
+    .guide-modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid #eee;
+      flex-shrink: 0;
+    }
 
-.guide-close-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(0, 137, 123, 0.3);
-}
+    .guide-close-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
 
-/* セクションヘルプモーダル */
-.section-help-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 1000;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
+    .guide-close-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(0, 137, 123, 0.3);
+    }
 
-.section-help-modal-overlay.show {
-  display: flex;
-}
+    /* セクションヘルプモーダル */
+    .section-help-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-.section-help-modal {
-  background: white;
-  border-radius: 16px;
-  width: 100%;
-  max-width: 380px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: sectionHelpModalIn 0.3s ease;
-}
+    .section-help-modal-overlay.show {
+      display: flex;
+    }
 
-@keyframes sectionHelpModalIn {
-  from { opacity: 0; transform: scale(0.95) translateY(-10px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
+    .section-help-modal {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: sectionHelpModalIn 0.3s ease;
+    }
 
-.section-help-modal-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 20px;
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-  color: white;
-  border-radius: 16px 16px 0 0;
-}
+    @keyframes sectionHelpModalIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+      }
 
-.section-help-modal-header .material-icons {
-  font-size: 24px;
-}
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
 
-.section-help-modal-header h3 {
-  flex: 1;
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
-}
+    .section-help-modal-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      border-radius: 16px 16px 0 0;
+    }
 
-.section-help-modal-close {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .section-help-modal-header .material-icons {
+      font-size: 24px;
+    }
 
-.section-help-modal-close:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
+    .section-help-modal-header h3 {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
 
-.section-help-modal-body {
-  padding: 20px;
-}
+    .section-help-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.section-help-modal-body p {
-  font-size: 14px;
-  color: #444;
-  line-height: 1.8;
-  margin: 0;
-}
+    .section-help-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
 
-.section-help-modal-footer {
-  padding: 16px 20px;
-  border-top: 1px solid #eee;
-}
+    .section-help-modal-body {
+      padding: 20px;
+    }
 
-.section-help-close-btn {
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-}
+    .section-help-modal-body p {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.8;
+      margin: 0;
+    }
 
-.section-help-close-btn:hover {
-  opacity: 0.9;
-}
-    
+    .section-help-modal-footer {
+      padding: 16px 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .section-help-close-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .section-help-close-btn:hover {
+      opacity: 0.9;
+    }
   </style>
 </head>
+
 <body>
   <div id="loginOverlay" class="login-overlay">
     <div class="login-box">
@@ -4225,22 +4324,24 @@
       </div>
       <h1 class="login-title">EQAO PORTAL</h1>
       <p class="login-subtitle">生徒番号とパスワードでログインしてください</p>
-      
+
       <div id="loginError" class="login-error"></div>
-      
+
       <div class="login-form-group">
         <label class="login-form-label">生徒番号</label>
         <input type="text" id="loginStudentId" class="login-form-input" placeholder="例：0001">
       </div>
-      
+
       <div class="login-form-group">
         <label class="login-form-label">パスワード</label>
-        <input type="password" id="loginPassword" class="login-form-input" placeholder="パスワード" onkeypress="if(event.key==='Enter')doLogin()">
+        <input type="password" id="loginPassword" class="login-form-input" placeholder="パスワード"
+          onkeypress="if(event.key==='Enter')doLogin()">
       </div>
-      
+
       <button id="loginBtn" class="login-btn" onclick="doLogin()">ログイン</button>
-      
-      <a href="password-reset.html" style="display:block; text-align:center; margin-top:16px; color:#1a237e; font-size:13px; text-decoration:none;">パスワードを忘れた方</a>
+
+      <a href="password-reset.html"
+        style="display:block; text-align:center; margin-top:16px; color:#1a237e; font-size:13px; text-decoration:none;">パスワードを忘れた方</a>
     </div>
   </div>
 
@@ -4282,6 +4383,17 @@
         </div>
 
         <div class="onboarding-modal-body">
+          <!-- スタートガイド -->
+          <a href="portal-guide.html" class="onboarding-item">
+            <div class="onboarding-item-icon" style="background: linear-gradient(135deg, #00897b 0%, #26a69a 100%);">
+              <span class="material-icons">rocket_launch</span>
+            </div>
+            <div class="onboarding-item-content">
+              <div class="onboarding-item-title">スタートガイド</div>
+              <div class="onboarding-item-desc">ポータルの目的と活用ステップ</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </a>
           <!-- 料金ルール動画 -->
           <a href="https://youtu.be/9VwlMYNy2aE" target="_blank" class="onboarding-item">
             <div class="onboarding-item-icon video">
@@ -4345,129 +4457,22 @@
           </a>
 
           <!-- カリキュラム動画 -->
-         <a href="https://youtu.be/kzGJuOBchXI?si=eUxdO9VhHFeV0Amg" target="_blank" class="onboarding-item">
-  <div class="onboarding-item-icon video">
-    <span class="material-icons">play_circle</span>
-  </div>
-  <div class="onboarding-item-content">
-    <div class="onboarding-item-title">カリキュラム動画</div>
-    <div class="onboarding-item-desc">カリキュラムの説明動画</div>
-  </div>
-  <span class="onboarding-item-badge">動画</span>
-  <span class="material-icons">chevron_right</span>
-</a>
+          <a href="https://youtu.be/kzGJuOBchXI?si=eUxdO9VhHFeV0Amg" target="_blank" class="onboarding-item">
+            <div class="onboarding-item-icon video">
+              <span class="material-icons">play_circle</span>
+            </div>
+            <div class="onboarding-item-content">
+              <div class="onboarding-item-title">カリキュラム動画</div>
+              <div class="onboarding-item-desc">カリキュラムの説明動画</div>
+            </div>
+            <span class="onboarding-item-badge">動画</span>
+            <span class="material-icons">chevron_right</span>
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- ポータルの使い方 バナー -->
-    <div class="guide-banner" onclick="openGuideModal()">
-      <div class="guide-banner-icon">
-        <span class="material-icons">help_outline</span>
-      </div>
-      <div class="guide-banner-content">
-        <div class="guide-banner-title">ポータルの使い方</div>
-        <div class="guide-banner-desc">初めての方はこちらをご確認ください</div>
-      </div>
-      <span class="material-icons guide-banner-arrow">chevron_right</span>
-    </div>
-
-    <!-- ポータルの使い方モーダル -->
-    <div class="guide-modal-overlay" id="guideModalOverlay" onclick="closeGuideModalOnOverlay(event)">
-      <div class="guide-modal" onclick="event.stopPropagation()">
-        <div class="guide-modal-header">
-          <span class="material-icons">help_outline</span>
-          <h2>ポータルの使い方</h2>
-          <button class="guide-modal-close" onclick="closeGuideModal()">
-            <span class="material-icons">close</span>
-          </button>
-        </div>
-
-        <div class="guide-modal-body">
-          <!-- Q1 -->
-          <div class="guide-qa-item">
-            <div class="guide-question">
-              <div class="guide-q-icon">Q</div>
-              <div class="guide-q-text">このポータルでは何ができますか？</div>
-            </div>
-            <div class="guide-answer">
-              <div class="guide-a-icon">A</div>
-              <div class="guide-a-text">EQAOに関するすべての情報が集まっているページです。スケジュール管理、教材、過去問など必要な情報にここからアクセスできます。</div>
-            </div>
-          </div>
-
-          <!-- Q2 -->
-          <div class="guide-qa-item">
-            <div class="guide-question">
-              <div class="guide-q-icon">Q</div>
-              <div class="guide-q-text">最初に何をすればいいですか？</div>
-            </div>
-            <div class="guide-answer">
-              <div class="guide-a-icon">A</div>
-              <div class="guide-a-text">「はじめにご確認ください」を読んだ後、画面上部のプロフィールを設定してください。この情報をもとに講師が授業を進めます。</div>
-            </div>
-          </div>
-
-          <!-- Q3 -->
-          <div class="guide-qa-item">
-            <div class="guide-question">
-              <div class="guide-q-icon">Q</div>
-              <div class="guide-q-text">すべての機能を使う必要がありますか？</div>
-            </div>
-            <div class="guide-answer">
-              <div class="guide-a-icon">A</div>
-              <div class="guide-a-text">すべてを使う必要はありません。目標によって重要な機能は変わります。どれを使うかは講師と相談しながら決めていきましょう。</div>
-            </div>
-          </div>
-
-          <!-- Q4 -->
-          <div class="guide-qa-item">
-            <div class="guide-question">
-              <div class="guide-q-icon">Q</div>
-              <div class="guide-q-text">このページは毎日見る必要がありますか？</div>
-            </div>
-            <div class="guide-answer">
-              <div class="guide-a-icon">A</div>
-              <div class="guide-a-text">スケジュール確認や授業外学習の記録など、日々活用する機能があります。できるだけ毎日アクセスする習慣をつけましょう。使用しているデバイス内でのブックマーク、ホーム画面への配置を推奨します。</div>
-            </div>
-          </div>
-
-          <!-- Q5 -->
-          <div class="guide-qa-item">
-            <div class="guide-question">
-              <div class="guide-q-icon">Q</div>
-              <div class="guide-q-text">使い方がわからない場合やエラーが出た場合はどうすればいいですか？</div>
-            </div>
-            <div class="guide-answer">
-              <div class="guide-a-icon">A</div>
-              <div class="guide-a-text">使い方は直接講師に聞いたり、LINEグループで質問してください。不具合は画面最下部の「不具合報告・ご要望はこちら」から報告をお願いします。</div>
-            </div>
-          </div>
-
-          <!-- Q6 -->
-          <div class="guide-qa-item">
-            <div class="guide-question">
-              <div class="guide-q-icon">Q</div>
-              <div class="guide-q-text">動画や教材は自宅でも閲覧できますか？</div>
-            </div>
-            <div class="guide-answer">
-              <div class="guide-a-icon">A</div>
-              <div class="guide-a-text">インターネット環境があればどこでも閲覧できます。</div>
-            </div>
-          </div>
-
-          <!-- 補足情報 -->
-          <div class="guide-tip">
-            <span class="material-icons">lightbulb</span>
-            <p>各ページのヘッダーにある <span class="help-icon-sample">?</span> ボタンをタップすると、そのページの使い方を確認できます。</p>
-          </div>
-        </div>
-
-        <div class="guide-modal-footer">
-          <button class="guide-close-btn" onclick="closeGuideModal()">閉じる</button>
-        </div>
-      </div>
-    </div>
+  
 
     <div class="news-section">
       <div class="news-header">
@@ -4548,40 +4553,40 @@
       </div>
 
       <!-- 授業外学習カード -->
-<!-- 授業外学習カード -->
-<div class="study-card">
-  <div class="study-header">
-    <span class="material-icons">trending_up</span>
-    授業外学習
-    <button class="section-help-btn-small" onclick="openSectionHelp('study')">
-      <span class="material-icons">help_outline</span>
-    </button>
-  </div>
-  <div class="study-chart-container">
-    <div class="study-chart-header">
-      <div class="study-chart-title" id="studyChartTitle">今週の学習記録</div>
-      <div class="study-week-nav">
-        <button class="study-week-btn" onclick="changeWeek(-1)">← 前週</button>
-        <button class="study-week-btn" onclick="changeWeek(1)">次週 →</button>
+      <!-- 授業外学習カード -->
+      <div class="study-card">
+        <div class="study-header">
+          <span class="material-icons">trending_up</span>
+          授業外学習
+          <button class="section-help-btn-small" onclick="openSectionHelp('study')">
+            <span class="material-icons">help_outline</span>
+          </button>
+        </div>
+        <div class="study-chart-container">
+          <div class="study-chart-header">
+            <div class="study-chart-title" id="studyChartTitle">今週の学習記録</div>
+            <div class="study-week-nav">
+              <button class="study-week-btn" onclick="changeWeek(-1)">← 前週</button>
+              <button class="study-week-btn" onclick="changeWeek(1)">次週 →</button>
+            </div>
+          </div>
+          <!-- ★修正: canvasをラッパーで囲む -->
+          <div class="study-chart-wrapper">
+            <canvas id="studyChart"></canvas>
+          </div>
+          <div class="study-total" id="studyTotal">今週の合計: 0時間</div>
+          <div class="study-buttons">
+            <button class="study-btn study-btn-add" onclick="openStudyModal()">
+              <span class="material-icons">add</span>
+              今日の学習を記録
+            </button>
+            <button class="study-btn study-btn-manage" onclick="openManageModal()">
+              <span class="material-icons">edit_note</span>
+              記録を管理
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-    <!-- ★修正: canvasをラッパーで囲む -->
-    <div class="study-chart-wrapper">
-      <canvas id="studyChart"></canvas>
-    </div>
-    <div class="study-total" id="studyTotal">今週の合計: 0時間</div>
-    <div class="study-buttons">
-  <button class="study-btn study-btn-add" onclick="openStudyModal()">
-    <span class="material-icons">add</span>
-    今日の学習を記録
-  </button>
-  <button class="study-btn study-btn-manage" onclick="openManageModal()">
-    <span class="material-icons">edit_note</span>
-    記録を管理
-  </button>
-</div>
-  </div>
-</div>
     </div>
 
     <!-- クイックアクセス（統一グリッド） -->
@@ -4840,12 +4845,8 @@
         </div>
         <div class="pv-modal-body">
           <div class="pv-video-container">
-            <iframe 
-              id="pvVideoIframe"
-              src="" 
-              title="EQAO PV動画"
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            <iframe id="pvVideoIframe" src="" title="EQAO PV動画" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen>
             </iframe>
           </div>
@@ -4950,7 +4951,8 @@
           </div>
           <span>過去の集団<br>授業動画</span>
         </a>
-        <a href="https://www.notion.so/EQAO-COMMUNITY-LINE-21f5f9664112803a8ee2cff1a4d5e2a7" target="_blank" class="menu-btn">
+        <a href="https://www.notion.so/EQAO-COMMUNITY-LINE-21f5f9664112803a8ee2cff1a4d5e2a7" target="_blank"
+          class="menu-btn">
           <div class="icon-wrapper icon-pink">
             <span class="material-icons">dashboard</span>
           </div>
@@ -5066,7 +5068,8 @@
       <div class="search-modal" onclick="event.stopPropagation()">
         <div class="search-header">
           <span class="material-icons">search</span>
-          <input type="text" class="search-input" id="searchInput" placeholder="ページ・機能を検索..." oninput="handleSearch(this.value)">
+          <input type="text" class="search-input" id="searchInput" placeholder="ページ・機能を検索..."
+            oninput="handleSearch(this.value)">
           <button class="search-close" onclick="closeSearchModal()">
             <span class="material-icons">close</span>
           </button>
@@ -5109,7 +5112,7 @@
   </div>
 
   <script>
- const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
 
     // ========================================
     // 検索機能
@@ -5206,7 +5209,7 @@
 
     function handleSearch(query) {
       const resultsContainer = document.getElementById('searchResults');
-      
+
       if (!query.trim()) {
         resultsContainer.innerHTML = getSearchInitialHTML();
         return;
@@ -5215,8 +5218,8 @@
       const q = query.toLowerCase();
       const results = SEARCH_DATA.filter(item => {
         return item.title.toLowerCase().includes(q) ||
-               item.category.toLowerCase().includes(q) ||
-               item.keywords.some(k => k.toLowerCase().includes(q));
+          item.category.toLowerCase().includes(q) ||
+          item.keywords.some(k => k.toLowerCase().includes(q));
       });
 
       if (results.length === 0) {
@@ -5244,7 +5247,7 @@
     }
 
     // Ctrl+K でショートカット
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
         openSearchModal();
@@ -5259,17 +5262,17 @@
     // ========================================
     function initSectionNav() {
       const navItems = document.querySelectorAll('.section-nav-item');
-      
+
       navItems.forEach(item => {
-        item.addEventListener('click', function(e) {
+        item.addEventListener('click', function (e) {
           e.preventDefault();
           const targetId = this.getAttribute('data-section');
           const targetSection = document.getElementById(targetId);
-          
+
           if (targetSection) {
             const headerHeight = 70;
             const targetPosition = targetSection.offsetTop - headerHeight;
-            
+
             window.scrollTo({
               top: targetPosition,
               behavior: 'smooth'
@@ -5292,7 +5295,7 @@
       const headerHeight = 100;
 
       let currentSection = sections[0];
-      
+
       sections.forEach(sectionId => {
         const section = document.getElementById(sectionId);
         if (section) {
@@ -5313,7 +5316,7 @@
     }
 
     // ページ読み込み時に初期化
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       initSectionNav();
     });
 
@@ -5396,10 +5399,10 @@
     function completeOnboarding() {
       // 完了フラグを保存
       localStorage.setItem(ONBOARDING_COMPLETED_KEY, 'true');
-      
+
       // モーダルを閉じる
       closeOnboardingModal();
-      
+
       // バナーを非表示
       document.getElementById('onboardingBanner').style.display = 'none';
     }
@@ -5416,7 +5419,7 @@
           url.searchParams.set(key, value);
         }
       }
-      
+
       const response = await fetch(url.toString());
       if (!response.ok) {
         throw new Error('API Error: ' + response.status);
@@ -5427,9 +5430,9 @@
     function checkLoginStatus() {
       const loggedIn = localStorage.getItem('eqao_loggedIn');
       const studentName = localStorage.getItem('eqao_studentName');
-      
+
       console.log('Checking login status:', { loggedIn, studentName });
-      
+
       if (loggedIn === 'true') {
         console.log('User is logged in, hiding login overlay');
         document.getElementById('loginOverlay').classList.add('hidden');
@@ -5451,27 +5454,27 @@
       const password = document.getElementById('loginPassword').value;
       const errorEl = document.getElementById('loginError');
       const loginBtn = document.getElementById('loginBtn');
-      
+
       console.log('Login attempt:', { studentId });
-      
+
       if (!studentId || !password) {
         errorEl.textContent = '生徒番号とパスワードを入力してください';
         errorEl.style.display = 'block';
         return;
       }
-      
+
       errorEl.style.display = 'none';
       loginBtn.disabled = true;
       loginBtn.textContent = 'ログイン中...';
-      
+
       try {
         console.log('Calling authenticate API...');
         const result = await apiGet('authenticate', { studentId, password });
         console.log('API result:', result);
-        
+
         if (result.success) {
           console.log('Login successful, saving to localStorage...');
-          
+
           if (false && result.needsPasswordChange) {
             alert('初回ログインのためパスワードを変更してください。');
             localStorage.setItem('eqao_studentId', result.studentId);
@@ -5483,7 +5486,7 @@
             window.location.href = 'schedule.html';
             return;
           }
-          
+
           localStorage.setItem('eqao_studentId', result.studentId);
           localStorage.setItem('eqao_studentName', result.studentName);
           localStorage.setItem('eqao_password', password);
@@ -5492,13 +5495,13 @@
           localStorage.setItem('eqao_isAdmin', result.isAdmin ? 'true' : 'false');
           localStorage.setItem('eqao_hasVideoAccess', result.hasVideoAccess ? 'true' : 'false');
           localStorage.removeItem('eqao_needsPasswordChange');
-          
+
           console.log('localStorage saved:', {
             eqao_loggedIn: localStorage.getItem('eqao_loggedIn'),
             eqao_studentName: localStorage.getItem('eqao_studentName'),
             eqao_hasVideoAccess: localStorage.getItem('eqao_hasVideoAccess')
           });
-          
+
           document.getElementById('loginOverlay').classList.add('hidden');
           const navUserNameEl = document.getElementById('navUserName');
           if (navUserNameEl) {
@@ -5530,14 +5533,14 @@
         localStorage.removeItem('eqao_rowIndex');
         localStorage.removeItem('eqao_isAdmin');
         localStorage.removeItem('eqao_needsPasswordChange');
-        
+
         document.getElementById('loginOverlay').classList.remove('hidden');
         document.getElementById('loginStudentId').value = '';
         document.getElementById('loginPassword').value = '';
       }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       checkLoginStatus();
     });
 
@@ -5552,28 +5555,28 @@
 
     function displayNews(data) {
       const newsList = document.getElementById('newsList');
-      
+
       if (!data || data.length === 0) {
         newsList.innerHTML = '<div class="news-empty">現在お知らせはありません</div>';
         return;
       }
 
       newsList.innerHTML = '';
-      
-      data.forEach(function(item) {
+
+      data.forEach(function (item) {
         const newsItem = document.createElement('div');
         newsItem.className = 'news-item';
-        
-        newsItem.innerHTML = 
+
+        newsItem.innerHTML =
           '<div class="news-date">' + escapeHtml(item.date) + '</div>' +
           '<div class="news-content">' +
-            '<div class="news-item-title">' +
-              escapeHtml(item.title) +
-              (item.isNew ? '<span class="news-new-badge">NEW</span>' : '') +
-            '</div>' +
-            (item.content ? '<div class="news-item-text">' + escapeHtml(item.content) + '</div>' : '') +
+          '<div class="news-item-title">' +
+          escapeHtml(item.title) +
+          (item.isNew ? '<span class="news-new-badge">NEW</span>' : '') +
+          '</div>' +
+          (item.content ? '<div class="news-item-text">' + escapeHtml(item.content) + '</div>' : '') +
           '</div>';
-        
+
         newsList.appendChild(newsItem);
       });
     }
@@ -5601,32 +5604,32 @@
     function displayRuleUpdates(data) {
       const banner = document.getElementById('ruleUpdateBanner');
       const text = document.getElementById('ruleUpdateText');
-      
+
       if (!data || !data.success || !data.updates || data.updates.length === 0) {
         banner.classList.remove('show');
         ruleUpdatesData = [];
         return;
       }
-      
+
       // 更新日が新しい順にソート
-      const sortedUpdates = data.updates.sort(function(a, b) {
+      const sortedUpdates = data.updates.sort(function (a, b) {
         return new Date(b.updatedAt) - new Date(a.updatedAt);
       });
-      
+
       ruleUpdatesData = sortedUpdates;
       const count = sortedUpdates.length;
       text.textContent = '規定が' + count + '件更新されました（直近7日間）';
       banner.classList.add('show');
-      
+
       // モーダルの内容を生成
       renderRuleModal(sortedUpdates);
     }
 
     function renderRuleModal(updates) {
       const modalBody = document.getElementById('ruleModalBody');
-      
+
       let html = '';
-      updates.forEach(function(item) {
+      updates.forEach(function (item) {
         html += `
           <a href="rules.html" class="rule-update-item">
             <div class="rule-update-row1">
@@ -5637,7 +5640,7 @@
           </a>
         `;
       });
-      
+
       modalBody.innerHTML = html;
     }
 
@@ -5685,17 +5688,17 @@
 
     function openLineRuleModal(fromLine = false) {
       openedFromLineModal = fromLine;
-      
+
       // LINEモーダルが開いていたら閉じる
       document.getElementById('lineModalOverlay').classList.remove('show');
-      
+
       document.getElementById('lineRuleModalOverlay').classList.add('show');
       document.body.style.overflow = 'hidden';
     }
 
     function closeLineRuleModal() {
       document.getElementById('lineRuleModalOverlay').classList.remove('show');
-      
+
       // LINEモーダルから開いた場合は戻る
       if (openedFromLineModal) {
         document.getElementById('lineModalOverlay').classList.add('show');
@@ -5750,7 +5753,7 @@
     function openPvModal() {
       // 先にEQAO情報モーダルを閉じる
       document.getElementById('info-modal-overlay').classList.remove('show');
-      
+
       // PVモーダルを開く
       document.getElementById('pvModalOverlay').classList.add('show');
       document.getElementById('pvVideoIframe').src = PV_VIDEO_URL;
@@ -5770,7 +5773,7 @@
       }
     }
 
-// ========================================
+    // ========================================
     // プロフィール機能
     // ========================================
 
@@ -5799,10 +5802,10 @@
     // タブ切り替え
     function switchTab(tabIndex) {
       currentTab = tabIndex;
-      
+
       const tabs = document.querySelectorAll('.profile-tab');
       const contents = document.querySelectorAll('.profile-tab-content');
-      
+
       tabs.forEach((tab, index) => {
         if (index === tabIndex) {
           tab.classList.add('active');
@@ -5810,7 +5813,7 @@
           tab.classList.remove('active');
         }
       });
-      
+
       contents.forEach((content, index) => {
         if (index === tabIndex) {
           content.classList.add('active');
@@ -5823,13 +5826,13 @@
     // プロフィールデータを読み込む
     async function loadProfileData() {
       const studentId = localStorage.getItem('eqao_studentId');
-      
+
       try {
         const result = await apiGet('getProfile', { studentId });
-        
+
         if (result.success && result.profile) {
           const profile = result.profile;
-          
+
           // 基本情報
           document.getElementById('profileGrade').value = profile.grade || '';
           document.getElementById('profileSchool').value = profile.school || '';
@@ -5837,7 +5840,7 @@
           document.getElementById('profileEnglish').value = profile.english || '';
           document.getElementById('profileClub').value = profile.club || '';
           document.getElementById('profileClubLevel').value = profile.clubLevel || '';
-          
+
           // 性格・学習スタイル
           const personality = profile.personality || [];
           for (let i = 1; i <= 8; i++) {
@@ -5846,7 +5849,7 @@
               checkbox.checked = personality.includes(checkbox.value);
             }
           }
-          
+
           // 指導希望
           const teachingStyle = profile.teachingStyle || [];
           for (let i = 1; i <= 8; i++) {
@@ -5855,7 +5858,7 @@
               checkbox.checked = teachingStyle.includes(checkbox.value);
             }
           }
-          
+
           // 生活制約
           const constraints = profile.constraints || [];
           for (let i = 1; i <= 8; i++) {
@@ -5864,7 +5867,7 @@
               checkbox.checked = constraints.includes(checkbox.value);
             }
           }
-          
+
           // 備考
           document.getElementById('profileNotes').value = profile.notes || '';
         }
@@ -5877,16 +5880,16 @@
     async function saveProfile() {
       const studentId = localStorage.getItem('eqao_studentId');
       const studentName = localStorage.getItem('eqao_studentName');
-      
+
       // 必須項目チェック
       const grade = document.getElementById('profileGrade').value;
       const major = document.getElementById('profileMajor').value;
-      
+
       if (!grade || !major) {
         alert('学年と志望系統は必須項目です');
         return;
       }
-      
+
       // チェックボックスの値を取得
       const personality = [];
       for (let i = 1; i <= 8; i++) {
@@ -5895,7 +5898,7 @@
           personality.push(checkbox.value);
         }
       }
-      
+
       const teachingStyle = [];
       for (let i = 1; i <= 8; i++) {
         const checkbox = document.getElementById('teaching' + i);
@@ -5903,7 +5906,7 @@
           teachingStyle.push(checkbox.value);
         }
       }
-      
+
       const constraints = [];
       for (let i = 1; i <= 8; i++) {
         const checkbox = document.getElementById('constraint' + i);
@@ -5911,7 +5914,7 @@
           constraints.push(checkbox.value);
         }
       }
-      
+
       const profileData = {
         studentId: studentId,
         name: studentName,
@@ -5926,18 +5929,18 @@
         constraints: constraints,
         notes: document.getElementById('profileNotes').value
       };
-      
+
       try {
-       const response = await fetch(API_URL, {
-  method: 'POST',
-  body: JSON.stringify({
-    action: 'saveProfile',
-    ...profileData
-  })
-});
-        
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'saveProfile',
+            ...profileData
+          })
+        });
+
         const result = await response.json();
-        
+
         if (result.success) {
           alert('プロフィールを保存しました');
           closeProfileModal();
@@ -5951,37 +5954,37 @@
       }
     }
 
-   // プロフィールカードを更新
-async function loadProfileCard() {
-  const studentId = localStorage.getItem('eqao_studentId');
-  const studentName = localStorage.getItem('eqao_studentName');
-  
-  // 詳細ボタンの参照を取得
-  const detailButtons = document.querySelectorAll('.profile-btn');
-  let detailBtn = null;
-  detailButtons.forEach(btn => {
-    if (btn.textContent.includes('詳細')) {
-      detailBtn = btn;
-    }
-  });
-  
-  try {
-    const result = await apiGet('getProfile', { studentId });
-    
-    if (result.success && result.profile) {
-      const profile = result.profile;
-      
-      // プロフィール表示HTML作成
-      let html = `
+    // プロフィールカードを更新
+    async function loadProfileCard() {
+      const studentId = localStorage.getItem('eqao_studentId');
+      const studentName = localStorage.getItem('eqao_studentName');
+
+      // 詳細ボタンの参照を取得
+      const detailButtons = document.querySelectorAll('.profile-btn');
+      let detailBtn = null;
+      detailButtons.forEach(btn => {
+        if (btn.textContent.includes('詳細')) {
+          detailBtn = btn;
+        }
+      });
+
+      try {
+        const result = await apiGet('getProfile', { studentId });
+
+        if (result.success && result.profile) {
+          const profile = result.profile;
+
+          // プロフィール表示HTML作成
+          let html = `
   <div class="profile-basic-info">
     <div class="profile-avatar">👤</div>
     <div class="profile-name">${escapeHtml(studentName)}</div>
   </div>
 `;
-      
-      // 学年・志望系統
-      if (profile.grade || profile.major) {
-        html += `
+
+          // 学年・志望系統
+          if (profile.grade || profile.major) {
+            html += `
           <div class="profile-detail-row">
             <span class="material-icons profile-detail-icon">school</span>
             <div class="profile-detail-content">
@@ -5990,11 +5993,11 @@ async function loadProfileCard() {
             </div>
           </div>
         `;
-      }
-      
-      // 高校
-      if (profile.school) {
-        html += `
+          }
+
+          // 高校
+          if (profile.school) {
+            html += `
           <div class="profile-detail-row">
             <span class="material-icons profile-detail-icon">account_balance</span>
             <div class="profile-detail-content">
@@ -6003,11 +6006,11 @@ async function loadProfileCard() {
             </div>
           </div>
         `;
-      }
-      
-      // 英語資格
-      if (profile.english) {
-        html += `
+          }
+
+          // 英語資格
+          if (profile.english) {
+            html += `
           <div class="profile-detail-row">
             <span class="material-icons profile-detail-icon">emoji_events</span>
             <div class="profile-detail-content">
@@ -6016,11 +6019,11 @@ async function loadProfileCard() {
             </div>
           </div>
         `;
-      }
-      
-      // 部活動
-      if (profile.club) {
-        html += `
+          }
+
+          // 部活動
+          if (profile.club) {
+            html += `
           <div class="profile-detail-row">
             <span class="material-icons profile-detail-icon">sports_soccer</span>
             <div class="profile-detail-content">
@@ -6029,11 +6032,11 @@ async function loadProfileCard() {
             </div>
           </div>
         `;
-      }
-      
-      // 性格
-      if (profile.personality && profile.personality.length > 0) {
-        html += `
+          }
+
+          // 性格
+          if (profile.personality && profile.personality.length > 0) {
+            html += `
           <div class="profile-detail-row">
             <span class="material-icons profile-detail-icon">psychology</span>
             <div class="profile-detail-content">
@@ -6042,11 +6045,11 @@ async function loadProfileCard() {
             </div>
           </div>
         `;
-      }
-      
-      // 指導希望
-      if (profile.teachingStyle && profile.teachingStyle.length > 0) {
-        html += `
+          }
+
+          // 指導希望
+          if (profile.teachingStyle && profile.teachingStyle.length > 0) {
+            html += `
           <div class="profile-detail-row">
             <span class="material-icons profile-detail-icon">school</span>
             <div class="profile-detail-content">
@@ -6055,11 +6058,11 @@ async function loadProfileCard() {
             </div>
           </div>
         `;
-      }
-      
-      // 生活制約
-      if (profile.constraints && profile.constraints.length > 0) {
-        html += `
+          }
+
+          // 生活制約
+          if (profile.constraints && profile.constraints.length > 0) {
+            html += `
           <div class="profile-detail-row">
             <span class="material-icons profile-detail-icon">schedule</span>
             <div class="profile-detail-content">
@@ -6068,11 +6071,11 @@ async function loadProfileCard() {
             </div>
           </div>
         `;
-      }
-      
-      // 備考
-      if (profile.notes) {
-        html += `
+          }
+
+          // 備考
+          if (profile.notes) {
+            html += `
           <div class="profile-detail-row">
             <span class="material-icons profile-detail-icon">note</span>
             <div class="profile-detail-content">
@@ -6081,17 +6084,17 @@ async function loadProfileCard() {
             </div>
           </div>
         `;
-      }
-      
-      document.querySelector('.profile-body').innerHTML = html;
-      
-      // 詳細ボタンを有効化
-      if (detailBtn) {
-        detailBtn.disabled = false;
-      }
-    } else {
-      // プロフィール未登録
-      document.querySelector('.profile-body').innerHTML = `
+          }
+
+          document.querySelector('.profile-body').innerHTML = html;
+
+          // 詳細ボタンを有効化
+          if (detailBtn) {
+            detailBtn.disabled = false;
+          }
+        } else {
+          // プロフィール未登録
+          document.querySelector('.profile-body').innerHTML = `
         <div class="profile-avatar" id="profileAvatar">👤</div>
         <div class="profile-info">
           <div class="profile-name" id="profileName">未登録</div>
@@ -6100,34 +6103,34 @@ async function loadProfileCard() {
           </div>
         </div>
       `;
-      
-      if (detailBtn) {
-        detailBtn.disabled = true;
+
+          if (detailBtn) {
+            detailBtn.disabled = true;
+          }
+        }
+      } catch (error) {
+        console.error('プロフィール読み込みエラー:', error);
+        if (detailBtn) {
+          detailBtn.disabled = true;
+        }
       }
     }
-  } catch (error) {
-    console.error('プロフィール読み込みエラー:', error);
-    if (detailBtn) {
-      detailBtn.disabled = true;
-    }
-  }
-}
 
     // プロフィール詳細を表示
-async function viewProfileDetails() {
-  const studentId = localStorage.getItem('eqao_studentId');
-  
-  try {
-    const result = await apiGet('getProfile', { studentId });
-    
-    // プロフィールが存在しない場合は早期return
-    if (!result.success || !result.profile) {
-      return;
-    }
-    
-    if (result.success && result.profile) {
+    async function viewProfileDetails() {
+      const studentId = localStorage.getItem('eqao_studentId');
+
+      try {
+        const result = await apiGet('getProfile', { studentId });
+
+        // プロフィールが存在しない場合は早期return
+        if (!result.success || !result.profile) {
+          return;
+        }
+
+        if (result.success && result.profile) {
           const profile = result.profile;
-          
+
           let message = '【基本情報】\n';
           message += '学年: ' + (profile.grade || '未登録') + '\n';
           message += '高校: ' + (profile.school || '未登録') + '\n';
@@ -6135,27 +6138,27 @@ async function viewProfileDetails() {
           message += '英語資格: ' + (profile.english || '未登録') + '\n';
           message += '部活動: ' + (profile.club || '未登録') + '\n';
           message += '部活動量: ' + (profile.clubLevel || '未登録') + '\n\n';
-          
+
           if (profile.personality && profile.personality.length > 0) {
             message += '【性格・学習スタイル】\n';
             message += profile.personality.join(', ') + '\n\n';
           }
-          
+
           if (profile.teachingStyle && profile.teachingStyle.length > 0) {
             message += '【指導の希望】\n';
             message += profile.teachingStyle.join(', ') + '\n\n';
           }
-          
+
           if (profile.constraints && profile.constraints.length > 0) {
             message += '【生活上の制約】\n';
             message += profile.constraints.join(', ') + '\n\n';
           }
-          
+
           if (profile.notes) {
             message += '【備考】\n';
             message += profile.notes + '\n';
           }
-          
+
           alert(message);
         } else {
           alert('プロフィールが登録されていません');
@@ -6167,7 +6170,7 @@ async function viewProfileDetails() {
     }
 
     // ページ読み込み時にプロフィールカードを更新
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const loggedIn = localStorage.getItem('eqao_loggedIn');
       if (loggedIn === 'true') {
         loadProfileCard();
@@ -6229,12 +6232,12 @@ async function viewProfileDetails() {
     function openStudyModal() {
       document.getElementById('studyModalOverlay').classList.add('show');
       document.body.style.overflow = 'hidden';
-      
+
       // 今日の日付をデフォルト設定
       const today = new Date();
       const dateStr = today.toISOString().split('T')[0];
       document.getElementById('studyDate').value = dateStr;
-      
+
       // フォームをリセット
       document.getElementById('studyCategory').value = '';
       document.getElementById('studyHours').value = '';
@@ -6257,24 +6260,24 @@ async function viewProfileDetails() {
     // カテゴリー詳細を表示
     function showCategoryDetail() {
       const category = document.getElementById('studyCategory').value;
-      
+
       if (!category) {
         alert('カテゴリーを選択してください');
         return;
       }
-      
+
       const categoryInfo = studyCategories[category];
-      
+
       document.getElementById('categoryBadge').style.backgroundColor = categoryInfo.color;
       document.getElementById('categoryName').textContent = category;
-      
+
       const details = categoryInfo.details.split('\n');
       let html = '<ul>';
       details.forEach(detail => {
         html += '<li>' + escapeHtml(detail) + '</li>';
       });
       html += '</ul>';
-      
+
       document.getElementById('categoryContent').innerHTML = html;
       document.getElementById('categoryDetailPopup').classList.add('show');
     }
@@ -6291,33 +6294,33 @@ async function viewProfileDetails() {
       const category = document.getElementById('studyCategory').value;
       const hours = parseFloat(document.getElementById('studyHours').value);
       const memo = document.getElementById('studyMemo').value;
-      
+
       // 入力チェック
       if (!date || !category || !hours) {
         alert('日付、カテゴリー、時間は必須項目です');
         return;
       }
-      
+
       if (hours <= 0 || hours % 0.5 !== 0) {
         alert('時間は0.5時間単位で入力してください');
         return;
       }
-  
-  try {
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      body: JSON.stringify({
-        action: 'saveStudyLog',
-        studentId: studentId,
-        date: date,
-        category: category,
-        hours: hours,
-        memo: memo
-      })
-    });
-    
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'saveStudyLog',
+            studentId: studentId,
+            date: date,
+            category: category,
+            hours: hours,
+            memo: memo
+          })
+        });
+
         const result = await response.json();
-        
+
         if (result.success) {
           alert('学習記録を保存しました');
           closeStudyModal();
@@ -6343,10 +6346,10 @@ async function viewProfileDetails() {
       const dayOfWeek = today.getDay(); // 0=日曜, 1=月曜, ...
       const monday = new Date(today);
       monday.setDate(today.getDate() - dayOfWeek + 1 + (offset * 7));
-      
+
       const sunday = new Date(monday);
       sunday.setDate(monday.getDate() + 6);
-      
+
       return {
         start: monday.toISOString().split('T')[0],
         end: sunday.toISOString().split('T')[0],
@@ -6361,20 +6364,20 @@ async function viewProfileDetails() {
     // グラフを読み込む
     async function loadStudyChart() {
       const studentId = localStorage.getItem('eqao_studentId');
-      
+
       if (!studentId) {
         return;
       }
-      
+
       try {
         const weekRange = getWeekRange(currentWeekOffset);
-        
+
         const result = await apiGet('getStudyStats', {
           studentId: studentId,
           startDate: weekRange.start,
           endDate: weekRange.end
         });
-        
+
         if (result.success) {
           renderStudyChart(result.stats, result.totalHours, weekRange);
         } else {
@@ -6386,63 +6389,63 @@ async function viewProfileDetails() {
     }
 
     // ========================================
-// 記録管理機能
-// ========================================
+    // 記録管理機能
+    // ========================================
 
-// 記録管理モーダルを開く
-function openManageModal() {
-  document.getElementById('manageModalOverlay').classList.add('show');
-  document.body.style.overflow = 'hidden';
-  loadStudyLogs();
-}
-
-// 記録管理モーダルを閉じる
-function closeManageModal() {
-  document.getElementById('manageModalOverlay').classList.remove('show');
-  document.body.style.overflow = '';
-}
-
-// オーバーレイクリックで閉じる
-function closeManageModalOnOverlay(event) {
-  if (event.target === event.currentTarget) {
-    closeManageModal();
-  }
-}
-
-// 学習記録一覧を読み込む
-async function loadStudyLogs() {
-  const studentId = localStorage.getItem('eqao_studentId');
-  const modalBody = document.getElementById('manageModalBody');
-  
-  modalBody.innerHTML = '<div class="manage-loading">読み込み中...</div>';
-  
-  try {
-    const result = await apiGet('getStudyLogs', {
-      studentId: studentId,
-      days: 14 // 直近14日分
-    });
-    
-    if (result.success && result.logs && result.logs.length > 0) {
-      displayStudyLogs(result.logs);
-    } else {
-      modalBody.innerHTML = '<div class="manage-empty">記録がありません</div>';
+    // 記録管理モーダルを開く
+    function openManageModal() {
+      document.getElementById('manageModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+      loadStudyLogs();
     }
-  } catch (error) {
-    console.error('記録読み込みエラー:', error);
-    modalBody.innerHTML = '<div class="manage-empty">記録の読み込みに失敗しました</div>';
-  }
-}
 
-// 学習記録一覧を表示
-function displayStudyLogs(logs) {
-  const modalBody = document.getElementById('manageModalBody');
-  
-  let html = '';
-  
-  logs.forEach(log => {
-    const categoryColor = studyCategories[log.category]?.color || '#999';
-    
-    html += `
+    // 記録管理モーダルを閉じる
+    function closeManageModal() {
+      document.getElementById('manageModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    // オーバーレイクリックで閉じる
+    function closeManageModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeManageModal();
+      }
+    }
+
+    // 学習記録一覧を読み込む
+    async function loadStudyLogs() {
+      const studentId = localStorage.getItem('eqao_studentId');
+      const modalBody = document.getElementById('manageModalBody');
+
+      modalBody.innerHTML = '<div class="manage-loading">読み込み中...</div>';
+
+      try {
+        const result = await apiGet('getStudyLogs', {
+          studentId: studentId,
+          days: 14 // 直近14日分
+        });
+
+        if (result.success && result.logs && result.logs.length > 0) {
+          displayStudyLogs(result.logs);
+        } else {
+          modalBody.innerHTML = '<div class="manage-empty">記録がありません</div>';
+        }
+      } catch (error) {
+        console.error('記録読み込みエラー:', error);
+        modalBody.innerHTML = '<div class="manage-empty">記録の読み込みに失敗しました</div>';
+      }
+    }
+
+    // 学習記録一覧を表示
+    function displayStudyLogs(logs) {
+      const modalBody = document.getElementById('manageModalBody');
+
+      let html = '';
+
+      logs.forEach(log => {
+        const categoryColor = studyCategories[log.category]?.color || '#999';
+
+        html += `
       <div class="manage-log-item">
         <div class="manage-log-header">
           <div class="manage-log-date">${escapeHtml(log.date)}</div>
@@ -6466,263 +6469,263 @@ function displayStudyLogs(logs) {
         </div>
       </div>
     `;
-  });
-  
-  modalBody.innerHTML = html;
-}
+      });
 
-// 学習記録を編集
-function editStudyLog(rowIndex, date, category, hours, memo) {
-  // 既存の記録モーダルを閉じる
-  closeManageModal();
-  
-  // 編集モードで記録モーダルを開く
-  document.getElementById('studyModalOverlay').classList.add('show');
-  document.body.style.overflow = 'hidden';
-  
-  // フォームに値をセット
-  document.getElementById('studyDate').value = date;
-  document.getElementById('studyCategory').value = category;
-  document.getElementById('studyHours').value = hours;
-  document.getElementById('studyMemo').value = memo;
-  
-  // 保存ボタンを編集モードに変更
-  const saveBtn = document.querySelector('.study-modal-btn-save');
-  saveBtn.textContent = '更新';
-  saveBtn.onclick = function() {
-    updateStudyLog(rowIndex);
-  };
-}
+      modalBody.innerHTML = html;
+    }
 
-// 学習記録を更新
-async function updateStudyLog(rowIndex) {
-  const studentId = localStorage.getItem('eqao_studentId');
-  const date = document.getElementById('studyDate').value;
-  const category = document.getElementById('studyCategory').value;
-  const hours = parseFloat(document.getElementById('studyHours').value);
-  const memo = document.getElementById('studyMemo').value;
-  
-  // 入力チェック
-  if (!date || !category || !hours) {
-    alert('日付、カテゴリー、時間は必須項目です');
-    return;
-  }
-  
-  if (hours <= 0 || hours % 0.5 !== 0) {
-    alert('時間は0.5時間単位で入力してください');
-    return;
-  }
-  
-  try {
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      body: JSON.stringify({
-        action: 'updateStudyLog',
-        rowIndex: rowIndex,
-        studentId: studentId,
-        date: date,
-        category: category,
-        hours: hours,
-        memo: memo
-      })
-    });
-    
-    const result = await response.json();
-    
-    if (result.success) {
-      alert('学習記録を更新しました');
-      closeStudyModal();
-      
-      // 保存ボタンを元に戻す
+    // 学習記録を編集
+    function editStudyLog(rowIndex, date, category, hours, memo) {
+      // 既存の記録モーダルを閉じる
+      closeManageModal();
+
+      // 編集モードで記録モーダルを開く
+      document.getElementById('studyModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+
+      // フォームに値をセット
+      document.getElementById('studyDate').value = date;
+      document.getElementById('studyCategory').value = category;
+      document.getElementById('studyHours').value = hours;
+      document.getElementById('studyMemo').value = memo;
+
+      // 保存ボタンを編集モードに変更
       const saveBtn = document.querySelector('.study-modal-btn-save');
-      saveBtn.textContent = '保存';
-      saveBtn.onclick = saveStudyLog;
-      
-      // グラフを更新
-      loadStudyChart();
-    } else {
-      alert('更新に失敗しました: ' + (result.error || '不明なエラー'));
+      saveBtn.textContent = '更新';
+      saveBtn.onclick = function () {
+        updateStudyLog(rowIndex);
+      };
     }
-  } catch (error) {
-    console.error('更新エラー:', error);
-    alert('エラーが発生しました');
-  }
-}
 
-// 学習記録の削除確認
-function deleteStudyLogConfirm(rowIndex) {
-  if (confirm('この記録を削除しますか？')) {
-    deleteStudyLogExecute(rowIndex);
-  }
-}
+    // 学習記録を更新
+    async function updateStudyLog(rowIndex) {
+      const studentId = localStorage.getItem('eqao_studentId');
+      const date = document.getElementById('studyDate').value;
+      const category = document.getElementById('studyCategory').value;
+      const hours = parseFloat(document.getElementById('studyHours').value);
+      const memo = document.getElementById('studyMemo').value;
 
-// 学習記録を削除
-async function deleteStudyLogExecute(rowIndex) {
-  try {
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      body: JSON.stringify({
-        action: 'deleteStudyLog',
-        rowIndex: rowIndex
-      })
-    });
-    
-    const result = await response.json();
-    
-    if (result.success) {
-      alert('学習記録を削除しました');
-      
-      // 記録一覧を再読み込み
-      loadStudyLogs();
-      
-      // グラフを更新
-      loadStudyChart();
-    } else {
-      alert('削除に失敗しました: ' + (result.error || '不明なエラー'));
+      // 入力チェック
+      if (!date || !category || !hours) {
+        alert('日付、カテゴリー、時間は必須項目です');
+        return;
+      }
+
+      if (hours <= 0 || hours % 0.5 !== 0) {
+        alert('時間は0.5時間単位で入力してください');
+        return;
+      }
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'updateStudyLog',
+            rowIndex: rowIndex,
+            studentId: studentId,
+            date: date,
+            category: category,
+            hours: hours,
+            memo: memo
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert('学習記録を更新しました');
+          closeStudyModal();
+
+          // 保存ボタンを元に戻す
+          const saveBtn = document.querySelector('.study-modal-btn-save');
+          saveBtn.textContent = '保存';
+          saveBtn.onclick = saveStudyLog;
+
+          // グラフを更新
+          loadStudyChart();
+        } else {
+          alert('更新に失敗しました: ' + (result.error || '不明なエラー'));
+        }
+      } catch (error) {
+        console.error('更新エラー:', error);
+        alert('エラーが発生しました');
+      }
     }
-  } catch (error) {
-    console.error('削除エラー:', error);
-    alert('エラーが発生しました');
-  }
-}
+
+    // 学習記録の削除確認
+    function deleteStudyLogConfirm(rowIndex) {
+      if (confirm('この記録を削除しますか？')) {
+        deleteStudyLogExecute(rowIndex);
+      }
+    }
+
+    // 学習記録を削除
+    async function deleteStudyLogExecute(rowIndex) {
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'deleteStudyLog',
+            rowIndex: rowIndex
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert('学習記録を削除しました');
+
+          // 記録一覧を再読み込み
+          loadStudyLogs();
+
+          // グラフを更新
+          loadStudyChart();
+        } else {
+          alert('削除に失敗しました: ' + (result.error || '不明なエラー'));
+        }
+      } catch (error) {
+        console.error('削除エラー:', error);
+        alert('エラーが発生しました');
+      }
+    }
 
     // グラフを描画
-function renderStudyChart(stats, totalHours, weekRange) {
-  const canvas = document.getElementById('studyChart');
-  const ctx = canvas.getContext('2d');
-  
-  // ★修正: 強制サイズ設定を削除（ラッパーに任せる）
-  
-  // 既存のグラフを破棄
-  if (studyChart) {
-    studyChart.destroy();
-  }
-  
-  // メモデータを保持するオブジェクト
-  const memoData = {};
-  
-  // データセットを構築
-  const datasets = [];
-  const categories = Object.keys(studyCategories);
-  
-  categories.forEach(category => {
-    const data = weekRange.dates.map(date => {
-      const dateData = stats[date] && stats[date][category];
-      
-      // メモを保存
-      if (dateData) {
-        if (!memoData[date]) {
-          memoData[date] = {};
-        }
-        memoData[date][category] = {
-          hours: dateData.hours || dateData,  // 旧データ対応
-          memos: dateData.memos || []
-        };
-        return dateData.hours || dateData;
+    function renderStudyChart(stats, totalHours, weekRange) {
+      const canvas = document.getElementById('studyChart');
+      const ctx = canvas.getContext('2d');
+
+      // ★修正: 強制サイズ設定を削除（ラッパーに任せる）
+
+      // 既存のグラフを破棄
+      if (studyChart) {
+        studyChart.destroy();
       }
-      
-      return 0;
-    });
-    
-    datasets.push({
-      label: category,
-      data: data,
-      backgroundColor: studyCategories[category].color,
-      borderRadius: 4
-    });
-  });
-  
-  // ラベル（日付）
-  const labels = weekRange.dates.map(date => {
-    const d = new Date(date);
-    return (d.getMonth() + 1) + '/' + d.getDate();
-  });
-  
-  // グラフを作成
-studyChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: labels,
-    datasets: datasets
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false
-      },
-      tooltip: {
-        callbacks: {
-          // ツールチップをカスタマイズ
-          label: function(context) {
-            const category = context.dataset.label;
-            const hours = context.parsed.y;
-            const dateIndex = context.dataIndex;
-            const date = weekRange.dates[dateIndex];
-            
-            let label = category + ': ' + hours + '時間';
-            
-            // メモがあれば追加
-            if (memoData[date] && memoData[date][category]) {
-              const memos = memoData[date][category].memos;
-              if (memos.length > 0) {
-                label += '\n💬 ' + memos.join(', ');
+
+      // メモデータを保持するオブジェクト
+      const memoData = {};
+
+      // データセットを構築
+      const datasets = [];
+      const categories = Object.keys(studyCategories);
+
+      categories.forEach(category => {
+        const data = weekRange.dates.map(date => {
+          const dateData = stats[date] && stats[date][category];
+
+          // メモを保存
+          if (dateData) {
+            if (!memoData[date]) {
+              memoData[date] = {};
+            }
+            memoData[date][category] = {
+              hours: dateData.hours || dateData,  // 旧データ対応
+              memos: dateData.memos || []
+            };
+            return dateData.hours || dateData;
+          }
+
+          return 0;
+        });
+
+        datasets.push({
+          label: category,
+          data: data,
+          backgroundColor: studyCategories[category].color,
+          borderRadius: 4
+        });
+      });
+
+      // ラベル（日付）
+      const labels = weekRange.dates.map(date => {
+        const d = new Date(date);
+        return (d.getMonth() + 1) + '/' + d.getDate();
+      });
+
+      // グラフを作成
+      studyChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: datasets
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                // ツールチップをカスタマイズ
+                label: function (context) {
+                  const category = context.dataset.label;
+                  const hours = context.parsed.y;
+                  const dateIndex = context.dataIndex;
+                  const date = weekRange.dates[dateIndex];
+
+                  let label = category + ': ' + hours + '時間';
+
+                  // メモがあれば追加
+                  if (memoData[date] && memoData[date][category]) {
+                    const memos = memoData[date][category].memos;
+                    if (memos.length > 0) {
+                      label += '\n💬 ' + memos.join(', ');
+                    }
+                  }
+
+                  return label;
+                },
+                title: function (context) {
+                  return context[0].label;
+                }
+              },
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              padding: 12,
+              bodySpacing: 6,
+              bodyFont: {
+                size: 12
+              },
+              displayColors: true
+            }
+          },
+          scales: {
+            x: {
+              stacked: true,
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              stacked: true,
+              beginAtZero: true,
+              ticks: {
+                stepSize: 1,
+                callback: function (value) {
+                  return value + 'h';
+                }
               }
             }
-            
-            return label;
-          },
-          title: function(context) {
-            return context[0].label;
-          }
-        },
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        padding: 12,
-        bodySpacing: 6,
-        bodyFont: {
-          size: 12
-        },
-        displayColors: true
-      }
-    },
-    scales: {
-      x: {
-        stacked: true,
-        grid: {
-          display: false
-        }
-      },
-      y: {
-        stacked: true,
-        beginAtZero: true,
-        ticks: {
-          stepSize: 1,
-          callback: function(value) {
-            return value + 'h';
           }
         }
-      }
-    }
-  }
-});
-  
-  // タイトルを更新
-  const startDate = new Date(weekRange.start);
-  const endDate = new Date(weekRange.end);
-  const titleText = (startDate.getMonth() + 1) + '/' + startDate.getDate() + 
-                   ' - ' + (endDate.getMonth() + 1) + '/' + endDate.getDate();
-  document.getElementById('studyChartTitle').textContent = titleText;
+      });
 
-  
-  // 合計時間を更新
-  const weekLabel = currentWeekOffset === 0 ? '今週' : 
-                    currentWeekOffset < 0 ? Math.abs(currentWeekOffset) + '週前' : 
-                    currentWeekOffset + '週後';
-  document.getElementById('studyTotal').textContent = weekLabel + 'の合計: ' + totalHours.toFixed(1) + '時間';
-}
+      // タイトルを更新
+      const startDate = new Date(weekRange.start);
+      const endDate = new Date(weekRange.end);
+      const titleText = (startDate.getMonth() + 1) + '/' + startDate.getDate() +
+        ' - ' + (endDate.getMonth() + 1) + '/' + endDate.getDate();
+      document.getElementById('studyChartTitle').textContent = titleText;
+
+
+      // 合計時間を更新
+      const weekLabel = currentWeekOffset === 0 ? '今週' :
+        currentWeekOffset < 0 ? Math.abs(currentWeekOffset) + '週前' :
+          currentWeekOffset + '週後';
+      document.getElementById('studyTotal').textContent = weekLabel + 'の合計: ' + totalHours.toFixed(1) + '時間';
+    }
     // ページ読み込み時にグラフを表示
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const loggedIn = localStorage.getItem('eqao_loggedIn');
       if (loggedIn === 'true') {
         loadStudyChart();
@@ -6794,11 +6797,11 @@ studyChart = new Chart(ctx, {
       }
     }
 
-    
+
   </script>
   <script src="js/nav-menu.js"></script>
 
-<!-- プロフィール編集モーダル -->
+  <!-- プロフィール編集モーダル -->
   <div class="profile-modal-overlay" id="profileModalOverlay" onclick="closeProfileModalOnOverlay(event)">
     <div class="profile-modal" onclick="event.stopPropagation()">
       <div class="profile-modal-header">
@@ -6872,8 +6875,8 @@ studyChart = new Chart(ctx, {
         <!-- タブ2: 性格・学習スタイル -->
         <div class="profile-tab-content" data-tab="1">
           <div class="profile-tab-description">
-    当てはまるものを選択してください（複数選択可）
-  </div>
+            当てはまるものを選択してください（複数選択可）
+          </div>
           <div class="profile-checkbox-group">
             <div class="profile-checkbox-item">
               <input type="checkbox" id="personality1" value="即答型">
@@ -6912,9 +6915,9 @@ studyChart = new Chart(ctx, {
 
         <!-- タブ3: 指導の希望 -->
         <div class="profile-tab-content" data-tab="2">
-            <div class="profile-tab-description">
-    希望する指導スタイルを選択してください（複数選択可）
-  </div>
+          <div class="profile-tab-description">
+            希望する指導スタイルを選択してください（複数選択可）
+          </div>
           <div class="profile-checkbox-group">
             <div class="profile-checkbox-item">
               <input type="checkbox" id="teaching1" value="厳しめの指導">
@@ -6953,9 +6956,9 @@ studyChart = new Chart(ctx, {
 
         <!-- タブ4: 生活上の制約 -->
         <div class="profile-tab-content" data-tab="3">
-           <div class="profile-tab-description">
-    当てはまるものを選択してください（複数選択可）
-  </div>
+          <div class="profile-tab-description">
+            当てはまるものを選択してください（複数選択可）
+          </div>
           <div class="profile-checkbox-group">
             <div class="profile-checkbox-item">
               <input type="checkbox" id="constraint1" value="夜の授業が難しい">
@@ -6996,7 +6999,8 @@ studyChart = new Chart(ctx, {
         <div class="profile-tab-content" data-tab="4">
           <div class="profile-form-group">
             <label class="profile-form-label">その他、配慮してほしいこと</label>
-            <textarea id="profileNotes" class="profile-form-textarea" placeholder="例：家庭の事情、健康面、特に配慮してほしいことなど"></textarea>
+            <textarea id="profileNotes" class="profile-form-textarea"
+              placeholder="例：家庭の事情、健康面、特に配慮してほしいことなど"></textarea>
           </div>
         </div>
       </div>
@@ -7077,22 +7081,23 @@ studyChart = new Chart(ctx, {
   <!-- Chart.js 読み込み -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 
-<!-- 記録管理モーダル -->
-<div class="manage-modal-overlay" id="manageModalOverlay" onclick="closeManageModalOnOverlay(event)">
-  <div class="manage-modal" onclick="event.stopPropagation()">
-    <div class="manage-modal-header">
-      <span class="material-icons">edit_note</span>
-      <h2>学習記録を管理</h2>
-      <button class="manage-modal-close" onclick="closeManageModal()">
-        <span class="material-icons">close</span>
-      </button>
-    </div>
-    
-    <div class="manage-modal-body" id="manageModalBody">
-      <div class="manage-loading">読み込み中...</div>
+  <!-- 記録管理モーダル -->
+  <div class="manage-modal-overlay" id="manageModalOverlay" onclick="closeManageModalOnOverlay(event)">
+    <div class="manage-modal" onclick="event.stopPropagation()">
+      <div class="manage-modal-header">
+        <span class="material-icons">edit_note</span>
+        <h2>学習記録を管理</h2>
+        <button class="manage-modal-close" onclick="closeManageModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+
+      <div class="manage-modal-body" id="manageModalBody">
+        <div class="manage-loading">読み込み中...</div>
+      </div>
     </div>
   </div>
-</div>
-  
+
 </body>
+
 </html>
