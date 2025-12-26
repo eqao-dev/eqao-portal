@@ -684,6 +684,128 @@
       margin-top: 8px;
     }
 
+    /* 感謝の手紙セクション */
+    .ceremony-section {
+      background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+      border-radius: 20px;
+      padding: 28px 24px;
+      margin-bottom: 24px;
+      border: 2px solid #ffd54f;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ceremony-section::before {
+      content: '✉';
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 80px;
+      opacity: 0.1;
+    }
+
+    .ceremony-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .ceremony-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #ff8f00 0%, #ffa726 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .ceremony-icon .material-icons {
+      font-size: 24px;
+      color: white;
+    }
+
+    .ceremony-header-text {
+      flex: 1;
+    }
+
+    .ceremony-label {
+      font-size: 11px;
+      color: #ff8f00;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+
+    .ceremony-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #e65100;
+    }
+
+    .ceremony-body {
+      color: #5d4037;
+      line-height: 1.9;
+      font-size: 14px;
+    }
+
+    .ceremony-body p {
+      margin-bottom: 16px;
+    }
+
+    .ceremony-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .ceremony-highlight {
+      background: rgba(255, 255, 255, 0.7);
+      border-left: 4px solid #ff8f00;
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .ceremony-highlight-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #e65100;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ceremony-highlight-title .material-icons {
+      font-size: 18px;
+    }
+
+    .ceremony-highlight-text {
+      font-size: 14px;
+      color: #5d4037;
+      line-height: 1.8;
+    }
+
+    .ceremony-philosophy {
+      background: linear-gradient(135deg, #e65100 0%, #ff8f00 100%);
+      color: white;
+      padding: 20px 24px;
+      border-radius: 16px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .ceremony-philosophy-text {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.8;
+    }
+
+    .ceremony-philosophy-text strong {
+      font-size: 16px;
+    }
+
     @media (max-width: 480px) {
       .header-title {
         font-size: 15px;
@@ -696,6 +818,14 @@
       .hero-section::before,
       .hero-section::after {
         font-size: 24px;
+      }
+
+      .ceremony-section {
+        padding: 24px 20px;
+      }
+
+      .ceremony-title {
+        font-size: 16px;
       }
     }
   </style>
@@ -786,6 +916,45 @@
         大学入学はゴールではなく、未来への大きなスタートです。<br>
         努力を支えてくださったご家族への感謝を形にし、<br>
         EQAOで共に頑張ってきた仲間と次のステージに進む準備を整えましょう。
+      </div>
+    </div>
+
+    <!-- 冒頭セレモニー：感謝の手紙 -->
+    <div class="ceremony-section">
+      <div class="ceremony-header">
+        <div class="ceremony-icon">
+          <span class="material-icons">mail</span>
+        </div>
+        <div class="ceremony-header-text">
+          <div class="ceremony-label">◆ 冒頭セレモニー</div>
+          <h2 class="ceremony-title">感謝の手紙</h2>
+        </div>
+      </div>
+      <div class="ceremony-body">
+        <p>
+          EQAO PARTYでは、受験期間を支えてくれた大切な人へ、<br>
+          一人ずつ手書きの手紙を書き、その想いを言葉としてしっかり伝える時間を設けます。
+        </p>
+        <div class="ceremony-highlight">
+          <div class="ceremony-highlight-title">
+            <span class="material-icons">favorite</span>
+            届けたい想い
+          </div>
+          <div class="ceremony-highlight-text">
+            受験を共に歩んだ家族、友人、メンター、先生––<br>
+            その誰かに向けて、日頃は照れくさくて言えなかった感謝を、丁寧に届けてほしい。
+          </div>
+        </div>
+        <p>
+          これは<strong>"合格のその先へ"</strong>進むための大切な儀式であり、<br>
+          支えてくれた人へ還元し、次のステージに向かう心の準備となる場でもあります。
+        </p>
+        <div class="ceremony-philosophy">
+          <div class="ceremony-philosophy-text">
+            EQAOは、<strong>感謝を言葉にできる人こそ強く、優しく成長できる</strong>と考えています。<br>
+            その第一歩として、この手紙の時間を大切にしていきます。
+          </div>
+        </div>
       </div>
     </div>
 
