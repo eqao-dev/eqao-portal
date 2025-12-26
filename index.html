@@ -2392,6 +2392,36 @@
       margin: 8px 0;
     }
 
+    .header-faq-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .header-faq-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .header-faq-btn .material-icons {
+      font-size: 18px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+
     .hamburger-btn {
       display: flex;
       align-items: center;
@@ -2403,7 +2433,6 @@
       border-radius: 50%;
       color: white;
       cursor: pointer;
-      margin-left: auto;
     }
 
     .hamburger-btn:hover {
@@ -4342,6 +4371,21 @@
 
       <a href="password-reset.html"
         style="display:block; text-align:center; margin-top:16px; color:#1a237e; font-size:13px; text-decoration:none;">パスワードを忘れた方</a>
+
+      <!-- 保護者向け案内 -->
+      <div style="margin-top:24px; padding-top:20px; border-top:1px solid #e0e0e0;">
+        <p style="font-size:12px; color:#666; margin-bottom:12px; line-height:1.6;">
+          <span class="material-icons"
+            style="font-size:16px; vertical-align:middle; margin-right:4px; color:#1a237e;">family_restroom</span>
+          保護者の方も、お子様と同じID・パスワードでログインいただけます
+        </p>
+        <a href="parent-guide.html"
+          style="display:inline-flex; align-items:center; gap:4px; color:#1a237e; font-size:13px; font-weight:500; text-decoration:none;">
+          保護者の方へ
+          <span class="material-icons" style="font-size:16px;">chevron_right</span>
+        </a>
+      </div>
+
     </div>
   </div>
 
@@ -4353,9 +4397,15 @@
       <h1>EQAO PORTAL</h1>
       <p class="subtitle">塾生専用ページ</p>
     </div>
-    <button class="hamburger-btn" onclick="openNav()">
-      <span class="material-icons">menu</span>
-    </button>
+    <div class="header-right">
+      <a href="faq.html" class="header-faq-btn">
+        <span class="material-icons">help_outline</span>
+        <span>FAQ</span>
+      </a>
+      <button class="hamburger-btn" onclick="openNav()">
+        <span class="material-icons">menu</span>
+      </button>
+    </div>
   </header>
 
   <div class="container">
@@ -4472,7 +4522,7 @@
       </div>
     </div>
 
-  
+
 
     <div class="news-section">
       <div class="news-header">
@@ -4599,22 +4649,22 @@
         <span class="material-icons">info</span>
         <span>EQAO情報</span>
       </div>
+      <a href="parent-guide.html" class="quick-access-item teal">
+        <span class="material-icons">family_restroom</span>
+        <span>保護者の方へ</span>
+      </a>
       <a href="forms.html" class="quick-access-item amber">
         <span class="material-icons">list_alt</span>
         <span>各種申し込み</span>
-      </a>
-      <a href="faq.html" class="quick-access-item teal">
-        <span class="material-icons">help</span>
-        <span>よくある質問</span>
-      </a>
-      <a href="https://forms.gle/ijJqayjPRZZsQY5r9" target="_blank" class="quick-access-item red">
-        <span class="material-icons">priority_high</span>
-        <span>緊急連絡</span>
       </a>
       <div class="quick-access-item purple" onclick="openMeetingModal()">
         <span class="material-icons">event</span>
         <span>面談予約</span>
       </div>
+      <a href="https://forms.gle/ijJqayjPRZZsQY5r9" target="_blank" class="quick-access-item red">
+        <span class="material-icons">priority_high</span>
+        <span>緊急連絡</span>
+      </a>
     </div>
 
     <!-- LINEモーダル -->

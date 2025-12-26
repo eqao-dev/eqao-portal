@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +42,7 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -50,7 +51,7 @@
     }
 
     .back-btn:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
     }
 
     .header-title {
@@ -84,7 +85,9 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     /* カテゴリ一覧 */
@@ -125,7 +128,7 @@
       align-items: center;
       gap: 12px;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       transition: all 0.2s;
     }
 
@@ -153,16 +156,45 @@
       color: white;
     }
 
-    .parent-icon.color-blue { background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%); }
-    .parent-icon.color-cyan { background: linear-gradient(135deg, #00838f 0%, #4dd0e1 100%); }
-    .parent-icon.color-purple { background: linear-gradient(135deg, #6a1b9a 0%, #ab47bc 100%); }
-    .parent-icon.color-amber { background: linear-gradient(135deg, #ff8f00 0%, #ffc107 100%); }
-    .parent-icon.color-orange { background: linear-gradient(135deg, #e65100 0%, #ff9800 100%); }
-    .parent-icon.color-green { background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%); }
-    .parent-icon.color-pink { background: linear-gradient(135deg, #c2185b 0%, #f06292 100%); }
-    .parent-icon.color-red { background: linear-gradient(135deg, #c62828 0%, #ef5350 100%); }
-    .parent-icon.color-indigo { background: linear-gradient(135deg, #283593 0%, #5c6bc0 100%); }
-    .parent-icon.color-teal { background: linear-gradient(135deg, #00695c 0%, #26a69a 100%); }
+    .parent-icon.color-blue {
+      background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%);
+    }
+
+    .parent-icon.color-cyan {
+      background: linear-gradient(135deg, #00838f 0%, #4dd0e1 100%);
+    }
+
+    .parent-icon.color-purple {
+      background: linear-gradient(135deg, #6a1b9a 0%, #ab47bc 100%);
+    }
+
+    .parent-icon.color-amber {
+      background: linear-gradient(135deg, #ff8f00 0%, #ffc107 100%);
+    }
+
+    .parent-icon.color-orange {
+      background: linear-gradient(135deg, #e65100 0%, #ff9800 100%);
+    }
+
+    .parent-icon.color-green {
+      background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);
+    }
+
+    .parent-icon.color-pink {
+      background: linear-gradient(135deg, #c2185b 0%, #f06292 100%);
+    }
+
+    .parent-icon.color-red {
+      background: linear-gradient(135deg, #c62828 0%, #ef5350 100%);
+    }
+
+    .parent-icon.color-indigo {
+      background: linear-gradient(135deg, #283593 0%, #5c6bc0 100%);
+    }
+
+    .parent-icon.color-teal {
+      background: linear-gradient(135deg, #00695c 0%, #26a69a 100%);
+    }
 
     .parent-name {
       flex: 1;
@@ -199,7 +231,7 @@
       background: white;
       border-radius: 0 0 12px 12px;
       padding: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .parent-content.open {
@@ -303,7 +335,7 @@
       border-radius: 12px;
       padding: 16px;
       margin-bottom: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .quiz-progress {
@@ -337,7 +369,7 @@
       background: white;
       border-radius: 16px;
       padding: 24px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
     }
 
@@ -495,7 +527,7 @@
       border-radius: 20px;
       padding: 32px 24px;
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       margin-bottom: 24px;
     }
 
@@ -606,7 +638,7 @@
       border-radius: 12px;
       padding: 16px;
       margin-bottom: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .review-item.correct {
@@ -653,6 +685,7 @@
     }
   </style>
 </head>
+
 <body>
   <header class="header">
     <button class="back-btn" onclick="goBack()">
@@ -798,7 +831,7 @@
     async function init() {
       const loggedIn = localStorage.getItem('eqao_loggedIn');
       const studentId = localStorage.getItem('eqao_studentId');
-      
+
       if (!loggedIn || !studentId) {
         window.location.href = 'index.html';
         return;
@@ -846,7 +879,8 @@
 
     function loadCheckState() {
       try {
-        const saved = localStorage.getItem('eqao_checkState_v2');
+        const studentId = localStorage.getItem('eqao_studentId') || 'guest';
+        const saved = localStorage.getItem(`eqao_checklist_${studentId}_state`);
         if (saved) {
           checkState = JSON.parse(saved);
         }
@@ -874,7 +908,8 @@
             checkState[category] = serverState[category];
           }
           // ローカルにも保存
-          localStorage.setItem('eqao_checkState_v2', JSON.stringify(checkState));
+          const studentId = localStorage.getItem('eqao_studentId') || 'guest';
+          localStorage.setItem(`eqao_checklist_${studentId}_state`, JSON.stringify(checkState));
         }
       } catch (error) {
         console.error('サーバーからの読み込みエラー:', error);
@@ -899,7 +934,7 @@
 
         // この大カテゴリに問題がある中カテゴリを取得
         const quizMidCats = quizData[parent] ? quizData[parent].mid_categories : [];
-        
+
         // 受験可能な中カテゴリ数をカウント
         let unlockedCount = 0;
         const midCatDetails = [];
@@ -1173,9 +1208,9 @@
         item.innerHTML = `
           <div class="review-question">Q${index + 1}. ${escapeHtml(answer.question)}</div>
           <div class="review-answer ${answer.isCorrect ? 'correct' : 'incorrect'}">
-            ${answer.isCorrect ? 
-              '<span>✓ 正解</span>' : 
-              '<span>✗ 不正解</span>'}
+            ${answer.isCorrect ?
+            '<span>✓ 正解</span>' :
+            '<span>✗ 不正解</span>'}
           </div>
         `;
         reviewList.appendChild(item);
@@ -1196,13 +1231,13 @@
       document.getElementById('categoryView').style.display = 'block';
       document.getElementById('quizView').style.display = 'none';
       document.getElementById('resultView').style.display = 'none';
-      
+
       // スプレッドシートから最新のチェック状態を取得
       await loadFromSpreadsheet();
-      
+
       // カテゴリ一覧を再描画
       displayCategories();
-      
+
       // 以前開いていた大カテゴリを再度開く
       openParents.forEach(parent => {
         const section = document.querySelector(`.parent-section[data-parent="${parent}"]`);
@@ -1266,4 +1301,5 @@
   </script>
   <script src="js/nav-menu.js"></script>
 </body>
+
 </html>

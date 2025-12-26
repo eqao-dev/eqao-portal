@@ -31,8 +31,8 @@ const NAV_MENU_STRUCTURE = [
   {
     category: '各種申し込み・連絡',
     items: [
+      { href: 'parent-guide.html', icon: 'family_restroom', iconColor: 'icon-teal', label: '保護者の方へ' },
       { href: 'forms.html', icon: 'list_alt', iconColor: 'icon-amber', label: '各種申し込み' },
-      { href: 'faq.html', icon: 'help', iconColor: 'icon-teal', label: 'よくある質問' },
       { href: 'https://forms.gle/ijJqayjPRZZsQY5r9', icon: 'priority_high', iconColor: 'icon-red', label: '緊急連絡', external: true }
     ]
   },

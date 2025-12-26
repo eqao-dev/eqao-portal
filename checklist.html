@@ -62,18 +62,6 @@
       flex: 1;
     }
 
-    .header-user {
-      font-size: 12px;
-      opacity: 0.9;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .header-user .material-icons {
-      font-size: 16px;
-    }
-
     .menu-btn {
       display: flex;
       align-items: center;
@@ -379,37 +367,46 @@
       opacity: 1;
     }
 
-    /* 確認テストリンク（控えめ） */
+    /* 確認テストリンク（目立つボタン風） */
     .progress-quiz-link {
       margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.15);
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
-      transition: opacity 0.2s;
+      transition: all 0.2s;
+      border: 1px solid rgba(255,255,255,0.2);
     }
 
     .progress-quiz-link:hover {
-      opacity: 0.8;
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-2px);
     }
 
     .progress-quiz-left {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      opacity: 0.9;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 600;
     }
 
     .progress-quiz-left .material-icons {
-      font-size: 18px;
+      font-size: 22px;
     }
 
     .progress-quiz-arrow {
-      font-size: 18px;
-      opacity: 0.7;
+      font-size: 20px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* レスポンシブ対応 */
@@ -708,6 +705,9 @@
       padding: 20px;
       margin-bottom: 16px;
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 72px;
+      z-index: 50;
     }
 
     .detail-breadcrumb {
@@ -852,52 +852,87 @@
       flex-shrink: 0;
     }
 
-    /* 完了時のお祝いメッセージ */
-    .completion-message {
-      background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
-      border: 2px solid #4caf50;
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 16px;
+    /* 下部固定の完了バー */
+    .completion-bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+      padding: 16px 20px;
+      padding-bottom: calc(16px + env(safe-area-inset-bottom));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+      z-index: 90;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .completion-bottom-bar.show {
+      transform: translateY(0);
+    }
+
+    .completion-bottom-content {
       display: flex;
       align-items: center;
       gap: 12px;
+      color: white;
     }
 
-    .completion-message.hidden {
-      display: none;
-    }
-
-    .completion-icon {
-      width: 40px;
-      height: 40px;
-      background: #4caf50;
+    .completion-bottom-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.2);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
     }
 
-    .completion-icon .material-icons {
-      color: white;
-      font-size: 24px;
+    .completion-bottom-icon .material-icons {
+      font-size: 20px;
     }
 
-    .completion-text {
-      flex: 1;
+    .completion-bottom-text {
+      font-size: 14px;
+      font-weight: 600;
     }
 
-    .completion-title {
+    .completion-bottom-btn {
+      background: white;
+      color: #2e7d32;
+      border: none;
+      border-radius: 24px;
+      padding: 12px 24px;
       font-size: 14px;
       font-weight: 700;
-      color: #2e7d32;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      font-family: inherit;
     }
 
-    .completion-subtitle {
-      font-size: 12px;
-      color: #558b2f;
-      margin-top: 2px;
+    .completion-bottom-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .completion-bottom-btn .material-icons {
+      font-size: 20px;
+    }
+
+    body.has-completion-bar {
+      padding-bottom: 100px;
+    }
+
+    /* 古い完了メッセージは非表示 */
+    .completion-message {
+      display: none;
     }
 
     /* 確認テストバナー */
@@ -1138,10 +1173,6 @@
     <button class="help-btn" onclick="openHelpModal()">
       <span class="material-icons">help_outline</span>
     </button>
-    <div class="header-user">
-      <span class="material-icons">person</span>
-      <span id="navUserName"></span>
-    </div>
     <button class="hamburger-btn" onclick="openNav()">
       <span class="material-icons">menu</span>
     </button>
@@ -1237,6 +1268,20 @@
   <div id="syncStatus" class="sync-status">
     <span class="material-icons">sync</span>
     <span id="syncMessage">同期中...</span>
+  </div>
+
+  <!-- 下部固定の完了バー -->
+  <div id="completionBottomBar" class="completion-bottom-bar">
+    <div class="completion-bottom-content">
+      <div class="completion-bottom-icon">
+        <span class="material-icons">celebration</span>
+      </div>
+      <div class="completion-bottom-text">全て完了しました！</div>
+    </div>
+    <button class="completion-bottom-btn" onclick="window.location.href='quiz.html'">
+      <span class="material-icons">quiz</span>
+      確認テストを受ける
+    </button>
   </div>
 
   <!-- ヘルプモーダル -->
@@ -1679,11 +1724,13 @@
       document.getElementById('detailProgressText').textContent = checked + ' / ' + items.length;
 
       // 完了メッセージ
-      const completionMsg = document.getElementById('completionMessage');
+      const bottomBar = document.getElementById('completionBottomBar');
       if (isComplete) {
-        completionMsg.classList.remove('hidden');
+        bottomBar.classList.add('show');
+        document.body.classList.add('has-completion-bar');
       } else {
-        completionMsg.classList.add('hidden');
+        bottomBar.classList.remove('show');
+        document.body.classList.remove('has-completion-bar');
       }
 
       // 項目一覧
@@ -1766,11 +1813,14 @@
       document.getElementById('detailProgressFill').style.width = percent + '%';
       document.getElementById('detailProgressText').textContent = checked + ' / ' + items.length;
 
-      const completionMsg = document.getElementById('completionMessage');
+      // 下部固定バーの表示制御
+      const bottomBar = document.getElementById('completionBottomBar');
       if (isComplete) {
-        completionMsg.classList.remove('hidden');
+        bottomBar.classList.add('show');
+        document.body.classList.add('has-completion-bar');
       } else {
-        completionMsg.classList.add('hidden');
+        bottomBar.classList.remove('show');
+        document.body.classList.remove('has-completion-bar');
       }
     }
 
@@ -1793,6 +1843,9 @@
     // ============================================
     function goBack() {
       if (currentView === 'detail') {
+        // 完了バーを非表示
+        document.getElementById('completionBottomBar').classList.remove('show');
+        document.body.classList.remove('has-completion-bar');
         displayProgress();
       } else {
         window.location.href = 'index.html?t=' + new Date().getTime();
