@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>推奨イベント一覧 - EQAO PORTAL</title>
+  <link rel="apple-touch-icon" href="/logo.png">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      flex: 1;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    .intro-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .intro-card h2 {
+      font-size: 16px;
+      color: #1a237e;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .intro-card h2 .material-icons {
+      font-size: 20px;
+      color: #ff9800;
+    }
+
+    .intro-card p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .intro-card .notice {
+      background: #fff8e1;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 12px;
+      color: #f57c00;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .intro-card .notice .material-icons {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* 検索・フィルター */
+    .search-filter-section {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f5f7fa;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+    }
+
+    .search-box .material-icons {
+      color: #888;
+      font-size: 20px;
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      background: none;
+      font-size: 14px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .search-box input::placeholder {
+      color: #aaa;
+    }
+
+    .category-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .category-btn {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid #e0e0e0;
+      background: white;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .category-btn:hover {
+      border-color: #1a237e;
+      color: #1a237e;
+    }
+
+    .category-btn.active {
+      background: #1a237e;
+      color: white;
+      border-color: #1a237e;
+    }
+
+    /* イベントカウント */
+    .event-count {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .event-count strong {
+      color: #1a237e;
+    }
+
+    /* イベントリスト */
+    .event-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .event-item {
+      background: white;
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .event-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(26, 35, 126, 0.15);
+      border-color: #c5cae9;
+    }
+
+    .event-number {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .event-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .event-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .event-category {
+      font-size: 11px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .event-arrow {
+      color: #bbb;
+      flex-shrink: 0;
+    }
+
+    .event-item:hover .event-arrow {
+      color: #1a237e;
+    }
+
+    /* 外部リンクアイコン */
+    .external-icon {
+      font-size: 16px !important;
+      color: #888;
+    }
+
+    /* 空の状態 */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #888;
+    }
+
+    .empty-state .material-icons {
+      font-size: 48px;
+      color: #ddd;
+      margin-bottom: 12px;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+    }
+
+    /* スクロールトップボタン */
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(26, 35, 126, 0.3);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      z-index: 50;
+    }
+
+    .scroll-top-btn.show {
+      display: flex;
+    }
+
+    .scroll-top-btn:hover {
+      transform: scale(1.1);
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 24px 32px;
+      }
+
+      .event-item {
+        padding: 16px 20px;
+      }
+
+      .event-title {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <button class="back-btn" onclick="history.back()">
+      <span class="material-icons">arrow_back</span>
+    </button>
+    <div class="header-title">推奨イベント一覧</div>
+  </header>
+
+  <div class="container">
+    <div class="intro-card">
+      <h2>
+        <span class="material-icons">emoji_events</span>
+        EQAO推奨イベント
+      </h2>
+      <p>
+        総合型選抜に活用できるコンテスト・プログラムの一覧です。<br>
+        クリックして詳細を確認し、興味のあるものには積極的に参加しましょう。<br>
+        対策・準備が必要な場合は塾で行います。
+      </p>
+      <div class="notice">
+        <span class="material-icons">info</span>
+        <span>URLが古くなっている場合があります。リンク切れの場合はイベント名で検索してください。</span>
+      </div>
+    </div>
+
+    <div class="search-filter-section">
+      <div class="search-box">
+        <span class="material-icons">search</span>
+        <input type="text" id="searchInput" placeholder="イベント名で検索..." oninput="filterEvents()">
+      </div>
+      <div class="category-filter">
+        <button class="category-btn active" data-category="all" onclick="setCategory('all')">すべて</button>
+        <button class="category-btn" data-category="contest" onclick="setCategory('contest')">コンテスト</button>
+        <button class="category-btn" data-category="program" onclick="setCategory('program')">プログラム</button>
+        <button class="category-btn" data-category="olympiad" onclick="setCategory('olympiad')">オリンピック</button>
+        <button class="category-btn" data-category="essay" onclick="setCategory('essay')">作文・小論文</button>
+        <button class="category-btn" data-category="english" onclick="setCategory('english')">英語系</button>
+        <button class="category-btn" data-category="business" onclick="setCategory('business')">ビジネス</button>
+      </div>
+    </div>
+
+    <div class="event-count" id="eventCount">
+      全 <strong>119</strong> 件のイベント
+    </div>
+
+    <div class="event-list" id="eventList">
+      <!-- イベントはJavaScriptで動的に生成 -->
+    </div>
+
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <span class="material-icons">search_off</span>
+      <p>該当するイベントが見つかりません</p>
+    </div>
+  </div>
+
+  <button class="scroll-top-btn" id="scrollTopBtn" onclick="scrollToTop()">
+    <span class="material-icons">keyboard_arrow_up</span>
+  </button>
+
+  <script>
+    // イベントデータ（公式サイトへの直接リンク）
+    const events = [
+      { no: 1, name: "プレゼン大会 (EQAO主催）", category: "contest", url: "https://www.change-future.jp" },
+      { no: 2, name: "高校生まちづくりコンテスト", category: "contest", url: "https://www.tamagawa.ac.jp/college_of_tourism/machi_contest2023/index.html" },
+      { no: 3, name: "マイプロジェクト", category: "program", url: "https://myprojects.jp/" },
+      { no: 4, name: "Stanford e-Japan", category: "program", url: "https://spice.fsi.stanford.edu/fellowship/stanford-e-japan" },
+      { no: 5, name: "日本言語学オリンピック", category: "olympiad", url: "https://iolingjapan.org/" },
+      { no: 6, name: "高校生けんちくコンテスト（日本工学院）", category: "contest", url: "https://www.neec.ac.jp/contest/kentiku/" },
+      { no: 7, name: "立教経営 1-day Passport", category: "program", url: "https://cob.rikkyo.ac.jp/news/2023/usirlo0000001k1i.html" },
+      { no: 8, name: "SDGs「誰ひとり取り残さない」作文・小論文コンテスト", category: "essay", url: "https://nogezaka-glocal.com/dh4/" },
+      { no: 9, name: "地理オリンピック", category: "olympiad", url: "https://japan-igeo.com/" },
+      { no: 10, name: "Change Maker Awards（英語プレゼンコンテスト）", category: "english", url: "https://esibla.or.jp/change-maker-awards/about" },
+      { no: 11, name: "JMMUN（Japan Metropolitan Model United Nations）", category: "english", url: "http://jmmun.org/jpn/" },
+      { no: 12, name: "マイナビキャリア甲子園", category: "business", url: "https://careerkoshien.mynavi.jp/" },
+      { no: 13, name: "YouTube甲子園", category: "contest", url: "https://youtubekoshien.k-manabonect.co.jp/" },
+      { no: 14, name: "高校生「ものづくり・ことづくり」プランコンテスト（静岡理工科大学）", category: "business", url: "https://www.sist.ac.jp/news/monokoto.html" },
+      { no: 15, name: "情報オリンピック", category: "olympiad", url: "https://www.ioi-jp.org/" },
+      { no: 16, name: "高校生いすデザインコンテスト（日本工学院）", category: "contest", url: "https://www.neec.ac.jp/contest/chair_design/" },
+      { no: 17, name: "Bunri Creative Award 地域創造のための高校生コンテスト（名古屋文理大学）", category: "contest", url: "https://www.nagoya-bunri.ac.jp/news/post-13943/" },
+      { no: 18, name: "日本学生科学賞", category: "contest", url: "https://event.yomiuri.co.jp/jssa/about" },
+      { no: 19, name: "JSEC（高校生・高専生科学技術チャレンジ）", category: "contest", url: "https://manabu.asahi.com/jsec/" },
+      { no: 20, name: "Deutsche Haiku Kyoto", category: "essay", url: "https://deutschehaikukyoto.com/" },
+      { no: 21, name: "四国大学「富士正晴全国高校生文学賞」", category: "essay", url: "https://www.shikoku-u.ac.jp/fmasaharu/" },
+      { no: 22, name: "三田文学新人賞", category: "essay", url: "https://www.mitabungaku.jp/shinjin.html" },
+      { no: 23, name: "数学オリンピック 国内大会", category: "olympiad", url: "https://www.imojp.org/domestic/jmo.html" },
+      { no: 24, name: "全国高校生建築提案コンテスト（秋田県立大学）", category: "contest", url: "https://www.akita-pu.ac.jp/oshirase/oshirase2023/7799" },
+      { no: 25, name: "大阪成蹊全国アート＆デザインコンペティション", category: "contest", url: "https://univ.osaka-seikei.jp/lp/art-design-competition/" },
+      { no: 26, name: "SDGs Design International Awards", category: "contest", url: "https://www.sdgs.design.kyushu-u.ac.jp/awards/" },
+      { no: 27, name: "とくしまブランドde簡単料理コンテスト（四国大学短期大学部）", category: "contest", url: "https://www.shikoku-u.ac.jp/news/shokuei/20230707.html" },
+      { no: 28, name: "国際理解・国際協力のための高校生の主張コンクール", category: "essay", url: "http://www.unaj.or.jp/concours/" },
+      { no: 29, name: "国際協力中学生・高校生エッセイコンテスト", category: "essay", url: "https://www.jica.go.jp/cooperation/experience/essay/index.html" },
+      { no: 30, name: "全日本高校模擬国連大会", category: "english", url: "https://jcgc-mun.org/jigyoannai/%E5%85%A8%E6%97%A5%E6%9C%AC%E9%AB%98%E6%A0%A1%E6%A8%A1%E6%93%AC%E5%9B%BD%E9%80%A3%E5%A4%A7%E4%BC%9A/" },
+      { no: 31, name: "英作文コンテスト", category: "english", url: "http://www.zen-ei-ren.com/?page_id=391" },
+      { no: 32, name: "高校生から始める「カレッジ・イングリッシュ講座」（Temple University）", category: "english", url: "https://www.tuj.ac.jp/jp/aep/programs/aep-high" },
+      { no: 33, name: "高校生英語プレゼンテーションコンテスト（山陽学園大学）", category: "english", url: "https://www.sguc.ac.jp/regional_alliances/activities/precon/" },
+      { no: 34, name: "高校生ビジネスプラン・グランプリ（日本政策金融公庫）", category: "business", url: "https://www.jfc.go.jp/n/grandprix/" },
+      { no: 35, name: "現代ビジネスプラン・コンペ", category: "business", url: "https://www.hyogo-dai.ac.jp/compe/index.htm" },
+      { no: 36, name: "Stanford e-Entrepreneurship Japan", category: "business", url: "https://spice.fsi.stanford.edu/fellowship/stanford-e-entrepreneurship-japan" },
+      { no: 37, name: "海の宝アカデミックコンテスト", category: "contest", url: "https://www.umicon.jp/contest/guideline.html" },
+      { no: 38, name: "NGO LOOB", category: "program", url: "https://loobinc.com/" },
+      { no: 39, name: "全国高校生放送・デジコン大賞", category: "contest", url: "https://www.housou-digicon.net/" },
+      { no: 40, name: "「共に生きる社会」めざして 高校生作文コンテスト", category: "essay", url: "https://www.iuhw.ac.jp/composition_contest/2023/" },
+      { no: 41, name: "山口芸術短期大学", category: "contest", url: "https://www.yamaguchi-jca.ac.jp/" },
+      { no: 42, name: "星槎道都大学 建築学科", category: "contest", url: "https://www.seisadohto.ac.jp/admission/faculty/architecture/blog/" },
+      { no: 43, name: "EGG (Entrepreneurship in the Global Ground)", category: "business", url: "https://egg-very50.studio.site/" },
+      { no: 44, name: "GXサイエンスキャンプ", category: "program", url: "https://web.tuat.ac.jp/~gxcamp/" },
+      { no: 45, name: "超然文学賞（金沢大学）", category: "essay", url: "https://www.kanazawa-u.ac.jp/admission/teacher/chozen" },
+      { no: 46, name: "田舎力甲子園（福知山公立大学）", category: "contest", url: "https://www.fukuchiyama.ac.jp/news/27851/" },
+      { no: 47, name: "UNITE Program（立命館大学）", category: "program", url: "https://www.ritsumei.ac.jp/uniteprogram/" },
+      { no: 48, name: "時事学 作文コンテスト", category: "essay", url: "https://jijigaku.com/pub/contest/" },
+      { no: 49, name: "小泉信三賞全国高校生小論文コンテスト（慶應義塾）", category: "essay", url: "https://www.keio.ac.jp/ja/about/learn-more/tradition/koizumi-contest/" },
+      { no: 50, name: "韓国語高校生말하기（マラギ）コンテスト", category: "contest", url: "https://www.toyoeiwa.ac.jp/daigaku/news/20230606-17541.html" },
+      { no: 51, name: "ジョン・ニッセル杯", category: "english", url: "https://www.sophia-cler.jp/hs-students/nissel-cup.html" },
+      { no: 52, name: "高校化学グランドコンテスト", category: "contest", url: "https://s-gracon.jp/2024/" },
+      { no: 53, name: "福山大学 学科イベント", category: "program", url: "https://www.fukuyama-u.ac.jp/course/human/media-visual/media-event-info/" },
+      { no: 54, name: "キッズドア イベント", category: "program", url: "https://kidsdoor.net/news" },
+      { no: 55, name: "全国高校生環境スピーチコンテスト（千葉商科大学）", category: "contest", url: "https://www.cuc.ac.jp/news/2023/speechcontest.html" },
+      { no: 56, name: "女子中高生のためのグローバル講演会－サイエンスから世界へ－", category: "program", url: "https://www.ocha.ac.jp/event/d012874.html" },
+      { no: 57, name: "高校生探究・情報コンテスト（静岡大学情報学部）", category: "contest", url: "https://wwp.shizuoka.ac.jp/tankyu/" },
+      { no: 58, name: "バイオサミット", category: "contest", url: "https://www.bio-summit.org/" },
+      { no: 59, name: "JA Travel and Tourism Business Program (TTBiz)", category: "business", url: "https://www.ja-japan.org/contests/TTBiz.html" },
+      { no: 60, name: "高校生のためのアジアの言語と文化", category: "program", url: "https://www.takushoku-u.ac.jp/extension/post-24.html" },
+      { no: 61, name: "DHU U-18 Artist Contest", category: "contest", url: "https://www.dhw.ac.jp/p/articon/" },
+      { no: 62, name: "IHRP（全国高校生異分野融合型研究プログラム）", category: "program", url: "https://ihrp-japan.org/" },
+      { no: 63, name: "ORANGE CUP（拓殖大学工学部）", category: "contest", url: "https://feng.takushoku-u.ac.jp/orange_cup/" },
+      { no: 64, name: "TOMODACHI Boeing Entrepreneurship Seminar", category: "business", url: "https://usjapantomodachi.org/programs-activities/entrepreneurship-leadership/tac-keio-sfc-entrepreneurship-seminar-and-business-plan-competition/" },
+      { no: 65, name: "イベント甲子園", category: "contest", url: "https://event-koshien2023.studio.site/" },
+      { no: 66, name: "金沢大学GSC", category: "program", url: "https://gsc.w3.kanazawa-u.ac.jp/outline/" },
+      { no: 67, name: "未来構想キャンプ（慶應SFC）", category: "program", url: "https://www.sfc.keio.ac.jp/admissions/event/camp/" },
+      { no: 68, name: "国際ユース作文コンテスト（五井平和財団）", category: "essay", url: "https://www.goipeace.or.jp/work/essay-contest/" },
+      { no: 69, name: "HLABサマースクール", category: "program", url: "https://h-lab.co/summer-school/" },
+      { no: 70, name: "京進グループ イベント・キャンペーン", category: "program", url: "https://group.kyoshin.co.jp/event/" },
+      { no: 71, name: "獨協大学 高校生スピーチコンテスト", category: "english", url: "https://www.dokkyo.ac.jp/about/outline/events/d_speech/d-speech01_01_j.html" },
+      { no: 72, name: "GTE サマースクール（ビジネスコンテスト）", category: "business", url: "https://www.gtekapion.org/summerschool" },
+      { no: 73, name: "化学グランプリ", category: "olympiad", url: "https://gp.csj.jp/next/" },
+      { no: 74, name: "THINK FLAT CAMP U-18（ネットプロテクションズ）", category: "program", url: "https://corp.netprotections.com/recruit/thinkflatcamp2024/" },
+      { no: 75, name: "MONO-COTO INNOVATION", category: "contest", url: "https://mono-coto-innovation.com/" },
+      { no: 76, name: "高校生 食のSDGsアクションプラングランプリ（流通科学大学）", category: "contest", url: "https://www.umds.ac.jp/sdgs/action-plan/" },
+      { no: 77, name: "IT夢コン", category: "contest", url: "https://yumecon.ic.kanagawa-it.ac.jp/home" },
+      { no: 78, name: "OPEN MISSION 探究ゼミナール（東京都市大学）", category: "program", url: "https://www.comm.tcu.ac.jp/nyushi/openmission/" },
+      { no: 79, name: "大阪大学SEEDSプログラム", category: "program", url: "https://seeds.osaka-u.ac.jp/" },
+      { no: 80, name: "物理チャレンジ", category: "olympiad", url: "https://www.jpho.jp/" },
+      { no: 81, name: "高大接続教室", category: "program", url: "http://www.kodai.uec.ac.jp/sk/" },
+      { no: 82, name: "生物学オリンピック", category: "olympiad", url: "https://www.jbo-info.jp/jbo/index.html" },
+      { no: 83, name: "AJEMUN", category: "english", url: "https://sites.google.com/shibushibu.ed.jp/ajemun2023/%E3%83%9B%E3%83%BC%E3%83%A0" },
+      { no: 84, name: "FedEx/JA International Trade Challenge (ITC)", category: "business", url: "https://www.ja-japan.org/contests/ITC.html" },
+      { no: 85, name: "せかい探究部（上智大学）", category: "program", url: "https://jp.sophia-ged.com/iblsupportprogram/" },
+      { no: 86, name: "GTE グランプリ（ビジネスプランコンテスト）", category: "business", url: "https://www.gtekapion.org/contest" },
+      { no: 87, name: "高校生小論文・プレゼン動画コンテスト（自治医科大学）", category: "contest", url: "https://www.jichi.ac.jp/contest/" },
+      { no: 88, name: "ソフィア未来塾（上智大学）", category: "program", url: "https://dept.sophia.ac.jp/is/shric/news/sophiafuturedesigncourse.html" },
+      { no: 89, name: "未踏ジュニア", category: "program", url: "https://jr.mitou.org/" },
+      { no: 90, name: "社会共創コンテスト", category: "contest", url: "https://www.cri.ehime-u.ac.jp/contest/youkou/" },
+      { no: 91, name: "デジ絵コン", category: "contest", url: "https://shikoku-u.com/design/" },
+      { no: 92, name: "弁護士に会ってみよう！春休み特別企画", category: "program", url: "https://www.nichibenren.or.jp/event/year/2023/230328_29_30.html" },
+      { no: 93, name: "高校生対象「文学塾」（國學院大學）", category: "program", url: "https://www.kokugakuin.ac.jp/event/392283" },
+      { no: 94, name: "未踏IT人材発掘・育成事業（IPA）", category: "program", url: "https://www.ipa.go.jp/jinzai/mitou/it/index.html" },
+      { no: 95, name: "NPO法人I-CAS", category: "program", url: "https://www.i-cas.org/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/entry" },
+      { no: 96, name: "インフラ映えフォトコンテスト", category: "contest", url: "https://toshi-kankyo.jimdo.com/infrastructure%EF%BD%B0photo/" },
+      { no: 97, name: "英語レシテーションコンテスト（東洋英和女学院大学）", category: "english", url: "https://www.toyoeiwa.ac.jp/daigaku/news/20231218-18749.html" },
+      { no: 98, name: "身延山大学アートコンテスト", category: "contest", url: "https://sites.google.com/min.ac.jp/artc/home?authuser=0" },
+      { no: 99, name: "SDGs探究AWARDS", category: "contest", url: "https://sdgs-awards.umedai.jp/" },
+      { no: 100, name: "SASS（大学生による中高生のためのSDGs/サスティナビリティアワード）", category: "contest", url: "https://www.sdgs-award.com/" },
+      { no: 101, name: "静岡産業大学 俳句コンテスト", category: "essay", url: "https://www.ssu.ac.jp/news2/haiku13/" },
+      { no: 102, name: "STEAM JAPAN AWARD", category: "contest", url: "https://steam-japan.com/award/" },
+      { no: 103, name: "BEGINプログラム（APU）", category: "program", url: "https://www.apumate.net/event/begin/" },
+      { no: 104, name: "AIG高校生外交官プログラム", category: "program", url: "https://www.highschooldiplomats.org/index.html" },
+      { no: 105, name: "トビタテ！留学JAPAN新・日本代表プログラム", category: "program", url: "https://tobitate-mext.jasso.go.jp/newprogram/hs/" },
+      { no: 106, name: "高校生ビジネスアイデアコンテスト（岐阜協立大学）", category: "business", url: "https://www.gku.ac.jp/topics/event/6-1.html" },
+      { no: 107, name: "SEIKA AWARD", category: "contest", url: "https://award.kyoto-seika.ac.jp/" },
+      { no: 108, name: "MAKERS UNIVERSITY U-18", category: "program", url: "https://u-18.makers-u.jp/" },
+      { no: 109, name: "SDGs推進センター", category: "program", url: "https://www.kanazawa-it.ac.jp/sdgs/topics/2023/1010.html" },
+      { no: 110, name: "西東京三大学連携 協働高大接続教育プログラム", category: "program", url: "http://www.tufs-tuat-uec.jp/schedule.html" },
+      { no: 111, name: "高校生と大学生のための金曜特別講座", category: "program", url: "https://high-school.c.u-tokyo.ac.jp/index.html" },
+      { no: 112, name: "SFC万学博覧会", category: "program", url: "https://expo.sfc.keio.ac.jp/2023/ja/" },
+      { no: 113, name: "ディスカバ！高校１年・２年生のためのキャリア支援プロジェクト", category: "program", url: "https://discova.jp/program/" },
+      { no: 114, name: "リケジョ-未来シンポジウム", category: "program", url: "http://www-w.cf.ocha.ac.jp/cos/category/event/symposium/rikejo_sympo/" },
+      { no: 115, name: "AFS君津インターナショナルサマーキャンプ", category: "program", url: "https://www.afs.or.jp/afscamps/kimitsu/" },
+      { no: 116, name: "AFS Global You Adventurer", category: "program", url: "https://www.afs.or.jp/online-programs/afs-global-you-adventurer/" },
+      { no: 117, name: "GOAL by Alexsolutions Inc.", category: "program", url: "https://alexsol.co.jp/goal/" },
+      { no: 118, name: "高校生から始める「カレッジ・イングリッシュ講座」", category: "english", url: "https://www.tuj.ac.jp/jp/aep/programs/aep-high" },
+      { no: 119, name: "キャリア開発プログラム（産業能率大学）", category: "program", url: "https://www.sanno.ac.jp/exam/event/career_develop/index.html" }
+    ];
+
+    // カテゴリ名の日本語表記
+    const categoryNames = {
+      'contest': 'コンテスト',
+      'program': 'プログラム',
+      'olympiad': 'オリンピック',
+      'essay': '作文・小論文',
+      'english': '英語系',
+      'business': 'ビジネス'
+    };
+
+    let currentCategory = 'all';
+
+    // イベントリストを生成
+    function renderEvents(filteredEvents) {
+      const eventList = document.getElementById('eventList');
+      const emptyState = document.getElementById('emptyState');
+      const eventCount = document.getElementById('eventCount');
+
+      if (filteredEvents.length === 0) {
+        eventList.style.display = 'none';
+        emptyState.style.display = 'block';
+        eventCount.innerHTML = '該当するイベントがありません';
+        return;
+      }
+
+      eventList.style.display = 'flex';
+      emptyState.style.display = 'none';
+      eventCount.innerHTML = `全 <strong>${filteredEvents.length}</strong> 件のイベント`;
+
+      eventList.innerHTML = filteredEvents.map(event => {
+        return `
+          <a href="${event.url}" target="_blank" rel="noopener noreferrer" class="event-item">
+            <div class="event-number">${event.no}</div>
+            <div class="event-content">
+              <div class="event-title">${event.name}</div>
+              <div class="event-category">${categoryNames[event.category] || event.category}</div>
+            </div>
+            <span class="material-icons external-icon">open_in_new</span>
+          </a>
+        `;
+      }).join('');
+    }
+
+    // フィルタリング
+    function filterEvents() {
+      const searchText = document.getElementById('searchInput').value.toLowerCase();
+      
+      let filtered = events;
+      
+      // カテゴリフィルタ
+      if (currentCategory !== 'all') {
+        filtered = filtered.filter(e => e.category === currentCategory);
+      }
+      
+      // テキスト検索
+      if (searchText) {
+        filtered = filtered.filter(e => 
+          e.name.toLowerCase().includes(searchText)
+        );
+      }
+      
+      renderEvents(filtered);
+    }
+
+    // カテゴリ設定
+    function setCategory(category) {
+      currentCategory = category;
+      
+      // ボタンのアクティブ状態を更新
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.category === category);
+      });
+      
+      filterEvents();
+    }
+
+    // スクロールトップ
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // スクロールイベント
+    window.addEventListener('scroll', () => {
+      const scrollTopBtn = document.getElementById('scrollTopBtn');
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('show');
+      } else {
+        scrollTopBtn.classList.remove('show');
+      }
+    });
+
+    // 初期表示
+    renderEvents(events);
+  </script>
+</body>
+</html>

@@ -1,31 +1,38 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>料金シミュレーター | EQAO PORTAL</title>
-  
+  <title>料金シミュレーター | EQAO</title>
+
+  <!-- OGP -->
+  <meta property="og:title" content="料金シミュレーター | EQAO">
+  <meta property="og:description" content="EQAOの料金をシミュレーションできます">
+  <meta property="og:type" content="website">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="css/nav-menu.css">
-  
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
       font-family: 'Noto Sans JP', sans-serif;
-      background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf4 100%);
+      background: linear-gradient(180deg, #f8f9fc 0%, #e8ecf4 100%);
       min-height: 100vh;
       color: #374151;
     }
-    
+
     /* ヘッダー */
     .header {
       background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
@@ -35,21 +42,23 @@
       z-index: 100;
       box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
     }
-    
+
     .header-content {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 12px;
-      max-width: 600px;
+      max-width: 400px;
       margin: 0 auto;
-      padding: 0 16px;
+      position: relative;
     }
-    
+
     .back-button {
-      flex-shrink: 0;
+      position: absolute;
+      left: 0;
       width: 36px;
       height: 36px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -58,11 +67,11 @@
       text-decoration: none;
       transition: background 0.2s;
     }
-    
+
     .back-button:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
     }
-    
+
     .logo {
       width: 36px;
       height: 36px;
@@ -71,24 +80,24 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       overflow: hidden;
       padding: 4px;
     }
-    
+
     .logo img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
-    
+
     .header-title {
       color: white;
       font-size: 16px;
       font-weight: bold;
       letter-spacing: 0.5px;
     }
-    
+
     /* メインコンテンツ */
     .main {
       max-width: 500px;
@@ -96,19 +105,19 @@
       padding: 20px 16px;
       padding-bottom: 40px;
     }
-    
+
     /* ヒーロー */
     .hero {
       text-align: center;
       margin-bottom: 24px;
       padding: 20px 0;
     }
-    
+
     .hero-label {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      background: #1a237e;
       color: white;
       padding: 6px 14px;
       border-radius: 20px;
@@ -116,37 +125,37 @@
       font-weight: bold;
       margin-bottom: 12px;
     }
-    
+
     .hero-title {
       font-size: 24px;
       font-weight: bold;
       color: #1a237e;
       margin-bottom: 8px;
     }
-    
+
     .hero-subtitle {
       font-size: 13px;
       color: #6b7280;
       line-height: 1.6;
     }
-    
+
     /* 入力セクション */
     .input-section {
       background: white;
       border-radius: 20px;
       padding: 24px;
       margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     }
-    
+
     .input-group {
       margin-bottom: 24px;
     }
-    
+
     .input-group:last-child {
       margin-bottom: 0;
     }
-    
+
     .input-label {
       display: flex;
       align-items: center;
@@ -156,29 +165,25 @@
       color: #1a237e;
       margin-bottom: 12px;
     }
-    
+
     .input-label-icon {
       width: 28px;
       height: 28px;
-      background: #e8eaf6;
+      background: #e8ecf4;
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #1a237e;
     }
-    
-    .input-label-icon .material-icons {
-      font-size: 16px;
-    }
-    
+
     /* コース選択 */
     .course-options {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
-    
+
     .course-option {
       display: flex;
       align-items: center;
@@ -190,17 +195,17 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    
+
     .course-option:hover {
       border-color: #1a237e;
-      background: #e8eaf6;
+      background: #f0f2f7;
     }
-    
+
     .course-option.selected {
       border-color: #1a237e;
-      background: #e8eaf6;
+      background: #e8ecf4;
     }
-    
+
     .course-radio {
       width: 20px;
       height: 20px;
@@ -212,12 +217,12 @@
       transition: all 0.2s;
       flex-shrink: 0;
     }
-    
+
     .course-option.selected .course-radio {
       border-color: #1a237e;
       background: #1a237e;
     }
-    
+
     .course-radio::after {
       content: '';
       width: 8px;
@@ -227,62 +232,62 @@
       opacity: 0;
       transition: opacity 0.2s;
     }
-    
+
     .course-option.selected .course-radio::after {
       opacity: 1;
     }
-    
+
     .course-info {
       flex: 1;
     }
-    
+
     .course-name {
       font-size: 14px;
       font-weight: bold;
       color: #374151;
     }
-    
+
     .course-price-sub {
       font-size: 11px;
       color: #9ca3af;
       margin-top: 2px;
     }
-    
+
     .course-price {
       font-size: 12px;
       color: #6b7280;
       margin-top: 2px;
     }
-    
+
     /* スライダー */
     .slider-container {
       padding: 0 4px;
     }
-    
+
     .slider-value {
       text-align: center;
       margin-bottom: 12px;
     }
-    
+
     .slider-number {
       font-size: 36px;
       font-weight: bold;
       color: #1a237e;
     }
-    
+
     .slider-unit {
       font-size: 16px;
       color: #6b7280;
       margin-left: 4px;
     }
-    
+
     .slider-hint {
       font-size: 11px;
       color: #9ca3af;
       text-align: center;
       margin-bottom: 12px;
     }
-    
+
     .slider {
       width: 100%;
       height: 8px;
@@ -292,7 +297,7 @@
       border-radius: 4px;
       outline: none;
     }
-    
+
     .slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
@@ -303,7 +308,7 @@
       cursor: pointer;
       box-shadow: 0 2px 8px rgba(26, 35, 126, 0.3);
     }
-    
+
     .slider::-moz-range-thumb {
       width: 28px;
       height: 28px;
@@ -313,7 +318,7 @@
       border: none;
       box-shadow: 0 2px 8px rgba(26, 35, 126, 0.3);
     }
-    
+
     .slider-labels {
       display: flex;
       justify-content: space-between;
@@ -321,31 +326,31 @@
       font-size: 11px;
       color: #9ca3af;
     }
-    
+
     .slider-note {
       margin-bottom: 16px;
       font-size: 12px;
       color: #6b7280;
       line-height: 1.5;
     }
-    
+
     .slider-note.highlight {
-      background: #e8eaf6;
+      background: #e8ecf4;
       color: #1a237e;
       padding: 8px 12px;
       border-radius: 8px;
       border-left: 3px solid #3949ab;
       font-weight: 500;
     }
-    
-    /* 基本プラン説明 */
+
+    /* 基本プラン説明（テキストリスト版） */
     .plan-guide {
       margin-bottom: 16px;
       padding: 10px 12px;
       background: #f8fafc;
       border-radius: 8px;
     }
-    
+
     .plan-guide-title {
       font-size: 11px;
       font-weight: bold;
@@ -355,36 +360,31 @@
       align-items: center;
       gap: 4px;
     }
-    
-    .plan-guide-title .material-icons {
-      font-size: 12px;
-      color: #9ca3af;
-    }
-    
+
     .plan-text-list {
       font-size: 11px;
       color: #4b5563;
       line-height: 1.7;
     }
-    
+
     .plan-text-list .plan-line {
       display: block;
     }
-    
+
     .plan-text-list .plan-name {
       font-weight: 600;
       color: #374151;
     }
-    
+
     .plan-text-list .plan-star {
       color: #f59e0b;
     }
-    
+
     .plan-text-list .plan-sub {
       color: #9ca3af;
       font-size: 10px;
     }
-    
+
     .plan-footer {
       margin-top: 6px;
       padding-top: 6px;
@@ -393,7 +393,12 @@
       color: #9ca3af;
       line-height: 1.5;
     }
-    
+
+    .plan-footer a {
+      color: #1a237e;
+      text-decoration: underline;
+    }
+
     /* 結果セクション */
     .result-section {
       background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
@@ -402,7 +407,7 @@
       color: white;
       box-shadow: 0 10px 30px rgba(26, 35, 126, 0.3);
     }
-    
+
     .result-title {
       font-size: 14px;
       font-weight: bold;
@@ -411,111 +416,95 @@
       align-items: center;
       gap: 8px;
     }
-    
-    .result-title .material-icons {
-      font-size: 18px;
-    }
-    
+
     .result-items {
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
-    
+
     .result-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     }
-    
+
     .result-item:last-child {
       border-bottom: none;
       padding-bottom: 0;
     }
-    
+
     .result-item.total {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255, 255, 255, 0.1);
       margin: 0 -24px;
       padding: 16px 24px;
       border-radius: 12px;
       border-bottom: none;
     }
-    
+
     .result-label {
       font-size: 13px;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
     }
-    
+
+    .result-label-sub {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 2px;
+    }
+
     .result-breakdown {
       display: flex;
       flex-direction: column;
       gap: 2px;
       margin-top: 4px;
     }
-    
+
     .result-breakdown span {
       font-size: 11px;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255, 255, 255, 0.6);
     }
-    
+
     .result-value {
       font-size: 18px;
       font-weight: bold;
     }
-    
+
     .result-item.total .result-label {
       font-size: 14px;
       font-weight: bold;
       color: white;
     }
-    
+
     .result-item.total .result-value {
       font-size: 24px;
       color: #fde047;
     }
-    
-    /* 税込表示バッジ */
-    .tax-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(253, 224, 71, 0.3);
-      color: #fde047;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: bold;
-      margin-left: 8px;
-    }
-    
-    .tax-badge .material-icons {
-      font-size: 10px;
-    }
-    
+
     /* 注釈 */
     .footnote {
       margin-top: 20px;
       padding: 16px;
-      background: rgba(255,255,255,0.7);
+      background: rgba(255, 255, 255, 0.7);
       border-radius: 12px;
       border-left: 3px solid #d1d5db;
     }
-    
+
     .footnote-title {
       font-size: 11px;
       color: #6b7280;
       font-weight: bold;
       margin-bottom: 6px;
     }
-    
+
     .footnote-text {
       font-size: 11px;
       color: #9ca3af;
       line-height: 1.6;
     }
-    
+
     /* オプション一覧ボタン */
     .option-button {
       display: flex;
@@ -535,16 +524,17 @@
       transition: all 0.2s;
       box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);
     }
-    
+
     .option-button:hover {
       background: linear-gradient(135deg, #fde68a 0%, #fcd34d 100%);
       transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
     }
-    
-    .option-button .material-icons {
-      font-size: 16px;
+
+    .option-button:active {
+      transform: translateY(0);
     }
-    
+
     /* オプションモーダル */
     .option-modal-overlay {
       position: fixed;
@@ -552,7 +542,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0, 0, 0, 0.6);
       z-index: 600;
       display: none;
       align-items: flex-start;
@@ -560,33 +550,33 @@
       padding: 20px;
       overflow-y: auto;
     }
-    
+
     .option-modal-overlay.show {
       display: flex;
     }
-    
+
     .option-modal {
       background: white;
       border-radius: 20px;
       width: 100%;
       max-width: 480px;
       margin: 20px auto;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       overflow: hidden;
     }
-    
+
     .option-modal-header {
       background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
       padding: 20px;
       color: white;
       position: relative;
     }
-    
+
     .option-modal-close {
       position: absolute;
       top: 16px;
       right: 16px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       border: none;
       border-radius: 50%;
       width: 32px;
@@ -598,28 +588,28 @@
       color: white;
       transition: background 0.2s;
     }
-    
+
     .option-modal-close:hover {
-      background: rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.3);
     }
-    
+
     .option-modal-title {
       font-size: 18px;
       font-weight: bold;
       margin-bottom: 4px;
     }
-    
+
     .option-modal-subtitle {
       font-size: 12px;
       opacity: 0.8;
     }
-    
+
     .option-modal-body {
       padding: 20px;
       max-height: 60vh;
       overflow-y: auto;
     }
-    
+
     .option-notice {
       background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
       border: 1px solid #6ee7b7;
@@ -630,7 +620,7 @@
       align-items: flex-start;
       gap: 10px;
     }
-    
+
     .option-notice-icon {
       flex-shrink: 0;
       width: 20px;
@@ -642,26 +632,22 @@
       justify-content: center;
       color: white;
     }
-    
-    .option-notice-icon .material-icons {
-      font-size: 12px;
-    }
-    
+
     .option-notice-text {
       font-size: 12px;
       color: #065f46;
       line-height: 1.5;
       font-weight: 500;
     }
-    
+
     .option-category {
       margin-bottom: 16px;
     }
-    
+
     .option-category:last-child {
       margin-bottom: 0;
     }
-    
+
     .option-category-title {
       font-size: 12px;
       font-weight: bold;
@@ -673,17 +659,13 @@
       align-items: center;
       gap: 6px;
     }
-    
-    .option-category-title .material-icons {
-      font-size: 14px;
-    }
-    
+
     .option-list {
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
-    
+
     .option-item {
       display: flex;
       justify-content: space-between;
@@ -693,20 +675,20 @@
       border-radius: 8px;
       gap: 12px;
     }
-    
+
     .option-item-name {
       font-size: 12px;
       color: #374151;
       line-height: 1.4;
     }
-    
+
     .option-item-name .sub {
       display: block;
       font-size: 10px;
       color: #9ca3af;
       margin-top: 2px;
     }
-    
+
     .option-item-price {
       font-size: 12px;
       font-weight: bold;
@@ -714,31 +696,45 @@
       white-space: nowrap;
       text-align: right;
     }
-    
+
     .option-item-price .sub {
       display: block;
       font-size: 10px;
       font-weight: normal;
       color: #9ca3af;
     }
-    
+
     .option-discount {
       background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
     }
-    
+
     .option-discount .option-item-price {
       color: #b45309;
     }
-    
+
+    /* 税込表示バッジ */
+    .tax-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(253, 224, 71, 0.3);
+      color: #fde047;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-left: 8px;
+    }
+
     /* 重要情報セクション */
     .info-section {
       background: white;
       border-radius: 16px;
       padding: 20px;
       margin-top: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
-    
+
     .info-header {
       display: flex;
       align-items: center;
@@ -747,40 +743,36 @@
       padding-bottom: 12px;
       border-bottom: 2px solid #e5e7eb;
     }
-    
+
     .info-header-icon {
       width: 32px;
       height: 32px;
-      background: #e8eaf6;
+      background: #e8ecf4;
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #3949ab;
     }
-    
-    .info-header-icon .material-icons {
-      font-size: 18px;
-    }
-    
+
     .info-header-title {
       font-size: 14px;
       font-weight: bold;
       color: #1a237e;
     }
-    
+
     /* 支払いバッジ */
     .payment-badge {
       display: flex;
       align-items: center;
       gap: 8px;
-      background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+      background: linear-gradient(135deg, #e8ecf4 0%, #dde3f0 100%);
       border: 1px solid #9fa8da;
       border-radius: 10px;
       padding: 12px 14px;
       margin-bottom: 12px;
     }
-    
+
     .payment-badge-icon {
       width: 28px;
       height: 28px;
@@ -792,23 +784,19 @@
       color: #3949ab;
       flex-shrink: 0;
     }
-    
-    .payment-badge-icon .material-icons {
-      font-size: 14px;
-    }
-    
+
     .payment-badge-text {
       font-size: 12px;
       color: #1a237e;
       line-height: 1.5;
     }
-    
+
     .payment-badge-text strong {
       display: block;
       font-size: 13px;
       margin-bottom: 2px;
     }
-    
+
     /* 割引カード */
     .discount-cards {
       display: flex;
@@ -816,7 +804,7 @@
       gap: 10px;
       margin-bottom: 16px;
     }
-    
+
     .discount-card {
       display: flex;
       align-items: center;
@@ -826,7 +814,7 @@
       border-radius: 10px;
       padding: 12px 14px;
     }
-    
+
     .discount-card-icon {
       width: 32px;
       height: 32px;
@@ -838,48 +826,44 @@
       color: #059669;
       flex-shrink: 0;
     }
-    
-    .discount-card-icon .material-icons {
-      font-size: 16px;
-    }
-    
+
     .discount-card-content {
       flex: 1;
     }
-    
+
     .discount-card-title {
       font-size: 13px;
       font-weight: bold;
       color: #065f46;
       margin-bottom: 2px;
     }
-    
+
     .discount-card-desc {
       font-size: 11px;
       color: #047857;
       line-height: 1.4;
     }
-    
+
     .discount-card-value {
       font-size: 14px;
       font-weight: bold;
       color: #059669;
       white-space: nowrap;
     }
-    
+
     /* 情報アコーディオン */
     .info-accordion {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
-    
+
     .info-accordion-item {
       background: #f8fafc;
       border-radius: 10px;
       overflow: hidden;
     }
-    
+
     .info-accordion-header {
       display: flex;
       align-items: center;
@@ -888,15 +872,15 @@
       cursor: pointer;
       transition: background 0.2s;
     }
-    
+
     .info-accordion-header:hover {
       background: #f1f5f9;
     }
-    
+
     .info-accordion-item.open .info-accordion-header {
       background: #e2e8f0;
     }
-    
+
     .info-accordion-icon {
       width: 24px;
       height: 24px;
@@ -906,45 +890,57 @@
       justify-content: center;
       flex-shrink: 0;
     }
-    
-    .info-accordion-icon .material-icons {
-      font-size: 12px;
+
+    .info-accordion-icon.blue {
+      background: #e8ecf4;
+      color: #3949ab;
     }
-    
-    .info-accordion-icon.blue { background: #e8eaf6; color: #3949ab; }
-    .info-accordion-icon.green { background: #d1fae5; color: #059669; }
-    .info-accordion-icon.yellow { background: #fef3c7; color: #d97706; }
-    .info-accordion-icon.purple { background: #f3e8ff; color: #9333ea; }
-    
+
+    .info-accordion-icon.green {
+      background: #d1fae5;
+      color: #059669;
+    }
+
+    .info-accordion-icon.yellow {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .info-accordion-icon.purple {
+      background: #f3e8ff;
+      color: #9333ea;
+    }
+
+    .info-accordion-icon.red {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
     .info-accordion-title {
       flex: 1;
       font-size: 13px;
       font-weight: 600;
       color: #374151;
     }
-    
+
     .info-accordion-arrow {
       color: #9ca3af;
       transition: transform 0.2s;
     }
-    
-    .info-accordion-arrow .material-icons {
-      font-size: 14px;
-    }
-    
+
     .info-accordion-item.open .info-accordion-arrow {
       transform: rotate(180deg);
     }
-    
+
     .info-accordion-content {
       display: none;
       padding: 0 14px 14px;
     }
-    
+
     .info-accordion-item.open .info-accordion-content {
       display: block;
     }
-    
+
     .info-accordion-text {
       font-size: 12px;
       color: #6b7280;
@@ -953,28 +949,28 @@
       border-radius: 8px;
       padding: 12px;
     }
-    
+
     .info-accordion-text p {
       margin-bottom: 10px;
     }
-    
+
     .info-accordion-text p:last-child {
       margin-bottom: 0;
     }
-    
+
     .info-accordion-text strong {
       color: #374151;
     }
-    
+
     .info-accordion-text ul {
       margin: 8px 0;
       padding-left: 16px;
     }
-    
+
     .info-accordion-text li {
       margin-bottom: 4px;
     }
-    
+
     .info-accordion-text .warning {
       background: #fef2f2;
       border-left: 3px solid #ef4444;
@@ -984,7 +980,7 @@
       font-size: 11px;
       color: #991b1b;
     }
-    
+
     .info-accordion-text .note {
       background: #fffbeb;
       border-left: 3px solid #f59e0b;
@@ -1000,7 +996,7 @@
       text-align: center;
       margin-top: 24px;
     }
-    
+
     .footer-link a {
       color: #1a237e;
       font-size: 13px;
@@ -1009,108 +1005,373 @@
       align-items: center;
       gap: 6px;
     }
-    
+
     .footer-link a:hover {
       text-decoration: underline;
     }
-    
-    .footer-link .material-icons {
-      font-size: 16px;
+
+    /* ===========================================
+       パスワード認証画面
+       =========================================== */
+    .auth-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, #f8f9fc 0%, #e8ecf4 100%);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
-    
-    /* レスポンシブ */
+
+    .auth-overlay.hidden {
+      display: none;
+    }
+
+    .auth-card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px 24px;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .auth-icon {
+      width: 64px;
+      height: 64px;
+      background: #e8ecf4;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: #1a237e;
+    }
+
+    .auth-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1a237e;
+      margin-bottom: 8px;
+    }
+
+    .auth-description {
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .auth-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    .auth-input:focus {
+      border-color: #1a237e;
+    }
+
+    .auth-input.error {
+      border-color: #ef4444;
+    }
+
+    .auth-error {
+      color: #ef4444;
+      font-size: 12px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .auth-error.show {
+      display: block;
+    }
+
+    .auth-button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: transform 0.2s;
+    }
+
+    .auth-button:hover {
+      transform: scale(1.02);
+    }
+
+    .auth-button:active {
+      transform: scale(0.98);
+    }
+
+    .auth-hint {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    .auth-hint a {
+      color: #1a237e;
+      text-decoration: none;
+    }
+
+    .auth-hint a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===========================================
+       レスポンシブ対応
+       =========================================== */
+
+    /* タブレット (768px以上) */
     @media (min-width: 768px) {
       .header-content {
         max-width: 700px;
       }
-      
+
       .main {
         max-width: 700px;
         padding: 28px 24px;
       }
-      
+
       .hero-title {
         font-size: 28px;
       }
-      
+
       .input-section {
         padding: 28px;
+        border-radius: 24px;
       }
-      
+
       .course-option {
         padding: 16px 20px;
       }
-      
+
+      .course-name {
+        font-size: 15px;
+      }
+
       .slider-number {
         font-size: 42px;
       }
-      
+
       .result-section {
         padding: 24px;
+        border-radius: 24px;
       }
-      
+
       .result-item.total .result-value {
         font-size: 28px;
       }
+
+      .auth-card {
+        max-width: 400px;
+        padding: 40px;
+      }
     }
-    
+
+    /* デスクトップ (1024px以上) */
     @media (min-width: 1024px) {
       .header-content {
         max-width: 800px;
       }
-      
+
       .main {
         max-width: 800px;
         padding: 36px 32px;
       }
-      
+
+      .hero-title {
+        font-size: 32px;
+      }
+
       .input-section {
         padding: 32px;
       }
-      
+
       .course-options {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
       }
-      
+
+      .course-option {
+        padding: 18px 20px;
+      }
+
       .result-section {
         padding: 28px;
       }
-      
+
       .result-items {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 16px;
       }
-      
+
       .result-item.total {
         grid-column: 1 / -1;
       }
     }
   </style>
+
+  <script>
+    // ============================================
+    // 認証設定
+    // ============================================
+    const AUTH_PASSWORD = 'eqaotrial1234';
+    const AUTH_STORAGE_KEY = 'eqao_simulator_auth';
+
+    function checkAuth() {
+      const isAuthenticated = localStorage.getItem(AUTH_STORAGE_KEY) === 'true';
+      const isPortalAuthenticated = localStorage.getItem('eqao_portal_auth') === 'true';
+      if (isAuthenticated || isPortalAuthenticated) {
+        document.getElementById('auth-overlay').classList.add('hidden');
+      }
+    }
+
+    function submitAuth() {
+      const input = document.getElementById('auth-input');
+      const error = document.getElementById('auth-error');
+      const password = input.value;
+
+      if (password === AUTH_PASSWORD) {
+        localStorage.setItem(AUTH_STORAGE_KEY, 'true');
+        document.getElementById('auth-overlay').classList.add('hidden');
+      } else {
+        input.classList.add('error');
+        error.classList.add('show');
+      }
+    }
+
+    // ============================================
+    // 料金設定
+    // ============================================
+    const ENROLLMENT_FEE = 39800;
+    const MATERIAL_FEE = 19800;
+    const ACCOUNT_FEE = 550;
+    const BASIC_FEE = 11980;
+    const SYSTEM_FEE = 2980;
+
+    let selectedCoursePrice = 13500;
+    let lessonsPerMonth = 8;
+    let months = 6;
+
+    function selectCourse(element) {
+      document.querySelectorAll('.course-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      element.classList.add('selected');
+      selectedCoursePrice = parseInt(element.dataset.price);
+      calculate();
+    }
+
+    function updateLessons(value) {
+      lessonsPerMonth = parseInt(value);
+      document.getElementById('lessons-value').textContent = value;
+      calculate();
+    }
+
+    function updateMonths(value) {
+      months = parseInt(value);
+      document.getElementById('months-value').textContent = value;
+      document.getElementById('months-label').textContent = value;
+      calculate();
+    }
+
+    function calculate() {
+      const initialCost = ENROLLMENT_FEE + MATERIAL_FEE + ACCOUNT_FEE;
+      const lessonCost = selectedCoursePrice * lessonsPerMonth;
+      const monthlyCost = BASIC_FEE + SYSTEM_FEE + lessonCost;
+      const totalCost = initialCost + (monthlyCost * months);
+
+      document.getElementById('initial-cost').textContent = formatPrice(initialCost);
+      document.getElementById('monthly-cost').textContent = formatPrice(monthlyCost);
+      document.getElementById('lesson-cost-display').textContent = formatPrice(lessonCost);
+      document.getElementById('total-cost').textContent = formatPrice(totalCost);
+    }
+
+    function formatPrice(price) {
+      return price.toLocaleString() + '円';
+    }
+
+    function showOptionModal() {
+      document.getElementById('option-modal-overlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+      lucide.createIcons();
+    }
+
+    function hideOptionModal(event) {
+      if (event && event.target !== event.currentTarget) return;
+      document.getElementById('option-modal-overlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function toggleInfoAccordion(id) {
+      const item = document.getElementById(id);
+      if (item) {
+        item.classList.toggle('open');
+      }
+    }
+  </script>
 </head>
+
 <body>
+  <!-- パスワード認証画面 -->
+  <div class="auth-overlay" id="auth-overlay">
+    <div class="auth-card">
+      <div class="auth-icon">
+        <i data-lucide="lock" style="width:28px;height:28px;"></i>
+      </div>
+      <h2 class="auth-title">パスワードを入力</h2>
+      <p class="auth-description">
+        このページは体験授業受講者限定です。<br>
+        体験授業後にお伝えしたパスワードを入力してください。
+      </p>
+      <input type="password" class="auth-input" id="auth-input" placeholder="パスワード">
+      <p class="auth-error" id="auth-error">パスワードが正しくありません</p>
+      <button class="auth-button" onclick="submitAuth()">確認</button>
+      <p class="auth-hint">
+        まだ体験授業を受講されていない方は<br>
+        <a href="/trial.html">無料体験授業に申し込む →</a>
+      </p>
+    </div>
+  </div>
+
   <!-- ヘッダー -->
   <header class="header">
     <div class="header-content">
       <a href="index.html" class="back-button">
-        <span class="material-icons">arrow_back</span>
+        <i data-lucide="arrow-left" style="width:20px;height:20px;"></i>
       </a>
-      <div class="logo"><img src="logo.png" alt="EQAO"></div>
+      <div class="logo"><img src="/logo.png" alt="EQAO"></div>
       <h1 class="header-title">料金シミュレーター</h1>
-      <button class="hamburger-btn" onclick="openNav()">
-        <span class="material-icons">menu</span>
-      </button>
     </div>
   </header>
-  
+
   <!-- メインコンテンツ -->
   <main class="main">
     <!-- ヒーロー -->
     <div class="hero">
       <div class="hero-label">
-        <span class="material-icons" style="font-size:14px;">calculate</span>
+        <i data-lucide="calculator" style="width:14px;height:14px;"></i>
         SIMULATOR
       </div>
       <h1 class="hero-title">料金シミュレーター</h1>
@@ -1119,14 +1380,14 @@
         料金の目安を確認できます
       </p>
     </div>
-    
+
     <!-- 入力セクション -->
     <div class="input-section">
       <!-- コース選択 -->
       <div class="input-group">
         <div class="input-label">
           <div class="input-label-icon">
-            <span class="material-icons">school</span>
+            <i data-lucide="graduation-cap" style="width:16px;height:16px;"></i>
           </div>
           希望コース
         </div>
@@ -1165,46 +1426,52 @@
             <div class="course-radio"></div>
             <div class="course-info">
               <div class="course-name">EQAO ENGLISH対策</div>
+              <div class="course-price-sub">英語資格対策（英検・IELTS・TEAP）専門 / 総合型選抜コースと併用可能</div>
               <div class="course-price">12,800円 / コマ</div>
             </div>
           </div>
         </div>
       </div>
-      
+
       <!-- コマ数 -->
       <div class="input-group">
         <div class="input-label">
           <div class="input-label-icon">
-            <span class="material-icons">calendar_month</span>
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
           </div>
           月の実施希望コマ数
         </div>
         <div class="slider-note highlight">※ 授業コマ数は毎月自由に変動させて予算を調整することが可能です。</div>
-        
+
         <!-- 基本プラン説明 -->
         <div class="plan-guide">
           <div class="plan-guide-title">
-            <span class="material-icons">info</span>
+            <i data-lucide="info" style="width:12px;height:12px;color:#9ca3af;"></i>
             プラン目安
           </div>
           <div class="plan-text-list">
-            <span class="plan-line">・<span class="plan-name">ミニマム</span>：4〜6コマ <span class="plan-sub">（高1・2年生）</span></span>
-            <span class="plan-line">・<span class="plan-name">レギュラー</span>：7〜9コマ <span class="plan-sub">（高2冬〜高3）</span><span class="plan-star">★平均8コマ</span></span>
-            <span class="plan-line">・<span class="plan-name">ハイレベル</span>：10〜12コマ <span class="plan-sub">（高3徹底プラン）</span></span>
-            <span class="plan-line">・<span class="plan-name">プレミアム</span>：13コマ〜 <span class="plan-sub">（要相談）</span></span>
+            <span class="plan-line">・<span class="plan-name">ミニマム</span>：4〜6コマ <span
+                class="plan-sub">（高1・2年生）</span></span>
+            <span class="plan-line">・<span class="plan-name">レギュラー</span>：7〜9コマ <span
+                class="plan-sub">（高2冬〜高3）</span><span class="plan-star">★平均8コマ</span></span>
+            <span class="plan-line">・<span class="plan-name">ハイレベル</span>：10〜12コマ <span
+                class="plan-sub">（高3徹底プラン）</span></span>
+            <span class="plan-line">・<span class="plan-name">プレミアム</span>：13コマ〜 <span
+                class="plan-sub">（要相談）</span></span>
           </div>
           <div class="plan-footer">
             ※ コマ数は志望校や科目数により変動します。
           </div>
         </div>
-        
+
         <div class="slider-container">
           <div class="slider-value">
             <span class="slider-number" id="lessons-value">8</span>
             <span class="slider-unit">コマ / 月</span>
           </div>
           <div class="slider-hint">※ 在籍生の平均は8コマです</div>
-          <input type="range" class="slider" id="lessons-slider" min="1" max="20" value="8" oninput="updateLessons(this.value)">
+          <input type="range" class="slider" id="lessons-slider" min="1" max="20" value="8"
+            oninput="updateLessons(this.value)">
           <div class="slider-labels">
             <span>1</span>
             <span>10</span>
@@ -1212,12 +1479,12 @@
           </div>
         </div>
       </div>
-      
+
       <!-- 月数 -->
       <div class="input-group">
         <div class="input-label">
           <div class="input-label-icon">
-            <span class="material-icons">schedule</span>
+            <i data-lucide="clock" style="width:16px;height:16px;"></i>
           </div>
           シミュレーション期間
         </div>
@@ -1226,7 +1493,8 @@
             <span class="slider-number" id="months-value">6</span>
             <span class="slider-unit">ヶ月</span>
           </div>
-          <input type="range" class="slider" id="months-slider" min="1" max="12" value="6" oninput="updateMonths(this.value)">
+          <input type="range" class="slider" id="months-slider" min="1" max="12" value="6"
+            oninput="updateMonths(this.value)">
           <div class="slider-labels">
             <span>1ヶ月</span>
             <span>6ヶ月</span>
@@ -1235,14 +1503,14 @@
         </div>
       </div>
     </div>
-    
+
     <!-- 結果セクション -->
     <div class="result-section">
       <div class="result-title">
-        <span class="material-icons">receipt_long</span>
+        <i data-lucide="receipt" style="width:18px;height:18px;"></i>
         料金シミュレーション結果
         <span class="tax-badge">
-          <span class="material-icons">check</span>
+          <i data-lucide="check" style="width:10px;height:10px;"></i>
           税込価格
         </span>
       </div>
@@ -1277,7 +1545,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- 注釈 -->
     <div class="footnote">
       <p class="footnote-title">料金について</p>
@@ -1289,36 +1557,36 @@
         ・詳細は体験授業時にご説明いたします
       </p>
       <button class="option-button" onclick="showOptionModal()">
-        <span class="material-icons">list</span>
+        <i data-lucide="list" style="width:16px;height:16px;"></i>
         オプション一覧を見る
       </button>
     </div>
-    
+
     <!-- 重要情報セクション -->
     <div class="info-section">
       <div class="info-header">
         <div class="info-header-icon">
-          <span class="material-icons">info</span>
+          <i data-lucide="info" style="width:18px;height:18px;"></i>
         </div>
         <h3 class="info-header-title">お支払い・割引について</h3>
       </div>
-      
+
       <!-- 支払い方法 -->
       <div class="payment-badge">
         <div class="payment-badge-icon">
-          <span class="material-icons">account_balance</span>
+          <i data-lucide="building-2" style="width:14px;height:14px;"></i>
         </div>
         <div class="payment-badge-text">
           <strong>お支払いは口座振込のみ対応</strong>
           クレジットカード等はご利用いただけません
         </div>
       </div>
-      
+
       <!-- 割引カード -->
       <div class="discount-cards">
         <div class="discount-card">
           <div class="discount-card-icon">
-            <span class="material-icons">favorite</span>
+            <i data-lucide="heart" style="width:16px;height:16px;"></i>
           </div>
           <div class="discount-card-content">
             <div class="discount-card-title">母子・父子家庭割引</div>
@@ -1328,7 +1596,7 @@
         </div>
         <div class="discount-card">
           <div class="discount-card-icon">
-            <span class="material-icons">people</span>
+            <i data-lucide="users" style="width:16px;height:16px;"></i>
           </div>
           <div class="discount-card-content">
             <div class="discount-card-title">紹介割引</div>
@@ -1337,47 +1605,46 @@
           <div class="discount-card-value">入塾金<br>1万円引</div>
         </div>
       </div>
-      
+
       <!-- アコーディオン -->
       <div class="info-accordion">
         <!-- お支払いについて -->
         <div class="info-accordion-item" id="info-payment">
           <div class="info-accordion-header" onclick="toggleInfoAccordion('info-payment')">
             <div class="info-accordion-icon blue">
-              <span class="material-icons">credit_card</span>
+              <i data-lucide="credit-card" style="width:12px;height:12px;"></i>
             </div>
             <span class="info-accordion-title">お支払いについて</span>
-            <span class="info-accordion-arrow">
-              <span class="material-icons">expand_more</span>
-            </span>
+            <i data-lucide="chevron-down" class="info-accordion-arrow" style="width:14px;height:14px;"></i>
           </div>
           <div class="info-accordion-content">
             <div class="info-accordion-text">
               <p><strong>①初回のお支払い</strong><br>
-              初回は<strong>3ヶ月分</strong>のお支払いとなります。</p>
-              
+                初回は<strong>3ヶ月分以上</strong>のお支払いとなります。<br>
+                4ヶ月分以上のまとめ払いも可能で、まとめ払いには割引特典があります。<br>
+                <span style="font-size: 11px; color: #9ca3af;">※詳しくは「オプション一覧」のまとめ払い割引制度をご確認ください</span>
+              </p>
+
               <p><strong>②翌月以降のお支払い</strong><br>
-              翌月以降は、<strong>3ヶ月分ごとの更新</strong>か<strong>月額ごとの更新</strong>の選択が可能です。</p>
-              
+                翌月以降は、<strong>3ヶ月分ごとの更新</strong>か<strong>月額ごとの更新</strong>の選択が可能です。</p>
+
               <p><strong>③余剰コマの返金</strong><br>
-              余った授業コマは<strong>卒塾時に全て返金</strong>されます。</p>
-              
+                余った授業コマは<strong>卒塾時に全て返金</strong>されます。</p>
+
               <p><strong>④返金時期について</strong><br>
-              卒塾後1月〜2月にかけて余剰コマを返金します。順番に手続きを行いますので、お手続き着手にお時間をいただく場合があります。</p>
+                卒塾後1月〜2月にかけて余剰コマを返金します。順番に手続きを行いますので、お手続き着手にお時間をいただく場合があります。</p>
             </div>
           </div>
         </div>
-        
+
         <!-- 母子・父子家庭手当 -->
         <div class="info-accordion-item" id="info-single-parent">
           <div class="info-accordion-header" onclick="toggleInfoAccordion('info-single-parent')">
             <div class="info-accordion-icon green">
-              <span class="material-icons">description</span>
+              <i data-lucide="file-text" style="width:12px;height:12px;"></i>
             </div>
             <span class="info-accordion-title">母子・父子家庭手当の申請方法</span>
-            <span class="info-accordion-arrow">
-              <span class="material-icons">expand_more</span>
-            </span>
+            <i data-lucide="chevron-down" class="info-accordion-arrow" style="width:14px;height:14px;"></i>
           </div>
           <div class="info-accordion-content">
             <div class="info-accordion-text">
@@ -1386,87 +1653,163 @@
                 <li>父子家庭、母子家庭であることを証明する書類 1通</li>
                 <li>世帯年収を証明する書類 1通</li>
               </ul>
-              
+
               <p><strong>提出方法</strong><br>
-              書類の発行年は最新のものであり、かつ年月が記載されているものを<strong>PDFで公式LINE</strong>にて送信してください。</p>
-              
+                書類の発行年は最新のものであり、かつ年月が記載されているものを<strong>PDFで公式LINE</strong>にて送信してください。</p>
+
               <p>弊社の基準を満たしていれば、父子家庭・母子家庭手当を適用させていただきます。</p>
-              
+
               <div class="warning">
                 万一適用されなかった場合は、経済的に困窮していないと判断したことになります。手当の申請が否認された場合、その結果に対する異議申し立ては一切受け付けませんので予めご了承ください。
               </div>
             </div>
           </div>
         </div>
-        
+
         <!-- クーリングオフ -->
         <div class="info-accordion-item" id="info-cooling-off">
           <div class="info-accordion-header" onclick="toggleInfoAccordion('info-cooling-off')">
             <div class="info-accordion-icon yellow">
-              <span class="material-icons">verified_user</span>
+              <i data-lucide="shield-check" style="width:12px;height:12px;"></i>
             </div>
             <span class="info-accordion-title">クーリングオフに関するポリシー</span>
-            <span class="info-accordion-arrow">
-              <span class="material-icons">expand_more</span>
-            </span>
+            <i data-lucide="chevron-down" class="info-accordion-arrow" style="width:14px;height:14px;"></i>
           </div>
           <div class="info-accordion-content">
             <div class="info-accordion-text">
               <p><strong>クーリングオフ期間</strong><br>
-              お客様は、商品やサービスの購入契約を締結した日から起算して、<strong>8日以内</strong>であれば、いかなる理由でも契約を解除することができます。</p>
-              
+                お客様は、商品やサービスの購入契約を締結した日から起算して、<strong>8日以内</strong>であれば、いかなる理由でも契約を解除することができます。</p>
+
               <p><strong>適用条件</strong><br>
-              クーリングオフを行うためには、<strong>「契約日から授業を一度も受けていない状態」</strong>であることが必要です。</p>
-              
+                クーリングオフを行うためには、<strong>「契約日から授業を一度も受けていない状態」</strong>であることが必要です。</p>
+
               <p><strong>手続き方法</strong><br>
-              クーリングオフを希望される場合は、期間内に <strong>info@eqao.co.jp</strong> までクーリングオフに必要な書類を送信してください。</p>
-              
+                クーリングオフを希望される場合は、期間内に <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                    data-cfemail="d8b1b6beb798bda9b9b7f6bbb7f6b2a8">[email&#160;protected]</a></strong>
+                までクーリングオフに必要な書類を送信してください。</p>
+
               <div class="note">
                 契約解除が成立した場合、既にお支払いいただいた金額は全額返金いたします。返金は、契約解除の通知を受けてから14日以内に行われます。
               </div>
             </div>
           </div>
         </div>
-        
+
         <!-- 返金の流れ -->
         <div class="info-accordion-item" id="info-refund">
           <div class="info-accordion-header" onclick="toggleInfoAccordion('info-refund')">
             <div class="info-accordion-icon purple">
-              <span class="material-icons">sync</span>
+              <i data-lucide="refresh-cw" style="width:12px;height:12px;"></i>
             </div>
             <span class="info-accordion-title">返金の流れ</span>
-            <span class="info-accordion-arrow">
-              <span class="material-icons">expand_more</span>
-            </span>
+            <i data-lucide="chevron-down" class="info-accordion-arrow" style="width:14px;height:14px;"></i>
           </div>
           <div class="info-accordion-content">
             <div class="info-accordion-text">
               <p><strong>① 口座情報の提供</strong><br>
-              返金用の銀行口座情報（口座名義、銀行名、支店名、口座番号）をご提供いただきます。<br>
-              ※弊社から公式LINEにてご連絡させていただきます。</p>
-              
+                返金用の銀行口座情報（口座名義、銀行名、支店名、口座番号）をご提供いただきます。<br>
+                ※弊社から公式LINEにてご連絡させていただきます。</p>
+
               <p><strong>② 返金額の通知</strong><br>
-              返金額を計算し、その結果を書面にてお客様へお知らせいたします。<br>
-              ※弊社から公式LINEにてご連絡させていただきます。</p>
-              
+                返金額を計算し、その結果を書面にてお客様へお知らせいたします。<br>
+                ※弊社から公式LINEにてご連絡させていただきます。</p>
+
               <p><strong>③ 返金の実行</strong><br>
-              問題がなければ、お知らせした着金予定日にご指定の口座へ返金を行います。<br>
-              ※万一、着金のご確認が取れない場合は、公式メールにてお問合せください。</p>
-              
+                問題がなければ、お知らせした着金予定日にご指定の口座へ返金を行います。<br>
+                ※万一、着金のご確認が取れない場合は、公式メールにてお問合せください。</p>
+
               <p><strong>④ 入金の確認と連絡のお願い</strong><br>
-              返金が完了しましたら、お客様に入金の確認をしていただき、その旨を弊社のメールまでご連絡ください。</p>
+                返金が完了しましたら、お客様に入金の確認をしていただき、その旨を弊社のメールまでご連絡ください。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 禁止事項・対応方針 -->
+        <div class="info-accordion-item" id="info-policy">
+          <div class="info-accordion-header" onclick="toggleInfoAccordion('info-policy')">
+            <div class="info-accordion-icon red">
+              <i data-lucide="shield-alert" style="width:12px;height:12px;"></i>
+            </div>
+            <span class="info-accordion-title">禁止事項・対応方針</span>
+            <i data-lucide="chevron-down" class="info-accordion-arrow" style="width:14px;height:14px;"></i>
+          </div>
+          <div class="info-accordion-content">
+            <div class="info-accordion-text">
+              <p><strong>情報漏洩・教材無断使用に関する禁止事項および対応方針</strong></p>
+
+              <p>当社が提供する教材、動画、資料、カリキュラム、指導内容その他一切の情報は、当社および当社スタッフが独自に制作・管理しているものであり、受講者本人の学習目的に限って利用されるものです。</p>
+
+              <p>これらの情報について、第三者への共有、転載、転送、複製、販売、公開、SNSや外部サービスへの掲載等を、当社の許可なく行うことを固く禁止します。</p>
+
+              <p>また、意図的であるか否かを問わず、外部への情報漏洩や無断配布が確認された場合は、重大な契約違反とみなします。</p>
+
+              <p><strong>違反が確認された場合の対応</strong><br>
+                万一、当社の教材・動画・内部情報等が外部に流出した、または無断で第三者に提供された事実が確認された場合、いかなる理由があっても、即時退塾（契約解除）手続きとさせていただきます。</p>
+
+              <p>この場合、既にお支払いいただいた受講料等の返金には一切応じません。さらに、当該行為により当社に損害が生じた場合には、損害賠償およびそれに付随する費用を請求させていただきます。</p>
+
+              <p>故意・過失の別、動機、事情の如何を問わず、責任が免除されることはありません。</p>
+
+              <p><strong>当社の姿勢</strong><br>
+                当社は、すべての受講者が安心して学習できる環境を守るため、情報管理および権利保護を極めて重要なものと位置づけています。</p>
+
+              <p>本サービスへのお申し込みにあたっては、本規定の内容をご理解・ご了承のうえ、当社の教材および情報を適切に取り扱っていただくようお願いいたします。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 講師指名制度 -->
+        <div class="info-accordion-item" id="info-instructor">
+          <div class="info-accordion-header" onclick="toggleInfoAccordion('info-instructor')">
+            <div class="info-accordion-icon blue">
+              <i data-lucide="user-check" style="width:12px;height:12px;"></i>
+            </div>
+            <span class="info-accordion-title">講師指名制度に関する規定</span>
+            <i data-lucide="chevron-down" class="info-accordion-arrow" style="width:14px;height:14px;"></i>
+          </div>
+          <div class="info-accordion-content">
+            <div class="info-accordion-text">
+              <p><strong>講師指名制度に関する基本方針および制限規定</strong></p>
+
+              <p>当社では、有料オプションとして講師の固定指名を行うことが可能です。</p>
+
+              <p>ただし、講師指名は「指名料を支払えば必ず成立するもの」ではなく、一定の条件および制限がある制度であることを、あらかじめご理解ください。</p>
+
+              <p><strong>指名が成立しない場合について</strong><br>
+                講師にはそれぞれ担当可能な人数・稼働時間等のキャパシティがあり、すでに他の受講者による固定指名や担当が入っている場合、後から指名を希望されてもお受けできないことがあります。</p>
+
+              <p>講師の受け持ち人数が上限に達している場合には、指名そのものが成立しない場合があります。</p>
+
+              <p>また、指名希望が集中した場合や、指導方針・相性・稼働状況等を総合的に判断した結果、講師側から指名をお断りするケースもあり得ます。</p>
+
+              <p>この場合においても、指名料を支払えば必ず指名が成立するという扱いにはなりません。</p>
+
+              <p><strong>例外対応について</strong><br>
+                指名が成立しなかった場合や、途中で指名対応ができなくなった場合において、指名料の上乗せによる優先対応、例外的な対応、特別な確約等は行っておりません。</p>
+
+              <p><strong>指名可否の判断基準</strong><br>
+                講師指名の可否は、以下を踏まえ総合的に判断されます。</p>
+              <ul style="margin: 8px 0 8px 20px; color: #6b7280;">
+                <li>講師本人の稼働状況および意向</li>
+                <li>事前の申込み状況</li>
+                <li>受講者本人の学習姿勢や継続意欲</li>
+              </ul>
+
+              <p>本制度は、講師・受講者双方にとって無理のない、質の高い指導環境を維持するためのものです。</p>
+
+              <p>指名制度の性質および制限についてご理解・ご了承のうえ、お申し込みいただくものとします。</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
+
     <!-- オプション一覧モーダル -->
     <div class="option-modal-overlay" id="option-modal-overlay" onclick="hideOptionModal(event)">
       <div class="option-modal" onclick="event.stopPropagation()">
         <div class="option-modal-header">
           <button class="option-modal-close" onclick="hideOptionModal()">
-            <span class="material-icons">close</span>
+            <i data-lucide="x" style="width:18px;height:18px;"></i>
           </button>
           <h3 class="option-modal-title">オプション一覧</h3>
           <p class="option-modal-subtitle">各種オプションメニューと料金</p>
@@ -1475,7 +1818,7 @@
           <!-- 注意書き -->
           <div class="option-notice">
             <div class="option-notice-icon">
-              <span class="material-icons">check</span>
+              <i data-lucide="check" style="width:12px;height:12px;"></i>
             </div>
             <p class="option-notice-text">
               オプションはすべて<strong>任意</strong>です。<br>
@@ -1483,11 +1826,11 @@
               必要に応じてご検討ください。
             </p>
           </div>
-          
+
           <!-- 授業関連オプション -->
           <div class="option-category">
             <div class="option-category-title">
-              <span class="material-icons">person_add</span>
+              <i data-lucide="user-check" style="width:14px;height:14px;"></i>
               授業関連オプション
             </div>
             <div class="option-list">
@@ -1507,25 +1850,25 @@
               </div>
             </div>
           </div>
-          
+
           <!-- 教材・模試 -->
           <div class="option-category">
             <div class="option-category-title">
-              <span class="material-icons">menu_book</span>
+              <i data-lucide="book-open" style="width:14px;height:14px;"></i>
               教材・模試
             </div>
             <div class="option-list">
               <div class="option-item">
                 <span class="option-item-name">
                   過去動画教材費
-                  <span class="sub">入塾時に購入の場合</span>
+                  <span class="sub">代表による過去の集団授業動画 / 入塾時に購入の場合</span>
                 </span>
                 <span class="option-item-price">11,000円<span class="sub">/初回</span></span>
               </div>
               <div class="option-item">
                 <span class="option-item-name">
                   過去動画教材費
-                  <span class="sub">入塾後に追加購入の場合</span>
+                  <span class="sub">代表による過去の集団授業動画 / 入塾後に追加購入の場合</span>
                 </span>
                 <span class="option-item-price">39,800円<span class="sub">/払い切り</span></span>
               </div>
@@ -1538,11 +1881,11 @@
               </div>
             </div>
           </div>
-          
+
           <!-- 特別プログラム -->
           <div class="option-category">
             <div class="option-category-title">
-              <span class="material-icons">auto_awesome</span>
+              <i data-lucide="sparkles" style="width:14px;height:14px;"></i>
               特別プログラム
             </div>
             <div class="option-list">
@@ -1583,11 +1926,11 @@
               </div>
             </div>
           </div>
-          
+
           <!-- 割引制度 -->
           <div class="option-category">
             <div class="option-category-title">
-              <span class="material-icons">percent</span>
+              <i data-lucide="percent" style="width:14px;height:14px;"></i>
               まとめ払い割引制度
             </div>
             <div class="option-list">
@@ -1596,16 +1939,32 @@
                 <span class="option-item-price">-10,000円</span>
               </div>
               <div class="option-item option-discount">
+                <span class="option-item-name">5ヶ月まとめ払い</span>
+                <span class="option-item-price">-12,500円</span>
+              </div>
+              <div class="option-item option-discount">
                 <span class="option-item-name">6ヶ月まとめ払い</span>
                 <span class="option-item-price">-15,000円</span>
+              </div>
+              <div class="option-item option-discount">
+                <span class="option-item-name">7ヶ月まとめ払い</span>
+                <span class="option-item-price">-17,500円</span>
               </div>
               <div class="option-item option-discount">
                 <span class="option-item-name">8ヶ月まとめ払い</span>
                 <span class="option-item-price">-20,000円</span>
               </div>
               <div class="option-item option-discount">
+                <span class="option-item-name">9ヶ月まとめ払い</span>
+                <span class="option-item-price">-25,000円</span>
+              </div>
+              <div class="option-item option-discount">
                 <span class="option-item-name">10ヶ月まとめ払い</span>
                 <span class="option-item-price">-30,000円</span>
+              </div>
+              <div class="option-item option-discount">
+                <span class="option-item-name">11ヶ月まとめ払い</span>
+                <span class="option-item-price">-35,000円</span>
               </div>
               <div class="option-item option-discount">
                 <span class="option-item-name">12ヶ月まとめ払い</span>
@@ -1616,98 +1975,34 @@
         </div>
       </div>
     </div>
-    
+
     <!-- フッターリンク -->
     <div class="footer-link">
       <a href="index.html">
-        <span class="material-icons">arrow_back</span>
+        <i data-lucide="arrow-left" style="width:14px;height:14px;"></i>
         トップページに戻る
       </a>
     </div>
   </main>
-  
+
   <script>
-    // 料金設定
-    const ENROLLMENT_FEE = 39800;  // 入塾金
-    const MATERIAL_FEE = 19800;    // 教材費
-    const ACCOUNT_FEE = 550;       // アカウント設定費用
-    const BASIC_FEE = 11980;       // 在籍基本料（月額）
-    const SYSTEM_FEE = 2980;       // システムサーバー費（月額）
-    
-    // 初期値
-    let selectedCoursePrice = 13500; // 最難関私大
-    let lessonsPerMonth = 8;
-    let months = 6;
-    
-    document.addEventListener('DOMContentLoaded', function() {
+    // 初期化
+    document.addEventListener('DOMContentLoaded', function () {
+      checkAuth();
+
+      document.getElementById('auth-input').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') submitAuth();
+      });
+
+      document.getElementById('auth-input').addEventListener('input', function () {
+        this.classList.remove('error');
+        document.getElementById('auth-error').classList.remove('show');
+      });
+
+      lucide.createIcons();
       calculate();
     });
-    
-    // コース選択
-    function selectCourse(element) {
-      document.querySelectorAll('.course-option').forEach(opt => {
-        opt.classList.remove('selected');
-      });
-      
-      element.classList.add('selected');
-      selectedCoursePrice = parseInt(element.dataset.price);
-      
-      calculate();
-    }
-    
-    // コマ数更新
-    function updateLessons(value) {
-      lessonsPerMonth = parseInt(value);
-      document.getElementById('lessons-value').textContent = value;
-      calculate();
-    }
-    
-    // 月数更新
-    function updateMonths(value) {
-      months = parseInt(value);
-      document.getElementById('months-value').textContent = value;
-      document.getElementById('months-label').textContent = value;
-      calculate();
-    }
-    
-    // 計算
-    function calculate() {
-      const initialCost = ENROLLMENT_FEE + MATERIAL_FEE + ACCOUNT_FEE;
-      const lessonCost = selectedCoursePrice * lessonsPerMonth;
-      const monthlyCost = BASIC_FEE + SYSTEM_FEE + lessonCost;
-      const totalCost = initialCost + (monthlyCost * months);
-      
-      document.getElementById('initial-cost').textContent = formatPrice(initialCost);
-      document.getElementById('monthly-cost').textContent = formatPrice(monthlyCost);
-      document.getElementById('lesson-cost-display').textContent = formatPrice(lessonCost);
-      document.getElementById('total-cost').textContent = formatPrice(totalCost);
-    }
-    
-    // 金額フォーマット
-    function formatPrice(price) {
-      return price.toLocaleString() + '円';
-    }
-    
-    // オプションモーダル表示
-    function showOptionModal() {
-      document.getElementById('option-modal-overlay').classList.add('show');
-      document.body.style.overflow = 'hidden';
-    }
-    
-    // オプションモーダル非表示
-    function hideOptionModal(event) {
-      if (event && event.target !== event.currentTarget) return;
-      document.getElementById('option-modal-overlay').classList.remove('show');
-      document.body.style.overflow = '';
-    }
-    
-    // 情報アコーディオン開閉
-    function toggleInfoAccordion(itemId) {
-      const item = document.getElementById(itemId);
-      item.classList.toggle('open');
-    }
   </script>
-  
-  <script src="js/nav-menu.js"></script>
 </body>
+
 </html>

@@ -138,23 +138,64 @@
       font-weight: 500;
     }
 
+    /* セグメントセクション */
+    .segment-section {
+      margin-bottom: 28px;
+    }
+
+    .segment-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .segment-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .segment-icon .material-icons {
+      font-size: 20px;
+      color: white;
+    }
+
+    .segment-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a237e;
+    }
+
+    .segment-progress {
+      margin-left: auto;
+      font-size: 13px;
+      color: #666;
+      font-weight: 500;
+    }
+
     /* カテゴリカード */
     .category-grid {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .category-card {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 20px;
+      gap: 14px;
+      padding: 16px;
       background: white;
-      border-radius: 16px;
+      border-radius: 14px;
       text-decoration: none;
       color: inherit;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
       transition: all 0.3s ease;
     }
 
@@ -168,10 +209,10 @@
     }
 
     .category-icon {
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-      border-radius: 14px;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #e8ecf4 0%, #f0f2f7 100%);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -179,8 +220,8 @@
     }
 
     .category-icon .material-icons {
-      font-size: 28px;
-      color: white;
+      font-size: 24px;
+      color: #1a237e;
     }
 
     .category-info {
@@ -189,8 +230,8 @@
     }
 
     .category-name {
-      font-size: 16px;
-      font-weight: 700;
+      font-size: 15px;
+      font-weight: 600;
       color: #333;
       margin-bottom: 6px;
     }
@@ -203,30 +244,30 @@
 
     .category-progress-bar {
       flex: 1;
-      height: 8px;
+      height: 6px;
       background: #e8ecf4;
-      border-radius: 4px;
+      border-radius: 3px;
       overflow: hidden;
     }
 
     .category-progress-fill {
       height: 100%;
       background: linear-gradient(90deg, #00695c 0%, #26a69a 100%);
-      border-radius: 4px;
+      border-radius: 3px;
       transition: width 0.5s ease;
     }
 
     .category-progress-text {
-      font-size: 14px;
+      font-size: 13px;
       color: #666;
       font-weight: 600;
-      min-width: 80px;
+      min-width: 70px;
       text-align: right;
     }
 
     .category-arrow {
-      color: #999;
-      font-size: 28px;
+      color: #bbb;
+      font-size: 24px;
       flex-shrink: 0;
     }
 
@@ -283,32 +324,50 @@
         font-size: 24px;
       }
 
+      .segment-header {
+        margin-bottom: 10px;
+      }
+
+      .segment-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+      }
+
+      .segment-icon .material-icons {
+        font-size: 18px;
+      }
+
+      .segment-title {
+        font-size: 15px;
+      }
+
       .category-card {
-        padding: 16px;
+        padding: 14px;
         gap: 12px;
       }
 
       .category-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
       }
 
       .category-icon .material-icons {
-        font-size: 24px;
+        font-size: 22px;
       }
 
       .category-name {
-        font-size: 15px;
+        font-size: 14px;
       }
 
       .category-progress-text {
-        font-size: 13px;
-        min-width: 70px;
+        font-size: 12px;
+        min-width: 60px;
       }
 
       .category-arrow {
-        font-size: 24px;
+        font-size: 22px;
       }
     }
 
@@ -492,8 +551,8 @@
       <div id="progressPercent" class="progress-percent">0%</div>
     </div>
 
-    <!-- カテゴリ一覧 -->
-    <div id="categoryContainer" class="category-grid">
+    <!-- セグメント別カテゴリ一覧 -->
+    <div id="categoryContainer">
       <div class="loading">
         <div class="loading-spinner"></div>
         <p>カテゴリを読み込み中...</p>
@@ -551,7 +610,7 @@
     // ============================================
     // 設定
     // ============================================
-    const JSON_URL = 'https://raw.githubusercontent.com/eqao-dev/eqao-portal/refs/heads/main/materials.json'; // ← GitHubのraw URLに置き換え
+    const JSON_URL = 'https://raw.githubusercontent.com/eqao-dev/eqao-portal/refs/heads/main/materials.json';
     const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
 
     // ============================================
@@ -559,7 +618,8 @@
     // ============================================
     let materialsData = [];
     let checkedItems = {};
-    let categories = [];
+    let segments = [];
+    let categoriesBySegment = {};
 
     // ============================================
     // 初期化
@@ -584,21 +644,34 @@
         if (!response.ok) throw new Error('JSON取得エラー');
         materialsData = await response.json();
 
-        // カテゴリ抽出（順序維持）
-        const seen = new Set();
-        categories = materialsData
-          .map(item => item.category)
-          .filter(cat => {
-            if (seen.has(cat)) return false;
-            seen.add(cat);
-            return true;
-          });
+        // セグメントとカテゴリを抽出（順序維持）
+        const seenSegments = new Set();
+        const seenCategories = {};
+        
+        materialsData.forEach(item => {
+          const seg = item.segment || '未分類';
+          const cat = item.category;
+          
+          // セグメント順序維持
+          if (!seenSegments.has(seg)) {
+            seenSegments.add(seg);
+            segments.push(seg);
+            categoriesBySegment[seg] = [];
+            seenCategories[seg] = new Set();
+          }
+          
+          // カテゴリ順序維持
+          if (!seenCategories[seg].has(cat)) {
+            seenCategories[seg].add(cat);
+            categoriesBySegment[seg].push(cat);
+          }
+        });
 
         // チェック状態取得
         await loadCheckedState();
 
         // 表示
-        renderCategories();
+        renderSegments();
         updateTotalProgress();
       } catch (error) {
         console.error('読み込みエラー:', error);
@@ -632,35 +705,63 @@
     // ============================================
     // 表示
     // ============================================
-    function renderCategories() {
+    function renderSegments() {
       const container = document.getElementById('categoryContainer');
       
       let html = '';
-      categories.forEach(category => {
-        const items = materialsData.filter(item => item.category === category);
-        const checkedCount = items.filter(item => {
+      segments.forEach(segment => {
+        // セグメント内の全アイテム
+        const segmentItems = materialsData.filter(item => (item.segment || '未分類') === segment);
+        const segmentChecked = segmentItems.filter(item => {
           const key = `${item.category}::${item.name}`;
           return checkedItems[key] === true;
         }).length;
-        const total = items.length;
-        const percent = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+        const segmentTotal = segmentItems.length;
 
         html += `
-          <a href="materials-detail.html?category=${encodeURIComponent(category)}" class="category-card">
-            <div class="category-icon">
-              <span class="material-icons">${getCategoryIcon(category)}</span>
-            </div>
-            <div class="category-info">
-              <div class="category-name">${escapeHtml(category)}</div>
-              <div class="category-progress">
-                <div class="category-progress-bar">
-                  <div class="category-progress-fill" style="width: ${percent}%"></div>
-                </div>
-                <div class="category-progress-text">${checkedCount} / ${total}</div>
+          <div class="segment-section">
+            <div class="segment-header">
+              <div class="segment-icon">
+                <span class="material-icons">${getSegmentIcon(segment)}</span>
               </div>
+              <div class="segment-title">${escapeHtml(segment)}</div>
+              <div class="segment-progress">${segmentChecked} / ${segmentTotal}</div>
             </div>
-            <span class="material-icons category-arrow">chevron_right</span>
-          </a>
+            <div class="category-grid">
+        `;
+
+        // セグメント内のカテゴリ
+        categoriesBySegment[segment].forEach(category => {
+          const items = materialsData.filter(item => item.category === category);
+          const checkedCount = items.filter(item => {
+            const key = `${item.category}::${item.name}`;
+            return checkedItems[key] === true;
+          }).length;
+          const total = items.length;
+          const percent = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+
+          html += `
+            <a href="materials-detail.html?category=${encodeURIComponent(category)}" class="category-card">
+              <div class="category-icon">
+                <span class="material-icons">${getCategoryIcon(category)}</span>
+              </div>
+              <div class="category-info">
+                <div class="category-name">${escapeHtml(category)}</div>
+                <div class="category-progress">
+                  <div class="category-progress-bar">
+                    <div class="category-progress-fill" style="width: ${percent}%"></div>
+                  </div>
+                  <div class="category-progress-text">${checkedCount} / ${total}</div>
+                </div>
+              </div>
+              <span class="material-icons category-arrow">chevron_right</span>
+            </a>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
         `;
       });
 
@@ -676,6 +777,14 @@
       document.getElementById('totalCount').textContent = total;
       document.getElementById('progressBar').style.width = percent + '%';
       document.getElementById('progressPercent').textContent = percent + '% 完了';
+    }
+
+    function getSegmentIcon(segment) {
+      if (segment.includes('教養')) return 'auto_stories';
+      if (segment.includes('基礎') || segment.includes('学力')) return 'school';
+      if (segment.includes('小論文')) return 'edit_note';
+      if (segment.includes('面接') || segment.includes('口頭')) return 'record_voice_over';
+      return 'folder_open';
     }
 
     function getCategoryIcon(category) {
