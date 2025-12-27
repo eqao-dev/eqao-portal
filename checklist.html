@@ -1276,9 +1276,9 @@
       <div class="completion-bottom-icon">
         <span class="material-icons">celebration</span>
       </div>
-      <div class="completion-bottom-text">全て完了しました！</div>
+      <div class="completion-bottom-text" id="completionBottomText">全て完了しました！</div>
     </div>
-    <button class="completion-bottom-btn" onclick="window.location.href='quiz.html'">
+    <button id="completionQuizBtn" class="completion-bottom-btn" onclick="goToQuizForCategory()">
       <span class="material-icons">quiz</span>
       確認テストを受ける
     </button>
@@ -1335,6 +1335,7 @@
     // 設定
     // ============================================
     const JSON_URL = 'checklist_master.json';
+    const QUIZ_URL = 'quiz_data.json'; 
     const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
     const SYNC_INTERVAL = 15 * 1000;
 
@@ -1366,6 +1367,7 @@
     let syncTimer = null;
     let parentCategories = [];
     let openParents = new Set();
+    let quizCategories = new Set();
 
     // ============================================
     // localStorage キー
@@ -1397,6 +1399,40 @@
       } catch (e) {
         console.error('チェック状態の読み込みエラー:', e);
         checkState = {};
+      }
+    }
+
+    // ============================================
+    // クイズカテゴリの読み込み
+    // ============================================
+    async function loadQuizCategories() {
+      try {
+        const response = await fetch(QUIZ_URL + '?t=' + Date.now());
+        if (!response.ok) return;
+        const quizData = await response.json();
+        
+        // 各大カテゴリ内のmid_categoriesを収集
+        for (const parentName in quizData) {
+          const parentData = quizData[parentName];
+          if (parentData.mid_categories) {
+            parentData.mid_categories.forEach(cat => quizCategories.add(cat));
+          }
+        }
+        console.log('クイズカテゴリ読み込み完了:', quizCategories.size, '件');
+      } catch (error) {
+        console.error('クイズデータの読み込みエラー:', error);
+      }
+    }
+
+    function hasQuizForCategory(categoryName) {
+      return quizCategories.has(categoryName);
+    }
+
+    function goToQuizForCategory() {
+      if (currentCategory) {
+        window.location.href = 'quiz.html?category=' + encodeURIComponent(currentCategory);
+      } else {
+        window.location.href = 'quiz.html';
       }
     }
 
@@ -1723,11 +1759,23 @@
       document.getElementById('detailProgressFill').style.width = percent + '%';
       document.getElementById('detailProgressText').textContent = checked + ' / ' + items.length;
 
-      // 完了メッセージ
+      // 下部固定バーの表示制御
       const bottomBar = document.getElementById('completionBottomBar');
+      const quizBtn = document.getElementById('completionQuizBtn');
+      const bottomText = document.getElementById('completionBottomText');
+
       if (isComplete) {
         bottomBar.classList.add('show');
         document.body.classList.add('has-completion-bar');
+        
+        // テストの有無でボタン表示を切り替え
+        if (hasQuizForCategory(currentCategory)) {
+          quizBtn.style.display = 'flex';
+          bottomText.textContent = '全て完了しました！';
+        } else {
+          quizBtn.style.display = 'none';
+          bottomText.textContent = '全て完了しました！おめでとう！';
+        }
       } else {
         bottomBar.classList.remove('show');
         document.body.classList.remove('has-completion-bar');
@@ -1815,9 +1863,21 @@
 
       // 下部固定バーの表示制御
       const bottomBar = document.getElementById('completionBottomBar');
+      const quizBtn = document.getElementById('completionQuizBtn');
+      const bottomText = document.getElementById('completionBottomText');
+
       if (isComplete) {
         bottomBar.classList.add('show');
         document.body.classList.add('has-completion-bar');
+        
+        // テストの有無でボタン表示を切り替え
+        if (hasQuizForCategory(currentCategory)) { 
+          quizBtn.style.display = 'flex';
+          bottomText.textContent = '全て完了しました！';
+        } else {
+          quizBtn.style.display = 'none';
+          bottomText.textContent = '全て完了しました！おめでとう！';
+        }
       } else {
         bottomBar.classList.remove('show');
         document.body.classList.remove('has-completion-bar');
@@ -1897,6 +1957,7 @@
 
       setNavUserName();
       loadCheckState();
+      await loadQuizCategories(); 
 
       const loaded = await loadMasterData();
       if (!loaded) return;
