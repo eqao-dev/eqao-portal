@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +42,7 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -51,7 +52,7 @@
     }
 
     .back-btn:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
     }
 
     .header-title {
@@ -80,7 +81,7 @@
       background: white;
       border-radius: 16px;
       padding: 20px;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     }
 
@@ -138,9 +139,118 @@
       font-weight: 500;
     }
 
+    /* セグメントフィルター */
+.segment-filter-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.segment-filter {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0;
+  padding-right: 40px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.segment-filter::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.filter-btn:hover {
+  border-color: #1a237e;
+  color: #1a237e;
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  border-color: #1a237e;
+  color: white;
+}
+
+.filter-btn .material-icons {
+  font-size: 18px;
+}
+
+.filter-btn .filter-count {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.filter-btn.active .filter-count {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.scroll-hint {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  background: linear-gradient(90deg, transparent 0%, #f0f2f8 70%, #f0f2f8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 4px;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-hint .material-icons {
+  font-size: 24px;
+  color: #1a237e;
+  animation: scrollHintPulse 1.5s ease-in-out infinite;
+}
+
+.scroll-hint.hidden {
+  opacity: 0;
+}
+
+@keyframes scrollHintPulse {
+  0%, 100% { transform: translateX(0); opacity: 0.6; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+
+/* スマホ対応 */
+@media (max-width: 480px) {
+  .scroll-hint {
+    width: 40px;
+  }
+  
+  .scroll-hint .material-icons {
+    font-size: 20px;
+  }
+}
+
     /* セグメントセクション */
     .segment-section {
       margin-bottom: 28px;
+    }
+
+    .segment-section.hidden {
+      display: none;
     }
 
     .segment-header {
@@ -289,7 +399,9 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     /* エラー */
@@ -322,6 +434,19 @@
 
       .progress-count {
         font-size: 24px;
+      }
+
+      .segment-filter {
+        gap: 6px;
+      }
+
+      .filter-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      .filter-btn .material-icons {
+        font-size: 16px;
       }
 
       .segment-header {
@@ -378,7 +503,7 @@
       justify-content: center;
       width: 36px;
       height: 36px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -387,7 +512,7 @@
     }
 
     .help-btn:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
     }
 
     .help-btn .material-icons {
@@ -425,8 +550,15 @@
     }
 
     @keyframes helpModalIn {
-      from { opacity: 0; transform: scale(0.95) translateY(-10px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
 
     .help-modal-header {
@@ -515,6 +647,7 @@
     }
   </style>
 </head>
+
 <body>
   <header class="header">
     <a href="index.html" class="back-btn">
@@ -550,6 +683,16 @@
       </div>
       <div id="progressPercent" class="progress-percent">0%</div>
     </div>
+
+    <!-- セグメントフィルター -->
+    <div class="segment-filter-wrapper">
+  <div id="segmentFilter" class="segment-filter">
+    <!-- JavaScriptで動的に生成 -->
+  </div>
+  <div class="scroll-hint" id="scrollHint">
+    <span class="material-icons">chevron_right</span>
+  </div>
+</div>
 
     <!-- セグメント別カテゴリ一覧 -->
     <div id="categoryContainer">
@@ -620,6 +763,7 @@
     let checkedItems = {};
     let segments = [];
     let categoriesBySegment = {};
+    let currentFilter = 'all';
 
     // ============================================
     // 初期化
@@ -647,11 +791,11 @@
         // セグメントとカテゴリを抽出（順序維持）
         const seenSegments = new Set();
         const seenCategories = {};
-        
+
         materialsData.forEach(item => {
           const seg = item.segment || '未分類';
           const cat = item.category;
-          
+
           // セグメント順序維持
           if (!seenSegments.has(seg)) {
             seenSegments.add(seg);
@@ -659,7 +803,7 @@
             categoriesBySegment[seg] = [];
             seenCategories[seg] = new Set();
           }
-          
+
           // カテゴリ順序維持
           if (!seenCategories[seg].has(cat)) {
             seenCategories[seg].add(cat);
@@ -669,6 +813,9 @@
 
         // チェック状態取得
         await loadCheckedState();
+
+        // フィルターボタン生成
+        renderFilterButtons();
 
         // 表示
         renderSegments();
@@ -693,7 +840,7 @@
         const url = `${API_URL}?action=getMaterialsState&studentId=${encodeURIComponent(studentId)}`;
         const response = await fetch(url);
         const result = await response.json();
-        
+
         if (result.success && result.checkedItems) {
           checkedItems = result.checkedItems;
         }
@@ -703,11 +850,103 @@
     }
 
     // ============================================
+    // フィルターボタン
+    // ============================================
+    function renderFilterButtons() {
+  const container = document.getElementById('segmentFilter');
+  
+  // 「すべて」ボタン
+  let html = `
+    <button class="filter-btn active" data-segment="all" onclick="filterSegment('all')">
+      <span class="material-icons">apps</span>
+      すべて
+      <span class="filter-count">${materialsData.length}</span>
+    </button>
+  `;
+
+  // 各セグメントボタン
+  segments.forEach(segment => {
+    const segmentItems = materialsData.filter(item => (item.segment || '未分類') === segment);
+    const count = segmentItems.length;
+    const icon = getSegmentIcon(segment);
+    
+    html += `
+      <button class="filter-btn" data-segment="${escapeHtml(segment)}" onclick="filterSegment('${escapeHtml(segment)}')">
+        <span class="material-icons">${icon}</span>
+        ${escapeHtml(segment)}
+        <span class="filter-count">${count}</span>
+      </button>
+    `;
+  });
+
+  container.innerHTML = html;
+
+  // ★ここから追加★ スクロールヒントの表示/非表示
+  setupScrollHint();
+}
+
+// ★新しく追加する関数★
+function setupScrollHint() {
+  const container = document.getElementById('segmentFilter');
+  const hint = document.getElementById('scrollHint');
+  
+  if (!container || !hint) return;
+
+  function checkScroll() {
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    const currentScroll = container.scrollLeft;
+    
+    // 右端に近づいたらヒントを非表示
+    if (maxScroll - currentScroll < 20) {
+      hint.classList.add('hidden');
+    } else {
+      hint.classList.remove('hidden');
+    }
+    
+    // そもそもスクロール不要ならヒント非表示
+    if (maxScroll <= 0) {
+      hint.classList.add('hidden');
+    }
+  }
+
+  container.addEventListener('scroll', checkScroll);
+  window.addEventListener('resize', checkScroll);
+  
+  // 初期チェック
+  setTimeout(checkScroll, 100);
+}
+
+    function filterSegment(segment) {
+      currentFilter = segment;
+
+      // ボタンのアクティブ状態更新
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.segment === segment) {
+          btn.classList.add('active');
+        }
+      });
+
+      // セグメントの表示/非表示
+      document.querySelectorAll('.segment-section').forEach(section => {
+        if (segment === 'all') {
+          section.classList.remove('hidden');
+        } else {
+          if (section.dataset.segment === segment) {
+            section.classList.remove('hidden');
+          } else {
+            section.classList.add('hidden');
+          }
+        }
+      });
+    }
+
+    // ============================================
     // 表示
     // ============================================
     function renderSegments() {
       const container = document.getElementById('categoryContainer');
-      
+
       let html = '';
       segments.forEach(segment => {
         // セグメント内の全アイテム
@@ -719,7 +958,7 @@
         const segmentTotal = segmentItems.length;
 
         html += `
-          <div class="segment-section">
+          <div class="segment-section" data-segment="${escapeHtml(segment)}">
             <div class="segment-header">
               <div class="segment-icon">
                 <span class="material-icons">${getSegmentIcon(segment)}</span>
@@ -806,4 +1045,5 @@
   </script>
   <script src="js/nav-menu.js"></script>
 </body>
+
 </html>
