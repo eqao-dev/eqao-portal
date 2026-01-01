@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
   <link rel="icon" type="image/png" href="/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
   <style>
     * {
       margin: 0;
@@ -20,53 +22,6 @@
       background: linear-gradient(135deg, #e3e8f4 0%, #d0d9e8 100%);
       min-height: 100vh;
       padding-bottom: 40px;
-    }
-
-    .header {
-      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-      color: white;
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .back-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.15);
-      border: none;
-      border-radius: 12px;
-      color: white;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-decoration: none;
-    }
-
-    .back-btn:hover {
-      background: rgba(255, 255, 255, 0.25);
-    }
-
-    .header-title {
-      flex: 1;
-    }
-
-    .header-title h1 {
-      font-size: 18px;
-      font-weight: 700;
-    }
-
-    .header-title .subtitle {
-      font-size: 11px;
-      opacity: 0.8;
-      margin-top: 2px;
     }
 
     .container {
@@ -95,7 +50,7 @@
       right: -50%;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -242,12 +197,29 @@
       color: white;
     }
 
-    .merit-icon.orange { background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); }
-    .merit-icon.blue { background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); }
-    .merit-icon.green { background: linear-gradient(135deg, #43a047 0%, #66bb6a 100%); }
-    .merit-icon.purple { background: linear-gradient(135deg, #7b1fa2 0%, #ab47bc 100%); }
-    .merit-icon.teal { background: linear-gradient(135deg, #00695c 0%, #26a69a 100%); }
-    .merit-icon.pink { background: linear-gradient(135deg, #c2185b 0%, #f06292 100%); }
+    .merit-icon.orange {
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    }
+
+    .merit-icon.blue {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+    }
+
+    .merit-icon.green {
+      background: linear-gradient(135deg, #43a047 0%, #66bb6a 100%);
+    }
+
+    .merit-icon.purple {
+      background: linear-gradient(135deg, #7b1fa2 0%, #ab47bc 100%);
+    }
+
+    .merit-icon.teal {
+      background: linear-gradient(135deg, #00695c 0%, #26a69a 100%);
+    }
+
+    .merit-icon.pink {
+      background: linear-gradient(135deg, #c2185b 0%, #f06292 100%);
+    }
 
     .merit-content h4 {
       font-size: 15px;
@@ -599,16 +571,65 @@
         grid-template-columns: 1fr;
       }
     }
+
+    .header-faq-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .header-faq-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .header-faq-btn .material-icons {
+      font-size: 18px;
+    }
+
+    .hamburger-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+    }
+
+    .hamburger-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
   </style>
 </head>
+
 <body>
-  <header class="header">
-    <a href="index.html" class="back-btn">
-      <span class="material-icons">arrow_back</span>
-    </a>
-    <div class="header-title">
-      <h1>塾生交流会</h1>
-      <p class="subtitle">仲間とつながり、共に成長する</p>
+  <header class="common-header">
+    <div class="common-header-content">
+      <a href="index.html" class="back-btn">
+        <span class="material-icons">arrow_back</span>
+      </a>
+      <div class="header-logo">
+        <img src="/logo.png" alt="EQAO">
+      </div>
+      <span class="header-title">塾生交流会</span>
+      <a href="faq.html" class="header-faq-btn">
+        <span class="material-icons">help_outline</span>
+        <span>FAQ</span>
+      </a>
+      <button class="hamburger-btn" onclick="openNav()">
+        <span class="material-icons">menu</span>
+      </button>
     </div>
   </header>
 
@@ -639,7 +660,7 @@
 
         <div class="highlight-box">
           <p>✨ 一人で抱え込まないで！同じ悩みを持つ仲間がいます。<br>
-          交流会で得られる「仲間の存在」は、受験を乗り越える大きな力になります。</p>
+            交流会で得られる「仲間の存在」は、受験を乗り越える大きな力になります。</p>
         </div>
 
         <p>
@@ -961,5 +982,7 @@
       </a>
     </div>
   </div>
+  <script src="js/nav-menu.js"></script>
 </body>
+
 </html>
