@@ -2002,6 +2002,18 @@
       position: relative;
     }
 
+    .menu-btn .personal-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #ff5722;
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
     @media (max-width: 480px) {
       .header {
         padding: 14px 16px;
@@ -4631,8 +4643,8 @@
               今日の学習を記録
             </button>
             <button class="study-btn study-btn-manage" onclick="openManageModal()">
-              <span class="material-icons">edit_note</span>
-              記録を管理
+              <span class="material-icons">history</span>
+              記録の編集・削除
             </button>
           </div>
         </div>
@@ -4934,24 +4946,32 @@
 
     <div class="section" id="section-schedule">
       <h2 class="section-title">スケジュール</h2>
-      <div class="button-grid">
+      <div class="button-grid-2col">
         <a href="yearly-schedule.html" class="menu-btn">
           <div class="icon-wrapper icon-blue">
             <span class="material-icons">calendar_month</span>
           </div>
           <span>年間<br>スケジュール</span>
         </a>
-        <a href="exam-schedule.html" class="menu-btn">
+        <a href="exam-schedule.html" class="menu-btn has-badge">
+          <span class="personal-badge">個別</span>
           <div class="icon-wrapper icon-indigo">
             <span class="material-icons">school</span>
           </div>
           <span>受験<br>スケジュール</span>
         </a>
-        <a href="schedule.html" class="menu-btn">
+        <a href="schedule.html" class="menu-btn has-badge">
+          <span class="personal-badge">個別</span>
           <div class="icon-wrapper icon-purple">
             <span class="material-icons">event_note</span>
           </div>
           <span>授業<br>スケジュール</span>
+        </a>
+        <a href="zoom-links.html" class="menu-btn">
+          <div class="icon-wrapper icon-purple">
+            <span class="material-icons">videocam</span>
+          </div>
+          <span>Zoomリンク<br>一覧</span>
         </a>
       </div>
     </div>
@@ -4965,13 +4985,15 @@
           </div>
           <span>チェックリスト<br>教材</span>
         </a>
-        <a href="progress.html" class="menu-btn">
+        <a href="progress.html" class="menu-btn has-badge">
+          <span class="personal-badge">個別</span>
           <div class="icon-wrapper icon-teal">
             <span class="material-icons">trending_up</span>
           </div>
           <span>自己/進捗<br>管理シート</span>
         </a>
-        <a href="school-list.html" class="menu-btn">
+        <a href="school-list.html" class="menu-btn has-badge">
+          <span class="personal-badge">個別</span>
           <div class="icon-wrapper icon-teal">
             <span class="material-icons">location_city</span>
           </div>
@@ -4983,23 +5005,18 @@
     <div class="section" id="section-learning">
       <h2 class="section-title">学習コンテンツ</h2>
       <div class="button-grid">
+        <!-- 1行目 -->
         <a href="https://one-stream.io/join/user/dfc86da0-9483-45b9-97e9-2b633cb669ac" target="_blank" class="menu-btn">
           <div class="icon-wrapper icon-orange">
             <span class="material-icons">play_circle</span>
           </div>
-          <span>動画教材<br>（onestream）</span>
-        </a>
-        <a href="materials.html" class="menu-btn">
-          <div class="icon-wrapper icon-orange">
-            <span class="material-icons">folder_shared</span>
-          </div>
-          <span>生徒共通<br>教材一覧</span>
+          <span>動画教材</span>
         </a>
         <a href="videos.html" class="menu-btn">
           <div class="icon-wrapper icon-pink">
             <span class="material-icons">video_library</span>
           </div>
-          <span>過去の集団<br>授業動画</span>
+          <span>過去の集団授業</span>
         </a>
         <a href="https://www.notion.so/EQAO-COMMUNITY-LINE-21f5f9664112803a8ee2cff1a4d5e2a7" target="_blank"
           class="menu-btn">
@@ -5008,18 +5025,26 @@
           </div>
           <span>生徒<br>プラットフォーム</span>
         </a>
+        <!-- 2行目 -->
+        <a href="materials.html" class="menu-btn">
+          <div class="icon-wrapper icon-orange">
+            <span class="material-icons">folder_shared</span>
+          </div>
+          <span>教材/問題集一式</span>
+        </a>
+        <span class="menu-btn disabled has-badge">
+          <span class="personal-badge">個別</span>
+          <div class="icon-wrapper icon-orange">
+            <span class="material-icons">description</span>
+          </div>
+          <span>授業書類<br>一覧</span>
+        </span>
         <a href="column.html" class="menu-btn">
           <div class="icon-wrapper icon-pink">
             <span class="material-icons">article</span>
           </div>
           <span>コラム<br>一覧</span>
         </a>
-        <span class="menu-btn disabled">
-          <div class="icon-wrapper icon-orange">
-            <span class="material-icons">description</span>
-          </div>
-          <span>授業書類<br>一覧</span>
-        </span>
       </div>
     </div>
 
@@ -5093,17 +5118,17 @@
     <div class="section" id="section-curriculum">
       <h2 class="section-title">カリキュラム・ルール</h2>
       <div class="button-grid">
-        <a href="zoom-links.html" class="menu-btn">
-          <div class="icon-wrapper icon-purple">
-            <span class="material-icons">videocam</span>
+        <a href="exchange-meeting.html" class="menu-btn">
+          <div class="icon-wrapper icon-orange">
+            <span class="material-icons">groups</span>
           </div>
-          <span>Zoomリンク<br>一覧</span>
+          <span>塾生交流会</span>
         </a>
         <a href="curriculum.html" class="menu-btn">
           <div class="icon-wrapper icon-purple">
             <span class="material-icons">route</span>
           </div>
-          <span>授業の<br>流れ</span>
+          <span>授業の流れ<br><small style="font-size:9px; opacity:0.7;">個別・集団授業</small></span>
         </a>
         <a href="curriculum-support.html" class="menu-btn">
           <div class="icon-wrapper icon-purple">
@@ -5116,6 +5141,12 @@
             <span class="material-icons">gavel</span>
           </div>
           <span>基本事項規定および<br>生徒保護者規則</span>
+        </a>
+        <a href="parent-checklist.html" class="menu-btn">
+          <div class="icon-wrapper icon-green">
+            <span class="material-icons">family_restroom</span>
+          </div>
+          <span>保護者向け<br>チェックリスト</span>
         </a>
       </div>
     </div>
@@ -5184,7 +5215,7 @@
       { title: '自己/進捗管理シート', href: 'progress.html', category: 'チェックリスト', icon: 'trending_up', color: 'icon-teal', keywords: ['進捗', '管理', '自己', 'シート'] },
       { title: '志望校/併願校管理シート', href: 'school-list.html', category: 'チェックリスト', icon: 'location_city', color: 'icon-teal', keywords: ['志望校', '併願校', '管理', '大学'] },
       // 学習コンテンツ
-      { title: '動画教材（onestream）', href: 'https://one-stream.io/join/user/dfc86da0-9483-45b9-97e9-2b633cb669ac', category: '学習コンテンツ', icon: 'play_circle', color: 'icon-orange', keywords: ['動画', '教材', 'onestream', '映像'], external: true },
+      { title: '動画教材', href: 'https://one-stream.io/join/user/dfc86da0-9483-45b9-97e9-2b633cb669ac', category: '学習コンテンツ', icon: 'play_circle', color: 'icon-orange', keywords: ['動画', '教材', 'onestream', '映像'], external: true },
       { title: '生徒共通教材一覧', href: 'materials.html', category: '学習コンテンツ', icon: 'folder_shared', color: 'icon-orange', keywords: ['教材', '資料', '共通'] },
       { title: '過去の集団授業動画', href: 'videos.html', category: '学習コンテンツ', icon: 'video_library', color: 'icon-pink', keywords: ['動画', '集団授業', '過去'] },
       { title: '生徒プラットフォーム', href: 'https://www.notion.so/EQAO-COMMUNITY-LINE-21f5f9664112803a8ee2cff1a4d5e2a7', category: '学習コンテンツ', icon: 'dashboard', color: 'icon-pink', keywords: ['プラットフォーム', 'notion', 'コミュニティ'], external: true },
@@ -6402,7 +6433,10 @@
       const today = new Date();
       const dayOfWeek = today.getDay(); // 0=日曜, 1=月曜, ...
       const monday = new Date(today);
-      monday.setDate(today.getDate() - dayOfWeek + 1 + (offset * 7));
+
+      // 日曜日(0)の場合は6日前の月曜日、それ以外は(dayOfWeek - 1)日前の月曜日
+      const daysToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+      monday.setDate(today.getDate() - daysToMonday + (offset * 7));
 
       const sunday = new Date(monday);
       sunday.setDate(monday.getDate() + 6);

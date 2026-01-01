@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>保護者向けチェックリスト | EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .back-btn {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    
+    .back-btn:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .intro-card {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    
+    .intro-card h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      color: #2e7d32;
+      margin-bottom: 12px;
+    }
+    
+    .intro-card p {
+      font-size: 14px;
+      color: #33691e;
+      line-height: 1.6;
+    }
+    
+    .progress-bar-container {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .progress-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .progress-count {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .progress-bar {
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4caf50, #81c784);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+    
+    .category {
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .category-header:hover {
+      background: linear-gradient(135deg, #bbdefb 0%, #90caf9 100%);
+    }
+    
+    .category-icon {
+      font-size: 24px;
+      color: #1565c0;
+    }
+    
+    .category-info {
+      flex: 1;
+    }
+    
+    .category-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0d47a1;
+      margin-bottom: 4px;
+    }
+    
+    .category-progress {
+      font-size: 12px;
+      color: #1976d2;
+    }
+    
+    .category-toggle {
+      font-size: 24px;
+      color: #1565c0;
+      transition: transform 0.3s;
+    }
+    
+    .category.collapsed .category-toggle {
+      transform: rotate(-90deg);
+    }
+    
+    .category-items {
+      padding: 12px;
+    }
+    
+    .category.collapsed .category-items {
+      display: none;
+    }
+    
+    .checklist-item {
+      display: flex;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      background: #fafafa;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    
+    .checklist-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .checklist-item:hover {
+      background: #f0f0f0;
+    }
+    
+    .checklist-item.checked {
+      background: #e8f5e9;
+    }
+    
+    .checkbox {
+      width: 24px;
+      height: 24px;
+      border: 2px solid #bdbdbd;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    
+    .checklist-item.checked .checkbox {
+      background: #4caf50;
+      border-color: #4caf50;
+    }
+    
+    .checkbox .material-icons {
+      font-size: 18px;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    
+    .checklist-item.checked .checkbox .material-icons {
+      opacity: 1;
+    }
+    
+    .item-content {
+      flex: 1;
+    }
+    
+    .item-number {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+      background: #9e9e9e;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-bottom: 6px;
+    }
+    
+    .checklist-item.checked .item-number {
+      background: #4caf50;
+    }
+    
+    .item-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    
+    .item-detail {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+    }
+    
+    .reset-section {
+      text-align: center;
+      padding: 20px;
+      margin-top: 10px;
+    }
+    
+    .reset-btn {
+      background: none;
+      border: 1px solid #e0e0e0;
+      color: #888;
+      padding: 10px 24px;
+      border-radius: 20px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .reset-btn:hover {
+      background: #f5f5f5;
+      border-color: #bdbdbd;
+      color: #666;
+    }
+    
+    .note-card {
+      background: #fff3e0;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    
+    .note-card .material-icons {
+      color: #ef6c00;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    
+    .note-card p {
+      font-size: 13px;
+      color: #e65100;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-content">
+      <a href="index.html" class="back-btn">
+        <span class="material-icons">arrow_back</span>
+      </a>
+      <div class="header-title">保護者向けチェックリスト</div>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div class="intro-card">
+      <h2>
+        <span class="material-icons">family_restroom</span>
+        保護者の皆様へ
+      </h2>
+      <p>総合型選抜では、お子様だけでなく保護者の方の理解とサポートも重要です。このチェックリストを参考に、お子様の受験準備をサポートしてください。チェック状態はこの端末に保存されます。</p>
+    </div>
+    
+    <div class="note-card">
+      <span class="material-icons">info</span>
+      <p>「三者面談で確認すべきこと」リストは、生徒本人用のチェックリストにも含まれています。親子で一緒に確認することをおすすめします。</p>
+    </div>
+    
+    <div class="progress-bar-container">
+      <div class="progress-header">
+        <span class="progress-label">全体の進捗</span>
+        <span class="progress-count" id="totalProgress">0 / 20</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+      </div>
+    </div>
+    
+    <!-- カテゴリ1: 総合型選抜に適した親になるためチェックリスト -->
+    <div class="category collapsed" id="category-1">
+      <div class="category-header" onclick="toggleCategory('category-1')">
+        <span class="material-icons category-icon">psychology</span>
+        <div class="category-info">
+          <div class="category-title">総合型選抜に適した親になるためチェックリスト</div>
+          <div class="category-progress" id="progress-1">0 / 12</div>
+        </div>
+        <span class="material-icons category-toggle">expand_more</span>
+      </div>
+      <div class="category-items">
+        <div class="checklist-item" id="item-1-1" onclick="toggleItem('item-1-1')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">1</span>
+            <div class="item-name">「自分の人生は自分で決めなさい」と伝えている親</div>
+            <div class="item-detail">日常的に「自分の人生は自分で選ぶものだ」と言う価値観が伝わっており、誰かに言われたからではなく、自分の意志で選び取ることの尊さを信じて見守っている親。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-1-2" onclick="toggleItem('item-1-2')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">2</span>
+            <div class="item-name">「やりたいことがあるなら、応援します」と支える親</div>
+            <div class="item-detail">本人がやりたいことを見つけたとき、条件をつけずに「応援するよ」と背中を押してくれる。必要であれば経済的支援も惜しまず、ただし"やるなら全力で"という責任も伝える。否定ではなく、信頼から始まる関わり方。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-1-3" onclick="toggleItem('item-1-3')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">3</span>
+            <div class="item-name">「学歴＝絶対」ではなく、人生の選択肢の1つと考える親</div>
+            <div class="item-detail">「学歴はあった方がいい。でもそれがすべてではない」「自分が本気でやりたいことがあるなら、学歴だけに縛られなくてもいい」そう伝えられる、柔軟で押しつけのない教育観を持っている。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-1-4" onclick="toggleItem('item-1-4')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">4</span>
+            <div class="item-name">価値観の押しつけをしない</div>
+            <div class="item-detail">「あなたはこうあるべき」「これをやらなきゃダメ」などと断定するのではなく、子ども自身が考える余地、選ぶ自由を尊重し、選択の伴走者として寄り添っている。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-1-5" onclick="toggleItem('item-1-5')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">5</span>
+            <div class="item-name">行動を強制しない</div>
+            <div class="item-detail">「この習い事をしなさい」「この進路にしなさい」などと決めつけず、子どもがやりたいと思ったことをまず受け入れ、一緒に考え、必要なアドバイスを"上から目線ではなく横から目線"で伝える。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-1-6" onclick="toggleItem('item-1-6')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">6</span>
+            <div class="item-name">勉強や成績で怒らない</div>
+            <div class="item-detail">テストで点数が悪くても、「なんでこんな点数なの！」ではなく、「これは人生の一部にすぎない」「これからどうしていこうか？」と未来志向で話す。子どもは、自分の努力や葛藤を否定されないことで、自信を取り戻していく。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-1-7" onclick="toggleItem('item-1-7')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">7</span>
+            <div class="item-name">「やるからには全力で」と責任感を育てる</div>
+            <div class="item-detail">「やりたいならやりなさい。でもやるなら中途半端にせず、やり切りなさい」自由と責任はセットだと伝え、やり抜く力と継続力を育ててくれる親の存在が、生徒の精神的な土台となる。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-1-8" onclick="toggleItem('item-1-8')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">8</span>
+            <div class="item-name">細かく口出しをしない</div>
+            <div class="item-detail">失敗を恐れてすぐに助け舟を出すのではなく、子どもが自分で考えて判断し、自分の責任で行動できるように"見守る力"を持っている親。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-1-9" onclick="toggleItem('item-1-9')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">9</span>
+            <div class="item-name">否定や批判の言葉を口にしない</div>
+            <div class="item-detail">人や制度、社会に対して、子どもの前で批判や否定ばかりを口にすることなく、まずは肯定・受容をベースに話をする。子どもに対しても、まず理解しようとする姿勢を示し、意見を伝える際にも感情ではなく対話を大切にしている。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-1-10" onclick="toggleItem('item-1-10')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">10</span>
+            <div class="item-name">「人としての在り方」を何より大切にしている</div>
+            <div class="item-detail">学歴や偏差値ではなく、感謝・礼儀・責任感・誠実さなど、"人としてどうあるべきか"を普段の生活の中で伝えている親。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-1-11" onclick="toggleItem('item-1-11')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">11</span>
+            <div class="item-name">これらを一言で表すなら──「愛のある放任」</div>
+            <div class="item-detail">必要以上に手を出しすぎず、けれど必要なときには必ず支えてくれる。選択肢とチャンスを与えてくれる、困ったときの保証があるからこそ安心して挑戦できる、挑戦と失敗を繰り返しながら自責の念を持ち自分で考える力が育まれる、今ある環境が"当たり前ではない"と気づき親への感謝が芽生える、「親に喜んでもらいたい」「期待に応えたい」「投資してくれた分を返したい」という気持ちが自然と生まれる。そしてそれが、「今あるのは親のおかげだ」と気づき、勉学に励むモチベーションとなり、成績が伸び、思考力・人間力が育ち、個性が花開き、自信がついてくる。結果として、高学歴という"証明"が後からついてくる。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-1-12" onclick="toggleItem('item-1-12')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">12</span>
+            <div class="item-name">大学受験を単体の勝負で終わらせない</div>
+            <div class="item-detail">人生は短期戦ではなく、長期戦です。受験は、その中のひとつの通過点に過ぎません。その場しのぎの対策、親主導の進路決定では、お子様の本質的な幸せにはつながりません。だからこそ、"今"だけでなく、"過去の家庭環境・教育観"も、総合型選抜の結果に確実に影響すると考えています。「自然と恩返ししたくなる親」の存在が、子どもの飛躍を生むのです。総合型選抜とは、受験という"個人の戦い"のようでいて、実はこれまでの家庭の文化や関わり方の集大成でもあります。大学合格はあくまで"結果"。でも、"親子で悔いのない時間を過ごせたか"は、ずっと残ります。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- カテゴリ2: 保護者/生徒本人が学校の三者面談で必ず確認すべきこと・聞くべきことリスト -->
+    <div class="category collapsed" id="category-2">
+      <div class="category-header" onclick="toggleCategory('category-2')">
+        <span class="material-icons category-icon">groups</span>
+        <div class="category-info">
+          <div class="category-title">保護者/生徒本人が学校の三者面談で必ず確認すべきこと・聞くべきことリスト</div>
+          <div class="category-progress" id="progress-2">0 / 8</div>
+        </div>
+        <span class="material-icons category-toggle">expand_more</span>
+      </div>
+      <div class="category-items">
+        <div class="checklist-item" id="item-2-1" onclick="toggleItem('item-2-1')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">1</span>
+            <div class="item-name">総合型選抜のサポート体制の有無</div>
+            <div class="item-detail">学校として総合型選抜（AO入試）に対応したサポートはあるか。サポート内容（志望理由書の添削、面接練習、小論文指導、活動証明書の発行など）はどこまで対応してもらえるか。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-2-2" onclick="toggleItem('item-2-2')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">2</span>
+            <div class="item-name">併願・専願のルール</div>
+            <div class="item-detail">総合型選抜で他大学との併願は可能か。専願の場合、校内や大学のどの時点で進路を一本化しなければならないか。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-2-3" onclick="toggleItem('item-2-3')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">3</span>
+            <div class="item-name">調査書の作成依頼期限</div>
+            <div class="item-detail">出願日の何日前までに依頼すれば、安全に調査書を作成してもらえるか。調査書の内容を事前に本人が確認することは可能か。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-2-4" onclick="toggleItem('item-2-4')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">4</span>
+            <div class="item-name">推薦書の依頼方法と期限</div>
+            <div class="item-detail">推薦書作成時、こちらで下書きや参考資料を準備して渡す必要があるか。推薦書の依頼は何週間前、または何か月前までに行うべきか。推薦書に記載される推薦文をこちらでも確認・提案できるか。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-2-5" onclick="toggleItem('item-2-5')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">5</span>
+            <div class="item-name">校内の個別対応・特別講座</div>
+            <div class="item-detail">小論文や面接の個別対策は受けられるか。夏休みなどに特別な総合型選抜講座や補習は行われるか。過去の合格者の例や資料は共有してもらえるか。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-2-6" onclick="toggleItem('item-2-6')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">6</span>
+            <div class="item-name">評定平均の確定時期</div>
+            <div class="item-detail">最終的な評定平均はいつ確定するのか（高3のどの時点か）。評定に反映される期間や提出物・出席日数の影響度はどの程度か。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-2-7" onclick="toggleItem('item-2-7')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">7</span>
+            <div class="item-name">英語資格の原本照合</div>
+            <div class="item-detail">英検などの英語資格の原本照合はいつから対応してもらえるのか。原本照合に必要な持参物や手順は何か。</div>
+          </div>
+        </div>
+        <div class="checklist-item" id="item-2-8" onclick="toggleItem('item-2-8')">
+          <div class="checkbox">
+            <span class="material-icons">check</span>
+          </div>
+          <div class="item-content">
+            <span class="item-number">8</span>
+            <div class="item-name">活動証明・実績証明</div>
+            <div class="item-detail">部活動やボランティアなどの活動証明書を学校で発行してもらえるか。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="reset-section">
+      <button class="reset-btn" onclick="resetChecklist()">
+        <span class="material-icons" style="font-size: 16px; vertical-align: middle; margin-right: 4px;">refresh</span>
+        チェックをリセット
+      </button>
+    </div>
+  </div>
+  
+  <script>
+    const STORAGE_KEY = 'eqao_parent_checklist';
+    const TOTAL_ITEMS = 20;
+    const CAT1_COUNT = 12;
+    const CAT2_COUNT = 8;
+    
+    // チェック状態を読み込む
+    function loadCheckedItems() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : [];
+    }
+    
+    // チェック状態を保存する
+    function saveCheckedItems(items) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    }
+    
+    // 項目のチェック状態を切り替える
+    function toggleItem(itemId) {
+      const item = document.getElementById(itemId);
+      const checkedItems = loadCheckedItems();
+      
+      if (item.classList.contains('checked')) {
+        item.classList.remove('checked');
+        const index = checkedItems.indexOf(itemId);
+        if (index > -1) checkedItems.splice(index, 1);
+      } else {
+        item.classList.add('checked');
+        if (!checkedItems.includes(itemId)) checkedItems.push(itemId);
+      }
+      
+      saveCheckedItems(checkedItems);
+      updateProgress();
+    }
+    
+    // カテゴリの開閉を切り替える
+    function toggleCategory(categoryId) {
+      const category = document.getElementById(categoryId);
+      category.classList.toggle('collapsed');
+    }
+    
+    // 進捗を更新する
+    function updateProgress() {
+      const checkedItems = loadCheckedItems();
+      
+      // カテゴリ1の進捗
+      const cat1Checked = checkedItems.filter(id => id.startsWith('item-1-')).length;
+      document.getElementById('progress-1').textContent = cat1Checked + ' / ' + CAT1_COUNT;
+      
+      // カテゴリ2の進捗
+      const cat2Checked = checkedItems.filter(id => id.startsWith('item-2-')).length;
+      document.getElementById('progress-2').textContent = cat2Checked + ' / ' + CAT2_COUNT;
+      
+      // 全体の進捗
+      const totalChecked = checkedItems.length;
+      document.getElementById('totalProgress').textContent = totalChecked + ' / ' + TOTAL_ITEMS;
+      document.getElementById('progressFill').style.width = (totalChecked / TOTAL_ITEMS * 100) + '%';
+    }
+    
+    // チェックをリセットする
+    function resetChecklist() {
+      if (confirm('すべてのチェックをリセットしますか？')) {
+        localStorage.removeItem(STORAGE_KEY);
+        document.querySelectorAll('.checklist-item.checked').forEach(item => {
+          item.classList.remove('checked');
+        });
+        updateProgress();
+      }
+    }
+    
+    // 初期化
+    function init() {
+      const checkedItems = loadCheckedItems();
+      checkedItems.forEach(itemId => {
+        const item = document.getElementById(itemId);
+        if (item) item.classList.add('checked');
+      });
+      updateProgress();
+    }
+    
+    init();
+  </script>
+</body>
+</html>

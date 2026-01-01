@@ -48,25 +48,26 @@ const NAV_MENU_STRUCTURE = [
     category: 'スケジュール',
     items: [
       { href: 'yearly-schedule.html', icon: 'calendar_month', iconColor: 'icon-blue', label: '年間スケジュール' },
-      { href: 'exam-schedule.html', icon: 'school', iconColor: 'icon-indigo', label: '受験スケジュール' },
-      { href: 'schedule.html', icon: 'event_note', iconColor: 'icon-purple', label: '授業スケジュール' }
+      { href: 'exam-schedule.html', icon: 'school', iconColor: 'icon-indigo', label: '受験スケジュール', badge: '個別' },
+      { href: 'schedule.html', icon: 'event_note', iconColor: 'icon-purple', label: '授業スケジュール', badge: '個別' },
+      { href: 'zoom-links.html', icon: 'videocam', iconColor: 'icon-purple', label: 'Zoomリンク一覧' }
     ]
   },
   {
     category: 'チェックリスト一覧',
     items: [
       { href: 'checklist.html', icon: 'checklist', iconColor: 'icon-teal', label: 'チェックリスト教材' },
-      { href: 'progress.html', icon: 'trending_up', iconColor: 'icon-teal', label: '自己/進捗管理シート' },
-      { href: 'school-list.html', icon: 'location_city', iconColor: 'icon-teal', label: '志望校/併願校管理シート' }
+      { href: 'progress.html', icon: 'trending_up', iconColor: 'icon-teal', label: '自己/進捗管理シート', badge: '個別' },
+      { href: 'school-list.html', icon: 'location_city', iconColor: 'icon-teal', label: '志望校/併願校管理シート', badge: '個別' }
     ]
   },
   {
     category: '学習コンテンツ',
     items: [
-      { href: 'https://one-stream.io/join/user/dfc86da0-9483-45b9-97e9-2b633cb669ac', icon: 'play_circle', iconColor: 'icon-orange', label: '動画教材（onestream）', external: true },
-      { href: 'materials.html', icon: 'folder_shared', iconColor: 'icon-orange', label: '生徒共通教材一覧' },
+      { href: 'https://one-stream.io/join/user/dfc86da0-9483-45b9-97e9-2b633cb669ac', icon: 'play_circle', iconColor: 'icon-orange', label: '動画教材', external: true },
       { href: 'videos.html', icon: 'video_library', iconColor: 'icon-pink', label: '過去の集団授業動画' },
       { href: 'https://www.notion.so/EQAO-COMMUNITY-LINE-21f5f9664112803a8ee2cff1a4d5e2a7', icon: 'dashboard', iconColor: 'icon-pink', label: '生徒プラットフォーム', external: true },
+      { href: 'materials.html', icon: 'folder_shared', iconColor: 'icon-orange', label: '教材/問題集一式' },
       { href: 'column.html', icon: 'article', iconColor: 'icon-pink', label: 'コラム一覧' }
     ]
   },
@@ -85,16 +86,18 @@ const NAV_MENU_STRUCTURE = [
       { href: 'mcff.html', icon: 'mic', iconColor: 'icon-green', label: 'MCFF申し込み' },
       { href: 'party.html', icon: 'celebration', iconColor: 'icon-green', label: 'EQAO PARTY' },
       { href: 'camp.html', icon: 'wb_sunny', iconColor: 'icon-red', label: 'EQAO CAMP' },
-      { href: 'study-tour.html', icon: 'flight', iconColor: 'icon-red', label: 'EQAO STUDY TOUR' }
+      { href: 'study-tour.html', icon: 'flight', iconColor: 'icon-red', label: 'EQAO STUDY TOUR' },
+      { href: 'recommended-events.html', icon: 'emoji_events', iconColor: 'icon-orange', label: '推奨イベント一覧' }
     ]
   },
   {
     category: 'カリキュラム・ルール',
     items: [
-      { href: 'zoom-links.html', icon: 'videocam', iconColor: 'icon-purple', label: 'Zoomリンク一覧' },
+      { href: 'exchange-meeting.html', icon: 'groups', iconColor: 'icon-orange', label: '塾生交流会' },
       { href: 'curriculum.html', icon: 'route', iconColor: 'icon-purple', label: '授業の流れ' },
       { href: 'curriculum-support.html', icon: 'account_tree', iconColor: 'icon-purple', label: 'カリキュラムとサポート体制' },
-      { href: 'rules.html', icon: 'gavel', iconColor: 'icon-brown', label: '基本事項規定および生徒保護者規則' }
+      { href: 'rules.html', icon: 'gavel', iconColor: 'icon-brown', label: '基本事項規定および生徒保護者規則' },
+      { href: 'parent-checklist.html', icon: 'family_restroom', iconColor: 'icon-green', label: '保護者向けチェックリスト' }
     ]
   }
 ];
@@ -111,7 +114,7 @@ function generateNavMenuHTML() {
   const currentPage = getCurrentPage();
   const studentId = localStorage.getItem('eqao_studentId') || '';
   const studentName = localStorage.getItem('eqao_studentName') || 'ゲスト';
-  
+
   let html = `
     <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
     <div id="navMenu" class="nav-menu">
@@ -140,26 +143,26 @@ function generateNavMenuHTML() {
         </div>
       </div>
   `;
-  
+
   NAV_MENU_STRUCTURE.forEach(section => {
     if (section.category) {
       html += `<div class="nav-category">${section.category}</div>`;
     }
-    
+
     html += '<div class="nav-section">';
-    
+
     section.items.forEach(item => {
       const isActive = item.href === currentPage;
       const isExternal = item.external;
       const isDisabled = item.disabled;
-      
+
       let classes = 'nav-item';
       if (isActive) classes += ' active';
       if (isDisabled) classes += ' disabled';
-      
+
       const target = isExternal ? ' target="_blank"' : '';
       const href = isDisabled ? 'javascript:void(0)' : item.href;
-      
+
       html += `
         <a href="${href}" class="${classes}"${target}>
           <span class="material-icons ${item.iconColor}">${item.icon}</span>
@@ -169,17 +172,18 @@ function generateNavMenuHTML() {
         </a>
       `;
     });
-    
+
     html += '</div>';
   });
-  
+
   html += `
-      <!-- フィードバックボタン -->
-      <div class="nav-feedback-section">
-        <button class="nav-feedback-btn" onclick="openFeedbackModal()">
-          <span class="material-icons">feedback</span>
+      <!-- フィードバック -->
+      <div class="nav-category">その他</div>
+      <div class="nav-section">
+        <a href="javascript:void(0)" class="nav-item" onclick="openFeedbackModal()">
+          <span class="material-icons icon-grey">feedback</span>
           <span>不具合報告・ご要望</span>
-        </button>
+        </a>
       </div>
       
       <div class="nav-footer">
@@ -187,7 +191,7 @@ function generateNavMenuHTML() {
       </div>
     </div>
   `;
-  
+
   return html;
 }
 
@@ -206,7 +210,7 @@ function initNavMenu() {
   const existingMenu = document.getElementById('navMenu');
   if (existingOverlay) existingOverlay.remove();
   if (existingMenu) existingMenu.remove();
-  
+
   // 新しいメニューを挿入
   const navHTML = generateNavMenuHTML();
   document.body.insertAdjacentHTML('beforeend', navHTML);
@@ -325,38 +329,6 @@ function generateFeedbackModalHTML() {
 function generateFeedbackStylesHTML() {
   return `
     <style id="feedbackModalStyles">
-      /* フィードバックボタン（ナビ内） */
-      .nav-feedback-section {
-        padding: 16px;
-        border-top: 1px solid #eee;
-      }
-      
-      .nav-feedback-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        width: 100%;
-        padding: 12px 16px;
-        background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
-        color: white;
-        border: none;
-        border-radius: 10px;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s;
-        font-family: inherit;
-      }
-      
-      .nav-feedback-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(63, 81, 181, 0.4);
-      }
-      
-      .nav-feedback-btn .material-icons {
-        font-size: 20px;
-      }
       
       /* フィードバックモーダル */
       .feedback-modal-overlay {
@@ -656,7 +628,7 @@ function initFeedbackModal() {
   if (!document.getElementById('feedbackModalStyles')) {
     document.head.insertAdjacentHTML('beforeend', generateFeedbackStylesHTML());
   }
-  
+
   // モーダルを追加
   if (!document.getElementById('feedbackModalOverlay')) {
     document.body.insertAdjacentHTML('beforeend', generateFeedbackModalHTML());
@@ -666,28 +638,28 @@ function initFeedbackModal() {
 function openFeedbackModal() {
   // ナビを閉じる
   closeNav();
-  
+
   // モーダルを初期化
   initFeedbackModal();
-  
+
   // ページ入力欄をリセット
   const pageInput = document.getElementById('feedbackPage');
   if (pageInput) {
     pageInput.value = '';
   }
-  
+
   // 内容をリセット
   const contentArea = document.getElementById('feedbackContent');
   if (contentArea) {
     contentArea.value = '';
   }
-  
+
   // 種別をリセット
   const firstRadio = document.querySelector('input[name="feedbackType"]');
   if (firstRadio) {
     firstRadio.checked = true;
   }
-  
+
   // モーダルを表示
   document.getElementById('feedbackModalOverlay').classList.add('show');
   document.body.style.overflow = 'hidden';
@@ -712,24 +684,24 @@ async function submitFeedback() {
   const pageInput = document.getElementById('feedbackPage');
   const contentInput = document.getElementById('feedbackContent');
   const submitBtn = document.querySelector('.feedback-btn-submit');
-  
+
   const type = typeInput ? typeInput.value : '';
   const page = pageInput ? pageInput.value : '';
   const content = contentInput ? contentInput.value.trim() : '';
-  
+
   if (!content) {
     alert('詳細内容を入力してください');
     return;
   }
-  
+
   // ボタンを無効化
   submitBtn.disabled = true;
   submitBtn.innerHTML = '<span class="feedback-spinner"></span>送信中...';
-  
+
   try {
     const studentId = localStorage.getItem('eqao_studentId') || '';
     const studentName = localStorage.getItem('eqao_studentName') || '';
-    
+
     const params = new URLSearchParams({
       action: 'submitFeedback',
       type: type,
@@ -739,15 +711,15 @@ async function submitFeedback() {
       studentName: studentName,
       userAgent: navigator.userAgent
     });
-    
+
     const response = await fetch(FEEDBACK_API_URL + '?' + params.toString());
     const result = await response.json();
-    
+
     if (result.success) {
       // 成功メッセージを表示
       const modalBody = document.querySelector('.feedback-modal-body');
       const modalFooter = document.querySelector('.feedback-modal-footer');
-      
+
       modalBody.innerHTML = `
         <div class="feedback-success">
           <div class="feedback-success-icon">
@@ -757,7 +729,7 @@ async function submitFeedback() {
           <div class="feedback-success-text">ご報告ありがとうございます。<br>確認次第対応いたします。</div>
         </div>
       `;
-      
+
       modalFooter.innerHTML = `
         <button class="feedback-btn-submit" onclick="closeFeedbackModal()" style="background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);">
           閉じる
@@ -775,6 +747,6 @@ async function submitFeedback() {
 }
 
 // DOMContentLoadedで初期化
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   initNavMenu();
 });

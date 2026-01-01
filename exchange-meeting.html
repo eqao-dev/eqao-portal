@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>塾生交流会 - EQAO PORTAL</title>
+  <link rel="apple-touch-icon" href="/logo.png">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #e3e8f4 0%, #d0d9e8 100%);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .header-title {
+      flex: 1;
+    }
+
+    .header-title h1 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .header-title .subtitle {
+      font-size: 11px;
+      opacity: 0.8;
+      margin-top: 2px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* ヒーローセクション */
+    .hero-section {
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      border-radius: 20px;
+      padding: 36px 28px;
+      margin-bottom: 24px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(255, 107, 53, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .hero-icon .material-icons {
+      font-size: 44px;
+    }
+
+    .hero-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      opacity: 0.95;
+      line-height: 1.7;
+    }
+
+    /* イントロセクション */
+    .intro-section {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .intro-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .intro-title .material-icons {
+      font-size: 28px;
+      color: #ff6b35;
+    }
+
+    .intro-text {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.9;
+    }
+
+    .intro-text p {
+      margin-bottom: 16px;
+    }
+
+    .intro-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ハイライトボックス */
+    .highlight-box {
+      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      border-left: 4px solid #ff6b35;
+      padding: 18px 22px;
+      border-radius: 0 14px 14px 0;
+      margin: 20px 0;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      font-weight: 600;
+      color: #e65100;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* メリットセクション */
+    .merit-section {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .merit-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .merit-title .material-icons {
+      font-size: 26px;
+      color: #43a047;
+    }
+
+    .merit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .merit-item {
+      background: linear-gradient(135deg, #f8f9fc 0%, #f0f4ff 100%);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: all 0.2s;
+    }
+
+    .merit-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(26, 35, 126, 0.12);
+    }
+
+    .merit-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .merit-icon .material-icons {
+      font-size: 26px;
+      color: white;
+    }
+
+    .merit-icon.orange { background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); }
+    .merit-icon.blue { background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); }
+    .merit-icon.green { background: linear-gradient(135deg, #43a047 0%, #66bb6a 100%); }
+    .merit-icon.purple { background: linear-gradient(135deg, #7b1fa2 0%, #ab47bc 100%); }
+    .merit-icon.teal { background: linear-gradient(135deg, #00695c 0%, #26a69a 100%); }
+    .merit-icon.pink { background: linear-gradient(135deg, #c2185b 0%, #f06292 100%); }
+
+    .merit-content h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 6px;
+    }
+
+    .merit-content p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* スケジュールセクション */
+    .schedule-section {
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .schedule-header {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .schedule-header .material-icons {
+      font-size: 28px;
+    }
+
+    .schedule-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .schedule-body {
+      padding: 20px;
+    }
+
+    .schedule-note {
+      background: #e3f2fd;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .schedule-note .material-icons {
+      font-size: 22px;
+      color: #1565c0;
+      flex-shrink: 0;
+    }
+
+    .schedule-note p {
+      font-size: 13px;
+      color: #1565c0;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* スケジュールカード */
+    .schedule-card {
+      background: #f8f9fc;
+      border-radius: 14px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .schedule-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .schedule-card-header {
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      color: white;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .schedule-date {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .schedule-date .material-icons {
+      font-size: 20px;
+    }
+
+    .schedule-time {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 12px;
+      border-radius: 20px;
+    }
+
+    .schedule-time .material-icons {
+      font-size: 16px;
+    }
+
+    .schedule-card-body {
+      padding: 18px;
+    }
+
+    .schedule-theme {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .schedule-detail {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .schedule-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 12px;
+      margin-top: 12px;
+    }
+
+    .schedule-badge .material-icons {
+      font-size: 14px;
+    }
+
+    /* 参加方法セクション */
+    .how-to-section {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .how-to-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .how-to-title .material-icons {
+      font-size: 26px;
+      color: #ff6b35;
+    }
+
+    .how-to-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .how-to-step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      flex: 1;
+      padding-top: 6px;
+    }
+
+    .step-content h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 6px;
+    }
+
+    .step-content p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* CTAセクション */
+    .cta-section {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 16px;
+      padding: 32px 28px;
+      text-align: center;
+      color: white;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+    }
+
+    .cta-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .cta-text {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      color: white;
+      padding: 16px 32px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(255, 107, 53, 0.5);
+    }
+
+    .cta-button .material-icons {
+      font-size: 22px;
+    }
+
+    /* メンターセクション */
+    .mentor-section {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .mentor-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mentor-title .material-icons {
+      font-size: 22px;
+      color: #7b1fa2;
+    }
+
+    .mentor-text {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    /* アクションボタン */
+    .action-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 24px;
+      background: white;
+      color: #1a237e;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .action-btn .material-icons {
+      font-size: 22px;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 600px) {
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .hero-subtitle {
+        font-size: 14px;
+      }
+
+      .schedule-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .merit-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="index.html" class="back-btn">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <div class="header-title">
+      <h1>塾生交流会</h1>
+      <p class="subtitle">仲間とつながり、共に成長する</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- ヒーローセクション -->
+    <section class="hero-section">
+      <div class="hero-icon">
+        <span class="material-icons">groups</span>
+      </div>
+      <h1 class="hero-title">塾生交流会</h1>
+      <p class="hero-subtitle">
+        同じ目標を持つ仲間と出会い、<br>
+        情報共有・悩み相談・モチベーションアップ！
+      </p>
+    </section>
+
+    <!-- イントロセクション -->
+    <section class="intro-section">
+      <h2 class="intro-title">
+        <span class="material-icons">emoji_people</span>
+        塾生交流会とは？
+      </h2>
+      <div class="intro-text">
+        <p>
+          塾生交流会は、EQAOに通う塾生同士が<strong>月に1回集まり、交流を深める場</strong>です。
+          受験という同じ目標に向かう仲間と出会い、情報交換やモチベーションアップに活用してください。
+        </p>
+
+        <div class="highlight-box">
+          <p>✨ 一人で抱え込まないで！同じ悩みを持つ仲間がいます。<br>
+          交流会で得られる「仲間の存在」は、受験を乗り越える大きな力になります。</p>
+        </div>
+
+        <p>
+          毎回テーマを設けて開催するので、その時期に必要な内容を学び・共有できます。
+          先輩メンターも参加するので、気軽に相談することもできます。
+        </p>
+      </div>
+    </section>
+
+    <!-- メリットセクション -->
+    <section class="merit-section">
+      <h2 class="merit-title">
+        <span class="material-icons">star</span>
+        参加するメリット
+      </h2>
+      <div class="merit-grid">
+        <div class="merit-item">
+          <div class="merit-icon orange">
+            <span class="material-icons">people</span>
+          </div>
+          <div class="merit-content">
+            <h4>仲間ができる</h4>
+            <p>同じ大学・学部を目指す仲間と出会えます。試験当日も知っている顔がいると安心！</p>
+          </div>
+        </div>
+        <div class="merit-item">
+          <div class="merit-icon blue">
+            <span class="material-icons">forum</span>
+          </div>
+          <div class="merit-content">
+            <h4>情報交換ができる</h4>
+            <p>他の塾生の取り組みや進捗を知ることで、自分の学習に活かせます。</p>
+          </div>
+        </div>
+        <div class="merit-item">
+          <div class="merit-icon green">
+            <span class="material-icons">psychology</span>
+          </div>
+          <div class="merit-content">
+            <h4>悩みを相談できる</h4>
+            <p>同じ境遇の仲間だからこそ分かり合える悩みを共有し、解決のヒントを得られます。</p>
+          </div>
+        </div>
+        <div class="merit-item">
+          <div class="merit-icon purple">
+            <span class="material-icons">local_fire_department</span>
+          </div>
+          <div class="merit-content">
+            <h4>モチベーションUP</h4>
+            <p>頑張っている仲間の姿を見て、自分も頑張ろうという気持ちになれます。</p>
+          </div>
+        </div>
+        <div class="merit-item">
+          <div class="merit-icon teal">
+            <span class="material-icons">record_voice_over</span>
+          </div>
+          <div class="merit-content">
+            <h4>言語化力がつく</h4>
+            <p>自分の考えを人に伝える練習になり、面接やプレゼン対策にもなります。</p>
+          </div>
+        </div>
+        <div class="merit-item">
+          <div class="merit-icon pink">
+            <span class="material-icons">support_agent</span>
+          </div>
+          <div class="merit-content">
+            <h4>メンターに相談</h4>
+            <p>先輩メンターも参加。リアルな体験談やアドバイスを直接聞けます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- スケジュールセクション -->
+    <section class="schedule-section">
+      <div class="schedule-header">
+        <span class="material-icons">calendar_month</span>
+        <h2>2026年度 開催スケジュール</h2>
+      </div>
+      <div class="schedule-body">
+        <div class="schedule-note">
+          <span class="material-icons">info</span>
+          <p>毎月第2金曜日 20:50〜21:50 に開催予定です。Zoomでオンライン参加できます。</p>
+        </div>
+
+        <!-- 4月 -->
+        <div class="schedule-card">
+          <div class="schedule-card-header">
+            <div class="schedule-date">
+              <span class="material-icons">event</span>
+              2026年4月11日（金）
+            </div>
+            <div class="schedule-time">
+              <span class="material-icons">schedule</span>
+              20:50〜21:50
+            </div>
+          </div>
+          <div class="schedule-card-body">
+            <div class="schedule-theme">『新年度の目標をみんなで立てて共有しよう』</div>
+            <p class="schedule-detail">
+              昨年度の振り返りから今年度の受験に向けて取り組むべき目標を設定し、塾生同士で共有します！
+              今年一年間の受験を乗り越える仲間を作りましょう！
+            </p>
+            <div class="schedule-badge">
+              <span class="material-icons">emoji_events</span>
+              新年度スタート回
+            </div>
+          </div>
+        </div>
+
+        <!-- 5月 -->
+        <div class="schedule-card">
+          <div class="schedule-card-header">
+            <div class="schedule-date">
+              <span class="material-icons">event</span>
+              2026年5月9日（金）
+            </div>
+            <div class="schedule-time">
+              <span class="material-icons">schedule</span>
+              20:50〜21:50
+            </div>
+          </div>
+          <div class="schedule-card-body">
+            <div class="schedule-theme">『塾生同士で情報共有＆お悩み相談会』</div>
+            <p class="schedule-detail">
+              将来やりたいことが定まらない人、決まってるけどどの学部に行けばいいか分からない人、
+              塾生同士で現状を情報共有して悩みを解決してみましょう！メンターも2人参加するので、メンターにも相談できます☺
+            </p>
+          </div>
+        </div>
+
+        <!-- 6月 -->
+        <div class="schedule-card">
+          <div class="schedule-card-header">
+            <div class="schedule-date">
+              <span class="material-icons">event</span>
+              2026年6月13日（金）
+            </div>
+            <div class="schedule-time">
+              <span class="material-icons">schedule</span>
+              20:50〜21:50
+            </div>
+          </div>
+          <div class="schedule-card-body">
+            <div class="schedule-theme">『「自分」を言語化し、目指している大学・学部を紹介し合おう！』</div>
+            <p class="schedule-detail">
+              6月は気を引き締める時期でもあります。情報交換やモチベを高めあうという観点から、
+              塾生交流会に参加することは大変意義があると思います！是非、積極的に参加していただきたいです。
+            </p>
+          </div>
+        </div>
+
+        <!-- 7月 -->
+        <div class="schedule-card">
+          <div class="schedule-card-header">
+            <div class="schedule-date">
+              <span class="material-icons">event</span>
+              2026年7月11日（金）
+            </div>
+            <div class="schedule-time">
+              <span class="material-icons">schedule</span>
+              20:50〜21:50
+            </div>
+          </div>
+          <div class="schedule-card-body">
+            <div class="schedule-theme">『同じ大学を目指す仲間作り＆進捗状況の共有』</div>
+            <p class="schedule-detail">
+              塾生のみなさん同士が交流を深められるように雑談の時間も交えつつ、
+              受験の情報共有をしていこうと思います！！沢山の参加お待ちしてます。
+            </p>
+          </div>
+        </div>
+
+        <!-- 8月 -->
+        <div class="schedule-card">
+          <div class="schedule-card-header">
+            <div class="schedule-date">
+              <span class="material-icons">event</span>
+              2026年8月8日（金）
+            </div>
+            <div class="schedule-time">
+              <span class="material-icons">schedule</span>
+              20:50〜21:50
+            </div>
+          </div>
+          <div class="schedule-card-body">
+            <div class="schedule-theme">『夏のオープンキャンパス感想発表会』</div>
+            <p class="schedule-detail">
+              オープンキャンパスの感想を発表し合う、質疑応答等を予定しています！
+              他の塾生と話すことで新たな情報を得たり、不安を解消したりできる絶好の機会ですので、是非参加してください！
+            </p>
+            <div class="schedule-badge">
+              <span class="material-icons">wb_sunny</span>
+              夏休み特別回
+            </div>
+          </div>
+        </div>
+
+        <!-- 9月 -->
+        <div class="schedule-card">
+          <div class="schedule-card-header">
+            <div class="schedule-date">
+              <span class="material-icons">event</span>
+              2026年9月12日（金）
+            </div>
+            <div class="schedule-time">
+              <span class="material-icons">schedule</span>
+              20:50〜21:50
+            </div>
+          </div>
+          <div class="schedule-card-body">
+            <div class="schedule-theme">『ミニディスカッションを通して、意見を言語化する練習をしよう』</div>
+            <p class="schedule-detail">
+              似ている学部を目指している塾生同士で悩みを共有後、ミニディスカッションを行いたいと思います。
+            </p>
+          </div>
+        </div>
+
+        <!-- 10月 -->
+        <div class="schedule-card">
+          <div class="schedule-card-header">
+            <div class="schedule-date">
+              <span class="material-icons">event</span>
+              2026年10月10日（金）
+            </div>
+            <div class="schedule-time">
+              <span class="material-icons">schedule</span>
+              20:50〜21:50
+            </div>
+          </div>
+          <div class="schedule-card-body">
+            <div class="schedule-theme">『二次試験に向けて面接対策をしよう！』</div>
+            <p class="schedule-detail">
+              二次試験に向けてグループ面接練習を行いたいと思います。
+              さらに、グループでお悩み相談、メンターへのお悩み相談ももちろん可能です。
+              みんなどんなことしてるんだろ？？出願後試験前の今何をするべき？？など大募集！
+            </p>
+            <div class="schedule-badge">
+              <span class="material-icons">school</span>
+              面接対策回
+            </div>
+          </div>
+        </div>
+
+        <!-- 11月 -->
+        <div class="schedule-card">
+          <div class="schedule-card-header">
+            <div class="schedule-date">
+              <span class="material-icons">event</span>
+              2026年11月14日（金）
+            </div>
+            <div class="schedule-time">
+              <span class="material-icons">schedule</span>
+              20:50〜21:50
+            </div>
+          </div>
+          <div class="schedule-card-body">
+            <div class="schedule-theme">『塾生同士で面接対策！上手な面接の答え方をお互いに学ぼう』</div>
+            <p class="schedule-detail">
+              多くの塾生が今月に二次試験を控えているかと思います！今回の塾生交流会では、
+              同じ大学学部を志望する塾生同士での面接対策を行います。
+              二次試験前に同じ大学を受ける仲間を見つける最後のチャンス！！仲間がいた方が当日安心ですよ。
+            </p>
+            <div class="schedule-badge">
+              <span class="material-icons">priority_high</span>
+              直前対策回
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 参加方法セクション -->
+    <section class="how-to-section">
+      <h2 class="how-to-title">
+        <span class="material-icons">login</span>
+        参加方法
+      </h2>
+      <div class="how-to-steps">
+        <div class="how-to-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>開催日を確認する</h4>
+            <p>上記のスケジュールから参加したい回を確認してください。</p>
+          </div>
+        </div>
+        <div class="how-to-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>LINEでお知らせを受け取る</h4>
+            <p>開催日当日に、EQAOコミュニティでZoomリンクや詳細のお知らせが届きます。</p>
+          </div>
+        </div>
+        <div class="how-to-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>当日Zoomに参加する</h4>
+            <p>開催時間になったら、お知らせのZoomリンクから参加してください。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTAセクション -->
+    <section class="cta-section">
+      <h2 class="cta-title">一緒に頑張る仲間を見つけよう！</h2>
+      <p class="cta-text">
+        受験は孤独な戦いではありません。<br>
+        同じ目標を持つ仲間と一緒に、この1年を乗り越えましょう。<br>
+        開催日当日に、EQAOコミュニティでZoomリンクをお知らせします。
+      </p>
+    </section>
+
+    <!-- アクションセクション -->
+    <div class="action-section">
+      <a href="index.html" class="action-btn">
+        <span class="material-icons">home</span>
+        ポータルトップへ戻る
+      </a>
+    </div>
+  </div>
+</body>
+</html>

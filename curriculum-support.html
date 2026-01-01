@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -7,31 +8,31 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>カリキュラムとサポート体制 - EQAO PORTAL</title>
-  
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="css/nav-menu.css">
-  
+
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  
+
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
       font-family: 'Noto Sans JP', sans-serif;
       background: #f1f5f9;
       min-height: 100vh;
       color: #374151;
     }
-    
+
     /* ヘッダー */
     .header {
       background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
@@ -45,14 +46,14 @@
       top: 0;
       z-index: 100;
     }
-    
+
     .back-btn {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -60,11 +61,11 @@
       transition: background 0.3s;
       text-decoration: none;
     }
-    
+
     .back-btn:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
     }
-    
+
     .header-title {
       font-size: 18px;
       font-weight: 700;
@@ -91,7 +92,7 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -100,7 +101,7 @@
     }
 
     .menu-btn:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
     }
 
     .nav-overlay {
@@ -109,7 +110,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.5);
       z-index: 200;
       opacity: 0;
       visibility: hidden;
@@ -132,7 +133,7 @@
       z-index: 201;
       transition: right 0.3s ease;
       overflow-y: auto;
-      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+      box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
     }
 
     .nav-menu.active {
@@ -205,7 +206,7 @@
       position: absolute;
       top: 16px;
       right: 16px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       border: none;
       width: 32px;
       height: 32px;
@@ -216,23 +217,23 @@
       align-items: center;
       justify-content: center;
     }
-    
+
     /* メインコンテンツ */
     .main {
       max-width: 800px;
       margin: 0 auto;
       padding: 20px 16px 40px;
     }
-    
+
     /* イントロセクション */
     .intro {
       background: white;
       border-radius: 16px;
       padding: 20px;
       margin-bottom: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
-    
+
     .intro-title {
       font-size: 18px;
       font-weight: bold;
@@ -242,13 +243,13 @@
       align-items: center;
       gap: 8px;
     }
-    
+
     .intro-text {
       font-size: 14px;
       color: #4b5563;
       line-height: 1.8;
     }
-    
+
     .intro-highlight {
       background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
       border-radius: 10px;
@@ -258,7 +259,38 @@
       color: #1e40af;
       line-height: 1.6;
     }
-    
+
+    .intro-video {
+      margin-top: 20px;
+    }
+
+    .video-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1a237e;
+      margin-bottom: 10px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
     /* カテゴリグリッド */
     .category-grid {
       display: grid;
@@ -266,7 +298,7 @@
       gap: 12px;
       margin-bottom: 24px;
     }
-    
+
     .category-card {
       background: white;
       border-radius: 14px;
@@ -274,20 +306,20 @@
       text-align: center;
       cursor: pointer;
       transition: all 0.2s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
       border: 2px solid transparent;
     }
-    
+
     .category-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     }
-    
+
     .category-card.active {
       border-color: #1a237e;
       background: #f8fafc;
     }
-    
+
     .category-icon {
       width: 48px;
       height: 48px;
@@ -297,34 +329,49 @@
       justify-content: center;
       margin: 0 auto 10px;
     }
-    
-    .category-card:nth-child(1) .category-icon { background: #dbeafe; color: #1d4ed8; }
-    .category-card:nth-child(2) .category-icon { background: #d1fae5; color: #059669; }
-    .category-card:nth-child(3) .category-icon { background: #fef3c7; color: #d97706; }
-    .category-card:nth-child(4) .category-icon { background: #fce7f3; color: #db2777; }
-    
+
+    .category-card:nth-child(1) .category-icon {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .category-card:nth-child(2) .category-icon {
+      background: #d1fae5;
+      color: #059669;
+    }
+
+    .category-card:nth-child(3) .category-icon {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .category-card:nth-child(4) .category-icon {
+      background: #fce7f3;
+      color: #db2777;
+    }
+
     .category-name {
       font-size: 13px;
       font-weight: bold;
       color: #374151;
       line-height: 1.4;
     }
-    
+
     .category-count {
       font-size: 11px;
       color: #9ca3af;
       margin-top: 4px;
     }
-    
+
     /* コンテンツエリア */
     .content-area {
       display: none;
     }
-    
+
     .content-area.active {
       display: block;
     }
-    
+
     .content-header {
       display: flex;
       align-items: center;
@@ -333,7 +380,7 @@
       padding-bottom: 12px;
       border-bottom: 2px solid #e5e7eb;
     }
-    
+
     .content-header-icon {
       width: 36px;
       height: 36px;
@@ -342,32 +389,47 @@
       align-items: center;
       justify-content: center;
     }
-    
-    .content-header-icon.curriculum { background: #dbeafe; color: #1d4ed8; }
-    .content-header-icon.support { background: #d1fae5; color: #059669; }
-    .content-header-icon.program { background: #fef3c7; color: #d97706; }
-    .content-header-icon.strength { background: #fce7f3; color: #db2777; }
-    
+
+    .content-header-icon.curriculum {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .content-header-icon.support {
+      background: #d1fae5;
+      color: #059669;
+    }
+
+    .content-header-icon.program {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .content-header-icon.strength {
+      background: #fce7f3;
+      color: #db2777;
+    }
+
     .content-header-title {
       font-size: 16px;
       font-weight: bold;
       color: #1a237e;
     }
-    
+
     /* アコーディオン */
     .accordion {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
-    
+
     .accordion-item {
       background: white;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
     }
-    
+
     .accordion-header {
       display: flex;
       align-items: center;
@@ -376,16 +438,16 @@
       cursor: pointer;
       transition: background 0.2s;
     }
-    
+
     .accordion-header:hover {
       background: #f9fafb;
     }
-    
+
     .accordion-item.open .accordion-header {
       background: #f8fafc;
       border-bottom: 1px solid #e5e7eb;
     }
-    
+
     .accordion-icon {
       width: 32px;
       height: 32px;
@@ -395,16 +457,47 @@
       justify-content: center;
       flex-shrink: 0;
     }
-    
-    .accordion-icon.blue { background: #eff6ff; color: #3b82f6; }
-    .accordion-icon.green { background: #ecfdf5; color: #10b981; }
-    .accordion-icon.yellow { background: #fefce8; color: #eab308; }
-    .accordion-icon.purple { background: #f3e8ff; color: #a855f7; }
-    .accordion-icon.pink { background: #fdf2f8; color: #ec4899; }
-    .accordion-icon.orange { background: #fff7ed; color: #f97316; }
-    .accordion-icon.cyan { background: #ecfeff; color: #06b6d4; }
-    .accordion-icon.red { background: #fef2f2; color: #ef4444; }
-    
+
+    .accordion-icon.blue {
+      background: #eff6ff;
+      color: #3b82f6;
+    }
+
+    .accordion-icon.green {
+      background: #ecfdf5;
+      color: #10b981;
+    }
+
+    .accordion-icon.yellow {
+      background: #fefce8;
+      color: #eab308;
+    }
+
+    .accordion-icon.purple {
+      background: #f3e8ff;
+      color: #a855f7;
+    }
+
+    .accordion-icon.pink {
+      background: #fdf2f8;
+      color: #ec4899;
+    }
+
+    .accordion-icon.orange {
+      background: #fff7ed;
+      color: #f97316;
+    }
+
+    .accordion-icon.cyan {
+      background: #ecfeff;
+      color: #06b6d4;
+    }
+
+    .accordion-icon.red {
+      background: #fef2f2;
+      color: #ef4444;
+    }
+
     .accordion-title {
       flex: 1;
       font-size: 14px;
@@ -412,46 +505,46 @@
       color: #374151;
       line-height: 1.4;
     }
-    
+
     .accordion-arrow {
       color: #9ca3af;
       transition: transform 0.2s;
     }
-    
+
     .accordion-item.open .accordion-arrow {
       transform: rotate(180deg);
     }
-    
+
     .accordion-content {
       display: none;
       padding: 16px;
       background: #fafafa;
     }
-    
+
     .accordion-item.open .accordion-content {
       display: block;
     }
-    
+
     .accordion-text {
       font-size: 13px;
       color: #4b5563;
       line-height: 1.8;
     }
-    
+
     .accordion-text p {
       margin-bottom: 12px;
     }
-    
+
     .accordion-text p:last-child {
       margin-bottom: 0;
     }
-    
+
     .accordion-list {
       margin: 12px 0;
       padding-left: 0;
       list-style: none;
     }
-    
+
     .accordion-list li {
       position: relative;
       padding-left: 20px;
@@ -460,7 +553,7 @@
       color: #4b5563;
       line-height: 1.6;
     }
-    
+
     .accordion-list li::before {
       content: '•';
       position: absolute;
@@ -468,7 +561,7 @@
       color: #1a237e;
       font-weight: bold;
     }
-    
+
     .accordion-highlight {
       background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
       border-radius: 8px;
@@ -478,24 +571,24 @@
       color: #92400e;
       line-height: 1.6;
     }
-    
+
     .accordion-subheading {
       font-weight: bold;
       color: #1a237e;
       margin: 16px 0 8px;
       font-size: 13px;
     }
-    
+
     .accordion-subheading:first-child {
       margin-top: 0;
     }
-    
+
     /* フッター */
     .footer-link {
       text-align: center;
       margin-top: 32px;
     }
-    
+
     .footer-link a {
       display: inline-flex;
       align-items: center;
@@ -508,67 +601,68 @@
       border-radius: 10px;
       transition: all 0.2s;
     }
-    
+
     .footer-link a:hover {
       background: #f3f4f6;
       color: #1a237e;
     }
-    
+
     /* レスポンシブ */
     @media (min-width: 768px) {
       .main {
         padding: 32px 24px 60px;
       }
-      
+
       .intro {
         padding: 28px;
       }
-      
+
       .intro-title {
         font-size: 20px;
       }
-      
+
       .category-grid {
         gap: 16px;
       }
-      
+
       .category-card {
         padding: 24px 20px;
       }
-      
+
       .category-icon {
         width: 56px;
         height: 56px;
       }
-      
+
       .category-name {
         font-size: 14px;
       }
-      
+
       .accordion-header {
         padding: 16px 20px;
       }
-      
+
       .accordion-content {
         padding: 20px;
       }
     }
-    
+
     @media (min-width: 1024px) {
       .header {
         padding: 20px 32px;
       }
-      
+
       .main {
         max-width: 900px;
       }
-      
+
       .category-card:hover {
         transform: translateY(-4px);
       }
     }
   </style>
 </head>
+
 <body>
   <!-- ヘッダー -->
   <header class="header">
@@ -580,7 +674,7 @@
       <span class="material-icons">person</span>
       <span id="navUserName"></span>
     </div>
-<button class="hamburger-btn" onclick="openNav()">
+    <button class="hamburger-btn" onclick="openNav()">
       <span class="material-icons">menu</span>
     </button>
 
@@ -602,8 +696,23 @@
       <div class="intro-highlight">
         💡 下記のカテゴリから気になる項目をタップしてご確認ください
       </div>
+
+      <!-- カリキュラム紹介動画 -->
+      <div class="intro-video">
+        <div class="video-label">
+          <i data-lucide="play-circle" style="width:16px;height:16px;"></i>
+          <span>カリキュラム紹介動画</span>
+        </div>
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/kzGJuOBchXI" title="EQAOカリキュラム紹介" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
     </section>
-    
+
+
     <!-- カテゴリ選択 -->
     <div class="category-grid">
       <div class="category-card active" onclick="showCategory('curriculum')">
@@ -635,7 +744,7 @@
         <div class="category-count">6項目</div>
       </div>
     </div>
-    
+
     <!-- カリキュラム -->
     <div class="content-area active" id="content-curriculum">
       <div class="content-header">
@@ -669,7 +778,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon green"><i data-lucide="users" style="width:16px;height:16px;"></i></div>
@@ -688,10 +797,11 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
-            <div class="accordion-icon yellow"><i data-lucide="calendar-check" style="width:16px;height:16px;"></i></div>
+            <div class="accordion-icon yellow"><i data-lucide="calendar-check" style="width:16px;height:16px;"></i>
+            </div>
             <span class="accordion-title">スケジュール・出願・進捗の徹底可視化</span>
             <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
           </div>
@@ -711,7 +821,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon purple"><i data-lucide="book-open" style="width:16px;height:16px;"></i></div>
@@ -721,24 +831,24 @@
           <div class="accordion-content">
             <div class="accordion-text">
               <p>EQAOの教材は、市販品の寄せ集めではありません。過去データ・指導現場の実例・大学別傾向を踏まえ、すべてカスタマイズされた<strong>独自教材</strong>です。</p>
-              
+
               <p class="accordion-subheading">小論文教材</p>
               <ul class="accordion-list">
                 <li>基礎問題 → 応用問題 → 発展問題の三段階構成</li>
                 <li>過去の受験傾向を踏まえた"実戦形式"</li>
               </ul>
-              
+
               <p class="accordion-subheading">面接教材</p>
               <ul class="accordion-list">
                 <li>想定質問リスト（定番質問・圧迫面接・深掘り質問）</li>
                 <li>「質問が想定外で答えられなかった」という失敗を防ぐ設計</li>
               </ul>
-              
+
               <p>その他にも、志望理由書、自己推薦書、レポートにおける独自開発教材とシステムを導入！</p>
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon pink"><i data-lucide="play-circle" style="width:16px;height:16px;"></i></div>
@@ -758,7 +868,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon orange"><i data-lucide="file-text" style="width:16px;height:16px;"></i></div>
@@ -773,7 +883,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon cyan"><i data-lucide="search" style="width:16px;height:16px;"></i></div>
@@ -794,7 +904,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon red"><i data-lucide="database" style="width:16px;height:16px;"></i></div>
@@ -815,7 +925,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon blue"><i data-lucide="users-round" style="width:16px;height:16px;"></i></div>
@@ -838,7 +948,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon green"><i data-lucide="message-circle" style="width:16px;height:16px;"></i></div>
@@ -858,10 +968,11 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
-            <div class="accordion-icon yellow"><i data-lucide="clipboard-list" style="width:16px;height:16px;"></i></div>
+            <div class="accordion-icon yellow"><i data-lucide="clipboard-list" style="width:16px;height:16px;"></i>
+            </div>
             <span class="accordion-title">授業報告の完全透明化</span>
             <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
           </div>
@@ -877,7 +988,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon purple"><i data-lucide="home" style="width:16px;height:16px;"></i></div>
@@ -896,7 +1007,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon pink"><i data-lucide="heart-handshake" style="width:16px;height:16px;"></i></div>
@@ -920,7 +1031,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- サポート体制 -->
     <div class="content-area" id="content-support">
       <div class="content-header">
@@ -949,7 +1060,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon blue"><i data-lucide="user-check" style="width:16px;height:16px;"></i></div>
@@ -969,7 +1080,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon yellow"><i data-lucide="file-check" style="width:16px;height:16px;"></i></div>
@@ -990,7 +1101,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon purple"><i data-lucide="eye" style="width:16px;height:16px;"></i></div>
@@ -1009,10 +1120,11 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
-            <div class="accordion-icon orange"><i data-lucide="layout-dashboard" style="width:16px;height:16px;"></i></div>
+            <div class="accordion-icon orange"><i data-lucide="layout-dashboard" style="width:16px;height:16px;"></i>
+            </div>
             <span class="accordion-title">EQAO PORTAL（生徒専用プラットフォーム）</span>
             <i data-lucide="chevron-down" class="accordion-arrow" style="width:18px;height:18px;"></i>
           </div>
@@ -1033,7 +1145,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon cyan"><i data-lucide="message-circle" style="width:16px;height:16px;"></i></div>
@@ -1053,7 +1165,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon pink"><i data-lucide="split" style="width:16px;height:16px;"></i></div>
@@ -1063,23 +1175,23 @@
           <div class="accordion-content">
             <div class="accordion-text">
               <p>保護者専用LINEと生徒専用LINEの<strong>2種類</strong>があり、役割を完全に分離しています。</p>
-              
+
               <p class="accordion-subheading">保護者LINE</p>
               <ul class="accordion-list">
                 <li>塾からの公式連絡配信用</li>
                 <li>個別の連絡、請求・手続き</li>
               </ul>
-              
+
               <p class="accordion-subheading">生徒LINE</p>
               <ul class="accordion-list">
                 <li>塾からの公式連絡配信用</li>
               </ul>
-              
+
               <p>連絡の混線や取りこぼしを防ぎます。</p>
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon green"><i data-lucide="phone-off" style="width:16px;height:16px;"></i></div>
@@ -1097,7 +1209,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon blue"><i data-lucide="plus-circle" style="width:16px;height:16px;"></i></div>
@@ -1120,7 +1232,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon yellow"><i data-lucide="bot" style="width:16px;height:16px;"></i></div>
@@ -1140,7 +1252,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon purple"><i data-lucide="book" style="width:16px;height:16px;"></i></div>
@@ -1160,7 +1272,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon red"><i data-lucide="video" style="width:16px;height:16px;"></i></div>
@@ -1181,7 +1293,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- プログラム・イベント -->
     <div class="content-area" id="content-program">
       <div class="content-header">
@@ -1210,7 +1322,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon blue"><i data-lucide="lightbulb" style="width:16px;height:16px;"></i></div>
@@ -1230,7 +1342,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon orange"><i data-lucide="tent" style="width:16px;height:16px;"></i></div>
@@ -1250,7 +1362,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon green"><i data-lucide="languages" style="width:16px;height:16px;"></i></div>
@@ -1271,7 +1383,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon purple"><i data-lucide="pencil" style="width:16px;height:16px;"></i></div>
@@ -1286,7 +1398,7 @@
                 <li>一般入試の英語・国語対策</li>
                 <li>数学・理科など必要科目の個別指導</li>
               </ul>
-              
+
               <p class="accordion-subheading">評定（内申）向上プログラム</p>
               <ul class="accordion-list">
                 <li>レポート作成支援・学校提出物の添削</li>
@@ -1297,7 +1409,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon cyan"><i data-lucide="plane" style="width:16px;height:16px;"></i></div>
@@ -1318,7 +1430,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon pink"><i data-lucide="clipboard-check" style="width:16px;height:16px;"></i></div>
@@ -1328,19 +1440,19 @@
           <div class="accordion-content">
             <div class="accordion-text">
               <p>「総合型選抜の実力」を可視化するために、独自の<strong>EQAO模試</strong>を運営しています。</p>
-              
+
               <p class="accordion-subheading">測定項目</p>
               <ul class="accordion-list">
                 <li>小論文・志望理由書・自己推薦書</li>
                 <li>面接・口頭試問・プレゼン</li>
                 <li>思考力・論理性・表現力</li>
               </ul>
-              
+
               <p>総合型は本来「数値化しづらい」入試ですが、EQAO模試はそれを点数化・可視化。現在地が明確化し、合格までの距離が見えます。</p>
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon red"><i data-lucide="book-marked" style="width:16px;height:16px;"></i></div>
@@ -1358,7 +1470,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon blue"><i data-lucide="file-video" style="width:16px;height:16px;"></i></div>
@@ -1378,7 +1490,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon green"><i data-lucide="users" style="width:16px;height:16px;"></i></div>
@@ -1398,7 +1510,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon yellow"><i data-lucide="party-popper" style="width:16px;height:16px;"></i></div>
@@ -1419,7 +1531,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon orange"><i data-lucide="heart" style="width:16px;height:16px;"></i></div>
@@ -1441,7 +1553,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon purple"><i data-lucide="map-pin" style="width:16px;height:16px;"></i></div>
@@ -1456,7 +1568,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- EQAOの強み -->
     <div class="content-area" id="content-strength">
       <div class="content-header">
@@ -1481,7 +1593,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon blue"><i data-lucide="layers" style="width:16px;height:16px;"></i></div>
@@ -1491,19 +1603,19 @@
           <div class="accordion-content">
             <div class="accordion-text">
               <p>全員を必ず基礎ラインまで引き上げる仕組みと、その後に一人ひとりの個性に応じて徹底的に仕上げる仕組み。この<strong>二段構え</strong>が最大の特徴です。</p>
-              
+
               <p class="accordion-subheading">基礎均一化（80％ラインへの底上げ）</p>
               <p>プロ講師による解説動画、ステップアップ式の動画教材、オンライン集団授業、独自の進捗管理シートで、入塾時期やスタート地点に関わらず、誰もが同じ水準に到達できます。</p>
-              
+
               <p class="accordion-subheading">オーダーメイドのマンツーマン指導（残り20％の仕上げ）</p>
               <p>研究テーマ決め、志望校や併願校の設定、全書類の作成と添削、面接練習やプレゼン資料作成など、受験に必要なあらゆる要素を一対一で丁寧に支援します。</p>
-              
+
               <p class="accordion-subheading">オールインクルーシブ制</p>
               <p>「書類だけ」「面接だけ」といった部分指導は原則行いません。全体を網羅的に仕上げることこそが、合格の再現性を高める唯一の方法です。</p>
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon green"><i data-lucide="network" style="width:16px;height:16px;"></i></div>
@@ -1523,7 +1635,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon yellow"><i data-lucide="bar-chart-3" style="width:16px;height:16px;"></i></div>
@@ -1538,7 +1650,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon purple"><i data-lucide="heart" style="width:16px;height:16px;"></i></div>
@@ -1554,7 +1666,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="accordion-icon orange"><i data-lucide="user" style="width:16px;height:16px;"></i></div>
@@ -1574,7 +1686,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- フッター -->
     <div class="footer-link">
       <a href="index.html">
@@ -1583,14 +1695,14 @@
       </a>
     </div>
   </main>
-  
+
   <script>
     // Lucideアイコン初期化
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       lucide.createIcons();
       setNavUserName();
     });
-    
+
     // カテゴリ切り替え
     function showCategory(category) {
       document.querySelectorAll('.category-card').forEach((card, index) => {
@@ -1600,12 +1712,12 @@
           card.classList.add('active');
         }
       });
-      
+
       document.querySelectorAll('.content-area').forEach(area => {
         area.classList.remove('active');
       });
       document.getElementById('content-' + category).classList.add('active');
-      
+
       setTimeout(() => {
         document.getElementById('content-' + category).scrollIntoView({
           behavior: 'smooth',
@@ -1613,12 +1725,12 @@
         });
       }, 100);
     }
-    
+
     // アコーディオン開閉
     function toggleAccordion(header) {
       const item = header.parentElement;
       const wasOpen = item.classList.contains('open');
-      
+
       if (wasOpen) {
         item.classList.remove('open');
       } else {
@@ -1632,11 +1744,12 @@
       const studentName = localStorage.getItem('eqao_studentName') || '';
       const navUserName = document.getElementById('navUserName');
       const navHeaderUser = document.getElementById('navHeaderUser');
-      
+
       if (navUserName) navUserName.textContent = studentName;
       if (navHeaderUser) navHeaderUser.textContent = studentName ? studentName + ' さん' : 'メニュー';
     }
   </script>
   <script src="js/nav-menu.js"></script>
 </body>
+
 </html>
