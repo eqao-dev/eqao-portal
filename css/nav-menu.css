@@ -376,3 +376,62 @@
   border-top: 1px solid #e8ecf4;
   margin-top: 10px;
 }
+
+/* ========================================
+   レスポンシブ対応（スマートフォン）
+======================================== */
+@media (max-width: 480px) {
+  /* ヘッダータイトルをスマホで調整 */
+  .common-header .header-title {
+    font-size: 14px;
+    white-space: normal;
+    line-height: 1.3;
+  }
+  
+  /* ハンバーガーボタンサイズ調整 */
+  .hamburger-btn {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .hamburger-btn .material-icons {
+    font-size: 22px;
+  }
+  
+  /* メニュー幅を画面に合わせる */
+  .nav-menu {
+    width: 85%;
+    max-width: 280px;
+  }
+  
+  /* ナビゲーションアイテムのパディング調整 */
+  .nav-item {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+  
+  /* ユーザーセクションの調整 */
+  .nav-user-section {
+    padding: 12px 14px;
+  }
+  
+  .nav-user-name {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  .common-header {
+    padding: 10px 12px;
+  }
+  
+  .common-header .header-title {
+    font-size: 13px;
+  }
+  
+  .common-header .back-btn,
+  .common-header .header-logo {
+    width: 32px;
+    height: 32px;
+  }
+}

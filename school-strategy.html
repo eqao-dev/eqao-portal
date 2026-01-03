@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,11 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="css/nav-menu.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Noto Sans JP', sans-serif;
@@ -38,7 +43,7 @@
       justify-content: center;
       width: 36px;
       height: 36px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -47,10 +52,12 @@
       transition: background 0.3s;
     }
 
-    .back-btn:hover { background: rgba(255,255,255,0.25); }
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
 
-    .header-title { 
-      font-size: 17px; 
+    .header-title {
+      font-size: 17px;
       font-weight: 700;
       flex: 1;
     }
@@ -72,7 +79,7 @@
       justify-content: center;
       width: 36px;
       height: 36px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -182,6 +189,68 @@
       }
     }
 
+    @media (max-width: 480px) {
+      .header {
+        padding: 10px 12px;
+        gap: 10px;
+      }
+
+      .back-btn {
+        width: 32px;
+        height: 32px;
+      }
+
+      .header-title {
+        font-size: 14px;
+      }
+
+      .header-menu-btn {
+        width: 32px;
+        height: 32px;
+      }
+
+      .container {
+        padding: 16px 10px;
+      }
+
+      .top-action-bar {
+        gap: 8px;
+      }
+
+      .action-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+
+      .section-header {
+        padding: 12px 14px;
+      }
+
+      .section-title {
+        font-size: 14px;
+      }
+
+      .section-content {
+        padding: 14px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .header {
+        padding: 8px 10px;
+      }
+
+      .header-title {
+        font-size: 13px;
+      }
+
+      .back-btn,
+      .header-menu-btn {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
     .pattern-tab {
       padding: 14px 10px;
       border: 2px solid #E0E0E0;
@@ -222,11 +291,11 @@
       font-weight: 600;
       padding: 2px 8px;
       border-radius: 10px;
-      background: rgba(0,0,0,0.08);
+      background: rgba(0, 0, 0, 0.08);
     }
 
     .pattern-tab.active .pattern-tab-name {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
     }
 
     .pattern-tab-icons {
@@ -247,11 +316,21 @@
       font-size: 16px;
     }
 
-    .pattern-tab-icons .ok { color: #4CAF50; }
-    .pattern-tab-icons .ng { color: #EF5350; }
+    .pattern-tab-icons .ok {
+      color: #4CAF50;
+    }
 
-    .pattern-tab.active .pattern-tab-icons .ok { color: #A5D6A7; }
-    .pattern-tab.active .pattern-tab-icons .ng { color: #FFCDD2; }
+    .pattern-tab-icons .ng {
+      color: #EF5350;
+    }
+
+    .pattern-tab.active .pattern-tab-icons .ok {
+      color: #A5D6A7;
+    }
+
+    .pattern-tab.active .pattern-tab-icons .ng {
+      color: #FFCDD2;
+    }
 
     .pattern-tab-count {
       font-size: 13px;
@@ -478,7 +557,7 @@
     .view-mode-btn.active {
       background: white;
       color: #00695C;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     /* ========================================
@@ -522,10 +601,21 @@
       white-space: nowrap;
     }
 
-    .list-pattern-badge.pattern-a { background: #4CAF50; }
-    .list-pattern-badge.pattern-b { background: #2196F3; }
-    .list-pattern-badge.pattern-c { background: #FF9800; }
-    .list-pattern-badge.pattern-d { background: #9E9E9E; }
+    .list-pattern-badge.pattern-a {
+      background: #4CAF50;
+    }
+
+    .list-pattern-badge.pattern-b {
+      background: #2196F3;
+    }
+
+    .list-pattern-badge.pattern-c {
+      background: #FF9800;
+    }
+
+    .list-pattern-badge.pattern-d {
+      background: #9E9E9E;
+    }
 
     .list-school-info {
       flex: 1;
@@ -598,30 +688,33 @@
 
     .compare-pattern-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       border-color: #00897B;
     }
 
     .compare-pattern-btn.active {
       border-width: 2px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    .compare-pattern-btn.active.pattern-a { 
-      background: linear-gradient(135deg, #E8F5E9, #C8E6C9); 
-      border-color: #4CAF50; 
+    .compare-pattern-btn.active.pattern-a {
+      background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+      border-color: #4CAF50;
     }
-    .compare-pattern-btn.active.pattern-b { 
-      background: linear-gradient(135deg, #E3F2FD, #BBDEFB); 
-      border-color: #2196F3; 
+
+    .compare-pattern-btn.active.pattern-b {
+      background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+      border-color: #2196F3;
     }
-    .compare-pattern-btn.active.pattern-c { 
-      background: linear-gradient(135deg, #FFF3E0, #FFE0B2); 
-      border-color: #FF9800; 
+
+    .compare-pattern-btn.active.pattern-c {
+      background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+      border-color: #FF9800;
     }
-    .compare-pattern-btn.active.pattern-d { 
-      background: linear-gradient(135deg, #FAFAFA, #EEEEEE); 
-      border-color: #9E9E9E; 
+
+    .compare-pattern-btn.active.pattern-d {
+      background: linear-gradient(135deg, #FAFAFA, #EEEEEE);
+      border-color: #9E9E9E;
     }
 
     .compare-pattern-icon {
@@ -637,10 +730,21 @@
       flex-shrink: 0;
     }
 
-    .compare-pattern-btn.pattern-a .compare-pattern-icon { background: #4CAF50; }
-    .compare-pattern-btn.pattern-b .compare-pattern-icon { background: #2196F3; }
-    .compare-pattern-btn.pattern-c .compare-pattern-icon { background: #FF9800; }
-    .compare-pattern-btn.pattern-d .compare-pattern-icon { background: #9E9E9E; }
+    .compare-pattern-btn.pattern-a .compare-pattern-icon {
+      background: #4CAF50;
+    }
+
+    .compare-pattern-btn.pattern-b .compare-pattern-icon {
+      background: #2196F3;
+    }
+
+    .compare-pattern-btn.pattern-c .compare-pattern-icon {
+      background: #FF9800;
+    }
+
+    .compare-pattern-btn.pattern-d .compare-pattern-icon {
+      background: #9E9E9E;
+    }
 
     .compare-pattern-text {
       flex: 1;
@@ -830,7 +934,9 @@
     }
 
     @keyframes spin {
-      100% { transform: rotate(360deg); }
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     .loading-state p {
@@ -892,6 +998,7 @@
         opacity: 0;
         transform: translateY(-20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -962,11 +1069,25 @@
       margin-bottom: 0;
     }
 
-    .ratio-item.danger { background: #FFEBEE; }
-    .ratio-item.warning { background: #FFF3E0; }
-    .ratio-item.caution { background: #FFFDE7; }
-    .ratio-item.normal { background: #E8F5E9; }
-    .ratio-item.safe { background: #E0F7FA; }
+    .ratio-item.danger {
+      background: #FFEBEE;
+    }
+
+    .ratio-item.warning {
+      background: #FFF3E0;
+    }
+
+    .ratio-item.caution {
+      background: #FFFDE7;
+    }
+
+    .ratio-item.normal {
+      background: #E8F5E9;
+    }
+
+    .ratio-item.safe {
+      background: #E0F7FA;
+    }
 
     .ratio-badge {
       padding: 6px 10px;
@@ -977,17 +1098,37 @@
       flex-shrink: 0;
     }
 
-    .ratio-item.danger .ratio-badge { background: #C62828; color: white; }
-    .ratio-item.warning .ratio-badge { background: #EF6C00; color: white; }
-    .ratio-item.caution .ratio-badge { background: #F9A825; color: white; }
-    .ratio-item.normal .ratio-badge { background: #2E7D32; color: white; }
-    .ratio-item.safe .ratio-badge { background: #00838F; color: white; }
+    .ratio-item.danger .ratio-badge {
+      background: #C62828;
+      color: white;
+    }
+
+    .ratio-item.warning .ratio-badge {
+      background: #EF6C00;
+      color: white;
+    }
+
+    .ratio-item.caution .ratio-badge {
+      background: #F9A825;
+      color: white;
+    }
+
+    .ratio-item.normal .ratio-badge {
+      background: #2E7D32;
+      color: white;
+    }
+
+    .ratio-item.safe .ratio-badge {
+      background: #00838F;
+      color: white;
+    }
 
     .ratio-desc {
       font-size: 13px;
       color: #333;
       line-height: 1.5;
     }
+
     /* ========================================
        スマホ向けコンパクト表示
     ======================================== */
@@ -1360,6 +1501,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="header">
     <a href="index.html" class="back-btn">
@@ -1396,7 +1538,7 @@
         <span class="section-title">パターン別 志望校</span>
       </div>
       <div class="section-content">
-        
+
         <!-- パターン選択タブ -->
         <div class="pattern-tabs" id="patternTabs">
           <div class="pattern-tab active" data-pattern="A" onclick="selectPattern('A')">
@@ -1470,7 +1612,7 @@
         <span class="section-title">全体表示・比較</span>
       </div>
       <div class="section-content view-mode-section">
-        
+
         <!-- 表示モード切替 -->
         <div class="view-mode-toggle">
           <button class="view-mode-btn active" data-mode="list" onclick="setViewMode('list')">
@@ -1566,42 +1708,42 @@
         <p class="ratio-guide-intro">
           総合型選抜における倍率の目安です。志望校選びの参考にしてください。
         </p>
-        
+
         <div class="ratio-item danger">
           <span class="ratio-badge">8倍以上</span>
           <span class="ratio-desc">極めて厳しい。出願には慎重な検討が必要。</span>
         </div>
-        
+
         <div class="ratio-item danger">
           <span class="ratio-badge">7倍台</span>
           <span class="ratio-desc">危険ゾーン。戦略的に挑むなら強い準備が必須。</span>
         </div>
-        
+
         <div class="ratio-item warning">
           <span class="ratio-badge">6倍台</span>
           <span class="ratio-desc">とても難易度が高い。強みや独自性がないと突破は困難。</span>
         </div>
-        
+
         <div class="ratio-item warning">
           <span class="ratio-badge">5倍台</span>
           <span class="ratio-desc">難易度はかなり高め。入念な対策を要する。</span>
         </div>
-        
+
         <div class="ratio-item caution">
           <span class="ratio-badge">4倍台</span>
           <span class="ratio-desc">チャレンジ校認定スタート基準。対策次第で合否が分かれる。</span>
         </div>
-        
+
         <div class="ratio-item caution">
           <span class="ratio-badge">3倍台</span>
           <span class="ratio-desc">簡単ではない。油断すれば落ちるレベル。</span>
         </div>
-        
+
         <div class="ratio-item normal">
           <span class="ratio-badge">2倍台</span>
           <span class="ratio-desc">合格可能性は高いが、気を抜かずに対策を。</span>
         </div>
-        
+
         <div class="ratio-item safe">
           <span class="ratio-badge">1倍台</span>
           <span class="ratio-desc">穴場。出願条件を満たせば合格率は比較的高い。</span>
@@ -1637,13 +1779,13 @@
     document.addEventListener('DOMContentLoaded', async () => {
       const studentId = localStorage.getItem('eqao_studentId');
       const studentName = localStorage.getItem('eqao_studentName');
-      
+
       if (!studentId) {
         localStorage.setItem('eqao_returnUrl', window.location.href);
         window.location.href = 'login.html';
         return;
       }
-      
+
       document.getElementById('userName').textContent = studentName || studentId;
       await loadSchoolData(studentId);
     });
@@ -1656,7 +1798,7 @@
         const url = `${API_URL}?action=getSchoolData&studentId=${studentId}`;
         const response = await fetch(url);
         const data = await response.json();
-        
+
         if (data && typeof data === 'object') {
           if (data.A || data.B || data.C || data.D) {
             schoolPatterns = {
@@ -1669,13 +1811,13 @@
             schoolPatterns = { A: data, B: [], C: [], D: [] };
           }
         }
-        
+
         document.getElementById('loadingState').style.display = 'none';
         updateAllCounts();
         renderPatternSchools();
         renderAllSchoolsList();
         renderCompareCards();
-        
+
       } catch (error) {
         console.error('API error:', error);
         document.getElementById('loadingState').innerHTML = `
@@ -1692,7 +1834,7 @@
       ['A', 'B', 'C', 'D'].forEach(p => {
         const schools = schoolPatterns[p] || [];
         const count = schools.length;
-        
+
         document.getElementById(`tabCount${p}`).textContent = count;
         document.getElementById(`compareCount${p}`).textContent = `${count}校`;
       });
@@ -1716,16 +1858,16 @@
       const container = document.getElementById('patternSchools');
       const emptyState = document.getElementById('patternEmpty');
       const schools = schoolPatterns[selectedPattern] || [];
-      
+
       if (schools.length === 0) {
         container.style.display = 'none';
         emptyState.style.display = 'block';
         return;
       }
-      
+
       container.style.display = 'flex';
       emptyState.style.display = 'none';
-      
+
       container.innerHTML = schools.map((school, index) => renderSchoolCard(school, index, `pattern-${index}`)).join('');
     }
 
@@ -1735,7 +1877,7 @@
     function renderSchoolCard(school, rank, idPrefix) {
       const typeClass = school.applicationType === '専願' ? 'sengan' : (school.applicationType === '併願' ? 'heigan' : '');
       const cardId = `${idPrefix}`;
-      
+
       return `
         <div class="school-card" id="${cardId}">
           <div class="school-card-header" onclick="toggleSchoolCard('${cardId}')">
@@ -1863,7 +2005,7 @@
       document.querySelectorAll('.view-mode-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.mode === mode);
       });
-      
+
       document.getElementById('listView').classList.toggle('hidden', mode !== 'list');
       document.getElementById('compareView').classList.toggle('show', mode === 'compare');
     }
@@ -1874,28 +2016,28 @@
     function renderAllSchoolsList() {
       const container = document.getElementById('allSchoolsList');
       const emptyState = document.getElementById('listEmpty');
-      
+
       let allSchools = [];
       ['A', 'B', 'C', 'D'].forEach(pattern => {
         (schoolPatterns[pattern] || []).forEach((school, index) => {
           allSchools.push({ pattern, rank: index + 1, school });
         });
       });
-      
+
       if (allSchools.length === 0) {
         container.style.display = 'none';
         emptyState.style.display = 'block';
         return;
       }
-      
+
       container.style.display = 'flex';
       emptyState.style.display = 'none';
-      
+
       container.innerHTML = allSchools.map((item, idx) => {
         const { pattern, rank, school } = item;
         const typeClass = school.applicationType === '専願' ? 'sengan' : (school.applicationType === '併願' ? 'heigan' : '');
         const cardId = `list-${idx}`;
-        
+
         return `
           <div class="list-school-card" id="${cardId}">
             <div class="list-school-header" onclick="toggleListCard('${cardId}')">
@@ -1940,20 +2082,20 @@
       const emptyState = document.getElementById('compareEmpty');
       const scrollHint = document.getElementById('scrollHint');
       const schools = schoolPatterns[selectedComparePattern] || [];
-      
+
       if (schools.length === 0) {
         container.innerHTML = '';
         emptyState.style.display = 'block';
         scrollHint.style.display = 'none';
         return;
       }
-      
+
       emptyState.style.display = 'none';
       scrollHint.style.display = schools.length > 1 ? 'flex' : 'none';
-      
+
       container.innerHTML = schools.map((school, index) => {
         const typeClass = school.applicationType === '専願' ? 'sengan' : (school.applicationType === '併願' ? 'heigan' : '');
-        
+
         return `
           <div class="compare-card">
             <div class="compare-card-header">
@@ -2064,4 +2206,5 @@
   </script>
   <script src="js/nav-menu.js"></script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +43,7 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -52,7 +53,7 @@
     }
 
     .back-btn:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
     }
 
     .header-title {
@@ -68,7 +69,7 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -96,7 +97,7 @@
       border-radius: 16px;
       padding: 24px;
       margin-bottom: 24px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     }
 
     .intro-title {
@@ -370,7 +371,7 @@
       border-radius: 16px;
       padding: 20px 24px;
       margin-bottom: 24px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     }
 
     .detail-intro-title {
@@ -503,14 +504,14 @@
       background: white;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
       cursor: pointer;
       transition: all 0.3s;
     }
 
     .theme-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
     }
 
     .theme-card.disabled {
@@ -520,7 +521,7 @@
 
     .theme-card.disabled:hover {
       transform: none;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     }
 
     .theme-card-inner {
@@ -624,7 +625,7 @@
       border-radius: 16px;
       padding: 20px;
       margin-bottom: 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     }
 
     .detail-theme-info {
@@ -710,7 +711,7 @@
       border-radius: 16px;
       padding: 20px;
       margin-bottom: 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     }
 
     .section-title {
@@ -983,7 +984,7 @@
       border-radius: 16px;
       padding: 20px;
       margin-bottom: 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     }
 
     .quiz-section.active {
@@ -1234,7 +1235,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(255,255,255,0.9);
+      background: rgba(255, 255, 255, 0.9);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1255,8 +1256,13 @@
     }
 
     @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     /* レスポンシブ */
@@ -1278,8 +1284,69 @@
         font-size: 14px;
       }
     }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 12px 14px;
+        gap: 12px;
+      }
+
+      .back-btn {
+        width: 36px;
+        height: 36px;
+      }
+
+      .header-title {
+        font-size: 15px;
+        letter-spacing: 1px;
+      }
+
+      .hamburger-btn {
+        width: 36px;
+        height: 36px;
+      }
+
+      .container {
+        padding: 16px 12px;
+      }
+
+      .intro-section {
+        padding: 18px;
+      }
+
+      .intro-title {
+        font-size: 15px;
+      }
+
+      .three-set-item {
+        padding: 12px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .header {
+        padding: 10px 12px;
+        gap: 10px;
+      }
+
+      .back-btn {
+        width: 32px;
+        height: 32px;
+      }
+
+      .header-title {
+        font-size: 14px;
+        letter-spacing: 0;
+      }
+
+      .hamburger-btn {
+        width: 34px;
+        height: 34px;
+      }
+    }
   </style>
 </head>
+
 <body>
   <!-- ヘッダー -->
   <div class="header">
@@ -1301,7 +1368,7 @@
           <span class="material-icons">school</span>
           この教材について
         </div>
-        
+
         <div class="intro-description">
           <p>この教材は<strong>「本質を理解してから実践する」</strong>という考え方に基づいて作られています。</p>
           <p>総合型選抜・推薦入試で求められるのは、テクニックではなく<strong>「なぜそうするのか」を理解した上での行動</strong>です。</p>
@@ -1379,7 +1446,7 @@
           <span class="material-icons">help_outline</span>
           各テーマの進め方
         </div>
-        
+
         <div class="detail-flow">
           <div class="detail-flow-item">
             <span class="material-icons">checklist</span>
@@ -1427,7 +1494,7 @@
           <div class="theme-number" id="detailThemeNumber">1</div>
           <div class="detail-theme-title" id="detailThemeTitle">テーマタイトル</div>
         </div>
-        
+
         <!-- プログレスステップ -->
         <div class="progress-steps">
           <div class="progress-step">
@@ -1459,7 +1526,7 @@
           <span class="material-icons">checklist</span>
           インプットチェックリスト
         </div>
-        
+
         <div class="checklist-progress">
           <div class="progress-bar-container">
             <div class="progress-bar-fill" id="checklistProgressBar" style="width: 0%"></div>
@@ -1528,7 +1595,7 @@
 
   <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
-    
+
     let currentUser = null;
     let currentThemeId = null;
     let themeProgressData = {};
@@ -1551,14 +1618,14 @@
     ];
 
     // ===== 初期化 =====
-    document.addEventListener('DOMContentLoaded', async function() {
+    document.addEventListener('DOMContentLoaded', async function () {
       const loggedIn = localStorage.getItem('eqao_loggedIn');
       if (!loggedIn) {
         localStorage.setItem('eqao_returnUrl', location.href);
         window.location.href = 'login.html';
         return;
       }
-      
+
       currentUser = {
         studentId: localStorage.getItem('eqao_studentId'),
         studentName: localStorage.getItem('eqao_studentName')
@@ -1566,7 +1633,7 @@
 
       // 全テーマの進捗を取得
       await loadAllProgress();
-      
+
       // テーマ一覧を描画
       renderThemeList();
 
@@ -1577,7 +1644,7 @@
     async function loadAllProgress() {
       for (const theme of themes) {
         if (!theme.available) continue;
-        
+
         try {
           const res = await fetch(`${API_URL}?action=getThemeProgress&studentId=${currentUser.studentId}&themeId=${theme.id}`);
           const result = await res.json();
@@ -1593,12 +1660,12 @@
     // ===== テーマ一覧描画 =====
     function renderThemeList() {
       const container = document.getElementById('themeGrid');
-      
+
       container.innerHTML = themes.map(theme => {
         const progress = themeProgressData[theme.id] || {};
         let statusBadge = '';
         let statusClass = '';
-        
+
         if (!theme.available) {
           statusBadge = '<span class="status-badge coming-soon"><span class="material-icons">schedule</span>準備中</span>';
           statusClass = 'disabled';
@@ -1632,44 +1699,44 @@
     async function openTheme(themeId) {
       currentThemeId = themeId;
       const theme = themes.find(t => t.id === themeId);
-      
+
       document.getElementById('loadingOverlay').style.display = 'flex';
-      
+
       // ヘッダー更新
       document.getElementById('headerTitle').textContent = `テーマ ${themeId}`;
       document.getElementById('backBtn').onclick = (e) => { e.preventDefault(); closeTheme(); };
-      
+
       // 詳細情報設定
       document.getElementById('detailThemeNumber').textContent = themeId;
       document.getElementById('detailThemeTitle').textContent = theme.title;
-      
+
       // データ取得
       await loadThemeData(themeId);
-      
+
       // ビュー切り替え
       document.getElementById('listView').classList.add('hidden');
       document.getElementById('detailView').classList.add('active');
-      
+
       document.getElementById('loadingOverlay').style.display = 'none';
     }
 
     // ===== テーマを閉じる =====
     function closeTheme() {
       currentThemeId = null;
-      
+
       document.getElementById('headerTitle').textContent = '授業書類';
       document.getElementById('backBtn').href = 'index.html';
       document.getElementById('backBtn').onclick = null;
-      
+
       document.getElementById('listView').classList.remove('hidden');
       document.getElementById('detailView').classList.remove('active');
-      
+
       // 小テストセクションをリセット
       document.getElementById('quizSection').classList.remove('active');
       document.getElementById('quizResult').classList.remove('show');
       document.getElementById('quizContent').style.display = 'block';
       document.getElementById('submitQuizBtn').style.display = 'flex';
-      
+
       // 進捗を再取得して一覧更新
       loadAllProgress().then(() => renderThemeList());
     }
@@ -1680,29 +1747,29 @@
         // 進捗取得
         const progressRes = await fetch(`${API_URL}?action=getThemeProgress&studentId=${currentUser.studentId}&themeId=${themeId}`);
         const progressResult = await progressRes.json();
-        
+
         if (progressResult.success) {
           themeProgressData[themeId] = progressResult;
           checkedItems = progressResult.inputProgress?.checkedItems || [];
         }
-        
+
         // インプット項目取得
         const itemsRes = await fetch(`${API_URL}?action=getInputItems&themeId=${themeId}`);
         const itemsResult = await itemsRes.json();
-        
+
         if (itemsResult.success) {
           inputItems = itemsResult.items;
         }
-        
+
         // チェックリスト描画
         renderChecklist();
         updateProgressSteps();
-        
+
         // 小テスト合格済みならアウトプット画面を表示
         if (progressResult.status === 'quiz_passed') {
           showCompletedState();
         }
-        
+
       } catch (error) {
         console.error('データ取得エラー:', error);
         alert('データの取得に失敗しました');
@@ -1716,12 +1783,12 @@
     function renderChecklist() {
       const container = document.getElementById('checklistContent');
       const filterContainer = document.getElementById('segmentFilter');
-      
+
       // セグメントでグループ化（順序を保持）
       const segmentOrder = [];
       const segments = {};
       const segmentDescriptions = {};
-      
+
       inputItems.forEach(item => {
         if (!segments[item.segment]) {
           segments[item.segment] = [];
@@ -1730,21 +1797,21 @@
         }
         segments[item.segment].push(item);
       });
-      
+
       // セグメントフィルタータブを生成
       let filterHtml = `<button class="segment-tab ${currentSegmentFilter === 'ALL' ? 'active' : ''}" onclick="filterSegment('ALL')">すべて</button>`;
       segmentOrder.forEach(segment => {
         filterHtml += `<button class="segment-tab ${currentSegmentFilter === segment ? 'active' : ''}" onclick="filterSegment('${segment}')">${segment}</button>`;
       });
       filterContainer.innerHTML = filterHtml;
-      
+
       // チェックリストを生成
       let html = '';
       segmentOrder.forEach(segment => {
         const items = segments[segment];
         const description = segmentDescriptions[segment];
         const isHidden = currentSegmentFilter !== 'ALL' && currentSegmentFilter !== segment;
-        
+
         html += `
           <div class="segment-group ${isHidden ? 'hidden' : ''}" data-segment="${segment}">
             <div class="segment-header">
@@ -1755,9 +1822,9 @@
             </div>
             <div class="checklist-items">
               ${items.map(item => {
-                const isChecked = checkedItems.includes(item.itemId);
-                const hasDetail = item.detail && item.detail.trim() !== '';
-                return `
+          const isChecked = checkedItems.includes(item.itemId);
+          const hasDetail = item.detail && item.detail.trim() !== '';
+          return `
                   <div class="checklist-item ${isChecked ? 'checked' : ''}" data-item-id="${item.itemId}">
                     <div class="item-header">
                       <div class="check-box" onclick="event.stopPropagation(); toggleCheckItem(${item.itemId})">
@@ -1773,12 +1840,12 @@
                     ` : ''}
                   </div>
                 `;
-              }).join('')}
+        }).join('')}
             </div>
           </div>
         `;
       });
-      
+
       container.innerHTML = html;
       updateChecklistProgress();
     }
@@ -1796,7 +1863,7 @@
     // ===== セグメントフィルター =====
     function filterSegment(segment) {
       currentSegmentFilter = segment;
-      
+
       // タブのアクティブ状態を更新
       document.querySelectorAll('.segment-tab').forEach(tab => {
         tab.classList.remove('active');
@@ -1804,7 +1871,7 @@
           tab.classList.add('active');
         }
       });
-      
+
       // セグメントグループの表示/非表示を切り替え
       document.querySelectorAll('.segment-group').forEach(group => {
         if (segment === 'ALL' || group.dataset.segment === segment) {
@@ -1831,14 +1898,14 @@
       } else {
         checkedItems.push(itemId);
       }
-      
+
       // UI更新
       const item = document.querySelector(`[data-item-id="${itemId}"]`);
       if (item) {
         item.classList.toggle('checked');
       }
       updateChecklistProgress();
-      
+
       // サーバーに保存
       try {
         const url = new URL(API_URL);
@@ -1846,10 +1913,10 @@
         url.searchParams.set('studentId', currentUser.studentId);
         url.searchParams.set('themeId', currentThemeId);
         url.searchParams.set('checkedItems', JSON.stringify(checkedItems));
-        
+
         const res = await fetch(url.toString());
         const result = await res.json();
-        
+
         if (result.allCompleted) {
           updateProgressSteps();
         }
@@ -1863,10 +1930,10 @@
       const total = inputItems.length;
       const checked = checkedItems.length;
       const percent = total > 0 ? Math.round((checked / total) * 100) : 0;
-      
+
       document.getElementById('checklistProgressBar').style.width = `${percent}%`;
       document.getElementById('checklistProgressText').textContent = `${checked} / ${total}`;
-      
+
       // 小テストボタンの有効化
       const toQuizBtn = document.getElementById('toQuizBtn');
       if (checked >= total && total > 0) {
@@ -1880,7 +1947,7 @@
     function updateProgressSteps() {
       const progress = themeProgressData[currentThemeId] || {};
       const status = progress.status || 'not_started';
-      
+
       const step1 = document.getElementById('step1Circle');
       const step2 = document.getElementById('step2Circle');
       const step3 = document.getElementById('step3Circle');
@@ -1889,12 +1956,12 @@
       const label1 = document.getElementById('step1Label');
       const label2 = document.getElementById('step2Label');
       const label3 = document.getElementById('step3Label');
-      
+
       // リセット
       [step1, step2, step3].forEach(el => el.classList.remove('active', 'completed'));
       [line1, line2].forEach(el => el.classList.remove('completed'));
       [label1, label2, label3].forEach(el => el.classList.remove('active', 'completed'));
-      
+
       if (status === 'quiz_passed') {
         step1.classList.add('completed');
         step2.classList.add('completed');
@@ -1922,17 +1989,17 @@
     // ===== 小テストセクション表示 =====
     async function showQuizSection() {
       document.getElementById('loadingOverlay').style.display = 'flex';
-      
+
       try {
         // 問題取得
         const res = await fetch(`${API_URL}?action=getQuizQuestions&themeId=${currentThemeId}`);
         const result = await res.json();
-        
+
         if (result.success) {
           quizQuestions = result.questions;
           selectedAnswers = {};
           renderQuiz();
-          
+
           document.getElementById('quizSection').classList.add('active');
           document.getElementById('quizSection').scrollIntoView({ behavior: 'smooth' });
         }
@@ -1940,7 +2007,7 @@
         console.error('小テスト取得エラー:', error);
         alert('小テストの取得に失敗しました');
       }
-      
+
       document.getElementById('loadingOverlay').style.display = 'none';
     }
 
@@ -1948,7 +2015,7 @@
     function renderQuiz() {
       const container = document.getElementById('quizContent');
       const optionLabels = ['A', 'B', 'C', 'D'];
-      
+
       container.innerHTML = quizQuestions.map((q, qIndex) => `
         <div class="quiz-question" data-question-id="${q.questionId}">
           <div class="question-number">問題 ${qIndex + 1}</div>
@@ -1964,7 +2031,7 @@
           <div class="explanation" id="explanation-${q.questionId}"></div>
         </div>
       `).join('');
-      
+
       document.getElementById('submitQuizBtn').disabled = true;
       document.getElementById('quizResult').classList.remove('show');
       document.getElementById('quizContent').style.display = 'block';
@@ -1975,9 +2042,9 @@
     function selectOption(questionId, optionIndex) {
       // 既に結果表示中なら何もしない
       if (document.getElementById('quizResult').classList.contains('show')) return;
-      
+
       selectedAnswers[questionId] = optionIndex;
-      
+
       // UIの更新
       const options = document.querySelectorAll(`[data-question-id="${questionId}"].quiz-option`);
       options.forEach(opt => {
@@ -1986,7 +2053,7 @@
           opt.classList.add('selected');
         }
       });
-      
+
       // 全問回答したら提出ボタン有効化
       const answeredCount = Object.keys(selectedAnswers).length;
       document.getElementById('submitQuizBtn').disabled = answeredCount < quizQuestions.length;
@@ -1995,22 +2062,22 @@
     // ===== 小テスト提出 =====
     async function submitQuiz() {
       document.getElementById('loadingOverlay').style.display = 'flex';
-      
+
       try {
         const answers = Object.entries(selectedAnswers).map(([questionId, selectedIndex]) => ({
           questionId: parseInt(questionId),
           selectedIndex: selectedIndex
         }));
-        
+
         const url = new URL(API_URL);
         url.searchParams.set('action', 'submitQuizAnswer');
         url.searchParams.set('studentId', currentUser.studentId);
         url.searchParams.set('themeId', currentThemeId);
         url.searchParams.set('answers', JSON.stringify(answers));
-        
+
         const res = await fetch(url.toString());
         const result = await res.json();
-        
+
         if (result.success) {
           showQuizResult(result);
         }
@@ -2018,14 +2085,14 @@
         console.error('提出エラー:', error);
         alert('提出に失敗しました');
       }
-      
+
       document.getElementById('loadingOverlay').style.display = 'none';
     }
 
     // ===== 結果表示 =====
     function showQuizResult(result) {
       const theme = themes.find(t => t.id === currentThemeId);
-      
+
       // 各問題の正誤を表示
       result.results.forEach(r => {
         const options = document.querySelectorAll(`[data-question-id="${r.questionId}"].quiz-option`);
@@ -2038,7 +2105,7 @@
             opt.classList.add('incorrect');
           }
         });
-        
+
         // 解説表示
         const explanation = document.getElementById(`explanation-${r.questionId}`);
         if (explanation && r.explanation) {
@@ -2046,19 +2113,19 @@
           explanation.classList.add('show');
         }
       });
-      
+
       // 結果サマリー
       const resultIcon = document.getElementById('resultIcon');
       const resultTitle = document.getElementById('resultTitle');
       const resultScore = document.getElementById('resultScore');
       const resultActions = document.getElementById('resultActions');
-      
+
       resultIcon.textContent = result.passed ? 'emoji_events' : 'sentiment_dissatisfied';
       resultIcon.className = `material-icons result-icon ${result.passed ? 'pass' : 'fail'}`;
       resultTitle.textContent = result.passed ? '合格！' : '不合格...';
       resultTitle.className = `result-title ${result.passed ? 'pass' : 'fail'}`;
       resultScore.textContent = `${result.totalQuestions}問中 ${result.score}問正解`;
-      
+
       if (result.passed) {
         resultActions.innerHTML = `
           ${theme.outputPage ? `
@@ -2071,7 +2138,7 @@
             テーマ一覧に戻る
           </button>
         `;
-        
+
         // 進捗更新
         themeProgressData[currentThemeId] = { status: 'quiz_passed' };
         updateProgressSteps();
@@ -2086,7 +2153,7 @@
           </button>
         `;
       }
-      
+
       // 提出ボタン非表示、結果表示
       document.getElementById('submitQuizBtn').style.display = 'none';
       document.getElementById('quizResult').classList.add('show');
@@ -2098,7 +2165,7 @@
       selectedAnswers = {};
       document.getElementById('quizResult').classList.remove('show');
       document.getElementById('submitQuizBtn').style.display = 'flex';
-      
+
       // 問題を再取得（シャッフル）
       showQuizSection();
     }
@@ -2106,7 +2173,7 @@
     // ===== 完了状態表示 =====
     function showCompletedState() {
       const theme = themes.find(t => t.id === currentThemeId);
-      
+
       // チェックリストを全てチェック済みにする
       inputItems.forEach(item => {
         if (!checkedItems.includes(item.itemId)) {
@@ -2114,23 +2181,23 @@
         }
       });
       renderChecklist();
-      
+
       // 小テスト結果を表示
       document.getElementById('quizSection').classList.add('active');
       document.getElementById('quizContent').style.display = 'none';
       document.getElementById('submitQuizBtn').style.display = 'none';
-      
+
       const resultIcon = document.getElementById('resultIcon');
       const resultTitle = document.getElementById('resultTitle');
       const resultScore = document.getElementById('resultScore');
       const resultActions = document.getElementById('resultActions');
-      
+
       resultIcon.textContent = 'check_circle';
       resultIcon.className = 'material-icons result-icon pass';
       resultTitle.textContent = '学習完了！';
       resultTitle.className = 'result-title pass';
       resultScore.textContent = '小テスト合格済み';
-      
+
       resultActions.innerHTML = `
         ${theme.outputPage ? `
           <a href="${theme.outputPage}" class="result-btn btn-output">
@@ -2142,10 +2209,11 @@
           テーマ一覧に戻る
         </button>
       `;
-      
+
       document.getElementById('quizResult').classList.add('show');
     }
   </script>
   <script src="js/nav-menu.js"></script>
 </body>
+
 </html>
