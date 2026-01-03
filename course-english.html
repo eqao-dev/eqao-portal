@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>EQAO ENGLISH - 英語資格対策専門コース</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #f8fafc;
+      min-height: 100vh;
+      color: #374151;
+    }
+    
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, #722f37 0%, #8b2942 100%);
+      padding: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 8px;
+    }
+    
+    @media (min-width: 768px) {
+      .header-content {
+        max-width: 720px;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .header-content {
+        max-width: 900px;
+      }
+    }
+    
+    .back-button {
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: all 0.2s;
+    }
+    
+    .back-button:hover {
+      background: rgba(255,255,255,0.25);
+    }
+    
+    .header-title {
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      flex: 1;
+    }
+    
+    /* メインコンテンツ */
+    .main {
+      max-width: 100%;
+      margin: 0 auto;
+      padding-bottom: 100px;
+    }
+    
+    @media (min-width: 768px) {
+      .main {
+        max-width: 720px;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .main {
+        max-width: 900px;
+      }
+    }
+    
+    /* ヒーローセクション */
+    .hero {
+      background: linear-gradient(180deg, #722f37 0%, #8b2942 50%, #8b2942 100%);
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(4px);
+    }
+    
+    .hero-title {
+      color: white;
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+    
+    .hero-subtitle {
+      color: rgba(255,255,255,0.9);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 20px;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-number {
+      color: #fde047;
+      font-size: 28px;
+      font-weight: 900;
+    }
+    
+    .stat-label {
+      color: rgba(255,255,255,0.8);
+      font-size: 11px;
+      margin-top: 4px;
+    }
+    
+    /* 悩みセクション */
+    .problems-section {
+      padding: 24px 16px;
+      background: white;
+    }
+    
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #722f37;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .problem-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .problem-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%);
+      border-radius: 12px;
+      border-left: 4px solid #f59e0b;
+    }
+    
+    .problem-icon {
+      width: 28px;
+      height: 28px;
+      background: #f59e0b;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .problem-icon i {
+      color: white;
+    }
+    
+    .problem-text {
+      font-size: 13px;
+      color: #78350f;
+      line-height: 1.5;
+      flex: 1;
+    }
+    
+    /* 解決セクション */
+    .solution-section {
+      padding: 24px 16px;
+      background: linear-gradient(135deg, #fdf2f4 0%, #fce7eb 100%);
+    }
+    
+    .solution-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .solution-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: #8b2942;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .solution-subtitle {
+      font-size: 13px;
+      color: #722f37;
+    }
+    
+    /* 強みカード */
+    .strengths {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .strength-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: transform 0.2s;
+    }
+    
+    .strength-card:hover {
+      transform: translateY(-2px);
+    }
+    
+    .strength-number {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #8b2942 0%, #722f37 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    
+    .strength-content {
+      flex: 1;
+    }
+    
+    .strength-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e3a5f;
+      margin-bottom: 6px;
+    }
+    
+    .strength-desc {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.6;
+    }
+    
+    /* 対応資格 */
+    .qualifications-section {
+      padding: 24px 16px;
+      background: white;
+    }
+    
+    .qual-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    
+    @media (min-width: 768px) {
+      .qual-grid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+    
+    .qual-item {
+      background: linear-gradient(135deg, #fdf2f4 0%, #fce7eb 100%);
+      border-radius: 12px;
+      padding: 16px 8px;
+      text-align: center;
+      border: 2px solid #8b2942;
+    }
+    
+    .qual-icon {
+      width: 40px;
+      height: 40px;
+      background: #8b2942;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+    }
+    
+    .qual-icon i {
+      color: white;
+    }
+    
+    .qual-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #8b2942;
+    }
+    
+    /* 実績セクション */
+    .results-section {
+      padding: 24px 16px;
+      background: linear-gradient(135deg, #722f37 0%, #8b2942 100%);
+      color: white;
+    }
+    
+    .results-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 16px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .results-highlight {
+      background: rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    
+    .results-number {
+      font-size: 36px;
+      font-weight: 900;
+      color: #fde047;
+      margin-bottom: 4px;
+    }
+    
+    .results-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.9);
+    }
+    
+    .results-note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.7);
+      margin-top: 12px;
+      text-align: center;
+    }
+    
+    /* CTA */
+    .cta-section {
+      padding: 24px 16px;
+      background: white;
+    }
+    
+    .cta-card {
+      background: linear-gradient(135deg, #8b2942 0%, #722f37 100%);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 120px;
+      height: 120px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    
+    .cta-card::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: -40px;
+      width: 100px;
+      height: 100px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .cta-title {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    
+    .cta-desc {
+      font-size: 12px;
+      opacity: 0.9;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: white;
+      color: #8b2942;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+      width: 100%;
+    }
+    
+    .cta-button:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+    
+    /* フッター戻るボタン */
+    .footer-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 1px solid #e5e7eb;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      z-index: 100;
+    }
+    
+    .footer-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #f1f5f9;
+      color: #64748b;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    
+    .footer-back:hover {
+      background: #e2e8f0;
+    }
+    
+    .footer-detail {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #8b2942 0%, #722f37 100%);
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: all 0.2s;
+      flex: 1;
+      justify-content: center;
+    }
+    
+    .footer-detail:hover {
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="back-button">
+        <i data-lucide="arrow-left" style="width:20px;height:20px;"></i>
+      </a>
+      <div class="header-title">EQAO ENGLISH</div>
+    </div>
+  </header>
+  
+  <main class="main">
+    <!-- ヒーローセクション -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i data-lucide="globe" style="width:14px;height:14px;"></i>
+          英語資格対策専門コース
+        </div>
+        <h1 class="hero-title">EQAO ENGLISH</h1>
+        <p class="hero-subtitle">
+          IELTS・英検など英語資格対策のプロが<br>
+          最新ノウハウで合格まで徹底伴走
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number">準1級</div>
+            <div class="stat-label">英検合格者多数</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">5.5+</div>
+            <div class="stat-label">IELTS取得者</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 悩みセクション -->
+    <section class="problems-section">
+      <h2 class="section-title">
+        <i data-lucide="alert-circle" style="width:20px;height:20px;color:#f59e0b;"></i>
+        こんな悩みありませんか？
+      </h2>
+      <div class="problem-list">
+        <div class="problem-item">
+          <div class="problem-icon">
+            <i data-lucide="help-circle" style="width:16px;height:16px;"></i>
+          </div>
+          <p class="problem-text">海外大学受験の方法がわからない...</p>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon">
+            <i data-lucide="book-open" style="width:16px;height:16px;"></i>
+          </div>
+          <p class="problem-text">TOEFL・IELTS・英検のスコアが伸び悩んでいる...</p>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon">
+            <i data-lucide="graduation-cap" style="width:16px;height:16px;"></i>
+          </div>
+          <p class="problem-text">インター・国際科の授業についていけているか心配...</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 解決セクション -->
+    <section class="solution-section">
+      <div class="solution-header">
+        <h2 class="solution-title">
+          <i data-lucide="sparkles" style="width:24px;height:24px;"></i>
+          EQAOにお任せください！
+        </h2>
+        <p class="solution-subtitle">「使える英語」を身につける3つの強み</p>
+      </div>
+      
+      <div class="strengths">
+        <div class="strength-card">
+          <div class="strength-number">1</div>
+          <div class="strength-content">
+            <h3 class="strength-title">合格＋実用力を同時強化</h3>
+            <p class="strength-desc">資格取得だけでなく、留学や仕事で使える実践的な英語力を身につけます</p>
+          </div>
+        </div>
+        <div class="strength-card">
+          <div class="strength-number">2</div>
+          <div class="strength-content">
+            <h3 class="strength-title">最先端動画で効率学習</h3>
+            <p class="strength-desc">スキマ時間でも学べる動画教材と個別指導のハイブリッド</p>
+          </div>
+        </div>
+        <div class="strength-card">
+          <div class="strength-number">3</div>
+          <div class="strength-content">
+            <h3 class="strength-title">徹底した個別フォロー</h3>
+            <p class="strength-desc">チャットやオンライン面談で随時サポート。途中で挫折させません</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 対応資格 -->
+    <section class="qualifications-section">
+      <h2 class="section-title">
+        <i data-lucide="award" style="width:20px;height:20px;color:#8b2942;"></i>
+        対応資格・試験
+      </h2>
+      <div class="qual-grid">
+        <div class="qual-item">
+          <div class="qual-icon">
+            <i data-lucide="file-text" style="width:20px;height:20px;color:white;"></i>
+          </div>
+          <div class="qual-name">IELTS</div>
+        </div>
+        <div class="qual-item">
+          <div class="qual-icon">
+            <i data-lucide="file-check" style="width:20px;height:20px;color:white;"></i>
+          </div>
+          <div class="qual-name">TOEFL</div>
+        </div>
+        <div class="qual-item">
+          <div class="qual-icon">
+            <i data-lucide="badge-check" style="width:20px;height:20px;color:white;"></i>
+          </div>
+          <div class="qual-name">英検</div>
+        </div>
+        <div class="qual-item">
+          <div class="qual-icon">
+            <i data-lucide="book-marked" style="width:20px;height:20px;color:white;"></i>
+          </div>
+          <div class="qual-name">TEAP</div>
+        </div>
+        <div class="qual-item">
+          <div class="qual-icon">
+            <i data-lucide="graduation-cap" style="width:20px;height:20px;color:white;"></i>
+          </div>
+          <div class="qual-name">SAT</div>
+        </div>
+        <div class="qual-item">
+          <div class="qual-icon">
+            <i data-lucide="globe" style="width:20px;height:20px;color:white;"></i>
+          </div>
+          <div class="qual-name">IB対策</div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 実績 -->
+    <section class="results-section">
+      <h3 class="results-title">
+        <i data-lucide="trending-up" style="width:20px;height:20px;"></i>
+        2024年度の実績
+      </h3>
+      <div class="results-highlight">
+        <div class="results-label">英検準1級 合格者</div>
+        <div class="results-number">数十名以上</div>
+      </div>
+      <p class="results-note">業界トップクラスの合格率を誇ります</p>
+    </section>
+    
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="cta-card">
+        <div class="cta-content">
+          <h3 class="cta-title">まずは詳細をチェック！</h3>
+          <p class="cta-desc">
+            完全オーダーメイドのカリキュラムで<br>
+            あなただけの学習プランをご提案
+          </p>
+          <a href="https://www.eqao.co.jp/eqao-english" target="_blank" class="cta-button">
+            <i data-lucide="external-link" style="width:18px;height:18px;"></i>
+            詳しく見る
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- フッターナビ -->
+  <div class="footer-nav">
+    <a href="index.html" class="footer-back">
+      <i data-lucide="home" style="width:16px;height:16px;"></i>
+      戻る
+    </a>
+    <a href="https://www.eqao.co.jp/eqao-english" target="_blank" class="footer-detail">
+      <i data-lucide="external-link" style="width:16px;height:16px;"></i>
+      公式サイトで詳細を見る
+    </a>
+  </div>
+  
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

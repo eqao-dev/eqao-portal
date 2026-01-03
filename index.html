@@ -2016,23 +2016,47 @@
 
     @media (max-width: 480px) {
       .header {
-        padding: 14px 16px;
-        gap: 14px;
+        padding: 12px 14px;
+        gap: 10px;
       }
 
       .header .logo {
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        padding: 4px;
       }
 
       .header .title-area h1 {
-        font-size: 24px;
-        letter-spacing: 3px;
+        font-size: 16px;
+        letter-spacing: 0px;
       }
 
       .header .title-area .subtitle {
-        font-size: 10px;
+        font-size: 9px;
+        margin-top: 2px;
+      }
+
+      .header-right {
+        gap: 6px;
+      }
+
+      .header-faq-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+
+      .header-faq-btn .material-icons {
+        font-size: 16px;
+      }
+
+      .hamburger-btn {
+        width: 38px;
+        height: 38px;
+      }
+
+      .hamburger-btn .material-icons {
+        font-size: 24px;
       }
 
       .line-btn {
@@ -2087,6 +2111,82 @@
       .faq-banner-arrow {
         font-size: 20px;
       }
+    }
+
+    @media (max-width: 360px) {
+      .header {
+        padding: 10px 12px;
+        gap: 8px;
+      }
+
+      .header .logo {
+        width: 38px;
+        height: 38px;
+      }
+
+      .header .title-area h1 {
+        font-size: 14px;
+      }
+
+      .header .title-area .subtitle {
+        font-size: 8px;
+      }
+
+      .header-faq-btn span:not(.material-icons) {
+        display: none;
+      }
+
+      .header-faq-btn {
+        padding: 6px 8px;
+      }
+    }
+
+    .menu-btn {
+      padding: 16px 6px;
+      min-height: 90px;
+    }
+
+    .menu-btn .icon-wrapper {
+      width: 40px;
+      height: 40px;
+    }
+
+    .menu-btn .material-icons {
+      font-size: 22px;
+    }
+
+    .menu-btn span {
+      font-size: 10px;
+    }
+
+    .banner-row {
+      gap: 10px;
+    }
+
+    .faq-banner {
+      padding: 14px 12px;
+      gap: 10px;
+    }
+
+    .faq-banner-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .faq-banner-icon .material-icons {
+      font-size: 22px;
+    }
+
+    .faq-banner-title {
+      font-size: 13px;
+    }
+
+    .faq-banner-desc {
+      font-size: 11px;
+    }
+
+    .faq-banner-arrow {
+      font-size: 20px;
     }
 
     .footer {
@@ -4888,6 +4988,26 @@
             <div class="info-modal-text">
               <div class="info-modal-title">合格実績</div>
               <div class="info-modal-desc">累計の大学別合格者数</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </a>
+          <a href="eqao-english.html" class="info-modal-item">
+            <div class="info-modal-icon" style="background: linear-gradient(135deg, #c62828 0%, #ef5350 100%);">
+              <span class="material-icons" style="color: white;">g_translate</span>
+            </div>
+            <div class="info-modal-text">
+              <div class="info-modal-title">EQAO ENGLISH</div>
+              <div class="info-modal-desc">英語資格対策専門コース</div>
+            </div>
+            <span class="material-icons">chevron_right</span>
+          </a>
+          <a href="eqao-ippan.html" class="info-modal-item">
+            <div class="info-modal-icon" style="background: linear-gradient(135deg, #7b1fa2 0%, #ba68c8 100%);">
+              <span class="material-icons" style="color: white;">school</span>
+            </div>
+            <div class="info-modal-text">
+              <div class="info-modal-title">EQAO IPPAN</div>
+              <div class="info-modal-desc">一般入試対策コース</div>
             </div>
             <span class="material-icons">chevron_right</span>
           </a>
