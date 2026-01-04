@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,11 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="css/nav-menu.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Noto Sans JP', sans-serif;
@@ -37,7 +42,7 @@
       justify-content: center;
       width: 36px;
       height: 36px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -50,9 +55,14 @@
       font-size: 20px;
     }
 
-    .back-btn:hover { background: rgba(255,255,255,0.25); }
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
 
-    .header-title { font-size: 16px; font-weight: 700; }
+    .header-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
 
     .container {
       max-width: 1200px;
@@ -131,6 +141,7 @@
       overflow-x: auto;
       margin: 0 -16px;
       padding: 0 16px 8px;
+      position: relative;
     }
 
     .gantt-chart {
@@ -154,11 +165,50 @@
       font-size: 10px;
       font-weight: 700;
       color: #004D40;
-      position: sticky;
-      left: 0;
       background: white;
-      z-index: 15;
-      box-shadow: 2px 0 4px rgba(0,0,0,0.08);
+    }
+
+    /* 右側カテゴリ（スマホのみ表示） */
+    .gantt-category-right {
+      width: 130px;
+      min-width: 130px;
+      flex-shrink: 0;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #004D40;
+      align-items: center;
+      gap: 6px;
+      background: white;
+      box-shadow: -2px 0 4px rgba(0, 0, 0, 0.08);
+    }
+
+    .gantt-label-header-right {
+      width: 130px;
+      min-width: 130px;
+      flex-shrink: 0;
+      padding: 6px 8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #004D40;
+      background: white;
+    }
+
+    /* 右側カテゴリ（スマホのみ表示） - 削除または無効化 */
+    .gantt-category-right,
+    .gantt-label-header-right {
+      display: none !important;
+    }
+
+    /* スマホ版で表示 */
+    @media (max-width: 768px) {
+      .gantt-category-right {
+        display: flex;
+      }
+
+      .gantt-label-header-right {
+        display: block;
+      }
     }
 
     .gantt-months {
@@ -244,11 +294,10 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      position: sticky;
-      left: 0;
+      position: relative;
       background: white;
-      z-index: 10;
-      box-shadow: 2px 0 4px rgba(0,0,0,0.08);
+      z-index: 20;
+      box-shadow: 2px 0 4px rgba(0, 0, 0, 0.08);
     }
 
     .category-color {
@@ -265,6 +314,7 @@
       height: 18px;
       overflow: hidden;
       z-index: 1;
+      transform: translateZ(0);
     }
 
     .gantt-cell {
@@ -280,27 +330,73 @@
       height: 14px;
       top: 2px;
       border-radius: 7px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     }
 
     /* カテゴリ色 - ポップ配色（濃いめ） */
-    .color-blue { background: linear-gradient(135deg, #3F51B5 0%, #5C6BC0 100%); }
-    .color-green { background: linear-gradient(135deg, #00897B 0%, #26A69A 100%); }
-    .color-yellow { background: linear-gradient(135deg, #FFA000 0%, #FFB300 100%); }
-    .color-orange { background: linear-gradient(135deg, #F4511E 0%, #FF7043 100%); }
-    .color-purple { background: linear-gradient(135deg, #8E24AA 0%, #AB47BC 100%); }
-    .color-cyan { background: linear-gradient(135deg, #00ACC1 0%, #26C6DA 100%); }
-    .color-red { background: linear-gradient(135deg, #E05555 0%, #FF6B6B 100%); }
-    .color-gray { background: linear-gradient(135deg, #546E7A 0%, #78909C 100%); }
+    .color-blue {
+      background: linear-gradient(135deg, #3F51B5 0%, #5C6BC0 100%);
+    }
 
-    .bg-blue { background: #3F51B5; }
-    .bg-green { background: #00897B; }
-    .bg-yellow { background: #FFA000; }
-    .bg-orange { background: #F4511E; }
-    .bg-purple { background: #8E24AA; }
-    .bg-cyan { background: #00ACC1; }
-    .bg-red { background: #E05555; }
-    .bg-gray { background: #546E7A; }
+    .color-green {
+      background: linear-gradient(135deg, #00897B 0%, #26A69A 100%);
+    }
+
+    .color-yellow {
+      background: linear-gradient(135deg, #FFA000 0%, #FFB300 100%);
+    }
+
+    .color-orange {
+      background: linear-gradient(135deg, #F4511E 0%, #FF7043 100%);
+    }
+
+    .color-purple {
+      background: linear-gradient(135deg, #8E24AA 0%, #AB47BC 100%);
+    }
+
+    .color-cyan {
+      background: linear-gradient(135deg, #00ACC1 0%, #26C6DA 100%);
+    }
+
+    .color-red {
+      background: linear-gradient(135deg, #E05555 0%, #FF6B6B 100%);
+    }
+
+    .color-gray {
+      background: linear-gradient(135deg, #546E7A 0%, #78909C 100%);
+    }
+
+    .bg-blue {
+      background: #3F51B5;
+    }
+
+    .bg-green {
+      background: #00897B;
+    }
+
+    .bg-yellow {
+      background: #FFA000;
+    }
+
+    .bg-orange {
+      background: #F4511E;
+    }
+
+    .bg-purple {
+      background: #8E24AA;
+    }
+
+    .bg-cyan {
+      background: #00ACC1;
+    }
+
+    .bg-red {
+      background: #E05555;
+    }
+
+    .bg-gray {
+      background: #546E7A;
+    }
 
     /* ヒント */
     .chart-hint {
@@ -332,8 +428,15 @@
     }
 
     @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .month-detail-header {
@@ -590,7 +693,7 @@
     }
 
     .panel-btn {
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       border: none;
       color: white;
       padding: 6px 10px;
@@ -605,7 +708,7 @@
     }
 
     .panel-btn:hover {
-      background: rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.3);
     }
 
     .panel-btn .material-icons {
@@ -713,7 +816,7 @@
     }
 
     .todo-item:hover {
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .todo-item.completed {
@@ -1157,12 +1260,12 @@
       cursor: pointer;
       transition: all 0.2s;
       min-width: 16px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     }
 
     .my-gantt-bar:hover {
       transform: scaleY(1.2);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
 
     /* ピンポイントイベント用マーカー */
@@ -1176,7 +1279,7 @@
       align-items: center;
       justify-content: center;
       transition: all 0.2s;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
 
     .my-gantt-marker .material-icons {
@@ -1187,7 +1290,7 @@
 
     .my-gantt-marker:hover {
       transform: rotate(-45deg) scale(1.2);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     }
 
     /* 予定が多い場合のスクロール */
@@ -1210,7 +1313,7 @@
       position: fixed;
       background: white;
       border-radius: 12px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
       padding: 16px;
       min-width: 220px;
       z-index: 1000;
@@ -1218,8 +1321,15 @@
     }
 
     @keyframes popoverIn {
-      from { opacity: 0; transform: translateY(-8px) scale(0.95); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     .plan-popover-header {
@@ -1370,7 +1480,7 @@
 
     .color-option.selected {
       border-color: #333;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     /* 削除ボタン */
@@ -1456,7 +1566,7 @@
       border-radius: 50%;
       color: white;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
 
     .hamburger-btn .material-icons {
@@ -1469,7 +1579,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.5);
       z-index: 200;
       opacity: 0;
       visibility: hidden;
@@ -1490,11 +1600,13 @@
       background: white;
       z-index: 201;
       transition: right 0.3s ease;
-      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+      box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
       overflow-y: auto;
     }
 
-    .nav-menu.open { right: 0; }
+    .nav-menu.open {
+      right: 0;
+    }
 
     .nav-header {
       background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
@@ -1516,7 +1628,7 @@
       justify-content: center;
       width: 36px;
       height: 36px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -1540,26 +1652,31 @@
 
     .nav-user-info .material-icons {
       font-size: 24px;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
     }
 
-    .nav-user-name { font-size: 14px; font-weight: 500; }
+    .nav-user-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
 
     .nav-logout-btn {
       display: flex;
       align-items: center;
       gap: 6px;
       padding: 8px 12px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 8px;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255, 255, 255, 0.9);
       font-size: 12px;
       cursor: pointer;
       font-family: inherit;
     }
 
-    .nav-logout-btn .material-icons { font-size: 16px; }
+    .nav-logout-btn .material-icons {
+      font-size: 16px;
+    }
 
     .nav-category {
       font-size: 11px;
@@ -1584,7 +1701,9 @@
       transition: background 0.2s;
     }
 
-    .nav-item:hover { background: #f5f5f5; }
+    .nav-item:hover {
+      background: #f5f5f5;
+    }
 
     .nav-item .material-icons {
       font-size: 22px;
@@ -1623,7 +1742,9 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     /* ============================================
@@ -1824,7 +1945,7 @@
     /* ============================================
        志望校／併願校セクション
        ============================================ */
-    
+
     /* パターン選択タブ */
     .pattern-selector {
       display: flex;
@@ -2069,7 +2190,7 @@
 
     .school-rank-select:focus {
       outline: none;
-      box-shadow: 0 0 0 3px rgba(0,137,123,0.2);
+      box-shadow: 0 0 0 3px rgba(0, 137, 123, 0.2);
     }
 
     .school-action-btn.edit-btn {
@@ -2112,7 +2233,7 @@
       margin-top: 4px;
       background: white;
       border-radius: 8px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
       z-index: 100;
       min-width: 140px;
       overflow: hidden;
@@ -2249,7 +2370,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.5);
       z-index: 1000;
       align-items: center;
       justify-content: center;
@@ -2288,7 +2409,7 @@
     }
 
     .modal-close {
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       border: none;
       color: white;
       width: 32px;
@@ -2301,7 +2422,7 @@
     }
 
     .modal-close:hover {
-      background: rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.3);
     }
 
     .modal-body {
@@ -2361,7 +2482,9 @@
       margin-bottom: 12px;
     }
 
-    .form-input, .form-select, .form-textarea {
+    .form-input,
+    .form-select,
+    .form-textarea {
       padding: 10px 12px;
       border: 1px solid #E0E0E0;
       border-radius: 8px;
@@ -2369,7 +2492,9 @@
       transition: border-color 0.2s;
     }
 
-    .form-input:focus, .form-select:focus, .form-textarea:focus {
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
       outline: none;
       border-color: #00897B;
     }
@@ -2445,12 +2570,15 @@
       .form-grid {
         grid-template-columns: 1fr;
       }
+
       .form-group.full-width {
         grid-column: span 1;
       }
+
       .school-tabs {
         justify-content: center;
       }
+
       .school-tab {
         min-width: 70px;
       }
@@ -2830,7 +2958,7 @@
     /* ==============================
        大科目・小科目の表示スタイル（追加）
        ============================== */
-    
+
     /* 大科目バッジ */
     .major-subject-badge {
       display: inline-flex;
@@ -2845,7 +2973,7 @@
     }
 
     .major-subject-number {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
       width: 26px;
       height: 26px;
       border-radius: 50%;
@@ -2979,8 +3107,15 @@
     }
 
     @keyframes helpModalIn {
-      from { opacity: 0; transform: scale(0.95) translateY(-10px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
 
     .help-modal-header {
@@ -3069,6 +3204,7 @@
     }
   </style>
 </head>
+
 <body>
   <header class="header">
     <a href="index.html" class="back-btn">
@@ -3289,7 +3425,8 @@
               </div>
               <!-- 編集モード -->
               <div id="goalsEdit" style="display: none;">
-                <textarea class="goals-textarea" id="goalsTextarea" placeholder="この月にやることを入力...&#10;&#10;例:&#10;・英検の勉強を毎日30分&#10;・志望理由書の下書き&#10;・ボランティア活動"></textarea>
+                <textarea class="goals-textarea" id="goalsTextarea"
+                  placeholder="この月にやることを入力...&#10;&#10;例:&#10;・英検の勉強を毎日30分&#10;・志望理由書の下書き&#10;・ボランティア活動"></textarea>
                 <div class="edit-actions">
                   <button class="btn-cancel" onclick="cancelGoalsEdit()">キャンセル</button>
                   <button class="btn-save" onclick="saveGoals()">
@@ -3368,7 +3505,8 @@
         <div class="checklist-wrapper" id="checklistWrapper">
           <div class="checklist-container">
             <div class="checklist-grade-tabs">
-              <button class="checklist-grade-tab active" data-grade="高1" onclick="selectChecklistGrade('高1')">高1（30項目）</button>
+              <button class="checklist-grade-tab active" data-grade="高1"
+                onclick="selectChecklistGrade('高1')">高1（30項目）</button>
               <button class="checklist-grade-tab" data-grade="高2" onclick="selectChecklistGrade('高2')">高2（29項目）</button>
               <button class="checklist-grade-tab" data-grade="高3" onclick="selectChecklistGrade('高3')">高3（50項目）</button>
             </div>
@@ -3539,7 +3677,7 @@
       <div class="modal-body">
         <form id="schoolForm">
           <input type="hidden" id="schoolId">
-          
+
           <!-- 基本情報 -->
           <div class="form-section">
             <div class="form-section-title">基本情報</div>
@@ -4430,7 +4568,7 @@
     // API設定
     // ============================================
     const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
-    
+
     // 生徒IDを取得
     function getStudentId() {
       return localStorage.getItem('eqao_studentId') || 'GUEST';
@@ -4570,10 +4708,10 @@
     function toggleChecklist() {
       const wrapper = document.getElementById('checklistWrapper');
       const toggle = document.getElementById('checklistToggle');
-      
+
       wrapper.classList.toggle('open');
       toggle.classList.toggle('open');
-      
+
       if (wrapper.classList.contains('open')) {
         toggle.querySelector('span:first-child').textContent = 'チェックリストを閉じる';
         renderChecklist();
@@ -4585,11 +4723,11 @@
     // チェックリスト学年選択
     function selectChecklistGrade(grade) {
       selectedChecklistGrade = grade;
-      
+
       document.querySelectorAll('.checklist-grade-tab').forEach(tab => {
         tab.classList.toggle('active', tab.dataset.grade === grade);
       });
-      
+
       renderChecklist();
     }
 
@@ -4598,7 +4736,7 @@
       const container = document.getElementById('checklistItems');
       const items = checklistData[selectedChecklistGrade];
       const checked = checkedItems[selectedChecklistGrade] || [];
-      
+
       let html = '';
       items.forEach((item, index) => {
         const isChecked = checked.includes(index);
@@ -4614,7 +4752,7 @@
           </div>
         `;
       });
-      
+
       container.innerHTML = html;
     }
 
@@ -4622,17 +4760,17 @@
     async function toggleChecklistItem(grade, index) {
       const checked = checkedItems[grade] || [];
       const idx = checked.indexOf(index);
-      
+
       if (idx === -1) {
         checked.push(index);
       } else {
         checked.splice(idx, 1);
       }
-      
+
       checkedItems[grade] = checked;
       renderChecklist();
       updateProgressDisplay();
-      
+
       // APIに保存（全学年まとめて保存）
       const studentId = getStudentId();
       try {
@@ -4654,7 +4792,7 @@
       const count3 = (checkedItems["高3"] || []).length;
       const totalChecked = count1 + count2 + count3;
       const percent = Math.round((totalChecked / total) * 100);
-      
+
       document.getElementById('totalProgressBar').style.width = percent + '%';
       document.getElementById('totalProgressPercent').textContent = percent + '%';
       document.getElementById('progress1Count').textContent = count1 + '/30';
@@ -4669,13 +4807,13 @@
         const url = `${API_URL}?action=getChecklistState&studentId=${studentId}`;
         const response = await fetch(url);
         const data = await response.json();
-        
+
         if (data && data.checkState) {
           if (data.checkState["高1"]) checkedItems["高1"] = data.checkState["高1"];
           if (data.checkState["高2"]) checkedItems["高2"] = data.checkState["高2"];
           if (data.checkState["高3"]) checkedItems["高3"] = data.checkState["高3"];
         }
-        
+
         updateProgressDisplay();
       } catch (error) {
         console.error('API error:', error);
@@ -4686,7 +4824,7 @@
     // ============================================
     // 志望校／併願校関連
     // ============================================
-    
+
     // 4パターンの志望校データ
     let schoolPatterns = {
       A: [],  // 評定○ 英語○
@@ -4710,15 +4848,15 @@
     function selectPattern(pattern) {
       selectedPattern = pattern;
       selectedSchoolIndex = -1;
-      
+
       // タブのアクティブ状態更新
       document.querySelectorAll('.pattern-tab').forEach(tab => {
         tab.classList.toggle('active', tab.dataset.pattern === pattern);
       });
-      
+
       // 説明文更新
       document.getElementById('patternDescText').textContent = patternDescriptions[pattern];
-      
+
       // 志望校リスト再描画
       renderSchoolTabs();
     }
@@ -4739,9 +4877,9 @@
       const emptyState = document.getElementById('schoolEmpty');
       const detailCard = document.getElementById('schoolDetail');
       const schools = getCurrentSchools();
-      
+
       let html = '';
-      
+
       schools.forEach((school, index) => {
         const isActive = index === selectedSchoolIndex;
         html += `
@@ -4752,7 +4890,7 @@
           </div>
         `;
       });
-      
+
       // 追加ボタン（6校未満の場合）
       if (schools.length < 6) {
         html += `
@@ -4762,9 +4900,9 @@
           </div>
         `;
       }
-      
+
       container.innerHTML = html;
-      
+
       // 空状態の表示切り替え
       if (schools.length === 0) {
         emptyState.style.display = 'none'; // 追加ボタンがあるので空状態メッセージは不要
@@ -4791,19 +4929,19 @@
       const container = document.getElementById('schoolDetail');
       const schools = getCurrentSchools();
       const school = schools[selectedSchoolIndex];
-      
+
       if (!school) {
         container.classList.remove('show');
         return;
       }
-      
+
       // 順位ドロップダウンのオプションを生成
       let rankOptions = '';
       for (let i = 0; i < schools.length; i++) {
         const selected = i === selectedSchoolIndex ? 'selected' : '';
         rankOptions += `<option value="${i}" ${selected}>第${i + 1}志望</option>`;
       }
-      
+
       let html = `
         <div class="school-detail-header">
           <div class="school-detail-title">
@@ -4907,7 +5045,7 @@
           </div>
         ` : ''}
       `;
-      
+
       container.innerHTML = html;
       container.classList.add('show');
     }
@@ -4947,16 +5085,16 @@
     async function changeSchoolRank(fromIndex, toIndex) {
       toIndex = parseInt(toIndex);
       if (fromIndex === toIndex) return;
-      
+
       const schools = getCurrentSchools();
       // 配列から要素を取り出して新しい位置に挿入
       const school = schools.splice(fromIndex, 1)[0];
       schools.splice(toIndex, 0, school);
       setCurrentSchools(schools);
-      
+
       selectedSchoolIndex = toIndex;
       renderSchoolTabs();
-      
+
       // APIに保存
       await saveSchoolsToAPI();
     }
@@ -4967,16 +5105,16 @@
       const title = document.getElementById('modalTitle');
       const form = document.getElementById('schoolForm');
       const schools = getCurrentSchools();
-      
+
       form.reset();
       editingSchoolId = null;
-      
+
       if (schoolIndex !== null && schools[schoolIndex]) {
         // 編集モード
         title.textContent = '志望校を編集';
         editingSchoolId = schoolIndex;
         const school = schools[schoolIndex];
-        
+
         // フォームに値をセット
         document.getElementById('universityName').value = school.universityName || '';
         document.getElementById('faculty').value = school.faculty || '';
@@ -5013,7 +5151,7 @@
       } else {
         title.textContent = '志望校を追加';
       }
-      
+
       modal.classList.add('show');
     }
 
@@ -5032,12 +5170,12 @@
     async function saveSchool() {
       const universityName = document.getElementById('universityName').value.trim();
       const faculty = document.getElementById('faculty').value.trim();
-      
+
       if (!universityName || !faculty) {
         alert('大学名と学部は必須です');
         return;
       }
-      
+
       const schoolData = {
         universityName,
         faculty,
@@ -5073,7 +5211,7 @@
         notes: document.getElementById('notes').value.trim(),
         pattern: selectedPattern
       };
-      
+
       if (editingSchoolId !== null) {
         // 編集
         const schools = getCurrentSchools();
@@ -5086,10 +5224,10 @@
         setCurrentSchools(schools);
         selectedSchoolIndex = schools.length - 1;
       }
-      
+
       closeSchoolModal();
       renderSchoolTabs();
-      
+
       // APIに保存
       await saveSchoolsToAPI();
     }
@@ -5101,15 +5239,15 @@
       if (!confirm(`「${school.universityName} ${school.faculty}」を削除しますか？`)) {
         return;
       }
-      
+
       schools.splice(index, 1);
       setCurrentSchools(schools);
       if (selectedSchoolIndex >= schools.length) {
         selectedSchoolIndex = Math.max(0, schools.length - 1);
       }
-      
+
       renderSchoolTabs();
-      
+
       // APIに保存
       await saveSchoolsToAPI();
     }
@@ -5123,7 +5261,7 @@
         C: '評定× 英語○',
         D: '評定× 英語×'
       };
-      
+
       let html = '';
       patterns.forEach(p => {
         const isCurrent = p === selectedPattern;
@@ -5133,7 +5271,7 @@
         const disabledClass = disabled ? 'disabled' : '';
         const icon = isCurrent ? 'block' : (isFull ? 'do_not_disturb' : 'content_copy');
         const label = isCurrent ? '（現在）' : (isFull ? '（満杯）' : `${targetSchools.length}校`);
-        
+
         html += `
           <div class="copy-dropdown-item ${disabledClass}" onclick="${disabled ? '' : `copySchoolToPattern('${p}')`}">
             <span class="material-icons">${icon}</span>
@@ -5142,7 +5280,7 @@
           </div>
         `;
       });
-      
+
       return html;
     }
 
@@ -5151,7 +5289,7 @@
       event.stopPropagation();
       const dropdown = document.getElementById('copyDropdown');
       dropdown.classList.toggle('show');
-      
+
       // 外側クリックで閉じる
       if (dropdown.classList.contains('show')) {
         setTimeout(() => {
@@ -5172,33 +5310,33 @@
     async function copySchoolToPattern(targetPattern) {
       const schools = getCurrentSchools();
       const school = schools[selectedSchoolIndex];
-      
+
       if (!school) return;
-      
+
       const targetSchools = schoolPatterns[targetPattern] || [];
-      
+
       // 6校制限チェック
       if (targetSchools.length >= 6) {
         alert('コピー先のパターンは既に6校登録されています');
         return;
       }
-      
+
       // ディープコピー
       const copiedSchool = JSON.parse(JSON.stringify(school));
-      
+
       // コピー先に追加
       targetSchools.push(copiedSchool);
       schoolPatterns[targetPattern] = targetSchools;
-      
+
       // ドロップダウンを閉じる
       closeCopyDropdown();
-      
+
       // 再描画
       renderSchoolTabs();
-      
+
       // APIに保存
       await saveSchoolsToAPI();
-      
+
       // 成功メッセージ
       alert(`パターン${targetPattern}にコピーしました（第${targetSchools.length}志望）`);
     }
@@ -5224,7 +5362,7 @@
         const url = `${API_URL}?action=getSchoolData&studentId=${studentId}`;
         const response = await fetch(url);
         const data = await response.json();
-        
+
         if (data && typeof data === 'object') {
           // 新形式（パターン別オブジェクト）
           if (data.A || data.B || data.C || data.D) {
@@ -5244,7 +5382,7 @@
             };
           }
         }
-        
+
         renderSchoolTabs();
       } catch (error) {
         console.error('API error:', error);
@@ -5280,15 +5418,15 @@
     function renderLessonList() {
       const container = document.getElementById('lessonList');
       const emptyState = document.getElementById('homeworkEmpty');
-      
+
       if (lessonData.length === 0) {
         container.innerHTML = '';
         emptyState.style.display = 'block';
         return;
       }
-      
+
       emptyState.style.display = 'none';
-      
+
       let html = '';
       lessonData.forEach((lesson, index) => {
         const typeClass = getLessonTypeClass(lesson.type);
@@ -5301,7 +5439,7 @@
           </div>
         `;
       });
-      
+
       container.innerHTML = html;
       renderLessonDetail();
     }
@@ -5309,7 +5447,7 @@
     // 授業を選択
     function selectLesson(index) {
       selectedLessonIndex = index;
-      
+
       // アクティブ状態を更新
       document.querySelectorAll('.lesson-item').forEach((item, i) => {
         if (i === index) {
@@ -5318,7 +5456,7 @@
           item.classList.remove('active');
         }
       });
-      
+
       renderLessonDetail();
     }
 
@@ -5326,18 +5464,18 @@
     function renderLessonDetail() {
       const container = document.getElementById('lessonDetail');
       const lesson = lessonData[selectedLessonIndex];
-      
+
       if (!lesson) {
         container.classList.remove('show');
         return;
       }
-      
+
       const typeClass = getLessonTypeClass(lesson.type);
-      
+
       // 大科目の情報
       const majorSubjectId = lesson.majorSubjectId;
       const majorSubjectName = majorSubjects[majorSubjectId] || '未設定';
-      
+
       // 小科目のチップを生成
       let minorSubjectsHtml = '';
       if (lesson.minorSubjects && lesson.minorSubjects.length > 0) {
@@ -5352,7 +5490,7 @@
         });
         minorSubjectsHtml += '</div>';
       }
-      
+
       container.innerHTML = `
         <div class="lesson-detail-header">
           <div class="lesson-detail-date">${escapeHtml(lesson.date)}</div>
@@ -5389,14 +5527,14 @@
           <div class="lesson-detail-section-content">${lesson.homework}</div>
         </div>
       `;
-      
+
       container.classList.add('show');
     }
 
     // ============================================
     // 私のスケジュール関連
     // ============================================
-    
+
     // データ（APIから取得）
     let monthlyGoals = {};
     let instructorNotes = [];
@@ -5478,13 +5616,13 @@
         container.innerHTML = html;
         return;
       }
-      
+
       // 日付順にソート
       gradePlans.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
-      
+
       // スクロール可能なコンテナ開始
       html += '<div class="my-gantt-content">';
-      
+
       gradePlans.forEach(plan => {
         const startPos = getMonthPosition(plan.startDate);
         if (startPos === -1) return;
@@ -5511,7 +5649,7 @@
           // 期間イベント（バー表示）
           const endPos = getMonthPosition(plan.endDate);
           if (endPos === -1) return;
-          
+
           const leftPercent = (startPos / monthCount) * 100;
           const widthPercent = ((endPos - startPos + 0.1) / monthCount) * 100; // 最低幅を確保
           const displayWidth = Math.max(widthPercent, 3); // 最低3%
@@ -5539,10 +5677,10 @@
     // ポップオーバーを表示
     function showPlanPopover(event, planId) {
       event.stopPropagation();
-      
+
       // 既存のポップオーバーを削除
       closePlanPopover();
-      
+
       const plan = myPlans.find(p => p.id === planId);
       if (!plan) return;
 
@@ -5553,7 +5691,7 @@
         return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
       };
 
-      const dateText = plan.endDate 
+      const dateText = plan.endDate
         ? `${formatDate(plan.startDate)} 〜 ${formatDate(plan.endDate)}`
         : formatDate(plan.startDate);
 
@@ -5620,7 +5758,7 @@
     // 直接削除（確認あり）
     function deletePlanDirect(planId) {
       if (!confirm('この予定を削除しますか？')) return;
-      
+
       myPlans = myPlans.filter(p => p.id !== planId);
       renderMyGanttChart();
       saveMyPlansToAPI();
@@ -5631,16 +5769,16 @@
       const modal = document.getElementById('planModal');
       const title = document.getElementById('planModalTitle');
       const deleteBtn = document.getElementById('deletePlanBtn');
-      
+
       const startInput = document.getElementById('planStartDate');
       const endInput = document.getElementById('planEndDate');
-      
+
       // 学年セレクト初期化
       document.querySelectorAll('.plan-grade-btn').forEach(btn => {
         btn.classList.remove('active');
         btn.onclick = () => selectPlanGrade(btn.dataset.grade);
       });
-      
+
       // カラーピッカー初期化
       document.querySelectorAll('.color-option').forEach(opt => {
         opt.classList.remove('selected');
@@ -5711,11 +5849,11 @@
       const name = document.getElementById('planName').value.trim();
       const startDate = document.getElementById('planStartDate').value;
       const endDate = document.getElementById('planEndDate').value;
-      
+
       // 選択された学年を取得
       const activeGradeBtn = document.querySelector('.plan-grade-btn.active');
       const planGrade = activeGradeBtn ? activeGradeBtn.dataset.grade : selectedGrade;
-      
+
       if (!name) {
         alert('予定名を入力してください');
         return;
@@ -5762,7 +5900,7 @@
     // 予定を削除
     async function deletePlan() {
       if (!editingPlanId) return;
-      
+
       if (confirm('この予定を削除しますか？')) {
         myPlans = myPlans.filter(p => p.id !== editingPlanId);
         closePlanModal();
@@ -5792,7 +5930,7 @@
         const url = `${API_URL}?action=getMyPlans&studentId=${studentId}`;
         const response = await fetch(url);
         const data = await response.json();
-        
+
         if (data && Array.isArray(data)) {
           myPlans = data;
         }
@@ -5835,11 +5973,11 @@
       const studentId = getStudentId();
 
       const newGoals = textarea.value.trim();
-      
+
       // ローカルに保存
       const key = `${grade}_${month}`;
       monthlyGoals[key] = newGoals;
-      
+
       if (newGoals) {
         goalsText.textContent = newGoals;
       } else {
@@ -5869,7 +6007,7 @@
     // 講師指示: 描画
     function renderInstructorNotes() {
       const container = document.getElementById('instructorNotes');
-      
+
       if (!container) return;
 
       if (instructorNotes.length === 0) {
@@ -5891,7 +6029,7 @@
         const isCompleted = note.completed;
         const completedClass = isCompleted ? 'completed' : '';
         const checkedClass = isCompleted ? 'checked' : '';
-        
+
         // 期限切れチェック
         let overdueClass = '';
         if (note.deadline && !isCompleted) {
@@ -5900,7 +6038,7 @@
             overdueClass = 'overdue';
           }
         }
-        
+
         html += `
           <div class="instructor-note-item ${completedClass}">
             <div class="instructor-note-checkbox ${checkedClass}" onclick="toggleTodoComplete(${index})">
@@ -5934,19 +6072,26 @@
     // ToDo完了状態をトグル
     async function toggleTodoComplete(index) {
       const note = instructorNotes[index];
-      if (!note) return;
-      
+      if (!note || !note.id) return;
+
       note.completed = !note.completed;
       renderInstructorNotes();
-      
-      // APIに保存（将来実装）
-      // await saveTodoState(note.id, note.completed);
+
+      // APIに保存
+      try {
+        const url = `${API_URL}?action=updateInstructorNote&noteId=${encodeURIComponent(note.id)}&text=${encodeURIComponent(note.text)}&deadline=${encodeURIComponent(note.deadline || '')}&completed=${note.completed}`;
+        const response = await fetch(url);
+        const result = await response.json();
+        console.log('Todo state saved:', result);
+      } catch (error) {
+        console.error('API error:', error);
+      }
     }
 
     // HTMLエスケープ
     function escapeHtml(str) {
       if (!str) return '';
-      return str.replace(/[&<>"']/g, function(match) {
+      return str.replace(/[&<>"']/g, function (match) {
         const escape = {
           '&': '&amp;',
           '<': '&lt;',
@@ -5963,7 +6108,7 @@
       const goalsText = document.getElementById('monthlyGoalsText');
       const grade = selectedGrade;
       const key = `${grade}_${month}`;
-      
+
       // ローカルキャッシュを確認
       if (monthlyGoals[key]) {
         goalsText.textContent = monthlyGoals[key];
@@ -5976,7 +6121,7 @@
         const url = `${API_URL}?action=getGoals&studentId=${studentId}&grade=${grade}&month=${month}`;
         const response = await fetch(url);
         const data = await response.json();
-        
+
         if (data && data.content) {
           monthlyGoals[key] = data.content;
           goalsText.textContent = data.content;
@@ -5996,7 +6141,7 @@
         const url = `${API_URL}?action=getInstructorNotes&studentId=${studentId}&grade=${grade}&month=${month}`;
         const response = await fetch(url);
         const data = await response.json();
-        
+
         if (data && Array.isArray(data)) {
           instructorNotes = data;
           renderInstructorNotes();
@@ -6027,7 +6172,7 @@
         const response = await fetch(url);
         const data = await response.json();
         console.log('Progress reports data:', data);
-        
+
         if (data && Array.isArray(data) && data.length > 0) {
           progressReports = data;
           selectedReportIndex = 0;
@@ -6058,7 +6203,7 @@
       let html = '';
       progressReports.forEach((report, index) => {
         const isActive = index === selectedReportIndex;
-        
+
         // submitMonthの処理（日付文字列、数値、文字列に対応）
         let label = '';
         if (report.submitMonth) {
@@ -6079,7 +6224,7 @@
         } else {
           label = `報告${index + 1}`;
         }
-        
+
         html += `
           <div class="progress-report-tab ${isActive ? 'active' : ''}" onclick="selectProgressReport(${index})">
             ${label}
@@ -6109,7 +6254,7 @@
         if (emptyState) emptyState.style.display = 'block';
         return;
       }
-      
+
       // 空状態を非表示
       if (emptyState) emptyState.style.display = 'none';
 
@@ -6253,10 +6398,10 @@
     function selectGradeFromMySchedule(grade) {
       // 上の学年ボタンも更新
       selectGrade(grade);
-      
+
       // 下の学年ボタンも更新
       updateMiniGradeButtons(grade);
-      
+
       // 月のドロップダウンを更新
       updateMonthSelect(grade);
     }
@@ -6277,7 +6422,7 @@
     function updateMonthSelect(grade) {
       const select = document.getElementById('monthSelect');
       const data = idealScheduleData[grade];
-      
+
       if (!data || !data.months) {
         select.innerHTML = '<option value="">-</option>';
         return;
@@ -6300,31 +6445,31 @@
     }
 
     // 初期化
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       try {
         setNavUserName();
-        
+
         // localStorageから前回の学年・月を復元
         const savedGrade = localStorage.getItem('eqao_schedule_grade');
         const savedMonth = localStorage.getItem('eqao_schedule_month');
-        
+
         if (savedGrade && idealScheduleData[savedGrade]) {
           selectedGrade = savedGrade;
         }
-        
+
         // 上の学年ボタンを更新
         document.querySelectorAll('.grade-btn').forEach(btn => {
           btn.classList.toggle('active', btn.dataset.grade === selectedGrade);
         });
-        
+
         // 下の学年ボタンを初期化
         updateMiniGradeButtons(selectedGrade);
-        
+
         // 月のドロップダウンを初期化
         updateMonthSelect(selectedGrade);
-        
+
         renderGanttChart();
-        
+
         // 月を選択（保存された月 or 現在の月 or 最初の月）
         const data = idealScheduleData[selectedGrade];
         if (savedMonth && data && data.months && data.months.includes(savedMonth)) {
@@ -6338,22 +6483,22 @@
             selectMonth(data.months[0]);
           }
         }
-        
+
         // チェックリストを読み込み
         loadChecklist();
-        
+
         // 志望校を読み込み
         loadSchools();
-        
+
         // 授業履歴を描画
         renderLessonList();
-        
+
         // マイガントチャートを読み込み
         loadMyPlans();
-        
+
         // 担任進捗報告を読み込み
         loadProgressReports();
-        
+
       } catch (e) {
         console.error('Initialization error:', e);
       }
@@ -6362,26 +6507,26 @@
     // 学年選択
     function selectGrade(grade) {
       selectedGrade = grade;
-      
+
       // localStorageに保存
       localStorage.setItem('eqao_schedule_grade', grade);
-      
+
       document.querySelectorAll('.grade-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.grade === grade);
       });
-      
+
       // 下の学年ボタンも更新
       updateMiniGradeButtons(grade);
-      
+
       // 月のドロップダウンを更新
       updateMonthSelect(grade);
-      
+
       // ガントチャート再描画
       renderGanttChart();
-      
+
       // マイガントチャート再描画
       renderMyGanttChart();
-      
+
       // 最初の月を選択
       const data = idealScheduleData[grade];
       if (data.months.length > 0) {
@@ -6427,26 +6572,26 @@
       categories.forEach(cat => {
         const startIdx = months.indexOf(cat.start);
         const endIdx = months.indexOf(cat.end);
-        
+
         // バーの位置と幅を計算（パーセント）
         const barLeft = (startIdx / months.length) * 100;
         const barWidth = ((endIdx - startIdx + 1) / months.length) * 100;
-        
+
         html += '<div class="gantt-row">';
         html += `<div class="gantt-category"><div class="category-color bg-${cat.color}"></div>${cat.name}</div>`;
         html += '<div class="gantt-bars">';
-        
+
         // セル（グリッド線用）
         months.forEach(m => {
           html += '<div class="gantt-cell"></div>';
         });
-        
+
         // バー（連続した1本）
         if (startIdx !== -1 && endIdx !== -1) {
           html += `<div class="gantt-bar color-${cat.color}" style="left: ${barLeft}%; width: ${barWidth}%;"></div>`;
         }
-        
-        html += '</div></div>';
+        html += '</div>';
+        html += '</div>';
       });
 
       container.innerHTML = html;
@@ -6457,7 +6602,7 @@
       const monthIdx = monthOrder.indexOf(month);
       const startIdx = monthOrder.indexOf(start);
       const endIdx = monthOrder.indexOf(end);
-      
+
       if (monthIdx === -1 || startIdx === -1 || endIdx === -1) return false;
       return monthIdx >= startIdx && monthIdx <= endIdx;
     }
@@ -6465,10 +6610,10 @@
     // 月選択
     function selectMonth(month) {
       selectedMonth = month;
-      
+
       // localStorageに保存
       localStorage.setItem('eqao_schedule_month', month);
-      
+
       // ガントチャートのヘッダー更新
       document.querySelectorAll('.gantt-month').forEach(el => {
         const m = el.textContent.replace('月', '');
@@ -6477,13 +6622,13 @@
 
       // 詳細カード表示
       renderMonthDetail(month);
-      
+
       // 私のスケジュール: パネルヘッダー更新
       updatePanelTitles();
-      
+
       // 私のスケジュール: 月ドロップダウン更新
       updateMonthSelectValue(month);
-      
+
       // 私のスケジュール: 目標と講師指示を読み込み
       loadMonthlyGoals(month);
       loadInstructorNotes(selectedGrade, month);
@@ -6498,12 +6643,12 @@
         btn.innerHTML = '<span class="material-icons">edit</span>編集';
       }
     }
-    
+
     // パネルヘッダーのタイトルを更新
     function updatePanelTitles() {
       const grade = selectedGrade;
       const month = selectedMonth || '12';
-      
+
       document.getElementById('goalsPanelTitle').textContent = `${month}月にやること`;
       document.getElementById('instructorPanelTitle').textContent = `${month}月の指示`;
     }
@@ -6558,4 +6703,5 @@
   </script>
   <script src="js/nav-menu.js"></script>
 </body>
+
 </html>
