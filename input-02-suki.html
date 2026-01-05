@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>「すき」を見つけ、伸ばし、学問に繋げる - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/input-common.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
+  <style>
+    /* セグメントヘッダー追加スタイル */
+    .segment-header {
+      background: #f5f5f5;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+      border-bottom: 1px solid #e0e0e0;
+      border-left: 4px solid #1565c0;
+    }
+
+    /* スキップセクション */
+    .skip-section {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px dashed #e0e0e0;
+    }
+
+    .skip-note {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    .btn-skip {
+      background: transparent;
+      color: #666;
+      border: 1px solid #ccc;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-skip:hover {
+      background: #f5f5f5;
+      color: #333;
+      border-color: #999;
+    }
+
+    .btn-skip .material-icons {
+      font-size: 18px;
+    }
+
+    /* アクションエリア */
+    .action-area {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .action-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .action-btn .material-icons {
+      font-size: 22px;
+    }
+
+    .action-btn-primary {
+      background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+    }
+
+    .action-btn-primary:hover:not(.disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 152, 0, 0.4);
+    }
+
+    .action-btn-primary.disabled {
+      background: #ccc;
+      color: #888;
+      box-shadow: none;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .action-btn-secondary {
+      background: white;
+      color: #666;
+      border: 2px solid #ddd;
+    }
+
+    .action-btn-secondary:hover {
+      background: #f5f5f5;
+      border-color: #bbb;
+      color: #333;
+    }
+
+    .action-note {
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+      margin: 0;
+    }
+
+    .action-note.completed {
+      color: #4caf50;
+      font-weight: 500;
+    }
+
+    @media (max-width: 600px) {
+      .action-buttons {
+        flex-direction: column;
+      }
+      
+      .action-btn {
+        padding: 14px 16px;
+        font-size: 14px;
+      }
+
+      /* セグメントフィルターをプルダウンに */
+      .filter-group {
+        display: none;
+      }
+      .mobile-segment-select {
+        display: block;
+      }
+    }
+
+    /* モバイル用セグメントプルダウン */
+    .mobile-segment-select {
+      display: none;
+      width: 100%;
+    }
+    .mobile-segment-select select {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-family: 'Noto Sans JP', sans-serif;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: white;
+      color: #333;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+    }
+    .mobile-segment-select select:focus {
+      outline: none;
+      border-color: #1565c0;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="lesson-materials.html" class="back-btn"><span class="material-icons">arrow_back</span></a>
+    <div class="header-content">
+      <div class="header-label">テーマ 2 ／ インプット</div>
+      <div class="header-title">「すき」を見つけ、伸ばし、学問に繋げる</div>
+    </div>
+    <button class="hamburger-btn" onclick="openNav()">
+      <span class="material-icons">menu</span>
+    </button>
+  </div>
+
+  <div class="container" id="mainContent">
+    <!-- 次のステップへのアクションエリア -->
+    <div class="action-area" id="actionArea">
+      <div class="action-buttons">
+        <a href="quiz-02-suki.html" class="action-btn action-btn-primary disabled" id="quizBtn">
+          <span class="material-icons">quiz</span>
+          <span class="action-btn-text">確認テストへ進む</span>
+        </a>
+        <a href="output-02-suki.html" class="action-btn action-btn-secondary">
+          <span class="material-icons">fast_forward</span>
+          <span class="action-btn-text">スキップしてアウトプットへ</span>
+        </a>
+      </div>
+      <p class="action-note" id="actionNote">※ すべてのインプットを完了すると確認テストが受けられます</p>
+    </div>
+    <!-- 進捗セクション -->
+    <div class="progress-section">
+      <div class="progress-header">
+        <div class="progress-title">進捗</div>
+        <div class="progress-count"><strong id="readCount">0</strong> / <span id="totalCount">0</span> 項目</div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
+    </div>
+
+    <!-- 注意書き -->
+    <div class="notice-box">
+      <p><span class="material-icons">info</span>各項目を開いて1秒以上読むと自動でチェックが付きます。すべて読み終わったら「インプット完了」ボタンを押してください。</p>
+    </div>
+
+    <!-- セグメントフィルター -->
+    <div class="column-controls" id="columnControls">
+      <div class="controls-row">
+        <div class="filter-group" id="segmentFilter"></div>
+        <div class="mobile-segment-select" id="mobileSegmentSelect">
+          <select id="segmentSelect" onchange="onSegmentSelectChange(this.value)">
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- コラム一覧 -->
+    <div class="column-section">
+      <div class="column-header">
+        <span class="material-icons">menu_book</span>
+        <div class="column-header-text">
+          <h2>インプット項目</h2>
+          <p>全4セグメント</p>
+        </div>
+      </div>
+      <div class="column-list" id="columnList"></div>
+    </div>
+  </div>
+
+  <!-- フッター -->
+  <div class="complete-footer" id="completeFooter">
+    <div class="footer-status" id="statusText">コラムを読んでください</div>
+    <button class="complete-btn" id="completeBtn" disabled onclick="completeInput()">
+      <span class="material-icons">check_circle</span>インプット完了
+    </button>
+  </div>
+
+  <!-- ローディング -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"><span class="material-icons">sync</span><span>読み込み中...</span></div>
+  </div>
+
+  <script>
+    // ============================================
+    // 設定
+    // ============================================
+    const INPUT_CONFIG = {
+      themeId: 2,
+      themeName: '「すき」を見つけ、伸ばし、学問に繋げる',
+      outputPage: 'output-02-suki.html',
+      // checklist_master.json のカテゴリ名をマッピング
+      categories: [
+        { segment: 'すきの定義', categoryKey: 'すきの定義理解チェックリスト' },
+        { segment: '自己分析', categoryKey: '自己分析ステップ' },
+        { segment: '合格事例', categoryKey: 'ゼロからすきを見つけて合格した事例' },
+        { segment: '学問に繋げる', categoryKey: '総合型選抜の考え方' }
+      ]
+    };
+
+    const JSON_URL = 'checklist_master.json';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
+
+    // ============================================
+    // 状態管理
+    // ============================================
+    let masterData = null;
+    let inputItems = [];
+    let checkState = {};
+    let currentUser = null;
+    let currentSegment = 'ALL';
+    let openItemId = null;
+    let readTimer = null;
+    let pendingSync = false;
+
+    // ============================================
+    // localStorage キー（checklist.htmlと共有）
+    // ============================================
+    function getStorageKey(type) {
+      const studentId = localStorage.getItem('eqao_studentId') || 'guest';
+      return `eqao_checklist_${studentId}_${type}`;
+    }
+
+    // ============================================
+    // チェック状態の保存・読み込み
+    // ============================================
+    function saveCheckState() {
+      try {
+        localStorage.setItem(getStorageKey('state'), JSON.stringify(checkState));
+        localStorage.setItem(getStorageKey('lastModified'), Date.now().toString());
+        pendingSync = true;
+      } catch (e) {
+        console.error('チェック状態の保存エラー:', e);
+      }
+    }
+
+    function loadCheckState() {
+      try {
+        const saved = localStorage.getItem(getStorageKey('state'));
+        if (saved) {
+          checkState = JSON.parse(saved);
+        }
+      } catch (e) {
+        console.error('チェック状態の読み込みエラー:', e);
+        checkState = {};
+      }
+    }
+
+    // ============================================
+    // サーバー同期（checklist.htmlと同じAPI）
+    // ============================================
+    async function syncToServer() {
+      if (!pendingSync || !currentUser) return;
+
+      try {
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'syncChecklistStateOld');
+        url.searchParams.set('studentId', currentUser.studentId);
+        url.searchParams.set('password', currentUser.password);
+        url.searchParams.set('checkState', JSON.stringify(checkState));
+
+        const response = await fetch(url.toString());
+        const result = await response.json();
+        
+        if (result.success) {
+          pendingSync = false;
+        }
+      } catch (error) {
+        console.error('同期エラー:', error);
+      }
+    }
+
+    async function loadFromServer() {
+      if (!currentUser) return;
+
+      try {
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'getChecklistStateOld');
+        url.searchParams.set('studentId', currentUser.studentId);
+
+        const response = await fetch(url.toString());
+        const result = await response.json();
+
+        if (result.success && result.checkState) {
+          // サーバーのデータをマージ
+          for (const category in result.checkState) {
+            if (!checkState[category]) {
+              checkState[category] = result.checkState[category];
+            }
+          }
+          localStorage.setItem(getStorageKey('state'), JSON.stringify(checkState));
+          renderItems();
+          updateProgress();
+        }
+      } catch (error) {
+        console.error('サーバーからの読み込みエラー:', error);
+      }
+    }
+
+    // ============================================
+    // マスタデータ読み込み
+    // ============================================
+    async function loadMasterData() {
+      try {
+        const response = await fetch(JSON_URL + '?t=' + Date.now());
+        if (!response.ok) throw new Error('JSONファイルの読み込みに失敗');
+        masterData = await response.json();
+        return true;
+      } catch (error) {
+        console.error('マスタデータ読み込みエラー:', error);
+        alert('データの読み込みに失敗しました。');
+        return false;
+      }
+    }
+
+    // ============================================
+    // インプット項目を抽出
+    // ============================================
+    function extractInputItems() {
+      inputItems = [];
+      let itemId = 1;
+
+      for (const catConfig of INPUT_CONFIG.categories) {
+        const categoryData = masterData[catConfig.categoryKey];
+        if (!categoryData || !categoryData.items) continue;
+
+        for (const item of categoryData.items) {
+          inputItems.push({
+            itemId: itemId,
+            segment: catConfig.segment,
+            categoryKey: catConfig.categoryKey,
+            no: item.no,
+            title: item.name,
+            detail: item.detail || ''
+          });
+          itemId++;
+        }
+      }
+    }
+
+    // ============================================
+    // チェック状態の取得・設定
+    // ============================================
+    function isItemChecked(item) {
+      const categoryState = checkState[item.categoryKey];
+      if (!categoryState) return false;
+      return categoryState[item.no] === true;
+    }
+
+    function setItemChecked(item, checked) {
+      if (!checkState[item.categoryKey]) {
+        checkState[item.categoryKey] = {};
+      }
+      checkState[item.categoryKey][item.no] = checked;
+      saveCheckState();
+    }
+
+    // ============================================
+    // 進捗計算
+    // ============================================
+    function calculateProgress() {
+      let total = inputItems.length;
+      let checked = 0;
+
+      for (const item of inputItems) {
+        if (isItemChecked(item)) {
+          checked++;
+        }
+      }
+
+      return { total, checked, percent: total > 0 ? Math.round((checked / total) * 100) : 0 };
+    }
+
+    // ============================================
+    // UI更新
+    // ============================================
+    function updateProgress() {
+      const progress = calculateProgress();
+      
+      document.getElementById('readCount').textContent = progress.checked;
+      document.getElementById('totalCount').textContent = progress.total;
+      document.getElementById('progressFill').style.width = progress.percent + '%';
+
+      // ボタン状態
+      const completeBtn = document.getElementById('completeBtn');
+      const statusText = document.getElementById('statusText');
+      const quizBtn = document.getElementById('quizBtn');
+      const actionNote = document.getElementById('actionNote');
+
+      if (progress.checked >= progress.total && progress.total > 0) {
+        completeBtn.disabled = false;
+        statusText.textContent = 'すべて読了しました！';
+        
+        // 確認テストボタンを有効化
+        quizBtn.classList.remove('disabled');
+        quizBtn.style.pointerEvents = 'auto';
+        actionNote.textContent = '✓ インプット完了！確認テストに進めます';
+        actionNote.classList.add('completed');
+      } else {
+        completeBtn.disabled = true;
+        statusText.textContent = `残り ${progress.total - progress.checked} 項目`;
+        
+        // 確認テストボタンを無効化
+        quizBtn.classList.add('disabled');
+        quizBtn.style.pointerEvents = 'none';
+        actionNote.textContent = `※ すべてのインプットを完了すると確認テストが受けられます（残り${progress.total - progress.checked}項目）`;
+        actionNote.classList.remove('completed');
+      }
+    }
+
+    // ============================================
+    // セグメントフィルター描画
+    // ============================================
+    function renderSegmentFilter() {
+      const container = document.getElementById('segmentFilter');
+      const mobileSelect = document.getElementById('segmentSelect');
+      
+      // セグメントごとの件数を計算
+      const segmentCounts = { ALL: inputItems.length };
+      for (const cat of INPUT_CONFIG.categories) {
+        segmentCounts[cat.segment] = inputItems.filter(item => item.segment === cat.segment).length;
+      }
+
+      // PC用ボタン
+      let html = `<button class="filter-btn ${currentSegment === 'ALL' ? 'active' : ''}" onclick="filterSegment('ALL')">すべて<span class="badge">${segmentCounts.ALL}</span></button>`;
+      
+      for (const cat of INPUT_CONFIG.categories) {
+        html += `<button class="filter-btn ${currentSegment === cat.segment ? 'active' : ''}" onclick="filterSegment('${cat.segment}')">${cat.segment}<span class="badge">${segmentCounts[cat.segment]}</span></button>`;
+      }
+
+      container.innerHTML = html;
+
+      // モバイル用プルダウン
+      if (mobileSelect) {
+        let selectHtml = `<option value="ALL" ${currentSegment === 'ALL' ? 'selected' : ''}>すべて (${segmentCounts.ALL})</option>`;
+        for (const cat of INPUT_CONFIG.categories) {
+          selectHtml += `<option value="${cat.segment}" ${currentSegment === cat.segment ? 'selected' : ''}>${cat.segment} (${segmentCounts[cat.segment]})</option>`;
+        }
+        mobileSelect.innerHTML = selectHtml;
+      }
+    }
+
+    function filterSegment(segment) {
+      currentSegment = segment;
+      renderSegmentFilter();
+      renderItems();
+    }
+
+    function onSegmentSelectChange(value) {
+      filterSegment(value);
+    }
+
+    // ============================================
+    // アイテム一覧描画
+    // ============================================
+    function renderItems() {
+      const container = document.getElementById('columnList');
+      
+      // フィルタリング
+      const filteredItems = currentSegment === 'ALL' 
+        ? inputItems 
+        : inputItems.filter(item => item.segment === currentSegment);
+
+      if (filteredItems.length === 0) {
+        container.innerHTML = '<div class="empty-state"><span class="material-icons">inbox</span><p>表示する項目がありません</p></div>';
+        return;
+      }
+
+      let html = '';
+      let currentSegmentGroup = '';
+
+      for (const item of filteredItems) {
+        // セグメントヘッダー（ALLの場合のみ）
+        if (currentSegment === 'ALL' && item.segment !== currentSegmentGroup) {
+          currentSegmentGroup = item.segment;
+          html += `<div class="segment-header">${item.segment}</div>`;
+        }
+
+        const isChecked = isItemChecked(item);
+        const isOpen = openItemId === item.itemId;
+
+        html += `
+          <div class="column-item ${isOpen ? 'open' : ''}" data-item-id="${item.itemId}">
+            <div class="column-item-header">
+              <div class="column-check ${isChecked ? 'checked' : ''}" data-item-id="${item.itemId}" onclick="toggleCheck(event, ${item.itemId})">
+                <span class="material-icons">check</span>
+              </div>
+              <div class="column-item-info" onclick="toggleItem(${item.itemId})">
+                <div class="column-item-title">${escapeHtml(item.title)}</div>
+              </div>
+              <span class="material-icons column-expand" onclick="toggleItem(${item.itemId})">expand_more</span>
+            </div>
+            <div class="column-content">
+              <div class="column-content-text">${escapeHtml(item.detail)}</div>
+            </div>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+    }
+
+    // ============================================
+    // アイテム開閉
+    // ============================================
+    function toggleItem(itemId) {
+      const item = inputItems.find(i => i.itemId === itemId);
+      if (!item) return;
+
+      // 前のタイマーをクリア
+      if (readTimer) {
+        clearTimeout(readTimer);
+        readTimer = null;
+      }
+
+      // 開閉切り替え
+      if (openItemId === itemId) {
+        openItemId = null;
+      } else {
+        openItemId = itemId;
+
+        // 1秒後に自動チェック
+        if (!isItemChecked(item)) {
+          readTimer = setTimeout(() => {
+            markAsRead(item);
+          }, 1000);
+        }
+      }
+
+      renderItems();
+    }
+
+    // ============================================
+    // 手動チェック切り替え
+    // ============================================
+    function toggleCheck(event, itemId) {
+      event.stopPropagation(); // 親のクリックイベントを止める
+      
+      const item = inputItems.find(i => i.itemId === itemId);
+      if (!item) return;
+
+      const isCurrentlyChecked = isItemChecked(item);
+      setItemChecked(item, !isCurrentlyChecked);
+      
+      saveCheckState();
+      updateProgress();
+      renderItems();
+    }
+
+    // ============================================
+    // 読了マーク
+    // ============================================
+    function markAsRead(item) {
+      if (isItemChecked(item)) return;
+
+      setItemChecked(item, true);
+      updateProgress();
+      renderItems();
+    }
+
+    // ============================================
+    // インプット完了
+    // ============================================
+    function completeInput() {
+      const progress = calculateProgress();
+      if (progress.checked < progress.total) {
+        alert('まだ全ての記事を読んでいません。');
+        return;
+      }
+
+      // インプット完了フラグを保存（テーマ別）
+      const completedKey = `eqao_input_completed_${INPUT_CONFIG.themeId}`;
+      localStorage.setItem(completedKey, 'true');
+
+      // サーバーに同期
+      syncToServer();
+
+      // 完了画面を表示
+      showCompletedState();
+    }
+
+    // ============================================
+    // 初期化
+    // ============================================
+    async function init() {
+      // 認証チェック
+      const loggedIn = localStorage.getItem('eqao_loggedIn');
+      const studentId = localStorage.getItem('eqao_studentId');
+
+      if (!loggedIn || !studentId) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      currentUser = {
+        studentId: studentId,
+        studentName: localStorage.getItem('eqao_studentName'),
+        password: localStorage.getItem('eqao_password')
+      };
+
+      // チェック状態を読み込み
+      loadCheckState();
+
+      // マスタデータを読み込み
+      const loaded = await loadMasterData();
+      if (!loaded) {
+        document.getElementById('loadingOverlay').style.display = 'none';
+        return;
+      }
+
+      // インプット項目を抽出
+      extractInputItems();
+
+      // 通常表示
+      renderSegmentFilter();
+      renderItems();
+      updateProgress();
+
+      // ローディング非表示
+      document.getElementById('loadingOverlay').style.display = 'none';
+
+      // サーバーから最新状態を取得
+      loadFromServer();
+
+      // 定期同期
+      setInterval(syncToServer, 15000);
+    }
+
+    // ============================================
+    // ユーティリティ
+    // ============================================
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // ページ離脱時に同期
+    window.addEventListener('beforeunload', function() {
+      if (pendingSync && currentUser) {
+        syncToServer();
+      }
+    });
+
+    // 初期化実行
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+  <script src="js/nav-menu.js"></script>
+</body>
+</html>

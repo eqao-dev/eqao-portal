@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アウトプット - 自己分析シート - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Noto Sans JP', sans-serif; background: #f5f7fa; min-height: 100vh; }
+    .header { background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%); color: white; padding: 16px 20px; display: flex; align-items: center; gap: 12px; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+    .back-btn { color: white; text-decoration: none; display: flex; align-items: center; }
+    .header-content { flex: 1; }
+    .header-label { font-size: 12px; opacity: 0.9; }
+    .header-title { font-size: 16px; font-weight: 700; }
+    .header-progress { text-align: right; }
+    .header-progress-text { font-size: 12px; opacity: 0.9; }
+    .header-progress-count { font-size: 14px; font-weight: 700; }
+    .hamburger-btn { background: none; border: none; color: white; cursor: pointer; padding: 8px; }
+    .main-container { display: flex; margin-top: 64px; height: calc(100vh - 64px); }
+    .sidebar { width: 320px; background: white; border-right: 1px solid #e0e0e0; overflow-y: auto; flex-shrink: 0; }
+    .sidebar-header { padding: 16px; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; background: white; z-index: 10; }
+    .sidebar-title { font-size: 14px; font-weight: 700; color: #333; margin-bottom: 8px; }
+    .progress-bar { height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #4caf50, #8bc34a); border-radius: 3px; transition: width 0.3s ease; }
+    .progress-text { font-size: 12px; color: #666; margin-top: 4px; }
+    .category-section { border-bottom: 1px solid #f0f0f0; }
+    .category-header { padding: 12px 16px; background: #f8f9fa; font-size: 13px; font-weight: 700; color: #1565c0; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+    .category-header:hover { background: #e3f2fd; }
+    .category-header .material-icons { font-size: 20px; transition: transform 0.2s; }
+    .category-header.collapsed .material-icons { transform: rotate(-90deg); }
+    .category-items { display: block; }
+    .category-items.collapsed { display: none; }
+    .question-item { padding: 10px 16px 10px 24px; font-size: 13px; color: #333; cursor: pointer; display: flex; align-items: flex-start; gap: 8px; border-left: 3px solid transparent; }
+    .question-item:hover { background: #f5f7fa; }
+    .question-item.active { background: #e3f2fd; border-left-color: #1565c0; }
+    .question-item .status-icon { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .question-item .status-icon.empty { border: 2px solid #ccc; }
+    .question-item .status-icon.filled { background: #4caf50; color: white; }
+    .question-item .status-icon .material-icons { font-size: 14px; }
+    .question-item .question-text { flex: 1; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .question-item .question-num { font-weight: 700; color: #1565c0; flex-shrink: 0; }
+    .content-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .answer-container { flex: 1; padding: 24px; overflow-y: auto; }
+
+    /* ガイドセクション */
+    .guide-section { 
+      background: white; 
+      border-radius: 12px; 
+      margin-bottom: 20px; 
+      max-width: 800px; 
+      margin-left: auto; 
+      margin-right: auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
+    }
+    .guide-header { 
+      padding: 14px 20px; 
+      cursor: pointer; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between;
+      background: #f8f9fa;
+      transition: background 0.2s;
+    }
+    .guide-header:hover {
+      background: #f0f0f0;
+    }
+    .guide-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .guide-header-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #4caf50, #8bc34a);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    .guide-header-text h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-bottom: 2px;
+    }
+    .guide-header-text p {
+      font-size: 12px;
+      color: #666;
+    }
+    .guide-toggle {
+      color: #666;
+      transition: transform 0.3s;
+    }
+    .guide-toggle.open {
+      transform: rotate(180deg);
+    }
+    .guide-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .guide-content.open {
+      max-height: 2000px;
+    }
+    .guide-content-inner {
+      padding: 0 20px 20px 20px;
+    }
+    .guide-block {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .guide-block:last-child {
+      margin-bottom: 0;
+    }
+    .guide-block h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1565c0;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .guide-block h4 .material-icons {
+      font-size: 18px;
+    }
+    .guide-block p {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+    .guide-block p:last-child {
+      margin-bottom: 0;
+    }
+    .guide-block ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .guide-block li {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 4px;
+    }
+    .guide-highlight {
+      background: #fff3e0;
+      border-left: 3px solid #ff9800;
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 12px;
+    }
+    .guide-highlight p {
+      font-size: 13px;
+      color: #e65100;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .answer-card { background: white; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); max-width: 800px; margin: 0 auto; }
+    .answer-header { padding: 20px 24px; border-bottom: 1px solid #f0f0f0; }
+    .answer-category { font-size: 12px; color: #1565c0; font-weight: 500; margin-bottom: 8px; }
+    .answer-question-num { font-size: 14px; color: #666; margin-bottom: 4px; }
+    .answer-question-text { font-size: 18px; font-weight: 700; color: #333; line-height: 1.6; }
+    .answer-body { padding: 24px; }
+    .answer-textarea { width: 100%; min-height: 300px; padding: 16px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 15px; font-family: 'Noto Sans JP', sans-serif; line-height: 1.8; resize: vertical; }
+    .answer-textarea:focus { outline: none; border-color: #1565c0; }
+    .answer-footer { padding: 16px 24px; border-top: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+    .save-status { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #666; }
+    .save-status .material-icons { font-size: 18px; }
+    .save-status.saving { color: #ff9800; }
+    .save-status.saved { color: #4caf50; }
+    .save-status.error { color: #f44336; }
+    .nav-buttons { display: flex; gap: 12px; }
+    .nav-btn { padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .nav-btn.prev { background: white; color: #666; border: 1px solid #ddd; }
+    .nav-btn.prev:hover:not(:disabled) { background: #f5f5f5; }
+    .nav-btn.next { background: #1565c0; color: white; border: none; }
+    .nav-btn.next:hover:not(:disabled) { background: #1976d2; }
+    .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .hint-box { background: #fff8e1; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; border-left: 4px solid #ff9800; }
+    .hint-box .hint-title { font-size: 12px; font-weight: 700; color: #f57c00; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+    .hint-box .hint-text { font-size: 13px; color: #666; line-height: 1.6; }
+    .loading-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+    .loading-spinner { display: flex; flex-direction: column; align-items: center; gap: 12px; color: #1565c0; }
+    .loading-spinner .material-icons { font-size: 48px; animation: spin 1s linear infinite; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* スマホ用設問選択エリア */
+    .mobile-question-select {
+      display: none;
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .mobile-question-header {
+      padding: 12px 16px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .mobile-question-header-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+    }
+    .mobile-question-header-progress {
+      font-size: 12px;
+      color: #666;
+    }
+    .mobile-question-list {
+      max-height: 180px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .mobile-question-item {
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #333;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .mobile-question-item:active {
+      background: #e3f2fd;
+    }
+    .mobile-question-item.active {
+      background: #e3f2fd;
+      border-left: 3px solid #1565c0;
+    }
+    .mobile-question-item .status-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+    .mobile-question-item .status-icon.empty {
+      border: 2px solid #ccc;
+    }
+    .mobile-question-item .status-icon.filled {
+      background: #4caf50;
+      color: white;
+    }
+    .mobile-question-item .status-icon .material-icons {
+      font-size: 14px;
+    }
+    .mobile-question-item .question-num {
+      font-weight: 700;
+      color: #1565c0;
+      flex-shrink: 0;
+      min-width: 24px;
+    }
+    .mobile-question-item .question-text {
+      flex: 1;
+      line-height: 1.4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .mobile-progress-bar-container {
+      padding: 8px 16px 12px;
+      background: #f8f9fa;
+    }
+    .mobile-progress-bar {
+      height: 6px;
+      background: #e0e0e0;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .mobile-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4caf50, #8bc34a);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+
+    @media (max-width: 900px) {
+      .main-container { flex-direction: column; }
+      .sidebar { width: 100%; max-height: 40vh; border-right: none; border-bottom: 1px solid #e0e0e0; }
+      .answer-textarea { min-height: 200px; }
+      .guide-section { margin: 0 0 16px 0; border-radius: 0; }
+    }
+    @media (max-width: 600px) {
+      .sidebar { display: none; }
+      .mobile-question-select { display: block; }
+      .main-container { margin-top: 64px; height: auto; min-height: calc(100vh - 64px); }
+      .content-area { overflow: visible; }
+      .answer-container { padding: 16px; overflow: visible; }
+      .answer-card { border-radius: 12px; }
+      .answer-header { padding: 16px; }
+      .answer-body { padding: 16px; }
+      .answer-question-text { font-size: 16px; }
+      .answer-textarea { min-height: 200px; }
+      .answer-footer { flex-direction: column; gap: 12px; padding: 16px; }
+      .nav-buttons { width: 100%; }
+      .nav-btn { flex: 1; justify-content: center; }
+      .guide-section { margin: 16px; border-radius: 12px; }
+      .guide-header { padding: 12px 16px; }
+      .guide-content-inner { padding: 0 16px 16px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="lesson-materials.html" class="back-btn"><span class="material-icons">arrow_back</span></a>
+    <div class="header-content">
+      <div class="header-label">テーマ 2 ／ アウトプット</div>
+      <div class="header-title">自己分析シート</div>
+    </div>
+    <div class="header-progress">
+      <div class="header-progress-text">回答済み</div>
+      <div class="header-progress-count"><span id="answeredCount">0</span> / 50</div>
+    </div>
+    <button class="hamburger-btn" onclick="openNav()"><span class="material-icons">menu</span></button>
+  </div>
+
+  <div class="main-container">
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">質問一覧</div>
+        <div class="progress-bar"><div class="progress-fill" id="sidebarProgress" style="width: 0%"></div></div>
+        <div class="progress-text"><span id="progressPercent">0</span>% 完了</div>
+      </div>
+      <div class="question-list" id="questionList"></div>
+    </div>
+
+    <!-- スマホ用設問選択エリア -->
+    <div class="mobile-question-select" id="mobileQuestionSelect">
+      <div class="mobile-question-header">
+        <span class="mobile-question-header-title">質問一覧</span>
+        <span class="mobile-question-header-progress"><span id="mobileProgressPercent">0</span>% 完了</span>
+      </div>
+      <div class="mobile-progress-bar-container">
+        <div class="mobile-progress-bar">
+          <div class="mobile-progress-fill" id="mobileProgressFill" style="width: 0%"></div>
+        </div>
+      </div>
+      <div class="mobile-question-list" id="mobileQuestionList">
+      </div>
+    </div>
+    <div class="content-area">
+      <div class="answer-container">
+        
+        <!-- ガイドセクション（常に表示） -->
+        <div class="guide-section">
+          <div class="guide-header" onclick="toggleGuide()">
+            <div class="guide-header-left">
+              <div class="guide-header-icon">
+                <span class="material-icons">menu_book</span>
+              </div>
+              <div class="guide-header-text">
+                <h3>この自己分析シートについて</h3>
+                <p>目的・考え方・進め方を確認</p>
+              </div>
+            </div>
+            <span class="material-icons guide-toggle" id="guideToggle">expand_more</span>
+          </div>
+          <div class="guide-content" id="guideContent">
+            <div class="guide-content-inner">
+              
+              <div class="guide-block">
+                <h4><span class="material-icons">flag</span>目的</h4>
+                <p>この質問項目は、総合型選抜における<strong>自己分析・研究テーマの設定・将来の進路設計</strong>を行うための思考材料を網羅的に整理するものです。</p>
+                <p>自分の言葉で順に入力・記述していくことで、「自分自身について考えるきっかけ」を得ることができます。</p>
+              </div>
+
+              <div class="guide-block">
+                <h4><span class="material-icons">lightbulb</span>大切な考え方</h4>
+                <p>ここで重要なのは、<strong>「今すぐ答えが出ること」ではありません。</strong></p>
+                <p>考え、書き出し、言語化できない部分にぶつかり、そこから再度考えること。<br>そのプロセス自体が、総合型選抜で最も評価される力になります。</p>
+                <div class="guide-highlight">
+                  <p>「優れている」だけではなく、「いかに、どう異なっているか」が大事。<br>その異なっている点を優れさせることが総合型選抜では極めて重要です。</p>
+                </div>
+              </div>
+
+              <div class="guide-block">
+                <h4><span class="material-icons">explore</span>この質問群で見つけるもの</h4>
+                <ul>
+                  <li>あなただからこそ触れられる経験</li>
+                  <li>あなただからこそ持っているストーリー</li>
+                  <li>あなただからこそ扱えるテーマ</li>
+                </ul>
+                <p style="margin-top: 12px;">これらに<strong>強さ・特殊性・独自性・熱量</strong>が重なったとき、総合型選抜で評価される意味のあるテーマが立ち上がります。</p>
+              </div>
+
+              <div class="guide-block">
+                <h4><span class="material-icons">route</span>テーマから志望理由へ</h4>
+                <p>すべての質問に丁寧に回答していく過程を通じて：</p>
+                <p style="text-align: center; font-weight: 700; color: #1565c0; margin: 12px 0;">
+                  興味 → テーマ → 学問 → 学部選定 → 志望理由書
+                </p>
+                <p>という流れが整理されていきます。振り返りながらアウトプットを重ねることで、自分の強み・他者との違い・進むべき方向性が明確になります。</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="answer-card">
+          <div class="answer-header">
+            <div class="answer-category" id="answerCategory"></div>
+            <div class="answer-question-num">質問 <span id="currentQuestionNum">1</span></div>
+            <div class="answer-question-text" id="answerQuestionText"></div>
+          </div>
+          <div class="answer-body">
+            <div class="hint-box">
+              <div class="hint-title"><span class="material-icons">lightbulb</span>ヒント</div>
+              <div class="hint-text" id="hintText"></div>
+            </div>
+            <textarea class="answer-textarea" id="answerTextarea" placeholder="ここに回答を入力してください..."></textarea>
+          </div>
+          <div class="answer-footer">
+            <div class="save-status" id="saveStatus">
+              <span class="material-icons">cloud_done</span>
+              <span id="saveStatusText">保存済み</span>
+            </div>
+            <div class="nav-buttons">
+              <button class="nav-btn prev" id="prevBtn" onclick="goToPrev()"><span class="material-icons">arrow_back</span>前へ</button>
+              <button class="nav-btn next" id="nextBtn" onclick="goToNext()">次へ<span class="material-icons">arrow_forward</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"><span class="material-icons">sync</span><span>読み込み中...</span></div>
+  </div>
+
+  <script>
+    // ============================================
+    // ガイドの開閉
+    // ============================================
+    function toggleGuide() {
+      const content = document.getElementById('guideContent');
+      const toggle = document.getElementById('guideToggle');
+      content.classList.toggle('open');
+      toggle.classList.toggle('open');
+      
+      // 状態を保存
+      const isOpen = content.classList.contains('open');
+      localStorage.setItem('eqao_guide_open', isOpen ? 'true' : 'false');
+    }
+
+    function initGuide() {
+      // 初回も閉じた状態、開いている場合のみ開く
+      const savedState = localStorage.getItem('eqao_guide_open');
+      const content = document.getElementById('guideContent');
+      const toggle = document.getElementById('guideToggle');
+      
+      if (savedState === 'true') {
+        content.classList.add('open');
+        toggle.classList.add('open');
+      }
+    }
+
+    // ============================================
+    // 質問データ（50問）
+    // ============================================
+    const QUESTIONS = [
+      { id: 1, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "長く続けている趣味、または今ハマっていることはありますか？", hint: "いつから、どのくらいの頻度で続いているかも含めて書いてみましょう。" },
+      { id: 2, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "本を読むのは好きですか？", hint: "好きな場合も苦手な場合も、その理由を考えてみましょう。" },
+      { id: 3, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "どんなジャンルの本をよく読みますか？", hint: "小説／ノンフィクション／社会問題／歴史／ビジネス／哲学など" },
+      { id: 4, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "なぜ、その本・ジャンルが好きなのだと思いますか？", hint: "内容・テーマ・視点・登場人物・価値観など、理由を言語化してください。" },
+      { id: 5, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "漫画・アニメ・ゲーム・映画・音楽などで、強く影響を受けたものはありますか？", hint: "なぜ心に残っているのかも考えてみましょう。" },
+      { id: 6, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "「時間を忘れて没頭してしまうこと」は何ですか？", hint: "趣味でも勉強でも、気づいたら時間が経っていたことを思い出してみましょう。" },
+      { id: 7, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "気づいたら調べてしまう分野はありますか？", hint: "宇宙／生物／医療／移民／国際問題／政治／教育など" },
+      { id: 8, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "過去を振り返って、強く心が動いた経験はありますか？", hint: "怒り・悲しみ・悔しさ・感動・衝撃など、感情の種類は問いません。" },
+      { id: 9, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "その出来事は、今でも少し心に残っていますか？なぜ忘れていないのだと思いますか？", hint: "その経験が自分にとって特別な理由を考えてみましょう。" },
+      { id: 10, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "過去のトラウマ的な経験はありますか？", hint: "小さなことでも構いません。無理のない範囲で振り返ってみましょう。" },
+      { id: 11, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "その経験は、あなたの考え方や行動にどんな影響を与えていますか？", hint: "今の自分の価値観や判断基準につながっていることはありますか？" },
+      { id: 12, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "「おかしい」「納得できない」と強く感じた出来事はありますか？", hint: "社会のルール、学校の制度、人間関係など、違和感を覚えた場面を思い出してみましょう。" },
+      { id: 13, category: "Ⅲ．性格・強み・弱みの理解", question: "周囲の人から、どのような性格だと言われることが多いですか？", hint: "友達、家族、先生など、複数の人からの評価を思い出してみましょう。" },
+      { id: 14, category: "Ⅲ．性格・強み・弱みの理解", question: "自分では、自分をどのような性格だと思いますか？", hint: "例：飽き性／集中力がある／慎重／衝動的 など" },
+      { id: 15, category: "Ⅲ．性格・強み・弱みの理解", question: "自分の長所だと思う点を、具体例とともに挙げてください。", hint: "「〇〇な場面で△△ができた」のように具体的に書いてみましょう。" },
+      { id: 16, category: "Ⅲ．性格・強み・弱みの理解", question: "逆に、短所・苦手な点は何だと思いますか？", hint: "克服しようとした経験があれば、それも書いてみましょう。" },
+      { id: 17, category: "Ⅲ．性格・強み・弱みの理解", question: "周囲と比べて「ここは優れている」「ここは明らかに違う」と感じる点はありますか？", hint: "他の人があまり持っていない視点や能力を考えてみましょう。" },
+      { id: 18, category: "Ⅲ．性格・強み・弱みの理解", question: "失敗したとき、あなたはどう立て直すタイプですか？", hint: "すぐ切り替える？しばらく落ち込む？誰かに相談する？など" },
+      { id: 19, category: "Ⅳ．環境・バックグラウンド", question: "家庭環境で、周囲と異なる点はありますか？", hint: "親の職業／家計／住んでいる地域／兄弟構成など" },
+      { id: 20, category: "Ⅳ．環境・バックグラウンド", question: "「自分だからこそ語れる」と思える背景はありますか？", hint: "育った環境や経験で、他の人にはない視点を持っていることは？" },
+      { id: 21, category: "Ⅳ．環境・バックグラウンド", question: "家族・身近な人の生き方で、影響を受けたものはありますか？", hint: "尊敬する点、反面教師にしている点、どちらでも構いません。" },
+      { id: 22, category: "Ⅳ．環境・バックグラウンド", question: "身の回りで起きた、大きな出来事（事故・病気・別れ・感動）はありますか？", hint: "その出来事が自分の価値観にどう影響したかも考えてみましょう。" },
+      { id: 23, category: "Ⅴ．活動経験・評価された経験", question: "これまでの活動で、社会的に評価された経験はありますか？", hint: "受賞・表彰・感謝された経験など" },
+      { id: 24, category: "Ⅴ．活動経験・評価された経験", question: "結果が出なかったが、強く印象に残っている活動はありますか？", hint: "結果よりもプロセスで学んだことを振り返ってみましょう。" },
+      { id: 25, category: "Ⅴ．活動経験・評価された経験", question: "学校の総合探究で取り組んでいる（取り組んだ）テーマは何ですか？", hint: "まだ決まっていない場合は、興味のある方向性を書いてみましょう。" },
+      { id: 26, category: "Ⅴ．活動経験・評価された経験", question: "そのテーマを選んだ理由は何ですか？", hint: "自分から選んだのか、与えられたのかも含めて書いてみましょう。" },
+      { id: 27, category: "Ⅴ．活動経験・評価された経験", question: "活動を通して、自分の限界を感じた経験はありますか？", hint: "その限界をどう乗り越えようとしたか、または諦めたかも含めて。" },
+      { id: 28, category: "Ⅵ．社会への問題意識", question: "ニュース・新聞・テレビを見ていて、強い違和感や怒りを覚えた問題はありますか？", hint: "最近気になったニュースを思い出してみましょう。" },
+      { id: 29, category: "Ⅵ．社会への問題意識", question: "「自分が何とかしたい」と感じた社会問題はありますか？", hint: "大きな問題でも身近な問題でも構いません。" },
+      { id: 30, category: "Ⅵ．社会への問題意識", question: "助けたいと思う対象はいますか？", hint: "子ども／高齢者／障害のある人／移民／貧困層／女性 など" },
+      { id: 31, category: "Ⅵ．社会への問題意識", question: "なぜ、その対象に関心を持ったのだと思いますか？", hint: "自分の経験や環境との関連を考えてみましょう。" },
+      { id: 32, category: "Ⅵ．社会への問題意識", question: "社会問題に関わりたいと思いますか？それとも距離を取りたいですか？", hint: "どちらの答えでも、その理由を言語化してみましょう。" },
+      { id: 33, category: "Ⅶ．国際性・文化・地域", question: "海外に行った経験、または特別な地域体験はありますか？", hint: "旅行、留学、引っ越しなど" },
+      { id: 34, category: "Ⅶ．国際性・文化・地域", question: "自分しかあまり訪れていない、または珍しい場所の経験はありますか？", hint: "その場所で感じたこと、学んだことを書いてみましょう。" },
+      { id: 35, category: "Ⅶ．国際性・文化・地域", question: "特定の国・地域にルーツがありますか？その国について語る「当事者性」はありますか？", hint: "家族の出身地や、特別な縁のある場所について考えてみましょう。" },
+      { id: 36, category: "Ⅶ．国際性・文化・地域", question: "将来、海外で生活することを考えていますか？", hint: "興味がある国や理由があれば書いてみましょう。" },
+      { id: 37, category: "Ⅶ．国際性・文化・地域", question: "英語を使った仕事に興味はありますか？", hint: "興味がある場合、どんな場面で使いたいかも考えてみましょう。" },
+      { id: 38, category: "Ⅶ．国際性・文化・地域", question: "日本で暮らすなら、都市部と地方、どちらを選びたいですか？", hint: "その理由も言語化してみましょう。" },
+      { id: 39, category: "Ⅷ．仕事観・将来像", question: "将来、どのような仕事に関わりたいですか？", hint: "具体的な職業でも、「〇〇に関わる仕事」という形でも構いません。" },
+      { id: 40, category: "Ⅷ．仕事観・将来像", question: "現場で手を動かしたいですか？それとも全体を動かす立場ですか？", hint: "プレイヤーとマネージャー、どちらに魅力を感じますか？" },
+      { id: 41, category: "Ⅷ．仕事観・将来像", question: "リーダーとして前に立ちたいですか？それとも支える役割が合っていますか？", hint: "過去の経験でどちらの役割が多かったかも振り返ってみましょう。" },
+      { id: 42, category: "Ⅷ．仕事観・将来像", question: "起業や大きな挑戦に興味はありますか？", hint: "興味がある場合、どんな分野で挑戦したいかも考えてみましょう。" },
+      { id: 43, category: "Ⅷ．仕事観・将来像", question: "安定を重視する生き方と、挑戦を重視する生き方、どちらに近いですか？", hint: "今の時点での考えで構いません。" },
+      { id: 44, category: "Ⅷ．仕事観・将来像", question: "最先端技術と、文学・教育・伝統文化、どちらに惹かれますか？", hint: "両方に興味がある場合は、その理由も書いてみましょう。" },
+      { id: 45, category: "Ⅸ．人物像・ロールモデル", question: "憧れの人、尊敬する人、ロールモデルはいますか？", hint: "職業・生き方・考え方、どの点に惹かれているかも書いてみましょう。" },
+      { id: 46, category: "Ⅹ．総合整理・次のステップ", question: "ここまでの回答を見返して、何度も出てきたキーワードは何ですか？", hint: "複数の質問で共通して出てくる言葉や概念を探してみましょう。" },
+      { id: 47, category: "Ⅹ．総合整理・次のステップ", question: "自分の中で「一貫しているテーマ」は何だと思いますか？", hint: "これまでの回答を通じて見えてきた軸を言語化してみましょう。" },
+      { id: 48, category: "Ⅹ．総合整理・次のステップ", question: "これは他の人にはあまり語れない、自分だけの視点だと思えるものは何ですか？", hint: "自分の経験や背景から生まれた独自の視点を考えてみましょう。" },
+      { id: 49, category: "Ⅹ．総合整理・次のステップ", question: "そのテーマは、どの学問分野と結びつきそうですか？", hint: "法学、経済学、社会学、教育学、国際関係学など、関連しそうな分野を挙げてみましょう。" },
+      { id: 50, category: "Ⅹ．総合整理・次のステップ", question: "その学問を通して、社会とどのように関わりたいですか？", hint: "将来の自分が社会に対してどんな貢献をしたいか、具体的にイメージしてみましょう。" }
+    ];
+
+    const CATEGORIES = [
+      "Ⅰ．興味・関心・好きなことの棚卸し",
+      "Ⅱ．心が動いた経験（原体験・感情）",
+      "Ⅲ．性格・強み・弱みの理解",
+      "Ⅳ．環境・バックグラウンド",
+      "Ⅴ．活動経験・評価された経験",
+      "Ⅵ．社会への問題意識",
+      "Ⅶ．国際性・文化・地域",
+      "Ⅷ．仕事観・将来像",
+      "Ⅸ．人物像・ロールモデル",
+      "Ⅹ．総合整理・次のステップ"
+    ];
+
+    // ============================================
+    // アプリケーション
+    // ============================================
+    const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
+    const AUTOSAVE_DELAY = 1500;
+
+    let currentUser = null;
+    let answers = {};
+    let currentQuestionId = 1;
+    let saveTimeout = null;
+    let isSaving = false;
+
+    async function init() {
+      const loggedIn = localStorage.getItem('eqao_loggedIn');
+      const studentId = localStorage.getItem('eqao_studentId');
+
+      if (!loggedIn || !studentId) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      currentUser = {
+        studentId: studentId,
+        studentName: localStorage.getItem('eqao_studentName'),
+        password: localStorage.getItem('eqao_password')
+      };
+
+      initGuide();
+      loadAnswersFromLocal();
+      renderSidebar();
+      renderMobileSelect();
+      showQuestion(currentQuestionId);
+
+      document.getElementById('answerTextarea').addEventListener('input', onAnswerInput);
+      document.getElementById('loadingOverlay').style.display = 'none';
+
+      loadAnswersFromServer();
+    }
+
+    function getLocalStorageKey() {
+      return `eqao_output_theme2_${currentUser.studentId}`;
+    }
+
+    function loadAnswersFromLocal() {
+      try {
+        const saved = localStorage.getItem(getLocalStorageKey());
+        if (saved) answers = JSON.parse(saved);
+      } catch (e) {
+        answers = {};
+      }
+    }
+
+    function saveAnswersToLocal() {
+      try {
+        localStorage.setItem(getLocalStorageKey(), JSON.stringify(answers));
+      } catch (e) {}
+    }
+
+    async function loadAnswersFromServer() {
+      try {
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'getOutputAnswers');
+        url.searchParams.set('studentId', currentUser.studentId);
+        url.searchParams.set('themeId', '2');
+
+        const response = await fetch(url.toString());
+        const result = await response.json();
+
+        if (result.success && result.answers) {
+          for (const key in result.answers) {
+            if (result.answers[key]) answers[key] = result.answers[key];
+          }
+          saveAnswersToLocal();
+          renderSidebar();
+          showQuestion(currentQuestionId);
+          updateProgress();
+        }
+      } catch (error) {
+        console.error('サーバー読み込みエラー:', error);
+      }
+    }
+
+    async function saveAnswerToServer(questionId, answerText) {
+      try {
+        const url = new URL(API_URL);
+        url.searchParams.set('action', 'saveOutputAnswer');
+        url.searchParams.set('studentId', currentUser.studentId);
+        url.searchParams.set('password', currentUser.password);
+        url.searchParams.set('themeId', '2');
+        url.searchParams.set('questionId', questionId.toString());
+        url.searchParams.set('answer', answerText);
+
+        const response = await fetch(url.toString());
+        const result = await response.json();
+        return result.success;
+      } catch (error) {
+        console.error('サーバー保存エラー:', error);
+        return false;
+      }
+    }
+
+    function renderSidebar() {
+      const container = document.getElementById('questionList');
+      let html = '';
+
+      for (const category of CATEGORIES) {
+        const categoryQuestions = QUESTIONS.filter(q => q.category === category);
+        html += `<div class="category-section">
+          <div class="category-header" onclick="toggleCategory(this)">
+            <span>${category}</span>
+            <span class="material-icons">expand_more</span>
+          </div>
+          <div class="category-items">`;
+
+        for (const q of categoryQuestions) {
+          const hasAnswer = answers[q.id] && answers[q.id].trim().length > 0;
+          const isActive = q.id === currentQuestionId;
+          html += `<div class="question-item ${isActive ? 'active' : ''} ${hasAnswer ? 'answered' : ''}" 
+                       data-id="${q.id}" onclick="selectQuestion(${q.id})">
+            <span class="status-icon ${hasAnswer ? 'filled' : 'empty'}">
+              ${hasAnswer ? '<span class="material-icons">check</span>' : ''}
+            </span>
+            <span class="question-num">${q.id}.</span>
+            <span class="question-text">${q.question}</span>
+          </div>`;
+        }
+        html += `</div></div>`;
+      }
+
+      container.innerHTML = html;
+      updateProgress();
+    }
+
+    function toggleCategory(header) {
+      header.classList.toggle('collapsed');
+      header.nextElementSibling.classList.toggle('collapsed');
+    }
+
+    function showQuestion(questionId) {
+      const question = QUESTIONS.find(q => q.id === questionId);
+      if (!question) return;
+
+      currentQuestionId = questionId;
+
+      document.getElementById('answerCategory').textContent = question.category;
+      document.getElementById('currentQuestionNum').textContent = question.id;
+      document.getElementById('answerQuestionText').textContent = question.question;
+      document.getElementById('hintText').textContent = question.hint;
+
+      const textarea = document.getElementById('answerTextarea');
+      textarea.value = answers[questionId] || '';
+
+      document.getElementById('prevBtn').disabled = questionId <= 1;
+      document.getElementById('nextBtn').disabled = questionId >= 50;
+
+      document.querySelectorAll('.question-item').forEach(item => {
+        item.classList.remove('active');
+        if (parseInt(item.dataset.id) === questionId) {
+          item.classList.add('active');
+          item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+
+      updateSaveStatus('saved');
+    }
+
+    function selectQuestion(questionId) {
+      showQuestion(questionId);
+    }
+
+    function goToPrev() {
+      if (currentQuestionId > 1) showQuestion(currentQuestionId - 1);
+    }
+
+    function goToNext() {
+      if (currentQuestionId < 50) showQuestion(currentQuestionId + 1);
+    }
+
+    function onAnswerInput(e) {
+      const answerText = e.target.value;
+      answers[currentQuestionId] = answerText;
+
+      updateSaveStatus('typing');
+
+      if (saveTimeout) clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(() => {
+        saveAnswer(currentQuestionId, answerText);
+      }, AUTOSAVE_DELAY);
+    }
+
+    async function saveAnswer(questionId, answerText) {
+      if (isSaving) return;
+      isSaving = true;
+
+      updateSaveStatus('saving');
+      saveAnswersToLocal();
+
+      const success = await saveAnswerToServer(questionId, answerText);
+      updateSaveStatus(success ? 'saved' : 'error');
+
+      isSaving = false;
+      renderSidebar();
+      renderMobileSelect();
+    }
+
+    function updateSaveStatus(status) {
+      const statusEl = document.getElementById('saveStatus');
+      const textEl = document.getElementById('saveStatusText');
+      const iconEl = statusEl.querySelector('.material-icons');
+
+      statusEl.className = 'save-status ' + status;
+
+      switch (status) {
+        case 'typing':
+          iconEl.textContent = 'edit';
+          textEl.textContent = '入力中...';
+          break;
+        case 'saving':
+          iconEl.textContent = 'sync';
+          textEl.textContent = '保存中...';
+          break;
+        case 'saved':
+          iconEl.textContent = 'cloud_done';
+          textEl.textContent = '保存済み';
+          break;
+        case 'error':
+          iconEl.textContent = 'error';
+          textEl.textContent = '保存エラー';
+          break;
+      }
+    }
+
+    function updateProgress() {
+      let answeredCount = 0;
+      for (const q of QUESTIONS) {
+        if (answers[q.id] && answers[q.id].trim().length > 0) answeredCount++;
+      }
+
+      const percent = Math.round((answeredCount / 50) * 100);
+
+      document.getElementById('answeredCount').textContent = answeredCount;
+      document.getElementById('sidebarProgress').style.width = percent + '%';
+      document.getElementById('progressPercent').textContent = percent;
+
+      // モバイル用プログレスも更新
+      const mobileProgressFill = document.getElementById('mobileProgressFill');
+      const mobileProgressPercent = document.getElementById('mobileProgressPercent');
+      if (mobileProgressFill) mobileProgressFill.style.width = percent + '%';
+      if (mobileProgressPercent) mobileProgressPercent.textContent = percent;
+    }
+
+    // モバイル用リストを描画
+    function renderMobileSelect() {
+      const container = document.getElementById('mobileQuestionList');
+      if (!container) return;
+
+      let html = '';
+      for (const q of QUESTIONS) {
+        const hasAnswer = answers[q.id] && answers[q.id].trim().length > 0;
+        const isActive = q.id === currentQuestionId;
+        html += `
+          <div class="mobile-question-item ${isActive ? 'active' : ''}" onclick="selectQuestion(${q.id})">
+            <span class="status-icon ${hasAnswer ? 'filled' : 'empty'}">
+              ${hasAnswer ? '<span class="material-icons">check</span>' : ''}
+            </span>
+            <span class="question-num">${q.id}.</span>
+            <span class="question-text">${q.question}</span>
+          </div>
+        `;
+      }
+      container.innerHTML = html;
+
+      // 選択中の質問が見えるようにスクロール
+      setTimeout(() => {
+        const activeItem = container.querySelector('.mobile-question-item.active');
+        if (activeItem) {
+          activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 100);
+    }
+
+    // プルダウン変更時（互換性のため残す）
+    function onQuestionSelectChange(value) {
+      const questionId = parseInt(value);
+      if (questionId) {
+        showQuestion(questionId);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+  <script src="js/nav-menu.js"></script>
+</body>
+</html>
