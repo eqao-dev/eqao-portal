@@ -10,7 +10,7 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Noto Sans JP', sans-serif; background: #f5f7fa; min-height: 100vh; }
-    .header { background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%); color: white; padding: 16px 20px; display: flex; align-items: center; gap: 12px; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+    .header { background: linear-gradient(135deg, #e65100 0%, #f57c00 100%); color: white; padding: 16px 20px; display: flex; align-items: center; gap: 12px; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
     .back-btn { color: white; text-decoration: none; display: flex; align-items: center; }
     .header-content { flex: 1; }
     .header-label { font-size: 12px; opacity: 0.9; }
@@ -27,21 +27,21 @@
     .progress-fill { height: 100%; background: linear-gradient(90deg, #4caf50, #8bc34a); border-radius: 3px; transition: width 0.3s ease; }
     .progress-text { font-size: 12px; color: #666; margin-top: 4px; }
     .category-section { border-bottom: 1px solid #f0f0f0; }
-    .category-header { padding: 12px 16px; background: #f8f9fa; font-size: 13px; font-weight: 700; color: #1565c0; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
-    .category-header:hover { background: #e3f2fd; }
+    .category-header { padding: 12px 16px; background: #f8f9fa; font-size: 13px; font-weight: 700; color: #e65100; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+    .category-header:hover { background: #fff3e0; }
     .category-header .material-icons { font-size: 20px; transition: transform 0.2s; }
     .category-header.collapsed .material-icons { transform: rotate(-90deg); }
     .category-items { display: block; }
     .category-items.collapsed { display: none; }
     .question-item { padding: 10px 16px 10px 24px; font-size: 13px; color: #333; cursor: pointer; display: flex; align-items: flex-start; gap: 8px; border-left: 3px solid transparent; }
     .question-item:hover { background: #f5f7fa; }
-    .question-item.active { background: #e3f2fd; border-left-color: #1565c0; }
+    .question-item.active { background: #fff3e0; border-left-color: #e65100; }
     .question-item .status-icon { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
     .question-item .status-icon.empty { border: 2px solid #ccc; }
     .question-item .status-icon.filled { background: #4caf50; color: white; }
     .question-item .status-icon .material-icons { font-size: 14px; }
     .question-item .question-text { flex: 1; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .question-item .question-num { font-weight: 700; color: #1565c0; flex-shrink: 0; }
+    .question-item .question-num { font-weight: 700; color: #e65100; flex-shrink: 0; }
     .content-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
     .answer-container { flex: 1; padding: 24px; overflow-y: auto; }
 
@@ -124,7 +124,7 @@
     .guide-block h4 {
       font-size: 13px;
       font-weight: 700;
-      color: #1565c0;
+      color: #e65100;
       margin-bottom: 8px;
       display: flex;
       align-items: center;
@@ -168,12 +168,12 @@
 
     .answer-card { background: white; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); max-width: 800px; margin: 0 auto; }
     .answer-header { padding: 20px 24px; border-bottom: 1px solid #f0f0f0; }
-    .answer-category { font-size: 12px; color: #1565c0; font-weight: 500; margin-bottom: 8px; }
+    .answer-category { font-size: 12px; color: #e65100; font-weight: 500; margin-bottom: 8px; }
     .answer-question-num { font-size: 14px; color: #666; margin-bottom: 4px; }
     .answer-question-text { font-size: 18px; font-weight: 700; color: #333; line-height: 1.6; }
     .answer-body { padding: 24px; }
     .answer-textarea { width: 100%; min-height: 300px; padding: 16px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 15px; font-family: 'Noto Sans JP', sans-serif; line-height: 1.8; resize: vertical; }
-    .answer-textarea:focus { outline: none; border-color: #1565c0; }
+    .answer-textarea:focus { outline: none; border-color: #e65100; }
     .answer-footer { padding: 16px 24px; border-top: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
     .save-status { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #666; }
     .save-status .material-icons { font-size: 18px; }
@@ -184,14 +184,14 @@
     .nav-btn { padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; }
     .nav-btn.prev { background: white; color: #666; border: 1px solid #ddd; }
     .nav-btn.prev:hover:not(:disabled) { background: #f5f5f5; }
-    .nav-btn.next { background: #1565c0; color: white; border: none; }
-    .nav-btn.next:hover:not(:disabled) { background: #1976d2; }
+    .nav-btn.next { background: #e65100; color: white; border: none; }
+    .nav-btn.next:hover:not(:disabled) { background: #f57c00; }
     .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .hint-box { background: #fff8e1; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; border-left: 4px solid #ff9800; }
     .hint-box .hint-title { font-size: 12px; font-weight: 700; color: #f57c00; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
     .hint-box .hint-text { font-size: 13px; color: #666; line-height: 1.6; }
     .loading-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-    .loading-spinner { display: flex; flex-direction: column; align-items: center; gap: 12px; color: #1565c0; }
+    .loading-spinner { display: flex; flex-direction: column; align-items: center; gap: 12px; color: #e65100; }
     .loading-spinner .material-icons { font-size: 48px; animation: spin 1s linear infinite; }
     @keyframes spin { 100% { transform: rotate(360deg); } }
 
@@ -234,11 +234,11 @@
       cursor: pointer;
     }
     .mobile-question-item:active {
-      background: #e3f2fd;
+      background: #fff3e0;
     }
     .mobile-question-item.active {
-      background: #e3f2fd;
-      border-left: 3px solid #1565c0;
+      background: #fff3e0;
+      border-left: 3px solid #e65100;
     }
     .mobile-question-item .status-icon {
       flex-shrink: 0;
@@ -262,7 +262,7 @@
     }
     .mobile-question-item .question-num {
       font-weight: 700;
-      color: #1565c0;
+      color: #e65100;
       flex-shrink: 0;
       min-width: 24px;
     }
@@ -402,7 +402,7 @@
               <div class="guide-block">
                 <h4><span class="material-icons">route</span>テーマから志望理由へ</h4>
                 <p>すべての質問に丁寧に回答していく過程を通じて：</p>
-                <p style="text-align: center; font-weight: 700; color: #1565c0; margin: 12px 0;">
+                <p style="text-align: center; font-weight: 700; color: #e65100; margin: 12px 0;">
                   興味 → テーマ → 学問 → 学部選定 → 志望理由書
                 </p>
                 <p>という流れが整理されていきます。振り返りながらアウトプットを重ねることで、自分の強み・他者との違い・進むべき方向性が明確になります。</p>
