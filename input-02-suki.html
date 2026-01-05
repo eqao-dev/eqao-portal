@@ -152,6 +152,29 @@
       .mobile-segment-select {
         display: block;
       }
+      
+      /* セグメントフィルターの余白調整 */
+      .column-controls {
+        margin-bottom: 0;
+        padding: 0;
+      }
+      .controls-row {
+        padding: 0;
+      }
+      
+      /* ヘッダーのスマホ対応 */
+      .header-title {
+        font-size: 11px;
+        max-width: 140px;
+      }
+      .header-tabs {
+        gap: 3px;
+        margin-left: 6px;
+      }
+      .header-tab {
+        padding: 5px 8px;
+        font-size: 10px;
+      }
     }
 
     /* モバイル用セグメントプルダウン */
@@ -178,14 +201,33 @@
       outline: none;
       border-color: #1565c0;
     }
+    
+    /* ヘッダータブナビゲーション */
+    .header-title { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .header-tabs { display: flex; gap: 4px; flex-shrink: 0; margin-left: 8px; }
+    .header-tab { 
+      padding: 6px 10px; 
+      border-radius: 6px; 
+      font-size: 11px; 
+      font-weight: 700; 
+      text-decoration: none;
+      color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.15);
+      transition: all 0.2s;
+    }
+    .header-tab:hover { background: rgba(255,255,255,0.25); color: white; }
+    .header-tab.active { background: white; color: #1565c0; }
   </style>
 </head>
 <body>
   <div class="header">
     <a href="lesson-materials.html" class="back-btn"><span class="material-icons">arrow_back</span></a>
     <div class="header-content">
-      <div class="header-label">テーマ 2 ／ インプット</div>
-      <div class="header-title">「すき」を見つけ、伸ばし、学問に繋げる</div>
+      <div class="header-title">テーマ 2｜「すき」を見つけ、伸ばし、学問に繋げる</div>
+    </div>
+    <div class="header-tabs">
+      <a href="input-02-suki.html" class="header-tab active">IN</a>
+      <a href="output-02-suki.html" class="header-tab">OUT</a>
     </div>
     <button class="hamburger-btn" onclick="openNav()">
       <span class="material-icons">menu</span>

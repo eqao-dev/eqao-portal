@@ -13,8 +13,22 @@
     .header { background: linear-gradient(135deg, #e65100 0%, #f57c00 100%); color: white; padding: 16px 20px; display: flex; align-items: center; gap: 12px; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
     .back-btn { color: white; text-decoration: none; display: flex; align-items: center; }
     .header-content { flex: 1; }
-    .header-label { font-size: 12px; opacity: 0.9; }
-    .header-title { font-size: 16px; font-weight: 700; }
+    .header-title { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .header-tabs { display: flex; gap: 4px; flex-shrink: 0; margin-left: 8px; }
+    .header-tab { 
+      padding: 6px 10px; 
+      border-radius: 6px; 
+      font-size: 11px; 
+      font-weight: 700; 
+      text-decoration: none;
+      color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.15);
+      transition: all 0.2s;
+    }
+    .header-tab:hover { background: rgba(255,255,255,0.25); color: white; }
+    .header-tab.active { background: white; color: #e65100; }
+    .header-progress { text-align: right; flex-shrink: 0; margin-left: 8px; }
+    .header-progress-count { font-size: 12px; font-weight: 700; }
     .header-progress { text-align: right; }
     .header-progress-text { font-size: 12px; opacity: 0.9; }
     .header-progress-count { font-size: 14px; font-weight: 700; }
@@ -218,6 +232,19 @@
       font-size: 12px;
       color: #666;
     }
+    .mobile-question-list-wrapper {
+      position: relative;
+    }
+    .mobile-question-list-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.95));
+      pointer-events: none;
+    }
     .mobile-question-list {
       max-height: 180px;
       overflow-y: auto;
@@ -313,6 +340,26 @@
       .guide-section { margin: 16px; border-radius: 12px; }
       .guide-header { padding: 12px 16px; }
       .guide-content-inner { padding: 0 16px 16px 16px; }
+      
+      /* ヘッダーのスマホ対応 */
+      .header-title {
+        font-size: 11px;
+        max-width: 120px;
+      }
+      .header-tabs {
+        gap: 3px;
+        margin-left: 6px;
+      }
+      .header-tab {
+        padding: 5px 8px;
+        font-size: 10px;
+      }
+      .header-progress {
+        margin-left: 6px;
+      }
+      .header-progress-count {
+        font-size: 11px;
+      }
     }
   </style>
 </head>
@@ -320,12 +367,14 @@
   <div class="header">
     <a href="lesson-materials.html" class="back-btn"><span class="material-icons">arrow_back</span></a>
     <div class="header-content">
-      <div class="header-label">テーマ 2 ／ アウトプット</div>
-      <div class="header-title">自己分析シート</div>
+      <div class="header-title">テーマ 2｜「すき」を見つけ、伸ばし、学問に繋げる</div>
+    </div>
+    <div class="header-tabs">
+      <a href="input-02-suki.html" class="header-tab">IN</a>
+      <a href="output-02-suki.html" class="header-tab active">OUT</a>
     </div>
     <div class="header-progress">
-      <div class="header-progress-text">回答済み</div>
-      <div class="header-progress-count"><span id="answeredCount">0</span> / 50</div>
+      <div class="header-progress-count"><span id="answeredCount">0</span>/50</div>
     </div>
     <button class="hamburger-btn" onclick="openNav()"><span class="material-icons">menu</span></button>
   </div>
@@ -351,7 +400,9 @@
           <div class="mobile-progress-fill" id="mobileProgressFill" style="width: 0%"></div>
         </div>
       </div>
-      <div class="mobile-question-list" id="mobileQuestionList">
+      <div class="mobile-question-list-wrapper">
+        <div class="mobile-question-list" id="mobileQuestionList">
+        </div>
       </div>
     </div>
     <div class="content-area">
