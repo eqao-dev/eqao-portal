@@ -1918,6 +1918,12 @@
       background: #f0f0f0;
     }
 
+    .news-item.news-item-clickable:hover {
+      background: #fff5f5;
+      border-left-color: #ff5722;
+      transform: translateX(4px);
+    }
+
     .news-date {
       flex-shrink: 0;
       font-size: 12px;
@@ -4454,6 +4460,162 @@
     .section-help-close-btn:hover {
       opacity: 0.9;
     }
+
+    /* ========================================
+   お知らせ遷移確認モーダル
+======================================== */
+    .news-link-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 700;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .news-link-modal-overlay.show {
+      display: flex;
+    }
+
+    .news-link-modal {
+      background: white;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 380px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: modalSlideUp 0.3s ease;
+    }
+
+    .news-link-modal-header {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .news-link-modal-header h2 {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .news-link-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: background 0.2s;
+    }
+
+    .news-link-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .news-link-modal-body {
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .news-link-modal-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .news-link-modal-icon .material-icons {
+      font-size: 32px;
+      color: white;
+    }
+
+    .news-link-modal-message {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 12px;
+    }
+
+    .news-link-modal-note {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+      background: #f8f9fc;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin: 0;
+    }
+
+    .news-link-modal-footer {
+      padding: 16px 20px;
+      background: #f8f9fc;
+      display: flex;
+      gap: 12px;
+    }
+
+    .news-link-modal-btn {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .news-link-modal-btn-cancel {
+      background: #e0e0e0;
+      color: #666;
+    }
+
+    .news-link-modal-btn-cancel:hover {
+      background: #d0d0d0;
+    }
+
+    .news-link-modal-btn-go {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+      color: white;
+    }
+
+    .news-link-modal-btn-go:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    }
+
+    .news-link-modal-btn-go .material-icons {
+      font-size: 18px;
+    }
+
+    /* お知らせクリック可能スタイル */
+    .news-item.news-item-clickable:hover {
+      background: #fff5f5;
+      border-left-color: #ff5722;
+      transform: translateX(4px);
+    }
   </style>
 </head>
 
@@ -5761,6 +5923,8 @@
       }
     }
 
+    // index.html の displayNews 関数を以下に置き換え
+
     function displayNews(data) {
       const newsList = document.getElementById('newsList');
 
@@ -5771,9 +5935,38 @@
 
       newsList.innerHTML = '';
 
+      // キーワードとリンク先のマッピング（将来の拡張用）
+      const linkMapping = [
+        { keyword: 'コラム', url: 'column.html', message: 'コラム一覧ページへ移動します' },
+        // 今後追加例：
+        // { keyword: '規定', url: 'rules.html', message: '規定ページへ移動します' },
+      ];
+
+      // タイトルからリンク情報を判定する関数
+      function getLinkInfo(title) {
+        for (const mapping of linkMapping) {
+          if (title && title.includes(mapping.keyword)) {
+            return mapping;
+          }
+        }
+        return null;
+      }
+
       data.forEach(function (item) {
+        const linkInfo = getLinkInfo(item.title);
+        const isClickable = linkInfo !== null;
+
         const newsItem = document.createElement('div');
-        newsItem.className = 'news-item';
+        newsItem.className = 'news-item' + (isClickable ? ' news-item-clickable' : '');
+
+        if (isClickable) {
+          newsItem.style.cursor = 'pointer';
+          newsItem.onclick = function () {
+            if (confirm(linkInfo.message + '\n\nよろしいですか？')) {
+              window.location.href = linkInfo.url;
+            }
+          };
+        }
 
         newsItem.innerHTML =
           '<div class="news-date">' + escapeHtml(item.date) + '</div>' +
@@ -5781,6 +5974,7 @@
           '<div class="news-item-title">' +
           escapeHtml(item.title) +
           (item.isNew ? '<span class="news-new-badge">NEW</span>' : '') +
+          (isClickable ? '<span class="material-icons" style="font-size:14px; margin-left:4px; vertical-align:middle; color:#999;">chevron_right</span>' : '') +
           '</div>' +
           (item.content ? '<div class="news-item-text">' + escapeHtml(item.content) + '</div>' : '') +
           '</div>';
@@ -6772,31 +6966,31 @@
 
     // 学習記録を削除
     async function deleteStudyLogExecute(rowIndex) {
-  console.log('削除開始 rowIndex:', rowIndex);  // ← 追加
-  try {
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      body: JSON.stringify({
-        action: 'deleteStudyLog',
-        rowIndex: rowIndex
-      })
-    });
+      console.log('削除開始 rowIndex:', rowIndex);  // ← 追加
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'deleteStudyLog',
+            rowIndex: rowIndex
+          })
+        });
 
-    const result = await response.json();
-    console.log('削除結果:', result);  // ← 追加
+        const result = await response.json();
+        console.log('削除結果:', result);  // ← 追加
 
-    if (result.success) {
-      alert('学習記録を削除しました');
-      loadStudyLogs();
-      loadStudyChart();
-    } else {
-      alert('削除に失敗しました: ' + (result.error || '不明なエラー'));
+        if (result.success) {
+          alert('学習記録を削除しました');
+          loadStudyLogs();
+          loadStudyChart();
+        } else {
+          alert('削除に失敗しました: ' + (result.error || '不明なエラー'));
+        }
+      } catch (error) {
+        console.error('削除エラー:', error);
+        alert('エラーが発生しました');
+      }
     }
-  } catch (error) {
-    console.error('削除エラー:', error);
-    alert('エラーが発生しました');
-  }
-}
 
     // グラフを描画
     function renderStudyChart(stats, totalHours, weekRange) {
@@ -7005,6 +7199,106 @@
         closeSectionHelp();
       }
     }
+
+    // ========================================
+    // お知らせ遷移モーダル
+    // ========================================
+    let pendingNewsLinkUrl = null;
+
+    function openNewsLinkModal(url, message, note, icon) {
+      pendingNewsLinkUrl = url;
+      document.getElementById('newsLinkModalMessage').textContent = message;
+      document.getElementById('newsLinkModalIcon').innerHTML = '<span class="material-icons">' + icon + '</span>';
+
+      if (note) {
+        document.querySelector('.news-link-modal-note').innerHTML = note;
+      }
+
+      document.getElementById('newsLinkModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNewsLinkModal() {
+      document.getElementById('newsLinkModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+      pendingNewsLinkUrl = null;
+    }
+
+    function closeNewsLinkModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeNewsLinkModal();
+      }
+    }
+
+    function goToNewsLink() {
+      if (pendingNewsLinkUrl) {
+        window.location.href = pendingNewsLinkUrl;
+      }
+    }
+
+    // displayNews関数を置き換え
+    function displayNews(data) {
+      const newsList = document.getElementById('newsList');
+
+      if (!data || data.length === 0) {
+        newsList.innerHTML = '<div class="news-empty">現在お知らせはありません</div>';
+        return;
+      }
+
+      newsList.innerHTML = '';
+
+      // キーワードとリンク先のマッピング（将来の拡張用）
+      const linkMapping = [
+        {
+          keyword: 'コラム',
+          url: 'column.html',
+          message: 'コラム一覧ページへ移動します',
+          note: '※ 個別のコラムページではなく、一覧ページへ移動します。<br>一覧から該当のコラムをお探しください。',
+          icon: 'article'
+        },
+        // 今後追加例：
+        // { keyword: '規定', url: 'rules.html', message: '規定ページへ移動します', note: '', icon: 'gavel' },
+      ];
+
+      // タイトルからリンク情報を判定する関数
+      function getLinkInfo(title) {
+        for (const mapping of linkMapping) {
+          if (title && title.includes(mapping.keyword)) {
+            return mapping;
+          }
+        }
+        return null;
+      }
+
+      data.forEach(function (item) {
+        const linkInfo = getLinkInfo(item.title);
+        const isClickable = linkInfo !== null;
+
+        const newsItem = document.createElement('div');
+        newsItem.className = 'news-item' + (isClickable ? ' news-item-clickable' : '');
+
+        if (isClickable) {
+          newsItem.style.cursor = 'pointer';
+          newsItem.onclick = function () {
+            openNewsLinkModal(linkInfo.url, linkInfo.message, linkInfo.note, linkInfo.icon);
+          };
+        }
+
+        newsItem.innerHTML =
+          '<div class="news-date">' + escapeHtml(item.date) + '</div>' +
+          '<div class="news-content">' +
+          '<div class="news-item-title">' +
+          escapeHtml(item.title) +
+          (item.isNew ? '<span class="news-new-badge">NEW</span>' : '') +
+          (isClickable ? '<span class="material-icons" style="font-size:14px; margin-left:4px; vertical-align:middle; color:#999;">chevron_right</span>' : '') +
+          '</div>' +
+          (item.content ? '<div class="news-item-text">' + escapeHtml(item.content) + '</div>' : '') +
+          '</div>';
+
+        newsList.appendChild(newsItem);
+      });
+    }
+
 
 
   </script>
@@ -7303,6 +7597,33 @@
 
       <div class="manage-modal-body" id="manageModalBody">
         <div class="manage-loading">読み込み中...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- お知らせ遷移確認モーダル -->
+  <div class="news-link-modal-overlay" id="newsLinkModalOverlay" onclick="closeNewsLinkModalOnOverlay(event)">
+    <div class="news-link-modal" onclick="event.stopPropagation()">
+      <div class="news-link-modal-header">
+        <span class="material-icons">info</span>
+        <h2>ページ移動</h2>
+        <button class="news-link-modal-close" onclick="closeNewsLinkModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="news-link-modal-body">
+        <div class="news-link-modal-icon" id="newsLinkModalIcon">
+          <span class="material-icons">article</span>
+        </div>
+        <p class="news-link-modal-message" id="newsLinkModalMessage">コラム一覧ページへ移動します</p>
+        <p class="news-link-modal-note">※ 個別のコラムページではなく、一覧ページへ移動します。<br>一覧から該当のコラムをお探しください。</p>
+      </div>
+      <div class="news-link-modal-footer">
+        <button class="news-link-modal-btn news-link-modal-btn-cancel" onclick="closeNewsLinkModal()">キャンセル</button>
+        <button class="news-link-modal-btn news-link-modal-btn-go" id="newsLinkModalGoBtn" onclick="goToNewsLink()">
+          <span class="material-icons">arrow_forward</span>
+          移動する
+        </button>
       </div>
     </div>
   </div>
