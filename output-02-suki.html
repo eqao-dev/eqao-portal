@@ -260,7 +260,12 @@
       flex-shrink: 0;
     }
 
-    .content-area { flex: 1; display: flex; flex-direction: row; overflow: hidden; }
+    .content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+    }
 
     .answer-container {
       flex: 1;
@@ -1093,7 +1098,6 @@
       color: #333;
       white-space: pre-wrap;
     }
-
   </style>
 </head>
 
@@ -1234,7 +1238,8 @@
             <span class="comment-count" id="mobileCommentCount"></span>
           </div>
           <div class="mobile-comment-list" id="mobileCommentList"></div>
-          <div class="mobile-comment-empty" id="mobileCommentEmpty" style="text-align:center;padding:16px;color:#999;font-size:13px;">
+          <div class="mobile-comment-empty" id="mobileCommentEmpty"
+            style="text-align:center;padding:16px;color:#999;font-size:13px;">
             コメントはまだありません
           </div>
         </div>
@@ -1249,236 +1254,242 @@
             <span class="material-icons" id="refreshIcon">refresh</span>
           </button>
         </div>
-    <div class="comment-panel-body" id="commentPanelBody">
-      <div class="comment-empty" id="commentEmpty">
-        <span class="material-icons">chat_bubble_outline</span>
-        <p>この質問へのコメントは<br>まだありません</p>
+        <div class="comment-panel-body" id="commentPanelBody">
+          <div class="comment-empty" id="commentEmpty">
+            <span class="material-icons">chat_bubble_outline</span>
+            <p>この質問へのコメントは<br>まだありません</p>
+          </div>
+          <div class="comment-list" id="commentList"></div>
+        </div>
       </div>
-      <div class="comment-list" id="commentList"></div>
-    </div>
-  </div>
-  <div class="loading-overlay" id="loadingOverlay">
-    <div class="loading-spinner"><span class="material-icons">sync</span><span>読み込み中...</span></div>
-  </div>
+      <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"><span class="material-icons">sync</span><span>読み込み中...</span></div>
+      </div>
 
-  <script>
-    // ============================================
-    // ガイドの開閉
-    // ============================================
-    function toggleGuide() {
-      const content = document.getElementById('guideContent');
-      const toggle = document.getElementById('guideToggle');
-      content.classList.toggle('open');
-      toggle.classList.toggle('open');
+      <script>
+        // ============================================
+        // ガイドの開閉
+        // ============================================
+        function toggleGuide() {
+          const content = document.getElementById('guideContent');
+          const toggle = document.getElementById('guideToggle');
+          content.classList.toggle('open');
+          toggle.classList.toggle('open');
 
-      // 状態を保存
-      const isOpen = content.classList.contains('open');
-      localStorage.setItem('eqao_guide_open', isOpen ? 'true' : 'false');
-    }
-
-    function initGuide() {
-      // 初回も閉じた状態、開いている場合のみ開く
-      const savedState = localStorage.getItem('eqao_guide_open');
-      const content = document.getElementById('guideContent');
-      const toggle = document.getElementById('guideToggle');
-
-      if (savedState === 'true') {
-        content.classList.add('open');
-        toggle.classList.add('open');
-      }
-    }
-
-    // ============================================
-    // 質問データ（50問）
-    // ============================================
-    const QUESTIONS = [
-      { id: 1, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "長く続けている趣味、または今ハマっていることはありますか？", hint: "いつから、どのくらいの頻度で続いているかも含めて書いてみましょう。" },
-      { id: 2, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "本を読むのは好きですか？", hint: "好きな場合も苦手な場合も、その理由を考えてみましょう。" },
-      { id: 3, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "どんなジャンルの本をよく読みますか？", hint: "小説／ノンフィクション／社会問題／歴史／ビジネス／哲学など" },
-      { id: 4, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "なぜ、その本・ジャンルが好きなのだと思いますか？", hint: "内容・テーマ・視点・登場人物・価値観など、理由を言語化してください。" },
-      { id: 5, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "漫画・アニメ・ゲーム・映画・音楽などで、強く影響を受けたものはありますか？", hint: "なぜ心に残っているのかも考えてみましょう。" },
-      { id: 6, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "「時間を忘れて没頭してしまうこと」は何ですか？", hint: "趣味でも勉強でも、気づいたら時間が経っていたことを思い出してみましょう。" },
-      { id: 7, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "気づいたら調べてしまう分野はありますか？", hint: "宇宙／生物／医療／移民／国際問題／政治／教育など" },
-      { id: 8, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "過去を振り返って、強く心が動いた経験はありますか？", hint: "怒り・悲しみ・悔しさ・感動・衝撃など、感情の種類は問いません。" },
-      { id: 9, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "その出来事は、今でも少し心に残っていますか？なぜ忘れていないのだと思いますか？", hint: "その経験が自分にとって特別な理由を考えてみましょう。" },
-      { id: 10, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "過去のトラウマ的な経験はありますか？", hint: "小さなことでも構いません。無理のない範囲で振り返ってみましょう。" },
-      { id: 11, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "その経験は、あなたの考え方や行動にどんな影響を与えていますか？", hint: "今の自分の価値観や判断基準につながっていることはありますか？" },
-      { id: 12, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "「おかしい」「納得できない」と強く感じた出来事はありますか？", hint: "社会のルール、学校の制度、人間関係など、違和感を覚えた場面を思い出してみましょう。" },
-      { id: 13, category: "Ⅲ．性格・強み・弱みの理解", question: "周囲の人から、どのような性格だと言われることが多いですか？", hint: "友達、家族、先生など、複数の人からの評価を思い出してみましょう。" },
-      { id: 14, category: "Ⅲ．性格・強み・弱みの理解", question: "自分では、自分をどのような性格だと思いますか？", hint: "例：飽き性／集中力がある／慎重／衝動的 など" },
-      { id: 15, category: "Ⅲ．性格・強み・弱みの理解", question: "自分の長所だと思う点を、具体例とともに挙げてください。", hint: "「〇〇な場面で△△ができた」のように具体的に書いてみましょう。" },
-      { id: 16, category: "Ⅲ．性格・強み・弱みの理解", question: "逆に、短所・苦手な点は何だと思いますか？", hint: "克服しようとした経験があれば、それも書いてみましょう。" },
-      { id: 17, category: "Ⅲ．性格・強み・弱みの理解", question: "周囲と比べて「ここは優れている」「ここは明らかに違う」と感じる点はありますか？", hint: "他の人があまり持っていない視点や能力を考えてみましょう。" },
-      { id: 18, category: "Ⅲ．性格・強み・弱みの理解", question: "失敗したとき、あなたはどう立て直すタイプですか？", hint: "すぐ切り替える？しばらく落ち込む？誰かに相談する？など" },
-      { id: 19, category: "Ⅳ．環境・バックグラウンド", question: "家庭環境で、周囲と異なる点はありますか？", hint: "親の職業／家計／住んでいる地域／兄弟構成など" },
-      { id: 20, category: "Ⅳ．環境・バックグラウンド", question: "「自分だからこそ語れる」と思える背景はありますか？", hint: "育った環境や経験で、他の人にはない視点を持っていることは？" },
-      { id: 21, category: "Ⅳ．環境・バックグラウンド", question: "家族・身近な人の生き方で、影響を受けたものはありますか？", hint: "尊敬する点、反面教師にしている点、どちらでも構いません。" },
-      { id: 22, category: "Ⅳ．環境・バックグラウンド", question: "身の回りで起きた、大きな出来事（事故・病気・別れ・感動）はありますか？", hint: "その出来事が自分の価値観にどう影響したかも考えてみましょう。" },
-      { id: 23, category: "Ⅴ．活動経験・評価された経験", question: "これまでの活動で、社会的に評価された経験はありますか？", hint: "受賞・表彰・感謝された経験など" },
-      { id: 24, category: "Ⅴ．活動経験・評価された経験", question: "結果が出なかったが、強く印象に残っている活動はありますか？", hint: "結果よりもプロセスで学んだことを振り返ってみましょう。" },
-      { id: 25, category: "Ⅴ．活動経験・評価された経験", question: "学校の総合探究で取り組んでいる（取り組んだ）テーマは何ですか？", hint: "まだ決まっていない場合は、興味のある方向性を書いてみましょう。" },
-      { id: 26, category: "Ⅴ．活動経験・評価された経験", question: "そのテーマを選んだ理由は何ですか？", hint: "自分から選んだのか、与えられたのかも含めて書いてみましょう。" },
-      { id: 27, category: "Ⅴ．活動経験・評価された経験", question: "活動を通して、自分の限界を感じた経験はありますか？", hint: "その限界をどう乗り越えようとしたか、または諦めたかも含めて。" },
-      { id: 28, category: "Ⅵ．社会への問題意識", question: "ニュース・新聞・テレビを見ていて、強い違和感や怒りを覚えた問題はありますか？", hint: "最近気になったニュースを思い出してみましょう。" },
-      { id: 29, category: "Ⅵ．社会への問題意識", question: "「自分が何とかしたい」と感じた社会問題はありますか？", hint: "大きな問題でも身近な問題でも構いません。" },
-      { id: 30, category: "Ⅵ．社会への問題意識", question: "助けたいと思う対象はいますか？", hint: "子ども／高齢者／障害のある人／移民／貧困層／女性 など" },
-      { id: 31, category: "Ⅵ．社会への問題意識", question: "なぜ、その対象に関心を持ったのだと思いますか？", hint: "自分の経験や環境との関連を考えてみましょう。" },
-      { id: 32, category: "Ⅵ．社会への問題意識", question: "社会問題に関わりたいと思いますか？それとも距離を取りたいですか？", hint: "どちらの答えでも、その理由を言語化してみましょう。" },
-      { id: 33, category: "Ⅶ．国際性・文化・地域", question: "海外に行った経験、または特別な地域体験はありますか？", hint: "旅行、留学、引っ越しなど" },
-      { id: 34, category: "Ⅶ．国際性・文化・地域", question: "自分しかあまり訪れていない、または珍しい場所の経験はありますか？", hint: "その場所で感じたこと、学んだことを書いてみましょう。" },
-      { id: 35, category: "Ⅶ．国際性・文化・地域", question: "特定の国・地域にルーツがありますか？その国について語る「当事者性」はありますか？", hint: "家族の出身地や、特別な縁のある場所について考えてみましょう。" },
-      { id: 36, category: "Ⅶ．国際性・文化・地域", question: "将来、海外で生活することを考えていますか？", hint: "興味がある国や理由があれば書いてみましょう。" },
-      { id: 37, category: "Ⅶ．国際性・文化・地域", question: "英語を使った仕事に興味はありますか？", hint: "興味がある場合、どんな場面で使いたいかも考えてみましょう。" },
-      { id: 38, category: "Ⅶ．国際性・文化・地域", question: "日本で暮らすなら、都市部と地方、どちらを選びたいですか？", hint: "その理由も言語化してみましょう。" },
-      { id: 39, category: "Ⅷ．仕事観・将来像", question: "将来、どのような仕事に関わりたいですか？", hint: "具体的な職業でも、「〇〇に関わる仕事」という形でも構いません。" },
-      { id: 40, category: "Ⅷ．仕事観・将来像", question: "現場で手を動かしたいですか？それとも全体を動かす立場ですか？", hint: "プレイヤーとマネージャー、どちらに魅力を感じますか？" },
-      { id: 41, category: "Ⅷ．仕事観・将来像", question: "リーダーとして前に立ちたいですか？それとも支える役割が合っていますか？", hint: "過去の経験でどちらの役割が多かったかも振り返ってみましょう。" },
-      { id: 42, category: "Ⅷ．仕事観・将来像", question: "起業や大きな挑戦に興味はありますか？", hint: "興味がある場合、どんな分野で挑戦したいかも考えてみましょう。" },
-      { id: 43, category: "Ⅷ．仕事観・将来像", question: "安定を重視する生き方と、挑戦を重視する生き方、どちらに近いですか？", hint: "今の時点での考えで構いません。" },
-      { id: 44, category: "Ⅷ．仕事観・将来像", question: "最先端技術と、文学・教育・伝統文化、どちらに惹かれますか？", hint: "両方に興味がある場合は、その理由も書いてみましょう。" },
-      { id: 45, category: "Ⅸ．人物像・ロールモデル", question: "憧れの人、尊敬する人、ロールモデルはいますか？", hint: "職業・生き方・考え方、どの点に惹かれているかも書いてみましょう。" },
-      { id: 46, category: "Ⅹ．総合整理・次のステップ", question: "ここまでの回答を見返して、何度も出てきたキーワードは何ですか？", hint: "複数の質問で共通して出てくる言葉や概念を探してみましょう。" },
-      { id: 47, category: "Ⅹ．総合整理・次のステップ", question: "自分の中で「一貫しているテーマ」は何だと思いますか？", hint: "これまでの回答を通じて見えてきた軸を言語化してみましょう。" },
-      { id: 48, category: "Ⅹ．総合整理・次のステップ", question: "これは他の人にはあまり語れない、自分だけの視点だと思えるものは何ですか？", hint: "自分の経験や背景から生まれた独自の視点を考えてみましょう。" },
-      { id: 49, category: "Ⅹ．総合整理・次のステップ", question: "そのテーマは、どの学問分野と結びつきそうですか？", hint: "法学、経済学、社会学、教育学、国際関係学など、関連しそうな分野を挙げてみましょう。" },
-      { id: 50, category: "Ⅹ．総合整理・次のステップ", question: "その学問を通して、社会とどのように関わりたいですか？", hint: "将来の自分が社会に対してどんな貢献をしたいか、具体的にイメージしてみましょう。" }
-    ];
-
-    const CATEGORIES = [
-      "Ⅰ．興味・関心・好きなことの棚卸し",
-      "Ⅱ．心が動いた経験（原体験・感情）",
-      "Ⅲ．性格・強み・弱みの理解",
-      "Ⅳ．環境・バックグラウンド",
-      "Ⅴ．活動経験・評価された経験",
-      "Ⅵ．社会への問題意識",
-      "Ⅶ．国際性・文化・地域",
-      "Ⅷ．仕事観・将来像",
-      "Ⅸ．人物像・ロールモデル",
-      "Ⅹ．総合整理・次のステップ"
-    ];
-
-    // ============================================
-    // アプリケーション
-    // ============================================
-    const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
-    const AUTOSAVE_DELAY = 1500;
-
-    let currentUser = null;
-    let answers = {};
-    let currentQuestionId = 1;
-    let saveTimeout = null;
-    let isSaving = false;
-
-    async function init() {
-      const loggedIn = localStorage.getItem('eqao_loggedIn');
-      const studentId = localStorage.getItem('eqao_studentId');
-
-      if (!loggedIn || !studentId) {
-        window.location.href = 'index.html';
-        return;
-      }
-
-      currentUser = {
-        studentId: studentId,
-        studentName: localStorage.getItem('eqao_studentName'),
-        password: localStorage.getItem('eqao_password')
-      };
-
-      initGuide();
-      loadAnswersFromLocal();
-      renderSidebar();
-      renderMobileSelect();
-      showQuestion(currentQuestionId);
-
-      document.getElementById('answerTextarea').addEventListener('input', onAnswerInput);
-      document.getElementById('loadingOverlay').style.display = 'none';
-
-      loadAnswersFromServer();
-      loadTeacherComments();
-      startCommentPolling();
-    }
-
-    function getLocalStorageKey() {
-      return `eqao_output_theme2_${currentUser.studentId}`;
-    }
-
-    function loadAnswersFromLocal() {
-      try {
-        const saved = localStorage.getItem(getLocalStorageKey());
-        if (saved) answers = JSON.parse(saved);
-      } catch (e) {
-        answers = {};
-      }
-    }
-
-    function saveAnswersToLocal() {
-      try {
-        localStorage.setItem(getLocalStorageKey(), JSON.stringify(answers));
-      } catch (e) { }
-    }
-
-    async function loadAnswersFromServer() {
-      try {
-        const url = new URL(API_URL);
-        url.searchParams.set('action', 'getOutputAnswers');
-        url.searchParams.set('studentId', currentUser.studentId);
-        url.searchParams.set('themeId', '2');
-
-        const response = await fetch(url.toString());
-        const result = await response.json();
-
-        if (result.success && result.answers) {
-          for (const key in result.answers) {
-            if (result.answers[key]) answers[key] = result.answers[key];
-          }
-          saveAnswersToLocal();
-          renderSidebar();
-          showQuestion(currentQuestionId);
-          updateProgress();
+          // 状態を保存
+          const isOpen = content.classList.contains('open');
+          localStorage.setItem('eqao_guide_open', isOpen ? 'true' : 'false');
         }
-      } catch (error) {
-        console.error('サーバー読み込みエラー:', error);
-      }
-    }
 
-    async function saveAnswerToServer(questionId, answerText) {
-      try {
-        const url = new URL(API_URL);
-        url.searchParams.set('action', 'saveOutputAnswer');
-        url.searchParams.set('studentId', currentUser.studentId);
-        url.searchParams.set('password', currentUser.password);
-        url.searchParams.set('themeId', '2');
-        url.searchParams.set('questionId', questionId.toString());
-        url.searchParams.set('answer', answerText);
+        function initGuide() {
+          // 初回も閉じた状態、開いている場合のみ開く
+          const savedState = localStorage.getItem('eqao_guide_open');
+          const content = document.getElementById('guideContent');
+          const toggle = document.getElementById('guideToggle');
 
-        const response = await fetch(url.toString());
-        const result = await response.json();
-        return result.success;
-      } catch (error) {
-        console.error('サーバー保存エラー:', error);
-        return false;
-      }
-    }
+          if (savedState === 'true') {
+            content.classList.add('open');
+            toggle.classList.add('open');
+          }
+        }
 
-    function renderSidebar() {
-      const container = document.getElementById('questionList');
-      let html = '';
+        // ============================================
+        // 質問データ（50問）
+        // ============================================
+        const QUESTIONS = [
+          { id: 1, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "長く続けている趣味、または今ハマっていることはありますか？", hint: "いつから、どのくらいの頻度で続いているかも含めて書いてみましょう。" },
+          { id: 2, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "本を読むのは好きですか？", hint: "好きな場合も苦手な場合も、その理由を考えてみましょう。" },
+          { id: 3, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "どんなジャンルの本をよく読みますか？", hint: "小説／ノンフィクション／社会問題／歴史／ビジネス／哲学など" },
+          { id: 4, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "なぜ、その本・ジャンルが好きなのだと思いますか？", hint: "内容・テーマ・視点・登場人物・価値観など、理由を言語化してください。" },
+          { id: 5, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "漫画・アニメ・ゲーム・映画・音楽などで、強く影響を受けたものはありますか？", hint: "なぜ心に残っているのかも考えてみましょう。" },
+          { id: 6, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "「時間を忘れて没頭してしまうこと」は何ですか？", hint: "趣味でも勉強でも、気づいたら時間が経っていたことを思い出してみましょう。" },
+          { id: 7, category: "Ⅰ．興味・関心・好きなことの棚卸し", question: "気づいたら調べてしまう分野はありますか？", hint: "宇宙／生物／医療／移民／国際問題／政治／教育など" },
+          { id: 8, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "過去を振り返って、強く心が動いた経験はありますか？", hint: "怒り・悲しみ・悔しさ・感動・衝撃など、感情の種類は問いません。" },
+          { id: 9, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "その出来事は、今でも少し心に残っていますか？なぜ忘れていないのだと思いますか？", hint: "その経験が自分にとって特別な理由を考えてみましょう。" },
+          { id: 10, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "過去のトラウマ的な経験はありますか？", hint: "小さなことでも構いません。無理のない範囲で振り返ってみましょう。" },
+          { id: 11, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "その経験は、あなたの考え方や行動にどんな影響を与えていますか？", hint: "今の自分の価値観や判断基準につながっていることはありますか？" },
+          { id: 12, category: "Ⅱ．心が動いた経験（原体験・感情）", question: "「おかしい」「納得できない」と強く感じた出来事はありますか？", hint: "社会のルール、学校の制度、人間関係など、違和感を覚えた場面を思い出してみましょう。" },
+          { id: 13, category: "Ⅲ．性格・強み・弱みの理解", question: "周囲の人から、どのような性格だと言われることが多いですか？", hint: "友達、家族、先生など、複数の人からの評価を思い出してみましょう。" },
+          { id: 14, category: "Ⅲ．性格・強み・弱みの理解", question: "自分では、自分をどのような性格だと思いますか？", hint: "例：飽き性／集中力がある／慎重／衝動的 など" },
+          { id: 15, category: "Ⅲ．性格・強み・弱みの理解", question: "自分の長所だと思う点を、具体例とともに挙げてください。", hint: "「〇〇な場面で△△ができた」のように具体的に書いてみましょう。" },
+          { id: 16, category: "Ⅲ．性格・強み・弱みの理解", question: "逆に、短所・苦手な点は何だと思いますか？", hint: "克服しようとした経験があれば、それも書いてみましょう。" },
+          { id: 17, category: "Ⅲ．性格・強み・弱みの理解", question: "周囲と比べて「ここは優れている」「ここは明らかに違う」と感じる点はありますか？", hint: "他の人があまり持っていない視点や能力を考えてみましょう。" },
+          { id: 18, category: "Ⅲ．性格・強み・弱みの理解", question: "失敗したとき、あなたはどう立て直すタイプですか？", hint: "すぐ切り替える？しばらく落ち込む？誰かに相談する？など" },
+          { id: 19, category: "Ⅳ．環境・バックグラウンド", question: "家庭環境で、周囲と異なる点はありますか？", hint: "親の職業／家計／住んでいる地域／兄弟構成など" },
+          { id: 20, category: "Ⅳ．環境・バックグラウンド", question: "「自分だからこそ語れる」と思える背景はありますか？", hint: "育った環境や経験で、他の人にはない視点を持っていることは？" },
+          { id: 21, category: "Ⅳ．環境・バックグラウンド", question: "家族・身近な人の生き方で、影響を受けたものはありますか？", hint: "尊敬する点、反面教師にしている点、どちらでも構いません。" },
+          { id: 22, category: "Ⅳ．環境・バックグラウンド", question: "身の回りで起きた、大きな出来事（事故・病気・別れ・感動）はありますか？", hint: "その出来事が自分の価値観にどう影響したかも考えてみましょう。" },
+          { id: 23, category: "Ⅴ．活動経験・評価された経験", question: "これまでの活動で、社会的に評価された経験はありますか？", hint: "受賞・表彰・感謝された経験など" },
+          { id: 24, category: "Ⅴ．活動経験・評価された経験", question: "結果が出なかったが、強く印象に残っている活動はありますか？", hint: "結果よりもプロセスで学んだことを振り返ってみましょう。" },
+          { id: 25, category: "Ⅴ．活動経験・評価された経験", question: "学校の総合探究で取り組んでいる（取り組んだ）テーマは何ですか？", hint: "まだ決まっていない場合は、興味のある方向性を書いてみましょう。" },
+          { id: 26, category: "Ⅴ．活動経験・評価された経験", question: "そのテーマを選んだ理由は何ですか？", hint: "自分から選んだのか、与えられたのかも含めて書いてみましょう。" },
+          { id: 27, category: "Ⅴ．活動経験・評価された経験", question: "活動を通して、自分の限界を感じた経験はありますか？", hint: "その限界をどう乗り越えようとしたか、または諦めたかも含めて。" },
+          { id: 28, category: "Ⅵ．社会への問題意識", question: "ニュース・新聞・テレビを見ていて、強い違和感や怒りを覚えた問題はありますか？", hint: "最近気になったニュースを思い出してみましょう。" },
+          { id: 29, category: "Ⅵ．社会への問題意識", question: "「自分が何とかしたい」と感じた社会問題はありますか？", hint: "大きな問題でも身近な問題でも構いません。" },
+          { id: 30, category: "Ⅵ．社会への問題意識", question: "助けたいと思う対象はいますか？", hint: "子ども／高齢者／障害のある人／移民／貧困層／女性 など" },
+          { id: 31, category: "Ⅵ．社会への問題意識", question: "なぜ、その対象に関心を持ったのだと思いますか？", hint: "自分の経験や環境との関連を考えてみましょう。" },
+          { id: 32, category: "Ⅵ．社会への問題意識", question: "社会問題に関わりたいと思いますか？それとも距離を取りたいですか？", hint: "どちらの答えでも、その理由を言語化してみましょう。" },
+          { id: 33, category: "Ⅶ．国際性・文化・地域", question: "海外に行った経験、または特別な地域体験はありますか？", hint: "旅行、留学、引っ越しなど" },
+          { id: 34, category: "Ⅶ．国際性・文化・地域", question: "自分しかあまり訪れていない、または珍しい場所の経験はありますか？", hint: "その場所で感じたこと、学んだことを書いてみましょう。" },
+          { id: 35, category: "Ⅶ．国際性・文化・地域", question: "特定の国・地域にルーツがありますか？その国について語る「当事者性」はありますか？", hint: "家族の出身地や、特別な縁のある場所について考えてみましょう。" },
+          { id: 36, category: "Ⅶ．国際性・文化・地域", question: "将来、海外で生活することを考えていますか？", hint: "興味がある国や理由があれば書いてみましょう。" },
+          { id: 37, category: "Ⅶ．国際性・文化・地域", question: "英語を使った仕事に興味はありますか？", hint: "興味がある場合、どんな場面で使いたいかも考えてみましょう。" },
+          { id: 38, category: "Ⅶ．国際性・文化・地域", question: "日本で暮らすなら、都市部と地方、どちらを選びたいですか？", hint: "その理由も言語化してみましょう。" },
+          { id: 39, category: "Ⅷ．仕事観・将来像", question: "将来、どのような仕事に関わりたいですか？", hint: "具体的な職業でも、「〇〇に関わる仕事」という形でも構いません。" },
+          { id: 40, category: "Ⅷ．仕事観・将来像", question: "現場で手を動かしたいですか？それとも全体を動かす立場ですか？", hint: "プレイヤーとマネージャー、どちらに魅力を感じますか？" },
+          { id: 41, category: "Ⅷ．仕事観・将来像", question: "リーダーとして前に立ちたいですか？それとも支える役割が合っていますか？", hint: "過去の経験でどちらの役割が多かったかも振り返ってみましょう。" },
+          { id: 42, category: "Ⅷ．仕事観・将来像", question: "起業や大きな挑戦に興味はありますか？", hint: "興味がある場合、どんな分野で挑戦したいかも考えてみましょう。" },
+          { id: 43, category: "Ⅷ．仕事観・将来像", question: "安定を重視する生き方と、挑戦を重視する生き方、どちらに近いですか？", hint: "今の時点での考えで構いません。" },
+          { id: 44, category: "Ⅷ．仕事観・将来像", question: "最先端技術と、文学・教育・伝統文化、どちらに惹かれますか？", hint: "両方に興味がある場合は、その理由も書いてみましょう。" },
+          { id: 45, category: "Ⅸ．人物像・ロールモデル", question: "憧れの人、尊敬する人、ロールモデルはいますか？", hint: "職業・生き方・考え方、どの点に惹かれているかも書いてみましょう。" },
+          { id: 46, category: "Ⅹ．総合整理・次のステップ", question: "ここまでの回答を見返して、何度も出てきたキーワードは何ですか？", hint: "複数の質問で共通して出てくる言葉や概念を探してみましょう。" },
+          { id: 47, category: "Ⅹ．総合整理・次のステップ", question: "自分の中で「一貫しているテーマ」は何だと思いますか？", hint: "これまでの回答を通じて見えてきた軸を言語化してみましょう。" },
+          { id: 48, category: "Ⅹ．総合整理・次のステップ", question: "これは他の人にはあまり語れない、自分だけの視点だと思えるものは何ですか？", hint: "自分の経験や背景から生まれた独自の視点を考えてみましょう。" },
+          { id: 49, category: "Ⅹ．総合整理・次のステップ", question: "そのテーマは、どの学問分野と結びつきそうですか？", hint: "法学、経済学、社会学、教育学、国際関係学など、関連しそうな分野を挙げてみましょう。" },
+          { id: 50, category: "Ⅹ．総合整理・次のステップ", question: "その学問を通して、社会とどのように関わりたいですか？", hint: "将来の自分が社会に対してどんな貢献をしたいか、具体的にイメージしてみましょう。" }
+        ];
 
-      for (const category of CATEGORIES) {
-        const categoryQuestions = QUESTIONS.filter(q => q.category === category);
-        const hasCurrentQuestion = categoryQuestions.some(q => q.id === currentQuestionId);
-        const collapsedClass = hasCurrentQuestion ? '' : 'collapsed';
-        html += `<div class="category-section">
+        const CATEGORIES = [
+          "Ⅰ．興味・関心・好きなことの棚卸し",
+          "Ⅱ．心が動いた経験（原体験・感情）",
+          "Ⅲ．性格・強み・弱みの理解",
+          "Ⅳ．環境・バックグラウンド",
+          "Ⅴ．活動経験・評価された経験",
+          "Ⅵ．社会への問題意識",
+          "Ⅶ．国際性・文化・地域",
+          "Ⅷ．仕事観・将来像",
+          "Ⅸ．人物像・ロールモデル",
+          "Ⅹ．総合整理・次のステップ"
+        ];
+
+        // ============================================
+        // アプリケーション
+        // ============================================
+        const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
+        const AUTOSAVE_DELAY = 1500;
+
+        let currentUser = null;
+        let answers = {};
+        let currentQuestionId = 1;
+        let saveTimeout = null;
+        let isSaving = false;
+
+        async function init() {
+          const loggedIn = localStorage.getItem('eqao_loggedIn');
+          const studentId = localStorage.getItem('eqao_studentId');
+
+          if (!loggedIn || !studentId) {
+            window.location.href = 'index.html';
+            return;
+          }
+
+          currentUser = {
+            studentId: studentId,
+            studentName: localStorage.getItem('eqao_studentName'),
+            password: localStorage.getItem('eqao_password')
+          };
+
+          initGuide();
+          loadAnswersFromLocal();
+          renderSidebar();
+          renderMobileSelect();
+          showQuestion(currentQuestionId);
+
+          document.getElementById('answerTextarea').addEventListener('input', onAnswerInput);
+          document.getElementById('loadingOverlay').style.display = 'none';
+
+          loadAnswersFromServer();
+          loadTeacherComments();
+          startCommentPolling();
+        }
+
+        function getLocalStorageKey() {
+          return `eqao_output_theme2_${currentUser.studentId}`;
+        }
+
+        function loadAnswersFromLocal() {
+          try {
+            const saved = localStorage.getItem(getLocalStorageKey());
+            if (saved) answers = JSON.parse(saved);
+          } catch (e) {
+            answers = {};
+          }
+        }
+
+        function saveAnswersToLocal() {
+          try {
+            localStorage.setItem(getLocalStorageKey(), JSON.stringify(answers));
+          } catch (e) { }
+        }
+
+        async function loadAnswersFromServer() {
+          try {
+            const url = new URL(API_URL);
+            url.searchParams.set('action', 'getOutputAnswers');
+            url.searchParams.set('studentId', currentUser.studentId);
+            url.searchParams.set('themeId', '2');
+
+            const response = await fetch(url.toString());
+            const result = await response.json();
+
+            if (result.success && result.answers) {
+              for (const key in result.answers) {
+                if (result.answers[key]) {
+                  const questionId = parseInt(key.replace('q', ''));
+                  if (!isNaN(questionId)) {
+                    answers[questionId] = result.answers[key];
+                  }
+                }
+              }
+              saveAnswersToLocal();
+              renderSidebar();
+              renderMobileSelect();
+              showQuestion(currentQuestionId);
+              updateProgress();
+            }
+          } catch (error) {
+            console.error('サーバー読み込みエラー:', error);
+          }
+        }
+
+        async function saveAnswerToServer(questionId, answerText) {
+          try {
+            const url = new URL(API_URL);
+            url.searchParams.set('action', 'saveOutputAnswer');
+            url.searchParams.set('studentId', currentUser.studentId);
+            url.searchParams.set('password', currentUser.password);
+            url.searchParams.set('themeId', '2');
+            url.searchParams.set('questionId', questionId.toString());
+            url.searchParams.set('answer', answerText);
+
+            const response = await fetch(url.toString());
+            const result = await response.json();
+            return result.success;
+          } catch (error) {
+            console.error('サーバー保存エラー:', error);
+            return false;
+          }
+        }
+
+        function renderSidebar() {
+          const container = document.getElementById('questionList');
+          let html = '';
+
+          for (const category of CATEGORIES) {
+            const categoryQuestions = QUESTIONS.filter(q => q.category === category);
+            const hasCurrentQuestion = categoryQuestions.some(q => q.id === currentQuestionId);
+            const collapsedClass = hasCurrentQuestion ? '' : 'collapsed';
+            html += `<div class="category-section">
           <div class="category-header ${collapsedClass}" onclick="toggleCategory(this)">
             <span>${category}</span>
             <span class="material-icons">expand_more</span>
           </div>
           <div class="category-items ${collapsedClass}">`;
 
-        for (const q of categoryQuestions) {
-          const hasAnswer = answers[q.id] && answers[q.id].trim().length > 0;
-          const isActive = q.id === currentQuestionId;
-          html += `<div class="question-item ${isActive ? 'active' : ''} ${hasAnswer ? 'answered' : ''}" 
+            for (const q of categoryQuestions) {
+              const hasAnswer = answers[q.id] && answers[q.id].trim().length > 0;
+              const isActive = q.id === currentQuestionId;
+              html += `<div class="question-item ${isActive ? 'active' : ''} ${hasAnswer ? 'answered' : ''}" 
                        data-id="${q.id}" onclick="selectQuestion(${q.id})">
             <span class="status-icon ${hasAnswer ? 'filled' : 'empty'}">
               ${hasAnswer ? '<span class="material-icons">check</span>' : ''}
@@ -1486,143 +1497,143 @@
             <span class="question-num">${q.id}.</span>
             <span class="question-text">${q.question}</span>
           </div>`;
+            }
+            html += `</div></div>`;
+          }
+
+          container.innerHTML = html;
+          updateProgress();
         }
-        html += `</div></div>`;
-      }
 
-      container.innerHTML = html;
-      updateProgress();
-    }
-
-    function toggleCategory(header) {
-      header.classList.toggle('collapsed');
-      header.nextElementSibling.classList.toggle('collapsed');
-    }
-
-    function showQuestion(questionId) {
-      const question = QUESTIONS.find(q => q.id === questionId);
-      if (!question) return;
-
-      currentQuestionId = questionId;
-
-      document.getElementById('answerCategory').textContent = question.category;
-      document.getElementById('currentQuestionNum').textContent = question.id;
-      document.getElementById('answerQuestionText').textContent = question.question;
-      document.getElementById('hintText').textContent = question.hint;
-
-      const textarea = document.getElementById('answerTextarea');
-      textarea.value = answers[questionId] || '';
-
-      document.getElementById('prevBtn').disabled = questionId <= 1;
-      document.getElementById('nextBtn').disabled = questionId >= 50;
-
-      document.querySelectorAll('.question-item').forEach(item => {
-        item.classList.remove('active');
-        if (parseInt(item.dataset.id) === questionId) {
-          item.classList.add('active');
-          item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        function toggleCategory(header) {
+          header.classList.toggle('collapsed');
+          header.nextElementSibling.classList.toggle('collapsed');
         }
-      });
 
-      updateSaveStatus('saved');
-      displayComment(questionId);
-    }
+        function showQuestion(questionId) {
+          const question = QUESTIONS.find(q => q.id === questionId);
+          if (!question) return;
 
-    function selectQuestion(questionId) {
-      showQuestion(questionId);
-    }
+          currentQuestionId = questionId;
 
-    function goToPrev() {
-      if (currentQuestionId > 1) showQuestion(currentQuestionId - 1);
-    }
+          document.getElementById('answerCategory').textContent = question.category;
+          document.getElementById('currentQuestionNum').textContent = question.id;
+          document.getElementById('answerQuestionText').textContent = question.question;
+          document.getElementById('hintText').textContent = question.hint;
 
-    function goToNext() {
-      if (currentQuestionId < 50) showQuestion(currentQuestionId + 1);
-    }
+          const textarea = document.getElementById('answerTextarea');
+          textarea.value = answers[questionId] || '';
 
-    function onAnswerInput(e) {
-      const answerText = e.target.value;
-      answers[currentQuestionId] = answerText;
+          document.getElementById('prevBtn').disabled = questionId <= 1;
+          document.getElementById('nextBtn').disabled = questionId >= 50;
 
-      updateSaveStatus('typing');
+          document.querySelectorAll('.question-item').forEach(item => {
+            item.classList.remove('active');
+            if (parseInt(item.dataset.id) === questionId) {
+              item.classList.add('active');
+              item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          });
 
-      if (saveTimeout) clearTimeout(saveTimeout);
-      saveTimeout = setTimeout(() => {
-        saveAnswer(currentQuestionId, answerText);
-      }, AUTOSAVE_DELAY);
-    }
+          updateSaveStatus('saved');
+          displayComment(questionId);
+        }
 
-    async function saveAnswer(questionId, answerText) {
-      if (isSaving) return;
-      isSaving = true;
+        function selectQuestion(questionId) {
+          showQuestion(questionId);
+        }
 
-      updateSaveStatus('saving');
-      saveAnswersToLocal();
+        function goToPrev() {
+          if (currentQuestionId > 1) showQuestion(currentQuestionId - 1);
+        }
 
-      const success = await saveAnswerToServer(questionId, answerText);
-      updateSaveStatus(success ? 'saved' : 'error');
+        function goToNext() {
+          if (currentQuestionId < 50) showQuestion(currentQuestionId + 1);
+        }
 
-      isSaving = false;
-      renderSidebar();
-      renderMobileSelect();
-    }
+        function onAnswerInput(e) {
+          const answerText = e.target.value;
+          answers[currentQuestionId] = answerText;
 
-    function updateSaveStatus(status) {
-      const statusEl = document.getElementById('saveStatus');
-      const textEl = document.getElementById('saveStatusText');
-      const iconEl = statusEl.querySelector('.material-icons');
+          updateSaveStatus('typing');
 
-      statusEl.className = 'save-status ' + status;
+          if (saveTimeout) clearTimeout(saveTimeout);
+          saveTimeout = setTimeout(() => {
+            saveAnswer(currentQuestionId, answerText);
+          }, AUTOSAVE_DELAY);
+        }
 
-      switch (status) {
-        case 'typing':
-          iconEl.textContent = 'edit';
-          textEl.textContent = '入力中...';
-          break;
-        case 'saving':
-          iconEl.textContent = 'sync';
-          textEl.textContent = '保存中...';
-          break;
-        case 'saved':
-          iconEl.textContent = 'cloud_done';
-          textEl.textContent = '保存済み';
-          break;
-        case 'error':
-          iconEl.textContent = 'error';
-          textEl.textContent = '保存エラー';
-          break;
-      }
-    }
+        async function saveAnswer(questionId, answerText) {
+          if (isSaving) return;
+          isSaving = true;
 
-    function updateProgress() {
-      let answeredCount = 0;
-      for (const q of QUESTIONS) {
-        if (answers[q.id] && answers[q.id].trim().length > 0) answeredCount++;
-      }
+          updateSaveStatus('saving');
+          saveAnswersToLocal();
 
-      const percent = Math.round((answeredCount / 50) * 100);
+          const success = await saveAnswerToServer(questionId, answerText);
+          updateSaveStatus(success ? 'saved' : 'error');
 
-      document.getElementById('answeredCount').textContent = answeredCount;
-      document.getElementById('sidebarProgress').style.width = percent + '%';
-      document.getElementById('progressPercent').textContent = percent;
+          isSaving = false;
+          renderSidebar();
+          renderMobileSelect();
+        }
 
-      // モバイル用プログレスも更新
-      const mobileProgressFill = document.getElementById('mobileProgressFill');
-      const mobileProgressPercent = document.getElementById('mobileProgressPercent');
-      if (mobileProgressFill) mobileProgressFill.style.width = percent + '%';
-      if (mobileProgressPercent) mobileProgressPercent.textContent = percent;
-    }
+        function updateSaveStatus(status) {
+          const statusEl = document.getElementById('saveStatus');
+          const textEl = document.getElementById('saveStatusText');
+          const iconEl = statusEl.querySelector('.material-icons');
 
-    // モバイル用リストを描画
-    function renderMobileSelect() {
-      const container = document.getElementById('mobileQuestionList');
-      if (!container) return;
+          statusEl.className = 'save-status ' + status;
 
-      let html = '';
-      for (const q of QUESTIONS) {
-        const hasAnswer = answers[q.id] && answers[q.id].trim().length > 0;
-        const isActive = q.id === currentQuestionId;
-        html += `
+          switch (status) {
+            case 'typing':
+              iconEl.textContent = 'edit';
+              textEl.textContent = '入力中...';
+              break;
+            case 'saving':
+              iconEl.textContent = 'sync';
+              textEl.textContent = '保存中...';
+              break;
+            case 'saved':
+              iconEl.textContent = 'cloud_done';
+              textEl.textContent = '保存済み';
+              break;
+            case 'error':
+              iconEl.textContent = 'error';
+              textEl.textContent = '保存エラー';
+              break;
+          }
+        }
+
+        function updateProgress() {
+          let answeredCount = 0;
+          for (const q of QUESTIONS) {
+            if (answers[q.id] && answers[q.id].trim().length > 0) answeredCount++;
+          }
+
+          const percent = Math.round((answeredCount / 50) * 100);
+
+          document.getElementById('answeredCount').textContent = answeredCount;
+          document.getElementById('sidebarProgress').style.width = percent + '%';
+          document.getElementById('progressPercent').textContent = percent;
+
+          // モバイル用プログレスも更新
+          const mobileProgressFill = document.getElementById('mobileProgressFill');
+          const mobileProgressPercent = document.getElementById('mobileProgressPercent');
+          if (mobileProgressFill) mobileProgressFill.style.width = percent + '%';
+          if (mobileProgressPercent) mobileProgressPercent.textContent = percent;
+        }
+
+        // モバイル用リストを描画
+        function renderMobileSelect() {
+          const container = document.getElementById('mobileQuestionList');
+          if (!container) return;
+
+          let html = '';
+          for (const q of QUESTIONS) {
+            const hasAnswer = answers[q.id] && answers[q.id].trim().length > 0;
+            const isActive = q.id === currentQuestionId;
+            html += `
           <div class="mobile-question-item ${isActive ? 'active' : ''}" onclick="selectQuestion(${q.id})">
             <span class="status-icon ${hasAnswer ? 'filled' : 'empty'}">
               ${hasAnswer ? '<span class="material-icons">check</span>' : ''}
@@ -1631,135 +1642,135 @@
             <span class="question-text">${q.question}</span>
           </div>
         `;
-      }
-      container.innerHTML = html;
+          }
+          container.innerHTML = html;
 
-      // 選択中の質問が見えるようにスクロール
-      setTimeout(() => {
-        const activeItem = container.querySelector('.mobile-question-item.active');
-        if (activeItem) {
-          activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      }, 100);
-    }
-
-    // プルダウン変更時（互換性のため残す）
-    function onQuestionSelectChange(value) {
-      const questionId = parseInt(value);
-      if (questionId) {
-        showQuestion(questionId);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', init);
-
-// ============================================
-    // 講師コメント機能
-    // ============================================
-    let teacherComments = {};
-    let commentPollingInterval = null;
-
-    // 手動更新ボタン
-    async function refreshComments() {
-      const btn = document.querySelector('.comment-refresh-btn');
-      if (btn) btn.classList.add('loading');
-      
-      await loadTeacherComments();
-      
-      if (btn) {
-        btn.classList.remove('loading');
-        // 更新完了を視覚的にフィードバック
-        const icon = document.getElementById('refreshIcon');
-        if (icon) {
-          icon.textContent = 'check';
+          // 選択中の質問が見えるようにスクロール
           setTimeout(() => {
-            icon.textContent = 'refresh';
-          }, 1500);
+            const activeItem = container.querySelector('.mobile-question-item.active');
+            if (activeItem) {
+              activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          }, 100);
         }
-      }
-    }
 
-    // 自動更新を開始（30秒ごと）
-    function startCommentPolling() {
-      if (commentPollingInterval) clearInterval(commentPollingInterval);
-      commentPollingInterval = setInterval(() => {
-        loadTeacherComments();
-      }, 30000);
-    }
-
-    // 自動更新を停止
-    function stopCommentPolling() {
-      if (commentPollingInterval) {
-        clearInterval(commentPollingInterval);
-        commentPollingInterval = null;
-      }
-    }
-
-    async function loadTeacherComments() {
-      try {
-        const url = new URL(API_URL);
-        url.searchParams.set('action', 'getTeacherComments');
-        url.searchParams.set('studentId', currentUser.studentId);
-        url.searchParams.set('themeId', '2');
-
-        const response = await fetch(url.toString());
-        const result = await response.json();
-
-        if (result.success && result.comments) {
-          teacherComments = result.comments;
-          displayComment(currentQuestionId);
+        // プルダウン変更時（互換性のため残す）
+        function onQuestionSelectChange(value) {
+          const questionId = parseInt(value);
+          if (questionId) {
+            showQuestion(questionId);
+          }
         }
-      } catch (error) {
-        console.error('講師コメント読み込みエラー:', error);
-      }
-    }
 
-    function displayComment(questionId) {
-      const commentKey = `q${questionId}`;
-      const comments = teacherComments[commentKey] || [];
+        document.addEventListener('DOMContentLoaded', init);
 
-      // PC用パネル
-      const emptyEl = document.getElementById('commentEmpty');
-      const listEl = document.getElementById('commentList');
+        // ============================================
+        // 講師コメント機能
+        // ============================================
+        let teacherComments = {};
+        let commentPollingInterval = null;
 
-      if (Array.isArray(comments) && comments.length > 0) {
-        emptyEl.style.display = 'none';
-        listEl.style.display = 'flex';
-        listEl.innerHTML = renderCommentItems(comments);
-      } else {
-        emptyEl.style.display = 'flex';
-        listEl.style.display = 'none';
-        listEl.innerHTML = '';
-      }
+        // 手動更新ボタン
+        async function refreshComments() {
+          const btn = document.querySelector('.comment-refresh-btn');
+          if (btn) btn.classList.add('loading');
 
-      // スマホ用
-      const mobileListEl = document.getElementById('mobileCommentList');
-      const mobileEmptyEl = document.getElementById('mobileCommentEmpty');
-      const mobileCountEl = document.getElementById('mobileCommentCount');
+          await loadTeacherComments();
 
-      if (Array.isArray(comments) && comments.length > 0) {
-        if (mobileEmptyEl) mobileEmptyEl.style.display = 'none';
-        if (mobileListEl) {
-          mobileListEl.style.display = 'flex';
-          mobileListEl.innerHTML = renderMobileCommentItems(comments);
+          if (btn) {
+            btn.classList.remove('loading');
+            // 更新完了を視覚的にフィードバック
+            const icon = document.getElementById('refreshIcon');
+            if (icon) {
+              icon.textContent = 'check';
+              setTimeout(() => {
+                icon.textContent = 'refresh';
+              }, 1500);
+            }
+          }
         }
-        if (mobileCountEl) mobileCountEl.textContent = `${comments.length}件`;
-      } else {
-        if (mobileEmptyEl) mobileEmptyEl.style.display = 'block';
-        if (mobileListEl) {
-          mobileListEl.style.display = 'none';
-          mobileListEl.innerHTML = '';
-        }
-        if (mobileCountEl) mobileCountEl.textContent = '';
-      }
-    }
 
-    // PC用コメント一覧を生成
-    function renderCommentItems(comments) {
-      return comments.map(c => {
-        const date = new Date(c.createdAt);
-        const dateStr = `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
-        return `
+        // 自動更新を開始（30秒ごと）
+        function startCommentPolling() {
+          if (commentPollingInterval) clearInterval(commentPollingInterval);
+          commentPollingInterval = setInterval(() => {
+            loadTeacherComments();
+          }, 30000);
+        }
+
+        // 自動更新を停止
+        function stopCommentPolling() {
+          if (commentPollingInterval) {
+            clearInterval(commentPollingInterval);
+            commentPollingInterval = null;
+          }
+        }
+
+        async function loadTeacherComments() {
+          try {
+            const url = new URL(API_URL);
+            url.searchParams.set('action', 'getTeacherComments');
+            url.searchParams.set('studentId', currentUser.studentId);
+            url.searchParams.set('themeId', '2');
+
+            const response = await fetch(url.toString());
+            const result = await response.json();
+
+            if (result.success && result.comments) {
+              teacherComments = result.comments;
+              displayComment(currentQuestionId);
+            }
+          } catch (error) {
+            console.error('講師コメント読み込みエラー:', error);
+          }
+        }
+
+        function displayComment(questionId) {
+          const commentKey = `q${questionId}`;
+          const comments = teacherComments[commentKey] || [];
+
+          // PC用パネル
+          const emptyEl = document.getElementById('commentEmpty');
+          const listEl = document.getElementById('commentList');
+
+          if (Array.isArray(comments) && comments.length > 0) {
+            emptyEl.style.display = 'none';
+            listEl.style.display = 'flex';
+            listEl.innerHTML = renderCommentItems(comments);
+          } else {
+            emptyEl.style.display = 'flex';
+            listEl.style.display = 'none';
+            listEl.innerHTML = '';
+          }
+
+          // スマホ用
+          const mobileListEl = document.getElementById('mobileCommentList');
+          const mobileEmptyEl = document.getElementById('mobileCommentEmpty');
+          const mobileCountEl = document.getElementById('mobileCommentCount');
+
+          if (Array.isArray(comments) && comments.length > 0) {
+            if (mobileEmptyEl) mobileEmptyEl.style.display = 'none';
+            if (mobileListEl) {
+              mobileListEl.style.display = 'flex';
+              mobileListEl.innerHTML = renderMobileCommentItems(comments);
+            }
+            if (mobileCountEl) mobileCountEl.textContent = `${comments.length}件`;
+          } else {
+            if (mobileEmptyEl) mobileEmptyEl.style.display = 'block';
+            if (mobileListEl) {
+              mobileListEl.style.display = 'none';
+              mobileListEl.innerHTML = '';
+            }
+            if (mobileCountEl) mobileCountEl.textContent = '';
+          }
+        }
+
+        // PC用コメント一覧を生成
+        function renderCommentItems(comments) {
+          return comments.map(c => {
+            const date = new Date(c.createdAt);
+            const dateStr = `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+            return `
           <div class="comment-item">
             <div class="comment-item-header">
               <span class="comment-item-teacher">${escapeHtml(c.teacherName)}</span>
@@ -1768,15 +1779,15 @@
             <div class="comment-item-text">${escapeHtml(c.comment)}</div>
           </div>
         `;
-      }).join('');
-    }
+          }).join('');
+        }
 
-    // スマホ用コメント一覧を生成
-    function renderMobileCommentItems(comments) {
-      return comments.map(c => {
-        const date = new Date(c.createdAt);
-        const dateStr = `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
-        return `
+        // スマホ用コメント一覧を生成
+        function renderMobileCommentItems(comments) {
+          return comments.map(c => {
+            const date = new Date(c.createdAt);
+            const dateStr = `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+            return `
           <div class="mobile-comment-item">
             <div class="mobile-comment-item-header">
               <span class="mobile-comment-item-teacher">${escapeHtml(c.teacherName)}</span>
@@ -1785,18 +1796,18 @@
             <div class="mobile-comment-item-text">${escapeHtml(c.comment)}</div>
           </div>
         `;
-      }).join('');
-    }
+          }).join('');
+        }
 
-    // HTMLエスケープ
-    function escapeHtml(str) {
-      if (!str) return '';
-      return str.replace(/[&<>"']/g, m => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-      }[m]));
-    }
-  </script>
-  <script src="js/nav-menu.js"></script>
+        // HTMLエスケープ
+        function escapeHtml(str) {
+          if (!str) return '';
+          return str.replace(/[&<>"']/g, m => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+          }[m]));
+        }
+      </script>
+      <script src="js/nav-menu.js"></script>
 </body>
 
 </html>
