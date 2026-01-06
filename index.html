@@ -6772,33 +6772,31 @@
 
     // 学習記録を削除
     async function deleteStudyLogExecute(rowIndex) {
-      try {
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          body: JSON.stringify({
-            action: 'deleteStudyLog',
-            rowIndex: rowIndex
-          })
-        });
+  console.log('削除開始 rowIndex:', rowIndex);  // ← 追加
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'deleteStudyLog',
+        rowIndex: rowIndex
+      })
+    });
 
-        const result = await response.json();
+    const result = await response.json();
+    console.log('削除結果:', result);  // ← 追加
 
-        if (result.success) {
-          alert('学習記録を削除しました');
-
-          // 記録一覧を再読み込み
-          loadStudyLogs();
-
-          // グラフを更新
-          loadStudyChart();
-        } else {
-          alert('削除に失敗しました: ' + (result.error || '不明なエラー'));
-        }
-      } catch (error) {
-        console.error('削除エラー:', error);
-        alert('エラーが発生しました');
-      }
+    if (result.success) {
+      alert('学習記録を削除しました');
+      loadStudyLogs();
+      loadStudyChart();
+    } else {
+      alert('削除に失敗しました: ' + (result.error || '不明なエラー'));
     }
+  } catch (error) {
+    console.error('削除エラー:', error);
+    alert('エラーが発生しました');
+  }
+}
 
     // グラフを描画
     function renderStudyChart(stats, totalHours, weekRange) {
