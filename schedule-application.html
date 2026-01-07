@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スケジュール申請 | EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* ヘッダー */
+    .page-header {
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      padding: 24px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+    }
+
+    .page-header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .page-header .target-month {
+      font-size: 1.1rem;
+      margin-top: 8px;
+      opacity: 0.9;
+    }
+
+    /* ステップインジケーター */
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #e0e0e0;
+      color: #757575;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .step.active .step-number {
+      background: #1a237e;
+      color: white;
+    }
+
+    .step.completed .step-number {
+      background: #4caf50;
+      color: white;
+    }
+
+    .step-label {
+      font-size: 14px;
+      color: #757575;
+    }
+
+    .step.active .step-label {
+      color: #1a237e;
+      font-weight: 500;
+    }
+
+    .step-connector {
+      width: 40px;
+      height: 2px;
+      background: #e0e0e0;
+      margin: 0 8px;
+    }
+
+    /* カード */
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* フォーム */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .form-label .required {
+      color: #e53935;
+      margin-left: 4px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: #1a237e;
+      box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+    }
+
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-hint {
+      font-size: 13px;
+      color: #757575;
+      margin-top: 6px;
+    }
+
+    /* 現在の担当講師表示 */
+    .current-mentor {
+      background: #e8eaf6;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .current-mentor .material-icons {
+      color: #1a237e;
+    }
+
+    /* カレンダー */
+    .calendar-container {
+      margin-top: 16px;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .calendar-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .calendar-day-header {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 500;
+      color: #757575;
+      padding: 12px 0;
+      background: #f5f5f5;
+      border-bottom: 1px solid #e0e0e0;
+      border-right: 1px solid #f0f0f0;
+    }
+
+    .calendar-day-header:last-of-type {
+      border-right: none;
+    }
+
+    .calendar-day-header.sunday {
+      color: #e53935;
+    }
+
+    .calendar-day-header.saturday {
+      color: #1565c0;
+    }
+
+    .calendar-day {
+      padding: 12px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 14px;
+      position: relative;
+      background: white;
+      border-right: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .calendar-day:hover {
+      background: #e8eaf6;
+    }
+
+    .calendar-day:nth-child(7n + 7) {
+      border-right: none;
+    }
+
+    .calendar-day.empty {
+      background: #fafafa;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .calendar-day.empty:hover {
+      background: #fafafa;
+    }
+
+    .calendar-day.sunday .day-number {
+      color: #e53935;
+    }
+
+    .calendar-day.saturday .day-number {
+      color: #1565c0;
+    }
+
+    .calendar-day.has-schedule {
+      background: #e3f2fd;
+    }
+
+    .calendar-day.has-schedule .schedule-count {
+      font-size: 10px;
+      color: #1976d2;
+      margin-top: 2px;
+    }
+
+    .calendar-day:hover {
+      background: #e8eaf6;
+    }
+
+    .calendar-day.selected {
+      background: #1a237e;
+      color: white;
+    }
+
+    .calendar-day.selected .day-number {
+      color: white;
+    }
+
+    /* 日程入力モーダル */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: #757575;
+    }
+
+    .modal-body {
+      padding: 24px;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    /* 時間帯リスト */
+    .time-slot-list {
+      margin-top: 16px;
+    }
+
+    .time-slot-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: #f5f7fa;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+    .time-slot-item .time-info {
+      flex: 1;
+    }
+
+    .time-slot-item .format-badge {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+
+    .time-slot-item .format-badge.campus {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .time-slot-item .delete-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #e53935;
+      padding: 4px;
+    }
+
+    .add-time-slot-btn {
+      width: 100%;
+      padding: 12px;
+      border: 2px dashed #ddd;
+      border-radius: 8px;
+      background: none;
+      cursor: pointer;
+      color: #757575;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .add-time-slot-btn:hover {
+      border-color: #1a237e;
+      color: #1a237e;
+    }
+
+    /* 時間選択 */
+    .time-select-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .time-select-row .form-select {
+      width: auto;
+      min-width: 100px;
+    }
+
+    /* ボタン */
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: #1a237e;
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: #0d1757;
+    }
+
+    .btn-primary:disabled {
+      background: #bdbdbd;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+
+    .btn-secondary:hover {
+      background: #f5f5f5;
+    }
+
+    .btn-danger {
+      background: #e53935;
+      color: white;
+      border: none;
+    }
+
+    .btn-danger:hover {
+      background: #c62828;
+    }
+
+    /* ナビゲーションボタン */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 32px;
+    }
+
+    /* 確認画面 */
+    .confirm-section {
+      margin-bottom: 24px;
+    }
+
+    .confirm-section-title {
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e8eaf6;
+    }
+
+    .confirm-item {
+      display: flex;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .confirm-label {
+      width: 140px;
+      color: #757575;
+      flex-shrink: 0;
+    }
+
+    .confirm-value {
+      flex: 1;
+    }
+
+    .confirm-schedule-list {
+      margin-top: 8px;
+    }
+
+    .confirm-schedule-item {
+      background: #f5f7fa;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    /* ローディング */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.8);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loading-overlay.active {
+      display: flex;
+    }
+
+    .loading-spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #e0e0e0;
+      border-top-color: #1a237e;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* 完了画面 */
+    .completion-card {
+      text-align: center;
+      padding: 48px 24px;
+    }
+
+    .completion-icon {
+      width: 80px;
+      height: 80px;
+      background: #e8f5e9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+
+    .completion-icon .material-icons {
+      font-size: 48px;
+      color: #4caf50;
+    }
+
+    .completion-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .completion-message {
+      color: #757575;
+      margin-bottom: 32px;
+    }
+
+    /* 非表示 */
+    .hidden {
+      display: none !important;
+    }
+
+    /* 担任・担当講師情報ボックス */
+    .info-box {
+      background: #e8eaf6;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      padding: 8px 0;
+    }
+
+    .info-row:not(:last-child) {
+      border-bottom: 1px solid rgba(26, 35, 126, 0.1);
+    }
+
+    .info-label {
+      width: 100px;
+      font-weight: 500;
+      color: #1a237e;
+    }
+
+    .info-value {
+      flex: 1;
+      color: #333;
+    }
+
+    /* 授業形態ボタン */
+    .format-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .format-btn {
+      flex: 1;
+      padding: 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #757575;
+      transition: all 0.2s;
+    }
+
+    .format-btn:hover {
+      border-color: #1a237e;
+      color: #1a237e;
+    }
+
+    .format-btn.active {
+      border-color: #1a237e;
+      background: #e8eaf6;
+      color: #1a237e;
+    }
+
+    .format-btn .material-icons {
+      font-size: 28px;
+    }
+
+    /* 編集案内バナー */
+    .edit-banner {
+      background: #e3f2fd;
+      border: 1px solid #64b5f6;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .edit-banner .material-icons {
+      color: #1976d2;
+      font-size: 24px;
+    }
+
+    .edit-banner .edit-text {
+      flex: 1;
+    }
+
+    .edit-banner .edit-title {
+      font-weight: 700;
+      color: #1565c0;
+      margin-bottom: 4px;
+    }
+
+    /* 申請停止バナー */
+    .closed-banner {
+      background: #ffebee;
+      border: 1px solid #ef9a9a;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .closed-banner .material-icons {
+      color: #c62828;
+      font-size: 24px;
+    }
+
+    .closed-banner .closed-text {
+      flex: 1;
+    }
+
+    .closed-banner .closed-title {
+      font-weight: 700;
+      color: #c62828;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- ヘッダー -->
+    <div class="page-header">
+      <h1>
+        <span class="material-icons">event_note</span>
+        スケジュール申請
+      </h1>
+      <div class="target-month" id="targetMonthDisplay"></div>
+    </div>
+
+    <!-- 編集案内バナー（申請済みの場合） -->
+    <div class="edit-banner hidden" id="editBanner">
+      <span class="material-icons">edit_note</span>
+      <div class="edit-text">
+        <div class="edit-title">申請済みの内容を編集中</div>
+        <div>内容を変更して再申請できます。申請期間内（毎月15日まで）であれば何度でも変更可能です。</div>
+      </div>
+    </div>
+
+    <!-- 申請停止バナー（受付停止中の場合） -->
+    <div class="closed-banner hidden" id="closedBanner">
+      <span class="material-icons">lock</span>
+      <div class="closed-text">
+        <div class="closed-title">現在、申請を受け付けていません</div>
+        <div>申請期間外のため、新規申請・変更はできません。</div>
+      </div>
+    </div>
+
+    <!-- ステップインジケーター -->
+    <div class="step-indicator">
+      <div class="step active" id="step1">
+        <div class="step-number">1</div>
+        <div class="step-label">基本情報</div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step" id="step2">
+        <div class="step-number">2</div>
+        <div class="step-label">希望日時</div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step" id="step3">
+        <div class="step-number">3</div>
+        <div class="step-label">確認・送信</div>
+      </div>
+    </div>
+
+    <!-- ステップ1: 基本情報 -->
+    <div id="section1">
+      <div class="card">
+        <h2 class="card-title">
+          <span class="material-icons">person</span>
+          講師について
+        </h2>
+
+        <!-- 現在の担当講師 -->
+        <div class="info-box">
+          <div class="info-row">
+            <span class="info-label">担任</span>
+            <span class="info-value" id="currentTaninName">-</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">担当講師</span>
+            <span class="info-value" id="currentMentorNames">-</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">担当講師（希望）</label>
+          <select class="form-select" id="preferredInstructor">
+            <option value="">選択してください</option>
+          </select>
+          <div class="form-hint">指名料なしで、できればこの講師に担当してほしいという希望です</div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">指名講師</label>
+            <select class="form-select" id="nominatedInstructor">
+              <option value="">指名なし</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">指名コマ数</label>
+            <input type="number" class="form-input" id="nominatedLessons" min="0" value="0">
+            <div class="form-hint">指名料: 1コマ2,200円（税込）</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">
+          <span class="material-icons">school</span>
+          授業コマ数
+        </h2>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">来月の合計コマ数<span class="required">*</span></label>
+            <input type="number" class="form-input" id="totalLessons" min="1" required>
+            <div class="form-hint">来月実施したいコマ数を入力してください（通常授業＋英語対策の合計）</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">通常授業コマ数<span class="required">*</span></label>
+            <input type="number" class="form-input" id="normalLessons" min="0" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">英語対策（EQAO ENGLISH）の有無</label>
+          <select class="form-select" id="hasEnglish">
+            <option value="">選択してください</option>
+            <option value="あり">あり</option>
+            <option value="なし">なし</option>
+          </select>
+        </div>
+
+        <div id="englishSection" class="hidden">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">英語対策コマ数</label>
+              <input type="number" class="form-input" id="englishLessons" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">英語完了希望時期</label>
+              <input type="text" class="form-input" id="englishDeadline" placeholder="例: 2月末まで">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">英語試験日</label>
+            <input type="text" class="form-input" id="englishExamDate" placeholder="例: 2/15 TEAP">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">
+          <span class="material-icons">edit_note</span>
+          その他
+        </h2>
+
+        <div class="form-group">
+          <label class="form-label">試験スケジュール</label>
+          <textarea class="form-textarea" id="examSchedule" placeholder="試験予定があれば記入してください"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">補足・要望</label>
+          <textarea class="form-textarea" id="notes" placeholder="その他、スケジュールに関する要望があれば記入してください"></textarea>
+        </div>
+      </div>
+
+      <!-- アンケートセクション（設定でON/OFFできるように） -->
+      <div class="card hidden" id="surveySection">
+        <h2 class="card-title">
+          <span class="material-icons">quiz</span>
+          アンケート
+        </h2>
+
+        <div class="form-group">
+          <label class="form-label">一般入試の対策も進めていますか？</label>
+          <select class="form-select" id="generalExamParallel">
+            <option value="">選択してください</option>
+            <option value="はい">はい</option>
+            <option value="いいえ">いいえ</option>
+            <option value="検討中">検討中</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">現在考えている入試形態</label>
+          <select class="form-select" id="examType">
+            <option value="">選択してください</option>
+            <option value="総合型選抜のみ">総合型選抜のみ</option>
+            <option value="一般も視野に入れている">一般も視野に入れている</option>
+            <option value="まだ決めていない">まだ決めていない</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">一般入試対策の方法</label>
+          <select class="form-select" id="generalPrep">
+            <option value="">選択してください</option>
+            <option value="学習塾に通って対策">学習塾に通って対策</option>
+            <option value="自分で教材や参考書を使って">自分で教材や参考書を使って</option>
+            <option value="特にしていない">特にしていない</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">一般入試への切り替えを想定していますか？</label>
+          <select class="form-select" id="generalSwitch">
+            <option value="">選択してください</option>
+            <option value="想定している">想定している</option>
+            <option value="想定していない">想定していない</option>
+            <option value="まだ決めていない">まだ決めていない</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">EQAO IPPANでの一般入試対策を希望しますか？</label>
+          <select class="form-select" id="ippanHope">
+            <option value="">選択してください</option>
+            <option value="はい">はい</option>
+            <option value="いいえ">いいえ</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <div></div>
+        <button class="btn btn-primary" id="toStep2Btn">
+          次へ：希望日時入力
+          <span class="material-icons">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ステップ2: 希望日時 -->
+    <div id="section2" class="hidden">
+      <div class="card">
+        <h2 class="card-title">
+          <span class="material-icons">calendar_month</span>
+          希望日時を選択
+        </h2>
+        <p style="color: #757575; margin-bottom: 16px;">
+          授業可能な日をクリックして、時間帯を追加してください。<br>
+          1日に複数の時間帯を登録できます。
+        </p>
+
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <div class="calendar-title" id="calendarTitle"></div>
+          </div>
+          <div class="calendar-grid" id="calendarGrid">
+            <!-- カレンダーがここに生成される -->
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">
+          <span class="material-icons">list</span>
+          登録済みの希望日時
+        </h2>
+        <div id="scheduleList">
+          <p style="color: #757575; text-align: center; padding: 24px;">
+            まだ希望日時が登録されていません
+          </p>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn btn-secondary" id="toStep1Btn">
+          <span class="material-icons">arrow_back</span>
+          戻る
+        </button>
+        <button class="btn btn-primary" id="toStep3Btn">
+          次へ：確認画面
+          <span class="material-icons">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ステップ3: 確認・送信 -->
+    <div id="section3" class="hidden">
+      <div class="card">
+        <h2 class="card-title">
+          <span class="material-icons">fact_check</span>
+          申請内容の確認
+        </h2>
+
+        <div class="confirm-section">
+          <div class="confirm-section-title">講師について</div>
+          <div class="confirm-item">
+            <div class="confirm-label">担当講師（希望）</div>
+            <div class="confirm-value" id="confirmPreferredInstructor">-</div>
+          </div>
+          <div class="confirm-item">
+            <div class="confirm-label">指名講師</div>
+            <div class="confirm-value" id="confirmNominatedInstructor">-</div>
+          </div>
+        </div>
+
+        <div class="confirm-section">
+          <div class="confirm-section-title">授業コマ数</div>
+          <div class="confirm-item">
+            <div class="confirm-label">合計コマ数</div>
+            <div class="confirm-value" id="confirmTotalLessons">-</div>
+          </div>
+          <div class="confirm-item">
+            <div class="confirm-label">通常授業</div>
+            <div class="confirm-value" id="confirmNormalLessons">-</div>
+          </div>
+          <div class="confirm-item">
+            <div class="confirm-label">英語対策</div>
+            <div class="confirm-value" id="confirmEnglishLessons">-</div>
+          </div>
+        </div>
+
+        <div class="confirm-section">
+          <div class="confirm-section-title">希望日時（<span id="confirmScheduleCount">0</span>件）</div>
+          <div class="confirm-schedule-list" id="confirmScheduleList">
+            <!-- 希望日時リストがここに表示される -->
+          </div>
+        </div>
+
+        <div class="confirm-section">
+          <div class="confirm-section-title">その他</div>
+          <div class="confirm-item">
+            <div class="confirm-label">試験スケジュール</div>
+            <div class="confirm-value" id="confirmExamSchedule">-</div>
+          </div>
+          <div class="confirm-item">
+            <div class="confirm-label">補足・要望</div>
+            <div class="confirm-value" id="confirmNotes">-</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn btn-secondary" id="toStep2FromStep3Btn">
+          <span class="material-icons">arrow_back</span>
+          戻る
+        </button>
+        <button class="btn btn-primary" id="submitBtn">
+          <span class="material-icons">send</span>
+          申請する
+        </button>
+      </div>
+    </div>
+
+    <!-- 完了画面 -->
+    <div id="completionSection" class="hidden">
+      <div class="card completion-card">
+        <div class="completion-icon">
+          <span class="material-icons">check_circle</span>
+        </div>
+        <h2 class="completion-title">申請が完了しました</h2>
+        <p class="completion-message">
+          スケジュール申請を受け付けました。<br>
+          スケジュール確定後、改めてご連絡いたします。
+        </p>
+        <button class="btn btn-primary" onclick="location.href='index.html'">
+          ポータルトップへ戻る
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 日程入力モーダル -->
+  <div class="modal-overlay" id="timeSlotModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">時間帯を追加</h3>
+        <button class="modal-close" onclick="closeModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div
+          style="background: #e3f2fd; color: #1565c0; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+          <span class="material-icons" style="font-size: 20px;">info</span>
+          <span>1日に複数の時間帯を登録できます</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">この日授業できる時間<span class="required">*</span></label>
+          <div class="time-select-row">
+            <select class="form-select" id="modalStartTime"></select>
+            <span>〜</span>
+            <select class="form-select" id="modalEndTime"></select>
+          </div>
+          <div class="form-hint">この時間帯の中で授業を調整します</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">授業形態<span class="required">*</span></label>
+          <div class="format-buttons">
+            <button type="button" class="format-btn active" data-value="オンライン" id="formatOnline">
+              <span class="material-icons">laptop</span>
+              オンライン
+            </button>
+            <button type="button" class="format-btn" data-value="校舎" id="formatCampus">
+              <span class="material-icons">business</span>
+              校舎
+            </button>
+          </div>
+          <input type="hidden" id="modalFormat" value="オンライン">
+        </div>
+
+        <!-- この日の登録済み時間帯 -->
+        <div class="time-slot-list" id="modalExistingSlots">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal()">キャンセル</button>
+        <button class="btn btn-primary" onclick="addTimeSlot()">追加</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ローディング -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <script>
+    // ============================================
+    // 設定・状態管理
+    // ============================================
+    const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
+
+    let currentUser = null;
+    let settings = null;
+    let instructors = [];
+    let scheduleData = {}; // { '2025-02-01': [{ startTime, endTime, format }], ... }
+    let selectedDate = null;
+
+    // ============================================
+    // 初期化
+    // ============================================
+    document.addEventListener('DOMContentLoaded', async () => {
+      // ログイン確認
+      const loggedIn = localStorage.getItem('eqao_loggedIn');
+      if (loggedIn !== 'true') {
+        alert('ログインが必要です');
+        localStorage.setItem('eqao_returnUrl', location.href);
+        location.href = 'login.html';
+        return;
+      }
+      currentUser = {
+        studentId: localStorage.getItem('eqao_studentId'),
+        studentName: localStorage.getItem('eqao_studentName'),
+        password: localStorage.getItem('eqao_password')
+      };
+
+      showLoading(true);
+
+      try {
+        // 設定取得
+        const settingsRes = await apiGet('getScheduleSettings');
+        console.log('設定データ:', settingsRes);
+        if (settingsRes.success) {
+          settings = settingsRes.settings;
+
+          // 対象月表示
+          document.getElementById('targetMonthDisplay').textContent =
+            `${settings.targetYear}年${settings.targetMonth}月分の申請`;
+
+          // 申請受付停止中の場合
+          if (!settings.isAccepting) {
+            document.getElementById('closedBanner').classList.remove('hidden');
+            // フォームを無効化
+            disableAllInputs();
+          }
+        }
+
+        // 講師一覧取得
+        const instructorsRes = await apiGet('getActiveInstructors');
+        if (instructorsRes.success) {
+          instructors = instructorsRes.instructors;
+          populateInstructorSelects();
+        }
+
+        // 担任を取得
+        try {
+          const taninRes = await apiGet('getStudentTanin', { studentId: currentUser.studentId });
+          if (taninRes.success && taninRes.tanin) {
+            document.getElementById('currentTaninName').textContent = taninRes.tanin.name;
+          }
+        } catch (e) {
+          console.log('担任API未実装');
+        }
+
+        // 担当講師を取得（複数対応）
+        try {
+          const mentorsRes = await apiGet('getStudentMentors', { studentId: currentUser.studentId });
+          if (mentorsRes.success && mentorsRes.mentors && mentorsRes.mentors.length > 0) {
+            const mentorNames = mentorsRes.mentors.map(m => m.name).join('、');
+            document.getElementById('currentMentorNames').textContent = mentorNames;
+            // 希望講師のデフォルトを最初の担当講師に設定
+            document.getElementById('preferredInstructor').value = mentorsRes.mentors[0].id;
+          }
+        } catch (e) {
+          console.log('担当講師API未実装');
+        }
+
+        // 既存申請があれば読み込み
+        const existingRes = await apiGet('getExistingScheduleApplication', {
+          studentId: currentUser.studentId,
+          yearMonth: settings.targetYearMonth
+        });
+        console.log('既存申請データ:', existingRes);
+        if (existingRes.success && existingRes.application) {
+          loadExistingApplication(existingRes.application);
+
+          // 申請受付中の場合のみ編集バナーを表示
+          if (settings.isAccepting) {
+            document.getElementById('editBanner').classList.remove('hidden');
+          }
+        }
+
+        // カレンダー初期化
+        initCalendar();
+
+        // イベントリスナー設定
+        setupEventListeners();
+
+      } catch (error) {
+        console.error('初期化エラー:', error);
+        alert('データの読み込みに失敗しました');
+      } finally {
+        showLoading(false);
+      }
+    });
+
+    // ============================================
+    // API通信
+    // ============================================
+    async function apiGet(action, params = {}) {
+      const url = new URL(API_URL);
+      url.searchParams.append('action', action);
+      for (const key in params) {
+        url.searchParams.append(key, params[key]);
+      }
+
+      const response = await fetch(url);
+      return await response.json();
+    }
+
+    async function apiPost(action, data) {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ action, ...data })
+      });
+      return await response.json();
+    }
+
+    // ============================================
+    // 講師選択肢を設定
+    // ============================================
+    function populateInstructorSelects() {
+      const preferredSelect = document.getElementById('preferredInstructor');
+      const nominatedSelect = document.getElementById('nominatedInstructor');
+
+      instructors.forEach(inst => {
+        const option1 = new Option(inst.name, inst.id);
+        const option2 = new Option(inst.name, inst.id);
+        preferredSelect.add(option1);
+        nominatedSelect.add(option2);
+      });
+    }
+
+    // ============================================
+    // 既存申請を読み込み
+    // ============================================
+    function loadExistingApplication(app) {
+      document.getElementById('preferredInstructor').value = app.preferredInstructor || '';
+      document.getElementById('nominatedInstructor').value = app.nominatedInstructor || '';
+      document.getElementById('nominatedLessons').value = app.nominatedLessons || 0;
+      document.getElementById('totalLessons').value = app.totalLessons || '';
+      document.getElementById('normalLessons').value = app.normalLessons || '';
+      document.getElementById('hasEnglish').value = app.hasEnglish || '';
+      document.getElementById('englishLessons').value = app.englishLessons || 0;
+      document.getElementById('englishDeadline').value = app.englishDeadline || '';
+      document.getElementById('englishExamDate').value = app.englishExamDate || '';
+      document.getElementById('examSchedule').value = app.examSchedule || '';
+      document.getElementById('notes').value = app.notes || '';
+
+      // 英語セクション表示
+      if (app.hasEnglish === 'あり') {
+        document.getElementById('englishSection').classList.remove('hidden');
+      }
+
+      // 希望日時を読み込み
+      if (app.scheduleDetails && app.scheduleDetails.length > 0) {
+        app.scheduleDetails.forEach(detail => {
+          const dateKey = detail.date;
+          if (!scheduleData[dateKey]) {
+            scheduleData[dateKey] = [];
+          }
+          scheduleData[dateKey].push({
+            startTime: detail.startTime,
+            endTime: detail.endTime,
+            format: detail.format
+          });
+        });
+      }
+    }
+
+    // ============================================
+    // カレンダー初期化
+    // ============================================
+    function initCalendar() {
+      const year = settings.targetYear;
+      const month = settings.targetMonth;
+      const daysInMonth = new Date(year, month, 0).getDate();
+      const firstDay = new Date(year, month - 1, 1).getDay();
+
+      document.getElementById('calendarTitle').textContent = `${year}年${month}月`;
+
+      const grid = document.getElementById('calendarGrid');
+      grid.innerHTML = '';
+
+      // 曜日ヘッダー
+      const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+      dayNames.forEach((name, i) => {
+        const header = document.createElement('div');
+        header.className = 'calendar-day-header';
+        if (i === 0) header.classList.add('sunday');
+        if (i === 6) header.classList.add('saturday');
+        header.textContent = name;
+        grid.appendChild(header);
+      });
+
+      // 空白セル
+      for (let i = 0; i < firstDay; i++) {
+        const empty = document.createElement('div');
+        empty.className = 'calendar-day empty';
+        grid.appendChild(empty);
+      }
+
+      // 日付セル
+      for (let day = 1; day <= daysInMonth; day++) {
+        const date = new Date(year, month - 1, day);
+        const dayOfWeek = date.getDay();
+        const dateKey = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+        const cell = document.createElement('div');
+        cell.className = 'calendar-day';
+        cell.dataset.date = dateKey;
+
+        if (dayOfWeek === 0) cell.classList.add('sunday');
+        if (dayOfWeek === 6) cell.classList.add('saturday');
+
+        cell.innerHTML = `<span class="day-number">${day}</span>`;
+
+        // 登録済みの場合
+        if (scheduleData[dateKey] && scheduleData[dateKey].length > 0) {
+          cell.classList.add('has-schedule');
+          cell.innerHTML += `<span class="schedule-count">${scheduleData[dateKey].length}件</span>`;
+        }
+
+        cell.addEventListener('click', () => openModal(dateKey));
+        grid.appendChild(cell);
+      }
+    }
+
+    // ============================================
+    // モーダル操作
+    // ============================================
+    function openModal(dateKey) {
+      selectedDate = dateKey;
+
+      // 日付をパース
+      const [year, month, day] = dateKey.split('-').map(Number);
+      const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+      const date = new Date(year, month - 1, day);
+      const dayOfWeek = dayNames[date.getDay()];
+
+      document.getElementById('modalTitle').textContent =
+        `${month}/${day}（${dayOfWeek}）の時間帯`;
+
+      // 時間選択肢を生成
+      const startTimeSelect = document.getElementById('modalStartTime');
+      const endTimeSelect = document.getElementById('modalEndTime');
+      startTimeSelect.innerHTML = '';
+      endTimeSelect.innerHTML = '';
+
+      // 直接値を指定して生成
+      const timeOptions = generateTimeOptions('07:00', '24:00', 30);
+
+      timeOptions.forEach(time => {
+        const option1 = document.createElement('option');
+        option1.value = time;
+        option1.textContent = time;
+        startTimeSelect.appendChild(option1);
+
+        const option2 = document.createElement('option');
+        option2.value = time;
+        option2.textContent = time;
+        endTimeSelect.appendChild(option2);
+      });
+
+      // 終了時間のデフォルトを開始時間+3時間に
+      if (timeOptions.length > 6) {
+        endTimeSelect.value = timeOptions[6]; // 07:00から3時間後 = 10:00
+      }
+
+      // 既存の時間帯を表示
+      renderExistingSlots();
+
+      // 開始時間が変更されたら終了時間の選択肢を更新
+      startTimeSelect.addEventListener('change', function () {
+        const selectedStart = this.value;
+        const selectedStartMinutes = timeToMinutes(selectedStart);
+
+        // 終了時間の選択肢を再生成（開始時間の1時間後以降のみ）
+        endTimeSelect.innerHTML = '';
+        timeOptions.forEach(time => {
+          if (timeToMinutes(time) >= selectedStartMinutes + 60) {
+            const option = document.createElement('option');
+            option.value = time;
+            option.textContent = time;
+            endTimeSelect.appendChild(option);
+          }
+        });
+      });
+
+      // 初期状態でも終了時間をフィルタリング
+      startTimeSelect.dispatchEvent(new Event('change'));
+
+      // 授業形態ボタンのイベント設定
+      document.querySelectorAll('.format-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          document.getElementById('modalFormat').value = this.dataset.value;
+        });
+      });
+
+      // 初期状態をリセット
+      document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('formatOnline').classList.add('active');
+      document.getElementById('modalFormat').value = 'オンライン';
+
+      document.getElementById('timeSlotModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('timeSlotModal').classList.remove('active');
+      selectedDate = null;
+    }
+
+    function updateEndTime() {
+      const startTime = document.getElementById('modalStartTime').value;
+      if (!startTime) return;
+
+      const [hour, min] = startTime.split(':').map(Number);
+      const endHour = hour + 1;
+      const endTime = `${String(endHour).padStart(2, '0')}:${String(min).padStart(2, '0')}`;
+
+      document.getElementById('modalEndTime').textContent = endTime;
+    }
+
+    function renderExistingSlots() {
+      const container = document.getElementById('modalExistingSlots');
+      const slots = scheduleData[selectedDate] || [];
+
+      if (slots.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+
+      container.innerHTML = `
+        <div style="margin-bottom: 8px; font-weight: 500; color: #1a237e;">この日の登録済み時間帯</div>
+        ${slots.map((slot, index) => `
+          <div class="time-slot-item">
+            <span class="material-icons" style="color: #1a237e;">schedule</span>
+            <div class="time-info">${slot.startTime} 〜 ${slot.endTime}</div>
+            <span class="format-badge ${slot.format === '校舎' ? 'campus' : ''}">${slot.format}</span>
+            <button class="delete-btn" onclick="removeTimeSlot(${index})">
+              <span class="material-icons">delete</span>
+            </button>
+          </div>
+        `).join('')}
+      `;
+    }
+
+    function addTimeSlot() {
+      const startTime = document.getElementById('modalStartTime').value;
+      const endTime = document.getElementById('modalEndTime').value;
+      const format = document.getElementById('modalFormat').value;
+
+      if (!startTime || !endTime) {
+        alert('開始時間と終了時間を選択してください');
+        return;
+      }
+
+      // 開始 < 終了のバリデーション
+      if (timeToMinutes(startTime) >= timeToMinutes(endTime)) {
+        alert('終了時間は開始時間より後にしてください');
+        return;
+      }
+
+      if (!scheduleData[selectedDate]) {
+        scheduleData[selectedDate] = [];
+      }
+
+      // 重複チェック
+      const newStart = timeToMinutes(startTime);
+      const newEnd = timeToMinutes(endTime);
+
+      for (const slot of scheduleData[selectedDate]) {
+        const existStart = timeToMinutes(slot.startTime);
+        const existEnd = timeToMinutes(slot.endTime);
+
+        if (!(newEnd <= existStart || newStart >= existEnd)) {
+          alert('この時間帯は既に登録されている時間と重複しています');
+          return;
+        }
+      }
+
+      scheduleData[selectedDate].push({
+        startTime: startTime,
+        endTime: endTime,
+        format: format
+      });
+
+      // ソート
+      scheduleData[selectedDate].sort((a, b) =>
+        timeToMinutes(a.startTime) - timeToMinutes(b.startTime)
+      );
+
+      renderExistingSlots();
+      initCalendar();
+      updateScheduleList();
+      closeModal();
+    }
+
+    function removeTimeSlot(index) {
+      scheduleData[selectedDate].splice(index, 1);
+
+      if (scheduleData[selectedDate].length === 0) {
+        delete scheduleData[selectedDate];
+      }
+
+      renderExistingSlots();
+      initCalendar();
+      updateScheduleList();
+    }
+
+    // ============================================
+    // スケジュールリスト更新
+    // ============================================
+    function updateScheduleList() {
+      const container = document.getElementById('scheduleList');
+      const dates = Object.keys(scheduleData).sort();
+
+      if (dates.length === 0) {
+        container.innerHTML = `
+          <p style="color: #757575; text-align: center; padding: 24px;">
+            まだ希望日時が登録されていません
+          </p>
+        `;
+        return;
+      }
+
+      const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+
+      container.innerHTML = dates.map(dateKey => {
+        const [year, month, day] = dateKey.split('-').map(Number);
+        const date = new Date(year, month - 1, day);
+        const dayOfWeek = dayNames[date.getDay()];
+        const slots = scheduleData[dateKey];
+
+        return `
+          <div style="margin-bottom: 16px;">
+            <div style="font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+              <span class="material-icons" style="font-size: 18px; color: #1a237e;">event</span>
+              ${month}/${day}（${dayOfWeek}）
+            </div>
+            ${slots.map((slot, index) => `
+              <div class="time-slot-item">
+                <span class="material-icons" style="color: #1a237e;">schedule</span>
+                <div class="time-info">${slot.startTime} 〜 ${slot.endTime}</div>
+                <span class="format-badge ${slot.format === '校舎' ? 'campus' : ''}">${slot.format}</span>
+                <button class="delete-btn" onclick="removeScheduleItem('${dateKey}', ${index})">
+                  <span class="material-icons">delete</span>
+                </button>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function removeScheduleItem(dateKey, index) {
+      scheduleData[dateKey].splice(index, 1);
+
+      if (scheduleData[dateKey].length === 0) {
+        delete scheduleData[dateKey];
+      }
+
+      initCalendar();
+      updateScheduleList();
+    }
+
+    // ============================================
+    // ユーティリティ
+    // ============================================
+    function generateTimeOptions(startTime, endTime, stepMinutes) {
+      const options = [];
+      const [startHour, startMin] = startTime.split(':').map(Number);
+      const [endHour, endMin] = endTime.split(':').map(Number);
+
+      let currentHour = startHour;
+      let currentMin = startMin;
+
+      while (currentHour < endHour || (currentHour === endHour && currentMin <= endMin)) {
+        const displayHour = currentHour === 24 ? '24' : String(currentHour).padStart(2, '0');
+        const timeStr = `${displayHour}:${String(currentMin).padStart(2, '0')}`;
+        options.push(timeStr);
+
+        currentMin += stepMinutes;
+        if (currentMin >= 60) {
+          currentHour += Math.floor(currentMin / 60);
+          currentMin = currentMin % 60;
+        }
+      }
+
+      return options;
+    }
+
+    function timeToMinutes(timeStr) {
+      const [hour, min] = timeStr.split(':').map(Number);
+      return hour * 60 + min;
+    }
+
+    function showLoading(show) {
+      document.getElementById('loadingOverlay').classList.toggle('active', show);
+    }
+
+    function getInstructorName(id) {
+      const instructor = instructors.find(i => i.id === id);
+      return instructor ? instructor.name : '-';
+    }
+
+    // ============================================
+    // ステップ遷移
+    // ============================================
+    function goToStep(stepNum) {
+      // すべてのセクションを非表示
+      document.getElementById('section1').classList.add('hidden');
+      document.getElementById('section2').classList.add('hidden');
+      document.getElementById('section3').classList.add('hidden');
+
+      // ステップインジケーター更新
+      ['step1', 'step2', 'step3'].forEach((id, i) => {
+        const el = document.getElementById(id);
+        el.classList.remove('active', 'completed');
+        if (i + 1 < stepNum) {
+          el.classList.add('completed');
+        } else if (i + 1 === stepNum) {
+          el.classList.add('active');
+        }
+      });
+
+      // 対象セクション表示
+      document.getElementById(`section${stepNum}`).classList.remove('hidden');
+
+      // ページトップへスクロール
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ============================================
+    // 確認画面の内容を更新
+    // ============================================
+    function updateConfirmSection() {
+      const preferredId = document.getElementById('preferredInstructor').value;
+      const nominatedId = document.getElementById('nominatedInstructor').value;
+      const nominatedLessons = document.getElementById('nominatedLessons').value;
+
+      document.getElementById('confirmPreferredInstructor').textContent =
+        preferredId ? getInstructorName(preferredId) : '-';
+
+      document.getElementById('confirmNominatedInstructor').textContent =
+        nominatedId ? `${getInstructorName(nominatedId)}（${nominatedLessons}コマ）` : 'なし';
+
+      document.getElementById('confirmTotalLessons').textContent =
+        document.getElementById('totalLessons').value + 'コマ';
+
+      document.getElementById('confirmNormalLessons').textContent =
+        document.getElementById('normalLessons').value + 'コマ';
+
+      const hasEnglish = document.getElementById('hasEnglish').value;
+      const englishLessons = document.getElementById('englishLessons').value;
+      document.getElementById('confirmEnglishLessons').textContent =
+        hasEnglish === 'あり' ? englishLessons + 'コマ' : 'なし';
+
+      document.getElementById('confirmExamSchedule').textContent =
+        document.getElementById('examSchedule').value || '-';
+
+      document.getElementById('confirmNotes').textContent =
+        document.getElementById('notes').value || '-';
+
+      // スケジュールリスト
+      const dates = Object.keys(scheduleData).sort();
+      document.getElementById('confirmScheduleCount').textContent =
+        dates.reduce((sum, d) => sum + scheduleData[d].length, 0);
+
+      const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+      const scheduleListEl = document.getElementById('confirmScheduleList');
+
+      if (dates.length === 0) {
+        scheduleListEl.innerHTML = '<p style="color: #e53935;">希望日時が登録されていません</p>';
+      } else {
+        scheduleListEl.innerHTML = dates.map(dateKey => {
+          const [year, month, day] = dateKey.split('-').map(Number);
+          const date = new Date(year, month - 1, day);
+          const dayOfWeek = dayNames[date.getDay()];
+          const slots = scheduleData[dateKey];
+
+          return slots.map(slot => `
+            <div class="confirm-schedule-item">
+              ${month}/${day}（${dayOfWeek}） ${slot.startTime}〜${slot.endTime} 【${slot.format}】
+            </div>
+          `).join('');
+        }).join('');
+      }
+    }
+
+    // ============================================
+    // 申請送信
+    // ============================================
+    async function submitApplication() {
+      // バリデーション
+      const totalLessons = document.getElementById('totalLessons').value;
+      if (!totalLessons || parseInt(totalLessons) < 1) {
+        alert('合計コマ数を入力してください');
+        return;
+      }
+
+      const dates = Object.keys(scheduleData);
+      if (dates.length === 0) {
+        if (!confirm('希望日時が1つも登録されていません。このまま申請しますか？')) {
+          return;
+        }
+      }
+
+      showLoading(true);
+
+      try {
+        // スケジュール詳細を配列に変換
+        const scheduleDetails = [];
+        dates.sort().forEach(dateKey => {
+          scheduleData[dateKey].forEach(slot => {
+            scheduleDetails.push({
+              date: dateKey,
+              startTime: slot.startTime,
+              endTime: slot.endTime,
+              format: slot.format
+            });
+          });
+        });
+
+        const data = {
+          studentId: currentUser.studentId,
+          studentName: currentUser.studentName,
+          grade: currentUser.grade || '',
+          yearMonth: settings.targetYearMonth,
+          preferredInstructor: document.getElementById('preferredInstructor').value,
+          nominatedInstructor: document.getElementById('nominatedInstructor').value,
+          nominatedLessons: parseInt(document.getElementById('nominatedLessons').value) || 0,
+          hasEnglish: document.getElementById('hasEnglish').value,
+          englishDeadline: document.getElementById('englishDeadline').value,
+          totalLessons: parseInt(document.getElementById('totalLessons').value) || 0,
+          normalLessons: parseInt(document.getElementById('normalLessons').value) || 0,
+          englishLessons: parseInt(document.getElementById('englishLessons').value) || 0,
+          englishExamDate: document.getElementById('englishExamDate').value,
+          notes: document.getElementById('notes').value,
+          examSchedule: document.getElementById('examSchedule').value,
+          generalExamParallel: document.getElementById('generalExamParallel').value,
+          examType: document.getElementById('examType').value,
+          generalPrep: document.getElementById('generalPrep').value,
+          generalSwitch: document.getElementById('generalSwitch').value,
+          ippanHope: document.getElementById('ippanHope').value,
+          scheduleDetails: scheduleDetails
+        };
+
+        const result = await apiPost('saveScheduleApplication', data);
+
+        if (result.success) {
+          // 完了画面を表示
+          document.getElementById('section3').classList.add('hidden');
+          document.getElementById('completionSection').classList.remove('hidden');
+          document.querySelector('.step-indicator').classList.add('hidden');
+        } else {
+          alert('申請に失敗しました: ' + (result.error || '不明なエラー'));
+        }
+      } catch (error) {
+        console.error('申請エラー:', error);
+        alert('申請に失敗しました');
+      } finally {
+        showLoading(false);
+      }
+    }
+
+    // ============================================
+    // イベントリスナー設定
+    // ============================================
+    function setupEventListeners() {
+      // 英語セクション表示/非表示
+      document.getElementById('hasEnglish').addEventListener('change', (e) => {
+        document.getElementById('englishSection').classList.toggle('hidden', e.target.value !== 'あり');
+      });
+
+      // ステップ遷移
+      document.getElementById('toStep2Btn').addEventListener('click', () => {
+        // バリデーション
+        const totalLessons = document.getElementById('totalLessons').value;
+        if (!totalLessons || parseInt(totalLessons) < 1) {
+          alert('合計コマ数を入力してください');
+          return;
+        }
+
+        goToStep(2);
+        updateScheduleList();
+      });
+
+      document.getElementById('toStep1Btn').addEventListener('click', () => goToStep(1));
+
+      document.getElementById('toStep3Btn').addEventListener('click', () => {
+        const dates = Object.keys(scheduleData);
+        if (dates.length === 0) {
+          alert('希望日時を1件以上登録してください');
+          return;
+        }
+        goToStep(3);
+        updateConfirmSection();
+      });
+      document.getElementById('toStep2FromStep3Btn').addEventListener('click', () => goToStep(2));
+
+      document.getElementById('submitBtn').addEventListener('click', submitApplication);
+
+      // モーダル外クリックで閉じる
+      document.getElementById('timeSlotModal').addEventListener('click', (e) => {
+        if (e.target.id === 'timeSlotModal') {
+          closeModal();
+        }
+      });
+    }
+
+    // ============================================
+    // フォーム無効化（申請停止中）
+    // ============================================
+    function disableAllInputs() {
+      // 全ての入力要素を無効化
+      document.querySelectorAll('input, select, textarea').forEach(el => {
+        el.disabled = true;
+      });
+
+      // ボタンを無効化
+      document.querySelectorAll('.btn-primary').forEach(btn => {
+        btn.disabled = true;
+        btn.style.background = '#bdbdbd';
+        btn.style.cursor = 'not-allowed';
+      });
+
+      // カレンダーのクリックを無効化
+      document.querySelectorAll('.calendar-day').forEach(day => {
+        day.style.pointerEvents = 'none';
+        day.style.opacity = '0.6';
+      });
+    }
+  </script>
+</body>
+
+</html>
