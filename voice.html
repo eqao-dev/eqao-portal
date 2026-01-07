@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>生徒・保護者の声 | EQAO PORTAL</title>
+
+  <!-- OGP -->
+  <meta property="og:title" content="生徒・保護者の声 | EQAO PORTAL">
+  <meta property="og:description" content="EQAOを選んだ理由、お子様の変化、印象的なエピソードをご紹介します">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(180deg, #1a237e 0%, #283593 240px, #f8f9fc 240px);
+      min-height: 100vh;
+      color: #374151;
+    }
+
+    /* ヘッダー */
+    .header {
+      background: transparent;
+      padding: 16px;
+      z-index: 100;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .header-content .hamburger-btn {
+      margin-left: auto;
+    }
+
+    .back-button {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+      background: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      padding: 4px;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .header-title {
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    /* メインコンテンツ */
+    .main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 16px 40px;
+    }
+
+    /* ヒーローセクション */
+    .hero {
+      text-align: center;
+      padding: 10px 0 30px;
+      color: white;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 16px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    /* ハイライト統計カード */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .hero-stat-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      border-bottom: 4px solid #f59e0b;
+    }
+
+    .hero-stat-number {
+      font-size: 32px;
+      font-weight: bold;
+      color: #1a237e;
+      line-height: 1;
+    }
+
+    .hero-stat-unit {
+      font-size: 16px;
+      color: #1a237e;
+    }
+
+    .hero-stat-label {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 480px) {
+      .hero-stat-number {
+        font-size: 22px;
+      }
+
+      .hero-stat-label {
+        font-size: 10px;
+      }
+    }
+
+    /* タブナビゲーション */
+    .tab-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      background: white;
+      padding: 6px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .tab-button {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 12px 8px;
+      border: none;
+      background: transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: center;
+    }
+
+    .tab-button.active {
+      background: #1a237e;
+    }
+
+    .tab-button .tab-icon {
+      font-size: 20px;
+      color: #9ca3af;
+      transition: color 0.3s;
+    }
+
+    .tab-button.active .tab-icon {
+      color: white;
+    }
+
+    .tab-button .tab-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #6b7280;
+      transition: color 0.3s;
+    }
+
+    .tab-button.active .tab-label {
+      color: white;
+    }
+
+    @media (min-width: 480px) {
+      .tab-button {
+        flex-direction: row;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px 16px;
+      }
+
+      .tab-button .tab-label {
+        font-size: 13px;
+      }
+    }
+
+    /* タブコンテンツ */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* セクション */
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-left: 4px;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .section-icon .material-icons {
+      font-size: 22px;
+    }
+
+    .section-icon.pink {
+      background: linear-gradient(135deg, #ec4899, #db2777);
+    }
+
+    .section-icon.green {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+    }
+
+    .section-icon.blue {
+      background: linear-gradient(135deg, #3b82f6, #1e40af);
+    }
+
+    .section-title-wrapper {
+      flex: 1;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 2px;
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    /* セクションハイライトカード */
+    .section-highlight {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-highlight::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 5px;
+    }
+
+    .section-highlight.pink::before {
+      background: linear-gradient(180deg, #ec4899, #db2777);
+    }
+
+    .section-highlight.green::before {
+      background: linear-gradient(180deg, #22c55e, #16a34a);
+    }
+
+    .section-highlight.blue::before {
+      background: linear-gradient(180deg, #3b82f6, #1e40af);
+    }
+
+    .section-highlight-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-highlight-icon .material-icons {
+      font-size: 28px;
+    }
+
+    .section-highlight.pink .section-highlight-icon {
+      background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+      color: #ec4899;
+    }
+
+    .section-highlight.green .section-highlight-icon {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      color: #22c55e;
+    }
+
+    .section-highlight.blue .section-highlight-icon {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      color: #3b82f6;
+    }
+
+    .section-highlight-content {
+      flex: 1;
+    }
+
+    .section-highlight-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a237e;
+      line-height: 1.5;
+      margin-bottom: 4px;
+    }
+
+    .section-highlight-sub {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    @media (max-width: 480px) {
+      .section-highlight {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 16px;
+      }
+
+      .section-highlight-icon {
+        width: 50px;
+        height: 50px;
+      }
+
+      .section-highlight-icon .material-icons {
+        font-size: 24px;
+      }
+    }
+
+    /* アコーディオン */
+    .accordion-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .accordion-item {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      transition: box-shadow 0.3s;
+    }
+
+    .accordion-item:hover {
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .accordion-item.active {
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .accordion-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s;
+    }
+
+    .accordion-header:hover {
+      background: #f9fafb;
+    }
+
+    .accordion-number {
+      width: 32px;
+      height: 32px;
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .accordion-number.pink {
+      background: linear-gradient(135deg, #ec4899, #db2777);
+    }
+
+    .accordion-number.green {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+    }
+
+    .accordion-number.blue {
+      background: linear-gradient(135deg, #3b82f6, #1e40af);
+    }
+
+    .accordion-title {
+      flex: 1;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a237e;
+      line-height: 1.4;
+    }
+
+    .accordion-icon {
+      font-size: 24px;
+      color: #9ca3af;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .accordion-item.active .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .accordion-item.active .accordion-content {
+      max-height: 600px;
+    }
+
+    .accordion-body {
+      padding: 0 20px 20px 66px;
+    }
+
+    .accordion-points {
+      margin: 0 0 16px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .accordion-points li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 14px;
+      color: #4b5563;
+      line-height: 1.8;
+    }
+
+    .accordion-points li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 8px;
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 50%;
+    }
+
+    .accordion-quote {
+      display: flex;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 12px;
+      border-left: 4px solid;
+    }
+
+    .accordion-quote .material-icons {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .accordion-quote.pink {
+      background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+      border-left-color: #ec4899;
+    }
+
+    .accordion-quote.pink .material-icons {
+      color: #ec4899;
+    }
+
+    .accordion-quote.green {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border-left-color: #22c55e;
+    }
+
+    .accordion-quote.green .material-icons {
+      color: #22c55e;
+    }
+
+    .accordion-quote.blue {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border-left-color: #3b82f6;
+    }
+
+    .accordion-quote.blue .material-icons {
+      color: #3b82f6;
+    }
+
+    .accordion-quote p {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .accordion-quote.pink p {
+      color: #be185d;
+    }
+
+    .accordion-quote.green p {
+      color: #15803d;
+    }
+
+    .accordion-quote.blue p {
+      color: #1e40af;
+    }
+
+    /* 注釈 */
+    .footnote {
+      margin-top: 32px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 12px;
+      border-left: 3px solid #d1d5db;
+    }
+
+    .footnote-title {
+      font-size: 11px;
+      color: #6b7280;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .footnote-text {
+      font-size: 11px;
+      color: #9ca3af;
+      line-height: 1.7;
+    }
+
+    /* フッターリンク */
+    .footer-link {
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .footer-link a {
+      color: #1a237e;
+      font-size: 13px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-link a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-link .material-icons {
+      font-size: 16px;
+    }
+
+    /* レスポンシブ */
+    @media (min-width: 600px) {
+      .hero-title {
+        font-size: 32px;
+      }
+
+      .hero-stat-number {
+        font-size: 36px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .main {
+        max-width: 800px;
+        padding: 0 24px 40px;
+      }
+
+      .header-content {
+        max-width: 800px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .main {
+        max-width: 900px;
+        padding: 0 32px 48px;
+      }
+
+      .header-content {
+        max-width: 900px;
+      }
+
+      .hero-title {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="back-button">
+        <span class="material-icons">arrow_back</span>
+      </a>
+      <div class="logo"><img src="logo.png" alt="EQAO"></div>
+      <h1 class="header-title">生徒・保護者の声</h1>
+      <button class="hamburger-btn" onclick="openNav()">
+        <span class="material-icons">menu</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="main">
+    <!-- ヒーローセクション -->
+    <div class="hero">
+      <div class="hero-badge">
+        <span class="material-icons" style="font-size:14px;">forum</span>
+        REAL VOICE
+      </div>
+      <h1 class="hero-title">生徒・保護者の声</h1>
+      <p class="hero-subtitle">EQAOを選んだ理由、お子様の変化、<br>印象に残ったエピソードをご紹介します</p>
+
+      <!-- ハイライト統計 -->
+      <div class="hero-stats">
+        <div class="hero-stat-card">
+          <span class="hero-stat-number">97.3<span class="hero-stat-unit">%</span></span>
+          <p class="hero-stat-label">入塾してよかった</p>
+        </div>
+        <div class="hero-stat-card">
+          <span class="hero-stat-number">100<span class="hero-stat-unit">%</span></span>
+          <p class="hero-stat-label">学びが楽しかった</p>
+        </div>
+        <div class="hero-stat-card">
+          <span class="hero-stat-number">91.9<span class="hero-stat-unit">%</span></span>
+          <p class="hero-stat-label">友人に紹介したい</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- タブナビゲーション -->
+    <div class="tab-nav">
+      <button class="tab-button active" onclick="switchTab('reason')">
+        <span class="material-icons tab-icon">volunteer_activism</span>
+        <span class="tab-label">選んだ理由</span>
+      </button>
+      <button class="tab-button" onclick="switchTab('change')">
+        <span class="material-icons tab-icon">trending_up</span>
+        <span class="tab-label">変化した点</span>
+      </button>
+      <button class="tab-button" onclick="switchTab('episode')">
+        <span class="material-icons tab-icon">auto_stories</span>
+        <span class="tab-label">エピソード</span>
+      </button>
+    </div>
+
+    <!-- EQAOを選んだ理由セクション -->
+    <div id="reason" class="section tab-content active">
+      <div class="section-header">
+        <div class="section-icon pink">
+          <span class="material-icons">volunteer_activism</span>
+        </div>
+        <div class="section-title-wrapper">
+          <h2 class="section-title">EQAOを選んだ理由</h2>
+          <p class="section-subtitle">入塾の決め手となったポイント</p>
+        </div>
+      </div>
+
+      <!-- セクションハイライト -->
+      <div class="section-highlight pink">
+        <div class="section-highlight-icon">
+          <span class="material-icons">gps_fixed</span>
+        </div>
+        <div class="section-highlight-content">
+          <p class="section-highlight-text">「総合型選抜・上智大学に本当に特化していると感じた」</p>
+          <p class="section-highlight-sub">多くの保護者・生徒が実績と専門性を評価</p>
+        </div>
+      </div>
+
+      <div class="accordion-list">
+        <!-- 理由1 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number pink">1</span>
+            <span class="accordion-title">総合型選抜・上智大学に「本当に特化している」</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>総合型選抜専門で、強い実績、高い合格率があった</li>
+                <li>上智大学総合グローバル学部・総合人間科学部など、志望学部との相性が明確だった</li>
+                <li>上智大学の合格率が高く、専門塾として信頼できた</li>
+              </ul>
+              <div class="accordion-quote pink">
+                <span class="material-icons">format_quote</span>
+                <p>「上智大学を第一志望にしており、実績と専門性の両方が揃っていたのがEQAOだった」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 理由2 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number pink">2</span>
+            <span class="accordion-title">一人ひとりに合わせた「個別最適な指導」</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>志望校・本人の状況に合わせた完全個別対応</li>
+                <li>授業内容・時間・頻度の柔軟さ</li>
+                <li>オンライン／対面を自由に選べる点</li>
+                <li>通塾日程の融通が利き、継続しやすかった</li>
+              </ul>
+              <div class="accordion-quote pink">
+                <span class="material-icons">format_quote</span>
+                <p>「型にはめる指導ではなく、本人に合ったやり方で進めてくれると感じた」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 理由3 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number pink">3</span>
+            <span class="accordion-title">先生・メンターが親身で、精神面まで支えてくれた</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>悩みや不安を気軽に相談できる距離感</li>
+                <li>メンタルが落ちている時も、授業後には前向きになれていた</li>
+                <li>LINEなどでのこまめな声かけ・フォロー</li>
+                <li>優しく、真摯に向き合ってくれた</li>
+              </ul>
+              <div class="accordion-quote pink">
+                <span class="material-icons">format_quote</span>
+                <p>「学力だけでなく、気持ちの部分まで支えてくれる塾だった」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 理由4 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number pink">4</span>
+            <span class="accordion-title">玉村代表の判断力・エネルギー・姿勢への信頼</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>他塾がGOを出す中で、九州大学受験に唯一ストップをかけた判断</li>
+                <li>自信と覚悟を感じる説明・対応</li>
+                <li>この仕事・教育に対する姿勢への共感</li>
+              </ul>
+              <div class="accordion-quote pink">
+                <span class="material-icons">format_quote</span>
+                <p>「最後の決め手は、玉村さんの判断力と覚悟だった」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 理由5 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number pink">5</span>
+            <span class="accordion-title">自分の「強み・個性」を引き出してくれる指導</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>「すきを見つけて、すきを伸ばす」という理念への共感</li>
+                <li>自己推薦書・志望理由書で、自分では気づけない強みを言語化してくれた</li>
+                <li>子どもの自主性を尊重してくれた</li>
+              </ul>
+              <div class="accordion-quote pink">
+                <span class="material-icons">format_quote</span>
+                <p>「自分自身について深く考え、理解する機会になった」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 理由6 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number pink">6</span>
+            <span class="accordion-title">実体験に基づいた、質の高い総合型対策</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>実際に総合型選抜を経験したメンターによる指導</li>
+                <li>書類・面接・小論文を細部まで丁寧にチェック</li>
+                <li>直前まで一緒に書類を仕上げてくれた</li>
+              </ul>
+              <div class="accordion-quote pink">
+                <span class="material-icons">format_quote</span>
+                <p>「机上の空論ではなく、実体験に基づくアドバイスが心強かった」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 理由7 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number pink">7</span>
+            <span class="accordion-title">思考力・積極性が育つ授業設計</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>時事問題について自分の意見を発表する機会</li>
+                <li>集団授業・合宿で、同じ目標を持つ仲間と出会えた</li>
+                <li>積極性や発信力が身についた</li>
+              </ul>
+              <div class="accordion-quote pink">
+                <span class="material-icons">format_quote</span>
+                <p>「受験対策を超えて、人として成長できたと感じた」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 理由8 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number pink">8</span>
+            <span class="accordion-title">オンライン対応・仕組み面の合理性</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>オンラインで完結でき、移動の負担がない</li>
+                <li>書類のクラウド一括管理が非常に効率的</li>
+                <li>未使用コマの返金制度があり安心できた</li>
+              </ul>
+              <div class="accordion-quote pink">
+                <span class="material-icons">format_quote</span>
+                <p>「仕組みが整っていて、保護者としても安心できた」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 理由9 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number pink">9</span>
+            <span class="accordion-title">口コミ・紹介・発信コンテンツがきっかけ</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>先輩・知人・塾からの紹介</li>
+                <li>TikTok・YouTubeでの情報発信に魅力を感じた</li>
+                <li>無料体験授業で「ここならいける」と実感</li>
+              </ul>
+              <div class="accordion-quote pink">
+                <span class="material-icons">format_quote</span>
+                <p>「体験を通して、ここなら合格を目指せると確信できた」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- お子様の変化セクション -->
+    <div id="change" class="section tab-content">
+      <div class="section-header">
+        <div class="section-icon green">
+          <span class="material-icons">trending_up</span>
+        </div>
+        <div class="section-title-wrapper">
+          <h2 class="section-title">お子様が変化した点</h2>
+          <p class="section-subtitle">保護者が実感した成長</p>
+        </div>
+      </div>
+
+      <!-- セクションハイライト -->
+      <div class="section-highlight green">
+        <div class="section-highlight-icon">
+          <span class="material-icons">auto_awesome</span>
+        </div>
+        <div class="section-highlight-content">
+          <p class="section-highlight-text">「自信を持って、自分の考えを話せるようになった」</p>
+          <p class="section-highlight-sub">受験対策を超えた人間的成長を多くの保護者が実感</p>
+        </div>
+      </div>
+
+      <div class="accordion-list">
+        <!-- 変化1 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number green">1</span>
+            <span class="accordion-title">自信を持って話せるようになった／前向きになった</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>人前で自分の考えを言葉にして話せるようになった</li>
+                <li>書類や面接に対して「できる」という感覚を持てるようになった</li>
+                <li>以前よりポジティブに物事を捉えるようになった</li>
+              </ul>
+              <div class="accordion-quote green">
+                <span class="material-icons">format_quote</span>
+                <p>「自分の考えに自信を持ち、堂々と話せるようになったと感じます」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 変化2 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number green">2</span>
+            <span class="accordion-title">学習意欲・行動量が明らかに増えた</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>学習時間が大幅に増えた</li>
+                <li>自主的に塾に行く、家でも学習するようになった</li>
+                <li>切羽詰まった状況でも、自分で考えて行動できていた</li>
+              </ul>
+              <div class="accordion-quote green">
+                <span class="material-icons">format_quote</span>
+                <p>「言われてやる勉強ではなく、自分から動く姿勢に変わりました」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 変化3 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number green">3</span>
+            <span class="accordion-title">考え方・思考力が大きく成長した</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>物事を論理的に考える力がついた</li>
+                <li>以前よりも言語化が上手くなった</li>
+                <li>物事の捉え方が前向き・整理されたものに変わった</li>
+              </ul>
+              <div class="accordion-quote green">
+                <span class="material-icons">format_quote</span>
+                <p>「感覚ではなく、理由を持って考えられるようになったと感じます」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 変化4 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number green">4</span>
+            <span class="accordion-title">文章力・書類作成力が向上した</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>志望理由書・自己推薦書に自信を持てるようになった</li>
+                <li>文章構成や表現力が明らかに上がった</li>
+                <li>書類準備に対する意欲が高まった</li>
+              </ul>
+              <div class="accordion-quote green">
+                <span class="material-icons">format_quote</span>
+                <p>「書くことに苦手意識がなくなり、むしろ前向きに取り組んでいました」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 変化5 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number green">5</span>
+            <span class="accordion-title">自己分析が深まり、将来について考えるようになった</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>自分自身を見つめ直す時間が増えた</li>
+                <li>将来の夢や目標について深く考えるようになった</li>
+                <li>受験を通して人間的な成長を感じた</li>
+              </ul>
+              <div class="accordion-quote green">
+                <span class="material-icons">format_quote</span>
+                <p>「受験対策が、子どもの内面の成長につながったと感じています」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 変化6 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number green">6</span>
+            <span class="accordion-title">合宿・仲間・先生から良い刺激を受けた</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>合宿で出会った仲間や先生に刺激を受けた</li>
+                <li>同じ目標を持つ環境が、向上心につながった</li>
+                <li>楽しみながら受講できていた</li>
+              </ul>
+              <div class="accordion-quote green">
+                <span class="material-icons">format_quote</span>
+                <p>「環境に恵まれ、前向きな刺激をたくさん受けていました」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 変化7 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number green">7</span>
+            <span class="accordion-title">基礎スキル・学習習慣が身についた</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>PC操作など基礎的な部分から身につけられた</li>
+                <li>教えてもらったことをコツコツ自分のものにする力がついた</li>
+                <li>部活と勉強を両立できるようになった</li>
+              </ul>
+              <div class="accordion-quote green">
+                <span class="material-icons">format_quote</span>
+                <p>「基礎から丁寧に積み上げる経験が、本人の自信につながったと思います」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 変化8 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number green">8</span>
+            <span class="accordion-title">総合型選抜への理解・対策力が深まった</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>総合型選抜の具体的な対策ができるようになった</li>
+                <li>知識量が増え、より深い対策ができた</li>
+              </ul>
+              <div class="accordion-quote green">
+                <span class="material-icons">format_quote</span>
+                <p>「総合型選抜に対する理解が格段に深まりました」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 印象的なエピソードセクション -->
+    <div id="episode" class="section tab-content">
+      <div class="section-header">
+        <div class="section-icon blue">
+          <span class="material-icons">auto_stories</span>
+        </div>
+        <div class="section-title-wrapper">
+          <h2 class="section-title">印象に残っているエピソード</h2>
+          <p class="section-subtitle">心に残った出来事・体験</p>
+        </div>
+      </div>
+
+      <!-- セクションハイライト -->
+      <div class="section-highlight blue">
+        <div class="section-highlight-icon">
+          <span class="material-icons">handshake</span>
+        </div>
+        <div class="section-highlight-content">
+          <p class="section-highlight-text">「最後の最後まで伴走してもらえている感覚があった」</p>
+          <p class="section-highlight-sub">受験当日まで寄り添うサポート体制</p>
+        </div>
+      </div>
+
+      <div class="accordion-list">
+        <!-- エピソード1 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number blue">1</span>
+            <span class="accordion-title">フィードバック・添削の質が非常に高かった</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>書類添削やフィードバックが丁寧で、的確だった</li>
+                <li>多くの講師から多角的なアドバイスをもらえ、志望理由書の完成度が大きく上がった</li>
+                <li>実体験に基づく指摘が多く、安心感があった</li>
+              </ul>
+              <div class="accordion-quote blue">
+                <span class="material-icons">format_quote</span>
+                <p>「どの指摘も納得感があり、成長を実感できました」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- エピソード2 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number blue">2</span>
+            <span class="accordion-title">最初に「高い基準」を示されたことが印象的だった</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>入塾直後の授業で、自分の想定を超える志望校を複数提案された</li>
+                <li>最初は戸惑ったが、「本気で可能性を見てくれている」と感じた</li>
+              </ul>
+              <div class="accordion-quote blue">
+                <span class="material-icons">format_quote</span>
+                <p>「最初から妥協しない姿勢を示してくれたことが印象に残っています」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- エピソード3 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number blue">3</span>
+            <span class="accordion-title">常に寄り添い、励ましてくれた存在があった</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>「一緒に頑張ろう」と声をかけ続けてくれた</li>
+                <li>面談や授業で涙を流すほど辛い時期にも、話を聞いて立て直してくれた</li>
+                <li>メンタルが不安定な時期を支えてもらえた</li>
+              </ul>
+              <div class="accordion-quote blue">
+                <span class="material-icons">format_quote</span>
+                <p>「精神的に一番苦しい時期を、支えてもらえたことが忘れられません」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- エピソード4 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number blue">4</span>
+            <span class="accordion-title">合宿（キャンプ）での個別指導・協働体験</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>合宿で個別に指導してもらえた時間が非常に貴重だった</li>
+                <li>講師と一緒に課題レポートを考え抜いた経験が自信につながった</li>
+                <li>仲間と共に学ぶ環境が刺激になった</li>
+              </ul>
+              <div class="accordion-quote blue">
+                <span class="material-icons">format_quote</span>
+                <p>「一人では絶対に到達できなかった完成度まで引き上げてもらいました」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- エピソード5 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number blue">5</span>
+            <span class="accordion-title">直前期・本番での支えが心に残った</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>出願直前の10月に、上智大学の準備を手厚く支えてもらえた</li>
+                <li>合格発表前や試験当日の朝に激励の連絡があり、緊張が和らいだ</li>
+                <li>受験当日に応援に来てくれたことが励みになった</li>
+              </ul>
+              <div class="accordion-quote blue">
+                <span class="material-icons">format_quote</span>
+                <p>「最後の最後まで伴走してもらえている感覚がありました」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- エピソード6 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number blue">6</span>
+            <span class="accordion-title">授業が「楽しく、学びが深い」と感じられた</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>テンポが良く、話が分かりやすい授業だった</li>
+                <li>国際情勢や大学生活など、視野が広がる話が多かった</li>
+                <li>授業自体が楽しみだった</li>
+              </ul>
+              <div class="accordion-quote blue">
+                <span class="material-icons">format_quote</span>
+                <p>「ただの受験対策ではなく、学びとして面白かったです」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- エピソード7 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number blue">7</span>
+            <span class="accordion-title">厳しい指導が、自分の弱さに気づくきっかけになった</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>厳しく指摘された経験が、自分の甘さや弱さを自覚するきっかけになった</li>
+                <li>今振り返ると、人生全体につながる指導だったと感じている</li>
+              </ul>
+              <div class="accordion-quote blue">
+                <span class="material-icons">format_quote</span>
+                <p>「あの時の厳しさが、今ではありがたかったと思えます」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- エピソード8 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number blue">8</span>
+            <span class="accordion-title">将来や学びを結びつけてくれた指導</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>自分の夢と大学での学びを結びつけて整理してくれた</li>
+                <li>将来について深く考えるきっかけになった</li>
+              </ul>
+              <div class="accordion-quote blue">
+                <span class="material-icons">format_quote</span>
+                <p>「進学がゴールではない、という視点をもらえました」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- エピソード9 -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="accordion-number blue">9</span>
+            <span class="accordion-title">担当・担当外を問わず、相談できる環境だった</span>
+            <span class="material-icons accordion-icon">expand_more</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul class="accordion-points">
+                <li>担当の先生だけでなく、他の先生にも気軽に相談できた</li>
+                <li>日々の学習や本番当日に、自信とやる気をもらえた</li>
+              </ul>
+              <div class="accordion-quote blue">
+                <span class="material-icons">format_quote</span>
+                <p>「一人で抱え込まずに済む環境だったのが大きかったです」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 注釈 -->
+    <div class="footnote">
+      <p class="footnote-title">データについて</p>
+      <p class="footnote-text">
+        ・掲載内容は2025年度までの在籍生徒・保護者を対象に実施したアンケート結果です
+      </p>
+    </div>
+
+    <!-- フッターリンク -->
+    <div class="footer-link">
+      <a href="index.html">
+        <span class="material-icons">arrow_back</span>
+        トップページに戻る
+      </a>
+    </div>
+  </main>
+
+  <script src="js/nav-menu.js"></script>
+
+  <script>
+    // アコーディオン機能
+    function toggleAccordion(button) {
+      const item = button.parentElement;
+      const isActive = item.classList.contains('active');
+
+      if (isActive) {
+        item.classList.remove('active');
+      } else {
+        item.classList.add('active');
+      }
+    }
+
+    // タブ切り替え機能
+    function switchTab(tabId) {
+      // 全タブコンテンツを非表示
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+
+      // 全タブボタンを非アクティブ
+      document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+      });
+
+      // 選択されたタブコンテンツを表示
+      document.getElementById(tabId).classList.add('active');
+
+      // 選択されたタブボタンをアクティブに
+      event.currentTarget.classList.add('active');
+    }
+  </script>
+</body>
+
+</html>
