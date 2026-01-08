@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>EQAO IPPAN - 一般入試対策コース</title>
+  <link rel="apple-touch-icon" href="/logo.png">
+  <link rel="icon" type="image/png" href="/logo.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- ナビメニューCSS -->
+  <link rel="stylesheet" href="css/nav-menu.css">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #f8fafc;
+      min-height: 100vh;
+      color: #374151;
+    }
+    
+    /* ヘッダー - ポータルと統一 */
+    .header {
+      background: linear-gradient(135deg, #4a0e4e 0%, #5c1160 100%);
+      color: white;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(74, 14, 78, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .header .back-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .header .title-area {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .header .title-area h1 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .header .title-area .subtitle {
+      font-size: 10px;
+      opacity: 0.8;
+      margin-top: 2px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-faq-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .header-faq-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .header-faq-btn .material-icons {
+      font-size: 16px;
+    }
+
+    .hamburger-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+    }
+
+    .hamburger-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .hamburger-btn .material-icons {
+      font-size: 26px;
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 10px 12px;
+        gap: 8px;
+      }
+
+      .header .title-area h1 {
+        font-size: 14px;
+      }
+
+      .header-faq-btn span:not(.material-icons) {
+        display: none;
+      }
+
+      .header-faq-btn {
+        padding: 6px 8px;
+      }
+
+      .hamburger-btn {
+        width: 36px;
+        height: 36px;
+      }
+
+      .hamburger-btn .material-icons {
+        font-size: 24px;
+      }
+    }
+    
+    /* メインコンテンツ */
+    .main {
+      max-width: 100%;
+      margin: 0 auto;
+      padding-bottom: 40px;
+    }
+    
+    @media (min-width: 768px) {
+      .main {
+        max-width: 720px;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .main {
+        max-width: 900px;
+      }
+    }
+    
+    /* ヒーローセクション */
+    .hero {
+      background: linear-gradient(180deg, #4a0e4e 0%, #5c1160 50%, #5c1160 100%);
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(4px);
+    }
+    
+    .hero-title {
+      color: white;
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+    
+    .hero-subtitle {
+      color: rgba(255,255,255,0.9);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .hero-universities {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    
+    .univ-tag {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 15px;
+      backdrop-filter: blur(4px);
+    }
+    
+    /* 悩みセクション */
+    .problems-section {
+      padding: 24px 16px;
+      background: white;
+    }
+    
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #4a0e4e;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .problem-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .problem-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%);
+      border-radius: 12px;
+      border-left: 4px solid #f59e0b;
+    }
+    
+    .problem-icon {
+      width: 28px;
+      height: 28px;
+      background: #f59e0b;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .problem-icon i {
+      color: white;
+    }
+    
+    .problem-text {
+      font-size: 13px;
+      color: #78350f;
+      line-height: 1.5;
+      flex: 1;
+    }
+    
+    /* 解決セクション */
+    .solution-section {
+      padding: 24px 16px;
+      background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+    }
+    
+    .solution-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .solution-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: #5c1160;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .solution-subtitle {
+      font-size: 13px;
+      color: #4a0e4e;
+    }
+    
+    /* 強みカード */
+    .strengths {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .strength-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: transform 0.2s;
+    }
+    
+    .strength-card:hover {
+      transform: translateY(-2px);
+    }
+    
+    .strength-number {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #5c1160 0%, #4a0e4e 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    
+    .strength-content {
+      flex: 1;
+    }
+    
+    .strength-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e3a5f;
+      margin-bottom: 6px;
+    }
+    
+    .strength-desc {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.6;
+    }
+    
+    /* PDCA サイクル */
+    .pdca-section {
+      padding: 24px 16px;
+      background: white;
+    }
+    
+    .pdca-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    
+    .pdca-item {
+      text-align: center;
+      padding: 16px 12px;
+      border-radius: 16px;
+      transition: transform 0.2s;
+    }
+    
+    .pdca-item:hover {
+      transform: translateY(-2px);
+    }
+    
+    .pdca-item.plan {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    }
+    
+    .pdca-item.do {
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+    }
+    
+    .pdca-item.check {
+      background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%);
+    }
+    
+    .pdca-item.action {
+      background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+    }
+    
+    .pdca-letter {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+    
+    .pdca-item.plan .pdca-letter { color: #1d4ed8; }
+    .pdca-item.do .pdca-letter { color: #16a34a; }
+    .pdca-item.check .pdca-letter { color: #ca8a04; }
+    .pdca-item.action .pdca-letter { color: #db2777; }
+    
+    .pdca-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #374151;
+      margin-bottom: 4px;
+    }
+    
+    .pdca-desc {
+      font-size: 10px;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+    
+    /* 対象大学 */
+    .universities-section {
+      padding: 24px 16px;
+      background: linear-gradient(135deg, #5c1160 0%, #4a0e4e 100%);
+    }
+    
+    .univ-title {
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .univ-categories {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .univ-category {
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 14px;
+      backdrop-filter: blur(4px);
+    }
+    
+    .univ-category-title {
+      color: #fde047;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    
+    .univ-names {
+      color: rgba(255,255,255,0.9);
+      font-size: 13px;
+    }
+    
+    /* 入塾フロー */
+    .flow-section {
+      padding: 24px 16px;
+      background: white;
+    }
+    
+    .flow-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    
+    .flow-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    
+    .flow-number {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #5c1160 0%, #4a0e4e 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    
+    .flow-content {
+      flex: 1;
+      padding-bottom: 16px;
+    }
+    
+    .flow-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1e3a5f;
+      margin-bottom: 4px;
+    }
+    
+    .flow-desc {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+    
+    .flow-connector {
+      width: 2px;
+      height: 20px;
+      background: #e5e7eb;
+      margin-left: 15px;
+    }
+    
+    /* CTAセクション */
+    .cta-section {
+      padding: 24px 16px;
+      background: #f8fafc;
+    }
+    
+    .cta-card {
+      background: linear-gradient(135deg, #5c1160 0%, #4a0e4e 100%);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 120px;
+      height: 120px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    
+    .cta-card::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: -40px;
+      width: 100px;
+      height: 100px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .cta-title {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    
+    .cta-desc {
+      font-size: 12px;
+      opacity: 0.9;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: white;
+      color: #5c1160;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+      width: 100%;
+    }
+    
+    .cta-button:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+    
+  </style>
+</head>
+<body>
+  <!-- ヘッダー - ポータルと統一 -->
+  <header class="header">
+    <a href="index.html" class="back-btn">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <div class="title-area">
+      <h1>EQAO IPPAN</h1>
+      <p class="subtitle">一般入試対策コース</p>
+    </div>
+    <div class="header-right">
+      <a href="faq.html" class="header-faq-btn">
+        <span class="material-icons">help_outline</span>
+        <span>FAQ</span>
+      </a>
+      <button class="hamburger-btn" onclick="openNav()">
+        <span class="material-icons">menu</span>
+      </button>
+    </div>
+  </header>
+  
+  <main class="main">
+    <!-- ヒーローセクション -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i data-lucide="book-marked" style="width:14px;height:14px;"></i>
+          一般入試対策コース
+        </div>
+        <h1 class="hero-title">EQAO IPPAN</h1>
+        <p class="hero-subtitle">
+          私大・国公立の一般入試を完全網羅<br>
+          個別最適の伴走型指導で合格へ導く
+        </p>
+        <div class="hero-universities">
+          <span class="univ-tag">早慶上智</span>
+          <span class="univ-tag">GMARCH</span>
+          <span class="univ-tag">関関同立</span>
+          <span class="univ-tag">国公立</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 悩みセクション -->
+    <section class="problems-section">
+      <h2 class="section-title">
+        <i data-lucide="alert-circle" style="width:20px;height:20px;color:#f59e0b;"></i>
+        こんな悩みありませんか？
+      </h2>
+      <div class="problem-list">
+        <div class="problem-item">
+          <div class="problem-icon">
+            <i data-lucide="help-circle" style="width:16px;height:16px;"></i>
+          </div>
+          <p class="problem-text">一般入試対策って何から始めたらいいかわからない...</p>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon">
+            <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+          </div>
+          <p class="problem-text">部活や学校行事が忙しく、計画的に進められない...</p>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon">
+            <i data-lucide="trending-down" style="width:16px;height:16px;"></i>
+          </div>
+          <p class="problem-text">苦手科目が多く、モチベーションが続かない...</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 解決セクション -->
+    <section class="solution-section">
+      <div class="solution-header">
+        <h2 class="solution-title">
+          <i data-lucide="sparkles" style="width:24px;height:24px;"></i>
+          EQAOにお任せください！
+        </h2>
+        <p class="solution-subtitle">「できる喜び」を実感する3つの強み</p>
+      </div>
+      
+      <div class="strengths">
+        <div class="strength-card">
+          <div class="strength-number">1</div>
+          <div class="strength-content">
+            <h3 class="strength-title">個別最適の「伴走型」指導</h3>
+            <p class="strength-desc">担任講師制+LINEサポートで、あらゆる疑問や不安を即解決</p>
+          </div>
+        </div>
+        <div class="strength-card">
+          <div class="strength-number">2</div>
+          <div class="strength-content">
+            <h3 class="strength-title">動画×コーチング強化</h3>
+            <p class="strength-desc">「分かる・できる」感覚を増やしながら着実にレベルアップ</p>
+          </div>
+        </div>
+        <div class="strength-card">
+          <div class="strength-number">3</div>
+          <div class="strength-content">
+            <h3 class="strength-title">私大・国公立を幅広くカバー</h3>
+            <p class="strength-desc">現役生も浪人生も、どの学年からでもスタート可能</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- PDCAサイクル -->
+    <section class="pdca-section">
+      <h2 class="section-title">
+        <i data-lucide="refresh-cw" style="width:20px;height:20px;color:#5c1160;"></i>
+        EQAO式 PDCAサイクル
+      </h2>
+      <div class="pdca-grid">
+        <div class="pdca-item plan">
+          <div class="pdca-letter">P</div>
+          <div class="pdca-title">Plan 計画</div>
+          <div class="pdca-desc">オリジナル<br>カリキュラム作成</div>
+        </div>
+        <div class="pdca-item do">
+          <div class="pdca-letter">D</div>
+          <div class="pdca-title">Do 実行</div>
+          <div class="pdca-desc">計画に沿って<br>徹底的に学習</div>
+        </div>
+        <div class="pdca-item check">
+          <div class="pdca-letter">C</div>
+          <div class="pdca-title">Check 評価</div>
+          <div class="pdca-desc">毎週の確認テスト<br>で定着度チェック</div>
+        </div>
+        <div class="pdca-item action">
+          <div class="pdca-letter">A</div>
+          <div class="pdca-title">Action 改善</div>
+          <div class="pdca-desc">講師と一緒に<br>最適化を図る</div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 対象大学 -->
+    <section class="universities-section">
+      <h3 class="univ-title">
+        <i data-lucide="graduation-cap" style="width:20px;height:20px;"></i>
+        対応大学・入試
+      </h3>
+      <div class="univ-categories">
+        <div class="univ-category">
+          <div class="univ-category-title">最難関私大</div>
+          <div class="univ-names">早稲田・慶應・上智</div>
+        </div>
+        <div class="univ-category">
+          <div class="univ-category-title">難関私大</div>
+          <div class="univ-names">GMARCH・関関同立・成成明学獨國武</div>
+        </div>
+        <div class="univ-category">
+          <div class="univ-category-title">国公立大学</div>
+          <div class="univ-names">神大・筑波・その他国公立</div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 入塾フロー -->
+    <section class="flow-section">
+      <h2 class="section-title">
+        <i data-lucide="footprints" style="width:20px;height:20px;color:#5c1160;"></i>
+        入塾までの流れ
+      </h2>
+      <div class="flow-list">
+        <div class="flow-item">
+          <div class="flow-number">1</div>
+          <div class="flow-content">
+            <div class="flow-title">無料体験授業</div>
+            <div class="flow-desc">現在の学力を確認し、最適なプランをご提案</div>
+          </div>
+        </div>
+        <div class="flow-connector"></div>
+        <div class="flow-item">
+          <div class="flow-number">2</div>
+          <div class="flow-content">
+            <div class="flow-title">面談・カリキュラム説明</div>
+            <div class="flow-desc">講師が考えたカリキュラムを詳しくご案内</div>
+          </div>
+        </div>
+        <div class="flow-connector"></div>
+        <div class="flow-item">
+          <div class="flow-number">3</div>
+          <div class="flow-content">
+            <div class="flow-title">入塾・学習スタート</div>
+            <div class="flow-desc">専用LINEグループで手厚くサポート開始</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="cta-card">
+        <div class="cta-content">
+          <h3 class="cta-title">まずは詳細をチェック！</h3>
+          <p class="cta-desc">
+            総合型選抜と並行受講も可能<br>
+            最後まで諦めずに挑戦しましょう
+          </p>
+          <a href="https://www.eqao.co.jp/eqao-ippan" target="_blank" class="cta-button">
+            <i data-lucide="external-link" style="width:18px;height:18px;"></i>
+            詳しく見る
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  
+  <!-- ナビメニューJS -->
+  <script src="js/nav-menu.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
