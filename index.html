@@ -1485,6 +1485,7 @@
       color: #1a237e;
       margin-bottom: 14px;
       padding-left: 4px;
+      transition: all 0.3s ease;
     }
 
     .section-title::before {
@@ -1493,6 +1494,40 @@
       height: 22px;
       background: linear-gradient(180deg, #1a237e 0%, #3949ab 100%);
       border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .section-title.highlighted {
+      color: white;
+      padding-left: 12px;
+      padding-right: 14px;
+      font-size: 18px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      border-radius: 8px;
+      display: inline-block;
+      box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+      animation: highlightPulse 0.5s ease;
+    }
+
+    .section-title.highlighted::before {
+      width: 8px;
+      height: 28px;
+      background: linear-gradient(180deg, #ffc107 0%, #ff9800 100%);
+    }
+
+    @keyframes highlightPulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+      }
+      50% {
+        transform: scale(1.02);
+        box-shadow: 0 6px 20px rgba(26, 35, 126, 0.4);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+      }
     }
 
     .button-grid {
@@ -5640,6 +5675,8 @@
     // ========================================
     // セクションナビゲーション
     // ========================================
+    let highlightTimeout = null;
+
     function initSectionNav() {
       const navItems = document.querySelectorAll('.section-nav-item');
 
@@ -5650,8 +5687,13 @@
           const targetSection = document.getElementById(targetId);
 
           if (targetSection) {
-            const headerHeight = 70;
-            const targetPosition = targetSection.offsetTop - headerHeight;
+            // ヘッダーの実際の高さを取得
+            const header = document.querySelector('.header');
+            const headerHeight = header ? header.offsetHeight : 96;
+            
+            // セクションのmargin-topも確保（余裕をもって200px）
+            const scrollOffset = headerHeight + 100;
+            const targetPosition = targetSection.offsetTop - scrollOffset;
 
             window.scrollTo({
               top: targetPosition,
@@ -5661,6 +5703,24 @@
             // アクティブ状態を更新
             navItems.forEach(n => n.classList.remove('active'));
             this.classList.add('active');
+
+            // セクション見出しにハイライトを付与
+            const sectionTitle = targetSection.querySelector('.section-title');
+            if (sectionTitle) {
+              // 前のハイライトをクリア
+              document.querySelectorAll('.section-title.highlighted').forEach(title => {
+                title.classList.remove('highlighted');
+              });
+
+              // 新しいハイライトを追加
+              sectionTitle.classList.add('highlighted');
+
+              // 3秒後に自動で削除
+              clearTimeout(highlightTimeout);
+              highlightTimeout = setTimeout(() => {
+                sectionTitle.classList.remove('highlighted');
+              }, 3000);
+            }
           }
         });
       });
@@ -5672,7 +5732,11 @@
     function updateActiveSection() {
       const sections = ['section-schedule', 'section-checklist', 'section-learning', 'section-exam', 'section-event', 'section-curriculum'];
       const navItems = document.querySelectorAll('.section-nav-item');
-      const headerHeight = 100;
+      
+      // ヘッダーの実際の高さを取得して判定に使用
+      const header = document.querySelector('.header');
+      const headerHeight = header ? header.offsetHeight : 96;
+      const scrollOffset = headerHeight + 100;
 
       let currentSection = sections[0];
 
@@ -5680,7 +5744,7 @@
         const section = document.getElementById(sectionId);
         if (section) {
           const rect = section.getBoundingClientRect();
-          if (rect.top <= headerHeight) {
+          if (rect.top <= scrollOffset) {
             currentSection = sectionId;
           }
         }
