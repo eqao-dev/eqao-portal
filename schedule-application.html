@@ -1314,15 +1314,29 @@
       // 希望日時を読み込み
       if (app.scheduleDetails && app.scheduleDetails.length > 0) {
         app.scheduleDetails.forEach(detail => {
-          const dateKey = detail.date;
+          // 日付を正規化（YYYY-MM-DD形式に）
+          let dateKey = detail.date;
+          if (dateKey && dateKey.includes('T')) {
+            dateKey = dateKey.split('T')[0];
+          }
+
+          if (!dateKey) return;
+
           if (!scheduleData[dateKey]) {
             scheduleData[dateKey] = [];
           }
-          scheduleData[dateKey].push({
-            startTime: detail.startTime,
-            endTime: detail.endTime,
-            format: detail.format
-          });
+
+          // 時間を正規化（HH:MM形式に）
+          const startTime = formatTimeValue(detail.startTime);
+          const endTime = formatTimeValue(detail.endTime);
+
+          if (startTime && endTime) {
+            scheduleData[dateKey].push({
+              startTime: startTime,
+              endTime: endTime,
+              format: detail.format || 'オンライン'
+            });
+          }
         });
       }
     }
@@ -1656,6 +1670,35 @@
       return hour * 60 + min;
     }
 
+    function formatTimeValue(value) {
+      if (!value) return '';
+
+      // すでに HH:MM 形式の場合
+      if (typeof value === 'string' && /^\d{1,2}:\d{2}$/.test(value)) {
+        const [h, m] = value.split(':');
+        return `${h.padStart(2, '0')}:${m}`;
+      }
+
+      // ISO形式（2025-02-01T09:00:00.000Z）の場合
+      if (typeof value === 'string' && value.includes('T')) {
+        const timePart = value.split('T')[1];
+        if (timePart) {
+          const [h, m] = timePart.split(':');
+          return `${h.padStart(2, '0')}:${m}`;
+        }
+      }
+
+      // シリアル値（小数）の場合（Excelの時刻形式）
+      if (typeof value === 'number') {
+        const totalMinutes = Math.round(value * 24 * 60);
+        const h = Math.floor(totalMinutes / 60) % 24;
+        const m = totalMinutes % 60;
+        return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+      }
+
+      return String(value);
+    }
+
     function showLoading(show) {
       document.getElementById('loadingOverlay').classList.toggle('active', show);
     }
@@ -1723,10 +1766,15 @@
       document.getElementById('confirmNotes').textContent =
         document.getElementById('notes').value || '-';
 
-      // スケジュールリスト
+      // スケジュールリスト - 修正版
       const dates = Object.keys(scheduleData).sort();
-      document.getElementById('confirmScheduleCount').textContent =
-        dates.reduce((sum, d) => sum + scheduleData[d].length, 0);
+
+      // 総件数をカウント（日付ごとではなく、時間帯の合計）
+      let totalSlots = 0;
+      dates.forEach(dateKey => {
+        totalSlots += scheduleData[dateKey].length;
+      });
+      document.getElementById('confirmScheduleCount').textContent = totalSlots;
 
       const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
       const scheduleListEl = document.getElementById('confirmScheduleList');
@@ -1741,10 +1789,10 @@
           const slots = scheduleData[dateKey];
 
           return slots.map(slot => `
-            <div class="confirm-schedule-item">
-              ${month}/${day}（${dayOfWeek}） ${slot.startTime}〜${slot.endTime} 【${slot.format}】
-            </div>
-          `).join('');
+        <div class="confirm-schedule-item">
+          ${month}/${day}（${dayOfWeek}） ${slot.startTime}〜${slot.endTime} 【${slot.format}】
+        </div>
+      `).join('');
         }).join('');
       }
     }
