@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>面接練習動画 - EQAO PORTAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .header-title {
+      font-size: 17px;
+      font-weight: 700;
+      flex: 1;
+    }
+
+    .hamburger-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+    }
+
+    .hamburger-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* コンテナ */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* 説明バナー */
+    .info-banner {
+      background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .info-banner .material-icons {
+      font-size: 24px;
+      color: #1565C0;
+      flex-shrink: 0;
+    }
+
+    .info-banner-text {
+      font-size: 13px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* 動画リスト */
+    .video-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* 動画カード */
+    .video-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .video-card-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .video-card-header .material-icons {
+      font-size: 20px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 アスペクト比 */
+      background: #000;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ヘルプボタン */
+    .help-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .help-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .help-btn .material-icons {
+      font-size: 22px;
+    }
+
+    /* ヘルプモーダル */
+    .help-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .help-modal-overlay.show {
+      display: flex;
+    }
+
+    .help-modal {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 440px;
+      max-height: 80vh;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: helpModalIn 0.3s ease;
+    }
+
+    @keyframes helpModalIn {
+      from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .help-modal-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+    }
+
+    .help-modal-header .material-icons {
+      font-size: 24px;
+    }
+
+    .help-modal-header h3 {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .help-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .help-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .help-modal-body {
+      padding: 20px;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+
+    .help-modal-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .help-modal-title .material-icons {
+      font-size: 20px;
+    }
+
+    .help-modal-text {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.8;
+    }
+
+    .help-modal-footer {
+      padding: 16px 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .help-close-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .help-close-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 600px) {
+      .container {
+        padding: 12px;
+      }
+
+      .video-list {
+        gap: 16px;
+      }
+
+      .video-card-header {
+        padding: 10px 14px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="interviews.html" class="back-btn">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <h1 class="header-title">面接練習動画</h1>
+    <button class="help-btn" onclick="openHelpModal()">
+      <span class="material-icons">help_outline</span>
+    </button>
+    <button class="hamburger-btn" onclick="openNav()">
+      <span class="material-icons">menu</span>
+    </button>
+  </header>
+
+  <div class="container">
+    <!-- 説明バナー -->
+    <div class="info-banner">
+      <span class="material-icons">videocam</span>
+      <div class="info-banner-text">
+        過去の面接練習の様子を収録した動画です。<br>
+        先輩たちのやり取りを参考に、本番に備えましょう。
+      </div>
+    </div>
+
+    <!-- 動画リスト -->
+    <div class="video-list">
+      <div class="video-card">
+        <div class="video-card-header">
+          <span class="material-icons">play_circle</span>
+          動画①
+        </div>
+        <div class="video-wrapper">
+          <iframe 
+            src="https://www.youtube.com/embed/ShvN0Q_cPFs" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-card-header">
+          <span class="material-icons">play_circle</span>
+          動画②
+        </div>
+        <div class="video-wrapper">
+          <iframe 
+            src="https://www.youtube.com/embed/RVS8bYJm370" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-card-header">
+          <span class="material-icons">play_circle</span>
+          動画③
+        </div>
+        <div class="video-wrapper">
+          <iframe 
+            src="https://www.youtube.com/embed/nOog1l7lG0M" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-card-header">
+          <span class="material-icons">play_circle</span>
+          動画④
+        </div>
+        <div class="video-wrapper">
+          <iframe 
+            src="https://www.youtube.com/embed/SeDp1PW5mbw" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-card-header">
+          <span class="material-icons">play_circle</span>
+          動画⑤
+        </div>
+        <div class="video-wrapper">
+          <iframe 
+            src="https://www.youtube.com/embed/l7VTmx8uCbw" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-card-header">
+          <span class="material-icons">play_circle</span>
+          動画⑥
+        </div>
+        <div class="video-wrapper">
+          <iframe 
+            src="https://www.youtube.com/embed/tJCkv1vUyPs" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ヘルプモーダル -->
+  <div class="help-modal-overlay" id="helpModalOverlay" onclick="closeHelpModalOnOverlay(event)">
+    <div class="help-modal" onclick="event.stopPropagation()">
+      <div class="help-modal-header">
+        <span class="material-icons">help_outline</span>
+        <h3>このページについて</h3>
+        <button class="help-modal-close" onclick="closeHelpModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="help-modal-body">
+        <div class="help-modal-title">
+          <span class="material-icons">videocam</span>
+          面接練習動画とは？
+        </div>
+        <p class="help-modal-text">
+          過去にEQAOで行われた面接練習の様子を収録した動画です。<br><br>
+          実際のやり取りを見ることで、面接の雰囲気や受け答えのコツを学ぶことができます。<br><br>
+          <strong>※ 先輩方が残してくれた貴重な資料です。外部への共有はお控えください。</strong>
+        </p>
+      </div>
+      <div class="help-modal-footer">
+        <button class="help-close-btn" onclick="closeHelpModal()">閉じる</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ============================================
+    // ログイン確認
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+      const loggedIn = localStorage.getItem('eqao_loggedIn');
+      if (!loggedIn) {
+        window.location.href = 'index.html';
+        return;
+      }
+    });
+
+    // ============================================
+    // ヘルプモーダル
+    // ============================================
+    function openHelpModal() {
+      document.getElementById('helpModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeHelpModal() {
+      document.getElementById('helpModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function closeHelpModalOnOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeHelpModal();
+      }
+    }
+  </script>
+  <script src="js/nav-menu.js"></script>
+</body>
+</html>

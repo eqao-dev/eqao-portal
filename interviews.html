@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,11 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="css/nav-menu.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Noto Sans JP', sans-serif;
@@ -29,7 +34,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
     .back-btn {
@@ -38,7 +43,7 @@
       justify-content: center;
       width: 36px;
       height: 36px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -88,7 +93,7 @@
       border-radius: 16px;
       padding: 20px;
       margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .search-title {
@@ -313,14 +318,14 @@
       background: white;
       border-radius: 0 0 12px 12px;
       padding: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .interview-content-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
     }
 
     .interview-basic-info {
@@ -532,7 +537,9 @@
     }
 
     @keyframes spin {
-      100% { transform: rotate(360deg); }
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     /* 空状態 */
@@ -555,7 +562,7 @@
 
     /* 年度タグ */
     .year-tag {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
     }
 
     /* ヘルプボタン */
@@ -565,7 +572,7 @@
       justify-content: center;
       width: 36px;
       height: 36px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -574,7 +581,7 @@
     }
 
     .help-btn:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
     }
 
     .help-btn .material-icons {
@@ -612,8 +619,15 @@
     }
 
     @keyframes helpModalIn {
-      from { opacity: 0; transform: scale(0.95) translateY(-10px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
 
     .help-modal-header {
@@ -700,8 +714,54 @@
     .help-close-btn:hover {
       opacity: 0.9;
     }
+
+    /* 練習動画リンクバナー */
+    .video-link-banner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .video-link-banner:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .video-link-banner>.material-icons {
+      font-size: 28px;
+      color: #1565C0;
+      flex-shrink: 0;
+    }
+
+    .video-link-content {
+      flex: 1;
+    }
+
+    .video-link-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1565C0;
+      margin-bottom: 2px;
+    }
+
+    .video-link-desc {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .video-link-arrow {
+      font-size: 24px;
+      color: #1565C0;
+    }
   </style>
 </head>
+
 <body>
   <header class="header">
     <a href="index.html" class="back-btn">
@@ -726,6 +786,16 @@
         実際に聞かれた質問と回答を参考に、面接対策を進めましょう。
       </div>
     </div>
+
+    <!-- 練習動画リンク -->
+    <a href="interview-videos.html" class="video-link-banner">
+      <span class="material-icons">videocam</span>
+      <div class="video-link-content">
+        <div class="video-link-title">面接練習動画を見る</div>
+        <div class="video-link-desc">過去の練習の様子を動画で確認できます</div>
+      </div>
+      <span class="material-icons video-link-arrow">chevron_right</span>
+    </a>
 
     <!-- 検索セクション -->
     <div class="search-section">
@@ -777,7 +847,7 @@
           <p>読み込み中...</p>
         </div>
       </div>
-      
+
       <!-- ページネーション -->
       <div id="pagination" class="pagination" style="display: none;">
         <button class="pagination-btn" id="prevBtn" onclick="previousPage()">
@@ -849,7 +919,7 @@
     let currentPage = 1;
     let resultsPerPage = 20;
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // ログイン確認
       const loggedIn = localStorage.getItem('eqao_loggedIn');
       console.log('Interviews page - checking login:', loggedIn);
@@ -858,13 +928,13 @@
         eqao_studentId: localStorage.getItem('eqao_studentId'),
         eqao_studentName: localStorage.getItem('eqao_studentName')
       });
-      
+
       if (!loggedIn) {
         console.warn('Not logged in, redirecting to index.html');
         window.location.href = 'index.html';
         return;
       }
-      
+
       console.log('User is logged in, loading page...');
 
       // フィルター選択肢を読み込み
@@ -874,7 +944,7 @@
       searchInterviews();
 
       // Enterキーで検索
-      document.getElementById('searchFaculty').addEventListener('keypress', function(e) {
+      document.getElementById('searchFaculty').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') searchInterviews();
       });
     });
@@ -926,7 +996,7 @@
         // 全結果を保存
         allResults = results || [];
         currentPage = 1;
-        
+
         renderPaginatedResults();
       } catch (error) {
         console.error('Search error:', error);
@@ -960,7 +1030,7 @@
       let html = '';
       results.forEach((item, index) => {
         const cardId = `interview-${index}`;
-        
+
         html += `
           <div class="interview-card">
             <div class="interview-university-header">
@@ -1093,10 +1163,10 @@
       }
 
       const totalResults = allResults.length;
-      
+
       // ページネーション計算
       let startIndex, endIndex, totalPages;
-      
+
       if (resultsPerPage === -1) {
         // 全件表示
         startIndex = 0;
@@ -1108,19 +1178,19 @@
         startIndex = (currentPage - 1) * resultsPerPage;
         endIndex = Math.min(startIndex + resultsPerPage, totalResults);
       }
-      
+
       const pageResults = allResults.slice(startIndex, endIndex);
-      
+
       // 結果件数表示
       if (resultsPerPage === -1) {
         countEl.innerHTML = `<strong>${totalResults}</strong>件の面接データ`;
       } else {
         countEl.innerHTML = `<strong>${totalResults}</strong>件中 ${startIndex + 1}〜${endIndex}件を表示`;
       }
-      
+
       // 結果を表示
       renderResults(pageResults);
-      
+
       // ページネーションUI更新
       if (resultsPerPage === -1 || totalPages <= 1) {
         paginationEl.style.display = 'none';
@@ -1130,7 +1200,7 @@
         document.getElementById('prevBtn').disabled = currentPage === 1;
         document.getElementById('nextBtn').disabled = currentPage === totalPages;
       }
-      
+
       // ページトップにスクロール
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -1166,7 +1236,7 @@
 
       content.classList.toggle('open');
       expand.classList.toggle('open');
-      
+
       if (expand.classList.contains('open')) {
         expand.textContent = 'expand_less';
       } else {
@@ -1194,4 +1264,5 @@
   </script>
   <script src="js/nav-menu.js"></script>
 </body>
+
 </html>
