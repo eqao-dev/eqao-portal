@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>他塾との違い | EQAO PORTAL</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/student_logo.png">
+  <link rel="icon" type="image/png" href="/student_logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav-menu.css">
+  <style>
+    :root {
+      --primary: #1a237e;
+      --primary-light: #283593;
+      --accent-gold: #d4a853;
+      --accent-gold-light: #f5e6c8;
+      --success: #059669;
+      --success-light: #d1fae5;
+      --success-bg: #ecfdf5;
+      --danger: #dc2626;
+      --danger-light: #fee2e2;
+      --danger-bg: #fef2f2;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #e3e8f4 0%, #d0d9e8 100%);
+      min-height: 100vh;
+      color: var(--gray-700);
+    }
+
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-button {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: all 0.2s;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+      flex: 1;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hamburger-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: all 0.2s;
+    }
+
+    .hamburger-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* ヒーローセクション */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      padding: 40px 16px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 168, 83, 0.2);
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    .hero h1 {
+      color: white;
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1.4;
+      margin-bottom: 16px;
+      animation: fadeInUp 0.6s ease 0.1s both;
+    }
+
+    .hero h1 span {
+      color: var(--accent-gold);
+    }
+
+    .hero-subtitle {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 14px;
+      line-height: 1.8;
+      animation: fadeInUp 0.6s ease 0.2s both;
+    }
+
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 32px;
+      animation: fadeInUp 0.6s ease 0.3s both;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--accent-gold);
+      line-height: 1;
+      text-shadow: 0 2px 10px rgba(212, 168, 83, 0.3);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 4px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* メインコンテンツ */
+    .main {
+      padding: 24px 16px 100px;
+      max-width: 900px;
+      margin: 0 auto;
+      margin-top: -30px;
+      position: relative;
+    }
+
+    /* すべて開く/閉じるボタン */
+    .toggle-all {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 16px;
+      margin-bottom: 20px;
+    }
+
+    .toggle-all-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: white;
+      color: var(--primary);
+      border: 1px solid var(--gray-200);
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      font-family: inherit;
+    }
+
+    .toggle-all-button:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* カテゴリセクション */
+    .category-section {
+      margin-bottom: 24px;
+    }
+
+    .category-header {
+      background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fd 100%);
+      padding: 18px 20px;
+      border-radius: 16px 16px 0 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid var(--gray-200);
+      border-bottom: 2px solid var(--primary);
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .category-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 4px 12px rgba(26, 35, 126, 0.25);
+    }
+
+    .category-icon .material-icons {
+      font-size: 22px;
+    }
+
+    .category-info {
+      flex: 1;
+    }
+
+    .category-info h3 {
+      color: var(--gray-900);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .category-info p {
+      color: var(--gray-500);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .category-count {
+      background: var(--success-light);
+      color: var(--success);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .category-content {
+      background: white;
+      border-radius: 0 0 16px 16px;
+      overflow: visible;
+      border: 1px solid var(--gray-200);
+      border-top: none;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    /* 比較アイテム（アコーディオン） */
+    .compare-item {
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .compare-item:last-child {
+      border-bottom: none;
+    }
+
+    .compare-header {
+      padding: 16px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .compare-header:hover {
+      background: var(--gray-50);
+    }
+
+    .compare-header .number {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #c49a47 100%);
+      color: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(212, 168, 83, 0.3);
+    }
+
+    .compare-header .title {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-900);
+      line-height: 1.5;
+    }
+
+    .compare-header .arrow {
+      color: var(--gray-300);
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+
+    .compare-item.active .compare-header {
+      background: var(--gray-50);
+    }
+
+    .compare-item.active .compare-header .arrow {
+      transform: rotate(180deg);
+      color: var(--primary);
+    }
+
+    .compare-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .compare-item.active .compare-body {
+      max-height: 800px;
+    }
+
+    .compare-content {
+      padding: 12px 20px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .compare-box {
+      border-radius: 12px;
+      padding: 16px;
+      position: relative;
+    }
+
+    .compare-box.other {
+      background: var(--danger-bg);
+      border: 1px solid #fecaca;
+    }
+
+    .compare-box.eqao {
+      background: var(--success-bg);
+      border: 1px solid #a7f3d0;
+    }
+
+    .compare-box-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .compare-box-header .material-icons {
+      font-size: 16px;
+    }
+
+    .compare-box.other .compare-box-header {
+      color: var(--danger);
+    }
+
+    .compare-box.eqao .compare-box-header {
+      color: var(--success);
+    }
+
+    .compare-box p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--gray-700);
+    }
+
+    .compare-box.eqao::before {
+      content: '✓';
+      position: absolute;
+      top: -8px;
+      right: 8px;
+      width: 24px;
+      height: 24px;
+      background: var(--success);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(5, 150, 105, 0.4);
+    }
+
+    /* 料金比較セクション */
+    .price-section {
+      margin-top: 40px;
+      margin-bottom: 32px;
+    }
+
+    .price-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .price-header h2 {
+      color: var(--gray-900);
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .price-header h2 .icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #c49a47 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .price-header p {
+      color: var(--gray-500);
+      font-size: 14px;
+    }
+
+    .price-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--gray-200);
+    }
+
+    .price-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .price-column {
+      padding: 24px 20px;
+    }
+
+    .price-column.other {
+      background: var(--danger-bg);
+      border-right: 1px solid #fecaca;
+    }
+
+    .price-column.eqao {
+      background: var(--success-bg);
+      position: relative;
+    }
+
+    .price-column.eqao::before {
+      content: 'おすすめ';
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: var(--success);
+      color: white;
+      padding: 6px 14px;
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 0 0 0 12px;
+    }
+
+    .price-column-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid;
+    }
+
+    .price-column-header .material-icons {
+      font-size: 20px;
+    }
+
+    .price-column.other .price-column-header {
+      color: var(--danger);
+      border-color: #fecaca;
+    }
+
+    .price-column.eqao .price-column-header {
+      color: var(--success);
+      border-color: #a7f3d0;
+    }
+
+    .price-column-header span:last-child {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .price-list {
+      list-style: none;
+    }
+
+    .price-list li {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--gray-700);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .price-list li:last-child {
+      border-bottom: none;
+    }
+
+    .price-list li .material-icons {
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: 16px;
+    }
+
+    .price-column.other .price-list li .material-icons {
+      color: var(--danger);
+    }
+
+    .price-column.eqao .price-list li .material-icons {
+      color: var(--success);
+    }
+
+    /* CTAセクション */
+    .cta-section {
+      margin-top: 40px;
+    }
+
+    .cta-card {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: 20px;
+      padding: 32px 20px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(26, 35, 126, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% {
+        transform: translate(0, 0);
+      }
+      50% {
+        transform: translate(10%, 10%);
+      }
+    }
+
+    .cta-card h3 {
+      color: white;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .cta-card p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 13px;
+      margin-bottom: 24px;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: white;
+      color: var(--primary);
+      padding: 14px 36px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 20px;
+      }
+
+      .stat-number {
+        font-size: 32px;
+      }
+
+      .stats-bar {
+        gap: 16px;
+      }
+
+      .compare-content {
+        grid-template-columns: 1fr;
+      }
+
+      .compare-box.eqao::before {
+        top: -8px;
+        right: -8px;
+        width: 22px;
+        height: 22px;
+        font-size: 11px;
+      }
+
+      .price-comparison {
+        grid-template-columns: 1fr;
+      }
+
+      .price-column.other {
+        border-right: none;
+        border-bottom: 1px solid #fecaca;
+      }
+
+      .category-header {
+        padding: 14px 16px;
+      }
+
+      .category-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .category-info h3 {
+        font-size: 15px;
+      }
+
+      .compare-header {
+        padding: 14px 16px;
+      }
+
+      .compare-content {
+        padding: 0 16px 16px;
+      }
+
+      .header-title {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <a href="/" class="back-button">
+      <span class="material-icons">arrow_back</span>
+    </a>
+    <span class="header-title">他塾との違い</span>
+    <div class="header-right">
+      <button class="hamburger-btn" onclick="openNav()">
+        <span class="material-icons">menu</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ヒーローセクション -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="material-icons" style="font-size: 16px;">emoji_events</span>
+        選ばれる理由がここにある
+      </div>
+      <h1>EQAOは<span>30以上</span>の項目で<br>他塾と明確な違いがあります</h1>
+      <p class="hero-subtitle">一人ひとりに合わせた指導体制、充実した教材・システム、<br>そして透明な料金体系で、確実に合格へ導きます。</p>
+
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-number">30+</div>
+          <div class="stat-label">優位性の項目数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5</div>
+          <div class="stat-label">カテゴリ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- メインコンテンツ -->
+  <div class="main">
+    <!-- すべて開く/閉じる -->
+    <div class="toggle-all">
+      <button class="toggle-all-button" onclick="toggleAll()">
+        <span class="material-icons" style="font-size: 16px;">list</span>
+        <span id="toggle-text">すべて開く</span>
+      </button>
+    </div>
+
+    <!-- カテゴリ1: 実績・対応範囲 -->
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-icon">
+          <span class="material-icons">emoji_events</span>
+        </div>
+        <div class="category-info">
+          <h3>実績・対応範囲</h3>
+          <p>確かな合格実績と幅広い対応力</p>
+        </div>
+        <div class="category-count">7項目</div>
+      </div>
+      <div class="category-content">
+        <div class="compare-item" data-id="1">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">01</span>
+            <span class="title">合格実績・合格確率</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>合格者数が少ない、または合格確率が低く、年度ごとの結果にばらつきがあるケースが多い。また、合格者の一部のみを切り取って提示している場合もあり、全体としての再現性が見えづらい。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>圧倒的な合格率と、毎年安定した実績を出している。特定の一校だけに依存するのではなく、併願設計を前提に複数校で合格を取る指導を行っているため、結果が年によって大きくぶれにくい。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="2">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">02</span>
+            <span class="title">対応できる入試方式の幅</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>一部の大学、または一部の入試方式にしか対応できず、生徒の条件によっては「その方式は見られない」と言われることがある。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>総合型選抜、学校推薦型選抜、特別入試、公募推薦など、推薦・選抜系入試全般に対応している。方式ごとに評価ポイントが異なるため、それぞれに応じて指導内容を切り替えて対応している。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="3">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">03</span>
+            <span class="title">対象とする大学レベル</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>中堅大学レベルを中心とした指導が多く、難関私立大学への専門的な対策が十分でない場合がある。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>難関私立大学を主対象とした専門コースを設置しており、学部・大学ごとに求められる水準を前提に指導を行っている。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="4">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">04</span>
+            <span class="title">指導プランの設計方法</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>あらかじめ決められたカリキュラムを学年やコースごとに一律で提供する形式が多い。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>評定平均、志望校、志望学部、英語資格、活動歴、性格などを踏まえ、一人ひとり異なるカリキュラムを個別に設計する。同じ学年であっても、やる内容・順番・重点は異なる。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="5">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">05</span>
+            <span class="title">授業形態と関与度</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>複数人授業が中心で、一人ひとりに割ける時間が限られている。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>すべてマンツーマン指導。毎回の授業で、生徒の状況に合わせて内容を調整しながら進めるため、理解不足やズレをその場で修正できる。※集団授業は無料</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="6">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">06</span>
+            <span class="title">オンライン・対面対応</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>オンラインのみ、または特定地域限定での指導に留まる。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>オンライン・対面の両方に対応しており、全国どこからでも受講が可能。状況に応じて受講形式を切り替えることもできる。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="7">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">07</span>
+            <span class="title">対応できる受験範囲</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>一般入試中心の学習指導に偏りがち。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>総合型選抜だけでなく、一般入試、英語資格、国公立、海外大学にも対応しており、生徒の進路に応じて併用しながら指導する。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- カテゴリ2: 指導体制 -->
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-icon">
+          <span class="material-icons">groups</span>
+        </div>
+        <div class="category-info">
+          <h3>指導体制</h3>
+          <p>プロ講師陣による手厚いサポート</p>
+        </div>
+        <div class="category-count">8項目</div>
+      </div>
+      <div class="category-content">
+        <div class="compare-item" data-id="8">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">08</span>
+            <span class="title">授業外の活動・挑戦機会</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>授業以外の活動機会がほとんどない。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>課外活動の設計・整理、留学サポートに加え、全国規模のプレゼン大会を運営しており、出願時に使える経験を実際に積める環境を用意している。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="9">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">09</span>
+            <span class="title">教材の出どころ</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>市販教材や外部教材を流用するケースが多い。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>小論文教材、面接教材、志望理由書教材など、すべて独自に開発したオリジナル教材を使用している。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="10">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">10</span>
+            <span class="title">講師の構成</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>大学生講師のみで構成されていることが多い。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>大学生講師と社会人講師のハイブリッド体制。視点や経験の異なる講師が連携して指導を行う。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="11">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">11</span>
+            <span class="title">指導方針の統一性</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>講師ごとに指導内容や考え方が異なり、生徒が混乱することがある。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>代表・玉村による集団授業を通じて、指導方針・考え方を全体で共有している。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="12">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">12</span>
+            <span class="title">保護者・塾生との連携</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>保護者との接点が少なく、情報共有が不十分になりがち。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>毎月の保護者会、塾生同士の交流会を実施し、進捗や方針を共有しながら支援する。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="13">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">13</span>
+            <span class="title">映像教材の量と更新頻度</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>映像教材が少なく、更新されない場合が多い。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>数百本規模の動画教材を用意し、ステップアップ式で継続的に更新している。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="14">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">14</span>
+            <span class="title">授業外フォロー</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>授業時間外でのサポートが限定的。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>三者面談、塾長面談などを通じて、授業外でも継続的に状況を確認・修正する。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="15">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">15</span>
+            <span class="title">学習管理の可視化</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>授業外の学習管理が曖昧になりやすい。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>独自の進捗・学習管理システムを用いて、日々の取り組みを可視化している。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- カテゴリ3: 教材・システム -->
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-icon">
+          <span class="material-icons">menu_book</span>
+        </div>
+        <div class="category-info">
+          <h3>教材・システム</h3>
+          <p>独自開発の教材と最新システム</p>
+        </div>
+        <div class="category-count">4項目</div>
+      </div>
+      <div class="category-content">
+        <div class="compare-item" data-id="16">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">16</span>
+            <span class="title">教材量と体系性</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>教材数が少なく、「その場しのぎ」のプリント配布や口頭説明に頼ることが多い。結果として、学習の全体像が見えにくく、復習や自学が進みにくい。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>オリジナル教材として、小論文教材・面接教材・志望理由書教材を体系的に用意している。各教材は役割ごとに整理されており、「今は何をやる段階なのか」を常に確認できる構造になっている。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="17">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">17</span>
+            <span class="title">学習管理アプリの違い</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>外部アプリや汎用ツールを使用しており、受験対策に最適化されていない場合が多い。管理項目も塾ごとにバラつきがある。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>自社開発アプリを使用し、総合型選抜・推薦対策に必要な項目だけを整理して管理している。進捗・提出物・課題状況を一元管理できる。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="18">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">18</span>
+            <span class="title">模試・評価方法</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>模試が存在しない、または簡易的なチェックのみで終わることが多い。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>EQAO独自の模試を実施し、専用の採点基準・採点システムを用いて評価を行っている。本番を想定した形で現在地を確認できる。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="19">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">19</span>
+            <span class="title">講師依存か、仕組み化か</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>講師の力量や相性に大きく依存し、授業外では何をすればいいか分からなくなることが多い。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>チェックリストやToDoを事前に用意し、授業外でも「やるべきこと」が明確な状態を作っている。講師がいなくても、自学自習が進む設計になっている。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- カテゴリ4: サポート体制 -->
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-icon">
+          <span class="material-icons">support_agent</span>
+        </div>
+        <div class="category-info">
+          <h3>サポート体制</h3>
+          <p>きめ細やかなフォロー体制</p>
+        </div>
+        <div class="category-count">9項目</div>
+      </div>
+      <div class="category-content">
+        <div class="compare-item" data-id="20">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">20</span>
+            <span class="title">連絡手段の柔軟性</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>メールや決まった連絡手段のみで、相談や確認に時間がかかる場合がある。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>LINEおよび公式LINEを活用し、状況に応じて柔軟に連絡・相談ができる体制を整えている。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="21">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">21</span>
+            <span class="title">相談できる機会の多さ</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>授業時間内でしか相談できず、戦略の見直しが後手に回りやすい。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>塾長面談・三者面談・担任面談など、複数の面談を毎月無料で実施している。問題が起きる前提で、定期的に確認と修正を行う。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="22">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">22</span>
+            <span class="title">振替対応</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>振替ができない、または条件が厳しく利用しづらい。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>授業開始6時間前までの申告で、柔軟に振替対応を行っている。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="23">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">23</span>
+            <span class="title">料金体系の透明性</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>料金が分かりにくく、入塾後に追加費用が発生するケースがある。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>料金体系はすべて事前に開示しており、入塾期間中に条件が変わることはない。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="24">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">24</span>
+            <span class="title">メディア発信・情報公開</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>外部への情報発信がほとんどなく、実態が見えにくい。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>YouTubeなどを通じて、指導内容や考え方を継続的に発信している。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="25">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">25</span>
+            <span class="title">総合型選抜以外への対応</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>総合型選抜の対策のみで完結してしまう。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>一般入試や英語資格対策なども並行して指導可能。進路の幅を狭めない設計になっている。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="26">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">26</span>
+            <span class="title">イベント・実践機会</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>イベントや実践機会がほとんどない。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>合宿イベントや留学プログラムなど、学びを実体験につなげる機会を用意している。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="27">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">27</span>
+            <span class="title">報告書の有無</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>学習状況の報告がなく、保護者が進捗を把握しづらい。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>毎月1回、報告書を発行し、学習状況・進捗・今後の方針を共有している。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="28">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">28</span>
+            <span class="title">スケジュールの柔軟性</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>スケジュールが固定されており、状況や予算に合わせた調整が難しい。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>オーダーメイドでスケジュールを設計し、状況や予算に応じて柔軟に調整できる。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- カテゴリ5: 対策範囲 -->
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-icon">
+          <span class="material-icons">track_changes</span>
+        </div>
+        <div class="category-info">
+          <h3>対策範囲</h3>
+          <p>オールインクルーシブな対策</p>
+        </div>
+        <div class="category-count">2項目</div>
+      </div>
+      <div class="category-content">
+        <div class="compare-item" data-id="29">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">29</span>
+            <span class="title">講師の指名・変更</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>講師の指名ができず、相性が合わなくても変更が難しい。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>講師の固定指名や交代が可能。継続的な指導関係を築きやすい。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-item" data-id="30">
+          <div class="compare-header" onclick="toggleItem(this)">
+            <span class="number">30</span>
+            <span class="title">対策範囲の広さ</span>
+            <span class="material-icons arrow">expand_more</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-content">
+              <div class="compare-box other">
+                <div class="compare-box-header">
+                  <span class="material-icons">cancel</span>
+                  <span>他塾</span>
+                </div>
+                <p>小論文のみ、または一部対策に限定される。</p>
+              </div>
+              <div class="compare-box eqao">
+                <div class="compare-box-header">
+                  <span class="material-icons">check_circle</span>
+                  <span>EQAO</span>
+                </div>
+                <p>小論文、面接、志望理由書、出願全体まで、オールインクルーシブで一括対策を行っている。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 料金比較セクション -->
+    <div class="price-section">
+      <div class="price-header">
+        <h2>
+          <span class="icon">
+            <span class="material-icons">payments</span>
+          </span>
+          料金の違い
+        </h2>
+        <p>透明で分かりやすい料金体系</p>
+      </div>
+
+      <div class="price-card">
+        <div class="price-comparison">
+          <div class="price-column other">
+            <div class="price-column-header">
+              <span class="material-icons">cancel</span>
+              <span>他塾でよくある例</span>
+            </div>
+            <ul class="price-list">
+              <li>
+                <span class="material-icons">close</span>
+                1回1時間100万円などの非常識な講座
+              </li>
+              <li>
+                <span class="material-icons">close</span>
+                年間500万円を超える料金設定
+              </li>
+              <li>
+                <span class="material-icons">close</span>
+                営業やアップセルが頻繁
+              </li>
+              <li>
+                <span class="material-icons">close</span>
+                「返金保証」をうたいながら条件が厳しい
+              </li>
+              <li>
+                <span class="material-icons">close</span>
+                大学数が増えるごとに料金が加算
+              </li>
+              <li>
+                <span class="material-icons">close</span>
+                オンラインと対面で料金が異なる
+              </li>
+              <li>
+                <span class="material-icons">close</span>
+                高額な指名料がかかる
+              </li>
+            </ul>
+          </div>
+          <div class="price-column eqao">
+            <div class="price-column-header">
+              <span class="material-icons">check_circle</span>
+              <span>EQAO</span>
+            </div>
+            <ul class="price-list">
+              <li>
+                <span class="material-icons">check</span>
+                非常識な高額講座は設けていない
+              </li>
+              <li>
+                <span class="material-icons">check</span>
+                年間100万円前後で対策可能な料金設計
+              </li>
+              <li>
+                <span class="material-icons">check</span>
+                しつこい営業や頻繁なアップセルは行わない
+              </li>
+              <li>
+                <span class="material-icons">check</span>
+                結果だけでなく、対策プロセスも重視
+              </li>
+              <li>
+                <span class="material-icons">check</span>
+                月額費用のみで複数大学対策が可能
+              </li>
+              <li>
+                <span class="material-icons">check</span>
+                オンライン・対面で料金は一律
+              </li>
+              <li>
+                <span class="material-icons">check</span>
+                講師指名料は一律2,200円（税込）
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTAセクション -->
+    <div class="cta-section">
+      <div class="cta-card">
+        <h3>まずは体験授業で違いを実感してください</h3>
+        <p>EQAOの指導を無料で体験できます。<br>お気軽にお申し込みください。</p>
+        <a href="/trial.html" class="cta-button">
+          <span class="material-icons">calendar_today</span>
+          無料体験授業を予約する
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ナビゲーションメニュー（nav-menu.cssを使用） -->
+  <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
+  <nav id="navMenu" class="nav-menu">
+    <div class="nav-header">
+      <span class="material-icons">menu</span>
+      メニュー
+      <button class="nav-close" onclick="closeNav()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    <div class="nav-body">
+      <a href="/" class="nav-item">
+        <span class="material-icons">home</span>
+        ホーム
+      </a>
+      <a href="schedule.html" class="nav-item">
+        <span class="material-icons">event_note</span>
+        授業スケジュール
+      </a>
+      <a href="checklist.html" class="nav-item">
+        <span class="material-icons">checklist</span>
+        チェックリスト教材
+      </a>
+      <a href="materials.html" class="nav-item">
+        <span class="material-icons">folder_shared</span>
+        生徒共通教材一覧
+      </a>
+      <a href="faq.html" class="nav-item">
+        <span class="material-icons">help</span>
+        よくある質問
+      </a>
+    </div>
+  </nav>
+
+  <script>
+    // アコーディオン開閉
+    function toggleItem(header) {
+      const item = header.closest('.compare-item');
+      item.classList.toggle('active');
+    }
+
+    // すべて開く/閉じる
+    let allOpen = false;
+    function toggleAll() {
+      const items = document.querySelectorAll('.compare-item');
+      const toggleText = document.getElementById('toggle-text');
+
+      allOpen = !allOpen;
+
+      items.forEach(item => {
+        if (allOpen) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+
+      toggleText.textContent = allOpen ? 'すべて閉じる' : 'すべて開く';
+    }
+
+    // ナビゲーション
+    function openNav() {
+      document.getElementById('navMenu').classList.add('open');
+      document.getElementById('navOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav() {
+      document.getElementById('navMenu').classList.remove('open');
+      document.getElementById('navOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  </script>
+</body>
+
+</html>
