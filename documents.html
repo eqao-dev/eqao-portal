@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,11 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="css/nav-menu.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Noto Sans JP', sans-serif;
@@ -29,7 +34,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
     .back-btn {
@@ -38,7 +43,7 @@
       justify-content: center;
       width: 36px;
       height: 36px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -54,7 +59,7 @@
 
     /* コンテナ */
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 16px;
     }
@@ -88,7 +93,7 @@
       border-radius: 16px;
       padding: 20px;
       margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .search-title {
@@ -299,7 +304,7 @@
       background: white;
       border-radius: 16px;
       margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       overflow: hidden;
     }
 
@@ -413,7 +418,9 @@
     }
 
     @keyframes spin {
-      100% { transform: rotate(360deg); }
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     /* 空状態 */
@@ -461,7 +468,7 @@
       justify-content: center;
       width: 36px;
       height: 36px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
       color: white;
@@ -470,7 +477,7 @@
     }
 
     .help-btn:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
     }
 
     .help-btn .material-icons {
@@ -508,8 +515,15 @@
     }
 
     @keyframes helpModalIn {
-      from { opacity: 0; transform: scale(0.95) translateY(-10px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
 
     .help-modal-header {
@@ -596,8 +610,317 @@
     .help-close-btn:hover {
       opacity: 0.9;
     }
+
+    /* タブUI */
+    .tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 16px;
+      background: white;
+      border-radius: 12px;
+      padding: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 12px 16px;
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .tab-btn:hover {
+      background: #f5f5f5;
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+    }
+
+    .tab-btn .material-icons {
+      font-size: 18px;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* 参考資料フィルター */
+    .reference-filter {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: #1a237e;
+      color: #1a237e;
+    }
+
+    .filter-btn.active {
+      background: #1a237e;
+      border-color: #1a237e;
+      color: white;
+    }
+
+    /* 参考資料グリッド */
+    .reference-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .reference-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .reference-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .reference-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .reference-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .reference-thumbnail {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .reference-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .reference-info {
+      padding: 12px;
+    }
+
+    .reference-category {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .reference-category.poster {
+      background: #E8F5E9;
+      color: #2E7D32;
+    }
+
+    .reference-category.presentation {
+      background: #E3F2FD;
+      color: #1565C0;
+    }
+
+    .reference-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* プレビューモーダル */
+    .preview-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .preview-modal-overlay.show {
+      display: flex;
+    }
+
+    .preview-modal {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 900px;
+      max-height: 90vh;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: previewModalIn 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes previewModalIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .preview-modal-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .preview-modal-header h3 {
+      flex: 1;
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .preview-modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .preview-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .preview-modal-body {
+      flex: 1;
+      overflow: hidden;
+      background: #333;
+    }
+
+    .preview-modal-body iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 70vh;
+      border: none;
+    }
+
+    @media (max-width: 600px) {
+      .preview-modal {
+        max-height: 85vh;
+        border-radius: 12px;
+      }
+
+      .preview-modal-header {
+        padding: 12px 16px;
+      }
+
+      .preview-modal-header h3 {
+        font-size: 13px;
+      }
+
+      .preview-modal-body iframe {
+        min-height: 60vh;
+      }
+    }
+
+    .preview-modal-footer {
+      padding: 12px 20px;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: flex-end;
+      flex-shrink: 0;
+    }
+
+    .preview-open-btn {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .preview-open-btn:hover {
+      opacity: 0.9;
+    }
+
+    .preview-open-btn .material-icons {
+      font-size: 18px;
+    }
   </style>
 </head>
+
 <body>
   <header class="header">
     <a href="index.html" class="back-btn">
@@ -613,286 +936,326 @@
 
   </header>
 
-  <div class="container">
-    <!-- 説明バナー -->
-    <div class="info-banner">
-      <span class="material-icons">info</span>
-      <div class="info-banner-text">
-        過去にEQAO生が大学に提出した書類の内容（匿名）を検索できます。<br>
-        志望理由書や活動報告書など、参考にしてください。
-      </div>
-    </div>
-
-    <!-- 検索セクション -->
-    <div class="search-section">
-      <div class="search-title">
-        <span class="material-icons">search</span>
-        書類を検索
-      </div>
-      <div class="search-form">
-        <div class="search-row">
-          <div class="search-group">
-            <label class="search-label">大学名</label>
-            <select id="searchUniversity" class="search-select">
-              <option value="">すべての大学</option>
-            </select>
-          </div>
-          <div class="search-group">
-            <label class="search-label">学部・学科</label>
-            <input type="text" id="searchFaculty" class="search-input" placeholder="例: 経営">
-          </div>
-        </div>
-        <div class="search-actions">
-          <button class="btn-search" onclick="searchDocuments()">
-            <span class="material-icons">search</span>
-            検索
-          </button>
-          <button class="btn-clear" onclick="clearSearch()">クリア</button>
-        </div>
-        <div class="results-per-page">
-          <label class="per-page-label">表示件数:</label>
-          <select id="resultsPerPage" class="per-page-select" onchange="changeResultsPerPage()">
-            <option value="10">10件</option>
-            <option value="20" selected>20件</option>
-            <option value="50">50件</option>
-            <option value="100">100件</option>
-            <option value="-1">全件</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <!-- 結果セクション -->
-    <div class="results-section">
-      <div class="results-header">
-        <span class="results-count" id="resultsCount"></span>
-      </div>
-      <div id="resultsContainer">
-        <div class="empty-state">
+    <div class="container">
+      <!-- タブ -->
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('documents')">
           <span class="material-icons">description</span>
-          <p>検索条件を入力して<br>「検索」ボタンを押してください</p>
-          <p style="font-size: 12px; color: #999; margin-top: 12px;">
-            ⓘ 書類内容はコピー保護されています
+          提出書類
+        </button>
+        <button class="tab-btn" onclick="switchTab('reference')">
+          <span class="material-icons">collections</span>
+          ポスター・プレゼン
+        </button>
+      </div>
+
+      <!-- 提出書類タブ -->
+      <div id="tab-documents" class="tab-content active">
+        <!-- 説明バナー -->
+        <div class="info-banner">
+          <span class="material-icons">info</span>
+          <div class="info-banner-text">
+            過去にEQAO生が大学に提出した書類の内容（匿名）を検索できます。<br>
+            志望理由書や活動報告書など、参考にしてください。
+          </div>
+        </div>
+      
+
+        <!-- 検索セクション -->
+        <div class="search-section">
+          <div class="search-title">
+            <span class="material-icons">search</span>
+            書類を検索
+          </div>
+          <div class="search-form">
+            <div class="search-row">
+              <div class="search-group">
+                <label class="search-label">大学名</label>
+                <select id="searchUniversity" class="search-select">
+                  <option value="">すべての大学</option>
+                </select>
+              </div>
+              <div class="search-group">
+                <label class="search-label">学部・学科</label>
+                <input type="text" id="searchFaculty" class="search-input" placeholder="例: 経営">
+              </div>
+            </div>
+            <div class="search-actions">
+              <button class="btn-search" onclick="searchDocuments()">
+                <span class="material-icons">search</span>
+                検索
+              </button>
+              <button class="btn-clear" onclick="clearSearch()">クリア</button>
+            </div>
+            <div class="results-per-page">
+              <label class="per-page-label">表示件数:</label>
+              <select id="resultsPerPage" class="per-page-select" onchange="changeResultsPerPage()">
+                <option value="10">10件</option>
+                <option value="20" selected>20件</option>
+                <option value="50">50件</option>
+                <option value="100">100件</option>
+                <option value="-1">全件</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 結果セクション -->
+        <div class="results-section">
+          <div class="results-header">
+            <span class="results-count" id="resultsCount"></span>
+          </div>
+          <div id="resultsContainer">
+            <div class="empty-state">
+              <span class="material-icons">description</span>
+              <p>検索条件を入力して<br>「検索」ボタンを押してください</p>
+              <p style="font-size: 12px; color: #999; margin-top: 12px;">
+                ⓘ 書類内容はコピー保護されています
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ページネーション -->
+        <div id="pagination" class="pagination" style="display: none;">
+          <button class="pagination-btn" id="prevBtn" onclick="previousPage()">
+            <span class="material-icons">chevron_left</span>
+            前へ
+          </button>
+          <span class="pagination-info" id="pageInfo">1 / 1</span>
+          <button class="pagination-btn" id="nextBtn" onclick="nextPage()">
+            次へ
+            <span class="material-icons">chevron_right</span>
+          </button>
+        </div>
+      </div>
+      <!-- /提出書類タブ -->
+
+      <!-- ポスター・プレゼンタブ -->
+      <div id="tab-reference" class="tab-content">
+        <!-- 説明バナー -->
+        <div class="info-banner">
+          <span class="material-icons">lightbulb</span>
+          <div class="info-banner-text">
+            先輩たちが作成したポスターやプレゼン資料です。<br>
+            レイアウトや内容構成の参考にしてください。
+          </div>
+        </div>
+
+        <!-- フィルター -->
+        <div class="reference-filter">
+          <button class="filter-btn active" onclick="filterReference('all')">すべて</button>
+          <button class="filter-btn" onclick="filterReference('poster')">ポスター</button>
+          <button class="filter-btn" onclick="filterReference('presentation')">プレゼン</button>
+        </div>
+
+        <!-- グリッド -->
+        <div class="reference-grid" id="referenceGrid"></div>
+      </div>
+      <!-- /ポスター・プレゼンタブ -->
+    </div>
+
+    <!-- トースト -->
+    <div id="toast" class="toast"></div>
+
+    <!-- ヘルプモーダル -->
+    <div class="help-modal-overlay" id="helpModalOverlay" onclick="closeHelpModalOnOverlay(event)">
+      <div class="help-modal" onclick="event.stopPropagation()">
+        <div class="help-modal-header">
+          <span class="material-icons">help_outline</span>
+          <h3>このページについて</h3>
+          <button class="help-modal-close" onclick="closeHelpModal()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <div class="help-modal-body">
+          <div class="help-modal-title">
+            <span class="material-icons">folder_open</span>
+            生徒の書類とは？
+          </div>
+          <p class="help-modal-text">
+            これまでEQAOに在籍した先輩方が実際に提出した志望理由書やレポートを見ることができます。<br><br>
+            先輩方が努力を重ねて作り上げた大切な書類です。取り扱いには十分に注意し、自身の書類作成の参考にしてください。<br><br>
+            <strong>※ このページの内容はコピーできません。</strong>
           </p>
         </div>
-      </div>
-      
-      <!-- ページネーション -->
-      <div id="pagination" class="pagination" style="display: none;">
-        <button class="pagination-btn" id="prevBtn" onclick="previousPage()">
-          <span class="material-icons">chevron_left</span>
-          前へ
-        </button>
-        <span class="pagination-info" id="pageInfo">1 / 1</span>
-        <button class="pagination-btn" id="nextBtn" onclick="nextPage()">
-          次へ
-          <span class="material-icons">chevron_right</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- トースト -->
-  <div id="toast" class="toast"></div>
-
-  <!-- ヘルプモーダル -->
-  <div class="help-modal-overlay" id="helpModalOverlay" onclick="closeHelpModalOnOverlay(event)">
-    <div class="help-modal" onclick="event.stopPropagation()">
-      <div class="help-modal-header">
-        <span class="material-icons">help_outline</span>
-        <h3>このページについて</h3>
-        <button class="help-modal-close" onclick="closeHelpModal()">
-          <span class="material-icons">close</span>
-        </button>
-      </div>
-      <div class="help-modal-body">
-        <div class="help-modal-title">
-          <span class="material-icons">folder_open</span>
-          生徒の書類とは？
+        <div class="help-modal-footer">
+          <button class="help-close-btn" onclick="closeHelpModal()">閉じる</button>
         </div>
-        <p class="help-modal-text">
-          これまでEQAOに在籍した先輩方が実際に提出した志望理由書やレポートを見ることができます。<br><br>
-          先輩方が努力を重ねて作り上げた大切な書類です。取り扱いには十分に注意し、自身の書類作成の参考にしてください。<br><br>
-          <strong>※ このページの内容はコピーできません。</strong>
-        </p>
-      </div>
-      <div class="help-modal-footer">
-        <button class="help-close-btn" onclick="closeHelpModal()">閉じる</button>
       </div>
     </div>
-  </div>
 
-  <script>
-    // ============================================
-    // ヘルプモーダル
-    // ============================================
-    function openHelpModal() {
-      document.getElementById('helpModalOverlay').classList.add('show');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeHelpModal() {
-      document.getElementById('helpModalOverlay').classList.remove('show');
-      document.body.style.overflow = '';
-    }
-
-    function closeHelpModalOnOverlay(event) {
-      if (event.target === event.currentTarget) {
-        closeHelpModal();
+    <script>
+      // ============================================
+      // ヘルプモーダル
+      // ============================================
+      function openHelpModal() {
+        document.getElementById('helpModalOverlay').classList.add('show');
+        document.body.style.overflow = 'hidden';
       }
-    }
-  </script>
 
-  <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
-
-    let allDocTypes = [];
-    
-    // ページネーション用変数
-    let allResults = [];
-    let currentPage = 1;
-    let resultsPerPage = 20;
-
-    document.addEventListener('DOMContentLoaded', function() {
-      // ログイン確認
-      const loggedIn = localStorage.getItem('eqao_loggedIn');
-      console.log('Documents page - checking login:', loggedIn);
-      console.log('localStorage contents:', {
-        eqao_loggedIn: localStorage.getItem('eqao_loggedIn'),
-        eqao_studentId: localStorage.getItem('eqao_studentId'),
-        eqao_studentName: localStorage.getItem('eqao_studentName')
-      });
-      
-      if (!loggedIn) {
-        console.warn('Not logged in, redirecting to index.html');
-        window.location.href = 'index.html';
-        return;
+      function closeHelpModal() {
+        document.getElementById('helpModalOverlay').classList.remove('show');
+        document.body.style.overflow = '';
       }
-      
-      console.log('User is logged in, loading page...');
 
-      // フィルター選択肢を取得
-      loadFilters();
-
-      // コピー防止機能を有効化
-      enableCopyProtection();
-
-      // Enterキーで検索
-      document.getElementById('searchFaculty').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') searchDocuments();
-      });
-    });
-
-    // フィルター選択肢を読み込み
-    async function loadFilters() {
-      try {
-        console.log('Loading filters...');
-        
-        // 大学一覧を取得
-        const uniUrl = `${API_URL}?action=getUniversityList`;
-        console.log('Fetching universities from:', uniUrl);
-        const uniResponse = await fetch(uniUrl);
-        
-        console.log('University response status:', uniResponse.status);
-        const uniData = await uniResponse.json();
-        console.log('Universities data:', uniData);
-        
-        const uniSelect = document.getElementById('searchUniversity');
-        const universities = Array.isArray(uniData) ? uniData : (uniData.universities || []);
-        console.log('Parsed universities:', universities);
-        
-        if (universities.length > 0) {
-          universities.forEach(uni => {
-            const option = document.createElement('option');
-            option.value = uni;
-            option.textContent = uni;
-            uniSelect.appendChild(option);
-          });
-          console.log('Added', universities.length, 'universities to dropdown');
-        } else {
-          console.warn('No universities found');
+      function closeHelpModalOnOverlay(event) {
+        if (event.target === event.currentTarget) {
+          closeHelpModal();
         }
-      } catch (error) {
-        console.error('Error loading filters:', error);
-        showToast('データ読み込みエラー: ' + error.message);
       }
-    }
+    </script>
 
-    // 検索実行
-    async function searchDocuments() {
-      const university = document.getElementById('searchUniversity').value.trim();
-      const faculty = document.getElementById('searchFaculty').value.trim();
+    <script>
+      const API_URL = 'https://script.google.com/macros/s/AKfycbyXdCxzPU6oXAm2Mi9mfMDeNvQAyE0mmTOABA2EOYelvX6J2Rr48VcizS0vMgIS7Qc7/exec';
 
-      console.log('Searching with params:', { university, faculty });
+      let allDocTypes = [];
 
-      const container = document.getElementById('resultsContainer');
-      container.innerHTML = `
+      // ページネーション用変数
+      let allResults = [];
+      let currentPage = 1;
+      let resultsPerPage = 20;
+
+      document.addEventListener('DOMContentLoaded', function () {
+        // ログイン確認
+        const loggedIn = localStorage.getItem('eqao_loggedIn');
+        console.log('Documents page - checking login:', loggedIn);
+        console.log('localStorage contents:', {
+          eqao_loggedIn: localStorage.getItem('eqao_loggedIn'),
+          eqao_studentId: localStorage.getItem('eqao_studentId'),
+          eqao_studentName: localStorage.getItem('eqao_studentName')
+        });
+
+        if (!loggedIn) {
+          console.warn('Not logged in, redirecting to index.html');
+          window.location.href = 'index.html';
+          return;
+        }
+
+        console.log('User is logged in, loading page...');
+
+        // フィルター選択肢を取得
+        loadFilters();
+
+        // コピー防止機能を有効化
+        enableCopyProtection();
+
+        // Enterキーで検索
+        document.getElementById('searchFaculty').addEventListener('keypress', function (e) {
+          if (e.key === 'Enter') searchDocuments();
+        });
+      });
+
+      // フィルター選択肢を読み込み
+      async function loadFilters() {
+        try {
+          console.log('Loading filters...');
+
+          // 大学一覧を取得
+          const uniUrl = `${API_URL}?action=getUniversityList`;
+          console.log('Fetching universities from:', uniUrl);
+          const uniResponse = await fetch(uniUrl);
+
+          console.log('University response status:', uniResponse.status);
+          const uniData = await uniResponse.json();
+          console.log('Universities data:', uniData);
+
+          const uniSelect = document.getElementById('searchUniversity');
+          const universities = Array.isArray(uniData) ? uniData : (uniData.universities || []);
+          console.log('Parsed universities:', universities);
+
+          if (universities.length > 0) {
+            universities.forEach(uni => {
+              const option = document.createElement('option');
+              option.value = uni;
+              option.textContent = uni;
+              uniSelect.appendChild(option);
+            });
+            console.log('Added', universities.length, 'universities to dropdown');
+          } else {
+            console.warn('No universities found');
+          }
+        } catch (error) {
+          console.error('Error loading filters:', error);
+          showToast('データ読み込みエラー: ' + error.message);
+        }
+      }
+
+      // 検索実行
+      async function searchDocuments() {
+        const university = document.getElementById('searchUniversity').value.trim();
+        const faculty = document.getElementById('searchFaculty').value.trim();
+
+        console.log('Searching with params:', { university, faculty });
+
+        const container = document.getElementById('resultsContainer');
+        container.innerHTML = `
         <div class="loading">
           <span class="material-icons">sync</span>
           <p>検索中...</p>
         </div>
       `;
 
-      try {
-        const params = new URLSearchParams({
-          action: 'getSubmittedDocuments',
-          university: university,
-          faculty: faculty
-        });
-        
-        const url = `${API_URL}?${params}`;
-        console.log('Fetching from:', url);
-        
-        const response = await fetch(url);
-        console.log('Search response status:', response.status);
-        
-        const data = await response.json();
-        console.log('Search response data:', data);
-        
-        const results = Array.isArray(data) ? data : (data.results || []);
-        console.log('Parsed results:', results.length, 'items');
-        
-        // 全結果を保存
-        allResults = results;
-        currentPage = 1;
-        
-        renderPaginatedResults();
-      } catch (error) {
-        console.error('Search error:', error);
-        container.innerHTML = `
+        try {
+          const params = new URLSearchParams({
+            action: 'getSubmittedDocuments',
+            university: university,
+            faculty: faculty
+          });
+
+          const url = `${API_URL}?${params}`;
+          console.log('Fetching from:', url);
+
+          const response = await fetch(url);
+          console.log('Search response status:', response.status);
+
+          const data = await response.json();
+          console.log('Search response data:', data);
+
+          const results = Array.isArray(data) ? data : (data.results || []);
+          console.log('Parsed results:', results.length, 'items');
+
+          // 全結果を保存
+          allResults = results;
+          currentPage = 1;
+
+          renderPaginatedResults();
+        } catch (error) {
+          console.error('Search error:', error);
+          container.innerHTML = `
           <div class="empty-state">
             <span class="material-icons">error</span>
             <p>検索中にエラーが発生しました。<br>もう一度お試しください。<br><small>${error.message}</small></p>
           </div>
         `;
+        }
       }
-    }
 
-    // 検索結果を表示
-    function renderResults(results) {
-      const container = document.getElementById('resultsContainer');
-      const countEl = document.getElementById('resultsCount');
+      // 検索結果を表示
+      function renderResults(results) {
+        const container = document.getElementById('resultsContainer');
+        const countEl = document.getElementById('resultsCount');
 
-      if (!results || results.length === 0) {
-        container.innerHTML = `
+        if (!results || results.length === 0) {
+          container.innerHTML = `
           <div class="empty-state">
             <span class="material-icons">search_off</span>
             <p>該当する書類が見つかりませんでした。<br>検索条件を変更してお試しください。</p>
           </div>
         `;
-        countEl.innerHTML = '';
-        return;
-      }
+          countEl.innerHTML = '';
+          return;
+        }
 
-      // 書類総数をカウント
-      let totalDocs = 0;
-      results.forEach(r => totalDocs += r.documents.length);
+        // 書類総数をカウント
+        let totalDocs = 0;
+        results.forEach(r => totalDocs += r.documents.length);
 
-      countEl.innerHTML = `<strong>${results.length}</strong>件の大学・学部 / <strong>${totalDocs}</strong>件の書類`;
+        countEl.innerHTML = `<strong>${results.length}</strong>件の大学・学部 / <strong>${totalDocs}</strong>件の書類`;
 
-      let html = '';
-      results.forEach((item, index) => {
-        html += `
+        let html = '';
+        results.forEach((item, index) => {
+          html += `
           <div class="result-card">
             <div class="result-header">
               <div class="result-university">${escapeHtml(item.university)}</div>
@@ -901,9 +1264,9 @@
             <div class="result-documents">
         `;
 
-        item.documents.forEach((doc, docIndex) => {
-          const docId = `doc-${index}-${docIndex}`;
-          html += `
+          item.documents.forEach((doc, docIndex) => {
+            const docId = `doc-${index}-${docIndex}`;
+            html += `
             <div class="document-item">
               <div class="document-header" onclick="toggleDocument('${docId}')">
                 <span class="document-type-badge">${escapeHtml(doc.type)}</span>
@@ -914,205 +1277,342 @@
               </div>
             </div>
           `;
-        });
+          });
 
-        html += `
+          html += `
             </div>
           </div>
         `;
-      });
+        });
 
-      container.innerHTML = html;
-    }
+        container.innerHTML = html;
+      }
 
-    // ページネーション対応の表示
-    function renderPaginatedResults() {
-      const container = document.getElementById('resultsContainer');
-      const countEl = document.getElementById('resultsCount');
-      const paginationEl = document.getElementById('pagination');
+      // ページネーション対応の表示
+      function renderPaginatedResults() {
+        const container = document.getElementById('resultsContainer');
+        const countEl = document.getElementById('resultsCount');
+        const paginationEl = document.getElementById('pagination');
 
-      if (!allResults || allResults.length === 0) {
-        container.innerHTML = `
+        if (!allResults || allResults.length === 0) {
+          container.innerHTML = `
           <div class="empty-state">
             <span class="material-icons">search_off</span>
             <p>該当する書類が見つかりませんでした。<br>検索条件を変更してお試しください。</p>
           </div>
         `;
-        countEl.innerHTML = '';
-        paginationEl.style.display = 'none';
-        return;
+          countEl.innerHTML = '';
+          paginationEl.style.display = 'none';
+          return;
+        }
+
+        const totalResults = allResults.length;
+
+        // ページネーション計算
+        let startIndex, endIndex, totalPages;
+
+        if (resultsPerPage === -1) {
+          // 全件表示
+          startIndex = 0;
+          endIndex = totalResults;
+          totalPages = 1;
+          currentPage = 1;
+        } else {
+          totalPages = Math.ceil(totalResults / resultsPerPage);
+          startIndex = (currentPage - 1) * resultsPerPage;
+          endIndex = Math.min(startIndex + resultsPerPage, totalResults);
+        }
+
+        const pageResults = allResults.slice(startIndex, endIndex);
+
+        // 結果件数表示
+        let totalDocs = 0;
+        allResults.forEach(r => totalDocs += r.documents.length);
+
+        if (resultsPerPage === -1) {
+          countEl.innerHTML = `<strong>${allResults.length}</strong>件の大学・学部 / <strong>${totalDocs}</strong>件の書類`;
+        } else {
+          countEl.innerHTML = `<strong>${totalResults}</strong>件中 ${startIndex + 1}〜${endIndex}件を表示`;
+        }
+
+        // 結果を表示
+        renderResults(pageResults);
+
+        // ページネーションUI更新
+        if (resultsPerPage === -1 || totalPages <= 1) {
+          paginationEl.style.display = 'none';
+        } else {
+          paginationEl.style.display = 'flex';
+          document.getElementById('pageInfo').textContent = `${currentPage} / ${totalPages}`;
+          document.getElementById('prevBtn').disabled = currentPage === 1;
+          document.getElementById('nextBtn').disabled = currentPage === totalPages;
+        }
+
+        // ページトップにスクロール
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      const totalResults = allResults.length;
-      
-      // ページネーション計算
-      let startIndex, endIndex, totalPages;
-      
-      if (resultsPerPage === -1) {
-        // 全件表示
-        startIndex = 0;
-        endIndex = totalResults;
-        totalPages = 1;
+      // 表示件数変更
+      function changeResultsPerPage() {
+        resultsPerPage = parseInt(document.getElementById('resultsPerPage').value);
         currentPage = 1;
-      } else {
-        totalPages = Math.ceil(totalResults / resultsPerPage);
-        startIndex = (currentPage - 1) * resultsPerPage;
-        endIndex = Math.min(startIndex + resultsPerPage, totalResults);
-      }
-      
-      const pageResults = allResults.slice(startIndex, endIndex);
-      
-      // 結果件数表示
-      let totalDocs = 0;
-      allResults.forEach(r => totalDocs += r.documents.length);
-      
-      if (resultsPerPage === -1) {
-        countEl.innerHTML = `<strong>${allResults.length}</strong>件の大学・学部 / <strong>${totalDocs}</strong>件の書類`;
-      } else {
-        countEl.innerHTML = `<strong>${totalResults}</strong>件中 ${startIndex + 1}〜${endIndex}件を表示`;
-      }
-      
-      // 結果を表示
-      renderResults(pageResults);
-      
-      // ページネーションUI更新
-      if (resultsPerPage === -1 || totalPages <= 1) {
-        paginationEl.style.display = 'none';
-      } else {
-        paginationEl.style.display = 'flex';
-        document.getElementById('pageInfo').textContent = `${currentPage} / ${totalPages}`;
-        document.getElementById('prevBtn').disabled = currentPage === 1;
-        document.getElementById('nextBtn').disabled = currentPage === totalPages;
-      }
-      
-      // ページトップにスクロール
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // 表示件数変更
-    function changeResultsPerPage() {
-      resultsPerPage = parseInt(document.getElementById('resultsPerPage').value);
-      currentPage = 1;
-      renderPaginatedResults();
-    }
-
-    // 前のページへ
-    function previousPage() {
-      if (currentPage > 1) {
-        currentPage--;
         renderPaginatedResults();
       }
-    }
 
-    // 次のページへ
-    function nextPage() {
-      const totalPages = Math.ceil(allResults.length / resultsPerPage);
-      if (currentPage < totalPages) {
-        currentPage++;
-        renderPaginatedResults();
+      // 前のページへ
+      function previousPage() {
+        if (currentPage > 1) {
+          currentPage--;
+          renderPaginatedResults();
+        }
       }
-    }
 
-    // ドキュメントの開閉
-    function toggleDocument(docId) {
-      const content = document.getElementById(`${docId}-content`);
-      const expand = document.getElementById(`${docId}-expand`);
+      // 次のページへ
+      function nextPage() {
+        const totalPages = Math.ceil(allResults.length / resultsPerPage);
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderPaginatedResults();
+        }
+      }
 
-      content.classList.toggle('open');
-      expand.classList.toggle('open');
-    }
+      // ドキュメントの開閉
+      function toggleDocument(docId) {
+        const content = document.getElementById(`${docId}-content`);
+        const expand = document.getElementById(`${docId}-expand`);
 
-    // 検索クリア
-    function clearSearch() {
-      document.getElementById('searchUniversity').value = '';
-      document.getElementById('searchFaculty').value = '';
-      document.getElementById('resultsContainer').innerHTML = `
+        content.classList.toggle('open');
+        expand.classList.toggle('open');
+      }
+
+      // 検索クリア
+      function clearSearch() {
+        document.getElementById('searchUniversity').value = '';
+        document.getElementById('searchFaculty').value = '';
+        document.getElementById('resultsContainer').innerHTML = `
         <div class="empty-state">
           <span class="material-icons">description</span>
           <p>検索条件を入力して<br>「検索」ボタンを押してください</p>
         </div>
       `;
-      document.getElementById('resultsCount').innerHTML = '';
-    }
+        document.getElementById('resultsCount').innerHTML = '';
+      }
 
-    // トースト表示
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      toast.textContent = message;
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 2000);
-    }
+      // トースト表示
+      function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2000);
+      }
 
-    // コピー防止機能
-    function enableCopyProtection() {
-      // 右クリックメニューを無効化
-      document.addEventListener('contextmenu', function(e) {
-        const target = e.target;
-        // document-content内のみ無効化
-        if (target.closest('.document-content')) {
-          e.preventDefault();
-          showToast('この内容はコピーできません');
-          return false;
-        }
-      });
-
-      // コピーショートカットを無効化（Ctrl+C / Cmd+C）
-      document.addEventListener('keydown', function(e) {
-        const target = e.target;
-        // document-content内のみ無効化
-        if (target.closest('.document-content')) {
-          if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+      // コピー防止機能
+      function enableCopyProtection() {
+        // 右クリックメニューを無効化
+        document.addEventListener('contextmenu', function (e) {
+          const target = e.target;
+          // document-content内のみ無効化
+          if (target.closest('.document-content')) {
             e.preventDefault();
             showToast('この内容はコピーできません');
             return false;
           }
-        }
-      });
+        });
 
-      // コピーイベントを無効化
-      document.addEventListener('copy', function(e) {
-        const selection = window.getSelection();
-        const target = selection.anchorNode;
-        // document-content内のみ無効化
-        if (target && target.parentElement && target.parentElement.closest('.document-content')) {
-          e.preventDefault();
-          showToast('この内容はコピーできません');
-          return false;
-        }
-      });
+        // コピーショートカットを無効化（Ctrl+C / Cmd+C）
+        document.addEventListener('keydown', function (e) {
+          const target = e.target;
+          // document-content内のみ無効化
+          if (target.closest('.document-content')) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+              e.preventDefault();
+              showToast('この内容はコピーできません');
+              return false;
+            }
+          }
+        });
 
-      // ドラッグを無効化
-      document.addEventListener('dragstart', function(e) {
-        const target = e.target;
-        if (target.closest('.document-content')) {
-          e.preventDefault();
-          return false;
-        }
-      });
+        // コピーイベントを無効化
+        document.addEventListener('copy', function (e) {
+          const selection = window.getSelection();
+          const target = selection.anchorNode;
+          // document-content内のみ無効化
+          if (target && target.parentElement && target.parentElement.closest('.document-content')) {
+            e.preventDefault();
+            showToast('この内容はコピーできません');
+            return false;
+          }
+        });
 
-      // テキスト選択開始を無効化
-      document.addEventListener('selectstart', function(e) {
-        const target = e.target;
-        if (target.closest('.document-content')) {
-          e.preventDefault();
-          return false;
-        }
-      });
-    }
+        // ドラッグを無効化
+        document.addEventListener('dragstart', function (e) {
+          const target = e.target;
+          if (target.closest('.document-content')) {
+            e.preventDefault();
+            return false;
+          }
+        });
 
-    // HTMLエスケープ
-    function escapeHtml(str) {
-      if (!str) return '';
-      return str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-    }
-  </script>
-  <script src="js/nav-menu.js"></script>
+        // テキスト選択開始を無効化
+        document.addEventListener('selectstart', function (e) {
+          const target = e.target;
+          if (target.closest('.document-content')) {
+            e.preventDefault();
+            return false;
+          }
+        });
+      }
+
+      // HTMLエスケープ
+      function escapeHtml(str) {
+        if (!str) return '';
+        return str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+    </script>
+    <script src="js/nav-menu.js"></script>
+    <!-- プレビューモーダル -->
+    <div class="preview-modal-overlay" id="previewModalOverlay" onclick="closePreviewModalOnOverlay(event)">
+      <div class="preview-modal" onclick="event.stopPropagation()">
+        <div class="preview-modal-header">
+          <span class="material-icons">picture_as_pdf</span>
+          <h3 id="previewModalTitle">タイトル</h3>
+          <button class="preview-modal-close" onclick="closePreviewModal()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <div class="preview-modal-body">
+          <iframe id="previewIframe" src=""></iframe>
+        </div>
+        <div class="preview-modal-footer">
+          <a id="previewOpenLink" href="#" target="_blank" class="preview-open-btn">
+            <span class="material-icons">open_in_new</span>
+            新しいタブで開く
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ============================================
+      // タブ切り替え
+      // ============================================
+      function switchTab(tabName) {
+        // タブボタンの状態更新
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+
+        // タブコンテンツの表示切り替え
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        document.getElementById('tab-' + tabName).classList.add('active');
+      }
+
+      // ============================================
+      // 参考資料データ
+      // ============================================
+      const REFERENCE_MATERIALS = [
+        // プレゼン
+        { id: '1-Qpm9JS3nLa7yuHWSzySWkWZcNGCa3zA', title: '江戸川区における子どもの居場所づくり', category: 'presentation' },
+        { id: '10yTBH8XymA8dftU0cHhLQ3DWjQ7XCt0e', title: 'デンマークと比較する日本の福祉社会の現状', category: 'presentation' },
+        { id: '1p4wQZq_yj3pQdqiX7JSMbxvJdH9lGZ5E', title: '高等学校における校則の規定や見直しについて', category: 'presentation' },
+        { id: '1_0z_ARUAjKzlzW3bwk9Dd2ZYFgEHMcrQ', title: '持続可能な農業の構築', category: 'presentation' },
+        { id: '1flS07HfyIqbdLzdMfFFTtjrHSil-wlfw', title: 'カナダ留学が私に教えてくれたこと', category: 'presentation' },
+        // ポスター
+        { id: '1geHZ2a2GwMMqUTFPpltoKDI5o9seWMNC', title: '昔にタイムスリップできる街「おばあちゃんの原宿」巣鴨', category: 'poster' },
+        { id: '11yYL-qgRM2BIAczTtoFu6Qke9zGtcrcG', title: '歴史と共に歩んできた昭和レトロな町 青梅', category: 'poster' },
+        { id: '1PoqT101LyVcTCF64lMyaU86MmTXQnYRP', title: '「ワインの街」塩尻市', category: 'poster' },
+        { id: '1m40cjzWbyvDqrRgmxNR-UmFBOz-7C_oo', title: '仙台市の古き良き文化をもっと世界へ', category: 'poster' },
+        { id: '1IPLipXGCc5eYH9EYWlm6JfthYgMYTung', title: '故郷長野市をもっと魅力的に', category: 'poster' },
+        { id: '1aq27U9BPA4yH7z2_He7RESK5nNMp-WNZ', title: '奥多摩を変える', category: 'poster' },
+        { id: '1zMIfn-SZxrtHyLdHqrUGKSOJMs9n4rkw', title: '「つながり」で支える社会福祉', category: 'poster' },
+        { id: '1ZpfVIPfQ_UXNwJn98Ky8SZmzSbjz2Vup', title: '社会的弱者およびマイノリティの増加にともなう社会福祉の役割と展望', category: 'poster' },
+        { id: '1JmomjKfWUrFJlIS-IyzSv7o_geWjwcdu', title: 'レトロと自然の四万', category: 'poster' }
+      ];
+
+      let currentFilter = 'all';
+
+      // ============================================
+      // 参考資料グリッド描画
+      // ============================================
+      function renderReferenceGrid() {
+        const grid = document.getElementById('referenceGrid');
+        const filtered = currentFilter === 'all'
+          ? REFERENCE_MATERIALS
+          : REFERENCE_MATERIALS.filter(m => m.category === currentFilter);
+
+        grid.innerHTML = filtered.map(item => `
+        <div class="reference-card" onclick="openPreviewModal('${item.id}', '${escapeHtml(item.title)}')">
+          <div class="reference-thumbnail">
+            <img src="https://drive.google.com/thumbnail?id=${item.id}&sz=w400" 
+                 alt="${escapeHtml(item.title)}"
+                 onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'material-icons\\'>picture_as_pdf</span>';">
+          </div>
+          <div class="reference-info">
+            <span class="reference-category ${item.category}">
+              ${item.category === 'poster' ? 'ポスター' : 'プレゼン'}
+            </span>
+            <div class="reference-title">${escapeHtml(item.title)}</div>
+          </div>
+        </div>
+      `).join('');
+      }
+
+      // ============================================
+      // フィルター
+      // ============================================
+      function filterReference(category) {
+        currentFilter = category;
+
+        // ボタンの状態更新
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+
+        renderReferenceGrid();
+      }
+
+      // ============================================
+      // プレビューモーダル
+      // ============================================
+      function openPreviewModal(fileId, title) {
+        const overlay = document.getElementById('previewModalOverlay');
+        const iframe = document.getElementById('previewIframe');
+        const titleEl = document.getElementById('previewModalTitle');
+        const openLink = document.getElementById('previewOpenLink');
+
+        titleEl.textContent = title;
+        iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
+        openLink.href = `https://drive.google.com/file/d/${fileId}/view`;
+
+        overlay.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closePreviewModal() {
+        const overlay = document.getElementById('previewModalOverlay');
+        const iframe = document.getElementById('previewIframe');
+
+        overlay.classList.remove('show');
+        document.body.style.overflow = '';
+        iframe.src = '';
+      }
+
+      function closePreviewModalOnOverlay(event) {
+        if (event.target === event.currentTarget) {
+          closePreviewModal();
+        }
+      }
+
+      // 初期化時にグリッド描画
+      document.addEventListener('DOMContentLoaded', function () {
+        renderReferenceGrid();
+      });
+    </script>
 </body>
+
 </html>
